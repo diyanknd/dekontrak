@@ -1,0 +1,390 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 space-y-4 xxl:space-y-6">
+        <!-- Breadcrumb -->
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Tour Details</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Tour</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Details</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Tour  Details -->
+        <div x-data="{activeTab:'content'}" class="white-box">
+          <div class="flex justify-between flex-wrap gap-4 items-center bb-dashed-n30">
+            <h4>Tour Details</h4>
+            <div class="flex items-center gap-4 xxl:gap-6">
+              <a href="tour-details.html" class="size-11 rounded-full f-center bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500 text-xl hover:bg-neutral-40 dark:hover:bg-neutral-500 duration-300">
+                <i class="las la-external-link-alt"></i>
+              </a>
+              <a href="edit-tour.html" class="size-11 rounded-full f-center bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500 text-xl hover:bg-neutral-40 dark:hover:bg-neutral-500 duration-300">
+                <i class="las la-pen"></i>
+              </a>
+              <div x-data="{isOpen:false,selected:'Published', items:['Published','Draft']}" class="w-[124px] relative">
+                <div @click="isOpen=!isOpen" class="relative flex cursor-pointer items-center justify-between rounded-full bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 px-4 py-2.5 dark:border-neutral-500">
+                  <span class="text-sm" x-text="selected"></span>
+                  <i class="las la-angle-down duration-300" :class="isOpen?'rotate-180':'rotate-0'"></i>
+                </div>
+                <div x-show="isOpen" @click.away="isOpen=false" class="absolute left-0 top-full z-10 flex max-h-[200px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-0 p-1 shadow-xl dark:bg-neutral-904">
+                  <template x-for="item in items">
+                    <div @click="selected=item, isOpen=false" :class="selected===item?'bg-primary-300  text-neutral-0':'hover:bg-primary-50 dark:hover:bg-neutral-903'" class="cursor-pointer rounded-md px-4 py-2 duration-300 text-sm" x-text="item"></div>
+                  </template>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bb-dashed-n30">
+            <div class="col-span-12 flex flex-wrap gap-4 rounded-xl max-w-max sm:rounded-full border border-neutral-30 p-3 dark:border-neutral-500">
+              <button @click="activeTab='content'" :class="activeTab=='content' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">Tour Content</button>
+              <button @click="activeTab='candidate'" :class="activeTab=='candidate' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">Booker</button>
+            </div>
+            <!-- Tour Details -->
+          </div>
+          <div x-show="activeTab=='content'" x-transition class="grid grid-cols-12 gap-4 xxl:gap-6">
+            <div class="col-span-12 lg:col-span-7 xxl:col-span-8">
+              <div class="n20-box !p-2 xl:!p-6">
+                <img src="./assets/images/tour/tour-big.png" class="rounded-xl mb-5 xxl:mb-8" alt="" />
+
+                <div class="bb-dashed-n40 flex flex-wrap gap-3 justify-between items-center">
+                  <span class="py-2 px-5 rounded-3xl text-xs text-success-300 bg-success-300/10 border font-medium border-neutral-30 dark:border-neutral-500">Published</span>
+                  <p class="s-text">Posted date: 12 Mar 2024 9:02 AM</p>
+                </div>
+                <h2 class="mb-6">The Great Barrier Reef, Australia</h2>
+                <p class="m-text bb-dashed-n40 xxl:pb-8 xxl:mb-8">
+                  The Great Barrier Reef is the world's largest coral reef system, composed of over 2,900 individual reefs and 900 islands stretching for over 2,300 kilometres (1,400 mi) over an area of approximately 344,400 square kilometres (133,000 sq mi). The reef is located in the Coral Sea,
+                  off the coast of Queensland, Australia. The Great Barrier Reef can be seen from outer space and is the world's biggest single structure made by living organisms. This reef structure is composed of and built by billions of tiny organisms, known as coral polyps. It supports a wide
+                  diversity of life and was selected as a World Heritage Site in 1981. CNN labelled it one of the seven natural wonders of the world.
+                </p>
+
+                <div class="bb-dashed-n40">
+                  <h3 class="mb-5">Description</h3>
+                  <p class="m-text">
+                    The Great Barrier Reef is home to a wide variety of marine life, including over 1,500 species of fish, 411 species of hard corals, and 134 species of sharks and rays. The reef is also an important breeding ground for many species of sea turtles and whales. The Great Barrier Reef
+                    is a popular tourist destination, and there are many ways to experience it. Visitors can go snorkeling or scuba diving to see the coral reefs up close, or they can take a boat tour to see the reef from above the water. There are also a number of islands within the Great Barrier
+                    Reef that can be visited, such as Whitsunday Island and Hamilton Island.
+                  </p>
+                </div>
+
+                <h5 class="mb-6">Highlights : :</h5>
+                <ul class="space-y-4 list-disc marker:text-primary-300 ltr:pl-5 rtl:pr-5 bb-dashed-n40 xxl:mb-8 xxl:pb-8">
+                  <li>World's Largest Coral Reef System: Spanning over 2,300 kilometers (1,400 miles), it's the biggest structure made.</li>
+                  <li>Unbelievable Biodiversity: Home to over 1,500 fish species, 411 hard coral varieties, and 134 species of sharks and rays. </li>
+                  <li>Tourist Paradise: Offers snorkeling, scuba diving, boat tours, and island getaways like Whitsunday and Hamilton Island.</li>
+                  <li>Natural Wonder: A UNESCO World Heritage Site and one of the Seven Natural Wonders of the World, visible from outer space!</li>
+                  <li>Climate Change: Rising water temperatures are causing coral bleaching.</li>
+                  <li>Pollution: From agriculture, runoff, and development, it harms the reef's health.</li>
+                  <li>Overfishing: Depleting fish populations disrupts the reef's delicate ecosystem.</li>
+                </ul>
+
+                <h6 class="mb-6">Services :</h6>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 xxl:grid-cols-3 xxxl:grid-cols-3 gap-4 bb-dashed-n40 xxl:mb-8 xxl:pb-8">
+                  <div class="flex items-center gap-3">
+                    <i class="las la-check-circle text-primary-300 text-xl"></i>
+                    Audio Guide
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <i class="las la-check-circle text-primary-300 text-xl"></i>
+                    Gratuities
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <i class="las la-check-circle text-primary-300 text-xl"></i>
+                    Private Tour
+                  </div>
+
+                  <div class="flex items-center gap-3">
+                    <i class="las la-check-circle text-primary-300 text-xl"></i>
+                    Lunch
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <i class="las la-check-circle text-primary-300 text-xl"></i>
+                    Professional Guide
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <i class="las la-check-circle text-primary-300 text-xl"></i>
+                    Entrance Fee
+                  </div>
+
+                  <div class="flex items-center gap-3">
+                    <i class="las la-check-circle text-primary-300 text-xl"></i>
+                    Special activities
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <i class="las la-check-circle text-primary-300 text-xl"></i>
+                    Food and drinks
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <i class="las la-check-circle text-primary-300 text-xl"></i>
+                    Pick-up and drop off
+                  </div>
+                </div>
+
+                <div class="bb-dashed-n40 xxl:mb-8 xxl:pb-8">
+                  <h6 class="mb-6">Program :</h6>
+                  <p class="s-text font-semibold mb-4">Day 1</p>
+                  <p class="m-text mb-6">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five
+                    centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                  </p>
+                  <p class="s-text font-semibold mb-4">Day 2</p>
+                  <p class="m-text mb-6">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five
+                    centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                  </p>
+                  <p class="s-text font-semibold mb-4">Day 3</p>
+                  <p class="m-text mb-6 lg:mb-8">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five
+                    centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                  </p>
+                  <p>There are a number of efforts underway to protect the Great Barrier Reef. The Australian government has established a number of marine parks to protect the reef from fishing and other activities.</p>
+                </div>
+
+                <div class="flex flex-wrap gap-3 items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <h6 class="flex items-center gap-2">Tag <i class="las la-arrow-left text-xl"></i></h6>
+                    <div class="flex flex-wrap gap-3 sm:gap-4">
+                      <span class="rounded-3xl bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 px-3 sm:px-5 py-2"> Travel </span>
+                      <span class="rounded-3xl bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 px-3 sm:px-5 py-2">Mountain </span>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-4">
+                    <h6>Share -</h6>
+                    <ul class="flex gap-3 sm:gap-4">
+                      <li>
+                        <a class="size-8 f-center text-lg rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-facebook-f"></i></a>
+                      </li>
+                      <li>
+                        <a class="size-8 f-center text-lg rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-twitter"></i></a>
+                      </li>
+                      <li>
+                        <a class="size-8 f-center text-lg rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-instagram"></i></a>
+                      </li>
+                      <li>
+                        <a class="size-8 f-center text-lg rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-pinterest"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12 lg:col-span-5 xxl:col-span-4 space-y-4 xxl:space-y-6">
+              <div class="n20-box">
+                <h4 class="bb-dashed-n40">Tour Info</h4>
+                <div class="space-y-4 xxl:space-y-7">
+                  <div class="flex items-start gap-4 xxl:gap-6">
+                    <span class="size-9 md:size-12 shrink-0 rounded-full border border-neutral-40 dark:border-neutral-500 f-center bg-neutral-0 dark:bg-neutral-904 text-success-300 text-xl">
+                      <i class="las la-calendar-alt text-2xl"></i>
+                    </span>
+                    <div>
+                      <p class="m-text font-medium mb-3">Available</p>
+                      <p class="xl-text font-medium">12 Mar 2024 - 20 Mar 2024</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-4 xxl:gap-6">
+                    <span class="size-9 md:size-12 shrink-0 rounded-full border border-neutral-40 dark:border-neutral-500 f-center bg-neutral-0 dark:bg-neutral-904 text-secondary-300 text-xl">
+                      <i class="las la-user text-2xl"></i>
+                    </span>
+                    <div>
+                      <p class="m-text font-medium mb-3">Contact name</p>
+                      <p class="xl-text font-medium">Courtney Henry</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-4 xxl:gap-6">
+                    <span class="size-9 md:size-12 shrink-0 rounded-full border border-neutral-40 dark:border-neutral-500 f-center bg-neutral-0 dark:bg-neutral-904 text-warning-300 text-xl">
+                      <i class="las la-clock text-2xl"></i>
+                    </span>
+                    <div>
+                      <p class="m-text font-medium mb-3">Durations</p>
+                      <p class="xl-text font-medium">4 Days 3 nights</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-4 xxl:gap-6">
+                    <span class="size-9 md:size-12 shrink-0 rounded-full border border-neutral-40 dark:border-neutral-500 f-center bg-neutral-0 dark:bg-neutral-904 text-error-300 text-xl">
+                      <i class="las la-phone-volume text-2xl"></i>
+                    </span>
+                    <div>
+                      <p class="m-text font-medium mb-3">Contact phones</p>
+                      <p class="xl-text font-medium">(405) 555-0128</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-4 xxl:gap-6">
+                    <span class="size-9 md:size-12 shrink-0 rounded-full border border-neutral-40 dark:border-neutral-500 f-center bg-neutral-0 dark:bg-neutral-904 text-info-300 text-xl">
+                      <i class="las la-map-marker-alt text-2xl"></i>
+                    </span>
+                    <div>
+                      <p class="m-text font-medium mb-3">Location</p>
+                      <p class="xl-text font-medium">Australia</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-4 xxl:gap-6">
+                    <span class="size-9 md:size-12 shrink-0 rounded-full border border-neutral-40 dark:border-neutral-500 f-center bg-neutral-0 dark:bg-neutral-904 text-success-300 text-xl">
+                      <i class="las la-wallet text-2xl"></i>
+                    </span>
+                    <div>
+                      <p class="m-text font-medium mb-3">Cost</p>
+                      <p class="xl-text font-medium">$85.45</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-4 xxl:gap-6">
+                    <span class="size-9 md:size-12 shrink-0 rounded-full border border-neutral-40 dark:border-neutral-500 f-center bg-neutral-0 dark:bg-neutral-904 text-warning-300 text-xl">
+                      <i class="las la-star text-2xl"></i>
+                    </span>
+                    <div>
+                      <p class="m-text font-medium mb-3">Reviews</p>
+                      <p class="xl-text font-medium">4.9 <span class="text-neutral-100 font-normal">(4.9k)</span></p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-4 xxl:gap-6">
+                    <span class="size-9 md:size-12 shrink-0 rounded-full border border-neutral-40 dark:border-neutral-500 f-center bg-neutral-0 dark:bg-neutral-904 text-secondary-300 text-xl">
+                      <i class="las la-user-check text-2xl"></i>
+                    </span>
+                    <div>
+                      <p class="m-text font-medium mb-3">Guide by</p>
+                      <p class="xl-text font-medium">Wade Warren</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            x-data="{candidates:[
+                { id: 1, name: 'Taylor Otwell', avatar: './assets/images/avatar/avatar-big-1.png', guests: 4, approved: false },
+                { id: 2, name: 'Jane Cooper', avatar: './assets/images/avatar/avatar-big-2.png', guests: 2, approved: true },
+                { id: 3, name: 'Jennie Willingson', avatar: './assets/images/avatar/avatar-big-3.png', guests: 3, approved: false },
+                { id: 4, name: 'Michael Doglas', avatar: './assets/images/avatar/avatar-big-4.png', guests: 1, approved: true },
+                { id: 5, name: 'Theresa Webb', avatar: './assets/images/avatar/avatar-big-5.png', guests: 5, approved: false },
+                { id: 6, name: 'Kristin Watson', avatar: './assets/images/avatar/avatar-big-6.png', guests: 2, approved: true },
+                { id: 7, name: 'David Kendrick', avatar: './assets/images/avatar/avatar-big-1.png', guests: 4, approved: false },
+                { id: 8, name: 'Emily Andrews', avatar: './assets/images/avatar/avatar-big-2.png', guests: 3, approved: true },
+                { id: 9, name: 'Brandon Munoz', avatar: './assets/images/avatar/avatar-big-3.png', guests: 2, approved: false },
+                { id: 10, name: 'Samantha Phillips', avatar: './assets/images/avatar/avatar-big-4.png', guests: 4, approved: true },
+                { id: 11, name: 'Christopher Rice', avatar: './assets/images/avatar/avatar-big-5.png', guests: 1, approved: false },
+                { id: 12, name: 'Natalie Cole', avatar: './assets/images/avatar/avatar-big-6.png', guests: 3, approved: true },
+                { id: 13, name: 'Daniel Robertson', avatar: './assets/images/avatar/avatar-big-1.png', guests: 2, approved: false },
+                { id: 14, name: 'Jessica Morgan', avatar: './assets/images/avatar/avatar-big-2.png', guests: 5, approved: true },
+                { id: 15, name: 'Matthew Anderson', avatar: './assets/images/avatar/avatar-big-3.png', guests: 4, approved: false }
+              ],
+              handleAprove(id) {
+                this.candidates = this.candidates.map(candidate => {
+                  if (candidate.id === id) {
+                    return {
+                      ...candidate,
+                      approved: true
+                    }
+                  } else {
+                    return candidate
+                  }
+                })
+              }
+              }"
+            x-show="activeTab=='candidate'"
+            x-transition
+            class="grid grid-cols-12 gap-4 xxl:gap-6"
+          >
+            <template x-for="{id, name, avatar, guests, approved} in candidates">
+              <div class="col-span-12 md:col-span-6 xxl:col-span-4 n20-box relative">
+                <div class="flex flex-wrap justify-between items-start gap-3">
+                  <div class="flex items-start gap-4 xxl:gap-6">
+                    <img :src="avatar" class="rounded-full w-12 lg:w-[68px]" alt="" />
+                    <div>
+                      <h5 x-text="name" class="mb-2"></h5>
+                      <p class="mb-4 xxl:mb-6"><i class="las la-user-friends"></i> <span x-text="guests"></span> guests</p>
+                      <div class="flex gap-4">
+                        <a href="#" class="size-9 rounded-full border border-neutral-40 dark:border-neutral-500 f-center bg-success-300/10 text-success-300 text-xl">
+                          <i class="las la-phone-volume text-xl"></i>
+                        </a>
+                        <a href="#" class="size-9 rounded-full border border-neutral-40 dark:border-neutral-500 f-center bg-secondary-300/10 text-secondary-300 text-xl">
+                          <i class="lab la-facebook-messenger text-xl"></i>
+                        </a>
+                        <a href="#" class="size-9 rounded-full border border-neutral-40 dark:border-neutral-500 f-center bg-warning-300/10 text-warning-300 text-xl">
+                          <i class="las la-envelope text-xl"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <button @click="handleAprove(id)" x-show="!approved" class="btn btn-default-outlined !py-2 !px-5">Approve</button>
+                  <button x-show="approved" class="font-semibold text-primary-300 flex items-center gap-3"><i class="las la-check text-xl"></i> Approved</button>
+                </div>
+              </div>
+            </template>
+            <div class="col-span-12">
+              <div x-data="pagination" class="flex flex-wrap items-center justify-center gap-3">
+                <button
+                  x-bind:disabled="currentPage === 1"
+                  @click="changePage(currentPage - 1)"
+                  class="btn-primary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-primary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-transparent disabled:hover:text-primary-200"
+                >
+                  <i class="las la-angle-left text-xl"></i>
+                </button>
+
+                <template x-for="page in pageNumbers">
+                  <button
+                    x-text="page"
+                    :class=" {'btn-primary-icon bg-primary-300 !text-neutral-0':page==currentPage, 'flex text-sm lg:text-base size-10 select-none border-primary-300 hover:bg-primary-300 items-center hover:text-neutral-0 justify-center text-primary-300 rounded-full border duration-300 font-semibold':page!='...', 'cursor-default':page=='...'}"
+                    @click="changePage(page)"
+                  ></button>
+                </template>
+                <button
+                  x-bind:disabled="currentPage === totalPages"
+                  @click="changePage(currentPage + 1)"
+                  class="btn-primary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-primary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-transparent disabled:hover:text-primary-200"
+                >
+                  <i class="las la-angle-right text-xl"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+  </body>
+</html>

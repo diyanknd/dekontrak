@@ -1,0 +1,1143 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/dropzone.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6">
+        <div x-data="chart" class="grid grid-cols-12 gap-4 xxl:gap-6">
+          <div class="col-span-12 lg:col-span-8 space-y-4 xxl:space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 xxl:gap-6">
+              <div class="white-box">
+                <div class="flex items-center gap-4 xxl:gap-6 mb-5 xxl:mb-7">
+                  <span class="size-12 xl:size-[68px] rounded-xl bg-primary-300/10 text-primary-300 f-center border border-neutral-30 dark:border-neutral-500">
+                    <i class="lab la-dropbox text-3xl xl:text-[44px]"></i>
+                  </span>
+                  <div>
+                    <p class="m-text font-medium mb-3">File</p>
+                    <h4>Dropbox</h4>
+                  </div>
+                </div>
+                <div class="mb-4 rounded-xl bg-neutral-30 h-1 dark:bg-neutral-903">
+                  <div class="w-1/2 bg-primary-300 rounded-xl h-1"></div>
+                </div>
+                <p class="s-text">2.24 Gb / 22.35 Gb</p>
+              </div>
+              <div class="white-box">
+                <div class="flex items-center gap-4 xxl:gap-6 mb-5 xxl:mb-7">
+                  <span class="size-12 xl:size-[68px] rounded-xl bg-primary-300/10 text-primary-300 f-center border border-neutral-30 dark:border-neutral-500">
+                    <i class="lab la-google-drive text-3xl xl:text-[44px]"></i>
+                  </span>
+                  <div>
+                    <p class="m-text font-medium mb-3">File</p>
+                    <h4>Drive</h4>
+                  </div>
+                </div>
+                <div class="mb-4 rounded-xl bg-neutral-30 h-1 dark:bg-neutral-903">
+                  <div class="w-1/2 bg-primary-300 rounded-xl h-1"></div>
+                </div>
+                <p class="s-text">4.47 Gb / 22.35 Gb</p>
+              </div>
+              <div class="white-box">
+                <div class="flex items-center gap-4 xxl:gap-6 mb-5 xxl:mb-7">
+                  <span class="size-12 xl:size-[68px] rounded-xl bg-primary-300/10 text-primary-300 f-center border border-neutral-30 dark:border-neutral-500">
+                    <i class="las la-cloud text-3xl xl:text-[44px]"></i>
+                  </span>
+                  <div>
+                    <p class="m-text font-medium mb-3">File</p>
+                    <h4>OneDrive</h4>
+                  </div>
+                </div>
+                <div class="mb-4 rounded-xl bg-neutral-30 h-1 dark:bg-neutral-903">
+                  <div class="w-1/2 bg-primary-300 rounded-xl h-1"></div>
+                </div>
+                <p class="s-text">11.18 Gb / 22.35 Gb</p>
+              </div>
+              <div class="white-box">
+                <div class="flex items-center gap-4 xxl:gap-6 mb-5 xxl:mb-7">
+                  <span class="size-12 xl:size-[68px] rounded-xl bg-primary-300/10 text-primary-300 f-center border border-neutral-30 dark:border-neutral-500">
+                    <i class="lab la-apple text-3xl xl:text-[44px]"></i>
+                  </span>
+                  <div>
+                    <p class="m-text font-medium mb-3">File</p>
+                    <h4>IClound</h4>
+                  </div>
+                </div>
+                <div class="mb-4 rounded-xl bg-neutral-30 h-1 dark:bg-neutral-903">
+                  <div class="w-1/2 bg-primary-300 rounded-xl h-1"></div>
+                </div>
+                <p class="s-text">12.18 Gb / 15.35 Gb</p>
+              </div>
+            </div>
+            <!-- Data activity -->
+            <div class="col-span-12 lg:col-span-7 xxl:col-span-8 white-box overflow-hidden">
+              <div class="bb-dashed-n30 flex flex-col justify-center sm:flex-row sm:justify-between items-center gap-4">
+                <h4>Data Activity</h4>
+                <div class="flex items-center gap-3">
+                  <span>Sort By : </span>
+                  <select name="sort" class="nc-select n20">
+                    <option value="lyear">Last year</option>
+                    <option value="lmonth">Last month</option>
+                    <option value="year">Last 6 Month</option>
+                  </select>
+                </div>
+              </div>
+              <div x-ref="dataActivity"></div>
+            </div>
+
+            <!-- Recent Files -->
+            <div x-data="customizer" class="white-box">
+              <div class="flex justify-between items-center bb-dashed-n30">
+                <div x-data="modal" class="flex items-center gap-4">
+                  <h4>Recent Files</h4>
+                  <button @click="openModal" class="size-7 rounded-full bg-primary-300 text-neutral-0 f-center"><i class="las la-plus text-lg"></i></button>
+                  <template x-teleport="body">
+                    <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                      <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                        <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                          <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                            <h4>Upload Files</h4>
+                            <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                          </div>
+                          <form action="#" class="single-file my-4 xl:my-6">
+                            <div class="flex flex-col items-center text-center clickable-single cursor-pointer bg-neutral-20 border border-neutral-30 dark:border-neutral-500 dark:bg-neutral-903 rounded-xl p-6 lg:p-10">
+                              <img src="./assets/images/single-file.png" class="mb-6" alt="" />
+                              <h5 class="font-semibold mb-4">Drop or Select file</h5>
+                              <p>Drop files here or click <span class="text-primary-300">Browse</span> through your machine</p>
+                            </div>
+                          </form>
+                          <div class="flex gap-4 xxl:gap-6">
+                            <button class="btn-primary w-full">Upload</button>
+                            <button class="btn-primary-outlined w-full">Create</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+                <a href="#" class="h6 flex items-center gap-3">View All <i class="las la-arrow-right text-xl"></i></a>
+              </div>
+              <div class="flex flex-col gap-4">
+                <div class="p-4 xl:p-6 cursor-pointer rounded-xl hover:shadow-lg duration-300 bg-neutral-20 dark:bg-neutral-903 flex justify-between items-center gap-4 flex-wrap">
+                  <div @click="openCustomizer" class="flex grow gap-4 xxl:gap-6">
+                    <span class="size-14 shrink-0 flex justify-center bg-primary-300/10 items-center rounded-lg border border-primary-300 text-primary-300">
+                      <i class="las la-file-image text-3xl"></i>
+                    </span>
+                    <div>
+                      <p class="l-text font-medium mb-2">Product-photo-red-shirt.jpg</p>
+                      <p class="s-text">546.45 Mb • 03 Mar 2024 9:29 AM</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2 md:gap-4">
+                    <div class="f-center">
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-1.png" alt="" />
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-2.png" alt="" />
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-3.png" alt="" />
+                      <div class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2 bg-primary-300 font-semibold text-neutral-0 text-xs f-center">2+</div>
+                    </div>
+                    <button x-data="{fav: false}" @click="fav = !fav" class="size-8 rounded-full hover:bg-neutral-40 hover:dark:bg-neutral-500 duration-300 f-center">
+                      <i :class="fav ? 'las la-star text-warning-300' : 'lar la-star'" class="text-xl"></i>
+                    </button>
+                    <include-verti-option />
+                  </div>
+                </div>
+                <div class="p-4 xl:p-6 cursor-pointer rounded-xl hover:shadow-lg duration-300 bg-neutral-20 dark:bg-neutral-903 flex justify-between items-center gap-4 flex-wrap">
+                  <div @click="openCustomizer" class="flex grow gap-4 xxl:gap-6">
+                    <span class="size-14 shrink-0 flex justify-center bg-secondary-300/10 items-center rounded-lg border border-secondary-300 text-secondary-300">
+                      <i class="las la-file-video text-3xl"></i>
+                    </span>
+                    <div>
+                      <p class="l-text font-medium mb-2">Tutorial-how-to-bake-cake.mp4</p>
+                      <p class="s-text">546.45 Mb • 03 Mar 2024 9:29 AM</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2 md:gap-4">
+                    <div class="f-center">
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-1.png" alt="" />
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-2.png" alt="" />
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-3.png" alt="" />
+                    </div>
+                    <button x-data="{fav: false}" @click="fav = !fav" class="size-8 rounded-full hover:bg-neutral-40 hover:dark:bg-neutral-500 duration-300 f-center">
+                      <i :class="fav ? 'las la-star text-warning-300' : 'lar la-star'" class="text-xl"></i>
+                    </button>
+                    <include-verti-option />
+                  </div>
+                </div>
+                <div class="p-4 xl:p-6 cursor-pointer rounded-xl hover:shadow-lg duration-300 bg-neutral-20 dark:bg-neutral-903 flex justify-between items-center gap-4 flex-wrap">
+                  <div @click="openCustomizer" class="flex grow gap-4 xxl:gap-6">
+                    <span class="size-14 shrink-0 flex justify-center bg-warning-300/10 items-center rounded-lg border border-warning-300 text-warning-300">
+                      <i class="las la-file-pdf text-3xl"></i>
+                    </span>
+                    <div>
+                      <p class="l-text font-medium mb-2">Report-financial-analysis-q2.pdf</p>
+                      <p class="s-text">546.45 Mb • 03 Mar 2024 9:29 AM</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2 md:gap-4">
+                    <div class="f-center">
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-1.png" alt="" />
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-2.png" alt="" />
+                    </div>
+                    <button x-data="{fav: false}" @click="fav = !fav" class="size-8 rounded-full hover:bg-neutral-40 hover:dark:bg-neutral-500 duration-300 f-center">
+                      <i :class="fav ? 'las la-star text-warning-300' : 'lar la-star'" class="text-xl"></i>
+                    </button>
+                    <include-verti-option />
+                  </div>
+                </div>
+                <div class="p-4 xl:p-6 cursor-pointer rounded-xl hover:shadow-lg duration-300 bg-neutral-20 dark:bg-neutral-903 flex justify-between items-center gap-4 flex-wrap">
+                  <div @click="openCustomizer" class="flex grow gap-4 xxl:gap-6">
+                    <span class="size-14 shrink-0 flex justify-center bg-primary-300/10 items-center rounded-lg border border-primary-300 text-primary-300">
+                      <i class="las la-file-image text-3xl"></i>
+                    </span>
+                    <div>
+                      <p class="l-text font-medium mb-2">Landscape-sunset-mountains.jpg</p>
+                      <p class="s-text">546.45 Mb • 03 Mar 2024 9:29 AM</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2 md:gap-4">
+                    <div class="f-center">
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-1.png" alt="" />
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-2.png" alt="" />
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-3.png" alt="" />
+                      <div class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2 bg-primary-300 font-semibold text-neutral-0 text-xs f-center">2+</div>
+                    </div>
+                    <button x-data="{fav: false}" @click="fav = !fav" class="size-8 rounded-full hover:bg-neutral-40 hover:dark:bg-neutral-500 duration-300 f-center">
+                      <i :class="fav ? 'las la-star text-warning-300' : 'lar la-star'" class="text-xl"></i>
+                    </button>
+                    <include-verti-option />
+                  </div>
+                </div>
+                <div class="p-4 xl:p-6 cursor-pointer rounded-xl hover:shadow-lg duration-300 bg-neutral-20 dark:bg-neutral-903 flex justify-between items-center gap-4 flex-wrap">
+                  <div @click="openCustomizer" class="flex grow gap-4 xxl:gap-6">
+                    <span class="size-14 shrink-0 flex justify-center bg-secondary-300/10 items-center rounded-lg border border-secondary-300 text-secondary-300">
+                      <i class="las la-file-video text-3xl"></i>
+                    </span>
+                    <div>
+                      <p class="l-text font-medium mb-2">Vlog-travel-trip-italy.mp4</p>
+                      <p class="s-text">546.45 Mb • 03 Mar 2024 9:29 AM</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2 md:gap-4">
+                    <div class="f-center">
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-1.png" alt="" />
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-2.png" alt="" />
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-3.png" alt="" />
+                    </div>
+                    <button x-data="{fav: false}" @click="fav = !fav" class="size-8 rounded-full hover:bg-neutral-40 hover:dark:bg-neutral-500 duration-300 f-center">
+                      <i :class="fav ? 'las la-star text-warning-300' : 'lar la-star'" class="text-xl"></i>
+                    </button>
+                    <include-verti-option />
+                  </div>
+                </div>
+                <div class="p-4 xl:p-6 cursor-pointer rounded-xl hover:shadow-lg duration-300 bg-neutral-20 dark:bg-neutral-903 flex justify-between items-center gap-4 flex-wrap">
+                  <div @click="openCustomizer" class="flex grow gap-4 xxl:gap-6">
+                    <span class="size-14 shrink-0 flex justify-center bg-warning-300/10 items-center rounded-lg border border-warning-300 text-warning-300">
+                      <i class="las la-file-pdf text-3xl"></i>
+                    </span>
+                    <div>
+                      <p class="l-text font-medium mb-2">Report-financial-analysis-q2.pdf</p>
+                      <p class="s-text">546.45 Mb • 03 Mar 2024 9:29 AM</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2 md:gap-4">
+                    <div class="f-center">
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-1.png" alt="" />
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-2.png" alt="" />
+                    </div>
+                    <button x-data="{fav: false}" @click="fav = !fav" class="size-8 rounded-full hover:bg-neutral-40 hover:dark:bg-neutral-500 duration-300 f-center">
+                      <i :class="fav ? 'las la-star text-warning-300' : 'lar la-star'" class="text-xl"></i>
+                    </button>
+                    <include-verti-option />
+                  </div>
+                </div>
+                <div class="p-4 xl:p-6 cursor-pointer rounded-xl hover:shadow-lg duration-300 bg-neutral-20 dark:bg-neutral-903 flex justify-between items-center gap-4 flex-wrap">
+                  <div @click="openCustomizer" class="flex grow gap-4 xxl:gap-6">
+                    <span class="size-14 shrink-0 flex justify-center bg-secondary-300/10 items-center rounded-lg border border-secondary-300 text-secondary-300">
+                      <i class="las la-file-video text-3xl"></i>
+                    </span>
+                    <div>
+                      <p class="l-text font-medium mb-2">Tutorial-how-to-bake-cake.mp4</p>
+                      <p class="s-text">546.45 Mb • 03 Mar 2024 9:29 AM</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2 md:gap-4">
+                    <div class="f-center">
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-1.png" alt="" />
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-2.png" alt="" />
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-3.png" alt="" />
+                    </div>
+                    <button x-data="{fav: false}" @click="fav = !fav" class="size-8 rounded-full hover:bg-neutral-40 hover:dark:bg-neutral-500 duration-300 f-center">
+                      <i :class="fav ? 'las la-star text-warning-300' : 'lar la-star'" class="text-xl"></i>
+                    </button>
+                    <include-verti-option />
+                  </div>
+                </div>
+                <div class="p-4 xl:p-6 cursor-pointer rounded-xl hover:shadow-lg duration-300 bg-neutral-20 dark:bg-neutral-903 flex justify-between items-center gap-4 flex-wrap">
+                  <div @click="openCustomizer" class="flex grow gap-4 xxl:gap-6">
+                    <span class="size-14 shrink-0 flex justify-center bg-warning-300/10 items-center rounded-lg border border-warning-300 text-warning-300">
+                      <i class="las la-file-pdf text-3xl"></i>
+                    </span>
+                    <div>
+                      <p class="l-text font-medium mb-2">Report-financial-analysis-q2.pdf</p>
+                      <p class="s-text">546.45 Mb • 03 Mar 2024 9:29 AM</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2 md:gap-4">
+                    <div class="f-center">
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-1.png" alt="" />
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-2.png" alt="" />
+                    </div>
+                    <button x-data="{fav: false}" @click="fav = !fav" class="size-8 rounded-full hover:bg-neutral-40 hover:dark:bg-neutral-500 duration-300 f-center">
+                      <i :class="fav ? 'las la-star text-warning-300' : 'lar la-star'" class="text-xl"></i>
+                    </button>
+                    <include-verti-option />
+                  </div>
+                </div>
+                <div class="p-4 xl:p-6 cursor-pointer rounded-xl hover:shadow-lg duration-300 bg-neutral-20 dark:bg-neutral-903 flex justify-between items-center gap-4 flex-wrap">
+                  <div @click="openCustomizer" class="flex grow gap-4 xxl:gap-6">
+                    <span class="size-14 shrink-0 flex justify-center bg-primary-300/10 items-center rounded-lg border border-primary-300 text-primary-300">
+                      <i class="las la-file-image text-3xl"></i>
+                    </span>
+                    <div>
+                      <p class="l-text font-medium mb-2">Landscape-sunset-mountains.jpg</p>
+                      <p class="s-text">546.45 Mb • 03 Mar 2024 9:29 AM</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2 md:gap-4">
+                    <div class="f-center">
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-1.png" alt="" />
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-2.png" alt="" />
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-3.png" alt="" />
+                      <div class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2 bg-primary-300 font-semibold text-neutral-0 text-xs f-center">2+</div>
+                    </div>
+                    <button x-data="{fav: false}" @click="fav = !fav" class="size-8 rounded-full hover:bg-neutral-40 hover:dark:bg-neutral-500 duration-300 f-center">
+                      <i :class="fav ? 'las la-star text-warning-300' : 'lar la-star'" class="text-xl"></i>
+                    </button>
+                    <include-verti-option />
+                  </div>
+                </div>
+                <div class="p-4 xl:p-6 cursor-pointer rounded-xl hover:shadow-lg duration-300 bg-neutral-20 dark:bg-neutral-903 flex justify-between items-center gap-4 flex-wrap">
+                  <div @click="openCustomizer" class="flex grow gap-4 xxl:gap-6">
+                    <span class="size-14 shrink-0 flex justify-center bg-secondary-300/10 items-center rounded-lg border border-secondary-300 text-secondary-300">
+                      <i class="las la-file-video text-3xl"></i>
+                    </span>
+                    <div>
+                      <p class="l-text font-medium mb-2">Vlog-travel-trip-italy.mp4</p>
+                      <p class="s-text">546.45 Mb • 03 Mar 2024 9:29 AM</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2 md:gap-4">
+                    <div class="f-center">
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-1.png" alt="" />
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-2.png" alt="" />
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-3.png" alt="" />
+                    </div>
+                    <button x-data="{fav: false}" @click="fav = !fav" class="size-8 rounded-full hover:bg-neutral-40 hover:dark:bg-neutral-500 duration-300 f-center">
+                      <i :class="fav ? 'las la-star text-warning-300' : 'lar la-star'" class="text-xl"></i>
+                    </button>
+                    <include-verti-option />
+                  </div>
+                </div>
+                <div class="p-4 xl:p-6 cursor-pointer rounded-xl hover:shadow-lg duration-300 bg-neutral-20 dark:bg-neutral-903 flex justify-between items-center gap-4 flex-wrap">
+                  <div @click="openCustomizer" class="flex grow gap-4 xxl:gap-6">
+                    <span class="size-14 shrink-0 flex justify-center bg-primary-300/10 items-center rounded-lg border border-primary-300 text-primary-300">
+                      <i class="las la-file-image text-3xl"></i>
+                    </span>
+                    <div>
+                      <p class="l-text font-medium mb-2">Landscape-sunset-mountains.jpg</p>
+                      <p class="s-text">546.45 Mb • 03 Mar 2024 9:29 AM</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2 md:gap-4">
+                    <div class="f-center">
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-1.png" alt="" />
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-2.png" alt="" />
+                      <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-3.png" alt="" />
+                      <div class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2 bg-primary-300 font-semibold text-neutral-0 text-xs f-center">2+</div>
+                    </div>
+                    <button x-data="{fav: false}" @click="fav = !fav" class="size-8 rounded-full hover:bg-neutral-40 hover:dark:bg-neutral-500 duration-300 f-center">
+                      <i :class="fav ? 'las la-star text-warning-300' : 'lar la-star'" class="text-xl"></i>
+                    </button>
+                    <include-verti-option />
+                  </div>
+                </div>
+              </div>
+
+              <div class="inset-0 fixed bg-black bg-opacity-60 duration-300 z-[29]" x-show="customizerIsOpen" @click="closeCustomizer"></div>
+              <div
+                :class="customizerIsOpen?'translate-x-0 opacity-100 visible':'ltr:translate-x-full rtl:-translate-x-full opacity-0 invisible'"
+                class="w-[312px] sm:w-[500px] duration-300 fixed h-full top-0 right-0 z-30 p-4 md:p-6 xxl:p-8 bg-neutral-0 dark:bg-neutral-904 overflow-y-auto custom-scrollbar"
+              >
+                <div class="flex justify-between items-center bb-dashed-n30">
+                  <h4 class="text-2xl font-semibold">View Info</h4>
+                  <div class="flex gap-4 items-center shrink-0 text-2xl">
+                    <button x-data="{fav: false}" @click="fav = !fav" class="size-8 rounded-full hover:bg-neutral-40 hover:dark:bg-neutral-500 duration-300 f-center">
+                      <i :class="fav ? 'las la-star text-warning-300' : 'lar la-star'" class="text-xl"></i>
+                    </button>
+                    <button @click="closeCustomizer"><i class="las la-times"></i></button>
+                  </div>
+                </div>
+
+                <div class="bb-dashed-n30">
+                  <span class="size-14 shrink-0 xxl:size-[76px] flex justify-center bg-secondary-300/10 items-center rounded-lg border border-secondary-300 text-secondary-300 mb-4 xxl:mb-6">
+                    <i class="las la-file-pdf text-3xl xxl:text-4xl"></i>
+                  </span>
+                  <p class="l-text font-medium">Tutorial-how-to-bake-cake.mp4</p>
+                </div>
+                <!-- tags -->
+                <div x-data="{isOpen:true}" class="bb-dashed-n30">
+                  <div class="flex justify-between items-center">
+                    <p class="l-text font-medium">Tags</p>
+                    <button @click="isOpen = !isOpen" class="size-8 rounded-full f-center hover:bg-neutral-30 dark:hover:bg-neutral-500 duration-300">
+                      <i class="las la-angle-down text-lg duration-300" :class="isOpen?'rotate-180':''"></i>
+                    </button>
+                  </div>
+                  <div x-show="isOpen" x-collapse>
+                    <div class="bg-neutral-20 dark:bg-neutral-903 mt-4 xxl:mt-6 border border-neutral-40 dark:border-neutral-500 rounded-xl p-3 lg:p-4 xxl:p-5">
+                      <div
+                        x-data="{
+                                  selectOpen: false,
+                                  selectedItems: [ { title: 'Marketing' },
+                                      { title: 'Design' },],
+                                  searchText: '',
+                                  optionList: [
+                                      { title: 'Technology' },
+                                      { title: 'Design' },
+                                      { title: 'Marketing' },
+                                      { title: 'Trending' },
+                                      { title: 'Ai' },
+                                      { title: 'Business' },
+                                  ],
+                                  filteredOptions() {
+                                      if (this.searchText.trim() === '') {
+                                          return this.optionList;
+                                      } else {
+                                          return this.optionList.filter(option => option.title.toLowerCase().includes(this.searchText.trim().toLowerCase()));
+                                      }
+                                  },
+                                  toggleItem(item) {
+                                      const index = this.selectedItems.findIndex(selectedItem => selectedItem.title === item.title);
+                                      if (index === -1) {
+                                          // If item not already selected, add it to selectedItems array
+                                          this.selectedItems.push(item);
+                                      } else {
+                                          // If item already selected, remove it from selectedItems array
+                                          this.selectedItems.splice(index, 1);
+                                      }
+                                  },
+                                  isSelected(item) {
+                                      return this.selectedItems.findIndex(selectedItem => selectedItem.title === item.title) !== -1;
+                                  }
+                              }"
+                        class="relative"
+                      >
+                        <div @click="selectOpen = !selectOpen" class="rounded-xl w-full relative flex flex-col gap-2">
+                          <div x-show="selectedItems.length" class="flex gap-2 flex-wrap">
+                            <template x-for="item in selectedItems">
+                              <div class="px-1.5 py-0.5 rounded-full bg-neutral-20 dark:bg-neutral-904 flex items-center gap-2 border border-neutral-40 dark:border-neutral-600 text-neutral-700 dark:text-neutral-40">
+                                <span x-text="item.title" class="text-xs"></span>
+                                <span @click.stop="toggleItem(item)" class="text-xs rounded-full size-4 bg-neutral-70 text-neutral-10 f-center">
+                                  <i class="las la-times"></i>
+                                </span>
+                              </div>
+                            </template>
+                          </div>
+                          <input type="text" placeholder="Add tags" x-model="searchText" class="w-full bg-transparent capitalize text-sm" />
+                        </div>
+                        <ul x-show="selectOpen" @click.away="selectOpen = false" class="p-1 rounded-xl bg-neutral-0 dark:bg-neutral-904 absolute top-full left-0 right-0 w-full shadow-xl z-[3] max-h-[250px] overflow-y-auto flex flex-col gap-1">
+                          <template x-for="option in filteredOptions()" :key="option.title">
+                            <li @click="toggleItem(option)" x-text="option.title" :class="{ 'bg-primary-50 dark:bg-neutral-600': isSelected(option) }" class="py-1.5 ltr:pl-6 rtl:pr-6 hover:bg-primary-300 rounded-lg text-sm hover:text-neutral-0 duration-300 cursor-pointer capitalize"></li>
+                          </template>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Properties -->
+                <div x-data="{isOpen:true}" class="bb-dashed-n30">
+                  <div class="flex justify-between items-center">
+                    <p class="l-text font-medium">Properties</p>
+                    <button @click="isOpen = !isOpen" class="size-8 rounded-full f-center hover:bg-neutral-30 dark:hover:bg-neutral-500 duration-300">
+                      <i class="las la-angle-down text-lg duration-300" :class="isOpen?'rotate-180':''"></i>
+                    </button>
+                  </div>
+                  <div x-show="isOpen" x-collapse>
+                    <div class="bg-neutral-20 mt-4 xxl:mt-6 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 rounded-xl p-3 lg:p-4 xxl:p-5">
+                      <table>
+                        <tr>
+                          <td class="m-text w-36">Size</td>
+                          <td><span class="m-text font-medium">22.89 Mb</span></td>
+                        </tr>
+                        <tr>
+                          <td class="m-text w-36">Modified</td>
+                          <td><span class="m-text font-medium">02 Mar 2024 9:29 AM</span></td>
+                        </tr>
+                        <tr>
+                          <td class="m-text w-36">Size</td>
+                          <td><span class="m-text font-medium">Video</span></td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- share with -->
+                <div class="bb-dashed-n30">
+                  <div x-data="modal" class="flex justify-between items-center">
+                    <p class="l-text font-medium">File Share With</p>
+                    <button @click="openModal" class="size-7 rounded-full bg-primary-300 text-neutral-0 f-center"><i class="las la-plus text-lg"></i></button>
+                    <template x-teleport="body">
+                      <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                        <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                          <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                            <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                              <h4>Invite</h4>
+                              <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                            </div>
+                            <div>
+                              <form class="rounded-xl bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 p-2 flex mb-7 xxl:mb-10">
+                                <input type="text" class="px-4 py-2 w-full bg-transparent" placeholder="Enter Email..." />
+                                <button class="size-10 shrink-0 rounded-lg bg-primary-300 text-neutral-0 f-center">
+                                  <i class="las la-arrow-right text-2xl"></i>
+                                </button>
+                              </form>
+                              <div class="flex flex-col gap-5 xxl:gap-8 mb-7 xxl:mb-10">
+                                <div class="flex justify-between items-center">
+                                  <div class="flex items-center gap-2 md:gap-4">
+                                    <img src="./assets/images/avatar/avatar-big-1.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                                    <div>
+                                      <p class="mb-1 l-text font-medium">Arlene McCoy</p>
+                                      <p class="s-text">example@gmail.com</p>
+                                    </div>
+                                  </div>
+                                  <div x-data="{selected:'Can View',opened:false}" class="relative">
+                                    <div @click="opened = !opened" class="flex items-center gap-3 cursor-pointer">
+                                      <span class="text-xs xxl:text-base" x-text="selected"></span>
+                                      <i class="las la-angle-down text-sm xxl:text-xl"></i>
+                                    </div>
+                                    <div @click.away="opened = false" x-show="opened" class="absolute top-0 shadow-lg z-10 right-full min-w-[150px] bg-neutral-0 dark:bg-neutral-904 p-3 flex flex-col gap-1 border border-neutral-30 dark:border-neutral-500 rounded-xl">
+                                      <span @click="selected='Can View',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-eye text-xl"></i> Can View</span>
+                                      <span @click="selected='Can Edit',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-pen text-xl"></i> Can Edit</span>
+                                      <span @click="selected='Remove',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-trash text-xl"></i> Remove</span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                  <div class="flex items-center gap-2 md:gap-4">
+                                    <img src="./assets/images/avatar/avatar-big-5.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                                    <div>
+                                      <p class="mb-1 l-text font-medium">Robert Fox</p>
+                                      <p class="s-text">example@gmail.com</p>
+                                    </div>
+                                  </div>
+                                  <div x-data="{selected:'Can View',opened:false}" class="relative">
+                                    <div @click="opened = !opened" class="flex items-center gap-3 cursor-pointer">
+                                      <span class="text-xs xxl:text-base" x-text="selected"></span>
+                                      <i class="las la-angle-down text-sm xxl:text-xl"></i>
+                                    </div>
+                                    <div @click.away="opened = false" x-show="opened" class="absolute top-0 shadow-lg z-10 right-full min-w-[150px] bg-neutral-0 dark:bg-neutral-904 p-3 flex flex-col gap-1 border border-neutral-30 dark:border-neutral-500 rounded-xl">
+                                      <span @click="selected='Can View',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-eye text-xl"></i> Can View</span>
+                                      <span @click="selected='Can Edit',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-pen text-xl"></i> Can Edit</span>
+                                      <span @click="selected='Remove',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-trash text-xl"></i> Remove</span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                  <div class="flex items-center gap-2 md:gap-4">
+                                    <img src="./assets/images/avatar/avatar-big-2.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                                    <div>
+                                      <p class="mb-1 l-text font-medium">Kathryn Murphy</p>
+                                      <p class="s-text">example@gmail.com</p>
+                                    </div>
+                                  </div>
+                                  <div x-data="{selected:'Can View',opened:false}" class="relative">
+                                    <div @click="opened = !opened" class="flex items-center gap-3 cursor-pointer">
+                                      <span class="text-xs xxl:text-base" x-text="selected"></span>
+                                      <i class="las la-angle-down text-sm xxl:text-xl"></i>
+                                    </div>
+                                    <div @click.away="opened = false" x-show="opened" class="absolute top-0 shadow-lg z-10 right-full min-w-[150px] bg-neutral-0 dark:bg-neutral-904 p-3 flex flex-col gap-1 border border-neutral-30 dark:border-neutral-500 rounded-xl">
+                                      <span @click="selected='Can View',opened =false" class="flex w-full py-1 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-eye text-xl"></i> Can View</span>
+                                      <span @click="selected='Can Edit',opened =false" class="flex w-full py-1 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-pen text-xl"></i> Can Edit</span>
+                                      <span @click="selected='Remove',opened =false" class="flex w-full py-1 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-trash text-xl"></i> Remove</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="flex gap-4 xxl:gap-6 justify-between items-center">
+                              <button class="flex gap-4"><i class="las la-link text-xl"></i> <span class="h6">Copy Link</span></button>
+                              <button class="btn-primary-outlined" @click="closeModal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </template>
+                  </div>
+                  <div class="flex flex-col gap-4 xxl:gap-6 n30-box !p-2 xl:!p-5 mt-5">
+                    <div class="flex justify-between items-center">
+                      <div class="flex items-center gap-2 md:gap-4">
+                        <img src="./assets/images/avatar/avatar-big-1.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                        <div>
+                          <p class="mb-1 l-text font-medium">Arlene McCoy</p>
+                          <p class="s-text">example@gmail.com</p>
+                        </div>
+                      </div>
+                      <div x-data="{selected:'Can View',opened:false}" class="relative">
+                        <div @click="opened = !opened" class="flex items-center gap-3 cursor-pointer">
+                          <span class="text-xs xxl:text-base" x-text="selected"></span>
+                          <i class="las la-angle-down text-sm xxl:text-xl"></i>
+                        </div>
+                        <div @click.away="opened = false" x-show="opened" class="absolute top-0 shadow-lg z-10 right-full min-w-[150px] bg-neutral-0 dark:bg-neutral-904 p-3 flex flex-col gap-1 border border-neutral-30 dark:border-neutral-500 rounded-xl">
+                          <span @click="selected='Can View',opened =false" class="flex text-xs xxl:text-base w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-eye text-xl"></i> Can View</span>
+                          <span @click="selected='Can Edit',opened =false" class="flex text-xs xxl:text-base w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-pen text-xl"></i> Can Edit</span>
+                          <span @click="selected='Remove',opened =false" class="flex text-xs xxl:text-base w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-trash text-xl"></i> Remove</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <div class="flex items-center gap-2 md:gap-4">
+                        <img src="./assets/images/avatar/avatar-big-5.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                        <div>
+                          <p class="mb-1 l-text font-medium">Robert Fox</p>
+                          <p class="s-text">example@gmail.com</p>
+                        </div>
+                      </div>
+                      <div x-data="{selected:'Can View',opened:false}" class="relative">
+                        <div @click="opened = !opened" class="flex items-center gap-3 cursor-pointer">
+                          <span class="text-xs xxl:text-base" x-text="selected"></span>
+                          <i class="las la-angle-down text-sm xxl:text-xl"></i>
+                        </div>
+                        <div @click.away="opened = false" x-show="opened" class="absolute top-0 shadow-lg z-10 right-full min-w-[150px] bg-neutral-0 dark:bg-neutral-904 p-3 flex flex-col gap-1 border border-neutral-30 dark:border-neutral-500 rounded-xl">
+                          <span @click="selected='Can View',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-eye text-xl"></i> Can View</span>
+                          <span @click="selected='Can Edit',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-pen text-xl"></i> Can Edit</span>
+                          <span @click="selected='Remove',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-trash text-xl"></i> Remove</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <div class="flex items-center gap-2 md:gap-4">
+                        <img src="./assets/images/avatar/avatar-big-2.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                        <div>
+                          <p class="mb-1 l-text font-medium">Kathryn Murphy</p>
+                          <p class="s-text">example@gmail.com</p>
+                        </div>
+                      </div>
+                      <div x-data="{selected:'Can View',opened:false}" class="relative">
+                        <div @click="opened = !opened" class="flex items-center gap-3 cursor-pointer">
+                          <span class="text-xs xxl:text-base" x-text="selected"></span>
+                          <i class="las la-angle-down text-sm xxl:text-xl"></i>
+                        </div>
+                        <div @click.away="opened = false" x-show="opened" class="absolute top-0 shadow-lg z-10 right-full min-w-[150px] bg-neutral-0 dark:bg-neutral-904 p-3 flex flex-col gap-1 border border-neutral-30 dark:border-neutral-500 rounded-xl">
+                          <span @click="selected='Can View',opened =false" class="flex w-full py-1 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-eye text-xl"></i> Can View</span>
+                          <span @click="selected='Can Edit',opened =false" class="flex w-full py-1 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-pen text-xl"></i> Can Edit</span>
+                          <span @click="selected='Remove',opened =false" class="flex w-full py-1 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-trash text-xl"></i> Remove</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- reset button -->
+                <button class="w-full btn-error-outlined"><i class="las la-trash"></i> Delete</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-span-12 lg:col-span-4 space-y-4 xxl:space-y-6">
+            <!-- Upload file -->
+            <div class="white-box">
+              <h4 class="bb-dashed-n30">Upload File</h4>
+              <form action="#" class="single-file">
+                <div class="flex flex-col items-center text-center clickable-single cursor-pointer bg-neutral-20 border border-neutral-30 dark:border-neutral-500 dark:bg-neutral-903 rounded-xl p-6 lg:p-10">
+                  <img src="./assets/images/single-file.png" class="mb-6" alt="" />
+                  <h5 class="font-semibold mb-4">Drop or Select file</h5>
+                  <p>Drop files here or click <span class="text-primary-300">Browse</span> through your machine</p>
+                </div>
+              </form>
+            </div>
+
+            <!-- file overview -->
+            <div class="white-box">
+              <h4 class="bb-dashed-n30">File Overview</h4>
+              <div x-ref="fileOverview"></div>
+              <div class="flex flex-col gap-4 xxl:gap-8">
+                <div class="flex justify-between items-center">
+                  <div class="flex grow gap-4 xxl:gap-6">
+                    <span class="size-14 shrink-0 flex justify-center bg-primary-300/10 items-center rounded-lg border border-primary-300 text-primary-300">
+                      <i class="las la-file-image text-3xl"></i>
+                    </span>
+                    <div>
+                      <p class="l-text font-medium mb-2">Images</p>
+                      <p class="s-text">223 Files</p>
+                    </div>
+                  </div>
+                  <p class="l-text font-medium">11.18 Gb</p>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex grow gap-4 xxl:gap-6">
+                    <span class="size-14 shrink-0 flex justify-center bg-secondary-300/10 items-center rounded-lg border border-secondary-300 text-secondary-300">
+                      <i class="las la-file-video text-3xl"></i>
+                    </span>
+                    <div>
+                      <p class="l-text font-medium mb-2">Media</p>
+                      <p class="s-text">212 Files</p>
+                    </div>
+                  </div>
+                  <p class="l-text font-medium">4.18 Gb</p>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex grow gap-4 xxl:gap-6">
+                    <span class="size-14 shrink-0 flex justify-center bg-warning-300/10 items-center rounded-lg border border-warning-300 text-warning-300">
+                      <i class="las la-file-pdf text-3xl"></i>
+                    </span>
+                    <div>
+                      <p class="l-text font-medium mb-2">Doucments</p>
+                      <p class="s-text">254 Files</p>
+                    </div>
+                  </div>
+                  <p class="l-text font-medium">5.18 Gb</p>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex grow gap-4 xxl:gap-6">
+                    <span class="size-14 shrink-0 flex justify-center bg-error-300/10 items-center rounded-lg border border-error-300 text-error-300">
+                      <i class="las la-file-alt text-3xl"></i>
+                    </span>
+                    <div>
+                      <p class="l-text font-medium mb-2">Others</p>
+                      <p class="s-text">23 Files</p>
+                    </div>
+                  </div>
+                  <p class="l-text font-medium">21.18 Gb</p>
+                </div>
+              </div>
+            </div>
+            <!-- Folders -->
+            <div class="white-box overflow-x-hidden">
+              <div class="flex justify-between items-center bb-dashed-n30">
+                <div x-data="modal" class="flex items-center gap-4">
+                  <h4>Folders</h4>
+                  <button @click="openModal" class="size-7 rounded-full bg-primary-300 text-neutral-0 f-center"><i class="las la-plus text-lg"></i></button>
+                  <template x-teleport="body">
+                    <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                      <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                        <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                          <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                            <h4>New Folder</h4>
+                            <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                          </div>
+                          <div class="form-input">
+                            <input type="text" id="folder_name" placeholder="Folder" />
+                            <label for="folder_name">Folder Name</label>
+                          </div>
+                          <form action="#" class="single-file my-4 xl:my-6">
+                            <div class="flex flex-col items-center text-center clickable-single cursor-pointer bg-neutral-20 border border-neutral-30 dark:border-neutral-500 dark:bg-neutral-903 rounded-xl p-6 lg:p-10">
+                              <img src="./assets/images/single-file.png" class="mb-6" alt="" />
+                              <h5 class="font-semibold mb-4">Drop or Select file</h5>
+                              <p>Drop files here or click <span class="text-primary-300">Browse</span> through your machine</p>
+                            </div>
+                          </form>
+                          <div class="flex gap-4 xxl:gap-6">
+                            <button class="btn-primary w-full">Upload</button>
+                            <button class="btn-primary-outlined w-full">Create</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+                <a href="#" class="h6 flex items-center gap-3">View All <i class="las la-arrow-right text-xl"></i></a>
+              </div>
+              <div class="overflow-x-auto">
+                <div x-data="{folders:['Projects','Documents','Work','Training']}" class="flex gap-4 xxl:gap-6 min-w-max w-full">
+                  <template x-for="folder in folders">
+                    <div class="n30-box min-w-[250px] md:min-w-[300px] w-full">
+                      <div class="flex justify-between items-start mb-4 xl:mb-6">
+                        <img src="./assets/images/folder.png" alt="" />
+                        <div x-data="{ fav: false }" class="flex gap-4">
+                          <button @click="fav = !fav" class="size-8 rounded-full hover:bg-neutral-40 hover:dark:bg-neutral-500 duration-300 f-center">
+                            <i :class="fav ? 'las la-star text-warning-300' : 'lar la-star'" class="text-xl"></i>
+                          </button>
+                          <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                            <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                            <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                              <li>
+                                <span class="flex items-center gap-2 cursor-pointer rounded px-3 py-2 text-sm leading-normal duration-300 hover:bg-primary-50 dark:hover:bg-neutral-903"> <i class="las la-link text-xl"></i> Copy Link </span>
+                              </li>
+                              <li x-data="modal">
+                                <span @click="openModal" class="flex items-center gap-2 cursor-pointer rounded px-3 py-2 text-sm leading-normal duration-300 hover:bg-primary-50 dark:hover:bg-neutral-903"><i class="las la-share-alt-square text-xl"></i> Share</span>
+                                <template x-teleport="body">
+                                  <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                                    <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                                      <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                                        <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                                          <h4>Invite</h4>
+                                          <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                                        </div>
+                                        <div>
+                                          <form class="rounded-xl bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 p-2 flex mb-7 xxl:mb-10">
+                                            <input type="text" class="px-4 py-2 w-full bg-transparent" placeholder="Enter Email..." />
+                                            <button class="size-10 shrink-0 rounded-lg bg-primary-300 text-neutral-0 f-center">
+                                              <i class="las la-arrow-right text-2xl"></i>
+                                            </button>
+                                          </form>
+                                          <div class="flex flex-col gap-5 xxl:gap-8 mb-7 xxl:mb-10">
+                                            <div class="flex justify-between items-center">
+                                              <div class="flex items-center gap-2 md:gap-4">
+                                                <img src="./assets/images/avatar/avatar-big-1.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                                                <div>
+                                                  <p class="mb-1 l-text font-medium">Arlene McCoy</p>
+                                                  <p class="s-text">example@gmail.com</p>
+                                                </div>
+                                              </div>
+                                              <div x-data="{selected:'Can View',opened:false}" class="relative">
+                                                <div @click="opened = !opened" class="flex items-center gap-3 cursor-pointer">
+                                                  <span class="text-xs xxl:text-base" x-text="selected"></span>
+                                                  <i class="las la-angle-down text-sm xxl:text-xl"></i>
+                                                </div>
+                                                <div @click.away="opened = false" x-show="opened" class="absolute top-0 shadow-lg z-10 right-full min-w-[150px] bg-neutral-0 dark:bg-neutral-904 p-3 flex flex-col gap-1 border border-neutral-30 dark:border-neutral-500 rounded-xl">
+                                                  <span @click="selected='Can View',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-eye text-xl"></i> Can View</span>
+                                                  <span @click="selected='Can Edit',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-pen text-xl"></i> Can Edit</span>
+                                                  <span @click="selected='Remove',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-trash text-xl"></i> Remove</span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                              <div class="flex items-center gap-2 md:gap-4">
+                                                <img src="./assets/images/avatar/avatar-big-5.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                                                <div>
+                                                  <p class="mb-1 l-text font-medium">Robert Fox</p>
+                                                  <p class="s-text">example@gmail.com</p>
+                                                </div>
+                                              </div>
+                                              <div x-data="{selected:'Can View',opened:false}" class="relative">
+                                                <div @click="opened = !opened" class="flex items-center gap-3 cursor-pointer">
+                                                  <span class="text-xs xxl:text-base" x-text="selected"></span>
+                                                  <i class="las la-angle-down text-sm xxl:text-xl"></i>
+                                                </div>
+                                                <div @click.away="opened = false" x-show="opened" class="absolute top-0 shadow-lg z-10 right-full min-w-[150px] bg-neutral-0 dark:bg-neutral-904 p-3 flex flex-col gap-1 border border-neutral-30 dark:border-neutral-500 rounded-xl">
+                                                  <span @click="selected='Can View',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-eye text-xl"></i> Can View</span>
+                                                  <span @click="selected='Can Edit',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-pen text-xl"></i> Can Edit</span>
+                                                  <span @click="selected='Remove',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-trash text-xl"></i> Remove</span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                              <div class="flex items-center gap-2 md:gap-4">
+                                                <img src="./assets/images/avatar/avatar-big-2.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                                                <div>
+                                                  <p class="mb-1 l-text font-medium">Kathryn Murphy</p>
+                                                  <p class="s-text">example@gmail.com</p>
+                                                </div>
+                                              </div>
+                                              <div x-data="{selected:'Can View',opened:false}" class="relative">
+                                                <div @click="opened = !opened" class="flex items-center gap-3 cursor-pointer">
+                                                  <span class="text-xs xxl:text-base" x-text="selected"></span>
+                                                  <i class="las la-angle-down text-sm xxl:text-xl"></i>
+                                                </div>
+                                                <div @click.away="opened = false" x-show="opened" class="absolute top-0 shadow-lg z-10 right-full min-w-[150px] bg-neutral-0 dark:bg-neutral-904 p-3 flex flex-col gap-1 border border-neutral-30 dark:border-neutral-500 rounded-xl">
+                                                  <span @click="selected='Can View',opened =false" class="flex w-full py-1 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-eye text-xl"></i> Can View</span>
+                                                  <span @click="selected='Can Edit',opened =false" class="flex w-full py-1 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-pen text-xl"></i> Can Edit</span>
+                                                  <span @click="selected='Remove',opened =false" class="flex w-full py-1 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-trash text-xl"></i> Remove</span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="flex gap-4 xxl:gap-6 justify-between items-center">
+                                          <button class="flex gap-4"><i class="las la-link text-xl"></i> <span class="h6">Copy Link</span></button>
+                                          <button class="btn-primary-outlined" @click="closeModal">Close</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </template>
+                              </li>
+                              <li x-data="modal">
+                                <span @click="openModal" class="flex items-center gap-2 cursor-pointer rounded px-3 py-2 text-sm leading-normal duration-300 hover:bg-primary-50 dark:hover:bg-neutral-903"> <i class="las la-pen text-xl"></i> Edit </span>
+                                <template x-teleport="body">
+                                  <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                                    <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                                      <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                                        <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                                          <h4>Edit Folder</h4>
+                                          <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                                        </div>
+                                        <div class="form-input">
+                                          <input type="text" value="Folder Name" id="folder_name_2" placeholder="Folder" />
+                                          <label for="folder_name_2">Folder Name</label>
+                                        </div>
+                                        <form action="#" class="single-file my-4 xl:my-6">
+                                          <div class="flex flex-col items-center text-center clickable-single cursor-pointer bg-neutral-20 border border-neutral-30 dark:border-neutral-500 dark:bg-neutral-903 rounded-xl p-6 lg:p-10">
+                                            <img src="./assets/images/single-file.png" class="mb-6" alt="" />
+                                            <h5 class="font-semibold mb-4">Drop or Select file</h5>
+                                            <p>Drop files here or click <span class="text-primary-300">Browse</span> through your machine</p>
+                                          </div>
+                                        </form>
+                                        <div class="flex gap-4 xxl:gap-6">
+                                          <button class="btn-primary w-full">Upload</button>
+                                          <button class="btn-primary-outlined w-full">Create</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </template>
+                              </li>
+                              <li x-data="modal">
+                                <span @click="openModal" class="flex items-center gap-2 cursor-pointer rounded px-3 py-2 text-sm leading-normal duration-300 hover:bg-primary-50 dark:hover:bg-neutral-903"> <i class="las la-trash text-xl"></i> Delete </span>
+                                <template x-teleport="body">
+                                  <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                                    <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                                      <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                                        <div class="flex justify-between items-center bb-dashed-n30">
+                                          <h5>Delete File?</h5>
+                                          <button type="button" @click="closeModal"><i class="las la-times text-xl"></i></button>
+                                        </div>
+                                        <div class="p-5 text-center">
+                                          <div class="mx-auto w-fit rounded-full bg-error-300/10 p-4 text-error-300 ring-2 ring-error-300/50">
+                                            <i class="las la-trash text-5xl"></i>
+                                          </div>
+                                          <div class="mx-auto mt-5 text-base sm:w-3/4">Are you sure you want to delete?</div>
+                                          <div class="mt-8 f-center">
+                                            <button type="button" class="btn-error-outlined xl:py-2 xl:px-5" @click="closeModal">Cancel</button>
+                                            <button type="button" class="btn-primary ltr:ml-4 rtl:mr-4 xl:py-2 xl:px-5" @click="closeModal">Delete</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </template>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <h4 class="mb-3" x-text="folder"></h4>
+                      <p class="mb-5">1.12 Gb • 200 files</p>
+                      <div class="flex items-center">
+                        <img class="size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3" src="./assets/images/avatar/avatar-1.png" alt="" />
+                        <img class="size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3" src="./assets/images/avatar/avatar-2.png" alt="" />
+                        <img class="size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3" src="./assets/images/avatar/avatar-3.png" alt="" />
+                        <img class="size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3" src="./assets/images/avatar/avatar-4.png" alt="" />
+                        <div class="size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3 bg-primary-300 font-semibold text-neutral-0 text-xs f-center">9+</div>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </div>
+            <!-- unlock storage -->
+            <div class="white-box !p-2 xxxl:!p-6">
+              <div class="n30-box flex flex-col items-center">
+                <img src="./assets/images/unlock-storage.png" class="pt-5 xxl:pt-7" alt="" />
+                <div class="text-center mt-7 xxl:mt-10">
+                  <h3 class="mb-4">Unlock More Storage</h3>
+                  <p class="s-text mb-6 xl:mb-8">Upgrade your plan and get more space</p>
+                  <button class="btn-primary">Upgrade Plan</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/dropzone.min.js"></script>
+    <script defer src="./assets/js/libs/alpine.intersect.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+    <script src="./assets/js/libs/apexcharts.min.js"></script>
+    <script src="./assets/js/charts.js"></script>
+
+    <script>
+      document.addEventListener('alpine:init', () => {
+        Alpine.data('chart', () => ({
+          dataActivity: null,
+          fileOverview: null,
+          init() {
+            isDark = this.$store.app.theme === 'dark' ? true : false
+            isRtl = this.$store.app.dir === 'rtl' ? true : false
+
+            setTimeout(() => {
+              this.dataActivity = new ApexCharts(this.$refs.dataActivity, this.dataActivityOptions)
+              this.dataActivity.render()
+
+              this.fileOverview = new ApexCharts(this.$refs.fileOverview, this.fileOverviewOptions)
+              this.fileOverview.render()
+            }, 300)
+
+            this.$watch('$store.app.theme', () => {
+              this.refreshOptions()
+            })
+
+            this.$watch('$store.app.rtlClass', () => {
+              this.refreshOptions()
+            })
+          },
+
+          refreshOptions() {
+            isDark = this.$store.app.theme === 'dark' ? true : false
+            isRtl = this.$store.app.dir === 'rtl' ? true : false
+            this.dataActivity.updateOptions(this.dataActivityOptions)
+            this.fileOverview.updateOptions(this.fileOverviewOptions)
+          },
+
+          get dataActivityOptions() {
+            return {
+              series: [
+                {
+                  name: 'Images',
+                  data: [44, 55, 41, 67, 22, 43, 10]
+                },
+                {
+                  name: 'Media',
+                  data: [13, 23, 20, 8, 13, 27, 20]
+                },
+                {
+                  name: 'Documents',
+                  data: [11, 17, 15, 15, 21, 14, 15]
+                },
+                {
+                  name: 'Other',
+                  data: [21, 7, 25, 13, 22, 8, 35]
+                }
+              ],
+              chart: {
+                type: 'bar',
+                height: 310,
+                stacked: true,
+                toolbar: {
+                  show: false
+                },
+                zoom: {
+                  enabled: true
+                }
+              },
+              colors: ['#2C7BE5', '#FFAB00', '#FF5630', '#8E33FF'],
+              fill: {
+                colors: ['#2C7BE5', '#FFAB00', '#FF5630', '#8E33FF']
+              },
+              responsive: [
+                {
+                  breakpoint: 480,
+                  options: {
+                    legend: {
+                      position: 'bottom',
+                      offsetX: -10,
+                      offsetY: 0
+                    }
+                  }
+                }
+              ],
+              plotOptions: {
+                bar: {
+                  horizontal: false,
+                  borderRadius: 8,
+                  columnWidth: 20
+                }
+              },
+              xaxis: {
+                categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                labels: {
+                  show: false
+                }
+              },
+              dataLabels: {
+                enabled: false
+              },
+              legend: {
+                offsetY: 10,
+                position: 'bottom',
+                itemMargin: {
+                  horizontal: 10
+                },
+                markers: {
+                  offsetX: 0,
+                  width: 6,
+                  height: 6,
+                  radius: 20
+                }
+              },
+              fill: {
+                opacity: 1
+              }
+            }
+          },
+          get fileOverviewOptions() {
+            return {
+              series: [67],
+              chart: {
+                height: 280,
+                type: 'radialBar',
+                offsetY: -25
+              },
+              plotOptions: {
+                radialBar: {
+                  startAngle: -135,
+                  endAngle: 135,
+                  track: {
+                    background: isDark ? '#404A60' : '#DFE0E4'
+                  },
+                  dataLabels: {
+                    name: {
+                      fontSize: '16px',
+                      color: '#2C7BE5',
+                      offsetY: 120
+                    },
+                    value: {
+                      offsetY: 76,
+                      fontSize: '22px',
+                      color: isDark ? '#dfe0e4' : '#404a60',
+                      formatter: function (val) {
+                        return val + '%'
+                      }
+                    }
+                  }
+                }
+              },
+
+              stroke: {
+                dashArray: 4
+              },
+              labels: ['Returning Customer'],
+              fill: {
+                colors: ['#2C7BE5'],
+                opacity: 1
+              }
+            }
+          }
+        }))
+      })
+    </script>
+  </body>
+</html>

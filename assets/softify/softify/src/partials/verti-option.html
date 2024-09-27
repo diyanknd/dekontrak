@@ -1,0 +1,17 @@
+<div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+  <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+  <ul class="horiz-option" :class="isOpen?'show':'hide'">
+    <li>
+      <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-print text-xl"></i> Print </span>
+    </li>
+    <li>
+      <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-share-alt-square text-xl"></i> Share </span>
+    </li>
+    <li>
+      <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-download text-xl"></i> Download </span>
+    </li>
+    <li>
+      <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+    </li>
+  </ul>
+</div>

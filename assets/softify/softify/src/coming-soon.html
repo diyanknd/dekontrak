@@ -1,0 +1,80 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Main Content -->
+    <main class="relative py-14 lg:py-24 bg-neutral-20 dark:bg-neutral-903 min-h-screen text-neutral-700 dark:text-neutral-20">
+      <!-- banner -->
+      <div class="size-32 md:size-44 xl:size-[574px] rounded-full opacity-[0.2] blur-[80px] md:blur-[100px] xl:blur-[300px] bg-error-300 absolute bottom-0 left-0"></div>
+      <div class="size-32 md:size-44 xl:size-[574px] rounded-full opacity-[0.15] blur-[80px] md:blur-[100px] xl:blur-[300px] bg-error-300 absolute top-0 right-0"></div>
+
+      <!-- Coming Soon -->
+      <div class="container text-center py-10">
+        <h2 class="mb-4 lg:mb-6">Coming Soon!</h2>
+        <p class="m-text mb-10 lg:mb-14">We are currently working hard on this page!</p>
+        <div x-data="countdown" x-init="start" class="grid grid-cols-12 gap-4 md:gap-6 lg:gap-10 xxl:gap-14">
+          <div class="col-span-6 md:col-span-3">
+            <div class="rounded-xl border-4 border-primary-200 relative after:absolute after:h-1/2 after:w-full after:bg-primary-50 after:bottom-0 after:left-0">
+              <h2 class="text-primary-300 font-semibold relative z-[2] text-3xl md:text-5xl lg:text-7xl xl:text-[140px] leading-tight py-8 lg:py-12" x-text="days">02</h2>
+            </div>
+            <h2 class="mt-7 lg:mt-10">Days</h2>
+          </div>
+          <div class="col-span-6 md:col-span-3">
+            <div class="rounded-xl border-4 border-primary-200 relative after:absolute after:h-1/2 after:w-full after:bg-primary-50 after:bottom-0 after:left-0">
+              <h2 class="text-primary-300 font-semibold relative z-[2] text-3xl md:text-5xl lg:text-7xl xl:text-[140px] leading-tight py-8 lg:py-12" x-text="hours">12</h2>
+            </div>
+            <h2 class="mt-7 lg:mt-10">Hours</h2>
+          </div>
+          <div class="col-span-6 md:col-span-3">
+            <div class="rounded-xl border-4 border-primary-200 relative after:absolute after:h-1/2 after:w-full after:bg-primary-50 after:bottom-0 after:left-0">
+              <h2 class="text-primary-300 font-semibold relative z-[2] text-3xl md:text-5xl lg:text-7xl xl:text-[140px] leading-tight py-8 lg:py-12" x-text="minutes">15</h2>
+            </div>
+            <h2 class="mt-7 lg:mt-10">Minutes</h2>
+          </div>
+          <div class="col-span-6 md:col-span-3">
+            <div class="rounded-xl border-4 border-primary-200 relative after:absolute after:h-1/2 after:w-full after:bg-primary-50 after:bottom-0 after:left-0">
+              <h2 class="text-primary-300 font-semibold relative z-[2] text-3xl md:text-5xl lg:text-7xl xl:text-[140px] leading-tight py-8 lg:py-12" x-text="seconds">45</h2>
+            </div>
+            <h2 class="mt-7 lg:mt-10">Seconds</h2>
+          </div>
+        </div>
+        <form @submit.prevent class="mt-10 xl:mt-14 max-w-[636px] focus-within:border-primary-300 mb-6 lg:mb-8 mx-auto rounded-full bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 p-2 flex">
+          <input type="text" class="px-6 py-3 w-full bg-transparent" placeholder="Enter Your Email..." />
+          <button type="submit" class="btn-primary shrink-0">Notify Me</button>
+        </form>
+        <ul class="flex justify-center gap-4">
+          <li>
+            <a class="size-9 lg:size-12 f-center text-2xl rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-facebook-f"></i></a>
+          </li>
+          <li>
+            <a class="size-9 lg:size-12 f-center text-2xl rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-twitter"></i></a>
+          </li>
+          <li>
+            <a class="size-9 lg:size-12 f-center text-2xl rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-instagram"></i></a>
+          </li>
+          <li>
+            <a class="size-9 lg:size-12 f-center text-2xl rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-pinterest"></i></a>
+          </li>
+        </ul>
+      </div>
+    </main>
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

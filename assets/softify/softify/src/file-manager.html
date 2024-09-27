@@ -1,0 +1,1111 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/flatpicker.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/swiper.min.css" />
+    <link rel="stylesheet" href="./assets/css/dropzone.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 space-y-4 xxl:space-y-6">
+        <!-- Breadcrumb -->
+
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">File Manager</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>File Manager</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- File Manager -->
+
+        <div x-data="{activeTab:'list'}" class="white-box">
+          <div class="flex justify-between items-center bb-dashed-n30">
+            <h4>File Manager</h4>
+            <button class="btn-primary-outlined"><i class="las la-upload"></i> Upload</button>
+          </div>
+
+          <div class="flex justify-between flex-wrap gap-5 items-center bb-dashed-n30">
+            <form class="max-w-[337px] rounded-full bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 p-1 flex">
+              <input type="text" class="px-4 py-2 w-full bg-transparent" placeholder="Search..." />
+              <button class="size-10 shrink-0 rounded-full bg-primary-300 text-neutral-0 f-center">
+                <i class="las la-search text-2xl"></i>
+              </button>
+            </form>
+            <div class="flex items-center gap-4 flex-wrap">
+              <button class="flex items-center gap-2 font-semibold">
+                <input type="text" class="bg-transparent w-[100px]" placeholder="Select Date" id="filedate" />
+                <i class="las la-angle-down text-xl"></i>
+              </button>
+
+              <div x-data="{isOpen:false,selected:'All Type', items:['All Type', 'Folder','Image','Powerpoint','Zip','Audio','Video','Excel','Word']}" class="relative max-w-max w-full">
+                <div @click="isOpen=!isOpen" class="relative flex cursor-pointer items-center gap-1.5 font-semibold justify-between">
+                  <span x-text="selected"></span>
+                  <i class="las la-angle-down text-lg duration-300" :class="isOpen?'rotate-180':'rotate-0'"></i>
+                </div>
+                <div x-show="isOpen" @click.away="isOpen=false" class="absolute min-w-max custom-scrollbar whitespace-nowrap rtl:left-0 ltr:right-0 top-full z-10 flex max-h-[200px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-0 p-1 shadow-xl dark:bg-neutral-904">
+                  <template x-for="item in items">
+                    <div @click="selected=item, isOpen=false" :class="selected===item?'bg-primary-300  text-neutral-0':'hover:bg-primary-50 dark:hover:bg-neutral-903'" class="cursor-pointer rounded-md px-4 py-2 duration-300" x-text="item"></div>
+                  </template>
+                </div>
+              </div>
+
+              <div class="p-2 border border-neutral-30 dark:border-neutral-500 rounded-lg flex gap-2">
+                <button :class="activeTab == 'menu' ? 'bg-primary-300/10 text-primary-300' : ''" @click="activeTab = 'menu'" class="size-9 flex items-center rounded-lg justify-center text-2xl">
+                  <i class="las la-border-all"></i>
+                </button>
+                <button :class="activeTab == 'list' ? 'bg-primary-300/10 text-primary-300' : ''" @click="activeTab = 'list'" class="size-9 flex items-center rounded-lg justify-center text-2xl">
+                  <i class="las la-align-left"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div x-data="customizer">
+            <div x-show="activeTab=='menu'" class="flex flex-col gap-4 xxl:gap-6">
+              <div class="n20-box overflow-x-hidden">
+                <div class="flex justify-between items-center bb-dashed-n30">
+                  <div x-data="modal" class="flex items-center gap-4">
+                    <h4>Folders</h4>
+                    <button @click="openModal" class="size-7 rounded-full bg-primary-300 text-neutral-0 f-center"><i class="las la-plus text-lg"></i></button>
+                    <template x-teleport="body">
+                      <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                        <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                          <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                            <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                              <h4>New Folder</h4>
+                              <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                            </div>
+                            <div class="form-input">
+                              <input type="text" id="folder_name" placeholder="Folder" />
+                              <label for="folder_name">Folder Name</label>
+                            </div>
+                            <form action="#" class="single-file my-4 xl:my-6">
+                              <div class="flex flex-col items-center text-center clickable-single cursor-pointer bg-neutral-20 border border-neutral-30 dark:border-neutral-500 dark:bg-neutral-903 rounded-xl p-6 lg:p-10">
+                                <img src="./assets/images/single-file.png" class="mb-6" alt="" />
+                                <h5 class="font-semibold mb-4">Drop or Select file</h5>
+                                <p>Drop files here or click <span class="text-primary-300">Browse</span> through your machine</p>
+                              </div>
+                            </form>
+                            <div class="flex gap-4 xxl:gap-6">
+                              <button class="btn-primary w-full">Upload</button>
+                              <button class="btn-primary-outlined w-full">Create</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </template>
+                  </div>
+                  <a href="#" class="h6 flex items-center gap-3">View All <i class="las la-arrow-right text-xl"></i></a>
+                </div>
+                <div class="overflow-x-auto">
+                  <div x-data="{files:['Projects','Work','Training','Sports','Docs','Downloads']}" class="grid grid-cols-12 gap-4 xxl:gap-6">
+                    <template x-for="file in files">
+                      <div class="white-box col-span-12 md:col-span-6 lg:col-span-4 xxxl:col-span-3">
+                        <div class="flex justify-between items-start mb-4 xl:mb-6">
+                          <img src="./assets/images/folder.png" alt="" />
+                          <div x-data="{ fav: false }" class="flex gap-4">
+                            <button @click="fav = !fav" class="size-8 rounded-full hover:bg-neutral-40 hover:dark:bg-neutral-500 duration-300 f-center">
+                              <i :class="fav ? 'las la-star text-warning-300' : 'lar la-star'" class="text-xl"></i>
+                            </button>
+                            <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                              <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                              <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                                <li>
+                                  <span class="flex items-center gap-2 cursor-pointer rounded px-3 py-2 text-sm leading-normal duration-300 hover:bg-primary-50 dark:hover:bg-neutral-903"> <i class="las la-link text-xl"></i> Copy Link </span>
+                                </li>
+                                <li x-data="modal">
+                                  <span @click="openModal" class="flex items-center gap-2 cursor-pointer rounded px-3 py-2 text-sm leading-normal duration-300 hover:bg-primary-50 dark:hover:bg-neutral-903"><i class="las la-share-alt-square text-xl"></i> Share</span>
+                                  <template x-teleport="body">
+                                    <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                                      <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                                        <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                                          <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                                            <h4>Invite</h4>
+                                            <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                                          </div>
+                                          <div>
+                                            <form class="rounded-xl bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 p-2 flex mb-7 xxl:mb-10">
+                                              <input type="text" class="px-4 py-2 w-full bg-transparent" placeholder="Enter Email..." />
+                                              <button class="size-10 shrink-0 rounded-lg bg-primary-300 text-neutral-0 f-center">
+                                                <i class="las la-arrow-right text-2xl"></i>
+                                              </button>
+                                            </form>
+                                            <div class="flex flex-col gap-5 xxl:gap-8 mb-7 xxl:mb-10">
+                                              <div class="flex justify-between items-center">
+                                                <div class="flex items-center gap-2 md:gap-4">
+                                                  <img src="./assets/images/avatar/avatar-big-1.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                                                  <div>
+                                                    <p class="mb-1 l-text font-medium">Arlene McCoy</p>
+                                                    <p class="s-text">example@gmail.com</p>
+                                                  </div>
+                                                </div>
+                                                <div x-data="{selected:'Can View',opened:false}" class="relative">
+                                                  <div @click="opened = !opened" class="flex items-center gap-3 cursor-pointer">
+                                                    <span class="text-xs xxl:text-base" x-text="selected"></span>
+                                                    <i class="las la-angle-down text-sm xxl:text-xl"></i>
+                                                  </div>
+                                                  <div @click.away="opened = false" x-show="opened" class="absolute top-0 shadow-lg z-10 right-full min-w-[150px] bg-neutral-0 dark:bg-neutral-904 p-3 flex flex-col gap-1 border border-neutral-30 dark:border-neutral-500 rounded-xl">
+                                                    <span @click="selected='Can View',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-eye text-xl"></i> Can View</span>
+                                                    <span @click="selected='Can Edit',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-pen text-xl"></i> Can Edit</span>
+                                                    <span @click="selected='Remove',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-trash text-xl"></i> Remove</span>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="flex justify-between items-center">
+                                                <div class="flex items-center gap-2 md:gap-4">
+                                                  <img src="./assets/images/avatar/avatar-big-5.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                                                  <div>
+                                                    <p class="mb-1 l-text font-medium">Robert Fox</p>
+                                                    <p class="s-text">example@gmail.com</p>
+                                                  </div>
+                                                </div>
+                                                <div x-data="{selected:'Can View',opened:false}" class="relative">
+                                                  <div @click="opened = !opened" class="flex items-center gap-3 cursor-pointer">
+                                                    <span class="text-xs xxl:text-base" x-text="selected"></span>
+                                                    <i class="las la-angle-down text-sm xxl:text-xl"></i>
+                                                  </div>
+                                                  <div @click.away="opened = false" x-show="opened" class="absolute top-0 shadow-lg z-10 right-full min-w-[150px] bg-neutral-0 dark:bg-neutral-904 p-3 flex flex-col gap-1 border border-neutral-30 dark:border-neutral-500 rounded-xl">
+                                                    <span @click="selected='Can View',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-eye text-xl"></i> Can View</span>
+                                                    <span @click="selected='Can Edit',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-pen text-xl"></i> Can Edit</span>
+                                                    <span @click="selected='Remove',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-trash text-xl"></i> Remove</span>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="flex justify-between items-center">
+                                                <div class="flex items-center gap-2 md:gap-4">
+                                                  <img src="./assets/images/avatar/avatar-big-2.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                                                  <div>
+                                                    <p class="mb-1 l-text font-medium">Kathryn Murphy</p>
+                                                    <p class="s-text">example@gmail.com</p>
+                                                  </div>
+                                                </div>
+                                                <div x-data="{selected:'Can View',opened:false}" class="relative">
+                                                  <div @click="opened = !opened" class="flex items-center gap-3 cursor-pointer">
+                                                    <span class="text-xs xxl:text-base" x-text="selected"></span>
+                                                    <i class="las la-angle-down text-sm xxl:text-xl"></i>
+                                                  </div>
+                                                  <div @click.away="opened = false" x-show="opened" class="absolute top-0 shadow-lg z-10 right-full min-w-[150px] bg-neutral-0 dark:bg-neutral-904 p-3 flex flex-col gap-1 border border-neutral-30 dark:border-neutral-500 rounded-xl">
+                                                    <span @click="selected='Can View',opened =false" class="flex w-full py-1 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-eye text-xl"></i> Can View</span>
+                                                    <span @click="selected='Can Edit',opened =false" class="flex w-full py-1 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-pen text-xl"></i> Can Edit</span>
+                                                    <span @click="selected='Remove',opened =false" class="flex w-full py-1 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-trash text-xl"></i> Remove</span>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="flex gap-4 xxl:gap-6 justify-between items-center">
+                                            <button class="flex gap-4"><i class="las la-link text-xl"></i> <span class="h6">Copy Link</span></button>
+                                            <button class="btn-primary-outlined" @click="closeModal">Close</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </template>
+                                </li>
+                                <li x-data="modal">
+                                  <span @click="openModal" class="flex items-center gap-2 cursor-pointer rounded px-3 py-2 text-sm leading-normal duration-300 hover:bg-primary-50 dark:hover:bg-neutral-903"> <i class="las la-pen text-xl"></i> Edit </span>
+                                  <template x-teleport="body">
+                                    <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                                      <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                                        <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                                          <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                                            <h4>Edit Folder</h4>
+                                            <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                                          </div>
+                                          <div class="form-input">
+                                            <input type="text" value="Folder Name" id="file" placeholder="Folder" />
+                                            <label for="file">Folder Name</label>
+                                          </div>
+                                          <form action="#" class="single-file my-4 xl:my-6">
+                                            <div class="flex flex-col items-center text-center clickable-single cursor-pointer bg-neutral-20 border border-neutral-30 dark:border-neutral-500 dark:bg-neutral-903 rounded-xl p-6 lg:p-10">
+                                              <img src="./assets/images/single-file.png" class="mb-6" alt="" />
+                                              <h5 class="font-semibold mb-4">Drop or Select file</h5>
+                                              <p>Drop files here or click <span class="text-primary-300">Browse</span> through your machine</p>
+                                            </div>
+                                          </form>
+                                          <div class="flex gap-4 xxl:gap-6">
+                                            <button class="btn-primary w-full">Upload</button>
+                                            <button class="btn-primary-outlined w-full">Create</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </template>
+                                </li>
+                                <li x-data="modal">
+                                  <span @click="openModal" class="flex items-center gap-2 cursor-pointer rounded px-3 py-2 text-sm leading-normal duration-300 hover:bg-primary-50 dark:hover:bg-neutral-903"> <i class="las la-trash text-xl"></i> Delete </span>
+                                  <template x-teleport="body">
+                                    <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                                      <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                                        <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                                          <div class="flex justify-between items-center bb-dashed-n30">
+                                            <h5>Delete Folder?</h5>
+                                            <button type="button" @click="closeModal"><i class="las la-times text-xl"></i></button>
+                                          </div>
+                                          <div class="p-5 text-center">
+                                            <div class="mx-auto w-fit rounded-full bg-error-300/10 p-4 text-error-300 ring-2 ring-error-300/50">
+                                              <i class="las la-trash text-5xl"></i>
+                                            </div>
+                                            <div class="mx-auto mt-5 text-base sm:w-3/4">Are you sure you want to delete?</div>
+
+                                            <div class="mt-8 f-center">
+                                              <button type="button" class="btn-error-outlined xl:py-2 xl:px-5" @click="closeModal">Cancel</button>
+                                              <button type="button" class="btn-primary ltr:ml-4 rtl:mr-4 xl:py-2 xl:px-5" @click="closeModal">Delete</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </template>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                        <h5 @click="openCustomizer" class="mb-3" x-text="file"></h5>
+                        <p class="mb-5">1.12 Gb • 200 files</p>
+                        <div class="flex items-center">
+                          <img class="size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3" src="./assets/images/avatar/avatar-1.png" alt="" />
+                          <img class="size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3" src="./assets/images/avatar/avatar-2.png" alt="" />
+                          <img class="size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3" src="./assets/images/avatar/avatar-3.png" alt="" />
+                          <img class="size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3" src="./assets/images/avatar/avatar-4.png" alt="" />
+                          <div class="size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3 bg-primary-300 font-semibold text-neutral-0 m-text f-center">9+</div>
+                        </div>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+              </div>
+
+              <div class="n20-box">
+                <div class="flex justify-between items-center bb-dashed-n30">
+                  <div x-data="modal" class="flex items-center gap-4">
+                    <h4>Recent Files</h4>
+                    <button @click="openModal" class="size-7 rounded-full bg-primary-300 text-neutral-0 f-center"><i class="las la-plus text-lg"></i></button>
+                    <template x-teleport="body">
+                      <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                        <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                          <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                            <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                              <h4>Upload Files</h4>
+                              <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                            </div>
+                            <form action="#" class="single-file my-4 xl:my-6">
+                              <div class="flex flex-col items-center text-center clickable-single cursor-pointer bg-neutral-20 border border-neutral-30 dark:border-neutral-500 dark:bg-neutral-903 rounded-xl p-6 lg:p-10">
+                                <img src="./assets/images/single-file.png" class="mb-6" alt="" />
+                                <h5 class="font-semibold mb-4">Drop or Select file</h5>
+                                <p>Drop files here or click <span class="text-primary-300">Browse</span> through your machine</p>
+                              </div>
+                            </form>
+                            <div class="flex gap-4 xxl:gap-6">
+                              <button class="btn-primary w-full">Upload</button>
+                              <button class="btn-primary-outlined w-full">Create</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </template>
+                  </div>
+                  <a href="#" class="h6 flex items-center gap-3">View All <i class="las la-arrow-right text-xl"></i></a>
+                </div>
+                <div
+                  x-data="{files:[
+                  { id: 1, title: 'Trinidad samuel.mp4', icon: 'las la-file-video', class: 'secondary', users: ['./assets/images/avatar/avatar-1.png', './assets/images/avatar/avatar-2.png', './assets/images/avatar/avatar-4.png'] },
+                  { id: 2, title: 'Trinidad samuel.jpg', icon: 'las la-file-image', class: 'text-success-300 border-success-300/40 bg-success-300/20', users: ['./assets/images/avatar/avatar-1.png', ] },
+                  { id: 3, title: 'Marketing Report.pdf', icon: 'las la-file-pdf', class: 'text-warning-300 border-warning-300/40 bg-warning-300/20', users: ['./assets/images/avatar/avatar-1.png', './assets/images/avatar/avatar-2.png', './assets/images/avatar/avatar-4.png'] },
+                  { id: 4, title: 'Project Design.txt', icon: 'las la-file-word', class: 'text-error-300 border-error-300/40 bg-error-300/20', users: ['./assets/images/avatar/avatar-1.png', './assets/images/avatar/avatar-4.png'] },
+                  { id: 5, title: 'Budget_2024.rx', icon: 'las la-file-prescription', class: 'text-info-300 border-info-300/40 bg-info-300/20', users: ['./assets/images/avatar/avatar-1.png', './assets/images/avatar/avatar-2.png', './assets/images/avatar/avatar-4.png'] },
+                  { id: 6, title: 'Social Calender.pptx', icon: 'las la-file-powerpoint', class: 'text-secondary-300 border-secondary-300/40 bg-secondary-300/20', users: ['./assets/images/avatar/avatar-1.png', './assets/images/avatar/avatar-2.png', './assets/images/avatar/avatar-4.png'] },
+                  { id: 7, title: 'Meeting Notes.csv', icon: 'las la-file-csv', class: 'text-success-300 border-success-300/40 bg-success-300/20', users: ['./assets/images/avatar/avatar-1.png', ] },
+                  { id: 8, title: 'Marketing Report.mp3', icon: 'las la-file-audio', class: 'text-warning-300 border-warning-300/40 bg-warning-300/20', users: ['./assets/images/avatar/avatar-1.png', './assets/images/avatar/avatar-2.png', './assets/images/avatar/avatar-4.png'] },
+                  { id: 9, title: 'Project Design.xls', icon: 'las la-file-excel', class: 'text-error-300 border-error-300/40 bg-error-300/20', users: ['./assets/images/avatar/avatar-1.png', './assets/images/avatar/avatar-2.png', './assets/images/avatar/avatar-4.png'] },
+                  { id: 10, title: 'Budget_2024.doc', icon: 'las la-file-alt', class: 'text-info-300 border-info-300/40 bg-info-300/20', users: [ './assets/images/avatar/avatar-2.png', './assets/images/avatar/avatar-4.png'] },
+                  { id: 11, title: 'Project Design.html', icon: 'las la-file-code', class: 'text-error-300 border-error-300/40 bg-error-300/20', users: ['./assets/images/avatar/avatar-1.png', './assets/images/avatar/avatar-2.png', './assets/images/avatar/avatar-4.png'] },
+                  { id: 12, title: 'Japan_trip.mp4', icon: 'las la-file-video', class: 'text-info-300 border-info-300/40 bg-info-300/20', users: ['./assets/images/avatar/avatar-1.png', './assets/images/avatar/avatar-2.png'] }
+                ]}"
+                  class="grid grid-cols-12 gap-4 xxl:gap-6"
+                >
+                  <template x-for="{id, title, icon, class, users} in files">
+                    <div class="white-box col-span-12 md:col-span-6 xl:col-span-4 xxl:col-span-3">
+                      <div class="flex justify-between items-start mb-4 xl:mb-6">
+                        <div class="size-14 flex rounded-lg items-center justify-center border border-primary-300/60 text-primary-300 bg-primary-300/10">
+                          <i :class="icon" class="text-3xl"></i>
+                        </div>
+                        <div x-data="{ fav: false }" class="flex gap-4">
+                          <button @click="fav = !fav" class="size-8 rounded-full hover:bg-neutral-40 hover:dark:bg-neutral-500 duration-300 f-center">
+                            <i :class="fav ? 'las la-star text-warning-300' : 'lar la-star'" class="text-xl"></i>
+                          </button>
+                          <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                            <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                            <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                              <li>
+                                <span class="flex items-center gap-2 cursor-pointer rounded px-3 py-2 text-sm leading-normal duration-300 hover:bg-primary-50 dark:hover:bg-neutral-903"> <i class="las la-link text-xl"></i> Copy Link </span>
+                              </li>
+                              <li x-data="modal">
+                                <span @click="openModal" class="flex items-center gap-2 cursor-pointer rounded px-3 py-2 text-sm leading-normal duration-300 hover:bg-primary-50 dark:hover:bg-neutral-903"><i class="las la-share-alt-square text-xl"></i> Share</span>
+                                <template x-teleport="body">
+                                  <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                                    <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                                      <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                                        <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                                          <h4>Invite</h4>
+                                          <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                                        </div>
+                                        <div>
+                                          <form class="rounded-xl bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 p-2 flex mb-7 xxl:mb-10">
+                                            <input type="text" class="px-4 py-2 w-full bg-transparent" placeholder="Enter Email..." />
+                                            <button class="size-10 shrink-0 rounded-lg bg-primary-300 text-neutral-0 f-center">
+                                              <i class="las la-arrow-right text-2xl"></i>
+                                            </button>
+                                          </form>
+                                          <div class="flex flex-col gap-5 xxl:gap-8 mb-7 xxl:mb-10">
+                                            <div class="flex justify-between items-center">
+                                              <div class="flex items-center gap-2 md:gap-4">
+                                                <img src="./assets/images/avatar/avatar-big-1.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                                                <div>
+                                                  <p class="mb-1 l-text font-medium">Arlene McCoy</p>
+                                                  <p class="s-text">example@gmail.com</p>
+                                                </div>
+                                              </div>
+                                              <div x-data="{selected:'Can View',opened:false}" class="relative">
+                                                <div @click="opened = !opened" class="flex items-center gap-3 cursor-pointer">
+                                                  <span class="text-xs xxl:text-base" x-text="selected"></span>
+                                                  <i class="las la-angle-down text-sm xxl:text-xl"></i>
+                                                </div>
+                                                <div @click.away="opened = false" x-show="opened" class="absolute top-0 shadow-lg z-10 right-full min-w-[150px] bg-neutral-0 dark:bg-neutral-904 p-3 flex flex-col gap-1 border border-neutral-30 dark:border-neutral-500 rounded-xl">
+                                                  <span @click="selected='Can View',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-eye text-xl"></i> Can View</span>
+                                                  <span @click="selected='Can Edit',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-pen text-xl"></i> Can Edit</span>
+                                                  <span @click="selected='Remove',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-trash text-xl"></i> Remove</span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                              <div class="flex items-center gap-2 md:gap-4">
+                                                <img src="./assets/images/avatar/avatar-big-5.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                                                <div>
+                                                  <p class="mb-1 l-text font-medium">Robert Fox</p>
+                                                  <p class="s-text">example@gmail.com</p>
+                                                </div>
+                                              </div>
+                                              <div x-data="{selected:'Can View',opened:false}" class="relative">
+                                                <div @click="opened = !opened" class="flex items-center gap-3 cursor-pointer">
+                                                  <span class="text-xs xxl:text-base" x-text="selected"></span>
+                                                  <i class="las la-angle-down text-sm xxl:text-xl"></i>
+                                                </div>
+                                                <div @click.away="opened = false" x-show="opened" class="absolute top-0 shadow-lg z-10 right-full min-w-[150px] bg-neutral-0 dark:bg-neutral-904 p-3 flex flex-col gap-1 border border-neutral-30 dark:border-neutral-500 rounded-xl">
+                                                  <span @click="selected='Can View',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-eye text-xl"></i> Can View</span>
+                                                  <span @click="selected='Can Edit',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-pen text-xl"></i> Can Edit</span>
+                                                  <span @click="selected='Remove',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-trash text-xl"></i> Remove</span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                              <div class="flex items-center gap-2 md:gap-4">
+                                                <img src="./assets/images/avatar/avatar-big-2.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                                                <div>
+                                                  <p class="mb-1 l-text font-medium">Kathryn Murphy</p>
+                                                  <p class="s-text">example@gmail.com</p>
+                                                </div>
+                                              </div>
+                                              <div x-data="{selected:'Can View',opened:false}" class="relative">
+                                                <div @click="opened = !opened" class="flex items-center gap-3 cursor-pointer">
+                                                  <span class="text-xs xxl:text-base" x-text="selected"></span>
+                                                  <i class="las la-angle-down text-sm xxl:text-xl"></i>
+                                                </div>
+                                                <div @click.away="opened = false" x-show="opened" class="absolute top-0 shadow-lg z-10 right-full min-w-[150px] bg-neutral-0 dark:bg-neutral-904 p-3 flex flex-col gap-1 border border-neutral-30 dark:border-neutral-500 rounded-xl">
+                                                  <span @click="selected='Can View',opened =false" class="flex w-full py-1 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-eye text-xl"></i> Can View</span>
+                                                  <span @click="selected='Can Edit',opened =false" class="flex w-full py-1 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-pen text-xl"></i> Can Edit</span>
+                                                  <span @click="selected='Remove',opened =false" class="flex w-full py-1 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-trash text-xl"></i> Remove</span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="flex gap-4 xxl:gap-6 justify-between items-center">
+                                          <button class="flex gap-4"><i class="las la-link text-xl"></i> <span class="h6">Copy Link</span></button>
+                                          <button class="btn-primary-outlined" @click="closeModal">Close</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </template>
+                              </li>
+                              <li x-data="modal">
+                                <span @click="openModal" class="flex items-center gap-2 cursor-pointer rounded px-3 py-2 text-sm leading-normal duration-300 hover:bg-primary-50 dark:hover:bg-neutral-903"> <i class="las la-pen text-xl"></i> Edit </span>
+                                <template x-teleport="body">
+                                  <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                                    <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                                      <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                                        <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                                          <h4>Edit Folder</h4>
+                                          <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                                        </div>
+                                        <div class="form-input">
+                                          <input type="text" value="Folder Name" :id="title" placeholder="Folder" />
+                                          <label :for="title">Folder Name</label>
+                                        </div>
+                                        <form action="#" class="single-file my-4 xl:my-6">
+                                          <div class="flex flex-col items-center text-center clickable-single cursor-pointer bg-neutral-20 border border-neutral-30 dark:border-neutral-500 dark:bg-neutral-903 rounded-xl p-6 lg:p-10">
+                                            <img src="./assets/images/single-file.png" class="mb-6" alt="" />
+                                            <h5 class="font-semibold mb-4">Drop or Select file</h5>
+                                            <p>Drop files here or click <span class="text-primary-300">Browse</span> through your machine</p>
+                                          </div>
+                                        </form>
+                                        <div class="flex gap-4 xxl:gap-6">
+                                          <button class="btn-primary w-full">Upload</button>
+                                          <button class="btn-primary-outlined w-full">Create</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </template>
+                              </li>
+                              <li x-data="modal">
+                                <span @click="openModal" class="flex items-center gap-2 cursor-pointer rounded px-3 py-2 text-sm leading-normal duration-300 hover:bg-primary-50 dark:hover:bg-neutral-903"> <i class="las la-trash text-xl"></i> Delete </span>
+                                <template x-teleport="body">
+                                  <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                                    <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                                      <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                                        <div class="flex justify-between items-center bb-dashed-n30">
+                                          <h5>Delete File?</h5>
+                                          <button type="button" @click="closeModal"><i class="las la-times text-xl"></i></button>
+                                        </div>
+                                        <div class="p-5 text-center">
+                                          <div class="mx-auto w-fit rounded-full bg-error-300/10 p-4 text-error-300 ring-2 ring-error-300/50">
+                                            <i class="las la-trash text-5xl"></i>
+                                          </div>
+                                          <div class="mx-auto mt-5 text-base sm:w-3/4">Are you sure you want to delete?</div>
+                                          <div class="mt-8 f-center">
+                                            <button type="button" class="btn-error-outlined xl:py-2 xl:px-5" @click="closeModal">Cancel</button>
+                                            <button type="button" class="btn-primary ltr:ml-4 rtl:mr-4 xl:py-2 xl:px-5" @click="closeModal">Delete</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </template>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <h5 @click="openCustomizer" class="mb-3" x-text="title"></h5>
+                      <p class="mb-5">1.12 Gb • 200 files</p>
+                      <div class="flex items-center">
+                        <template x-for="user in users">
+                          <img class="size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3" :src="user" alt="" />
+                        </template>
+                        <!-- <div class="size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3 bg-primary-300 font-semibold text-neutral-0 m-text f-center">9+</div> -->
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </div>
+            <div x-show="activeTab=='list'">
+              <div
+                x-data="{dense: false, items: [
+                {
+                  id:1,
+                  title:'Docs',
+                  type:'folder',
+                  size:'2.24gb',
+                  date:'17 Feb 2024',
+                  time:'12:30 PM',
+                  shared:['./assets/images/avatar/avatar-1.png','./assets/images/avatar/avatar-3.png','./assets/images/avatar/avatar-4.png'],
+                  checked:false
+                },
+                {
+                  id:2,
+                  title:'Projects',
+                  type:'folder',
+                  size:'2.54gb',
+                  date:'19 Feb 2024',
+                  time:'12:50 PM',
+                  shared:['./assets/images/avatar/avatar-3.png','./assets/images/avatar/avatar-5.png','./assets/images/avatar/avatar-4.png'],
+                  checked:false
+                },
+                {
+                  id:3,
+                  title:'Foods',
+                  type:'folder',
+                  size:'2.54gb',
+                  date:'19 Feb 2024',
+                  time:'12:50 PM',
+                  shared:['./assets/images/avatar/avatar-3.png','./assets/images/avatar/avatar-5.png','./assets/images/avatar/avatar-4.png'],
+                  checked:false
+                },
+                {
+                  id:4,
+                  title:'Sports',
+                  type:'folder',
+                  size:'2.54gb',
+                  date:'19 Feb 2024',
+                  time:'12:50 PM',
+                  shared:['./assets/images/avatar/avatar-3.png','./assets/images/avatar/avatar-5.png',],
+                  checked:false
+                },
+                {
+                  id:5,
+                  title:'Training',
+                  type:'folder',
+                  size:'2.54gb',
+                  date:'19 Feb 2024',
+                  time:'12:50 PM',
+                  shared:['./assets/images/avatar/avatar-3.png',],
+                  checked:false
+                },
+                {
+                  id:6,
+                  title:'Work',
+                  type:'folder',
+                  size:'2.54gb',
+                  date:'19 Feb 2024',
+                  time:'12:50 PM',
+                  shared:['./assets/images/avatar/avatar-3.png','./assets/images/avatar/avatar-5.png','./assets/images/avatar/avatar-4.png'],
+                  checked:false
+                },
+                {
+                  id:7,
+                  title:'Q1_Report.mp4',
+                  type:'mp4',
+                  size:'540mb',
+                  date:'10 Feb 2024',
+                  time:'1:50 PM',
+                  shared:['./assets/images/avatar/avatar-5.png','./assets/images/avatar/avatar-4.png'],
+                  checked:false,
+                  icon:'las la-file-video text-secondary-300 text-2xl'
+                },
+                {
+                  id:8,
+                  title:'Photography.jpg',
+                  type:'jpg',
+                  size:'50mb',
+                  date:'28 Feb 2024',
+                  time:'3:54 PM',
+                  shared:['./assets/images/avatar/avatar-5.png'],
+                  checked:false,
+                  icon:'las la-file-image text-success-300 text-2xl'
+                },
+                {
+                  id:9,
+                  title:'client_feedback.docx',
+                  type:'docx',
+                  size:'5mb',
+                  date:'28 Mar 2024',
+                  time:'3:44 PM',
+                  shared:['./assets/images/avatar/avatar-2.png','./assets/images/avatar/avatar-5.png'],
+                  checked:false,
+                  icon:'las la-file-word text-error-300 text-2xl'
+                },
+                {
+                  id:10,
+                  title:'Innovation Engine.ppt',
+                  type:'ppt',
+                  size:'3mb',
+                  date:'21 Feb 2024',
+                  time:'3:54 PM',
+                  shared:['./assets/images/avatar/avatar-5.png','./assets/images/avatar/avatar-3.png','./assets/images/avatar/avatar-1.png'],
+                  checked:false,
+                  icon:'las la-file-powerpoint text-error-300 text-2xl'
+                },
+                {
+                  id:11,
+                  title:'Q3_report.csv',
+                  type:'csv',
+                  size:'13mb',
+                  date:'25 Feb 2024',
+                  time:'3:54 PM',
+                  shared:['./assets/images/avatar/avatar-3.png','./assets/images/avatar/avatar-1.png'],
+                  checked:false,
+                  icon:'las la-file-csv text-info-300 text-2xl'
+                },
+                {
+                  id:12,
+                  title:'Q1_Report.mp4',
+                  type:'mp4',
+                  size:'540mb',
+                  date:'10 Feb 2024',
+                  time:'1:50 PM',
+                  shared:['./assets/images/avatar/avatar-5.png','./assets/images/avatar/avatar-4.png'],
+                  checked:false,
+                  icon:'las la-file-video text-secondary-300 text-2xl'
+                },
+                {
+                  id:13,
+                  title:'Photography.jpg',
+                  type:'jpg',
+                  size:'50mb',
+                  date:'28 Feb 2024',
+                  time:'3:54 PM',
+                  shared:['./assets/images/avatar/avatar-5.png'],
+                  checked:false,
+                  icon:'las la-file-image text-success-300 text-2xl'
+                },
+                {
+                  id:14,
+                  title:'client_feedback.docx',
+                  type:'docx',
+                  size:'5mb',
+                  date:'28 Mar 2024',
+                  time:'3:44 PM',
+                  shared:['./assets/images/avatar/avatar-2.png','./assets/images/avatar/avatar-5.png'],
+                  checked:false,
+                  icon:'las la-file-word text-error-300 text-2xl'
+                },
+                {
+                  id:15,
+                  title:'Innovation Engine.ppt',
+                  type:'ppt',
+                  size:'3mb',
+                  date:'21 Feb 2024',
+                  time:'3:54 PM',
+                  shared:['./assets/images/avatar/avatar-5.png','./assets/images/avatar/avatar-3.png','./assets/images/avatar/avatar-1.png'],
+                  checked:false,
+                  icon:'las la-file-powerpoint text-error-300 text-2xl'
+                },
+                {
+                  id:16,
+                  title:'Q3_report.csv',
+                  type:'csv',
+                  size:'13mb',
+                  date:'25 Feb 2024',
+                  time:'3:54 PM',
+                  shared:['./assets/images/avatar/avatar-3.png','./assets/images/avatar/avatar-1.png'],
+                  checked:false,
+                  icon:'las la-file-csv text-info-300 text-2xl'
+                },
+              ],     handleSelect(e){
+          const {name,checked} = e.target
+          if(name=='select-all'){
+            this.items= this.items.map(file => ({...file,checked:checked}))
+          }  
+          this.isAllChecked()       
+        },
+        isAllChecked(){
+          return this.items.every(item => item.checked==true)
+        } } "
+                class="overflow-x-auto"
+              >
+                <table class="w-full whitespace-nowrap">
+                  <thead class="text-left">
+                    <tr class="bg-neutral-20 dark:bg-neutral-903">
+                      <th class="px-6 w-[72px] duration-300" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <label for="checkbox2" class="option">
+                          <input type="checkbox" name="select-all" id="checkbox2" :checked="isAllChecked()" @change="handleSelect($event)" aria-checked="false" />
+                          <span class="checkbox primary"></span>
+                        </label>
+                      </th>
+                      <th class="px-6 duration-300" :class="dense? 'py-2': 'py-3 lg:py-5'">Name</th>
+                      <th class="px-6 duration-300" :class="dense? 'py-2': 'py-3 lg:py-5'">Size</th>
+                      <th class="px-6 duration-300" :class="dense? 'py-2': 'py-3 lg:py-5'">Type</th>
+                      <th class="px-6 duration-300" :class="dense? 'py-2': 'py-3 lg:py-5'">Modified</th>
+                      <th class="px-6 duration-300" :class="dense? 'py-2': 'py-3 lg:py-5'">Shared</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <template x-for="file in items">
+                      <tr class="border-b border-neutral-30 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:hover:bg-neutral-903" :class="file.checked?'!bg-primary-300/10':'bg-neutral-0 dark:bg-neutral-904'">
+                        <td class="px-6 w-[72px]" :class="dense? 'py-1.5': 'py-3'">
+                          <label :for="file.id" class="option">
+                            <input type="checkbox" :id="file.id" :name="file.id" @change="handleSelect($event)" x-model="file.checked" aria-checked="false" />
+                            <span class="checkbox primary"></span>
+                          </label>
+                        </td>
+                        <td class="px-6" :class="dense? 'py-1.5': 'py-3'" @click="openCustomizer">
+                          <div class="flex items-center gap-3">
+                            <i x-show="file.type!='folder'" :class="file.icon" class="text-2xl"></i>
+                            <img x-show="file.type=='folder'" src="./assets/images/folder.png" width="24" height="24" alt="" />
+                            <p class="m-text font-medium" x-text="file.title"></p>
+                          </div>
+                        </td>
+                        <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                          <span class="m-text" x-text="file.size"></span>
+                        </td>
+                        <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                          <span class="m-text" x-text="file.type"></span>
+                        </td>
+                        <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                          <div>
+                            <p class="m-text font-medium mb-1" x-text="file.date"></p>
+                            <span class="text-xs" x-text="file.time"></span>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="flex items-center">
+                            <template x-for="img in file.shared">
+                              <img class="size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3" :src="img" alt="" />
+                            </template>
+                            <div x-show="file.shared.length>2" class="size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3 bg-primary-300 font-semibold text-neutral-0 text-xs f-center">2+</div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="flex items-center gap-3">
+                            <button @click="fav = !fav" x-data="{fav:false}" class="text-xl">
+                              <i x-show="fav" class="las la-star text-warning-300"></i>
+                              <i x-show="!fav" class="lar la-star"></i>
+                            </button>
+                            <include-verti-option />
+                          </div>
+                        </td>
+                      </tr>
+                    </template>
+                  </tbody>
+                </table>
+                <div class="mt-6 flex items-center gap-5 justify-center flex-col md:flex-row md:justify-between whitespace-nowrap">
+                  <label for="switch" class="switch flex">
+                    <input x-model="dense" id="switch" type="checkbox" />
+                    <span class="inner primary"></span>
+                    Dense
+                  </label>
+                  <div class="flex flex-col sm:flex-row justify-center sm:justify-between gap-5">
+                    <div class="flex items-center gap-4">
+                      <p>Rows per page :</p>
+                      <select name="rows" id="rows" class="bg-transparent dark:bg-neutral-904">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                      </select>
+                    </div>
+                    <div class="f-center gap-4">
+                      <p>1-10 of 100</p>
+                      <button><i class="las la-angle-left text-xl rtl:rotate-180"></i></button> <button><i class="las la-angle-right text-xl rtl:rotate-180"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="inset-0 fixed bg-black bg-opacity-60 duration-300 z-[29]" x-show="customizerIsOpen" @click="closeCustomizer"></div>
+            <div
+              :class="customizerIsOpen?'translate-x-0 opacity-100 visible':'ltr:translate-x-full rtl:-translate-x-full opacity-0 invisible'"
+              class="w-[312px] sm:w-[500px] duration-300 fixed h-full top-0 right-0 z-30 p-4 md:p-6 xxl:p-8 bg-neutral-0 dark:bg-neutral-904 overflow-y-auto custom-scrollbar"
+            >
+              <div class="flex justify-between items-center bb-dashed-n30">
+                <h4 class="text-2xl font-semibold">View Info</h4>
+                <div class="flex gap-4 items-center shrink-0 text-2xl">
+                  <button x-data="{fav: false}" @click="fav = !fav" class="size-8 rounded-full hover:bg-neutral-40 hover:dark:bg-neutral-500 duration-300 f-center">
+                    <i :class="fav ? 'las la-star text-warning-300' : 'lar la-star'" class="text-xl"></i>
+                  </button>
+                  <button @click="closeCustomizer"><i class="las la-times"></i></button>
+                </div>
+              </div>
+
+              <div class="bb-dashed-n30">
+                <span class="size-14 xxl:size-[76px] flex justify-center bg-secondary-300/10 items-center rounded-lg border border-secondary-300 text-secondary-300 mb-4 xxl:mb-6">
+                  <i class="las la-file-pdf text-3xl xxl:text-4xl"></i>
+                </span>
+                <p class="l-text font-medium">Tutorial-how-to-bake-cake.mp4</p>
+              </div>
+              <!-- tags -->
+              <div x-data="{isOpen:true}" class="bb-dashed-n30">
+                <div class="flex justify-between items-center">
+                  <p class="l-text font-medium">Tags</p>
+                  <button @click="isOpen = !isOpen" class="size-8 rounded-full f-center hover:bg-neutral-30 dark:hover:bg-neutral-500 duration-300">
+                    <i class="las la-angle-down text-lg duration-300" :class="isOpen?'rotate-180':''"></i>
+                  </button>
+                </div>
+                <div x-show="isOpen" x-collapse>
+                  <div class="bg-neutral-20 dark:bg-neutral-903 mt-4 xxl:mt-6 border border-neutral-40 dark:border-neutral-500 rounded-xl p-3 lg:p-4 xxl:p-5">
+                    <div
+                      x-data="{
+                                selectOpen: false,
+                                selectedItems: [ { title: 'Marketing' },
+                                    { title: 'Design' },],
+                                searchText: '',
+                                optionList: [
+                                    { title: 'Technology' },
+                                    { title: 'Design' },
+                                    { title: 'Marketing' },
+                                    { title: 'Trending' },
+                                    { title: 'Ai' },
+                                    { title: 'Business' },
+                                ],
+                                filteredOptions() {
+                                    if (this.searchText.trim() === '') {
+                                        return this.optionList;
+                                    } else {
+                                        return this.optionList.filter(option => option.title.toLowerCase().includes(this.searchText.trim().toLowerCase()));
+                                    }
+                                },
+                                toggleItem(item) {
+                                    const index = this.selectedItems.findIndex(selectedItem => selectedItem.title === item.title);
+                                    if (index === -1) {
+                                        // If item not already selected, add it to selectedItems array
+                                        this.selectedItems.push(item);
+                                    } else {
+                                        // If item already selected, remove it from selectedItems array
+                                        this.selectedItems.splice(index, 1);
+                                    }
+                                },
+                                isSelected(item) {
+                                    return this.selectedItems.findIndex(selectedItem => selectedItem.title === item.title) !== -1;
+                                }
+                            }"
+                      class="relative"
+                    >
+                      <div @click="selectOpen = !selectOpen" class="rounded-xl w-full relative flex flex-col gap-2">
+                        <div x-show="selectedItems.length" class="flex gap-2 flex-wrap">
+                          <template x-for="item in selectedItems">
+                            <div class="px-1.5 py-0.5 rounded-full bg-neutral-20 dark:bg-neutral-904 flex items-center gap-2 border border-neutral-40 dark:border-neutral-600 text-neutral-700 dark:text-neutral-40">
+                              <span x-text="item.title" class="text-xs"></span>
+                              <span @click.stop="toggleItem(item)" class="text-xs rounded-full size-4 bg-neutral-70 text-neutral-10 f-center">
+                                <i class="las la-times"></i>
+                              </span>
+                            </div>
+                          </template>
+                        </div>
+                        <input type="text" placeholder="Add tags" x-model="searchText" class="w-full bg-transparent capitalize text-sm" />
+                      </div>
+                      <ul x-show="selectOpen" @click.away="selectOpen = false" class="p-1 rounded-xl bg-neutral-0 dark:bg-neutral-904 absolute top-full left-0 right-0 w-full shadow-xl z-[3] max-h-[250px] overflow-y-auto flex flex-col gap-1">
+                        <template x-for="option in filteredOptions()" :key="option.title">
+                          <li @click="toggleItem(option)" x-text="option.title" :class="{ 'bg-primary-50 dark:bg-neutral-600': isSelected(option) }" class="py-1.5 ltr:pl-6 rtl:pr-6 hover:bg-primary-300 rounded-lg text-sm hover:text-neutral-0 duration-300 cursor-pointer capitalize"></li>
+                        </template>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Properties -->
+              <div x-data="{isOpen:true}" class="bb-dashed-n30">
+                <div class="flex justify-between items-center">
+                  <p class="l-text font-medium">Properties</p>
+                  <button @click="isOpen = !isOpen" class="size-8 rounded-full f-center hover:bg-neutral-30 dark:hover:bg-neutral-500 duration-300">
+                    <i class="las la-angle-down text-lg duration-300" :class="isOpen?'rotate-180':''"></i>
+                  </button>
+                </div>
+                <div x-show="isOpen" x-collapse>
+                  <div class="bg-neutral-20 mt-4 xxl:mt-6 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 rounded-xl p-3 lg:p-4 xxl:p-5">
+                    <table>
+                      <tr>
+                        <td class="m-text w-[120px]">Size</td>
+                        <td><span class="m-text font-medium">22.89 Mb</span></td>
+                      </tr>
+                      <tr>
+                        <td class="m-text w-[120px]">Modified</td>
+                        <td><span class="m-text font-medium">02 Mar 2024 9:29 AM</span></td>
+                      </tr>
+                      <tr>
+                        <td class="m-text w-[120px]">Size</td>
+                        <td><span class="m-text font-medium">Video</span></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <!-- share with -->
+              <div class="bb-dashed-n30">
+                <div x-data="modal" class="flex justify-between items-center">
+                  <p class="l-text font-medium">File Share With</p>
+                  <button @click="openModal" class="size-7 rounded-full bg-primary-300 text-neutral-0 f-center"><i class="las la-plus text-lg"></i></button>
+                  <template x-teleport="body">
+                    <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                      <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                        <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                          <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                            <h4>Invite</h4>
+                            <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                          </div>
+                          <div>
+                            <form class="rounded-xl bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 p-2 flex mb-7 xxl:mb-10">
+                              <input type="text" class="px-4 py-2 w-full bg-transparent" placeholder="Enter Email..." />
+                              <button class="size-10 shrink-0 rounded-lg bg-primary-300 text-neutral-0 f-center">
+                                <i class="las la-arrow-right text-2xl"></i>
+                              </button>
+                            </form>
+                            <div class="flex flex-col gap-5 xxl:gap-8 mb-7 xxl:mb-10">
+                              <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-2 md:gap-4">
+                                  <img src="./assets/images/avatar/avatar-big-1.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                                  <div>
+                                    <p class="mb-1 l-text font-medium">Arlene McCoy</p>
+                                    <p class="s-text">example@gmail.com</p>
+                                  </div>
+                                </div>
+                                <div x-data="{selected:'Can View',opened:false}" class="relative">
+                                  <div @click="opened = !opened" class="flex items-center gap-3 cursor-pointer">
+                                    <span class="text-xs xxl:text-base" x-text="selected"></span>
+                                    <i class="las la-angle-down text-sm xxl:text-xl"></i>
+                                  </div>
+                                  <div @click.away="opened = false" x-show="opened" class="absolute top-0 shadow-lg z-10 right-full min-w-[150px] bg-neutral-0 dark:bg-neutral-904 p-3 flex flex-col gap-1 border border-neutral-30 dark:border-neutral-500 rounded-xl">
+                                    <span @click="selected='Can View',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-eye text-xl"></i> Can View</span>
+                                    <span @click="selected='Can Edit',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-pen text-xl"></i> Can Edit</span>
+                                    <span @click="selected='Remove',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-trash text-xl"></i> Remove</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-2 md:gap-4">
+                                  <img src="./assets/images/avatar/avatar-big-5.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                                  <div>
+                                    <p class="mb-1 l-text font-medium">Robert Fox</p>
+                                    <p class="s-text">example@gmail.com</p>
+                                  </div>
+                                </div>
+                                <div x-data="{selected:'Can View',opened:false}" class="relative">
+                                  <div @click="opened = !opened" class="flex items-center gap-3 cursor-pointer">
+                                    <span class="text-xs xxl:text-base" x-text="selected"></span>
+                                    <i class="las la-angle-down text-sm xxl:text-xl"></i>
+                                  </div>
+                                  <div @click.away="opened = false" x-show="opened" class="absolute top-0 shadow-lg z-10 right-full min-w-[150px] bg-neutral-0 dark:bg-neutral-904 p-3 flex flex-col gap-1 border border-neutral-30 dark:border-neutral-500 rounded-xl">
+                                    <span @click="selected='Can View',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-eye text-xl"></i> Can View</span>
+                                    <span @click="selected='Can Edit',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-pen text-xl"></i> Can Edit</span>
+                                    <span @click="selected='Remove',opened =false" class="flex w-full py-1 xxl:py-2 xxl:px-3 px-1.5 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-trash text-xl"></i> Remove</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-2 md:gap-4">
+                                  <img src="./assets/images/avatar/avatar-big-2.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                                  <div>
+                                    <p class="mb-1 l-text font-medium">Kathryn Murphy</p>
+                                    <p class="s-text">example@gmail.com</p>
+                                  </div>
+                                </div>
+                                <div x-data="{selected:'Can View',opened:false}" class="relative">
+                                  <div @click="opened = !opened" class="flex items-center gap-3 cursor-pointer">
+                                    <span class="text-xs xxl:text-base" x-text="selected"></span>
+                                    <i class="las la-angle-down text-sm xxl:text-xl"></i>
+                                  </div>
+                                  <div @click.away="opened = false" x-show="opened" class="absolute top-0 shadow-lg z-10 right-full min-w-[150px] bg-neutral-0 dark:bg-neutral-904 p-3 flex flex-col gap-1 border border-neutral-30 dark:border-neutral-500 rounded-xl">
+                                    <span @click="selected='Can View',opened =false" class="flex w-full py-1 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-eye text-xl"></i> Can View</span>
+                                    <span @click="selected='Can Edit',opened =false" class="flex w-full py-1 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-pen text-xl"></i> Can Edit</span>
+                                    <span @click="selected='Remove',opened =false" class="flex w-full py-1 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-trash text-xl"></i> Remove</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="flex gap-4 xxl:gap-6 justify-between items-center">
+                            <button class="flex gap-4"><i class="las la-link text-xl"></i> <span class="h6">Copy Link</span></button>
+                            <button class="btn-primary-outlined" @click="closeModal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+                <div class="flex flex-col gap-4 xxl:gap-6 n30-box xl:p-5 mt-5">
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-4">
+                      <img src="./assets/images/avatar/avatar-big-1.png" width="60" />
+                      <div>
+                        <p class="mb-1 l-text font-medium">Arlene McCoy</p>
+                        <p class="s-text">example@gmail.com</p>
+                      </div>
+                    </div>
+                    <div x-data="{selected:'Can View',opened:false}" class="relative">
+                      <div @click="opened = !opened" class="flex items-center gap-3 cursor-pointer">
+                        <span class="h6" x-text="selected"></span>
+                        <i class="las la-angle-down text-xl"></i>
+                      </div>
+                      <div @click.away="opened = false" x-show="opened" class="absolute top-0 shadow-lg z-10 right-full min-w-[150px] bg-neutral-0 dark:bg-neutral-904 p-3 flex flex-col gap-1 border border-neutral-30 dark:border-neutral-500 rounded-xl">
+                        <span @click="selected='Can View',opened =false" class="flex w-full py-2 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-eye text-xl"></i> Can View</span>
+                        <span @click="selected='Can Edit',opened =false" class="flex w-full py-2 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-pen text-xl"></i> Can Edit</span>
+                        <span @click="selected='Remove',opened =false" class="flex w-full py-2 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-trash text-xl"></i> Remove</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-4">
+                      <img src="./assets/images/avatar/avatar-big-5.png" width="60" />
+                      <div>
+                        <p class="mb-1 l-text font-medium">Robert Fox</p>
+                        <p class="s-text">example@gmail.com</p>
+                      </div>
+                    </div>
+                    <div x-data="{selected:'Can View',opened:false}" class="relative">
+                      <div @click="opened = !opened" class="flex items-center gap-3 cursor-pointer">
+                        <span class="h6" x-text="selected"></span>
+                        <i class="las la-angle-down text-xl"></i>
+                      </div>
+                      <div @click.away="opened = false" x-show="opened" class="absolute top-0 shadow-lg z-10 right-full min-w-[150px] bg-neutral-0 dark:bg-neutral-904 p-3 flex flex-col gap-1 border border-neutral-30 dark:border-neutral-500 rounded-xl">
+                        <span @click="selected='Can View',opened =false" class="flex w-full py-2 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-eye text-xl"></i> Can View</span>
+                        <span @click="selected='Can Edit',opened =false" class="flex w-full py-2 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-pen text-xl"></i> Can Edit</span>
+                        <span @click="selected='Remove',opened =false" class="flex w-full py-2 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-trash text-xl"></i> Remove</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-4">
+                      <img src="./assets/images/avatar/avatar-big-2.png" width="60" />
+                      <div>
+                        <p class="mb-1 l-text font-medium">Kathryn Murphy</p>
+                        <p class="s-text">example@gmail.com</p>
+                      </div>
+                    </div>
+                    <div x-data="{selected:'Can View',opened:false}" class="relative">
+                      <div @click="opened = !opened" class="flex items-center gap-3 cursor-pointer">
+                        <span class="h6" x-text="selected"></span>
+                        <i class="las la-angle-down text-xl"></i>
+                      </div>
+                      <div @click.away="opened = false" x-show="opened" class="absolute top-0 shadow-lg z-10 right-full min-w-[150px] bg-neutral-0 dark:bg-neutral-904 p-3 flex flex-col gap-1 border border-neutral-30 dark:border-neutral-500 rounded-xl">
+                        <span @click="selected='Can View',opened =false" class="flex w-full py-1 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-eye text-xl"></i> Can View</span>
+                        <span @click="selected='Can Edit',opened =false" class="flex w-full py-1 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-pen text-xl"></i> Can Edit</span>
+                        <span @click="selected='Remove',opened =false" class="flex w-full py-1 px-3 rounded-lg hover:bg-primary-50 duration-300 cursor-pointer items-center gap-2"><i class="las la-trash text-xl"></i> Remove</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- reset button -->
+              <button class="w-full btn-error-outlined"><i class="las la-trash"></i> Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/flatpicker.js"></script>
+    <script src="./assets/js/libs/dropzone.min.js"></script>
+    <script src="./assets/js/libs/swiper-bundle.min.js"></script>
+    <script defer src="./assets/js/libs/alpine.intersect.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+    <script src="./assets/js/libs/apexcharts.min.js"></script>
+    <script src="./assets/js/charts.js"></script>
+  </body>
+</html>

@@ -1,0 +1,506 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/dropzone.min.css" />
+    <link rel="stylesheet" href="./assets/css/swiper.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 space-y-4 xxl:space-y-6">
+        <!-- Breadcrumb -->
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Product Details</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Product</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Details</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Product Details -->
+        <div class="white-box !p-2 md:!p-4 xl:!p-6">
+          <div class="flex justify-between gap-4 flex-wrap items-center bb-dashed-n30">
+            <h4>Product Details</h4>
+            <div class="flex items-center gap-4 xxl:gap-6">
+              <a href="product-details.html" class="size-12 rounded-full f-center bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500">
+                <i class="las la-external-link-alt text-2xl"></i>
+              </a>
+              <a href="edit-product.html" class="size-12 rounded-full f-center bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500">
+                <i class="las la-pen text-2xl"></i>
+              </a>
+              <div x-data="{open:false,selected:null, items:['Published', 'Draft']}" class="relative">
+                <div @click="open=!open" class="flex cursor-pointer items-center justify-between rounded-full border border-neutral-30 bg-neutral-20 dark:bg-neutral-903 dark:border-neutral-500 w-[140px] py-2 px-5">
+                  <span x-text="selected?selected:'Publish'"></span>
+                  <i class="las la-angle-down text-lg"></i>
+                </div>
+                <div x-show="open" @click.away="open=false" class="absolute left-0 top-full z-10 flex max-h-[200px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-0 p-1 shadow-xl dark:bg-neutral-904">
+                  <template x-for="item in items">
+                    <div @click="selected=item, open=false" :class="selected===item?'bg-primary-300  text-neutral-0':'hover:bg-primary-50 dark:hover:bg-neutral-903'" class="cursor-pointer rounded-md px-4 py-2 duration-300" x-text="item"></div>
+                  </template>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- product details -->
+          <div class="grid grid-cols-12 gap-4 lg:gap-6">
+            <div class="col-span-12 lg:col-span-6 xxl:col-span-5">
+              <div dir="ltr" class="bg-neutral-20 dark:bg-neutral-903 rounded-xl border border-neutral-40 dark:border-neutral-500 p-3 sm:p-4 lg:p-6">
+                <div class="swiper productThumbswiper1 relative rounded-xl">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide rounded-xl f-center">
+                      <img class="rounded-xl" src="./assets/images/products/product-big-1.png" />
+                    </div>
+                    <div class="swiper-slide rounded-xl f-center">
+                      <img class="rounded-xl" width="500" src="./assets/images/products/product-big-2.png" />
+                    </div>
+                    <div class="swiper-slide rounded-xl f-center">
+                      <img class="rounded-xl" width="500" src="./assets/images/products/product-big-3.png" />
+                    </div>
+                    <div class="swiper-slide rounded-xl f-center">
+                      <img class="rounded-xl" width="500" src="./assets/images/products/product-big-4.png" />
+                    </div>
+                  </div>
+                  <div class="absolute right-0 bottom-0 h-12 w-28 p-3 items-center justify-center rounded-lg border bg-neutral-0 dark:bg-neutral-904 border-neutral-30 dark:border-neutral-500 flex gap-2 z-[3]">
+                    <button class="thumb-prev">
+                      <i class="las la-angle-left text-lg rot"></i>
+                    </button>
+                    <div class="thumb-pagination"></div>
+                    <button class="thumb-next">
+                      <i class="las la-angle-right text-lg rot"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="flex justify-center">
+                <div class="swiper productThumbswiper2 mt-6">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide !size-14 md:!size-28 cursor-pointer rounded-lg bg-neutral-20 dark:bg-neutral-903 p-2.5 border border-neutral-30 dark:border-neutral-500">
+                      <img class="h-full rounded-lg object-center object-cover" src="./assets/images/products/product-big-1.png" />
+                    </div>
+                    <div class="swiper-slide !size-14 md:!size-28 cursor-pointer rounded-lg bg-neutral-20 dark:bg-neutral-903 p-2.5 border border-neutral-30 dark:border-neutral-500">
+                      <img class="h-full rounded-lg object-center object-cover" src="./assets/images/products/product-big-2.png" />
+                    </div>
+                    <div class="swiper-slide !size-14 md:!size-28 cursor-pointer rounded-lg bg-neutral-20 dark:bg-neutral-903 p-2.5 border border-neutral-30 dark:border-neutral-500">
+                      <img class="h-full rounded-lg object-center object-cover" src="./assets/images/products/product-big-3.png" />
+                    </div>
+                    <div class="swiper-slide !size-14 md:!size-28 cursor-pointer rounded-lg bg-neutral-20 dark:bg-neutral-903 p-2.5 border border-neutral-30 dark:border-neutral-500">
+                      <img class="h-full rounded-lg object-center object-cover" src="./assets/images/products/product-big-4.png" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12 lg:col-span-6 xxl:col-span-5 xxl:col-start-7">
+              <span class="py-2 px-4 rounded-lg bg-error-300 text-nowrap text-neutral-0 font-semibold">Sale</span>
+              <h6 class="text-secondary-300 uppercase my-4 lg:my-6">in stock</h6>
+              <h3 class="mb-4 xl:mb-6">Dressy Boots classic look.</h3>
+              <div class="flex items-center gap-4 mb-4 xl:mb-6">
+                <div class="flex gap-0.5">
+                  <i class="las la-star text-xl text-warning-300"></i>
+                  <i class="las la-star text-xl text-warning-300"></i>
+                  <i class="las la-star text-xl text-warning-300"></i>
+                  <i class="las la-star text-xl text-warning-300"></i>
+                  <i class="las la-star-half-alt text-xl text-warning-300"></i>
+                </div>
+                <span class="m-text">(3.36k reviews)</span>
+              </div>
+              <h3 class="text-primary-300 mb-4 lg:mb-6">$95.25</h3>
+              <p class="mb-6 pb-6 border-b border-dashed border-neutral-30 dark:border-neutral-500">Covering the ankle or higher, boots can be dressy, rugged, or designed for specific activities like hiking or riding.</p>
+              <div class="flex flex-col gap-5 xl:gap-8 mb-6 pb-6 xl:pb-8 xl:mb-8 border-b border-neutral-30 border-dashed dark:border-neutral-500">
+                <div>
+                  <p class="l-text font-medium mb-4">Color</p>
+                  <div x-data="{currentColor:'bg-green-500', colors:['bg-green-500','bg-violet-500','bg-yellow-500','bg-orange-500','bg-red-500']}" class="flex gap-3">
+                    <template x-for="color in colors">
+                      <button @click="currentColor=color" class="f-center size-7 border rounded-full" :class="currentColor==color?'border-primary-300':'border-neutral-30 dark:border-neutral-500'">
+                        <span class="size-4 rounded-full f-center" :class="color"></span>
+                      </button>
+                    </template>
+                  </div>
+                </div>
+                <div>
+                  <p class="l-text font-medium mb-4">Size</p>
+                  <div x-data="{currentSize:'s', sizes:['xs','s','m','l','xl']}" class="flex gap-3">
+                    <template x-for="size in sizes">
+                      <button @click="currentSize=size" class="f-center size-11 border rounded-full" :class="currentSize==size?'border-primary-300':'border-neutral-30 dark:border-neutral-500'">
+                        <span class="l-text rounded-full f-center uppercase" x-text="size"></span>
+                      </button>
+                    </template>
+                  </div>
+                </div>
+                <div>
+                  <p class="l-text font-medium mb-4">Quantity</p>
+                  <div x-data="{quantity: 2, increment() { this.quantity++ }, decrement() { this.quantity > 1 && this.quantity-- }}" class="p-1 border border-neutral-30 dark:border-neutral-500 bg-neutral-20 dark:bg-neutral-903 rounded-full inline-flex items-center gap-3">
+                    <button @click="decrement()" class="size-9 rounded-full hover:bg-primary-300 hover:text-neutral-0 duration-300 f-center bg-neutral-0 dark:bg-neutral-904">
+                      <i class="las la-minus text-xl"></i>
+                    </button>
+                    <span class="l-text font-medium" x-text="quantity"></span>
+                    <button @click="increment()" class="size-9 rounded-full hover:bg-primary-300 hover:text-neutral-0 duration-300 f-center bg-neutral-0 dark:bg-neutral-904">
+                      <i class="las la-plus text-xl"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="flex gap-4 mb-5 max-sm:flex-wrap lg:mb-8">
+                <a href="#" class="btn-primary w-full"> <i class="las la-shopping-cart text-xl"></i> Add to cart </a>
+                <a href="#" class="btn-primary-outlined w-full"> <i class="las la-tag text-xl"></i> Buy Now </a>
+              </div>
+              <div class="flex justify-center gap-4 flex-wrap xxl:gap-6">
+                <button class="flex items-center gap-3 m-text">
+                  <i class="las la-exchange-alt text-xl"></i>
+                  Compare
+                </button>
+                <button class="flex items-center gap-3 m-text">
+                  <i class="lar la-heart text-xl"></i>
+                  Favorite
+                </button>
+                <button class="flex items-center gap-3 m-text">
+                  <i class="las la-share-alt-square text-xl"></i>
+                  Share
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- description and reviews -->
+          <div x-data="{activeTab:'desc'}">
+            <div class="col-span-12 flex flex-wrap gap-4 max-w-max rounded-xl sm:rounded-full border border-neutral-30 p-3 dark:border-neutral-500 mb-7 xl:mb-10">
+              <button @click="activeTab='desc'" :class="activeTab=='desc' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">Description</button>
+              <button @click="activeTab='reviews'" :class="activeTab=='reviews' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">Reviews (7)</button>
+            </div>
+            <div x-cloak x-show="activeTab=='desc'" x-transition>
+              <div class="rounded-xl bg-neutral-20 p-3 dark:bg-neutral-903 sm:p-4 md:p-6 xl:p-8">
+                <h5 class="mb-4 lg:mb-6">Specifications</h5>
+                <ul class="flex flex-col gap-4 xxl:gap-6 border-b border-dashed border-neutral-30 dark:border-neutral-500 mb-6 lg:mb-8 pb-6 lg:pb-8">
+                  <li><span class="m-text font-medium">Category</span> <span class="m-text">Shoes</span></li>
+                  <li><span class="m-text font-medium">Manufacturer</span> <span class="m-text">Nike</span></li>
+                  <li><span class="m-text font-medium">Serial Number</span> <span class="m-text">5654545426</span></li>
+                  <li><span class="m-text font-medium">Ships Firm</span> <span class="m-text">United States</span></li>
+                </ul>
+                <h5 class="mb-4 lg:mb-6">Product Details</h5>
+                <ul class="border-b border-dashed border-neutral-30 dark:border-neutral-500 mb-6 lg:mb-8 pb-6 lg:pb-8 marker:text-primary-300 list-disc list-inside flex flex-col gap-3">
+                  <li class="m-text"><span class="font-medium">Chealsea boots :</span>Chelsea boots are slip-on boots with elasticated side panels. They are a classic and stylish option that can be dressed up or down.</li>
+                  <li class="m-text"><span class="font-medium">Combat boots :</span>Combat boots are inspired by military boots, and they often have thick soles and laces.</li>
+                  <li class="m-text"><span class="font-medium">Ankle boots :</span>Ankle booties are similar to Chelsea boots, but they typically have a higher heel. They are a great option for dressing up an outfit.</li>
+                  <li class="m-text"><span class="font-medium">Riding boots :</span>Riding boots are tall, close-fitting boots that were originally designed for horseback riding.</li>
+                  <li class="m-text"><span class="font-medium">Slouch boots :</span>Slouch boots are knee-high boots with a loose-fitting shaft. They are a comfortable and stylish option that can be dressed up or down.</li>
+                </ul>
+                <h5 class="mb-4 lg:mb-6">Benefits</h5>
+                <ul class="border-b border-dashed border-neutral-30 dark:border-neutral-500 mb-6 lg:mb-8 pb-6 lg:pb-8 marker:text-primary-300 list-disc list-inside flex flex-col gap-3">
+                  <li class="m-text"><span class="font-medium">Thigh-high boots :</span>Chelsea boots are slip-on boots with elasticated side panels. They are a classic and stylish option that can be dressed up or down.</li>
+                  <li class="m-text"><span class="font-medium">Thrench boots :</span>Combat boots are inspired by military boots, and they often have thick soles and laces.</li>
+                  <li class="m-text"><span class="font-medium">Work boots :</span>Ankle booties are similar to Chelsea boots, but they typically have a higher heel. They are a great option for dressing up an outfit.</li>
+                  <li class="m-text"><span class="font-medium">Hiking boots :</span>Riding boots are tall, close-fitting boots that were originally designed for horseback riding.</li>
+                  <li class="m-text"><span class="font-medium">Construction boots :</span>Slouch boots are knee-high boots with a loose-fitting shaft. They are a comfortable and stylish option that can be dressed up or down.</li>
+                </ul>
+                <h5 class="mb-4 lg:mb-6">Delivery and Returns</h5>
+                <ul class="border-b border-dashed border-neutral-30 dark:border-neutral-500 mb-6 lg:mb-8 pb-6 lg:pb-8 marker:text-primary-300 list-disc list-inside flex flex-col gap-3">
+                  <p>Your order of $200 or more gets free standard delivery.</p>
+                  <li class="m-text">Standard delivered 4-5 Business Days</li>
+                  <li class="m-text">Express delivered 2-4 Business Days</li>
+                  <p>Orders are processed and delivered Monday-Friday (excluding public holidays)</p>
+                </ul>
+                <div class="flex flex-col lg:flex-row gap-5 justify-center lg:justify-between items-center">
+                  <div class="flex items-center gap-2 md:gap-5">
+                    <h6 class="flex items-center gap-2">Follow Us <i class="las la-arrow-right text-xl"></i></h6>
+                    <ul class="flex gap-2 sm:gap-4">
+                      <li>
+                        <a class="size-8 lg:size-10 f-center text-lg lg:text-2xl rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-facebook-f"></i></a>
+                      </li>
+                      <li>
+                        <a class="size-8 lg:size-10 f-center text-lg lg:text-2xl rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-twitter"></i></a>
+                      </li>
+                      <li>
+                        <a class="size-8 lg:size-10 f-center text-lg lg:text-2xl rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-instagram"></i></a>
+                      </li>
+                      <li>
+                        <a class="size-8 lg:size-10 f-center text-lg lg:text-2xl rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-pinterest"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="flex justify-center flex-col sm:flex-row sm:justify-end items-center gap-5 flex-wrap">
+                    <h6 class="flex items-center gap-3">Popular Tag <i class="las la-arrow-right text-xl"></i></h6>
+                    <div class="flex gap-2 md:gap-4">
+                      <a href="#" class="rounded-full bg-neutral-0 dark:bg-neutral-904 border border-neutral-30 dark:border-neutral-500 l-text font-medium px-3 md:px-5 py-2">Shoe</a>
+                      <a href="#" class="rounded-full bg-neutral-0 dark:bg-neutral-904 border border-neutral-30 dark:border-neutral-500 l-text font-medium px-3 md:px-5 py-2">Trending</a>
+                      <a href="#" class="rounded-full bg-neutral-0 dark:bg-neutral-904 border border-neutral-30 dark:border-neutral-500 l-text font-medium px-3 md:px-5 py-2">New</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div x-cloak x-show="activeTab=='reviews'" x-transition>
+              <div class="rounded-xl bg-neutral-20 p-3 dark:bg-neutral-903 sm:p-4 md:p-6 xl:p-8">
+                <h5 class="mb-4 lg:mb-6">Average rating</h5>
+                <div class="bb-dashed-n30">
+                  <div>
+                    <div class="flex items-center gap-2 mb-4">
+                      <h4>4.5</h4>
+                      <div class="flex gap-0.5">
+                        <i class="las la-star text-xl text-warning-300"></i>
+                        <i class="las la-star text-xl text-warning-300"></i>
+                        <i class="las la-star text-xl text-warning-300"></i>
+                        <i class="las la-star text-xl text-warning-300"></i>
+                        <i class="las la-star-half-alt text-xl text-warning-300"></i>
+                      </div>
+                      <p>Based on 7 reviews</p>
+                    </div>
+                  </div>
+                  <div x-data="modal">
+                    <button @click="openModal" class="btn-primary"><i class="las la-pen text-lg"></i> Write Your Review</button>
+                    <template x-teleport="body">
+                      <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                        <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                          <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                            <div class="mb-4 flex items-center justify-between border-b border-dashed border-neutral-30 dark:border-neutral-500 pb-4 lg:mb-6 lg:pb-6">
+                              <h4>Add Review</h4>
+                              <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                            </div>
+                            <div class="flex items-center gap-4 mb-6">
+                              <p>Your review about this product:</p>
+                              <div x-data="{ rating: 3, maxRating: 5, hoverRating: 0 }">
+                                <div class="f-center">
+                                  <template x-for="star in maxRating">
+                                    <svg
+                                      class="h-6 w-6 cursor-pointer text-gray-300 hover:!text-yellow-500"
+                                      :class="{ 'text-yellow-500': hoverRating >= star || rating >= star }"
+                                      @mouseover="hoverRating = star"
+                                      @mouseleave="hoverRating = 0"
+                                      @click="rating = star"
+                                      fill="currentColor"
+                                      viewBox="0 0 20 20"
+                                    >
+                                      <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                      />
+                                    </svg>
+                                  </template>
+                                </div>
+                              </div>
+                            </div>
+                            <form class="grid grid-cols-2 gap-4 xxl:gap-6" @submit.prevent>
+                              <div class="col-span-2">
+                                <div class="form-input">
+                                  <input type="text" id="name" placeholder="Name" required />
+                                  <label for="name">Name</label>
+                                </div>
+                              </div>
+                              <div class="col-span-2 sm:col-span-1">
+                                <div class="form-input">
+                                  <input type="text" id="email" placeholder="Email" required />
+                                  <label for="email">Email</label>
+                                </div>
+                              </div>
+                              <div class="col-span-2 sm:col-span-1">
+                                <div class="form-input">
+                                  <input type="number" id="phone" placeholder="phone" required />
+                                  <label for="phone">Phone</label>
+                                </div>
+                              </div>
+                              <div class="col-span-2">
+                                <div class="form-input">
+                                  <textarea id="review" rows="4" placeholder="review" required></textarea>
+                                  <label for="review" class="textarea">Review</label>
+                                </div>
+                              </div>
+                              <div class="col-span-2 flex gap-4 mt-2">
+                                <button @click="closeModal" type="submit" class="btn-primary">Add Now</button>
+                                <button @click="closeModal" type="reset" class="btn-primary-outlined">Cancel</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+                <div class="flex max-sm:flex-wrap gap-5 max-sm:justify-center justify-between items-center mb-6">
+                  <h5>Customers Reviews</h5>
+                  <div class="flex items-center gap-3">
+                    <span>Sort By : </span>
+                    <select name="sort" class="nc-select">
+                      <option value="day">Last 15 Days</option>
+                      <option value="week">Last 1 Month</option>
+                      <option value="year">Last 6 Month</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="flex flex-col divide-y divide-dashed divide-neutral-40 dark:divide-neutral-500 pb-8 border-b border-dashed border-neutral-40 dark:border-neutral-500 mb-8">
+                  <div class="pb-6 xl:pb-8 flex max-md:flex-wrap max-md:gap-5 md:divide-x rtl:divide-x-reverse divide-neutral-40 dark:divide-neutral-500 divide-dashed">
+                    <div class="flex flex-col min-w-[200px] items-end ltr:pr-7 ltr:xl:pr-10 rtl:pl-7 rtl:lg:pl-10">
+                      <img src="./assets/images/users/user-s-1.png" class="rounded-full mb-4" alt="" />
+                      <p class="l-text font-medium mb-2">Kathryn Murphy</p>
+                      <span class="s-text">19 Feb 2024</span>
+                    </div>
+                    <div class="ltr:pl-7 ltr:xl:pl-10 rtl:pr-7 rtl:lg:pr-10">
+                      <div class="flex gap-0.5 mb-4">
+                        <i class="las la-star text-xl text-warning-300"></i>
+                        <i class="las la-star text-xl text-warning-300"></i>
+                        <i class="las la-star text-xl text-warning-300"></i>
+                        <i class="las la-star text-xl text-warning-300"></i>
+                        <i class="las la-star-half-alt text-xl text-warning-300"></i>
+                      </div>
+                      <p class="flex items-center gap-3 m-text text-primary-300 mb-4"><i class="las la-check-circle text-xl"></i> Verified Purchase</p>
+                      <p class="mb-6 m-text">The sun slowly set over the horizon, painting the sky in vibrant hues of orange and pink.</p>
+                      <div class="flex gap-6">
+                        <div class="flex items-center gap-2 text-primary-300">
+                          <button><i class="las la-thumbs-up text-xl"></i></button>
+                          <span>365</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                          <button><i class="las la-thumbs-down text-xl"></i></button>
+                          <span>365</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="py-6 xl:py-8 flex max-md:flex-wrap max-md:gap-5 md:divide-x rtl:divide-x-reverse divide-neutral-40 dark:divide-neutral-500 divide-dashed">
+                    <div class="flex flex-col min-w-[200px] items-end ltr:pr-7 ltr:xl:pr-10 rtl:pl-7 rtl:lg:pl-10">
+                      <img src="./assets/images/users/user-s-2.png" class="rounded-full mb-4" alt="" />
+                      <p class="l-text font-medium mb-2">Ralph Edwards</p>
+                      <span class="s-text">19 Feb 2024</span>
+                    </div>
+                    <div class="ltr:pl-7 ltr:xl:pl-10 rtl:pr-7 rtl:lg:pr-10">
+                      <div class="flex gap-0.5 mb-4">
+                        <i class="las la-star text-xl text-warning-300"></i>
+                        <i class="las la-star text-xl text-warning-300"></i>
+                        <i class="las la-star text-xl text-warning-300"></i>
+                        <i class="las la-star text-xl text-warning-300"></i>
+                        <i class="las la-star-half-alt text-xl text-warning-300"></i>
+                      </div>
+                      <p class="flex items-center gap-3 m-text text-primary-300 mb-4"><i class="las la-check-circle text-xl"></i> Verified Purchase</p>
+                      <div class="flex gap-4 mb-4">
+                        <div class="rounded-lg size-24 bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 p-2">
+                          <img src="./assets/images/products/product-5.png" alt="" />
+                        </div>
+                        <div class="rounded-lg size-24 bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 p-2">
+                          <img src="./assets/images/products/product-3.png" alt="" />
+                        </div>
+                      </div>
+                      <p class="mb-6 m-text">The sun slowly set over the horizon, painting the sky in vibrant hues of orange and pink.</p>
+                      <div class="flex gap-6">
+                        <div class="flex items-center gap-2 text-primary-300">
+                          <button><i class="las la-thumbs-up text-xl"></i></button>
+                          <span>365</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                          <button><i class="las la-thumbs-down text-xl"></i></button>
+                          <span>365</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="py-6 xl:py-8 flex max-md:flex-wrap max-md:gap-5 md:divide-x rtl:divide-x-reverse divide-neutral-40 dark:divide-neutral-500 divide-dashed">
+                    <div class="flex flex-col min-w-[200px] items-end ltr:pr-7 ltr:xl:pr-10 rtl:pl-7 rtl:lg:pl-10">
+                      <img src="./assets/images/users/user-s-3.png" class="rounded-full mb-4" alt="" />
+                      <p class="l-text font-medium mb-2">Courtney Henry</p>
+                      <span class="s-text">19 Feb 2024</span>
+                    </div>
+                    <div class="ltr:pl-7 ltr:xl:pl-10 rtl:pr-7 rtl:lg:pr-10">
+                      <div class="flex gap-0.5 mb-4">
+                        <i class="las la-star text-xl text-warning-300"></i>
+                        <i class="las la-star text-xl text-warning-300"></i>
+                        <i class="las la-star text-xl text-warning-300"></i>
+                        <i class="las la-star text-xl text-warning-300"></i>
+                        <i class="las la-star-half-alt text-xl text-warning-300"></i>
+                      </div>
+                      <p class="flex items-center gap-3 m-text text-primary-300 mb-4"><i class="las la-check-circle text-xl"></i> Verified Purchase</p>
+                      <p class="mb-6 m-text">The sun slowly set over the horizon, painting the sky in vibrant hues of orange and pink.</p>
+                      <div class="flex gap-6">
+                        <div class="flex items-center gap-2 text-primary-300">
+                          <button><i class="las la-thumbs-up text-xl"></i></button>
+                          <span>365</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                          <button><i class="las la-thumbs-down text-xl"></i></button>
+                          <span>365</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="pt-6 xl:pt-8 flex max-md:flex-wrap max-md:gap-5 md:divide-x rtl:divide-x-reverse divide-neutral-40 dark:divide-neutral-500 divide-dashed">
+                    <div class="flex flex-col min-w-[200px] items-end ltr:pr-7 ltr:xl:pr-10 rtl:pl-7 rtl:lg:pl-10">
+                      <img src="./assets/images/users/user-s-4.png" class="rounded-full mb-4" alt="" />
+                      <p class="l-text font-medium mb-2">Annete Black</p>
+                      <span class="s-text">19 Feb 2024</span>
+                    </div>
+                    <div class="ltr:pl-7 ltr:xl:pl-10 rtl:pr-7 rtl:lg:pr-10">
+                      <div class="flex gap-0.5 mb-4">
+                        <i class="las la-star text-xl text-warning-300"></i>
+                        <i class="las la-star text-xl text-warning-300"></i>
+                        <i class="las la-star text-xl text-warning-300"></i>
+                        <i class="las la-star text-xl text-warning-300"></i>
+                        <i class="las la-star-half-alt text-xl text-warning-300"></i>
+                      </div>
+                      <p class="flex items-center gap-3 m-text text-primary-300 mb-4"><i class="las la-check-circle text-xl"></i> Verified Purchase</p>
+                      <div class="flex gap-4 mb-4">
+                        <div class="rounded-lg size-24 bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 p-2">
+                          <img src="./assets/images/products/product-5.png" alt="" />
+                        </div>
+                      </div>
+                      <p class="mb-6 m-text">The sun slowly set over the horizon, painting the sky in vibrant hues of orange and pink.</p>
+                      <div class="flex gap-6">
+                        <div class="flex items-center gap-2 text-primary-300">
+                          <button><i class="las la-thumbs-up text-xl"></i></button>
+                          <span>365</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                          <button><i class="las la-thumbs-down text-xl"></i></button>
+                          <span>365</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/swiper-bundle.min.js"></script>
+    <script src="./assets/js/libs/dropzone.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+  </body>
+</html>

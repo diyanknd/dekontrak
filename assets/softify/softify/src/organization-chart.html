@@ -1,0 +1,1073 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/github.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Organizational Chart</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Components</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Organizational Chart</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- organizational chart -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div class="flex flex-col gap-4 xxl:gap-6">
+            <!--simple  -->
+            <div x-data="copyorviewcode" class="white-box">
+              <h4 class="bb-dashed-n30">Basic</h4>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+              <!-- Preview -->
+              <div x-show="!viewcode" class="flex flex-col items-center">
+                <button
+                  class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-primary-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-[30px]"
+                >
+                  Tasha Mcneill
+                </button>
+                <div class="relative flex gap-2 md:gap-4 mt-8 after:w-[80%] after:h-8 after:absolute after:-top-8 after:left-1/2 after:-translate-x-1/2 after:border after:rounded-tl-xl after:rounded-tr-xl after:border-b-0 after:border-primary-200">
+                  <ul class="flex flex-col items-center">
+                    <li>
+                      <button
+                        class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-primary-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-[30px]"
+                      >
+                        John Stone
+                      </button>
+                    </li>
+                    <li><button class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium">Rimsha Wynn</button></li>
+                  </ul>
+                  <ul class="flex flex-col items-center">
+                    <li>
+                      <button
+                        class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-primary-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 before:h-8 before:w-px before:border-r before:border-primary-200 before:absolute before:-top-8 before:left-1/2 before:-translate-x-1/2 mb-[30px]"
+                      >
+                        Ponnappa Priya
+                      </button>
+                    </li>
+                    <li class="flex flex-col items-center">
+                      <button
+                        class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-primary-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-[30px]"
+                      >
+                        Tyra Elliot
+                      </button>
+                      <div class="flex gap-1 sm:gap-2 md:gap-4 mt-8 after:w-[60%] relative after:h-8 after:absolute after:-top-8 after:left-1/2 after:-translate-x-1/2 after:border after:rounded-tl-xl after:rounded-tr-xl after:border-b-0 after:border-primary-200">
+                        <ul class="flex flex-col items-center">
+                          <li>
+                            <button
+                              class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-primary-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-[30px]"
+                            >
+                              John Stone
+                            </button>
+                          </li>
+                          <li><button class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium">Rimsha Wynn</button></li>
+                        </ul>
+                        <ul class="flex flex-col items-center">
+                          <li><button class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium">Rimsha Wynn</button></li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                  <ul class="flex flex-col items-center">
+                    <li class="flex flex-col items-center">
+                      <button
+                        class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-primary-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-[30px]"
+                      >
+                        Peter Stanbridge
+                      </button>
+                      <ul class="flex gap-1 sm:gap-2 md:gap-4 items-center mt-8 after:w-[60%] relative after:h-8 after:absolute after:-top-8 after:left-1/2 after:-translate-x-1/2 after:border after:rounded-tl-xl after:rounded-tr-xl after:border-b-0 after:border-primary-200">
+                        <li><button class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium">Harding</button></li>
+                        <li><button class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium">Medrano</button></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex flex-col items-center&#x22;&#x3E;
+  &#x3C;button
+    class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-primary-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-[30px]&#x22;
+  &#x3E;
+    Tasha Mcneill
+  &#x3C;/button&#x3E;
+  &#x3C;div class=&#x22;relative flex gap-2 md:gap-4 mt-8 after:w-[80%] after:h-8 after:absolute after:-top-8 after:left-1/2 after:-translate-x-1/2 after:border after:rounded-tl-xl after:rounded-tr-xl after:border-b-0 after:border-primary-200&#x22;&#x3E;
+    &#x3C;ul class=&#x22;flex flex-col items-center&#x22;&#x3E;
+      &#x3C;li&#x3E;
+        &#x3C;button
+          class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-primary-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-[30px]&#x22;
+        &#x3E;
+          John Stone
+        &#x3C;/button&#x3E;
+      &#x3C;/li&#x3E;
+      &#x3C;li&#x3E;&#x3C;button class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium&#x22;&#x3E;Rimsha Wynn&#x3C;/button&#x3E;&#x3C;/li&#x3E;
+    &#x3C;/ul&#x3E;
+    &#x3C;ul class=&#x22;flex flex-col items-center&#x22;&#x3E;
+      &#x3C;li&#x3E;
+        &#x3C;button
+          class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-primary-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 before:h-8 before:w-px before:border-r before:border-primary-200 before:absolute before:-top-8 before:left-1/2 before:-translate-x-1/2 mb-[30px]&#x22;
+        &#x3E;
+          Ponnappa Priya
+        &#x3C;/button&#x3E;
+      &#x3C;/li&#x3E;
+      &#x3C;li class=&#x22;flex flex-col items-center&#x22;&#x3E;
+        &#x3C;button
+          class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-primary-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-[30px]&#x22;
+        &#x3E;
+          Tyra Elliot
+        &#x3C;/button&#x3E;
+        &#x3C;div class=&#x22;flex gap-1 sm:gap-2 md:gap-4 mt-8 after:w-[60%] relative after:h-8 after:absolute after:-top-8 after:left-1/2 after:-translate-x-1/2 after:border after:rounded-tl-xl after:rounded-tr-xl after:border-b-0 after:border-primary-200&#x22;&#x3E;
+          &#x3C;ul class=&#x22;flex flex-col items-center&#x22;&#x3E;
+            &#x3C;li&#x3E;
+              &#x3C;button
+                class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-primary-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-[30px]&#x22;
+              &#x3E;
+                John Stone
+              &#x3C;/button&#x3E;
+            &#x3C;/li&#x3E;
+            &#x3C;li&#x3E;&#x3C;button class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium&#x22;&#x3E;Rimsha Wynn&#x3C;/button&#x3E;&#x3C;/li&#x3E;
+          &#x3C;/ul&#x3E;
+          &#x3C;ul class=&#x22;flex flex-col items-center&#x22;&#x3E;
+            &#x3C;li&#x3E;&#x3C;button class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium&#x22;&#x3E;Rimsha Wynn&#x3C;/button&#x3E;&#x3C;/li&#x3E;
+          &#x3C;/ul&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/li&#x3E;
+    &#x3C;/ul&#x3E;
+    &#x3C;ul class=&#x22;flex flex-col items-center&#x22;&#x3E;
+      &#x3C;li class=&#x22;flex flex-col items-center&#x22;&#x3E;
+        &#x3C;button
+          class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-primary-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-[30px]&#x22;
+        &#x3E;
+          Peter Stanbridge
+        &#x3C;/button&#x3E;
+        &#x3C;ul class=&#x22;flex gap-1 sm:gap-2 md:gap-4 items-center mt-8 after:w-[60%] relative after:h-8 after:absolute after:-top-8 after:left-1/2 after:-translate-x-1/2 after:border after:rounded-tl-xl after:rounded-tr-xl after:border-b-0 after:border-primary-200&#x22;&#x3E;
+          &#x3C;li&#x3E;&#x3C;button class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium&#x22;&#x3E;Harding&#x3C;/button&#x3E;&#x3C;/li&#x3E;
+          &#x3C;li&#x3E;&#x3C;button class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-primary-75 bg-primary-50 m-text font-medium&#x22;&#x3E;Medrano&#x3C;/button&#x3E;&#x3C;/li&#x3E;
+        &#x3C;/ul&#x3E;
+      &#x3C;/li&#x3E;
+    &#x3C;/ul&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!--Standard  -->
+            <div x-data="copyorviewcode" class="white-box">
+              <h4 class="bb-dashed-n30">Standard</h4>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <div x-show="!viewcode" class="flex flex-col items-center">
+                <div
+                  class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-neutral-40 after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-[30px] w-48"
+                >
+                  <div class="flex justify-between items-start mb-3">
+                    <img src="./assets/images/avatar/avatar-1.png" class="size-10 rounded-full" alt="" />
+                    <div x-data="dropdown" class="relative">
+                      <button @click="toggle"><i class="las la-ellipsis-h text-xl"></i></button>
+                      <div x-show="isOpen" @click.away="close" class="absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col">
+                        <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                          <i class="las la-edit text-xl"></i>
+                          Edit
+                        </button>
+                        <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                          <i class="las la-trash text-xl"></i>
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="l-text mb-1 font-medium">Elenor Pena</p>
+                  <p class="s-text">Ceo, Co-Founder</p>
+                </div>
+                <div class="relative flex flex-wrap gap-2 md:gap-4 mt-8 after:w-[75%] after:h-8 after:absolute after:-top-8 after:left-1/2 after:-translate-x-1/2 after:border after:rounded-tl-xl after:rounded-tr-xl after:border-b-0 after:border-neutral-40 after:dark:border-neutral-200">
+                  <ul class="flex flex-col items-center">
+                    <li>
+                      <div
+                        class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-neutral-40 after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-[30px] w-48"
+                      >
+                        <div class="flex justify-between items-start mb-3">
+                          <img src="./assets/images/avatar/avatar-2.png" class="size-10 rounded-full" alt="" />
+                          <div x-data="dropdown" class="relative">
+                            <button @click="toggle"><i class="las la-ellipsis-h text-xl"></i></button>
+                            <div x-show="isOpen" @click.away="close" class="absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col">
+                              <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                                <i class="las la-edit text-xl"></i>
+                                Edit
+                              </button>
+                              <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                                <i class="las la-trash text-xl"></i>
+                                Delete
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <p class="l-text mb-1 font-medium">Ralfh Edwards</p>
+                        <p class="s-text">Lead</p>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium w-48">
+                        <div class="flex justify-between items-start mb-3">
+                          <img src="./assets/images/avatar/avatar-3.png" class="size-10 rounded-full" alt="" />
+                          <div x-data="dropdown" class="relative">
+                            <button @click="toggle"><i class="las la-ellipsis-h text-xl"></i></button>
+                            <div x-show="isOpen" @click.away="close" class="absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col">
+                              <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                                <i class="las la-edit text-xl"></i>
+                                Edit
+                              </button>
+                              <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                                <i class="las la-trash text-xl"></i>
+                                Delete
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <p class="l-text mb-1 font-medium">Esther Howard</p>
+                        <p class="s-text">Manager</p>
+                      </div>
+                    </li>
+                  </ul>
+                  <ul class="flex flex-col items-center">
+                    <li>
+                      <div
+                        class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-neutral-40 after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 before:h-8 before:w-px before:border-r before:border-neutral-40 before:dark:border-neutral-200 before:absolute before:-top-8 before:left-1/2 before:-translate-x-1/2 mb-[30px] w-48"
+                      >
+                        <div class="flex justify-between items-start mb-3">
+                          <img src="./assets/images/avatar/avatar-4.png" class="size-10 rounded-full" alt="" />
+                          <div x-data="dropdown" class="relative">
+                            <button @click="toggle"><i class="las la-ellipsis-h text-xl"></i></button>
+                            <div x-show="isOpen" @click.away="close" class="absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col">
+                              <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                                <i class="las la-edit text-xl"></i>
+                                Edit
+                              </button>
+                              <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                                <i class="las la-trash text-xl"></i>
+                                Delete
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <p class="l-text mb-1 font-medium">Dianne Russel</p>
+                        <p class="s-text">Lead</p>
+                      </div>
+                    </li>
+                    <li class="flex flex-col items-center">
+                      <div
+                        class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-neutral-40 after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-[30px] w-48"
+                      >
+                        <div class="flex justify-between items-start mb-3">
+                          <img src="./assets/images/avatar/avatar-2.png" class="size-10 rounded-full" alt="" />
+                          <div x-data="dropdown" class="relative">
+                            <button @click="toggle"><i class="las la-ellipsis-h text-xl"></i></button>
+                            <div x-show="isOpen" @click.away="close" class="absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col">
+                              <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                                <i class="las la-edit text-xl"></i>
+                                Edit
+                              </button>
+                              <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                                <i class="las la-trash text-xl"></i>
+                                Delete
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <p class="l-text mb-1 font-medium">Courtney Henry</p>
+                        <p class="s-text">Manager</p>
+                      </div>
+                      <div
+                        class="flex gap-1 flex-wrap sm:gap-2 md:gap-4 mt-8 after:w-[60%] relative after:h-8 after:absolute after:-top-8 after:left-1/2 after:-translate-x-1/2 after:border after:rounded-tl-xl after:rounded-tr-xl after:border-b-0 after:border-neutral-40 after:dark:border-neutral-500"
+                      >
+                        <ul class="flex flex-col items-center">
+                          <li>
+                            <div
+                              class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-neutral-40 after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-[30px] w-48"
+                            >
+                              <div class="flex justify-between items-start mb-3">
+                                <img src="./assets/images/avatar/avatar-6.png" class="size-10 rounded-full" alt="" />
+                                <div x-data="dropdown" class="relative">
+                                  <button @click="toggle"><i class="las la-ellipsis-h text-xl"></i></button>
+                                  <div x-show="isOpen" @click.away="close" class="absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col">
+                                    <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                                      <i class="las la-edit text-xl"></i>
+                                      Edit
+                                    </button>
+                                    <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                                      <i class="las la-trash text-xl"></i>
+                                      Delete
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                              <p class="l-text mb-1 font-medium">Annette Black</p>
+                              <p class="s-text">Back end Developer</p>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium w-48">
+                              <div class="flex justify-between items-start mb-3">
+                                <img src="./assets/images/avatar/avatar-2.png" class="size-10 rounded-full" alt="" />
+                                <div x-data="dropdown" class="relative">
+                                  <button @click="toggle"><i class="las la-ellipsis-h text-xl"></i></button>
+                                  <div x-show="isOpen" @click.away="close" class="absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col">
+                                    <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                                      <i class="las la-edit text-xl"></i>
+                                      Edit
+                                    </button>
+                                    <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                                      <i class="las la-trash text-xl"></i>
+                                      Delete
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                              <p class="l-text mb-1 font-medium">Albert Flores</p>
+                              <p class="s-text">Front end Develper</p>
+                            </div>
+                          </li>
+                        </ul>
+                        <ul class="flex flex-col items-center">
+                          <li>
+                            <div class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium w-48">
+                              <div class="flex justify-between items-start mb-3">
+                                <img src="./assets/images/avatar/avatar-2.png" class="size-10 rounded-full" alt="" />
+                                <div x-data="dropdown" class="relative">
+                                  <button @click="toggle"><i class="las la-ellipsis-h text-xl"></i></button>
+                                  <div x-show="isOpen" @click.away="close" class="absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col">
+                                    <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                                      <i class="las la-edit text-xl"></i>
+                                      Edit
+                                    </button>
+                                    <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                                      <i class="las la-trash text-xl"></i>
+                                      Delete
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                              <p class="l-text mb-1 font-medium">Floyed Miles</p>
+                              <p class="s-text">UI/UX Design</p>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                  <ul class="flex flex-col items-center">
+                    <li class="flex flex-col items-center">
+                      <div
+                        class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-neutral-40 after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-[30px] w-48"
+                      >
+                        <div class="flex justify-between items-start mb-3">
+                          <img src="./assets/images/avatar/avatar-7.png" class="size-10 rounded-full" alt="" />
+                          <div x-data="dropdown" class="relative">
+                            <button @click="toggle"><i class="las la-ellipsis-h text-xl"></i></button>
+                            <div x-show="isOpen" @click.away="close" class="absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col">
+                              <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                                <i class="las la-edit text-xl"></i>
+                                Edit
+                              </button>
+                              <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                                <i class="las la-trash text-xl"></i>
+                                Delete
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <p class="l-text mb-1 font-medium">Robert Fox</p>
+                        <p class="s-text">Lead</p>
+                      </div>
+                      <ul
+                        class="flex flex-wrap gap-1 sm:gap-2 md:gap-4 items-center mt-8 after:w-[60%] relative after:h-8 after:absolute after:-top-8 after:left-1/2 after:-translate-x-1/2 after:border after:rounded-tl-xl after:rounded-tr-xl after:border-b-0 after:border-neutral-40 after:dark:border-neutral-200"
+                      >
+                        <li>
+                          <div class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium w-48">
+                            <div class="flex justify-between items-start mb-3">
+                              <img src="./assets/images/avatar/avatar-2.png" class="size-10 rounded-full" alt="" />
+                              <div x-data="dropdown" class="relative">
+                                <button @click="toggle"><i class="las la-ellipsis-h text-xl"></i></button>
+                                <div x-show="isOpen" @click.away="close" class="absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col">
+                                  <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                                    <i class="las la-edit text-xl"></i>
+                                    Edit
+                                  </button>
+                                  <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                                    <i class="las la-trash text-xl"></i>
+                                    Delete
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                            <p class="l-text mb-1 font-medium">Jenny Wilson</p>
+                            <p class="s-text">Support</p>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium w-48">
+                            <div class="flex justify-between items-start mb-3">
+                              <img src="./assets/images/avatar/avatar-9.png" class="size-10 rounded-full" alt="" />
+                              <div x-data="dropdown" class="relative">
+                                <button @click="toggle"><i class="las la-ellipsis-h text-xl"></i></button>
+                                <div x-show="isOpen" @click.away="close" class="absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col">
+                                  <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                                    <i class="las la-edit text-xl"></i>
+                                    Edit
+                                  </button>
+                                  <button class="w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903">
+                                    <i class="las la-trash text-xl"></i>
+                                    Delete
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                            <p class="l-text mb-1 font-medium">Jacob Jones</p>
+                            <p class="s-text">Content Writer</p>
+                          </div>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex flex-col items-center&#x22;&#x3E;
+  &#x3C;div
+    class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-neutral-40 after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-[30px] w-48&#x22;
+  &#x3E;
+    &#x3C;div class=&#x22;flex justify-between items-start mb-3&#x22;&#x3E;
+      &#x3C;img src=&#x22;./assets/images/avatar/avatar-1.png&#x22; class=&#x22;size-10 rounded-full&#x22; alt=&#x22;&#x22; /&#x3E;
+      &#x3C;div x-data=&#x22;dropdown&#x22; class=&#x22;relative&#x22;&#x3E;
+        &#x3C;button @click=&#x22;toggle&#x22;&#x3E;&#x3C;i class=&#x22;las la-ellipsis-h text-xl&#x22;&#x3E;&#x3C;/i&#x3E;&#x3C;/button&#x3E;
+        &#x3C;div x-show=&#x22;isOpen&#x22; @click.away=&#x22;close&#x22; class=&#x22;absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col&#x22;&#x3E;
+          &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+            &#x3C;i class=&#x22;las la-edit text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+            Edit
+          &#x3C;/button&#x3E;
+          &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+            &#x3C;i class=&#x22;las la-trash text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+            Delete
+          &#x3C;/button&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/div&#x3E;
+    &#x3C;/div&#x3E;
+    &#x3C;p class=&#x22;l-text mb-1 font-medium&#x22;&#x3E;Elenor Pena&#x3C;/p&#x3E;
+    &#x3C;p class=&#x22;s-text&#x22;&#x3E;Ceo, Co-Founder&#x3C;/p&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;relative flex flex-wrap gap-2 md:gap-4 mt-8 after:w-[75%] after:h-8 after:absolute after:-top-8 after:left-1/2 after:-translate-x-1/2 after:border after:rounded-tl-xl after:rounded-tr-xl after:border-b-0 after:border-neutral-40 after:dark:border-neutral-200&#x22;&#x3E;
+    &#x3C;ul class=&#x22;flex flex-col items-center&#x22;&#x3E;
+      &#x3C;li&#x3E;
+        &#x3C;div
+          class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-neutral-40 after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-[30px] w-48&#x22;
+        &#x3E;
+          &#x3C;div class=&#x22;flex justify-between items-start mb-3&#x22;&#x3E;
+            &#x3C;img src=&#x22;./assets/images/avatar/avatar-2.png&#x22; class=&#x22;size-10 rounded-full&#x22; alt=&#x22;&#x22; /&#x3E;
+            &#x3C;div x-data=&#x22;dropdown&#x22; class=&#x22;relative&#x22;&#x3E;
+              &#x3C;button @click=&#x22;toggle&#x22;&#x3E;&#x3C;i class=&#x22;las la-ellipsis-h text-xl&#x22;&#x3E;&#x3C;/i&#x3E;&#x3C;/button&#x3E;
+              &#x3C;div x-show=&#x22;isOpen&#x22; @click.away=&#x22;close&#x22; class=&#x22;absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col&#x22;&#x3E;
+                &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+                  &#x3C;i class=&#x22;las la-edit text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+                  Edit
+                &#x3C;/button&#x3E;
+                &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+                  &#x3C;i class=&#x22;las la-trash text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+                  Delete
+                &#x3C;/button&#x3E;
+              &#x3C;/div&#x3E;
+            &#x3C;/div&#x3E;
+          &#x3C;/div&#x3E;
+          &#x3C;p class=&#x22;l-text mb-1 font-medium&#x22;&#x3E;Ralfh Edwards&#x3C;/p&#x3E;
+          &#x3C;p class=&#x22;s-text&#x22;&#x3E;Lead&#x3C;/p&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/li&#x3E;
+      &#x3C;li&#x3E;
+        &#x3C;div class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium w-48&#x22;&#x3E;
+          &#x3C;div class=&#x22;flex justify-between items-start mb-3&#x22;&#x3E;
+            &#x3C;img src=&#x22;./assets/images/avatar/avatar-3.png&#x22; class=&#x22;size-10 rounded-full&#x22; alt=&#x22;&#x22; /&#x3E;
+            &#x3C;div x-data=&#x22;dropdown&#x22; class=&#x22;relative&#x22;&#x3E;
+              &#x3C;button @click=&#x22;toggle&#x22;&#x3E;&#x3C;i class=&#x22;las la-ellipsis-h text-xl&#x22;&#x3E;&#x3C;/i&#x3E;&#x3C;/button&#x3E;
+              &#x3C;div x-show=&#x22;isOpen&#x22; @click.away=&#x22;close&#x22; class=&#x22;absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col&#x22;&#x3E;
+                &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+                  &#x3C;i class=&#x22;las la-edit text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+                  Edit
+                &#x3C;/button&#x3E;
+                &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+                  &#x3C;i class=&#x22;las la-trash text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+                  Delete
+                &#x3C;/button&#x3E;
+              &#x3C;/div&#x3E;
+            &#x3C;/div&#x3E;
+          &#x3C;/div&#x3E;
+          &#x3C;p class=&#x22;l-text mb-1 font-medium&#x22;&#x3E;Esther Howard&#x3C;/p&#x3E;
+          &#x3C;p class=&#x22;s-text&#x22;&#x3E;Manager&#x3C;/p&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/li&#x3E;
+    &#x3C;/ul&#x3E;
+    &#x3C;ul class=&#x22;flex flex-col items-center&#x22;&#x3E;
+      &#x3C;li&#x3E;
+        &#x3C;div
+          class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-neutral-40 after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 before:h-8 before:w-px before:border-r before:border-neutral-40 before:dark:border-neutral-200 before:absolute before:-top-8 before:left-1/2 before:-translate-x-1/2 mb-[30px] w-48&#x22;
+        &#x3E;
+          &#x3C;div class=&#x22;flex justify-between items-start mb-3&#x22;&#x3E;
+            &#x3C;img src=&#x22;./assets/images/avatar/avatar-4.png&#x22; class=&#x22;size-10 rounded-full&#x22; alt=&#x22;&#x22; /&#x3E;
+            &#x3C;div x-data=&#x22;dropdown&#x22; class=&#x22;relative&#x22;&#x3E;
+              &#x3C;button @click=&#x22;toggle&#x22;&#x3E;&#x3C;i class=&#x22;las la-ellipsis-h text-xl&#x22;&#x3E;&#x3C;/i&#x3E;&#x3C;/button&#x3E;
+              &#x3C;div x-show=&#x22;isOpen&#x22; @click.away=&#x22;close&#x22; class=&#x22;absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col&#x22;&#x3E;
+                &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+                  &#x3C;i class=&#x22;las la-edit text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+                  Edit
+                &#x3C;/button&#x3E;
+                &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+                  &#x3C;i class=&#x22;las la-trash text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+                  Delete
+                &#x3C;/button&#x3E;
+              &#x3C;/div&#x3E;
+            &#x3C;/div&#x3E;
+          &#x3C;/div&#x3E;
+          &#x3C;p class=&#x22;l-text mb-1 font-medium&#x22;&#x3E;Dianne Russel&#x3C;/p&#x3E;
+          &#x3C;p class=&#x22;s-text&#x22;&#x3E;Lead&#x3C;/p&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/li&#x3E;
+      &#x3C;li class=&#x22;flex flex-col items-center&#x22;&#x3E;
+        &#x3C;div
+          class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-neutral-40 after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-[30px] w-48&#x22;
+        &#x3E;
+          &#x3C;div class=&#x22;flex justify-between items-start mb-3&#x22;&#x3E;
+            &#x3C;img src=&#x22;./assets/images/avatar/avatar-2.png&#x22; class=&#x22;size-10 rounded-full&#x22; alt=&#x22;&#x22; /&#x3E;
+            &#x3C;div x-data=&#x22;dropdown&#x22; class=&#x22;relative&#x22;&#x3E;
+              &#x3C;button @click=&#x22;toggle&#x22;&#x3E;&#x3C;i class=&#x22;las la-ellipsis-h text-xl&#x22;&#x3E;&#x3C;/i&#x3E;&#x3C;/button&#x3E;
+              &#x3C;div x-show=&#x22;isOpen&#x22; @click.away=&#x22;close&#x22; class=&#x22;absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col&#x22;&#x3E;
+                &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+                  &#x3C;i class=&#x22;las la-edit text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+                  Edit
+                &#x3C;/button&#x3E;
+                &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+                  &#x3C;i class=&#x22;las la-trash text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+                  Delete
+                &#x3C;/button&#x3E;
+              &#x3C;/div&#x3E;
+            &#x3C;/div&#x3E;
+          &#x3C;/div&#x3E;
+          &#x3C;p class=&#x22;l-text mb-1 font-medium&#x22;&#x3E;Courtney Henry&#x3C;/p&#x3E;
+          &#x3C;p class=&#x22;s-text&#x22;&#x3E;Manager&#x3C;/p&#x3E;
+        &#x3C;/div&#x3E;
+        &#x3C;div
+          class=&#x22;flex gap-1 flex-wrap sm:gap-2 md:gap-4 mt-8 after:w-[60%] relative after:h-8 after:absolute after:-top-8 after:left-1/2 after:-translate-x-1/2 after:border after:rounded-tl-xl after:rounded-tr-xl after:border-b-0 after:border-neutral-40 after:dark:border-neutral-500&#x22;
+        &#x3E;
+          &#x3C;ul class=&#x22;flex flex-col items-center&#x22;&#x3E;
+            &#x3C;li&#x3E;
+              &#x3C;div
+                class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-neutral-40 after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-[30px] w-48&#x22;
+              &#x3E;
+                &#x3C;div class=&#x22;flex justify-between items-start mb-3&#x22;&#x3E;
+                  &#x3C;img src=&#x22;./assets/images/avatar/avatar-6.png&#x22; class=&#x22;size-10 rounded-full&#x22; alt=&#x22;&#x22; /&#x3E;
+                  &#x3C;div x-data=&#x22;dropdown&#x22; class=&#x22;relative&#x22;&#x3E;
+                    &#x3C;button @click=&#x22;toggle&#x22;&#x3E;&#x3C;i class=&#x22;las la-ellipsis-h text-xl&#x22;&#x3E;&#x3C;/i&#x3E;&#x3C;/button&#x3E;
+                    &#x3C;div x-show=&#x22;isOpen&#x22; @click.away=&#x22;close&#x22; class=&#x22;absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col&#x22;&#x3E;
+                      &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+                        &#x3C;i class=&#x22;las la-edit text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+                        Edit
+                      &#x3C;/button&#x3E;
+                      &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+                        &#x3C;i class=&#x22;las la-trash text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+                        Delete
+                      &#x3C;/button&#x3E;
+                    &#x3C;/div&#x3E;
+                  &#x3C;/div&#x3E;
+                &#x3C;/div&#x3E;
+                &#x3C;p class=&#x22;l-text mb-1 font-medium&#x22;&#x3E;Annette Black&#x3C;/p&#x3E;
+                &#x3C;p class=&#x22;s-text&#x22;&#x3E;Back end Developer&#x3C;/p&#x3E;
+              &#x3C;/div&#x3E;
+            &#x3C;/li&#x3E;
+            &#x3C;li&#x3E;
+              &#x3C;div class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium w-48&#x22;&#x3E;
+                &#x3C;div class=&#x22;flex justify-between items-start mb-3&#x22;&#x3E;
+                  &#x3C;img src=&#x22;./assets/images/avatar/avatar-2.png&#x22; class=&#x22;size-10 rounded-full&#x22; alt=&#x22;&#x22; /&#x3E;
+                  &#x3C;div x-data=&#x22;dropdown&#x22; class=&#x22;relative&#x22;&#x3E;
+                    &#x3C;button @click=&#x22;toggle&#x22;&#x3E;&#x3C;i class=&#x22;las la-ellipsis-h text-xl&#x22;&#x3E;&#x3C;/i&#x3E;&#x3C;/button&#x3E;
+                    &#x3C;div x-show=&#x22;isOpen&#x22; @click.away=&#x22;close&#x22; class=&#x22;absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col&#x22;&#x3E;
+                      &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+                        &#x3C;i class=&#x22;las la-edit text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+                        Edit
+                      &#x3C;/button&#x3E;
+                      &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+                        &#x3C;i class=&#x22;las la-trash text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+                        Delete
+                      &#x3C;/button&#x3E;
+                    &#x3C;/div&#x3E;
+                  &#x3C;/div&#x3E;
+                &#x3C;/div&#x3E;
+                &#x3C;p class=&#x22;l-text mb-1 font-medium&#x22;&#x3E;Albert Flores&#x3C;/p&#x3E;
+                &#x3C;p class=&#x22;s-text&#x22;&#x3E;Front end Develper&#x3C;/p&#x3E;
+              &#x3C;/div&#x3E;
+            &#x3C;/li&#x3E;
+          &#x3C;/ul&#x3E;
+          &#x3C;ul class=&#x22;flex flex-col items-center&#x22;&#x3E;
+            &#x3C;li&#x3E;
+              &#x3C;div class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium w-48&#x22;&#x3E;
+                &#x3C;div class=&#x22;flex justify-between items-start mb-3&#x22;&#x3E;
+                  &#x3C;img src=&#x22;./assets/images/avatar/avatar-2.png&#x22; class=&#x22;size-10 rounded-full&#x22; alt=&#x22;&#x22; /&#x3E;
+                  &#x3C;div x-data=&#x22;dropdown&#x22; class=&#x22;relative&#x22;&#x3E;
+                    &#x3C;button @click=&#x22;toggle&#x22;&#x3E;&#x3C;i class=&#x22;las la-ellipsis-h text-xl&#x22;&#x3E;&#x3C;/i&#x3E;&#x3C;/button&#x3E;
+                    &#x3C;div x-show=&#x22;isOpen&#x22; @click.away=&#x22;close&#x22; class=&#x22;absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col&#x22;&#x3E;
+                      &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+                        &#x3C;i class=&#x22;las la-edit text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+                        Edit
+                      &#x3C;/button&#x3E;
+                      &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+                        &#x3C;i class=&#x22;las la-trash text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+                        Delete
+                      &#x3C;/button&#x3E;
+                    &#x3C;/div&#x3E;
+                  &#x3C;/div&#x3E;
+                &#x3C;/div&#x3E;
+                &#x3C;p class=&#x22;l-text mb-1 font-medium&#x22;&#x3E;Floyed Miles&#x3C;/p&#x3E;
+                &#x3C;p class=&#x22;s-text&#x22;&#x3E;UI/UX Design&#x3C;/p&#x3E;
+              &#x3C;/div&#x3E;
+            &#x3C;/li&#x3E;
+          &#x3C;/ul&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/li&#x3E;
+    &#x3C;/ul&#x3E;
+    &#x3C;ul class=&#x22;flex flex-col items-center&#x22;&#x3E;
+      &#x3C;li class=&#x22;flex flex-col items-center&#x22;&#x3E;
+        &#x3C;div
+          class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium relative after:h-8 after:w-px after:border-r after:border-neutral-40 after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-[30px] w-48&#x22;
+        &#x3E;
+          &#x3C;div class=&#x22;flex justify-between items-start mb-3&#x22;&#x3E;
+            &#x3C;img src=&#x22;./assets/images/avatar/avatar-7.png&#x22; class=&#x22;size-10 rounded-full&#x22; alt=&#x22;&#x22; /&#x3E;
+            &#x3C;div x-data=&#x22;dropdown&#x22; class=&#x22;relative&#x22;&#x3E;
+              &#x3C;button @click=&#x22;toggle&#x22;&#x3E;&#x3C;i class=&#x22;las la-ellipsis-h text-xl&#x22;&#x3E;&#x3C;/i&#x3E;&#x3C;/button&#x3E;
+              &#x3C;div x-show=&#x22;isOpen&#x22; @click.away=&#x22;close&#x22; class=&#x22;absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col&#x22;&#x3E;
+                &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+                  &#x3C;i class=&#x22;las la-edit text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+                  Edit
+                &#x3C;/button&#x3E;
+                &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+                  &#x3C;i class=&#x22;las la-trash text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+                  Delete
+                &#x3C;/button&#x3E;
+              &#x3C;/div&#x3E;
+            &#x3C;/div&#x3E;
+          &#x3C;/div&#x3E;
+          &#x3C;p class=&#x22;l-text mb-1 font-medium&#x22;&#x3E;Robert Fox&#x3C;/p&#x3E;
+          &#x3C;p class=&#x22;s-text&#x22;&#x3E;Lead&#x3C;/p&#x3E;
+        &#x3C;/div&#x3E;
+        &#x3C;ul
+          class=&#x22;flex flex-wrap gap-1 sm:gap-2 md:gap-4 items-center mt-8 after:w-[60%] relative after:h-8 after:absolute after:-top-8 after:left-1/2 after:-translate-x-1/2 after:border after:rounded-tl-xl after:rounded-tr-xl after:border-b-0 after:border-neutral-40 after:dark:border-neutral-200&#x22;
+        &#x3E;
+          &#x3C;li&#x3E;
+            &#x3C;div class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium w-48&#x22;&#x3E;
+              &#x3C;div class=&#x22;flex justify-between items-start mb-3&#x22;&#x3E;
+                &#x3C;img src=&#x22;./assets/images/avatar/avatar-2.png&#x22; class=&#x22;size-10 rounded-full&#x22; alt=&#x22;&#x22; /&#x3E;
+                &#x3C;div x-data=&#x22;dropdown&#x22; class=&#x22;relative&#x22;&#x3E;
+                  &#x3C;button @click=&#x22;toggle&#x22;&#x3E;&#x3C;i class=&#x22;las la-ellipsis-h text-xl&#x22;&#x3E;&#x3C;/i&#x3E;&#x3C;/button&#x3E;
+                  &#x3C;div x-show=&#x22;isOpen&#x22; @click.away=&#x22;close&#x22; class=&#x22;absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col&#x22;&#x3E;
+                    &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+                      &#x3C;i class=&#x22;las la-edit text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+                      Edit
+                    &#x3C;/button&#x3E;
+                    &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+                      &#x3C;i class=&#x22;las la-trash text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+                      Delete
+                    &#x3C;/button&#x3E;
+                  &#x3C;/div&#x3E;
+                &#x3C;/div&#x3E;
+              &#x3C;/div&#x3E;
+              &#x3C;p class=&#x22;l-text mb-1 font-medium&#x22;&#x3E;Jenny Wilson&#x3C;/p&#x3E;
+              &#x3C;p class=&#x22;s-text&#x22;&#x3E;Support&#x3C;/p&#x3E;
+            &#x3C;/div&#x3E;
+          &#x3C;/li&#x3E;
+          &#x3C;li&#x3E;
+            &#x3C;div class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium w-48&#x22;&#x3E;
+              &#x3C;div class=&#x22;flex justify-between items-start mb-3&#x22;&#x3E;
+                &#x3C;img src=&#x22;./assets/images/avatar/avatar-9.png&#x22; class=&#x22;size-10 rounded-full&#x22; alt=&#x22;&#x22; /&#x3E;
+                &#x3C;div x-data=&#x22;dropdown&#x22; class=&#x22;relative&#x22;&#x3E;
+                  &#x3C;button @click=&#x22;toggle&#x22;&#x3E;&#x3C;i class=&#x22;las la-ellipsis-h text-xl&#x22;&#x3E;&#x3C;/i&#x3E;&#x3C;/button&#x3E;
+                  &#x3C;div x-show=&#x22;isOpen&#x22; @click.away=&#x22;close&#x22; class=&#x22;absolute top-full left-0 w-40 z-10 p-3 rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 dark:border-neutral-500 shadow-xl flex flex-col&#x22;&#x3E;
+                    &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+                      &#x3C;i class=&#x22;las la-edit text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+                      Edit
+                    &#x3C;/button&#x3E;
+                    &#x3C;button class=&#x22;w-full flex items-center rounded-lg gap-2 py-1.5 px-2 hover:bg-neutral-20 duration-300 hover:dark:bg-neutral-903&#x22;&#x3E;
+                      &#x3C;i class=&#x22;las la-trash text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+                      Delete
+                    &#x3C;/button&#x3E;
+                  &#x3C;/div&#x3E;
+                &#x3C;/div&#x3E;
+              &#x3C;/div&#x3E;
+              &#x3C;p class=&#x22;l-text mb-1 font-medium&#x22;&#x3E;Jacob Jones&#x3C;/p&#x3E;
+              &#x3C;p class=&#x22;s-text&#x22;&#x3E;Content Writer&#x3C;/p&#x3E;
+            &#x3C;/div&#x3E;
+          &#x3C;/li&#x3E;
+        &#x3C;/ul&#x3E;
+      &#x3C;/li&#x3E;
+    &#x3C;/ul&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!--By Group  -->
+            <div x-data="copyorviewcode" class="white-box">
+              <h4 class="bb-dashed-n30">By Group</h4>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <!-- Preview -->
+              <div x-show="!viewcode" class="flex flex-col items-center">
+                <div
+                  class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium relative after:h-16 after:w-px after:border-r after:border-neutral-40 after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-16 w-48 text-center mt-8"
+                >
+                  <img src="./assets/images/avatar/avatar-1.png" class="size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-6" alt="" />
+                  <p class="l-text mb-1 font-medium mt-4">Wade Warren</p>
+                  <p class="s-text">Ceo, Co-Founder</p>
+                </div>
+                <div class="relative flex flex-wrap gap-2 md:gap-4 mt-20 after:w-[75%] after:h-20 after:absolute after:-top-20 after:left-1/2 after:-translate-x-[56%] after:border after:rounded-tl-xl after:rounded-tr-xl after:border-b-0 after:border-neutral-40 after:dark:border-neutral-200">
+                  <ul class="flex flex-col items-center">
+                    <li>
+                      <button
+                        class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-success-75 bg-success-50 dark:bg-neutral-904 m-text font-medium relative after:h-24 after:w-px after:border-r after:border-neutral-40 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-24 flex items-center gap-2"
+                      >
+                        <span>Product Design</span> <span class="w-6 h-[26px] bg-neutral-0 dark:bg-neutral-904 rounded-md f-center border border-success-100">2</span>
+                      </button>
+                    </li>
+                    <li>
+                      <div
+                        class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium border-t-4 border-t-success-300 dark:border-t-success-300 relative after:h-24 after:w-px after:border-r after:border-neutral-40 text-center after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-24 w-48"
+                      >
+                        <img src="./assets/images/avatar/avatar-2.png" class="size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-5" alt="" />
+                        <p class="l-text mb-1 font-medium pt-5">Ralfh Edwards</p>
+                        <p class="s-text">Lead</p>
+                      </div>
+                    </li>
+                    <li>
+                      <div
+                        class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium border-t-4 border-t-success-300 dark:border-t-success-300 relative w-48 text-center"
+                      >
+                        <img src="./assets/images/avatar/avatar-3.png" class="size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-5" alt="" />
+                        <p class="l-text mb-1 font-medium pt-5">Esther Howard</p>
+                        <p class="s-text">Lead</p>
+                      </div>
+                    </li>
+                  </ul>
+                  <ul class="flex flex-col items-center">
+                    <li>
+                      <button
+                        class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-secondary-75 bg-secondary-50 dark:bg-neutral-904 m-text font-medium relative after:h-24 after:w-px after:border-r after:border-neutral-40 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 before:h-20 before:w-px before:border-r before:border-neutral-40 before:absolute before:bottom-full before:left-1/2 before:-translate-x-1/2 mb-24 flex items-center gap-2"
+                      >
+                        <span>Development</span> <span class="w-6 h-[26px] bg-neutral-0 dark:bg-neutral-904 rounded-md f-center border border-secondary-100">5</span>
+                      </button>
+                    </li>
+                    <li>
+                      <div
+                        class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium border-t-4 border-t-secondary-300 dark:border-t-secondary-300 relative after:h-24 after:w-px after:border-r after:border-neutral-40 text-center after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-24 w-48"
+                      >
+                        <img src="./assets/images/avatar/avatar-2.png" class="size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-5" alt="" />
+                        <p class="l-text mb-1 font-medium pt-5">Dianne Russel</p>
+                        <p class="s-text">Lead</p>
+                      </div>
+                    </li>
+                    <li class="flex flex-col items-center">
+                      <div
+                        class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium border-t-4 border-t-secondary-300 dark:border-t-secondary-300 relative after:h-24 after:w-px after:border-r after:border-neutral-40 text-center after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-24 w-48"
+                      >
+                        <img src="./assets/images/avatar/avatar-2.png" class="size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-5" alt="" />
+                        <p class="l-text mb-1 font-medium pt-5">Courtney Henry</p>
+                        <p class="s-text">Lead</p>
+                      </div>
+                      <div
+                        class="flex gap-1 flex-wrap sm:gap-2 md:gap-4 mt-20 after:w-[55%] relative after:h-20 after:absolute after:-top-20 after:left-1/2 after:-translate-x-1/2 after:border after:rounded-tl-xl after:rounded-tr-xl after:border-b-0 after:border-neutral-40 after:dark:border-neutral-500"
+                      >
+                        <ul class="flex flex-col items-center">
+                          <li>
+                            <div
+                              class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium border-t-4 border-t-secondary-300 dark:border-t-secondary-300 relative after:h-24 after:w-px after:border-r after:border-neutral-40 text-center after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-24 w-48"
+                            >
+                              <img src="./assets/images/avatar/avatar-2.png" class="size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-5" alt="" />
+                              <p class="l-text mb-1 font-medium pt-5">Bessie Cooper</p>
+                              <p class="s-text">Back end Deve</p>
+                            </div>
+                          </li>
+                          <li>
+                            <div
+                              class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium border-t-4 border-t-secondary-300 dark:border-t-secondary-300 relative w-48 text-center"
+                            >
+                              <img src="./assets/images/avatar/avatar-2.png" class="size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-5" alt="" />
+                              <p class="l-text mb-1 font-medium pt-5">Robert Fox</p>
+                              <p class="s-text">Back end Deve</p>
+                            </div>
+                          </li>
+                        </ul>
+                        <ul class="flex flex-col items-center">
+                          <li>
+                            <div
+                              class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium border-t-4 border-t-secondary-300 dark:border-t-secondary-300 relative w-48 text-center"
+                            >
+                              <img src="./assets/images/avatar/avatar-2.png" class="size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-5" alt="" />
+                              <p class="l-text mb-1 font-medium pt-5">Albert Flores</p>
+                              <p class="s-text">Back end Deve</p>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                  <ul class="flex flex-col items-center">
+                    <li>
+                      <button
+                        class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-warning-75 bg-warning-50 dark:bg-neutral-904 m-text font-medium relative after:h-24 after:w-px after:border-r after:border-neutral-40 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-24 flex items-center gap-2"
+                      >
+                        <span>Marketing</span> <span class="w-6 h-[26px] bg-neutral-0 dark:bg-neutral-904 rounded-md f-center border border-warning-100">5</span>
+                      </button>
+                    </li>
+                    <li class="flex flex-col items-center">
+                      <div
+                        class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium border-t-4 border-t-warning-300 dark:border-t-warning-300 relative after:h-24 after:w-px after:border-r after:border-neutral-40 text-center after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-24 w-48"
+                      >
+                        <img src="./assets/images/avatar/avatar-2.png" class="size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-5" alt="" />
+                        <p class="l-text mb-1 font-medium pt-5">Ralfh Edwards</p>
+                        <p class="s-text">Lead</p>
+                      </div>
+                      <ul
+                        class="flex flex-wrap gap-1 sm:gap-2 md:gap-4 items-center mt-20 after:w-[60%] relative after:h-20 after:absolute after:-top-20 after:left-1/2 after:-translate-x-1/2 after:border after:rounded-tl-xl after:rounded-tr-xl after:border-b-0 after:border-neutral-40 after:dark:border-neutral-200"
+                      >
+                        <li>
+                          <div
+                            class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium border-t-4 border-t-warning-300 dark:border-t-warning-300 relative w-48 text-center"
+                          >
+                            <img src="./assets/images/avatar/avatar-2.png" class="size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-5" alt="" />
+                            <p class="l-text mb-1 font-medium pt-5">Esther Howard</p>
+                            <p class="s-text">Support</p>
+                          </div>
+                        </li>
+                        <li>
+                          <div
+                            class="px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium border-t-4 border-t-warning-300 dark:border-t-warning-300 relative w-48 text-center"
+                          >
+                            <img src="./assets/images/avatar/avatar-2.png" class="size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-5" alt="" />
+                            <p class="l-text mb-1 font-medium pt-5">Ronald Rechards</p>
+                            <p class="s-text">Content Writer</p>
+                          </div>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex flex-col items-center&#x22;&#x3E;
+  &#x3C;div
+    class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium relative after:h-16 after:w-px after:border-r after:border-neutral-40 after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-16 w-48 text-center mt-8&#x22;
+  &#x3E;
+    &#x3C;img src=&#x22;./assets/images/avatar/avatar-1.png&#x22; class=&#x22;size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-6&#x22; alt=&#x22;&#x22; /&#x3E;
+    &#x3C;p class=&#x22;l-text mb-1 font-medium mt-4&#x22;&#x3E;Wade Warren&#x3C;/p&#x3E;
+    &#x3C;p class=&#x22;s-text&#x22;&#x3E;Ceo, Co-Founder&#x3C;/p&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;relative flex flex-wrap gap-2 md:gap-4 mt-20 after:w-[75%] after:h-20 after:absolute after:-top-20 after:left-1/2 after:-translate-x-[56%] after:border after:rounded-tl-xl after:rounded-tr-xl after:border-b-0 after:border-neutral-40 after:dark:border-neutral-200&#x22;&#x3E;
+    &#x3C;ul class=&#x22;flex flex-col items-center&#x22;&#x3E;
+      &#x3C;li&#x3E;
+        &#x3C;button
+          class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-success-75 bg-success-50 dark:bg-neutral-904 m-text font-medium relative after:h-24 after:w-px after:border-r after:border-neutral-40 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-24 flex items-center gap-2&#x22;
+        &#x3E;
+          &#x3C;span&#x3E;Product Design&#x3C;/span&#x3E; &#x3C;span class=&#x22;w-6 h-[26px] bg-neutral-0 dark:bg-neutral-904 rounded-md f-center border border-success-100&#x22;&#x3E;2&#x3C;/span&#x3E;
+        &#x3C;/button&#x3E;
+      &#x3C;/li&#x3E;
+      &#x3C;li&#x3E;
+        &#x3C;div
+          class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium border-t-4 border-t-success-300 dark:border-t-success-300 relative after:h-24 after:w-px after:border-r after:border-neutral-40 text-center after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-24 w-48&#x22;
+        &#x3E;
+          &#x3C;img src=&#x22;./assets/images/avatar/avatar-2.png&#x22; class=&#x22;size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-5&#x22; alt=&#x22;&#x22; /&#x3E;
+          &#x3C;p class=&#x22;l-text mb-1 font-medium pt-5&#x22;&#x3E;Ralfh Edwards&#x3C;/p&#x3E;
+          &#x3C;p class=&#x22;s-text&#x22;&#x3E;Lead&#x3C;/p&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/li&#x3E;
+      &#x3C;li&#x3E;
+        &#x3C;div
+          class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium border-t-4 border-t-success-300 dark:border-t-success-300 relative w-48 text-center&#x22;
+        &#x3E;
+          &#x3C;img src=&#x22;./assets/images/avatar/avatar-3.png&#x22; class=&#x22;size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-5&#x22; alt=&#x22;&#x22; /&#x3E;
+          &#x3C;p class=&#x22;l-text mb-1 font-medium pt-5&#x22;&#x3E;Esther Howard&#x3C;/p&#x3E;
+          &#x3C;p class=&#x22;s-text&#x22;&#x3E;Lead&#x3C;/p&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/li&#x3E;
+    &#x3C;/ul&#x3E;
+    &#x3C;ul class=&#x22;flex flex-col items-center&#x22;&#x3E;
+      &#x3C;li&#x3E;
+        &#x3C;button
+          class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-secondary-75 bg-secondary-50 dark:bg-neutral-904 m-text font-medium relative after:h-24 after:w-px after:border-r after:border-neutral-40 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 before:h-20 before:w-px before:border-r before:border-neutral-40 before:absolute before:bottom-full before:left-1/2 before:-translate-x-1/2 mb-24 flex items-center gap-2&#x22;
+        &#x3E;
+          &#x3C;span&#x3E;Development&#x3C;/span&#x3E; &#x3C;span class=&#x22;w-6 h-[26px] bg-neutral-0 dark:bg-neutral-904 rounded-md f-center border border-secondary-100&#x22;&#x3E;5&#x3C;/span&#x3E;
+        &#x3C;/button&#x3E;
+      &#x3C;/li&#x3E;
+      &#x3C;li&#x3E;
+        &#x3C;div
+          class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium border-t-4 border-t-secondary-300 dark:border-t-secondary-300 relative after:h-24 after:w-px after:border-r after:border-neutral-40 text-center after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-24 w-48&#x22;
+        &#x3E;
+          &#x3C;img src=&#x22;./assets/images/avatar/avatar-2.png&#x22; class=&#x22;size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-5&#x22; alt=&#x22;&#x22; /&#x3E;
+          &#x3C;p class=&#x22;l-text mb-1 font-medium pt-5&#x22;&#x3E;Dianne Russel&#x3C;/p&#x3E;
+          &#x3C;p class=&#x22;s-text&#x22;&#x3E;Lead&#x3C;/p&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/li&#x3E;
+      &#x3C;li class=&#x22;flex flex-col items-center&#x22;&#x3E;
+        &#x3C;div
+          class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium border-t-4 border-t-secondary-300 dark:border-t-secondary-300 relative after:h-24 after:w-px after:border-r after:border-neutral-40 text-center after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-24 w-48&#x22;
+        &#x3E;
+          &#x3C;img src=&#x22;./assets/images/avatar/avatar-2.png&#x22; class=&#x22;size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-5&#x22; alt=&#x22;&#x22; /&#x3E;
+          &#x3C;p class=&#x22;l-text mb-1 font-medium pt-5&#x22;&#x3E;Courtney Henry&#x3C;/p&#x3E;
+          &#x3C;p class=&#x22;s-text&#x22;&#x3E;Lead&#x3C;/p&#x3E;
+        &#x3C;/div&#x3E;
+        &#x3C;div
+          class=&#x22;flex gap-1 flex-wrap sm:gap-2 md:gap-4 mt-20 after:w-[55%] relative after:h-20 after:absolute after:-top-20 after:left-1/2 after:-translate-x-1/2 after:border after:rounded-tl-xl after:rounded-tr-xl after:border-b-0 after:border-neutral-40 after:dark:border-neutral-500&#x22;
+        &#x3E;
+          &#x3C;ul class=&#x22;flex flex-col items-center&#x22;&#x3E;
+            &#x3C;li&#x3E;
+              &#x3C;div
+                class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium border-t-4 border-t-secondary-300 dark:border-t-secondary-300 relative after:h-24 after:w-px after:border-r after:border-neutral-40 text-center after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-24 w-48&#x22;
+              &#x3E;
+                &#x3C;img src=&#x22;./assets/images/avatar/avatar-2.png&#x22; class=&#x22;size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-5&#x22; alt=&#x22;&#x22; /&#x3E;
+                &#x3C;p class=&#x22;l-text mb-1 font-medium pt-5&#x22;&#x3E;Bessie Cooper&#x3C;/p&#x3E;
+                &#x3C;p class=&#x22;s-text&#x22;&#x3E;Back end Deve&#x3C;/p&#x3E;
+              &#x3C;/div&#x3E;
+            &#x3C;/li&#x3E;
+            &#x3C;li&#x3E;
+              &#x3C;div
+                class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium border-t-4 border-t-secondary-300 dark:border-t-secondary-300 relative w-48 text-center&#x22;
+              &#x3E;
+                &#x3C;img src=&#x22;./assets/images/avatar/avatar-2.png&#x22; class=&#x22;size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-5&#x22; alt=&#x22;&#x22; /&#x3E;
+                &#x3C;p class=&#x22;l-text mb-1 font-medium pt-5&#x22;&#x3E;Robert Fox&#x3C;/p&#x3E;
+                &#x3C;p class=&#x22;s-text&#x22;&#x3E;Back end Deve&#x3C;/p&#x3E;
+              &#x3C;/div&#x3E;
+            &#x3C;/li&#x3E;
+          &#x3C;/ul&#x3E;
+          &#x3C;ul class=&#x22;flex flex-col items-center&#x22;&#x3E;
+            &#x3C;li&#x3E;
+              &#x3C;div
+                class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium border-t-4 border-t-secondary-300 dark:border-t-secondary-300 relative w-48 text-center&#x22;
+              &#x3E;
+                &#x3C;img src=&#x22;./assets/images/avatar/avatar-2.png&#x22; class=&#x22;size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-5&#x22; alt=&#x22;&#x22; /&#x3E;
+                &#x3C;p class=&#x22;l-text mb-1 font-medium pt-5&#x22;&#x3E;Albert Flores&#x3C;/p&#x3E;
+                &#x3C;p class=&#x22;s-text&#x22;&#x3E;Back end Deve&#x3C;/p&#x3E;
+              &#x3C;/div&#x3E;
+            &#x3C;/li&#x3E;
+          &#x3C;/ul&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/li&#x3E;
+    &#x3C;/ul&#x3E;
+    &#x3C;ul class=&#x22;flex flex-col items-center&#x22;&#x3E;
+      &#x3C;li&#x3E;
+        &#x3C;button
+          class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-warning-75 bg-warning-50 dark:bg-neutral-904 m-text font-medium relative after:h-24 after:w-px after:border-r after:border-neutral-40 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-24 flex items-center gap-2&#x22;
+        &#x3E;
+          &#x3C;span&#x3E;Marketing&#x3C;/span&#x3E; &#x3C;span class=&#x22;w-6 h-[26px] bg-neutral-0 dark:bg-neutral-904 rounded-md f-center border border-warning-100&#x22;&#x3E;5&#x3C;/span&#x3E;
+        &#x3C;/button&#x3E;
+      &#x3C;/li&#x3E;
+      &#x3C;li class=&#x22;flex flex-col items-center&#x22;&#x3E;
+        &#x3C;div
+          class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium border-t-4 border-t-warning-300 dark:border-t-warning-300 relative after:h-24 after:w-px after:border-r after:border-neutral-40 text-center after:dark:border-neutral-200 after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 mb-24 w-48&#x22;
+        &#x3E;
+          &#x3C;img src=&#x22;./assets/images/avatar/avatar-2.png&#x22; class=&#x22;size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-5&#x22; alt=&#x22;&#x22; /&#x3E;
+          &#x3C;p class=&#x22;l-text mb-1 font-medium pt-5&#x22;&#x3E;Ralfh Edwards&#x3C;/p&#x3E;
+          &#x3C;p class=&#x22;s-text&#x22;&#x3E;Lead&#x3C;/p&#x3E;
+        &#x3C;/div&#x3E;
+        &#x3C;ul
+          class=&#x22;flex flex-wrap gap-1 sm:gap-2 md:gap-4 items-center mt-20 after:w-[60%] relative after:h-20 after:absolute after:-top-20 after:left-1/2 after:-translate-x-1/2 after:border after:rounded-tl-xl after:rounded-tr-xl after:border-b-0 after:border-neutral-40 after:dark:border-neutral-200&#x22;
+        &#x3E;
+          &#x3C;li&#x3E;
+            &#x3C;div
+              class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium border-t-4 border-t-warning-300 dark:border-t-warning-300 relative w-48 text-center&#x22;
+            &#x3E;
+              &#x3C;img src=&#x22;./assets/images/avatar/avatar-2.png&#x22; class=&#x22;size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-5&#x22; alt=&#x22;&#x22; /&#x3E;
+              &#x3C;p class=&#x22;l-text mb-1 font-medium pt-5&#x22;&#x3E;Esther Howard&#x3C;/p&#x3E;
+              &#x3C;p class=&#x22;s-text&#x22;&#x3E;Support&#x3C;/p&#x3E;
+            &#x3C;/div&#x3E;
+          &#x3C;/li&#x3E;
+          &#x3C;li&#x3E;
+            &#x3C;div
+              class=&#x22;px-1 sm:px-3 lg:px-6 py-1 sm:py-2 lg:py-3 !text-xs md:text-sm lg:text-base rounded-xl border border-neutral-30 dark:border-neutral-300 bg-neutral-20 dark:bg-neutral-903 m-text font-medium border-t-4 border-t-warning-300 dark:border-t-warning-300 relative w-48 text-center&#x22;
+            &#x3E;
+              &#x3C;img src=&#x22;./assets/images/avatar/avatar-2.png&#x22; class=&#x22;size-10 z-[3] rounded-full border border-neutral-40 dark:border-neutral-500 absolute left-1/2 -translate-x-1/2 -top-5&#x22; alt=&#x22;&#x22; /&#x3E;
+              &#x3C;p class=&#x22;l-text mb-1 font-medium pt-5&#x22;&#x3E;Ronald Rechards&#x3C;/p&#x3E;
+              &#x3C;p class=&#x22;s-text&#x22;&#x3E;Content Writer&#x3C;/p&#x3E;
+            &#x3C;/div&#x3E;
+          &#x3C;/li&#x3E;
+        &#x3C;/ul&#x3E;
+      &#x3C;/li&#x3E;
+    &#x3C;/ul&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/highlight.js"></script>
+    <script src="./assets/js/libs/sweetalert.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

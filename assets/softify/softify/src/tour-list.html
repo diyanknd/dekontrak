@@ -1,0 +1,990 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/swiper.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 space-y-4 xxl:space-y-6">
+        <!-- Breadcrumb -->
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Tour List</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Tour</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>List</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Tour List -->
+        <div
+          x-data="{filter:false, openFilter(){this.filter=true}, closeFilter(){this.filter=false},
+         }"
+          class="white-box"
+        >
+          <div class="bb-dashed-n30 flex justify-between items-center">
+            <h4>Tour List</h4>
+            <a href="create-tour.html" class="btn-primary-outlined"><i class="las la-plus-circle"></i> New Tour</a>
+          </div>
+
+          <div class="bb-dashed-n30 flex-wrap gap-4 flex justify-between items-center">
+            <form class="max-w-[337px] rounded-full bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 p-1 flex">
+              <input type="text" class="px-4 py-2 w-full bg-transparent" placeholder="Search..." />
+              <button class="size-10 shrink-0 rounded-full bg-primary-300 text-neutral-0 f-center">
+                <i class="las la-search text-2xl"></i>
+              </button>
+            </form>
+            <div class="flex items-center gap-4">
+              <button @click="openFilter" class="flex items-center gap-2 font-semibold">
+                <i class="las la-filter text-xl"></i>
+                Filter
+              </button>
+              <select name="sort" class="nc-select n20">
+                <option value="all">All</option>
+                <option value="new">New</option>
+                <option value="old">Old</option>
+              </select>
+            </div>
+          </div>
+          <div class="bb-dashed-n30 grid grid-cols-12 gap-4 xxl:gap-6">
+            <div class="n20-box !p-2 4xl:!p-3 col-span-12 md:col-span-6 xxl:col-span-4">
+              <div dir="ltr" class="rounded-xl relative mb-6 xxl:mb-8">
+                <div class="swiper tourSwiper rounded-xl">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-1.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-2.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-3.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-4.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                  </div>
+                  <div class="absolute right-3 bottom-3 lg:h-12 lg:w-28 w-20 h-9 p-3 items-center justify-center rounded-lg border bg-neutral-900 bg-opacity-50 border-neutral-100 flex gap-2 z-[3]">
+                    <button class="tour-prev">
+                      <i class="las la-angle-left text-lg text-neutral-0"></i>
+                    </button>
+                    <div class="tour-pagination text-neutral-0"></div>
+                    <button class="tour-next">
+                      <i class="las la-angle-right text-lg text-neutral-0"></i>
+                    </button>
+                  </div>
+                </div>
+                <span class="py-1.5 px-3 text-sm rounded-lg text-neutral-0 bg-primary-300 absolute top-3 left-3 z-[4]">$85.45</span>
+              </div>
+              <div class="sm:px-3 4xl:px-5 pb-3">
+                <div class="flex justify-between items-start bb-dashed-n40">
+                  <div>
+                    <p class="s-text mb-2">Posted Date: 12 Mar 2024 9:02 AM</p>
+                    <a href="tour-details.html" class="h4 max-one-line">The Grand Canyon National Park</a>
+                  </div>
+                  <button class="rounded-full size-9 f-center hover:bg-neutral-30 dark:hover:bg-neutral-600 duration-300">
+                    <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                      <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                      <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                        <li>
+                          <a href="tour-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                        </li>
+                        <li>
+                          <a href="edit-job.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-download text-xl"></i> Edit </a>
+                        </li>
+                        <li>
+                          <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </button>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-success-300/10 text-success-300 text-xl">
+                      <i class="las la-user-cog text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">24 Booked</p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-warning-300/10 text-warning-300 text-xl">
+                      <i class="las la-star text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">4.9 <span class="text-neutral-100 font-normal">(2.3k Reviews)</span></p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-secondary-300/10 text-secondary-300 text-xl">
+                      <i class="las la-clock text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">11 - 12 Mar 24</p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-error-300/10 text-error-300 text-xl">
+                      <i class="las la-map-marker-alt text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">USA</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="n20-box !p-2 4xl:!p-3 col-span-12 md:col-span-6 xxl:col-span-4">
+              <div dir="ltr" class="rounded-xl relative mb-6 xxl:mb-8">
+                <div class="swiper tourSwiper rounded-xl">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-2.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-4.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-7.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-5.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                  </div>
+                  <div class="absolute right-3 bottom-3 lg:h-12 lg:w-28 w-20 h-9 p-3 items-center justify-center rounded-lg border bg-neutral-900 bg-opacity-50 border-neutral-100 flex gap-2 z-[3]">
+                    <button class="tour-prev">
+                      <i class="las la-angle-left text-lg text-neutral-0"></i>
+                    </button>
+                    <div class="tour-pagination text-neutral-0"></div>
+                    <button class="tour-next">
+                      <i class="las la-angle-right text-lg text-neutral-0"></i>
+                    </button>
+                  </div>
+                </div>
+                <span class="py-1.5 px-3 text-sm rounded-lg text-neutral-0 bg-primary-300 absolute top-3 left-3 z-[4]">$85.45</span>
+              </div>
+              <div class="sm:px-3 4xl:px-5 pb-3">
+                <div class="flex justify-between items-start bb-dashed-n40">
+                  <div>
+                    <p class="s-text mb-2">Posted Date: 12 Mar 2024 9:02 AM</p>
+                    <a href="tour-details.html" class="h4 max-one-line">The Great Barrier Reef</a>
+                  </div>
+                  <button class="rounded-full size-9 f-center hover:bg-neutral-30 dark:hover:bg-neutral-600 duration-300">
+                    <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                      <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                      <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                        <li>
+                          <a href="tour-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                        </li>
+                        <li>
+                          <a href="edit-job.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-download text-xl"></i> Edit </a>
+                        </li>
+                        <li>
+                          <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </button>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-success-300/10 text-success-300 text-xl">
+                      <i class="las la-user-cog text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">25 Booked</p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-warning-300/10 text-warning-300 text-xl">
+                      <i class="las la-star text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">4.9 <span class="text-neutral-100 font-normal">(2.3k Reviews)</span></p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-secondary-300/10 text-secondary-300 text-xl">
+                      <i class="las la-clock text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">11 - 12 Mar 24</p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-error-300/10 text-error-300 text-xl">
+                      <i class="las la-map-marker-alt text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">USA</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="n20-box !p-2 4xl:!p-3 col-span-12 md:col-span-6 xxl:col-span-4">
+              <div dir="ltr" class="rounded-xl relative mb-6 xxl:mb-8">
+                <div class="swiper tourSwiper rounded-xl">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-3.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-2.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-8.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-7.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                  </div>
+                  <div class="absolute right-3 bottom-3 lg:h-12 lg:w-28 w-20 h-9 p-3 items-center justify-center rounded-lg border bg-neutral-900 bg-opacity-50 border-neutral-100 flex gap-2 z-[3]">
+                    <button class="tour-prev">
+                      <i class="las la-angle-left text-lg text-neutral-0"></i>
+                    </button>
+                    <div class="tour-pagination text-neutral-0"></div>
+                    <button class="tour-next">
+                      <i class="las la-angle-right text-lg text-neutral-0"></i>
+                    </button>
+                  </div>
+                </div>
+                <span class="py-1.5 px-3 text-sm rounded-lg text-neutral-0 bg-primary-300 absolute top-3 left-3 z-[4]">$85.45</span>
+              </div>
+              <div class="sm:px-3 4xl:px-5 pb-3">
+                <div class="flex justify-between items-start bb-dashed-n40">
+                  <div>
+                    <p class="s-text mb-2">Posted Date: 12 Mar 2024 9:02 AM</p>
+                    <a href="tour-details.html" class="h4 max-one-line">The Mystical Morocco Mayhem</a>
+                  </div>
+                  <button class="rounded-full size-9 f-center hover:bg-neutral-30 dark:hover:bg-neutral-600 duration-300">
+                    <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                      <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                      <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                        <li>
+                          <a href="tour-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                        </li>
+                        <li>
+                          <a href="edit-job.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-download text-xl"></i> Edit </a>
+                        </li>
+                        <li>
+                          <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </button>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-success-300/10 text-success-300 text-xl">
+                      <i class="las la-user-cog text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">12 Booked</p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-warning-300/10 text-warning-300 text-xl">
+                      <i class="las la-star text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">4.9 <span class="text-neutral-100 font-normal">(2.3k Reviews)</span></p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-secondary-300/10 text-secondary-300 text-xl">
+                      <i class="las la-clock text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">11 - 12 Mar 24</p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-error-300/10 text-error-300 text-xl">
+                      <i class="las la-map-marker-alt text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">USA</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="n20-box !p-2 4xl:!p-3 col-span-12 md:col-span-6 xxl:col-span-4">
+              <div dir="ltr" class="rounded-xl relative mb-6 xxl:mb-8">
+                <div class="swiper tourSwiper rounded-xl">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-4.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-3.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-6.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-7.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                  </div>
+                  <div class="absolute right-3 bottom-3 lg:h-12 lg:w-28 w-20 h-9 p-3 items-center justify-center rounded-lg border bg-neutral-900 bg-opacity-50 border-neutral-100 flex gap-2 z-[3]">
+                    <button class="tour-prev">
+                      <i class="las la-angle-left text-lg text-neutral-0"></i>
+                    </button>
+                    <div class="tour-pagination text-neutral-0"></div>
+                    <button class="tour-next">
+                      <i class="las la-angle-right text-lg text-neutral-0"></i>
+                    </button>
+                  </div>
+                </div>
+                <span class="py-1.5 px-3 text-sm rounded-lg text-neutral-0 bg-primary-300 absolute top-3 left-3 z-[4]">$85.45</span>
+              </div>
+              <div class="sm:px-3 4xl:px-5 pb-3">
+                <div class="flex justify-between items-start bb-dashed-n40">
+                  <div>
+                    <p class="s-text mb-2">Posted Date: 12 Mar 2024 9:02 AM</p>
+                    <a href="tour-details.html" class="h4 max-one-line">A Culinary Cruise Through Tuscany</a>
+                  </div>
+                  <button class="rounded-full size-9 f-center hover:bg-neutral-30 dark:hover:bg-neutral-600 duration-300">
+                    <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                      <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                      <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                        <li>
+                          <a href="tour-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                        </li>
+                        <li>
+                          <a href="edit-job.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-download text-xl"></i> Edit </a>
+                        </li>
+                        <li>
+                          <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </button>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-success-300/10 text-success-300 text-xl">
+                      <i class="las la-user-cog text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">19 Booked</p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-warning-300/10 text-warning-300 text-xl">
+                      <i class="las la-star text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">4.9 <span class="text-neutral-100 font-normal">(2.3k Reviews)</span></p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-secondary-300/10 text-secondary-300 text-xl">
+                      <i class="las la-clock text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">11 - 12 Mar 24</p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-error-300/10 text-error-300 text-xl">
+                      <i class="las la-map-marker-alt text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">USA</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="n20-box !p-2 4xl:!p-3 col-span-12 md:col-span-6 xxl:col-span-4">
+              <div dir="ltr" class="rounded-xl relative mb-6 xxl:mb-8">
+                <div class="swiper tourSwiper rounded-xl">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-5.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-4.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-3.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-1.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                  </div>
+                  <div class="absolute right-3 bottom-3 lg:h-12 lg:w-28 w-20 h-9 p-3 items-center justify-center rounded-lg border bg-neutral-900 bg-opacity-50 border-neutral-100 flex gap-2 z-[3]">
+                    <button class="tour-prev">
+                      <i class="las la-angle-left text-lg text-neutral-0"></i>
+                    </button>
+                    <div class="tour-pagination text-neutral-0"></div>
+                    <button class="tour-next">
+                      <i class="las la-angle-right text-lg text-neutral-0"></i>
+                    </button>
+                  </div>
+                </div>
+                <span class="py-1.5 px-3 text-sm rounded-lg text-neutral-0 bg-primary-300 absolute top-3 left-3 z-[4]">$85.45</span>
+              </div>
+              <div class="sm:px-3 4xl:px-5 pb-3">
+                <div class="flex justify-between items-start bb-dashed-n40">
+                  <div>
+                    <p class="s-text mb-2">Posted Date: 12 Mar 2024 9:02 AM</p>
+                    <a href="tour-details.html" class="h4 max-one-line">Icelandic Ice Caves &amp; Geothermal</a>
+                  </div>
+                  <button class="rounded-full size-9 f-center hover:bg-neutral-30 dark:hover:bg-neutral-600 duration-300">
+                    <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                      <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                      <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                        <li>
+                          <a href="tour-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                        </li>
+                        <li>
+                          <a href="edit-job.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-download text-xl"></i> Edit </a>
+                        </li>
+                        <li>
+                          <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </button>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-success-300/10 text-success-300 text-xl">
+                      <i class="las la-user-cog text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">18 Booked</p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-warning-300/10 text-warning-300 text-xl">
+                      <i class="las la-star text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">4.9 <span class="text-neutral-100 font-normal">(2.3k Reviews)</span></p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-secondary-300/10 text-secondary-300 text-xl">
+                      <i class="las la-clock text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">11 - 12 Mar 24</p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-error-300/10 text-error-300 text-xl">
+                      <i class="las la-map-marker-alt text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">USA</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="n20-box !p-2 4xl:!p-3 col-span-12 md:col-span-6 xxl:col-span-4">
+              <div dir="ltr" class="rounded-xl relative mb-6 xxl:mb-8">
+                <div class="swiper tourSwiper rounded-xl">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-6.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-5.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-3.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-4.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                  </div>
+                  <div class="absolute right-3 bottom-3 lg:h-12 lg:w-28 w-20 h-9 p-3 items-center justify-center rounded-lg border bg-neutral-900 bg-opacity-50 border-neutral-100 flex gap-2 z-[3]">
+                    <button class="tour-prev">
+                      <i class="las la-angle-left text-lg text-neutral-0"></i>
+                    </button>
+                    <div class="tour-pagination text-neutral-0"></div>
+                    <button class="tour-next">
+                      <i class="las la-angle-right text-lg text-neutral-0"></i>
+                    </button>
+                  </div>
+                </div>
+                <span class="py-1.5 px-3 text-sm rounded-lg text-neutral-0 bg-primary-300 absolute top-3 left-3 z-[4]">$85.45</span>
+              </div>
+              <div class="sm:px-3 4xl:px-5 pb-3">
+                <div class="flex justify-between items-start bb-dashed-n40">
+                  <div>
+                    <p class="s-text mb-2">Posted Date: 12 Mar 2024 9:02 AM</p>
+                    <a href="tour-details.html" class="h4 max-one-line">Trekking Through Patagonia's</a>
+                  </div>
+                  <button class="rounded-full size-9 f-center hover:bg-neutral-30 dark:hover:bg-neutral-600 duration-300">
+                    <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                      <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                      <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                        <li>
+                          <a href="tour-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                        </li>
+                        <li>
+                          <a href="edit-job.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-download text-xl"></i> Edit </a>
+                        </li>
+                        <li>
+                          <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </button>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-success-300/10 text-success-300 text-xl">
+                      <i class="las la-user-cog text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">11 Booked</p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-warning-300/10 text-warning-300 text-xl">
+                      <i class="las la-star text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">4.9 <span class="text-neutral-100 font-normal">(2.3k Reviews)</span></p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-secondary-300/10 text-secondary-300 text-xl">
+                      <i class="las la-clock text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">11 - 12 Mar 24</p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-error-300/10 text-error-300 text-xl">
+                      <i class="las la-map-marker-alt text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">USA</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="n20-box !p-2 4xl:!p-3 col-span-12 md:col-span-6 xxl:col-span-4">
+              <div dir="ltr" class="rounded-xl relative mb-6 xxl:mb-8">
+                <div class="swiper tourSwiper rounded-xl">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-7.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-6.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-5.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-4.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                  </div>
+                  <div class="absolute right-3 bottom-3 lg:h-12 lg:w-28 w-20 h-9 p-3 items-center justify-center rounded-lg border bg-neutral-900 bg-opacity-50 border-neutral-100 flex gap-2 z-[3]">
+                    <button class="tour-prev">
+                      <i class="las la-angle-left text-lg text-neutral-0"></i>
+                    </button>
+                    <div class="tour-pagination text-neutral-0"></div>
+                    <button class="tour-next">
+                      <i class="las la-angle-right text-lg text-neutral-0"></i>
+                    </button>
+                  </div>
+                </div>
+                <span class="py-1.5 px-3 text-sm rounded-lg text-neutral-0 bg-primary-300 absolute top-3 left-3 z-[4]">$85.45</span>
+              </div>
+              <div class="sm:px-3 4xl:px-5 pb-3">
+                <div class="flex justify-between items-start bb-dashed-n40">
+                  <div>
+                    <p class="s-text mb-2">Posted Date: 12 Mar 2024 9:02 AM</p>
+                    <a href="tour-details.html" class="h4 max-one-line">The Jewels of the Caribbean</a>
+                  </div>
+                  <button class="rounded-full size-9 f-center hover:bg-neutral-30 dark:hover:bg-neutral-600 duration-300">
+                    <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                      <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                      <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                        <li>
+                          <a href="tour-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                        </li>
+                        <li>
+                          <a href="edit-job.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-download text-xl"></i> Edit </a>
+                        </li>
+                        <li>
+                          <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </button>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-success-300/10 text-success-300 text-xl">
+                      <i class="las la-user-cog text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">15 Booked</p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-warning-300/10 text-warning-300 text-xl">
+                      <i class="las la-star text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">4.9 <span class="text-neutral-100 font-normal">(2.3k Reviews)</span></p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-secondary-300/10 text-secondary-300 text-xl">
+                      <i class="las la-clock text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">11 - 12 Mar 24</p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-error-300/10 text-error-300 text-xl">
+                      <i class="las la-map-marker-alt text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">USA</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="n20-box !p-2 4xl:!p-3 col-span-12 md:col-span-6 xxl:col-span-4">
+              <div dir="ltr" class="rounded-xl relative mb-6 xxl:mb-8">
+                <div class="swiper tourSwiper rounded-xl">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-8.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-7.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-3.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-4.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                  </div>
+                  <div class="absolute right-3 bottom-3 lg:h-12 lg:w-28 w-20 h-9 p-3 items-center justify-center rounded-lg border bg-neutral-900 bg-opacity-50 border-neutral-100 flex gap-2 z-[3]">
+                    <button class="tour-prev">
+                      <i class="las la-angle-left text-lg text-neutral-0"></i>
+                    </button>
+                    <div class="tour-pagination text-neutral-0"></div>
+                    <button class="tour-next">
+                      <i class="las la-angle-right text-lg text-neutral-0"></i>
+                    </button>
+                  </div>
+                </div>
+                <span class="py-1.5 px-3 text-sm rounded-lg text-neutral-0 bg-primary-300 absolute top-3 left-3 z-[4]">$85.45</span>
+              </div>
+              <div class="sm:px-3 4xl:px-5 pb-3">
+                <div class="flex justify-between items-start bb-dashed-n40">
+                  <div>
+                    <p class="s-text mb-2">Posted Date: 10 Mar 2024 9:02 AM</p>
+                    <a href="tour-details.html" class="h4 max-one-line">Exploring Ancient Traditions</a>
+                  </div>
+                  <button class="rounded-full size-9 f-center hover:bg-neutral-30 dark:hover:bg-neutral-600 duration-300">
+                    <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                      <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                      <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                        <li>
+                          <a href="tour-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                        </li>
+                        <li>
+                          <a href="edit-job.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-download text-xl"></i> Edit </a>
+                        </li>
+                        <li>
+                          <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </button>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-success-300/10 text-success-300 text-xl">
+                      <i class="las la-user-cog text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">14 Booked</p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-warning-300/10 text-warning-300 text-xl">
+                      <i class="las la-star text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">4.4 <span class="text-neutral-100 font-normal">(2.3k Reviews)</span></p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-secondary-300/10 text-secondary-300 text-xl">
+                      <i class="las la-clock text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">11 - 12 Mar 24</p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-error-300/10 text-error-300 text-xl">
+                      <i class="las la-map-marker-alt text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">USA</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="n20-box !p-2 4xl:!p-3 col-span-12 md:col-span-6 xxl:col-span-4">
+              <div dir="ltr" class="rounded-xl relative mb-6 xxl:mb-8">
+                <div class="swiper tourSwiper rounded-xl">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-9.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-8.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-3.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="./assets/images/tour/tour-4.png" class="rounded-xl w-full" alt="" />
+                    </div>
+                  </div>
+                  <div class="absolute right-3 bottom-3 lg:h-12 lg:w-28 w-20 h-9 p-3 items-center justify-center rounded-lg border bg-neutral-900 bg-opacity-50 border-neutral-100 flex gap-2 z-[3]">
+                    <button class="tour-prev">
+                      <i class="las la-angle-left text-lg text-neutral-0"></i>
+                    </button>
+                    <div class="tour-pagination text-neutral-0"></div>
+                    <button class="tour-next">
+                      <i class="las la-angle-right text-lg text-neutral-0"></i>
+                    </button>
+                  </div>
+                </div>
+                <span class="py-1.5 px-3 text-sm rounded-lg text-neutral-0 bg-primary-300 absolute top-3 left-3 z-[4]">$85.45</span>
+              </div>
+              <div class="sm:px-3 4xl:px-5 pb-3">
+                <div class="flex justify-between items-start bb-dashed-n40">
+                  <div>
+                    <p class="s-text mb-2">Posted Date: 12 Mar 2024 9:02 AM</p>
+                    <a href="tour-details.html" class="h4 max-one-line">Stargazing &amp; Astrophotography</a>
+                  </div>
+                  <button class="rounded-full size-9 f-center hover:bg-neutral-30 dark:hover:bg-neutral-600 duration-300">
+                    <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                      <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                      <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                        <li>
+                          <a href="tour-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                        </li>
+                        <li>
+                          <a href="edit-job.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-download text-xl"></i> Edit </a>
+                        </li>
+                        <li>
+                          <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </button>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-success-300/10 text-success-300 text-xl">
+                      <i class="las la-user-cog text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">10 Booked</p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-warning-300/10 text-warning-300 text-xl">
+                      <i class="las la-star text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">4.5 <span class="text-neutral-100 font-normal">(2.3k Reviews)</span></p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-secondary-300/10 text-secondary-300 text-xl">
+                      <i class="las la-clock text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">11 - 12 Mar 24</p>
+                  </div>
+                  <div class="col-span-1 flex items-center gap-3">
+                    <span class="size-9 rounded-full shrink-0 border border-neutral-40 dark:border-neutral-500 f-center bg-error-300/10 text-error-300 text-xl">
+                      <i class="las la-map-marker-alt text-xl"></i>
+                    </span>
+                    <p class="l-text font-medium">USA</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- pagination -->
+          <div x-data="pagination" class="flex flex-wrap items-center justify-center gap-3">
+            <button
+              x-bind:disabled="currentPage === 1"
+              @click="changePage(currentPage - 1)"
+              class="btn-primary-icon-outlined text-primary-300 size-10 select-none hover:bg-primary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-transparent disabled:hover:text-primary-200"
+            >
+              <i class="las la-angle-left text-xl"></i>
+            </button>
+
+            <template x-for="page in pageNumbers">
+              <button
+                x-text="page"
+                :class=" {'btn-primary-icon bg-primary-300 !text-neutral-0':page==currentPage, 'flex size-10 text-primary-300 select-none border-primary-300 hover:bg-primary-300 items-center hover:text-neutral-0 justify-center rounded-full border duration-300 font-semibold':page!='...', 'cursor-default':page=='...'}"
+                @click="changePage(page)"
+              ></button>
+            </template>
+            <button
+              x-bind:disabled="currentPage === totalPages"
+              @click="changePage(currentPage + 1)"
+              class="btn-primary-icon-outlined size-10 select-none text-primary-300 hover:bg-primary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-transparent disabled:hover:text-primary-200"
+            >
+              <i class="las la-angle-right text-xl"></i>
+            </button>
+          </div>
+          <!-- Tour filter -->
+          <div class="inset-0 fixed bg-black bg-opacity-60 duration-300 z-[29]" x-show="filter" @click="closeFilter"></div>
+          <div :class="filter?'translate-x-0 opacity-100 visible':'ltr:translate-x-full rtl:-translate-x-full opacity-0 invisible'" class="w-[312px] duration-300 fixed h-full top-0 ltr:right-0 rtl:left-0 z-30 p-4 md:p-6 lg:p-8 bg-neutral-0 dark:bg-neutral-904 overflow-y-auto custom-scrollbar">
+            <div class="flex justify-between items-center pb-4 lg:pb-6 mb-4 lg:mb-6 border-b border-dashed border-neutral-40 dark:border-neutral-500">
+              <h4 class="text-2xl font-semibold">Filters</h4>
+              <div class="flex gap-4 items-center shrink-0 text-2xl">
+                <button><i class="las la-redo-alt"></i></button>
+                <button @click="closeFilter"><i class="las la-times"></i></button>
+              </div>
+            </div>
+            <form class="w-full rounded-full bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 p-1 flex mb-7 lg:mb-10">
+              <input type="text" class="px-4 py-2 w-full text-sm bg-transparent" placeholder="Search..." />
+              <button class="size-10 shrink-0 rounded-full bg-primary-300 text-neutral-0 f-center">
+                <i class="las la-search text-2xl"></i>
+              </button>
+            </form>
+
+            <!-- durations -->
+            <div class="bb-dashed-n30">
+              <p class="l-text font-medium mb-6">Durations</p>
+              <div class="relative flex items-center gap-4 rounded-full border border-neutral-40 px-4 dark:border-neutral-500 lg:px-6 mb-6">
+                <label for="input" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Start Date</label>
+                <input type="date" class="w-full bg-transparent py-2.5 lg:py-3.5" />
+              </div>
+              <div class="relative flex items-center gap-4 rounded-full border border-neutral-40 px-4 dark:border-neutral-500 lg:px-6">
+                <label for="input" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">End Date</label>
+                <input type="date" class="w-full bg-transparent py-2.5 lg:py-3.5" />
+              </div>
+            </div>
+
+            <!-- destination -->
+            <div class="bb-dashed-n30">
+              <p class="l-text font-medium mb-6">Destination</p>
+              <div x-data="{isOpen:false,selected:'', items:['Egypt','Bahrain','Libia','Sudan','Morocco']}" class="relative">
+                <div @click="isOpen=!isOpen" class="relative flex cursor-pointer items-center justify-between rounded-full border border-neutral-40 px-6 py-3 dark:border-neutral-500">
+                  <span x-text="selected?selected:'Select destination'"></span>
+                  <i class="las la-angle-down text-lg duration-300" :class="isOpen?'rotate-180':'rotate-0'"></i>
+                  <span class="absolute -top-2 left-5 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Destination</span>
+                </div>
+                <div x-show="isOpen" @click.away="isOpen=false" class="absolute left-0 top-full z-10 flex max-h-[200px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-0 p-1 shadow-xl dark:bg-neutral-904">
+                  <template x-for="item in items">
+                    <div @click="selected=item, isOpen=false" :class="selected===item?'bg-primary-300  text-neutral-0':'hover:bg-primary-50 dark:hover:bg-neutral-903'" class="cursor-pointer rounded-md px-4 py-2 duration-300" x-text="item"></div>
+                  </template>
+                </div>
+              </div>
+            </div>
+            <div class="bb-dashed-n30">
+              <p class="l-text font-medium mb-6">Tour Guide</p>
+              <div x-data="{isOpen:false,selected:'', items:['Ben Awad','John Doe','Kane Wiliamson','Linus Torvald','Taylor Otwell']}" class="relative">
+                <div @click="isOpen=!isOpen" class="relative flex cursor-pointer items-center justify-between rounded-full border border-neutral-40 px-6 py-3 dark:border-neutral-500">
+                  <span x-text="selected?selected:'Select Guide'"></span>
+                  <i class="las la-angle-down text-lg duration-300" :class="isOpen?'rotate-180':'rotate-0'"></i>
+                  <span class="absolute -top-2 left-5 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Tour Guide</span>
+                </div>
+                <div x-show="isOpen" @click.away="isOpen=false" class="absolute left-0 top-full z-10 flex max-h-[200px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-0 p-1 shadow-xl dark:bg-neutral-904">
+                  <template x-for="item in items">
+                    <div @click="selected=item, isOpen=false" :class="selected===item?'bg-primary-300  text-neutral-0':'hover:bg-primary-50 dark:hover:bg-neutral-903'" class="cursor-pointer rounded-md px-4 py-2 duration-300" x-text="item"></div>
+                  </template>
+                </div>
+              </div>
+            </div>
+
+            <!-- Employment types -->
+            <div class="mt-6 lg:pt-6 border-t border-dashed border-neutral-30 dark:border-neutral-500">
+              <p class="l-text font-medium mb-6">Services</p>
+              <ul class="flex flex-col gap-3">
+                <li>
+                  <label for="audio" class="option">
+                    <input type="checkbox" id="audio" aria-checked="true" checked />
+                    <span class="checkbox primary"></span>
+                    Audio Guide
+                  </label>
+                </li>
+                <li>
+                  <label for="food" class="option">
+                    <input type="checkbox" id="food" aria-checked="true" />
+                    <span class="checkbox primary"></span>
+                    Food and Drinks
+                  </label>
+                </li>
+                <li>
+                  <label for="lunch" class="option">
+                    <input type="checkbox" id="lunch" aria-checked="true" />
+                    <span class="checkbox primary"></span>
+                    Lunch
+                  </label>
+                </li>
+                <li>
+                  <label for="private_tour" class="option">
+                    <input type="checkbox" id="private_tour" aria-checked="true" />
+                    <span class="checkbox primary"></span>
+                    Private tour
+                  </label>
+                </li>
+                <li>
+                  <label for="negotiable" class="option">
+                    <input type="checkbox" id="negotiable" aria-checked="true" />
+                    <span class="checkbox primary"></span>
+                    Special activities
+                  </label>
+                </li>
+                <li>
+                  <label for="entrance_fees" class="option">
+                    <input type="checkbox" id="entrance_fees" aria-checked="true" />
+                    <span class="checkbox primary"></span>
+                    Entrance fees
+                  </label>
+                </li>
+                <li>
+                  <label for="gratuities" class="option">
+                    <input type="checkbox" id="gratuities" aria-checked="true" />
+                    <span class="checkbox primary"></span>
+                    Gratuities
+                  </label>
+                </li>
+                <li>
+                  <label for="pickup" class="option">
+                    <input type="checkbox" id="pickup" aria-checked="true" />
+                    <span class="checkbox primary"></span>
+                    Pickup and drop-off
+                  </label>
+                </li>
+                <li>
+                  <label for="professional_guide" class="option">
+                    <input type="checkbox" id="professional_guide" aria-checked="true" />
+                    <span class="checkbox primary"></span>
+                    Professional guide
+                  </label>
+                </li>
+                <li>
+                  <label for="transport" class="option">
+                    <input type="checkbox" id="transport" aria-checked="true" />
+                    <span class="checkbox primary"></span>
+                    Transport by air-condition
+                  </label>
+                </li>
+              </ul>
+            </div>
+
+            <!-- reset button -->
+            <div class="mt-6 lg:pt-6 border-t border-dashed border-neutral-30 dark:border-neutral-500">
+              <button class="w-full btn-primary"><i class="las la-redo-alt"></i> Reset Filters</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/tcrs-binding-labels.min.js"></script>
+    <script src="./assets/js/libs/range-slider.js"></script>
+    <script src="./assets/js/libs/swiper-bundle.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+  </body>
+</html>

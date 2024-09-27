@@ -1,0 +1,302 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6">
+        <div class="space-y-4 xxl:space-y-6">
+          <!-- permissions list -->
+          <div
+            x-data="{ permissions: [{ id: 0, checked:false, name: 'Management', assignedTo: ['Administrator'], createdAt: '14 Apr 2024, 8:43 PM' }, { id: 1, checked:false, name: 'Manage Billing & Roles', assignedTo: ['Administrator'], createdAt: '14 Apr 2024, 8:44 PM' }, { id: 2, checked:false, name: 'Add & Remove Users', assignedTo: ['Administrator', 'Manager'], createdAt: '14 Apr 2024, 8:45 PM' }, { id: 3, checked:false, name: 'Project Planning', assignedTo: ['Administrator', 'User', 'Support'], createdAt: '14 Apr 2024, 8:46 PM' }, { id: 4, checked:false, name: 'Manage Email Sequences', assignedTo: ['Administrator', 'User', 'Support'], createdAt: '14 Apr 2024, 8:47 PM' }, { id: 5, checked:false, name: 'Client Communication', assignedTo: ['Administrator', 'Manager'], createdAt: '14 Apr 2024, 8:48 PM' }, { id: 6, checked:false, name: 'Only View', assignedTo: ['Administrator', 'Restricted User'], createdAt: '14 Apr 2024, 8:49 PM' }, { id: 7, checked:false, name: 'Financial Management', assignedTo: ['Administrator', 'Manager'], createdAt: '14 Apr 2024, 8:50 PM' }, { id: 8, checked:false, name: 'Manage Others Tasks', assignedTo: ['Administrator'], createdAt: '14 Apr 2024, 8:51 PM' }], 
+            showMessage(msg = '', type = 'success') {
+                const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+                })
+                toast.fire({
+                icon: type,
+                title: msg,
+                padding: '10px 20px'
+                })
+          },      
+            deleteUser(id){
+                this.permissions= this.permissions.filter((user)=> user.id !== id);
+                this.showMessage('Permisson deleted Successfully')
+            },
+            searchText:'',
+            filteredPermissions:[],
+            searchUser(){  
+                if(this.searchText.trim() === ''){
+                    this.filteredPermissions = this.permissions
+                } else{
+                    this.filteredPermissions = this.permissions.filter((user)=> user.name.toLowerCase().includes(this.searchText.toLowerCase()))                
+                }   
+            },
+            handleSelect(e){
+          const {name,checked} = e.target
+          if(name=='select-all'){
+            this.filteredPermissions= this.filteredPermissions.map(item => ({...item,checked:checked}))
+          }  
+          this.isAllChecked()       
+        },
+        isAllChecked(){
+          return this.filteredPermissions.every(item => item.checked==true) && this.filteredPermissions.length > 0
+        }
+            }"
+            class="white-box"
+            x-init="filteredPermissions=permissions"
+          >
+            <div class="flex flex-wrap gap-3 justify-between items-center bb-dashed-n30">
+              <h4>Permissions List</h4>
+              <div x-data="modal" class="flex flex-wrap items-center gap-4">
+                <form class="max-w-[425px] rounded-full bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 px-3 items-center flex">
+                  <i class="las la-search text-xl"></i>
+                  <input type="text" class="px-4 py-2 w-full bg-transparent" x-model="searchText" @keyup="searchUser()" placeholder="Search..." />
+                </form>
+                <button @click="openModal" class="btn-primary-outlined"><i class="las la-user-plus"></i> Add Permission</button>
+                <template x-teleport="body">
+                  <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                    <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                      <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-3xl overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                        <div class="mb-4 flex items-start justify-between bb-dashed-n30">
+                          <div>
+                            <h4 class="mb-2">Add Permission</h4>
+                            <p class="s-text">Add permission as per your requirements.</p>
+                          </div>
+                          <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                        </div>
+                        <div class="py-3 px-4 lg:px-6 lg:py-4 rounded-xl border border-warning-75 bg-warning-300/10 flex justify-between items-center mb-6">
+                          <div class="flex gap-4 items-start">
+                            <span class="size-8 rounded-md bg-warning-300 f-center text-neutral-900">
+                              <i class="las la-info-circle text-xl"></i>
+                            </span>
+                            <div>
+                              <p class="l-text font-medium mb-2">Warning</p>
+                              <span class="s-text font-medium text-warning-500">Account is waiting for confirmation!</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="relative flex items-center gap-4 rounded-xl border border-neutral-30 px-4 dark:border-neutral-500 lg:px-6 mb-6">
+                          <label for="name" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Name</label>
+                          <input type="text" placeholder="Management" id="name" class="w-full bg-transparent py-3 lg:py-4" />
+                        </div>
+                        <label for="checkbox22" class="option mb-6">
+                          <input type="checkbox" id="checkbox22" aria-checked="false" />
+                          <span class="checkbox default"></span>
+                          Set as core permission
+                        </label>
+
+                        <div class="flex gap-4 xxl:gap-6">
+                          <button class="btn-primary" @click="closeModal">Add</button>
+                          <button class="btn-primary-outlined" @click="closeModal">Cancel</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+                <div class="flex items-center gap-3">
+                  <span>Sort By : </span>
+                  <select name="sort" class="nc-select n20">
+                    <option value="all">All</option>
+                    <option value="new">New</option>
+                    <option value="old">Old</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div x-data="{dense: false}" class="checkboxes-container overflow-x-auto">
+              <table class="w-full whitespace-nowrap">
+                <thead class="text-left">
+                  <tr class="bg-neutral-20 dark:bg-neutral-903">
+                    <th class="px-6 duration-300" :class="dense? 'py-2': 'py-4'">
+                      <label for="checkbox2" class="option">
+                        <input type="checkbox" name="select-all" id="checkbox2" :checked="isAllChecked()" @change="handleSelect($event)" aria-checked="false" />
+                        <span class="checkbox primary"></span>
+                      </label>
+                    </th>
+                    <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Name</th>
+                    <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Assigned To</th>
+                    <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Create Date</th>
+                    <th class="px-6 text-center duration-300" :class="dense? 'py-2': 'py-5'">Action</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <template x-for="{id, name, assignedTo, checked, createdAt} in filteredPermissions">
+                    <tr class="border-b border-neutral-30 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:hover:bg-neutral-903" :class="checked?'!bg-primary-50':'bg-neutral-0 dark:bg-neutral-904'">
+                      <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3 xl:py-5'">
+                        <label :for="id" class="option">
+                          <input type="checkbox" :id="id" :name="id" @change="handleSelect($event)" x-model="checked" aria-checked="false" />
+                          <span class="checkbox primary"></span>
+                        </label>
+                      </td>
+
+                      <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3 xl:py-5'">
+                        <span class="m-text" x-text="name"></span>
+                      </td>
+
+                      <td class="px-6 flex gap-3" :class="dense? 'py-2': 'py-2 lg:py-3 xl:py-5'">
+                        <template x-for="item in assignedTo">
+                          <span
+                            :class="{'text-success-300 bg-success-300/10':item === 'Administrator', 'text-secondary-300 bg-secondary-300/10':item === 'User', 'text-warning-300 bg-warning-300/10':item === 'Manager', 'text-error-300 bg-error-300/10':item === 'Restricted User', 'text-info-300 bg-info-300/10':item === 'Support'}"
+                            class="py-2 px-5 rounded-3xl text-xs border border-neutral-30 dark:border-neutral-500"
+                            x-text="item"
+                          ></span>
+                        </template>
+                      </td>
+
+                      <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3 xl:py-5'">
+                        <span class="m-text" x-text="createdAt"></span>
+                      </td>
+                      <td>
+                        <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                          <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                          <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                            <li>
+                              <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-link text-xl"></i> Copy Link </span>
+                            </li>
+                            <li x-data="modal">
+                              <span @click="openModal" class="flex items-center gap-2 cursor-pointer rounded px-3 py-2 text-sm leading-normal duration-300 hover:bg-primary-300/10 dark:hover:bg-neutral-903"> <i class="las la-pen text-xl"></i> Edit </span>
+                              <template x-teleport="body">
+                                <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                                  <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                                    <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-3xl overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                                      <div class="mb-4 flex items-start justify-between bb-dashed-n30">
+                                        <div>
+                                          <h4 class="mb-2">Edit Permission</h4>
+                                          <p class="s-text">Edit permission as per your requirements.</p>
+                                        </div>
+                                        <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                                      </div>
+                                      <div class="py-3 px-4 lg:px-6 lg:py-4 rounded-xl border border-warning-75 bg-warning-300/10 flex justify-between items-center mb-6">
+                                        <div class="flex gap-4 items-start">
+                                          <span class="size-8 rounded-md bg-warning-300 f-center text-neutral-900">
+                                            <i class="las la-info-circle text-xl"></i>
+                                          </span>
+                                          <div>
+                                            <p class="l-text font-medium mb-2">Warning</p>
+                                            <span class="s-text font-medium text-warning-500">Account is waiting for confirmation!</span>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div class="relative flex items-center gap-4 rounded-xl border border-neutral-30 px-4 dark:border-neutral-500 lg:px-6 mb-6">
+                                        <label for="name2" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Name</label>
+                                        <input value="Management" type="text" placeholder="Management" id="name2" class="w-full bg-transparent py-3 lg:py-4" />
+                                      </div>
+                                      <label for="checkbox24" class="option mb-6">
+                                        <input type="checkbox" id="checkbox24" aria-checked="false" />
+                                        <span class="checkbox default"></span>
+                                        Set as core permission
+                                      </label>
+
+                                      <div class="flex gap-4 xxl:gap-6">
+                                        <button class="btn-primary" @click="closeModal">Update</button>
+                                        <button class="btn-primary-outlined" @click="closeModal">Cancel</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </template>
+                            </li>
+                            <li x-data="modal">
+                              <span @click="openModal" class="flex items-center gap-2 cursor-pointer rounded px-3 py-2 text-sm leading-normal duration-300 hover:bg-primary-300/10 dark:hover:bg-neutral-903"> <i class="las la-trash text-xl"></i> Delete </span>
+                              <template x-teleport="body">
+                                <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                                  <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                                    <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 max-w-lg w-[90%] overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                                      <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                                        <h4>Delete</h4>
+                                        <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                                      </div>
+                                      <div class="p-5 text-center">
+                                        <div class="mx-auto w-fit rounded-full bg-error-300/20 p-4 text-error-300 ring-2 ring-error-300/50">
+                                          <i class="las la-trash text-5xl"></i>
+                                        </div>
+                                        <div class="mx-auto mt-5 text-base sm:w-3/4">Are you sure you want to delete Permission?</div>
+
+                                        <div class="mt-8 f-center">
+                                          <button type="button" class="btn-error-outlined xl:py-2 xl:px-5" @click="closeModal() = false">Cancel</button>
+                                          <button type="button" class="btn-primary ltr:ml-4 rtl:mr-4 xl:py-2 xl:px-5" @click="deleteUser(id), closeModal()">Delete</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </template>
+                            </li>
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+              <div class="mt-6 flex items-center gap-5 justify-center flex-col md:flex-row md:justify-between whitespace-nowrap">
+                <label for="switch" class="switch flex">
+                  <input x-model="dense" id="switch" type="checkbox" />
+                  <span class="inner primary"></span>
+                  Dense
+                </label>
+                <div class="flex flex-col sm:flex-row justify-center sm:justify-between gap-5">
+                  <div class="flex gap-4 items-center">
+                    <p>Rows per page :</p>
+                    <select name="rows" id="rows" class="bg-transparent dark:bg-neutral-904">
+                      <option value="10">10</option>
+                      <option value="25">25</option>
+                      <option value="50">50</option>
+                      <option value="100">100</option>
+                    </select>
+                  </div>
+                  <div class="f-center gap-4">
+                    <p>1-10 of 100</p>
+                    <button><i class="las la-angle-left text-xl rtl:rotate-180"></i></button> <button><i class="las la-angle-right text-xl rtl:rotate-180"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/sweetalert.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+  </body>
+</html>

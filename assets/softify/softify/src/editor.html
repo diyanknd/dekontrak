@@ -1,0 +1,150 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/quill.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Editor</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Plugins</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Editor</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Editor -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div class="flex flex-col gap-4 lg:gap-6">
+            <div class="white-box">
+              <h5 class="bb-dashed-n30">Editor Simple</h5>
+              <div id="toolbar-one" class="flex flex-wrap gap-3 justify-between rounded-t-2xl !border-neutral-30 bg-neutral-20 dark:!border-neutral-500 dark:bg-neutral-903">
+                <span class="ql-formats">
+                  <select class="ql-header">
+                    <option value="1">Heading</option>
+                    <option value="2">Subheading</option>
+                    <option selected>Normal</option>
+                  </select>
+                </span>
+                <div class="flex grow justify-end">
+                  <span class="ql-formats">
+                    <button class="ql-bold"></button>
+                    <button class="ql-italic"></button>
+                    <button class="ql-underline"></button>
+                  </span>
+                  <span class="ql-formats">
+                    <button class="ql-list" value="ordered"></button>
+                    <button class="ql-list" value="bullet"></button>
+                  </span>
+                  <span class="ql-formats">
+                    <button class="ql-clean"></button>
+                  </span>
+                </div>
+              </div>
+              <div id="editor-one" class="rounded-b-2xl !border-neutral-30 dark:!border-neutral-500">
+                <p>Hello World!</p>
+                <p>Some initial <strong>bold</strong> text</p>
+                <p><br /></p>
+              </div>
+            </div>
+            <div class="white-box">
+              <h5 class="bb-dashed-n30">Editor Full</h5>
+              <div id="toolbar-two" class="flex flex-wrap gap-3 justify-between rounded-t-2xl !border-neutral-30 bg-neutral-20 dark:!border-neutral-500 dark:bg-neutral-903">
+                <span class="ql-formats">
+                  <select class="ql-header">
+                    <option value="1">Heading</option>
+                    <option value="2">Subheading</option>
+                    <option selected>Normal</option>
+                  </select>
+                  <select class="ql-font">
+                    <option selected>Sans Serif</option>
+                    <option value="serif">Serif</option>
+                    <option value="monospace">Monospace</option>
+                  </select>
+                </span>
+
+                <div class="flex grow flex-wrap justify-end">
+                  <span class="ql-formats !flex">
+                    <button class="ql-bold"></button>
+                    <button class="ql-italic"></button>
+                    <button class="ql-underline"></button>
+                    <button class="ql-strike"></button>
+                  </span>
+                  <span class="ql-formats !flex">
+                    <select class="ql-color"></select>
+                    <select class="ql-background"></select>
+                  </span>
+                  <span class="ql-formats !flex">
+                    <button class="ql-list" value="ordered"></button>
+                    <button class="ql-list" value="bullet"></button>
+                    <select class="ql-align">
+                      <option selected></option>
+                      <option value="center"></option>
+                      <option value="right"></option>
+                      <option value="justify"></option>
+                    </select>
+                  </span>
+                  <span class="ql-formats !flex">
+                    <button class="ql-blockquote"></button>
+                    <button class="ql-link"></button>
+                    <button class="ql-image"></button>
+                    <button class="ql-code-block"></button>
+                    <button class="ql-video"></button>
+                  </span>
+                  <span class="ql-formats">
+                    <button class="ql-clean"></button>
+                  </span>
+                </div>
+              </div>
+              <div id="editor-two" class="rounded-b-2xl !border-neutral-30 dark:!border-neutral-500">
+                <p>Hello World!</p>
+                <p>Some initial <strong>bold</strong> text</p>
+                <p><br /></p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <script src="./assets/js/libs/quill.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

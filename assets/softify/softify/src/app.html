@@ -1,0 +1,920 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/swiper.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903 relative">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6">
+        <div x-data="chart" class="grid grid-cols-12 gap-4 xxl:gap-6">
+          <!-- statistics -->
+          <div class="col-span-12 grid grid-cols-12 gap-4 xxl:gap-6">
+            <div class="col-span-12 sm:col-span-6 xxxl:col-span-4">
+              <div class="white-box">
+                <p class="m-text mb-4 pb-4 border-b border-dashed border-primary-75 font-medium">Total Active Users</p>
+                <div class="flex justify-between gap-1">
+                  <div>
+                    <h4 class="mb-3">2.5k</h4>
+                    <div class="flex items-center gap-3">
+                      <div class="flex items-center gap-2">
+                        <span class="f-center size-6 rounded-full bg-primary-50 dark:bg-neutral-903 text-primary-300"><i class="las la-arrow-up"></i></span><span class="m-text font-medium">+2.6%</span>
+                      </div>
+                      <p class="max-md:hidden">than last week</p>
+                    </div>
+                  </div>
+                  <div class="product-chart"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12 sm:col-span-6 xxxl:col-span-4">
+              <div class="white-box">
+                <p class="m-text mb-4 pb-4 border-b border-dashed border-primary-75 font-medium">Total Installed</p>
+                <div class="flex justify-between gap-1">
+                  <div>
+                    <h4 class="mb-3">2.5k</h4>
+                    <div class="flex items-center gap-3">
+                      <div class="flex items-center gap-2">
+                        <span class="f-center size-6 rounded-full bg-primary-50 dark:bg-neutral-903 text-primary-300"><i class="las la-arrow-up"></i></span><span class="m-text font-medium">+2.6%</span>
+                      </div>
+                      <p class="max-md:hidden">than last week</p>
+                    </div>
+                  </div>
+                  <div class="product-chart"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12 sm:col-span-6 xxxl:col-span-4">
+              <div class="white-box">
+                <p class="m-text mb-4 pb-4 border-b border-dashed border-primary-75 font-medium">Total Downloads</p>
+                <div class="flex justify-between gap-1">
+                  <div>
+                    <h4 class="mb-3">2.5k</h4>
+                    <div class="flex items-center gap-3">
+                      <div class="flex items-center gap-2">
+                        <span class="f-center size-6 rounded-full bg-primary-50 dark:bg-neutral-903 text-primary-300"><i class="las la-arrow-up"></i></span><span class="m-text font-medium">+2.6%</span>
+                      </div>
+                      <p class="max-md:hidden">than last week</p>
+                    </div>
+                  </div>
+                  <div class="product-chart"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Yearly Sales -->
+          <div class="col-span-12 lg:col-span-7 xxl:col-span-8 white-box overflow-hidden">
+            <div class="bb-dashed-n30 flex flex-col sm:flex-row justify-center sm:justify-between gap-4 items-center">
+              <div>
+                <h4>Area Installed</h4>
+                <p class="m-text mt-2">(+43%) than last year</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <span>Sort By : </span>
+                <select name="sort" class="nc-select n20">
+                  <option value="day">Last 15 Days</option>
+                  <option value="week">Last 1 Month</option>
+                  <option value="year">Last 6 Month</option>
+                </select>
+              </div>
+            </div>
+            <div x-ref="yearlySale"></div>
+          </div>
+          <!-- sale by person -->
+          <div class="col-span-12 lg:col-span-5 xxl:col-span-4 white-box overflow-hidden">
+            <h4 class="bb-dashed-n30">Current Download</h4>
+            <div class="pie-chart" x-ref="donutChart"></div>
+          </div>
+
+          <!-- New Invoices -->
+          <div class="col-span-12 lg:col-span-7 xxl:col-span-8">
+            <div class="white-box">
+              <div class="bb-dashed-n30 flex sm:justify-between gap-4 flex-col sm:flex-row justify-center items-center">
+                <h4>New Invoice</h4>
+                <div class="flex items-center gap-3">
+                  <span>Sort By : </span>
+                  <select name="sort" class="nc-select n20">
+                    <option value="day">Last 15 Days</option>
+                    <option value="week">Last 1 Month</option>
+                    <option value="year">Last 6 Month</option>
+                  </select>
+                </div>
+              </div>
+              <div x-data="{dense: false}" class="checkboxes-container overflow-x-auto">
+                <table class="w-full whitespace-nowrap">
+                  <thead class="text-left">
+                    <tr class="bg-neutral-20 dark:bg-neutral-903">
+                      <th class="px-6 duration-300" :class="dense? 'py-2': 'py-3 lg:py-5'">Invoice ID</th>
+                      <th class="px-6 duration-300" :class="dense? 'py-2': 'py-3 lg:py-5'">Category</th>
+                      <th class="px-6 duration-300" :class="dense? 'py-2': 'py-3 lg:py-5'">Price</th>
+                      <th class="px-6 duration-300" :class="dense? 'py-2': 'py-3 lg:py-5'">Status</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <span>#105986</span>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">Mac</td>
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <span>$2,000</span>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <span class="py-2 px-5 rounded-3xl text-xs text-primary-300 bg-primary-50 border border-neutral-30 dark:border-neutral-500">Paid</span>
+                      </td>
+                      <td>
+                        <include-verti-option />
+                      </td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <span>#105986</span>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">Mac</td>
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <span>$2,000</span>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <span class="py-2 px-5 rounded-3xl text-xs text-error-300 bg-error-50 border border-neutral-30 dark:bg-neutral-903 dark:border-neutral-500">Out of Stock</span>
+                      </td>
+                      <td>
+                        <include-verti-option />
+                      </td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <span>#105986</span>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">Windows</td>
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <span>$2,000</span>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <span class="py-2 px-5 rounded-3xl text-xs text-warning-300 bg-warning-50 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500">In Progress</span>
+                      </td>
+                      <td>
+                        <include-verti-option />
+                      </td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <span>#105986</span>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">Windows</td>
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <span>$2,000</span>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <span class="py-2 px-5 rounded-3xl text-xs text-error-300 bg-error-50 border border-neutral-30 dark:bg-neutral-903 dark:border-neutral-500">Out of Stock</span>
+                      </td>
+                      <td>
+                        <div class="flex justify-center min-w-16">
+                          <include-verti-option />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <span>#105986</span>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">Mac</td>
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <span>$2,000</span>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <span class="py-2 px-5 rounded-3xl text-xs text-error-300 bg-error-50 border border-neutral-30 dark:bg-neutral-903 dark:border-neutral-500">Out of Stock</span>
+                      </td>
+                      <td>
+                        <include-verti-option />
+                      </td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <span>#105986</span>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">Linux</td>
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <span>$2,000</span>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <span class="py-2 px-5 rounded-3xl text-xs text-primary-300 bg-primary-50 border border-neutral-30 dark:border-neutral-500">Paid</span>
+                      </td>
+                      <td>
+                        <include-verti-option />
+                      </td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <span>#105986</span>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">Android</td>
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <span>$2,000</span>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-2': 'py-3 lg:py-5'">
+                        <span class="py-2 px-5 rounded-3xl text-xs text-primary-300 bg-primary-50 border border-neutral-30 dark:border-neutral-500">Paid</span>
+                      </td>
+                      <td>
+                        <include-verti-option />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="mt-6 flex items-center gap-5 justify-center flex-col md:flex-row md:justify-between whitespace-nowrap">
+                  <label for="switch" class="switch flex">
+                    <input x-model="dense" id="switch" type="checkbox" />
+                    <span class="inner primary"></span>
+                    Dense
+                  </label>
+                  <div class="flex flex-col sm:flex-row justify-center sm:justify-between gap-5">
+                    <div class="flex items-center gap-4">
+                      <p>Rows per page :</p>
+                      <select name="rows" id="rows" class="bg-transparent dark:bg-neutral-904">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                      </select>
+                    </div>
+                    <div class="f-center gap-4">
+                      <p>1-10 of 100</p>
+                      <button><i class="las la-angle-left text-xl rtl:rotate-180"></i></button> <button><i class="las la-angle-right text-xl rtl:rotate-180"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top rated applications -->
+          <div class="col-span-12 lg:col-span-5 xxl:col-span-4 white-box">
+            <h4 class="bb-dashed-n30">Top Rated Applications</h4>
+            <div class="flex flex-col gap-6 xxl:gap-8">
+              <div class="flex justify-between items-center">
+                <div class="flex gap-4 xxl:gap-6 items-center">
+                  <span class="size-14 rounded-lg border border-neutral-40 bg-neutral-20 dark:bg-neutral-903 dark:border-neutral-500 f-center"><i class="lab la-behance text-4xl text-primary-300"></i></span>
+                  <div class="flex flex-col gap-2">
+                    <p class="l-text font-medium">Behance</p>
+                    <p class="flex items-center gap-1">
+                      <i class="lab la-windows"></i>
+                      <span class="s-text">Windows</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="flex flex-col items-end gap-2">
+                  <span class="inline-flex py-1 px-4 rounded-lg bg-primary-50 text-primary-300 s-text font-medium border border-neutral-30 dark:border-neutral-500">Free</span>
+                  <p class="flex items-center gap-1">
+                    <i class="las la-star text-warning-300 text-xl"></i>
+                    <span class="font-medium">4.7 <span class="text-neutral-100 font-normal">(1.95k)</span></span>
+                  </p>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex gap-4 xxl:gap-6 items-center">
+                  <span class="size-14 rounded-lg border border-neutral-40 bg-neutral-20 dark:bg-neutral-903 dark:border-neutral-500 f-center"><i class="lab la-github text-4xl text-primary-300"></i></span>
+                  <div class="flex flex-col gap-2">
+                    <p class="l-text font-medium">Github</p>
+                    <p class="flex items-center gap-1">
+                      <i class="lab la-mac"></i>
+                      <span class="s-text">Mac</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="flex flex-col items-end gap-2">
+                  <span class="inline-flex py-1 px-4 rounded-lg bg-secondary-50 dark:bg-neutral-903 text-secondary-300 s-text font-medium border border-neutral-30 dark:border-neutral-500">$44.65</span>
+                  <p class="flex items-center gap-1">
+                    <i class="las la-star text-warning-300 text-xl"></i>
+                    <span class="font-medium">4.7 <span class="text-neutral-100 font-normal">(1.95k)</span></span>
+                  </p>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex gap-4 xxl:gap-6 items-center">
+                  <span class="size-14 rounded-lg border border-neutral-40 bg-neutral-20 dark:bg-neutral-903 dark:border-neutral-500 f-center"><i class="lab la-evernote text-4xl text-primary-300"></i></span>
+                  <div class="flex flex-col gap-2">
+                    <p class="l-text font-medium">Evernote</p>
+                    <p class="flex items-center gap-1">
+                      <i class="lab la-windows"></i>
+                      <span class="s-text">Windows</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="flex flex-col items-end gap-2">
+                  <span class="inline-flex py-1 px-4 rounded-lg bg-primary-50 text-primary-300 s-text font-medium border border-neutral-30 dark:border-neutral-500">Free</span>
+                  <p class="flex items-center gap-1">
+                    <i class="las la-star text-warning-300 text-xl"></i>
+                    <span class="font-medium">4.7 <span class="text-neutral-100 font-normal">(1.95k)</span></span>
+                  </p>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex gap-4 xxl:gap-6 items-center">
+                  <span class="size-14 rounded-lg border border-neutral-40 bg-neutral-20 dark:bg-neutral-903 dark:border-neutral-500 f-center"><i class="lab la-google-drive text-4xl text-primary-300"></i></span>
+                  <div class="flex flex-col gap-2">
+                    <p class="l-text font-medium">Drive</p>
+                    <p class="flex items-center gap-1">
+                      <i class="lab la-mac"></i>
+                      <span class="s-text">Mac</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="flex flex-col items-end gap-2">
+                  <span class="inline-flex py-1 px-4 rounded-lg bg-secondary-50 dark:bg-neutral-903 text-secondary-300 s-text font-medium border border-neutral-30 dark:border-neutral-500">$44.65</span>
+                  <p class="flex items-center gap-1">
+                    <i class="las la-star text-warning-300 text-xl"></i>
+                    <span class="font-medium">4.7 <span class="text-neutral-100 font-normal">(1.95k)</span></span>
+                  </p>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex gap-4 xxl:gap-6 items-center">
+                  <span class="size-14 rounded-lg border border-neutral-40 bg-neutral-20 dark:bg-neutral-903 dark:border-neutral-500 f-center"><i class="lab la-chrome text-4xl text-primary-300"></i></span>
+                  <div class="flex flex-col gap-2">
+                    <p class="l-text font-medium">Chrome</p>
+                    <p class="flex items-center gap-1">
+                      <i class="lab la-mac"></i>
+                      <span class="s-text">Mac</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="flex flex-col items-end gap-2">
+                  <span class="inline-flex py-1 px-4 rounded-lg bg-secondary-50 dark:bg-neutral-903 text-secondary-300 s-text font-medium border border-neutral-30 dark:border-neutral-500">$44.65</span>
+                  <p class="flex items-center gap-1">
+                    <i class="las la-star text-warning-300 text-xl"></i>
+                    <span class="font-medium">4.7 <span class="text-neutral-100 font-normal">(1.95k)</span></span>
+                  </p>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex gap-4 xxl:gap-6 items-center">
+                  <span class="size-14 rounded-lg border border-neutral-40 bg-neutral-20 dark:bg-neutral-903 dark:border-neutral-500 f-center"><i class="lab la-dropbox text-4xl text-primary-300"></i></span>
+                  <div class="flex flex-col gap-2">
+                    <p class="l-text font-medium">Dropbox</p>
+                    <p class="flex items-center gap-1">
+                      <i class="lab la-windows"></i>
+                      <span class="s-text">Windows</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="flex flex-col items-end gap-2">
+                  <span class="inline-flex py-1 px-4 rounded-lg bg-primary-50 text-primary-300 s-text font-medium border border-neutral-30 dark:border-neutral-500">Free</span>
+                  <p class="flex items-center gap-1">
+                    <i class="las la-star text-warning-300 text-xl"></i>
+                    <span class="font-medium">4.7 <span class="text-neutral-100 font-normal">(1.95k)</span></span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- top installed countries -->
+          <div class="col-span-12 lg:col-span-7 xxl:col-span-8 white-box">
+            <h4 class="bb-dashed-n30">Top Installed Countries</h4>
+            <div class="checkboxes-container overflow-x-auto">
+              <table class="w-full whitespace-nowrap">
+                <tbody>
+                  <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <img src="./assets/images/flag/flag-sm-1.png" class="rounded-full" alt="" />
+                        <span>France</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <span class="size-8 bg-neutral-20 dark:bg-neutral-903 rounded-lg border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="lab la-android text-2xl"></i>
+                        </span>
+                        <span class="m-text font-medium">6.98k</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <span class="size-8 bg-neutral-20 dark:bg-neutral-903 rounded-lg border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="lab la-apple text-2xl"></i>
+                        </span>
+                        <span class="m-text font-medium">1.98k</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <span class="size-8 bg-neutral-20 dark:bg-neutral-903 rounded-lg border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="lab la-windows text-2xl"></i>
+                        </span>
+                        <span class="m-text font-medium">4.98k</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <img src="./assets/images/flag/flag-sm-2.png" class="rounded-full" alt="" />
+                        <span>Argentina</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <span class="size-8 bg-neutral-20 dark:bg-neutral-903 rounded-lg border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="lab la-android text-2xl"></i>
+                        </span>
+                        <span class="m-text font-medium">6.98k</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <span class="size-8 bg-neutral-20 dark:bg-neutral-903 rounded-lg border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="lab la-apple text-2xl"></i>
+                        </span>
+                        <span class="m-text font-medium">1.98k</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <span class="size-8 bg-neutral-20 dark:bg-neutral-903 rounded-lg border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="lab la-windows text-2xl"></i>
+                        </span>
+                        <span class="m-text font-medium">4.98k</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <img src="./assets/images/flag/flag-sm-3.png" class="rounded-full" alt="" />
+                        <span>China</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <span class="size-8 bg-neutral-20 dark:bg-neutral-903 rounded-lg border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="lab la-android text-2xl"></i>
+                        </span>
+                        <span class="m-text font-medium">6.98k</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <span class="size-8 bg-neutral-20 dark:bg-neutral-903 rounded-lg border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="lab la-apple text-2xl"></i>
+                        </span>
+                        <span class="m-text font-medium">1.98k</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <span class="size-8 bg-neutral-20 dark:bg-neutral-903 rounded-lg border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="lab la-windows text-2xl"></i>
+                        </span>
+                        <span class="m-text font-medium">4.98k</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <img src="./assets/images/flag/flag-sm-4.png" class="rounded-full" alt="" />
+                        <span>USA</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <span class="size-8 bg-neutral-20 dark:bg-neutral-903 rounded-lg border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="lab la-android text-2xl"></i>
+                        </span>
+                        <span class="m-text font-medium">6.98k</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <span class="size-8 bg-neutral-20 dark:bg-neutral-903 rounded-lg border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="lab la-apple text-2xl"></i>
+                        </span>
+                        <span class="m-text font-medium">1.98k</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <span class="size-8 bg-neutral-20 dark:bg-neutral-903 rounded-lg border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="lab la-windows text-2xl"></i>
+                        </span>
+                        <span class="m-text font-medium">4.98k</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <img src="./assets/images/flag/flag-sm-5.png" class="rounded-full" alt="" />
+                        <span>Bangladesh</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <span class="size-8 bg-neutral-20 dark:bg-neutral-903 rounded-lg border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="lab la-android text-2xl"></i>
+                        </span>
+                        <span class="m-text font-medium">6.98k</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <span class="size-8 bg-neutral-20 dark:bg-neutral-903 rounded-lg border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="lab la-apple text-2xl"></i>
+                        </span>
+                        <span class="m-text font-medium">1.98k</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <span class="size-8 bg-neutral-20 dark:bg-neutral-903 rounded-lg border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="lab la-windows text-2xl"></i>
+                        </span>
+                        <span class="m-text font-medium">4.98k</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <img src="./assets/images/flag/flag-sm-6.png" class="rounded-full" alt="" />
+                        <span>United Kingdom</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <span class="size-8 bg-neutral-20 dark:bg-neutral-903 rounded-lg border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="lab la-android text-2xl"></i>
+                        </span>
+                        <span class="m-text font-medium">6.98k</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <span class="size-8 bg-neutral-20 dark:bg-neutral-903 rounded-lg border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="lab la-apple text-2xl"></i>
+                        </span>
+                        <span class="m-text font-medium">1.98k</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <span class="size-8 bg-neutral-20 dark:bg-neutral-903 rounded-lg border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="lab la-windows text-2xl"></i>
+                        </span>
+                        <span class="m-text font-medium">4.98k</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <img src="./assets/images/flag/flag-sm-3.png" class="rounded-full" alt="" />
+                        <span>China</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <span class="size-8 bg-neutral-20 dark:bg-neutral-903 rounded-lg border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="lab la-android text-2xl"></i>
+                        </span>
+                        <span class="m-text font-medium">6.98k</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <span class="size-8 bg-neutral-20 dark:bg-neutral-903 rounded-lg border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="lab la-apple text-2xl"></i>
+                        </span>
+                        <span class="m-text font-medium">1.98k</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 lg:py-5'">
+                      <div class="flex items-center gap-2">
+                        <span class="size-8 bg-neutral-20 dark:bg-neutral-903 rounded-lg border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="lab la-windows text-2xl"></i>
+                        </span>
+                        <span class="m-text font-medium">4.98k</span>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="flex flex-col sm:flex-row justify-center sm:justify-between gap-5 mt-6">
+                <div class="flex gap-4 items-center justify-center">
+                  <p>Rows per page :</p>
+                  <select name="rows2" id="rows2" class="bg-transparent">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                </div>
+                <div class="f-center gap-4">
+                  <p>1-10 of 100</p>
+                  <button><i class="las la-angle-left text-xl rtl:rotate-180"></i></button> <button><i class="las la-angle-right text-xl rtl:rotate-180"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top rated applications -->
+          <div class="col-span-12 lg:col-span-5 xxl:col-span-4 white-box">
+            <h4 class="bb-dashed-n30">Top Authors</h4>
+            <div class="flex flex-col gap-6 xxl:gap-7">
+              <div class="flex justify-between items-center">
+                <div class="flex gap-4 xxl:gap-6 items-center">
+                  <img src="./assets/images/users/user-s-1.png" class="rounded-full size-10 xxl:size-14" alt="" />
+                  <div class="flex flex-col gap-1">
+                    <p class="l-text font-medium">Wade Warren</p>
+                    <p class="flex items-center gap-1">
+                      <i class="las la-heart text-xl"></i>
+                      <span class="s-text">5.6k</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="relative">
+                  <span class="size-9 lg:size-14 rounded-full border border-neutral-40 bg-neutral-20 dark:bg-neutral-903 dark:border-neutral-500 f-center"><i class="las la-trophy text-2xl lg:text-4xl text-primary-300"></i></span>
+                  <span class="size-5 rounded-full f-center text-neutral-0 absolute text-xs -top-1 -right-1 bg-primary-300">1</span>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex gap-4 xxl:gap-6 items-center">
+                  <img src="./assets/images/users/user-s-2.png" class="rounded-full size-10 xxl:size-14" alt="" />
+                  <div class="flex flex-col gap-1">
+                    <p class="l-text font-medium">Kristin Walter</p>
+                    <p class="flex items-center gap-1">
+                      <i class="las la-heart text-xl"></i>
+                      <span class="s-text">5.6k</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="relative">
+                  <span class="size-9 lg:size-14 rounded-full border border-neutral-40 bg-neutral-20 dark:bg-neutral-903 dark:border-neutral-500 f-center"><i class="las la-trophy text-2xl lg:text-4xl text-secondary-300"></i></span>
+                  <span class="size-5 rounded-full f-center text-neutral-0 absolute text-xs -top-1 -right-1 bg-secondary-300">1</span>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex gap-4 xxl:gap-6 items-center">
+                  <img src="./assets/images/users/user-s-3.png" class="rounded-full size-10 xxl:size-14" alt="" />
+                  <div class="flex flex-col gap-1">
+                    <p class="l-text font-medium">Guy Hawkins</p>
+                    <p class="flex items-center gap-1">
+                      <i class="las la-heart text-xl"></i>
+                      <span class="s-text">5.6k</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="relative">
+                  <span class="size-9 lg:size-14 rounded-full border border-neutral-40 bg-neutral-20 dark:bg-neutral-903 dark:border-neutral-500 f-center"><i class="las la-trophy text-2xl lg:text-4xl text-info-300"></i></span>
+                  <span class="size-5 rounded-full f-center text-neutral-0 absolute text-xs -top-1 -right-1 bg-info-300">1</span>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex gap-4 xxl:gap-6 items-center">
+                  <img src="./assets/images/users/user-s-5.png" class="rounded-full size-10 xxl:size-14" alt="" />
+                  <div class="flex flex-col gap-1">
+                    <p class="l-text font-medium">Ralph Edwards</p>
+                    <p class="flex items-center gap-1">
+                      <i class="las la-heart text-xl"></i>
+                      <span class="s-text">5.6k</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="relative">
+                  <span class="size-9 lg:size-14 rounded-full border border-neutral-40 bg-neutral-20 dark:bg-neutral-903 dark:border-neutral-500 f-center"><i class="las la-trophy text-2xl lg:text-4xl text-warning-300"></i></span>
+                  <span class="size-5 rounded-full f-center text-neutral-0 absolute text-xs -top-1 -right-1 bg-warning-300">1</span>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex gap-4 xxl:gap-6 items-center">
+                  <img src="./assets/images/users/user-s-6.png" class="rounded-full size-10 xxl:size-14" alt="" />
+                  <div class="flex flex-col gap-1">
+                    <p class="l-text font-medium">Cody Fisher</p>
+                    <p class="flex items-center gap-1">
+                      <i class="las la-heart text-xl"></i>
+                      <span class="s-text">5.6k</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="relative">
+                  <span class="size-9 lg:size-14 rounded-full border border-neutral-40 bg-neutral-20 dark:bg-neutral-903 dark:border-neutral-500 f-center"><i class="las la-trophy text-2xl lg:text-4xl text-error-300"></i></span>
+                  <span class="size-5 rounded-full f-center text-neutral-0 absolute text-xs -top-1 -right-1 bg-error-300">1</span>
+                </div>
+              </div>
+            </div>
+            <a href="#" class="text-primary-300 h6 flex items-center gap-2 mt-3">See All <i class="las la-arrow-right text-lg"></i></a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/apexcharts.min.js"></script>
+    <script src="./assets/js/libs/swiper-bundle.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+    <script src="./assets/js/charts.js"></script>
+
+    <script>
+      document.addEventListener('alpine:init', () => {
+        Alpine.data('chart', () => ({
+          yearlySale: null,
+          donutChart: null,
+          init() {
+            isDark = this.$store.app.theme === 'dark' ? true : false
+            isRtl = this.$store.app.dir === 'rtl' ? true : false
+
+            setTimeout(() => {
+              this.yearlySale = new ApexCharts(this.$refs.yearlySale, this.yearlySalesOptions)
+              this.yearlySale.render()
+
+              this.donutChart = new ApexCharts(this.$refs.donutChart, this.donutChartOptions)
+              this.donutChart.render()
+            }, 300)
+
+            this.$watch('$store.app.theme', () => {
+              this.refreshOptions()
+            })
+
+            this.$watch('$store.app.rtlClass', () => {
+              this.refreshOptions()
+            })
+          },
+
+          refreshOptions() {
+            isDark = this.$store.app.theme === 'dark' ? true : false
+            isRtl = this.$store.app.dir === 'rtl' ? true : false
+            this.yearlySale.updateOptions(this.yearlySalesOptions)
+            this.donutChart.updateOptions(this.donutChartOptions)
+          },
+
+          get yearlySalesOptions() {
+            return {
+              series: [
+                {
+                  name: 'Asia',
+                  type: 'line',
+                  data: [20, 38, 38, 73, 55, 63, 44, 75, 53, 80, 40, 80]
+                },
+                {
+                  name: 'America',
+                  type: 'line',
+                  data: [85, 66, 76, 38, 86, 35, 62, 40, 40, 64, 50, 87]
+                }
+              ],
+              chart: {
+                height: 300,
+                type: 'line',
+                toolbar: {
+                  show: false
+                }
+              },
+              legend: {
+                show: true,
+                offsetY: 10,
+                markers: {
+                  width: 6,
+                  height: 6
+                }
+              },
+              colors: ['#63CC8A', '#FFC861'],
+              stroke: {
+                width: [3, 3],
+                curve: 'smooth',
+                lineCap: 'round',
+                dashArray: [0, 5]
+              },
+              xaxis: {
+                type: 'category',
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                tickAmount: 12,
+                labels: {},
+                axisTicks: {
+                  show: false
+                },
+                axisBorder: {
+                  show: false
+                }
+              },
+              yaxis: {
+                min: 0,
+                max: 100,
+                tickAmount: 5,
+                labels: {
+                  offsetX: -17
+                }
+              },
+              fill: {
+                opacity: 1
+              },
+              grid: {
+                padding: {
+                  left: -10,
+                  bottom: 10
+                },
+                show: true,
+                xaxis: {
+                  lines: {
+                    show: true
+                  }
+                }
+              },
+              responsive: [
+                {
+                  breakpoint: 768,
+                  options: {
+                    chart: {
+                      height: 300
+                    }
+                  }
+                },
+                {
+                  breakpoint: 570,
+                  options: {
+                    chart: {
+                      height: 240
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          get donutChartOptions() {
+            return {
+              series: [44, 55, 41, 17, 15],
+              chart: {
+                type: 'donut',
+                height: 350
+              },
+              colors: ['#2C7BE5', '#FFAB00', '#FF5630', '#8E33FF', '#00B8D9'],
+              fill: {
+                colors: ['#2C7BE5', '#FFAB00', '#FF5630', '#8E33FF', '#00B8D9']
+              },
+              plotOptions: {
+                pie: {
+                  donut: {
+                    labels: {
+                      show: true,
+                      value: {
+                        fontSize: '16px',
+                        offsetY: 2
+                      }
+                    }
+                  }
+                }
+              },
+              legend: {
+                position: window.innerWidth > 1400 ? 'right' : 'bottom',
+                itemMargin: {
+                  vertical: window.innerWidth > 1500 ? 4 : 2
+                },
+                horizontalAlign: 'center',
+                markers: {
+                  width: 6,
+                  height: 6,
+                  offsetX: isRtl ? 4 : -4
+                },
+                offsetX: 0
+              },
+              labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+              dataLabels: {
+                style: {
+                  fontSize: '10px',
+                  fontWeight: 400
+                }
+              }
+            }
+          }
+        }))
+      })
+    </script>
+  </body>
+</html>

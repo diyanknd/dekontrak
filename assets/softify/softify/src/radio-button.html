@@ -1,0 +1,299 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="./assets/css/github.min.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Radio Button</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Forms</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Radio Button</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Radio Button  -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div class="space-y-4 xl:space-y-6">
+            <!-- Color Variants -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h4 class="bb-dashed-n40">Colors</h4>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+              <!-- Preview -->
+              <div x-show="!viewcode" class="relative">
+                <div class="flex flex-wrap gap-6">
+                  <div class="custom-radio">
+                    <input type="radio" id="default" name="color" />
+                    <label for="default">Default</label>
+                  </div>
+                  <div class="custom-radio">
+                    <input type="radio" id="primary" name="color" />
+                    <label for="primary" class="primary">Primary</label>
+                  </div>
+                  <!-- secondary -->
+                  <div class="custom-radio">
+                    <input type="radio" id="secondary" name="color" />
+                    <label for="secondary" class="secondary">Secondary</label>
+                  </div>
+                  <div class="custom-radio">
+                    <input type="radio" id="info" name="color" />
+                    <label for="info" class="info">Info</label>
+                  </div>
+                  <div class="custom-radio">
+                    <input type="radio" id="success" name="color" />
+                    <label for="success" class="success">Success</label>
+                  </div>
+                  <div class="custom-radio">
+                    <input type="radio" id="error" name="color" />
+                    <label for="error" class="error">Error</label>
+                  </div>
+                  <div class="custom-radio">
+                    <input type="radio" id="disabled" name="color" disabled />
+                    <label for="disabled" class="disabled">Disabled</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;relative flex justify-center gap-4&#x22;&#x3E;
+  &#x3C;div class=&#x22;flex flex-col gap-6&#x22;&#x3E;
+    &#x3C;div class=&#x22;custom-radio&#x22;&#x3E;
+      &#x3C;input type=&#x22;radio&#x22; id=&#x22;default&#x22; name=&#x22;color&#x22; /&#x3E;
+      &#x3C;label for=&#x22;default&#x22;&#x3E;Default&#x3C;/label&#x3E;
+    &#x3C;/div&#x3E;
+    &#x3C;div class=&#x22;custom-radio&#x22;&#x3E;
+      &#x3C;input type=&#x22;radio&#x22; id=&#x22;primary&#x22; name=&#x22;color&#x22; /&#x3E;
+      &#x3C;label for=&#x22;primary&#x22; class=&#x22;primary&#x22;&#x3E;Primary&#x3C;/label&#x3E;
+    &#x3C;/div&#x3E;
+    &#x3C;!-- secondary --&#x3E;
+    &#x3C;div class=&#x22;custom-radio&#x22;&#x3E;
+      &#x3C;input type=&#x22;radio&#x22; id=&#x22;secondary&#x22; name=&#x22;color&#x22; /&#x3E;
+      &#x3C;label for=&#x22;secondary&#x22; class=&#x22;secondary&#x22;&#x3E;Secondary&#x3C;/label&#x3E;
+    &#x3C;/div&#x3E;
+    &#x3C;div class=&#x22;custom-radio&#x22;&#x3E;
+      &#x3C;input type=&#x22;radio&#x22; id=&#x22;info&#x22; name=&#x22;color&#x22; /&#x3E;
+      &#x3C;label for=&#x22;info&#x22; class=&#x22;info&#x22;&#x3E;Info&#x3C;/label&#x3E;
+    &#x3C;/div&#x3E;
+    &#x3C;div class=&#x22;custom-radio&#x22;&#x3E;
+      &#x3C;input type=&#x22;radio&#x22; id=&#x22;success&#x22; name=&#x22;color&#x22; /&#x3E;
+      &#x3C;label for=&#x22;success&#x22; class=&#x22;success&#x22;&#x3E;Success&#x3C;/label&#x3E;
+    &#x3C;/div&#x3E;
+    &#x3C;div class=&#x22;custom-radio&#x22;&#x3E;
+      &#x3C;input type=&#x22;radio&#x22; id=&#x22;error&#x22; name=&#x22;color&#x22; /&#x3E;
+      &#x3C;label for=&#x22;error&#x22; class=&#x22;error&#x22;&#x3E;Error&#x3C;/label&#x3E;
+    &#x3C;/div&#x3E;
+    &#x3C;div class=&#x22;custom-radio&#x22;&#x3E;
+      &#x3C;input type=&#x22;radio&#x22; id=&#x22;disabled&#x22; name=&#x22;color&#x22; disabled /&#x3E;
+      &#x3C;label for=&#x22;disabled&#x22; class=&#x22;disabled&#x22;&#x3E;Disabled&#x3C;/label&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!-- Size Variants -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h4 class="bb-dashed-n40">Sizes</h4>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+              <!-- Preview -->
+              <div x-show="!viewcode" class="relative flex gap-4">
+                <div class="flex gap-6 flex-wrap">
+                  <label for="big" class="flex items-center gap-2 top-radio">
+                    <input type="radio" id="big" name="size" class="sr-only peer/top" />
+                    <span
+                      class="circle !size-7 peer-checked/top:after:absolute peer-checked/top:after:size-2 peer-checked/top:after:block peer-checked/top:after:rounded-full peer-checked/top:after:left-1/2 peer-checked/top:after:top-1/2 peer-checked/top:after:-translate-y-1/2 peer-checked/top:after:-translate-x-1/2 peer-checked/top:after:bg-neutral-700 dark:peer-checked/top:after:bg-neutral-20"
+                    ></span>
+                    <span>Large</span>
+                  </label>
+                  <label for="medium" class="flex items-center gap-2 top-radio">
+                    <input type="radio" id="medium" name="size" class="sr-only peer/top" />
+                    <span
+                      class="circle peer-checked/top:after:absolute peer-checked/top:after:size-1.5 peer-checked/top:after:block peer-checked/top:after:rounded-full peer-checked/top:after:left-1/2 peer-checked/top:after:top-1/2 peer-checked/top:after:-translate-y-1/2 peer-checked/top:after:-translate-x-1/2 peer-checked/top:after:bg-neutral-700 dark:peer-checked/top:after:bg-neutral-20"
+                    ></span>
+                    <span>Medium</span>
+                  </label>
+                  <label for="small" class="flex items-center gap-2 top-radio">
+                    <input type="radio" id="small" name="size" class="sr-only peer/top" />
+                    <span
+                      class="circle !size-4 !border peer-checked/top:after:absolute peer-checked/top:after:size-1 peer-checked/top:after:block peer-checked/top:after:rounded-full peer-checked/top:after:left-1/2 peer-checked/top:after:top-1/2 peer-checked/top:after:-translate-y-1/2 peer-checked/top:after:-translate-x-1/2 peer-checked/top:after:bg-neutral-700 dark:peer-checked/top:after:bg-neutral-20"
+                    ></span>
+                    <span>Small</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;relative flex justify-center gap-4&#x22;&#x3E;
+  &#x3C;div class=&#x22;flex gap-6&#x22;&#x3E;
+    &#x3C;label for=&#x22;big&#x22; class=&#x22;flex items-center gap-2 top-radio&#x22;&#x3E;
+      &#x3C;input type=&#x22;radio&#x22; id=&#x22;big&#x22; name=&#x22;size&#x22; class=&#x22;sr-only peer/top&#x22; /&#x3E;
+      &#x3C;span
+        class=&#x22;circle !size-7 peer-checked/top:after:absolute peer-checked/top:after:size-2 peer-checked/top:after:block peer-checked/top:after:rounded-full peer-checked/top:after:left-1/2 peer-checked/top:after:top-1/2 peer-checked/top:after:-translate-y-1/2 peer-checked/top:after:-translate-x-1/2 peer-checked/top:after:bg-neutral-700 dark:peer-checked/top:after:bg-neutral-20&#x22;
+      &#x3E;&#x3C;/span&#x3E;
+      &#x3C;span&#x3E;Large&#x3C;/span&#x3E;
+    &#x3C;/label&#x3E;
+    &#x3C;label for=&#x22;medium&#x22; class=&#x22;flex items-center gap-2 top-radio&#x22;&#x3E;
+      &#x3C;input type=&#x22;radio&#x22; id=&#x22;medium&#x22; name=&#x22;size&#x22; class=&#x22;sr-only peer/top&#x22; /&#x3E;
+      &#x3C;span
+        class=&#x22;circle peer-checked/top:after:absolute peer-checked/top:after:size-1.5 peer-checked/top:after:block peer-checked/top:after:rounded-full peer-checked/top:after:left-1/2 peer-checked/top:after:top-1/2 peer-checked/top:after:-translate-y-1/2 peer-checked/top:after:-translate-x-1/2 peer-checked/top:after:bg-neutral-700 dark:peer-checked/top:after:bg-neutral-20&#x22;
+      &#x3E;&#x3C;/span&#x3E;
+      &#x3C;span&#x3E;Medium&#x3C;/span&#x3E;
+    &#x3C;/label&#x3E;
+    &#x3C;label for=&#x22;small&#x22; class=&#x22;flex items-center gap-2 top-radio&#x22;&#x3E;
+      &#x3C;input type=&#x22;radio&#x22; id=&#x22;small&#x22; name=&#x22;size&#x22; class=&#x22;sr-only peer/top&#x22; /&#x3E;
+      &#x3C;span
+        class=&#x22;circle !size-4 !border peer-checked/top:after:absolute peer-checked/top:after:size-1 peer-checked/top:after:block peer-checked/top:after:rounded-full peer-checked/top:after:left-1/2 peer-checked/top:after:top-1/2 peer-checked/top:after:-translate-y-1/2 peer-checked/top:after:-translate-x-1/2 peer-checked/top:after:bg-neutral-700 dark:peer-checked/top:after:bg-neutral-20&#x22;
+      &#x3E;&#x3C;/span&#x3E;
+      &#x3C;span&#x3E;Small&#x3C;/span&#x3E;
+    &#x3C;/label&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!-- Position -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h4 class="bb-dashed-n40">Placement</h4>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+              <!-- Preview -->
+              <div x-show="!viewcode" class="relative flex gap-4">
+                <div class="flex gap-6 flex-wrap items-center">
+                  <label for="top" class="flex items-center flex-col gap-2 top-radio">
+                    <input type="radio" id="top" name="position" class="sr-only peer/top" />
+                    <span>Top</span>
+                    <span
+                      class="circle peer-checked/top:after:absolute peer-checked/top:after:size-1.5 peer-checked/top:after:block peer-checked/top:after:rounded-full peer-checked/top:after:left-1/2 peer-checked/top:after:top-1/2 peer-checked/top:after:-translate-y-1/2 peer-checked/top:after:-translate-x-1/2 peer-checked/top:after:bg-neutral-700 dark:peer-checked/top:after:bg-neutral-20"
+                    ></span>
+                  </label>
+                  <label for="start" class="flex items-center gap-2 top-radio">
+                    <input type="radio" id="start" name="position" class="sr-only peer/top" />
+                    <span
+                      class="circle peer-checked/top:after:absolute peer-checked/top:after:size-1.5 peer-checked/top:after:block peer-checked/top:after:rounded-full peer-checked/top:after:left-1/2 peer-checked/top:after:top-1/2 peer-checked/top:after:-translate-y-1/2 peer-checked/top:after:-translate-x-1/2 peer-checked/top:after:bg-neutral-700 dark:peer-checked/top:after:bg-neutral-20"
+                    ></span>
+                    <span>Start</span>
+                  </label>
+                  <label for="end" class="flex items-center gap-2 top-radio">
+                    <input type="radio" id="end" name="position" class="sr-only peer/top" />
+                    <span>End</span>
+                    <span
+                      class="circle peer-checked/top:after:absolute peer-checked/top:after:size-1.5 peer-checked/top:after:block peer-checked/top:after:rounded-full peer-checked/top:after:left-1/2 peer-checked/top:after:top-1/2 peer-checked/top:after:-translate-y-1/2 peer-checked/top:after:-translate-x-1/2 peer-checked/top:after:bg-neutral-700 dark:peer-checked/top:after:bg-neutral-20"
+                    ></span>
+                  </label>
+                  <label for="bottom" class="flex items-center flex-col gap-2 top-radio">
+                    <input type="radio" id="bottom" name="position" class="sr-only peer/top" />
+                    <span
+                      class="circle peer-checked/top:after:absolute peer-checked/top:after:size-1.5 peer-checked/top:after:block peer-checked/top:after:rounded-full peer-checked/top:after:left-1/2 peer-checked/top:after:top-1/2 peer-checked/top:after:-translate-y-1/2 peer-checked/top:after:-translate-x-1/2 peer-checked/top:after:bg-neutral-700 dark:peer-checked/top:after:bg-neutral-20"
+                    ></span>
+                    <span>Bottom</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;relative flex justify-center gap-4&#x22;&#x3E;
+  &#x3C;div class=&#x22;flex gap-6 items-center&#x22;&#x3E;
+    &#x3C;label for=&#x22;top&#x22; class=&#x22;flex items-center flex-col gap-2 top-radio&#x22;&#x3E;
+      &#x3C;input type=&#x22;radio&#x22; id=&#x22;top&#x22; name=&#x22;position&#x22; class=&#x22;sr-only peer/top&#x22; /&#x3E;
+      &#x3C;span&#x3E;Top&#x3C;/span&#x3E;
+      &#x3C;span
+        class=&#x22;circle peer-checked/top:after:absolute peer-checked/top:after:size-1.5 peer-checked/top:after:block peer-checked/top:after:rounded-full peer-checked/top:after:left-1/2 peer-checked/top:after:top-1/2 peer-checked/top:after:-translate-y-1/2 peer-checked/top:after:-translate-x-1/2 peer-checked/top:after:bg-neutral-700 dark:peer-checked/top:after:bg-neutral-20&#x22;
+      &#x3E;&#x3C;/span&#x3E;
+    &#x3C;/label&#x3E;
+    &#x3C;label for=&#x22;start&#x22; class=&#x22;flex items-center gap-2 top-radio&#x22;&#x3E;
+      &#x3C;input type=&#x22;radio&#x22; id=&#x22;start&#x22; name=&#x22;position&#x22; class=&#x22;sr-only peer/top&#x22; /&#x3E;
+      &#x3C;span
+        class=&#x22;circle peer-checked/top:after:absolute peer-checked/top:after:size-1.5 peer-checked/top:after:block peer-checked/top:after:rounded-full peer-checked/top:after:left-1/2 peer-checked/top:after:top-1/2 peer-checked/top:after:-translate-y-1/2 peer-checked/top:after:-translate-x-1/2 peer-checked/top:after:bg-neutral-700 dark:peer-checked/top:after:bg-neutral-20&#x22;
+      &#x3E;&#x3C;/span&#x3E;
+      &#x3C;span&#x3E;Start&#x3C;/span&#x3E;
+    &#x3C;/label&#x3E;
+    &#x3C;label for=&#x22;end&#x22; class=&#x22;flex items-center gap-2 top-radio&#x22;&#x3E;
+      &#x3C;input type=&#x22;radio&#x22; id=&#x22;end&#x22; name=&#x22;position&#x22; class=&#x22;sr-only peer/top&#x22; /&#x3E;
+      &#x3C;span&#x3E;End&#x3C;/span&#x3E;
+      &#x3C;span
+        class=&#x22;circle peer-checked/top:after:absolute peer-checked/top:after:size-1.5 peer-checked/top:after:block peer-checked/top:after:rounded-full peer-checked/top:after:left-1/2 peer-checked/top:after:top-1/2 peer-checked/top:after:-translate-y-1/2 peer-checked/top:after:-translate-x-1/2 peer-checked/top:after:bg-neutral-700 dark:peer-checked/top:after:bg-neutral-20&#x22;
+      &#x3E;&#x3C;/span&#x3E;
+    &#x3C;/label&#x3E;
+    &#x3C;label for=&#x22;bottom&#x22; class=&#x22;flex items-center flex-col gap-2 top-radio&#x22;&#x3E;
+      &#x3C;input type=&#x22;radio&#x22; id=&#x22;bottom&#x22; name=&#x22;position&#x22; class=&#x22;sr-only peer/top&#x22; /&#x3E;
+      &#x3C;span
+        class=&#x22;circle peer-checked/top:after:absolute peer-checked/top:after:size-1.5 peer-checked/top:after:block peer-checked/top:after:rounded-full peer-checked/top:after:left-1/2 peer-checked/top:after:top-1/2 peer-checked/top:after:-translate-y-1/2 peer-checked/top:after:-translate-x-1/2 peer-checked/top:after:bg-neutral-700 dark:peer-checked/top:after:bg-neutral-20&#x22;
+      &#x3E;&#x3C;/span&#x3E;
+      &#x3C;span&#x3E;Bottom&#x3C;/span&#x3E;
+    &#x3C;/label&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- Custom scripts and libraries -->
+    <script src="./assets/js/libs/sweetalert.min.js"></script>
+    <script src="./assets/js/libs/highlight.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

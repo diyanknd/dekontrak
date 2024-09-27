@@ -1,0 +1,228 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Payment</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Pages</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Payment</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Payment section -->
+        <section class="text-neutral-700 dark:text-neutral-20 bg-neutral-0 dark:bg-neutral-904 py-14 lg:py-28 relative">
+          <img src="./assets/images/why-choose-el-1.png" class="absolute lg:top-10 max-md:hidden lg:left-10 top-5 left-5" alt="" />
+          <img src="./assets/images/why-choose-el-2.png" width="337" class="absolute top-24 xxl:top-32 max-xxl:hidden right-10 xl:right-24 xxl:right-36" alt="" />
+          <div class="container">
+            <div class="max-w-xl mx-auto text-center mb-10 lg:mb-[60px] relative z-[3]">
+              <h5 class="text-secondary-300 mb-4">Payment Method</h5>
+              <h2 class="mb-3 lg:mb-6 leading-tight">Complete Your Purchase</h2>
+              <p>We offer flexible payment options to fit your needs. Whether you prefer credit cards, debit cards, we have a solution for you.</p>
+            </div>
+            <div class="grid grid-cols-12 gap-4 lg:gap-6 relative">
+              <img src="./assets/images/why-choose-el-3.png" class="absolute -bottom-10 xl:-left-10" alt="" />
+              <div class="col-span-12 lg:col-span-7 xxl:col-span-8 flex flex-col gap-4 lg:gap-6 relative z-[2]">
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl border border-neutral-30 dark:border-neutral-500 p-3 sm:p-4 md:p-6 xl:p-8">
+                  <h4 class="border-b border-dashed border-neutral-40 dark:border-neutral-400 mb-5 pb-5">Billing Address</h4>
+                  <form class="grid grid-cols-2 gap-4 lg:gap-6">
+                    <div class="col-span-2 md:col-span-1">
+                      <input type="text" class="rounded-full border border-neutral-30 dark:border-neutral-500 w-full bg-neutral-0 dark:bg-neutral-904 py-4 px-6" placeholder="Personal Name..." />
+                    </div>
+                    <div class="col-span-2 md:col-span-1">
+                      <input type="number" class="rounded-full border border-neutral-30 dark:border-neutral-500 w-full bg-neutral-0 dark:bg-neutral-904 py-4 px-6" placeholder="Phone Number..." />
+                    </div>
+                    <div class="col-span-2">
+                      <input type="email" class="rounded-full border border-neutral-30 dark:border-neutral-500 w-full bg-neutral-0 dark:bg-neutral-904 py-4 px-6" placeholder="Email Address..." />
+                    </div>
+                    <div class="col-span-2">
+                      <input type="text" class="rounded-full border border-neutral-30 dark:border-neutral-500 w-full bg-neutral-0 dark:bg-neutral-904 py-4 px-6" placeholder="Local Address..." />
+                    </div>
+                  </form>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl border border-neutral-30 dark:border-neutral-500 p-3 sm:p-4 md:p-6 xl:p-8">
+                  <h4 class="border-b border-dashed border-neutral-40 dark:border-neutral-400 mb-5 pb-5">Payment Method</h4>
+                  <form class="grid grid-cols-2 gap-4 lg:gap-6">
+                    <div class="col-span-2">
+                      <div class="rounded-full w-full bg-neutral-0 dark:bg-neutral-904 py-4 px-6 flex justify-between items-center border border-neutral-30 dark:border-neutral-500">
+                        <div class="custom-radio">
+                          <input type="radio" id="paypal" name="payment" />
+                          <label for="paypal" class="default">Paypal</label>
+                        </div>
+                        <img src="./assets/images/paypal.png" alt="" />
+                      </div>
+                    </div>
+                    <div class="col-span-2">
+                      <div x-data="modal" class="border border-neutral-30 dark:border-neutral-500 rounded-xl md:rounded-[32px] py-4 px-3 sm:px-6 bg-neutral-0 dark:bg-neutral-904">
+                        <div class="flex justify-between items-center mb-4">
+                          <div class="custom-radio">
+                            <input type="radio" id="card" name="payment" />
+                            <label for="card" class="default">Credit/Debit card</label>
+                          </div>
+                          <div class="flex gap-2 max-sm:hidden">
+                            <img src="./assets/images/mastercard.png" alt="" />
+                            <img src="./assets/images/payoneer.png" alt="" />
+                            <img src="./assets/images/visa.png" alt="" />
+                          </div>
+                        </div>
+                        <div x-data="{isOpen:false,selected:'**** **** ****3652-Jane', items:['**** **** ****3652-Jane','**** **** ****3652-John','**** **** ****3652-Sara','**** **** ****3652-Adam','**** **** ****3652-Mary']}" class="relative mb-4">
+                          <div @click="isOpen=!isOpen" class="relative bg-neutral-0 dark:bg-neutral-904 flex cursor-pointer items-center justify-between rounded-full px-6 py-3 border border-neutral-30 dark:border-neutral-500">
+                            <span x-text="selected"></span>
+                            <i class="las la-angle-down text-lg duration-300" :class="isOpen?'rotate-180':'rotate-0'"></i>
+                          </div>
+                          <div x-show="isOpen" @click.away="isOpen=false" class="absolute left-0 top-full z-10 flex max-h-[200px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-0 p-1 shadow-xl dark:bg-neutral-904">
+                            <template x-for="item in items">
+                              <div @click="selected=item, isOpen=false" :class="selected===item?'bg-primary-300  text-neutral-0':'hover:bg-primary-50 dark:hover:bg-neutral-903'" class="cursor-pointer rounded-md px-4 py-2 duration-300" x-text="item"></div>
+                            </template>
+                          </div>
+                        </div>
+                        <div class="flex justify-end">
+                          <span @click="openModal" class="font-semibold text-primary-300 flex items-center gap-3 cursor-pointer select-none">
+                            <i class="las la-plus text-xl"></i>
+                            Add New Card
+                          </span>
+                        </div>
+                        <template x-teleport="body">
+                          <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                            <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                              <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                                <div class="mb-4 flex items-center justify-between border-b border-dashed border-neutral-30 dark:border-neutral-500 pb-4 lg:mb-6 lg:pb-6">
+                                  <h4>New Card</h4>
+                                  <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                                </div>
+                                <form class="grid grid-cols-2 gap-4 xxl:gap-6" @submit.prevent>
+                                  <div class="col-span-2">
+                                    <div class="form-input">
+                                      <input type="number" id="card-number" placeholder="Card Number" required />
+                                      <label for="card-number">Card Number</label>
+                                    </div>
+                                  </div>
+                                  <div class="col-span-2">
+                                    <div class="form-input">
+                                      <input type="text" id="card-holder" placeholder="Card Holder" required />
+                                      <label for="card-holder">Card Holder</label>
+                                    </div>
+                                  </div>
+                                  <div class="col-span-2 sm:col-span-1">
+                                    <div class="form-input">
+                                      <input type="text" id="expire-date" placeholder="Expire Date" required />
+                                      <label for="expire-date">Expiration Date</label>
+                                    </div>
+                                  </div>
+                                  <div class="col-span-2 sm:col-span-1">
+                                    <div class="form-input">
+                                      <input type="text" id="cvc" placeholder="CVC" required />
+                                      <label for="cvc">CVV/CVC</label>
+                                    </div>
+                                  </div>
+                                  <div class="col-span-2 flex items-center gap-2">
+                                    <i class="las la-lock text-xl"></i>
+                                    <p class="m-text text-neutral-100">Your transaction is secured with SSL encryption</p>
+                                  </div>
+                                  <div class="col-span-2 flex gap-4 mt-2">
+                                    <button @click="closeModal" type="submit" class="btn-primary">Add Now</button>
+                                    <button @click="closeModal" type="reset" class="btn-primary-outlined">Cancel</button>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </template>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="col-span-12 lg:col-span-5 xxl:col-span-4 relative z-[2]">
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl border border-neutral-30 dark:border-neutral-500 p-3 sm:p-4 md:p-6 xl:p-8">
+                  <p class="l-text mb-3">Price</p>
+                  <div class="flex gap-4 items-end mb-6 pb-6 lg:pb-10 border-b border-dashed border-neutral-40 dark:border-neutral-500">
+                    <i class="las la-tag text-3xl"></i>
+                    <span>From</span>
+                    <div class="flex items-start gap-1">
+                      <h2>$9.99</h2>
+                      <i id="tooltip-pricing" class="las la-info-circle"></i>
+                    </div>
+                  </div>
+                  <ul class="flex flex-col gap-4 xxl:gap-6 border-b border-dashed border-neutral-40 dark:border-neutral-500 mb-6 pb-6">
+                    <li class="flex justify-between items-center">
+                      <span class="m-text">Billed Monthly</span>
+                      <label for="switch14" class="switch flex justify-center">
+                        <input id="switch14" type="checkbox" checked />
+                        <span class="inner primary"></span>
+                      </label>
+                    </li>
+                    <li class="flex justify-between items-center">
+                      <span class="m-text">Convenience Fee</span>
+                      <span class="text-error-300 uppercase font-medium">Premium</span>
+                    </li>
+                    <li class="flex justify-between items-center">
+                      <span class="m-text">Base Price</span>
+                      <span class="m-text font-medium">$9.99</span>
+                    </li>
+                    <li class="flex justify-between items-center">
+                      <span class="m-text">State Tax</span>
+                      <span class="m-text font-medium">$5</span>
+                    </li>
+                  </ul>
+                  <div class="flex justify-between items-center border-b border-dashed border-neutral-40 dark:border-neutral-500 mb-6 xl:mb-10 pb-6">
+                    <span class="m-text">Total</span>
+                    <span class="m-text font-medium">$1025</span>
+                  </div>
+                  <button class="btn-primary w-full">Upgrade Plan</button>
+                  <div class="mt-8">
+                    <p class="m-text mb-4 flex items-center gap-1"><i class="las la-check-circle text-primary-300 text-2xl"></i> Secure credit card payment</p>
+                    <p class="s-text">This is a secure 128-bit SSL encrypted payment</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/popper.js"></script>
+    <script src="./assets/js/libs/tippy.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,145 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Contact Us</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Pages</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Contact Us</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-neutral-0 dark:bg-neutral-904">
+          <!-- contact card -->
+          <section class="text-neutral-700 dark:text-neutral-20 py-14 xl:py-16 xxl:py-28">
+            <div class="container">
+              <div class="text-center mb-10 lg:mb-[60px]">
+                <h5 class="text-secondary-300 mb-4">Contact Us</h5>
+                <h2 class="mb-4 lg:mb-6">Let Us Help You</h2>
+              </div>
+              <div class="grid grid-cols-12 gap-4 lg:gap-6">
+                <div class="col-span-12 md:col-span-6 xxl:col-span-4 p-3 sm:p-4 md:p-6 xxl:p-8 xxxl:p-10 rounded-xl bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:hover:bg-primary-300 dark:border-neutral-500 flex items-start gap-4 lg:gap-6 group hover:bg-primary-300 duration-300">
+                  <span class="size-14 flex justify-center group-hover:bg-neutral-0 group-hover:text-primary-300 shrink-0 items-center rounded-full bg-primary-300 text-neutral-0">
+                    <i class="las la-map-marker text-3xl"></i>
+                  </span>
+                  <div class="group-hover:text-neutral-0">
+                    <h4 class="mb-3">Main Office</h4>
+                    <p class="mb-4 group-hover:text-neutral-0">2972 Westheimer Rd. Santa Ana, Illinois 85486</p>
+                    <a href="#" class="text-primary-300 group-hover:text-neutral-0 underline font-semibold">Find Location</a>
+                  </div>
+                </div>
+                <div class="col-span-12 md:col-span-6 xxl:col-span-4 p-3 sm:p-4 md:p-6 xxl:p-8 xxxl:p-10 rounded-xl bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:hover:bg-primary-300 dark:border-neutral-500 flex items-start gap-4 lg:gap-6 group hover:bg-primary-300 duration-300">
+                  <span class="size-14 flex justify-center group-hover:bg-neutral-0 group-hover:text-primary-300 shrink-0 items-center rounded-full bg-primary-300 text-neutral-0">
+                    <i class="las la-envelope-open text-3xl"></i>
+                  </span>
+                  <div class="group-hover:text-neutral-0">
+                    <h4 class="mb-3">Email Address</h4>
+                    <p class="mb-4 group-hover:text-neutral-0">infoexample@gmail.com example@gmail.com</p>
+                    <a href="#" class="text-primary-300 group-hover:text-neutral-0 underline font-semibold">Get In Touch</a>
+                  </div>
+                </div>
+                <div class="col-span-12 md:col-span-6 xxl:col-span-4 p-3 sm:p-4 md:p-6 xxl:p-8 xxxl:p-10 rounded-xl bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:hover:bg-primary-300 dark:border-neutral-500 flex items-start gap-4 lg:gap-6 group hover:bg-primary-300 duration-300">
+                  <span class="size-14 flex justify-center group-hover:bg-neutral-0 group-hover:text-primary-300 shrink-0 items-center rounded-full bg-primary-300 text-neutral-0">
+                    <i class="las la-phone-volume text-3xl"></i>
+                  </span>
+                  <div class="group-hover:text-neutral-0">
+                    <h4 class="mb-3">Phone Number</h4>
+                    <p class="group-hover:text-neutral-0">(406) 555-0120</p>
+                    <p class="mb-4 group-hover:text-neutral-0">(505) 555-0125</p>
+                    <a href="#" class="text-primary-300 group-hover:text-neutral-0 underline font-semibold">Contact Us Today!</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- contact form and map -->
+          <section class="text-neutral-700 dark:text-neutral-20 bg-neutral-0 dark:bg-neutral-904 pb-14 xl:pb-16 xxl:pb-28">
+            <div class="container">
+              <div class="grid grid-cols-2 gap-4 lg:gap-6">
+                <div class="col-span-2 lg:col-span-1 n20-box">
+                  <h4 class="mb-6 pb-6 border-b border-dashed border-neutral-30 dark:border-neutral-500">Get In Touch</h4>
+                  <form class="flex flex-col items-start gap-4 xxl:gap-6">
+                    <div class="relative flex items-center gap-4 rounded-[32px] border border-neutral-40 w-full px-4 dark:border-neutral-500 lg:px-6">
+                      <label for="input" class="absolute -top-2 bg-neutral-20 px-2 text-xs dark:bg-neutral-903">Your Name</label>
+                      <input type="text" placeholder="Enter Name..." class="w-full s-text bg-transparent py-2.5 xl:py-3.5" />
+                    </div>
+                    <div class="relative flex items-center gap-4 rounded-[32px] border border-neutral-40 w-full px-4 dark:border-neutral-500 lg:px-6">
+                      <label for="input" class="absolute -top-2 bg-neutral-20 px-2 text-xs dark:bg-neutral-903">Your Number</label>
+                      <input type="number" placeholder="Enter Number..." class="w-full s-text bg-transparent py-2.5 xl:py-3.5" />
+                    </div>
+                    <div class="relative flex items-center gap-4 rounded-[32px] border border-neutral-40 w-full px-4 dark:border-neutral-500 lg:px-6">
+                      <label for="input" class="absolute -top-2 bg-neutral-20 px-2 text-xs dark:bg-neutral-903">Your Email</label>
+                      <input type="email" placeholder="Enter Email..." class="w-full s-text bg-transparent py-2.5 xl:py-3.5" />
+                    </div>
+                    <div class="relative flex items-center gap-4 rounded-2xl border border-neutral-40 w-full px-4 dark:border-neutral-500 lg:px-6">
+                      <label for="input" class="absolute -top-2 bg-neutral-20 px-2 text-xs dark:bg-neutral-903">Your Name</label>
+                      <textarea rows="4" placeholder="Enter Name..." class="w-full s-text bg-transparent py-2.5 xl:py-3.5"></textarea>
+                    </div>
+                    <button class="btn-primary">Send Message</button>
+                  </form>
+                </div>
+                <div class="col-span-2 lg:col-span-1 n20-box">
+                  <h4 class="mb-6 pb-6 border-b border-dashed border-neutral-30 dark:border-neutral-500">Find Us In Map</h4>
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11135676.646532385!2d-103.61411605501429!3d37.899993456491686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1713936750924!5m2!1sen!2sbd"
+                    width="100%"
+                    height="85%"
+                    style="border: 0"
+                    allowfullscreen=""
+                    loading="lazy"
+                    class="rounded-xl"
+                    referrerpolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

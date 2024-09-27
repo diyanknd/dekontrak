@@ -1,0 +1,351 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/dropzone.min.css" />
+    <link rel="stylesheet" href="./assets/css/swiper.min.css" />
+    <link rel="stylesheet" href="./assets/css/quill.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 space-y-4 xxl:space-y-6">
+        <!-- Breadcrumb -->
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Create Product</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Product</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Create</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Create Product -->
+        <div class="white-box">
+          <h4 class="bb-dashed-n30">Create a new product</h4>
+          <div class="flex flex-col gap-4 xxl:gap-6">
+            <div>
+              <h5 class="mb-2">Details</h5>
+              <p class="s-text mb-5 xl:mb-8">Title, short description, image...</p>
+              <div class="form-input mb-4 xl:mb-6">
+                <input type="text" id="product_name" placeholder="Name" />
+                <label for="product_name">Product Name</label>
+              </div>
+              <div class="form-input mb-4 xl:mb-6">
+                <textarea id="sub-desc" rows="4" placeholder="Textfield"></textarea>
+                <label for="sub-desc" class="textarea">Sub Description</label>
+              </div>
+              <p class="l-text font-medium mb-4">Content</p>
+              <section class="mb-4 xl:mb-6">
+                <div id="toolbar-two" class="flex flex-wrap gap-3 justify-between rounded-t-2xl !border-neutral-30 bg-neutral-20 dark:!border-neutral-500 dark:bg-neutral-903">
+                  <span class="ql-formats">
+                    <select class="ql-header">
+                      <option value="1">Heading</option>
+                      <option value="2">Subheading</option>
+                      <option selected>Normal</option>
+                    </select>
+                    <select class="ql-font">
+                      <option selected>Sans Serif</option>
+                      <option value="serif">Serif</option>
+                      <option value="monospace">Monospace</option>
+                    </select>
+                  </span>
+
+                  <div class="flex grow flex-wrap justify-end">
+                    <span class="ql-formats !flex">
+                      <button class="ql-bold"></button>
+                      <button class="ql-italic"></button>
+                      <button class="ql-underline"></button>
+                      <button class="ql-strike"></button>
+                    </span>
+                    <span class="ql-formats !flex">
+                      <select class="ql-color"></select>
+                      <select class="ql-background"></select>
+                    </span>
+                    <span class="ql-formats !flex">
+                      <button class="ql-list" value="ordered"></button>
+                      <button class="ql-list" value="bullet"></button>
+                      <select class="ql-align">
+                        <option selected></option>
+                        <option value="center"></option>
+                        <option value="right"></option>
+                        <option value="justify"></option>
+                      </select>
+                    </span>
+                    <span class="ql-formats !flex">
+                      <button class="ql-blockquote"></button>
+                      <button class="ql-link"></button>
+                      <button class="ql-image"></button>
+                      <button class="ql-code-block"></button>
+                      <button class="ql-video"></button>
+                    </span>
+                    <span class="ql-formats">
+                      <button class="ql-clean"></button>
+                    </span>
+                  </div>
+                </div>
+                <div id="editor-two" class="rounded-b-2xl !border-neutral-30 h-[120px] dark:!border-neutral-500"></div>
+              </section>
+              <p class="l-text font-medium mb-4">Images</p>
+              <form action="#" id="single-file" class="single-file">
+                <div class="flex flex-col items-center text-center clickable-single cursor-pointer n20-box lg:p-10 xl:p-[60px]">
+                  <img src="./assets/images/single-file.png" class="mb-6 lg:mb-10" alt="" />
+                  <h5 class="font-semibold mb-4">Drop or Select file</h5>
+                  <p>Drop files here or click <span class="text-primary-300">Browse</span> through your machine</p>
+                </div>
+              </form>
+            </div>
+
+            <div>
+              <h5 class="mb-2">Properties</h5>
+              <p class="s-text mb-5 xl:mb-8">Additional functions and attributes...</p>
+              <div class="grid grid-cols-2 gap-4 xxl:gap-6 mb-6">
+                <div class="form-input col-span-2 md:col-span-1">
+                  <input type="text" id="product_code" placeholder="Product code" />
+                  <label for="product_code">Product Code</label>
+                </div>
+                <div class="form-input col-span-2 md:col-span-1">
+                  <input type="text" id="product_sku" placeholder="Product sku" />
+                  <label for="product_sku">Product SKU</label>
+                </div>
+                <div class="form-input col-span-2 md:col-span-1">
+                  <input type="text" id="quantity" placeholder="Product sku" />
+                  <label for="quantity">Quantity</label>
+                </div>
+                <div x-data="{isOpen:false,selected:'Shirt', items:['Shirt','Pants','Jacket','Shoes','Watch','Bag','Jewellery']}" class="relative col-span-2 md:col-span-1">
+                  <div @click="isOpen=!isOpen" class="relative flex cursor-pointer items-center justify-between rounded-xl border border-neutral-30 px-6 py-3.5 dark:border-neutral-500">
+                    <span x-text="selected"></span>
+                    <i class="las la-angle-down text-lg duration-300" :class="isOpen?'rotate-180':'rotate-0'"></i>
+                    <span class="absolute -top-2 left-5 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Select</span>
+                  </div>
+                  <div x-show="isOpen" @click.away="isOpen=false" class="absolute left-0 top-full z-10 flex max-h-[200px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-0 p-1 shadow-xl dark:bg-neutral-904">
+                    <template x-for="item in items">
+                      <div @click="selected=item, isOpen=false" :class="selected===item?'bg-primary-300  text-neutral-0':'hover:bg-primary-50 dark:hover:bg-neutral-903'" class="cursor-pointer rounded-md px-4 py-2 duration-300" x-text="item"></div>
+                    </template>
+                  </div>
+                </div>
+                <div
+                  x-data="{isOpen:false,selected:[], items:['Red','Blue','Green','Yellow','Violet'], handleClick(e){this.selected.includes(e)?this.selected.splice(this.selected.indexOf(e),1):this.selected.push(e)}, isSelected(item){return this.selected.includes(item)}}"
+                  class="relative col-span-2 md:col-span-1"
+                >
+                  <div @click="isOpen=!isOpen" class="relative flex cursor-pointer items-center justify-between rounded-xl border border-neutral-30 px-6 py-3.5 dark:border-neutral-500">
+                    <div>
+                      <template x-show="selected.length" x-for="item in selected">
+                        <span x-text="item + ', '"></span>
+                      </template>
+                      <span x-show="!selected.length">Select Color</span>
+                    </div>
+                    <i class="las la-angle-down text-lg duration-300" :class="isOpen?'rotate-180':'rotate-0'"></i>
+                    <span class="absolute -top-2 left-5 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Colors</span>
+                  </div>
+                  <div x-show="isOpen" @click.away="isOpen=false" class="absolute left-0 top-full z-10 flex max-h-[200px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-0 p-1 shadow-xl dark:bg-neutral-904">
+                    <template x-for="item in items">
+                      <div @click="handleClick(item), isOpen=false" :class="isSelected(item)?'bg-primary-300/10 ':'hover:bg-primary-50 dark:hover:bg-neutral-903'" class="cursor-pointer rounded-md px-4 py-2 duration-300" x-text="item"></div>
+                    </template>
+                  </div>
+                </div>
+                <div
+                  x-data="{isOpen:false,selected:[], items:['10','12','14','16','18','20'], handleClick(e){this.selected.includes(e)?this.selected.splice(this.selected.indexOf(e),1):this.selected.push(e)}, isSelected(item){return this.selected.includes(item)}}"
+                  class="relative col-span-2 md:col-span-1"
+                >
+                  <div @click="isOpen=!isOpen" class="relative flex cursor-pointer items-center justify-between rounded-xl border border-neutral-30 px-6 py-3.5 dark:border-neutral-500">
+                    <div>
+                      <template x-show="selected.length" x-for="item in selected">
+                        <span x-text="item + ', '"></span>
+                      </template>
+                      <span x-show="!selected.length">Select Size</span>
+                    </div>
+                    <i class="las la-angle-down text-lg duration-300" :class="isOpen?'rotate-180':'rotate-0'"></i>
+                    <span class="absolute -top-2 left-5 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Sizes</span>
+                  </div>
+                  <div x-show="isOpen" @click.away="isOpen=false" class="absolute left-0 top-full z-10 flex max-h-[200px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-0 p-1 shadow-xl dark:bg-neutral-904">
+                    <template x-for="item in items">
+                      <div @click="handleClick(item), isOpen=false" :class="isSelected(item)?'bg-primary-300/10 ':'hover:bg-primary-50 dark:hover:bg-neutral-903'" class="cursor-pointer rounded-md px-4 py-2 duration-300" x-text="item"></div>
+                    </template>
+                  </div>
+                </div>
+                <div x-data="{isOpen:true}" class="col-span-2">
+                  <div x-show="isOpen" x-collapse>
+                    <div class="bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 rounded-xl p-3 lg:p-4 xxl:p-5">
+                      <div
+                        x-data="{
+                                    selectOpen: false,
+                                    selectedItems: [],
+                                    searchText: '',
+                                    optionList: [
+                                        { title: 'Technology' },
+                                        { title: 'Design' },
+                                        { title: 'Marketing' },
+                                        { title: 'Trending' },
+                                        { title: 'Ai' },
+                                        { title: 'Business' },
+                                    ],
+                                    filteredOptions() {
+                                        if (this.searchText.trim() === '') {
+                                            return this.optionList;
+                                        } else {
+                                            return this.optionList.filter(option => option.title.toLowerCase().includes(this.searchText.trim().toLowerCase()));
+                                        }
+                                    },
+                                    toggleItem(item) {
+                                        const index = this.selectedItems.findIndex(selectedItem => selectedItem.title === item.title);
+                                        if (index === -1) {
+                                            // If item not already selected, add it to selectedItems array
+                                            this.selectedItems.push(item);
+                                        } else {
+                                            // If item already selected, remove it from selectedItems array
+                                            this.selectedItems.splice(index, 1);
+                                        }
+                                    },
+                                    isSelected(item) {
+                                        return this.selectedItems.findIndex(selectedItem => selectedItem.title === item.title) !== -1;
+                                    }
+                                }"
+                        class="relative"
+                      >
+                        <div @click="selectOpen = !selectOpen" class="rounded-xl w-full relative flex gap-2">
+                          <div x-show="selectedItems.length" class="flex gap-2 grow">
+                            <template x-for="item in selectedItems">
+                              <div class="px-1.5 py-0.5 rounded-full bg-neutral-20 dark:bg-neutral-904 flex items-center gap-2 border border-neutral-40 dark:border-neutral-600 text-neutral-700 dark:text-neutral-40">
+                                <span x-text="item.title" class="text-xs"></span>
+                                <span @click.stop="toggleItem(item)" class="text-xs rounded-full size-4 bg-neutral-70 text-neutral-10 f-center">
+                                  <i class="las la-times cursor-pointer"></i>
+                                </span>
+                              </div>
+                            </template>
+                          </div>
+                          <span class="absolute -top-full text-xs -translate-y-1/2 left-2 px-2 bg-neutral-0 dark:bg-neutral-904">Tags</span>
+                          <input type="text" placeholder="Add tags" x-model="searchText" class="w-full bg-transparent capitalize text-sm" />
+                        </div>
+                        <ul x-show="selectOpen" @click.away="selectOpen = false" class="p-1 rounded-xl bg-neutral-0 dark:bg-neutral-904 absolute top-full left-0 right-0 w-full shadow-xl z-[3] max-h-[250px] overflow-y-auto flex flex-col gap-1">
+                          <template x-for="option in filteredOptions()" :key="option.title">
+                            <li @click="toggleItem(option)" x-text="option.title" :class="{ 'bg-primary-50 dark:bg-neutral-600': isSelected(option) }" class="py-1.5 ltr:pl-6 rtl:pr-6 hover:bg-primary-300 rounded-lg text-sm hover:text-neutral-0 duration-300 cursor-pointer capitalize"></li>
+                          </template>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="l-text mb-4">Gender</p>
+
+              <div class="col-span-2 flex gap-4 mb-6">
+                <div class="custom-radio">
+                  <input type="radio" id="men" name="address" checked />
+                  <label for="men" class="primary">Men</label>
+                </div>
+                <div class="custom-radio">
+                  <input type="radio" id="women" name="address" />
+                  <label for="women" class="primary">Women</label>
+                </div>
+              </div>
+              <div class="flex mb-6 items-center gap-4">
+                <label for="switch7" class="switch flex justify-center">
+                  <input id="switch7" type="checkbox" checked />
+                  <span class="inner primary"></span>
+                </label>
+                <div class="form-input">
+                  <input type="text" id="sale_label" placeholder="Sale Label" />
+                  <label for="sale_label">Sale Label</label>
+                </div>
+              </div>
+              <div class="flex mb-6 items-center gap-4">
+                <label for="switch8" class="switch flex justify-center">
+                  <input id="switch8" type="checkbox" />
+                  <span class="inner primary"></span>
+                </label>
+                <div class="form-input">
+                  <input type="text" id="new_label" placeholder="Sale Label" />
+                  <label for="new_label">Enter new label</label>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h5 class="mb-2">Pricing</h5>
+              <p class="s-text mb-5 xl:mb-8">Additional functions and attributes...</p>
+              <div x-data="{includeTax:false}" class="grid grid-cols-2 gap-4 xxl:gap-6 mb-6">
+                <div class="relative flex items-center gap-2 sm:gap-4 rounded-xl border border-neutral-30 px-4 dark:border-neutral-500 lg:px-6 col-span-1">
+                  <label for="input" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Regular Price</label>
+                  <i class="las la-dollar-sign text-2xl"></i>
+                  <input type="number" placeholder="0.00" class="w-full bg-transparent py-3 lg:py-4" />
+                </div>
+                <div class="relative flex items-center gap-2 sm:gap-4 rounded-xl border border-neutral-30 px-4 dark:border-neutral-500 lg:px-6 col-span-1">
+                  <label for="input" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Sale Price</label>
+                  <i class="las la-dollar-sign text-2xl"></i>
+                  <input type="number" placeholder="0.00" class="w-full bg-transparent py-3 lg:py-4" />
+                </div>
+                <div class="col-span-2">
+                  <label for="switch14" class="switch flex">
+                    <input x-model="includeTax" id="switch14" type="checkbox" />
+                    <span class="inner primary"></span>
+                    Price Includes taxes
+                  </label>
+                </div>
+                <div x-show="!includeTax" class="relative flex items-center gap-4 rounded-xl border border-neutral-30 px-4 dark:border-neutral-500 lg:px-6 col-span-2">
+                  <label for="input" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Tax (%)</label>
+                  <i class="las la-percent text-2xl"></i>
+                  <input type="number" placeholder="0.00" class="w-full bg-transparent py-3 lg:py-4" />
+                </div>
+                <div class="col-span-2">
+                  <label for="switch9" class="switch flex">
+                    <input id="switch9" type="checkbox" />
+                    <span class="inner primary"></span>
+                    Publish
+                  </label>
+                </div>
+                <div class="col-span-2 mt-4 flex gap-4">
+                  <button class="btn-primary">Create Product</button>
+                  <button class="btn-primary-outlined">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/quill.js"></script>
+    <script src="./assets/js/libs/dropzone.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+  </body>
+</html>

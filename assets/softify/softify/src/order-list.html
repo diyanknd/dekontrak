@@ -1,0 +1,1638 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 space-y-4 xxl:space-y-6">
+        <!-- Breadcrumb -->
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Order List</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Order</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>List</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Order List -->
+        <div x-data="{activeTab:'all'}" class="white-box">
+          <div class="flex justify-between items-center bb-dashed-n30">
+            <h4>Order List</h4>
+            <div class="flex flex-wrap items-center gap-4">
+              <div class="flex items-center gap-3">
+                <span>Sort By : </span>
+                <select name="sort" class="nc-select n20">
+                  <option value="all">All</option>
+                  <option value="new">New</option>
+                  <option value="old">Old</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <div class="bb-dashed-n30">
+            <div class="col-span-12 flex max-w-max flex-wrap gap-4 rounded-xl md:rounded-[40px] border border-neutral-30 p-3 dark:border-neutral-500">
+              <button @click="activeTab='all'" :class="activeTab=='all' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full capitalize px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">all</button>
+              <button @click="activeTab='Pending'" :class="activeTab=='Pending' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full capitalize px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">pending</button>
+              <button @click="activeTab='Completed'" :class="activeTab=='Completed' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full capitalize px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">completed</button>
+              <button @click="activeTab='Cancelled'" :class="activeTab=='Cancelled' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full capitalize px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">cancelled</button>
+              <button @click="activeTab='Refunded'" :class="activeTab=='Refunded' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full capitalize px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">refunded</button>
+            </div>
+          </div>
+          <!-- filter -->
+          <div class="flex justify-between max-md:flex-wrap items-center gap-4 xxl:gap-6 mb-6">
+            <div class="flex max-md:w-full items-center rounded-full border border-neutral-30 dark:border-neutral-500 md:max-w-[220px] w-full py-2.5 px-5">
+              <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Start Date" class="w-full bg-transparent" />
+            </div>
+            <div class="flex max-md:w-full items-center rounded-full border border-neutral-30 dark:border-neutral-500 md:max-w-[220px] w-full py-2.5 px-5">
+              <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="End Date" class="w-full bg-transparent" />
+            </div>
+            <div class="grow flex items-center gap-4">
+              <div class="flex grow items-center rounded-full border border-neutral-30 dark:border-neutral-500 w-full py-2 px-5">
+                <input type="text" placeholder="Search" class="w-full bg-transparent" />
+                <i class="las la-search text-lg"></i>
+              </div>
+              <button>
+                <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                  <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                  <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                    <li>
+                      <a href="order-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                    </li>
+                    <li>
+                      <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                    </li>
+                  </ul>
+                </div>
+              </button>
+            </div>
+          </div>
+          <!-- search results -->
+          <div x-show="activeTab !='all'" class="flex flex-wrap justify-between items-center gap-3 mb-4 xl:mb-6">
+            <p>5 results found</p>
+            <div class="flex items-center gap-4">
+              <span>Status: </span>
+              <div class="chip soft-default">
+                <span class="icon">
+                  <i class="las la-layer-group"></i>
+                </span>
+                <span x-text="activeTab"></span>
+                <span class="icon cursor-pointer">
+                  <i class="las la-times"></i>
+                </span>
+              </div>
+              <button class="flex items-center gap-2 text-error-300 font-semibold text-sm" @click="activeTab='all'">
+                <i class="las la-trash text-base"></i>
+                Clear
+              </button>
+            </div>
+          </div>
+          <!-- product list -->
+          <div x-data="{dense: false, row6:false}" class="checkboxes-container overflow-x-auto">
+            <table x-show="activeTab=='all'" class="w-full whitespace-nowrap">
+              <thead class="text-left">
+                <tr class="bg-neutral-20 dark:bg-neutral-903">
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-4'">
+                    <label for="checkbox2" class="option">
+                      <input type="checkbox" id="checkbox2" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Order</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Customer</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Date</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Item</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Price</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody x-data="{row1:false, row2:false, row3:false, row4:false, row5:false, row6:false}">
+                <tr :class="row1?'!bg-primary-50':'bg-neutral-0 dark:bg-neutral-904'" class="border-b border-neutral-30 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <label for="#231201" class="option">
+                      <input type="checkbox" id="#231201" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>#231202</span>
+                  </td>
+                  <td class="px-6 flex items-center gap-3" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <img src="./assets/images/users/user-sm-1.png" width="32" class="rounded-full" alt="" />
+                    <div>
+                      <p class="m-text mb-1 font-medium">Jenny Wilson</p>
+                      <span class="text-xs">example@example.com</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <div>
+                      <p class="m-text font-medium mb-1">17 Feb 2024</p>
+                      <span class="text-xs">12:00 AM</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>3</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>$25.00</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-success-300 bg-success-300/10 border border-neutral-30 dark:border-neutral-500">Completed</span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <button @click="row1 = !row1" class="size-10 rounded-full hover:bg-primary-50 duration-300 f-center">
+                        <i :class="row1?'rotate-180':''" class="las duration-300 la-angle-down text-lg"></i>
+                      </button>
+                      <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                        <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                        <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                          <li>
+                            <a href="order-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                          </li>
+                          <li>
+                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="8">
+                    <div x-show="row1" x-collapse x-cloak class="flex w-full">
+                      <div class="w-full overflow-x-auto">
+                        <table class="w-full whitespace-nowrap">
+                          <tbody>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-1.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Nike New Shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-2.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Brand new shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr :class="row2?'!bg-primary-50':'bg-neutral-0 dark:bg-neutral-904'" class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <label for="#231202" class="option">
+                      <input type="checkbox" id="#231202" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>#231201</span>
+                  </td>
+                  <td class="px-6 flex items-center gap-3" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <img src="./assets/images/users/user-sm-2.png" width="32" class="rounded-full" alt="" />
+                    <div>
+                      <p class="m-text mb-1 font-medium">John Doe</p>
+                      <span class="text-xs">example@example.com</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <div>
+                      <p class="m-text font-medium mb-1">19 Feb 2024</p>
+                      <span class="text-xs">12:00 AM</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>3</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>$25.00</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-neutral-100 dark:text-neutral-50 bg-neutral-40 dark:bg-neutral-400 border border-neutral-30 dark:border-neutral-500">Refunded</span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <button @click="row2 = !row2" class="size-10 rounded-full hover:bg-primary-50 duration-300 f-center">
+                        <i :class="row2?'rotate-180':''" class="las la-angle-down text-lg duration-300"></i>
+                      </button>
+                      <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                        <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                        <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                          <li>
+                            <a href="order-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                          </li>
+                          <li>
+                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="8">
+                    <div x-show="row2" x-collapse x-cloak class="flex w-full">
+                      <div class="w-full overflow-x-auto">
+                        <table class="w-full whitespace-nowrap">
+                          <tbody>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-1.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Nike New Shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr :class="row3?'!bg-primary-50':'bg-neutral-0 dark:bg-neutral-904'" class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <label for="#231203" class="option">
+                      <input type="checkbox" id="#231203" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>#231209</span>
+                  </td>
+                  <td class="px-6 flex items-center gap-3" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <img src="./assets/images/users/user-sm-3.png" width="32" class="rounded-full" alt="" />
+                    <div>
+                      <p class="m-text mb-1 font-medium">Amir Jaman</p>
+                      <span class="text-xs">example@example.com</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <div>
+                      <p class="m-text font-medium mb-1">17 Feb 2024</p>
+                      <span class="text-xs">12:00 AM</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>3</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>$25.00</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-success-300 bg-success-300/10 border border-neutral-30 dark:border-neutral-500">Completed</span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <button @click="row3 = !row3" class="size-10 rounded-full hover:bg-primary-50 duration-300 f-center">
+                        <i :class="row3?'rotate-180':''" class="las la-angle-down text-lg duration-300"></i>
+                      </button>
+                      <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                        <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                        <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                          <li>
+                            <a href="order-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                          </li>
+                          <li>
+                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="8">
+                    <div x-show="row3" x-collapse x-cloak class="flex w-full">
+                      <div class="w-full overflow-x-auto">
+                        <table class="w-full whitespace-nowrap">
+                          <tbody>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-1.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Nike New Shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-2.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Brand new shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr :class="row4?'!bg-primary-50':'bg-neutral-0 dark:bg-neutral-904'" class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <label for="#231204" class="option">
+                      <input type="checkbox" id="#231204" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>#231219</span>
+                  </td>
+                  <td class="px-6 flex items-center gap-3" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <img src="./assets/images/users/user-sm-5.png" width="32" class="rounded-full" alt="" />
+                    <div>
+                      <p class="m-text mb-1 font-medium">Ahmed Shamim</p>
+                      <span class="text-xs">example@example.com</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <div>
+                      <p class="m-text font-medium mb-1">17 Feb 2024</p>
+                      <span class="text-xs">12:00 AM</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>3</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>$25.00</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-error-300 bg-error-300/10 border border-neutral-30 dark:border-neutral-500">Cancelled</span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <button @click="row4 = !row4" class="size-10 rounded-full hover:bg-primary-50 duration-300 f-center">
+                        <i :class="row4?'rotate-180':''" class="las la-angle-down text-lg duration-300"></i>
+                      </button>
+                      <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                        <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                        <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                          <li>
+                            <a href="order-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                          </li>
+                          <li>
+                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="8">
+                    <div x-show="row4" x-collapse x-cloak class="flex w-full">
+                      <div class="w-full overflow-x-auto">
+                        <table class="w-full whitespace-nowrap">
+                          <tbody>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-2.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Brand new shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr :class="row5?'!bg-primary-50':'bg-neutral-0 dark:bg-neutral-904'" class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <label for="#231205" class="option">
+                      <input type="checkbox" id="#231205" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>#231207</span>
+                  </td>
+                  <td class="px-6 flex items-center gap-3" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <img src="./assets/images/users/user-sm-6.png" width="32" class="rounded-full" alt="" />
+                    <div>
+                      <p class="m-text mb-1 font-medium">Taylor Otwel</p>
+                      <span class="text-xs">example@example.com</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <div>
+                      <p class="m-text font-medium mb-1">17 Feb 2024</p>
+                      <span class="text-xs">12:00 AM</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>3</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>$25.00</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-warning-300 bg-warning-300/10 border border-neutral-30 dark:border-neutral-500">Pending</span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <button @click="row5 = !row5" class="size-10 rounded-full hover:bg-primary-50 duration-300 f-center">
+                        <i :class="row5?'rotate-180':''" class="las la-angle-down text-lg duration-300"></i>
+                      </button>
+                      <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                        <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                        <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                          <li>
+                            <a href="order-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                          </li>
+                          <li>
+                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="8">
+                    <div x-show="row5" x-collapse x-cloak class="flex w-full">
+                      <div class="w-full overflow-x-auto">
+                        <table class="w-full whitespace-nowrap">
+                          <tbody>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-1.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Nike New Shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr :class="row6?'!bg-primary-50':'bg-neutral-0 dark:bg-neutral-904'" class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <label for="#231201" class="option">
+                      <input type="checkbox" id="#231206" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>#231206</span>
+                  </td>
+                  <td class="px-6 flex items-center gap-3" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <img src="./assets/images/users/user-sm-3.png" width="32" class="rounded-full" alt="" />
+                    <div>
+                      <p class="m-text mb-1 font-medium">Adam Athan</p>
+                      <span class="text-xs">example@example.com</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <div>
+                      <p class="m-text font-medium mb-1">17 Feb 2024</p>
+                      <span class="text-xs">12:00 AM</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>3</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>$25.00</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-success-300 bg-success-300/10 border border-neutral-30 dark:border-neutral-500">Completed</span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <button @click="row6 = !row6" class="size-10 rounded-full hover:bg-primary-50 duration-300 f-center">
+                        <i :class="row6?'rotate-180':''" class="las la-angle-down text-lg duration-300"></i>
+                      </button>
+                      <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                        <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                        <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                          <li>
+                            <a href="order-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                          </li>
+                          <li>
+                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="8">
+                    <div x-show="row6" x-collapse x-cloak class="flex w-full">
+                      <div class="w-full overflow-x-auto">
+                        <table class="w-full whitespace-nowrap">
+                          <tbody>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-1.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Nike New Shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-2.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Brand new shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table x-show="activeTab=='Pending'" class="w-full whitespace-nowrap">
+              <thead class="text-left">
+                <tr class="bg-neutral-20 dark:bg-neutral-903">
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-4'">
+                    <label for="checkbox20" class="option">
+                      <input type="checkbox" id="checkbox20" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Order</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Customer</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Date</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Item</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Price</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody x-data="{row1:false, row2:false, row3:false}">
+                <tr :class="row1?'!bg-primary-50':'bg-neutral-0 dark:bg-neutral-904'" class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <label for="#231208" class="option">
+                      <input type="checkbox" id="#231208" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>#231202</span>
+                  </td>
+                  <td class="px-6 flex items-center gap-3" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <img src="./assets/images/users/user-sm-1.png" width="32" class="rounded-full" alt="" />
+                    <div>
+                      <p class="m-text mb-1 font-medium">Jenny Wilson</p>
+                      <span class="text-xs">example@example.com</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <div>
+                      <p class="m-text font-medium mb-1">17 Feb 2024</p>
+                      <span class="text-xs">12:00 AM</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>3</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>$25.00</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-warning-300 bg-warning-300/10 border border-neutral-30 dark:border-neutral-500">Pending</span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <button @click="row1 = !row1" class="size-10 rounded-full hover:bg-primary-50 duration-300 f-center">
+                        <i :class="row1?'rotate-180':''" class="las la-angle-down text-lg duration-300"></i>
+                      </button>
+                      <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                        <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                        <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                          <li>
+                            <a href="order-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                          </li>
+                          <li>
+                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="8">
+                    <div x-show="row1" x-collapse x-cloak class="flex w-full">
+                      <div class="w-full overflow-x-auto">
+                        <table class="w-full whitespace-nowrap">
+                          <tbody>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-1.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Nike New Shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-2.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Brand new shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr :class="row2?'!bg-primary-50':'bg-neutral-0 dark:bg-neutral-904'" class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <label for="#231209" class="option">
+                      <input type="checkbox" id="#231209" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>#231201</span>
+                  </td>
+                  <td class="px-6 flex items-center gap-3" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <img src="./assets/images/users/user-sm-2.png" width="32" class="rounded-full" alt="" />
+                    <div>
+                      <p class="m-text mb-1 font-medium">John Doe</p>
+                      <span class="text-xs">example@example.com</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <div>
+                      <p class="m-text font-medium mb-1">19 Feb 2024</p>
+                      <span class="text-xs">12:00 AM</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>3</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>$25.00</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-warning-300 bg-warning-300/10 border border-neutral-30 dark:border-neutral-500">Pending</span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <button @click="row2 = !row2" class="size-10 rounded-full hover:bg-primary-50 duration-300 f-center">
+                        <i :class="row2?'rotate-180':''" class="las la-angle-down text-lg duration-300"></i>
+                      </button>
+                      <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                        <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                        <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                          <li>
+                            <a href="order-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                          </li>
+                          <li>
+                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="8">
+                    <div x-show="row2" x-collapse x-cloak class="flex w-full">
+                      <div class="w-full overflow-x-auto">
+                        <table class="w-full whitespace-nowrap">
+                          <tbody>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-1.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Nike New Shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr :class="row3?'!bg-primary-50':'bg-neutral-0 dark:bg-neutral-904'" class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <label for="#231210" class="option">
+                      <input type="checkbox" id="#231210" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>#231209</span>
+                  </td>
+                  <td class="px-6 flex items-center gap-3" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <img src="./assets/images/users/user-sm-3.png" width="32" class="rounded-full" alt="" />
+                    <div>
+                      <p class="m-text mb-1 font-medium">Amir Jaman</p>
+                      <span class="text-xs">example@example.com</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <div>
+                      <p class="m-text font-medium mb-1">17 Feb 2024</p>
+                      <span class="text-xs">12:00 AM</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>3</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>$25.00</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-warning-300 bg-warning-300/10 border border-neutral-30 dark:border-neutral-500">Pending</span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <button @click="row3 = !row3" class="size-10 rounded-full hover:bg-primary-50 duration-300 f-center">
+                        <i :class="row3?'rotate-180':''" class="las la-angle-down text-lg duration-300"></i>
+                      </button>
+                      <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                        <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                        <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                          <li>
+                            <a href="order-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                          </li>
+                          <li>
+                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="8">
+                    <div x-show="row3" x-collapse x-cloak class="flex w-full">
+                      <div class="w-full overflow-x-auto">
+                        <table class="w-full whitespace-nowrap">
+                          <tbody>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-1.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Nike New Shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-2.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Brand new shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table x-show="activeTab=='Completed'" class="w-full whitespace-nowrap">
+              <thead class="text-left">
+                <tr class="bg-neutral-20 dark:bg-neutral-903">
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-4'">
+                    <label for="checkbox11" class="option">
+                      <input type="checkbox" id="checkbox11" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Order</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Customer</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Date</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Item</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Price</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody x-data="{row1:false, row2:false, row3:false}">
+                <tr :class="row1?'!bg-primary-50':'bg-neutral-0 dark:bg-neutral-904'" class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <label for="#231212" class="option">
+                      <input type="checkbox" id="#231212" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>#231212</span>
+                  </td>
+                  <td class="px-6 flex items-center gap-3" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <img src="./assets/images/users/user-sm-1.png" width="32" class="rounded-full" alt="" />
+                    <div>
+                      <p class="m-text mb-1 font-medium">Jenny Wilson</p>
+                      <span class="text-xs">example@example.com</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <div>
+                      <p class="m-text font-medium mb-1">17 Feb 2024</p>
+                      <span class="text-xs">12:00 AM</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>3</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>$25.00</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-success-300 bg-success-300/10 border border-neutral-30 dark:border-neutral-500">Completed</span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <button @click="row1 = !row1" class="size-10 rounded-full hover:bg-primary-50 duration-300 f-center">
+                        <i :class="row1?'rotate-180':''" class="las la-angle-down text-lg duration-300"></i>
+                      </button>
+                      <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                        <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                        <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                          <li>
+                            <a href="order-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                          </li>
+                          <li>
+                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="8">
+                    <div x-show="row1" x-collapse x-cloak class="flex w-full">
+                      <div class="w-full overflow-x-auto">
+                        <table class="w-full whitespace-nowrap">
+                          <tbody>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-1.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Nike New Shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-2.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Brand new shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr :class="row2?'!bg-primary-50':'bg-neutral-0 dark:bg-neutral-904'" class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <label for="#231213" class="option">
+                      <input type="checkbox" id="#231213" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>#231201</span>
+                  </td>
+                  <td class="px-6 flex items-center gap-3" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <img src="./assets/images/users/user-sm-2.png" width="32" class="rounded-full" alt="" />
+                    <div>
+                      <p class="m-text mb-1 font-medium">John Doe</p>
+                      <span class="text-xs">example@example.com</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <div>
+                      <p class="m-text font-medium mb-1">19 Feb 2024</p>
+                      <span class="text-xs">12:00 AM</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>3</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>$25.00</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-success-300 bg-success-300/10 border border-neutral-30 dark:border-neutral-500">Completed</span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <button @click="row2 = !row2" class="size-10 rounded-full hover:bg-primary-50 duration-300 f-center">
+                        <i :class="row2?'rotate-180':''" class="las la-angle-down text-lg duration-300"></i>
+                      </button>
+                      <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                        <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                        <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                          <li>
+                            <a href="order-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                          </li>
+                          <li>
+                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="8">
+                    <div x-show="row2" x-collapse x-cloak class="flex w-full">
+                      <div class="w-full overflow-x-auto">
+                        <table class="w-full whitespace-nowrap">
+                          <tbody>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-1.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Nike New Shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr :class="row3?'!bg-primary-50':'bg-neutral-0 dark:bg-neutral-904'" class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <label for="#231214" class="option">
+                      <input type="checkbox" id="#231214" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>#231209</span>
+                  </td>
+                  <td class="px-6 flex items-center gap-3" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <img src="./assets/images/users/user-sm-3.png" width="32" class="rounded-full" alt="" />
+                    <div>
+                      <p class="m-text mb-1 font-medium">Amir Jaman</p>
+                      <span class="text-xs">example@example.com</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <div>
+                      <p class="m-text font-medium mb-1">17 Feb 2024</p>
+                      <span class="text-xs">12:00 AM</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>3</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>$25.00</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-success-300 bg-success-300/10 border border-neutral-30 dark:border-neutral-500">Completed</span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <button @click="row3 = !row3" class="size-10 rounded-full hover:bg-primary-50 duration-300 f-center">
+                        <i :class="row3?'rotate-180':''" class="las la-angle-down text-lg duration-300"></i>
+                      </button>
+                      <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                        <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                        <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                          <li>
+                            <a href="order-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                          </li>
+                          <li>
+                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="8">
+                    <div x-show="row3" x-collapse x-cloak class="flex w-full">
+                      <div class="w-full overflow-x-auto">
+                        <table class="w-full whitespace-nowrap">
+                          <tbody>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-1.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Nike New Shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-2.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Brand new shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table x-show="activeTab=='Cancelled'" class="w-full whitespace-nowrap">
+              <thead class="text-left">
+                <tr class="bg-neutral-20 dark:bg-neutral-903">
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-4'">
+                    <label for="checkbox16" class="option">
+                      <input type="checkbox" id="checkbox16" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Order</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Customer</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Date</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Item</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Price</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody x-data="{row1:false, row2:false, row3:false}">
+                <tr :class="row1?'!bg-primary-50':'bg-neutral-0 dark:bg-neutral-904'" class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <label for="#231217" class="option">
+                      <input type="checkbox" id="#231217" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>#231202</span>
+                  </td>
+                  <td class="px-6 flex items-center gap-3" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <img src="./assets/images/users/user-sm-1.png" width="32" class="rounded-full" alt="" />
+                    <div>
+                      <p class="m-text mb-1 font-medium">Jenny Wilson</p>
+                      <span class="text-xs">example@example.com</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <div>
+                      <p class="m-text font-medium mb-1">17 Feb 2024</p>
+                      <span class="text-xs">12:00 AM</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>3</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>$25.00</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-error-300 bg-error-300/10 border border-neutral-30 dark:border-neutral-500">Cancelled</span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <button @click="row1 = !row1" class="size-10 rounded-full hover:bg-primary-50 duration-300 f-center">
+                        <i :class="row1?'rotate-180':''" class="las la-angle-down text-lg duration-300"></i>
+                      </button>
+                      <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                        <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                        <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                          <li>
+                            <a href="order-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                          </li>
+                          <li>
+                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="8">
+                    <div x-show="row1" x-collapse x-cloak class="flex w-full">
+                      <div class="w-full overflow-x-auto">
+                        <table class="w-full whitespace-nowrap">
+                          <tbody>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-1.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Nike New Shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-2.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Brand new shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr :class="row2?'!bg-primary-50':'bg-neutral-0 dark:bg-neutral-904'" class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <label for="#231218" class="option">
+                      <input type="checkbox" id="#231218" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>#231201</span>
+                  </td>
+                  <td class="px-6 flex items-center gap-3" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <img src="./assets/images/users/user-sm-2.png" width="32" class="rounded-full" alt="" />
+                    <div>
+                      <p class="m-text mb-1 font-medium">John Doe</p>
+                      <span class="text-xs">example@example.com</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <div>
+                      <p class="m-text font-medium mb-1">19 Feb 2024</p>
+                      <span class="text-xs">12:00 AM</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>3</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>$25.00</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-error-300 bg-error-300/10 border border-neutral-30 dark:border-neutral-500">Cancelled</span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <button @click="row2 = !row2" class="size-10 rounded-full hover:bg-primary-50 duration-300 f-center">
+                        <i :class="row2?'rotate-180':''" class="las la-angle-down text-lg duration-300"></i>
+                      </button>
+                      <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                        <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                        <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                          <li>
+                            <a href="order-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                          </li>
+                          <li>
+                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="8">
+                    <div x-show="row2" x-collapse x-cloak class="flex w-full">
+                      <div class="w-full overflow-x-auto">
+                        <table class="w-full whitespace-nowrap">
+                          <tbody>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-1.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Nike New Shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr :class="row3?'!bg-primary-50':'bg-neutral-0 dark:bg-neutral-904'" class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <label for="#231219" class="option">
+                      <input type="checkbox" id="#231219" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>#231209</span>
+                  </td>
+                  <td class="px-6 flex items-center gap-3" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <img src="./assets/images/users/user-sm-3.png" width="32" class="rounded-full" alt="" />
+                    <div>
+                      <p class="m-text mb-1 font-medium">Amir Jaman</p>
+                      <span class="text-xs">example@example.com</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <div>
+                      <p class="m-text font-medium mb-1">17 Feb 2024</p>
+                      <span class="text-xs">12:00 AM</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>3</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>$25.00</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-error-300 bg-error-300/10 border border-neutral-30 dark:border-neutral-500">Cancelled</span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <button @click="row3 = !row3" class="size-10 rounded-full hover:bg-primary-50 duration-300 f-center">
+                        <i :class="row3?'rotate-180':''" class="las la-angle-down text-lg duration-300"></i>
+                      </button>
+                      <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                        <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                        <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                          <li>
+                            <a href="order-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                          </li>
+                          <li>
+                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="8">
+                    <div x-show="row3" x-collapse x-cloak class="flex w-full">
+                      <div class="w-full overflow-x-auto">
+                        <table class="w-full whitespace-nowrap">
+                          <tbody>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-1.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Nike New Shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-2.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Brand new shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table x-show="activeTab=='Refunded'" class="w-full whitespace-nowrap">
+              <thead class="text-left">
+                <tr class="bg-neutral-20 dark:bg-neutral-903">
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-4'">
+                    <label for="checkbox23" class="option">
+                      <input type="checkbox" id="checkbox23" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Order</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Customer</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Date</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Item</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Price</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody x-data="{row1:false, row2:false, row3:false}">
+                <tr :class="row1?'!bg-primary-50':'bg-neutral-0 dark:bg-neutral-904'" class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <label for="#231224" class="option">
+                      <input type="checkbox" id="#231224" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>#231202</span>
+                  </td>
+                  <td class="px-6 flex items-center gap-3" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <img src="./assets/images/users/user-sm-1.png" width="32" class="rounded-full" alt="" />
+                    <div>
+                      <p class="m-text mb-1 font-medium">Jenny Wilson</p>
+                      <span class="text-xs">example@example.com</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <div>
+                      <p class="m-text font-medium mb-1">17 Feb 2024</p>
+                      <span class="text-xs">12:00 AM</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>3</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>$25.00</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-neutral-100 dark:text-neutral-50 bg-neutral-40 dark:bg-neutral-400 border border-neutral-30 dark:border-neutral-500">Refunded</span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <button @click="row1 = !row1" class="size-10 rounded-full hover:bg-primary-50 duration-300 f-center">
+                        <i :class="row1?'rotate-180':''" class="las la-angle-down text-lg duration-300"></i>
+                      </button>
+                      <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                        <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                        <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                          <li>
+                            <a href="order-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                          </li>
+                          <li>
+                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="8">
+                    <div x-show="row1" x-collapse x-cloak class="flex w-full">
+                      <div class="w-full overflow-x-auto">
+                        <table class="w-full whitespace-nowrap">
+                          <tbody>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-1.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Nike New Shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-2.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Brand new shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr :class="row2?'!bg-primary-50':'bg-neutral-0 dark:bg-neutral-904'" class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <label for="#231225" class="option">
+                      <input type="checkbox" id="#231225" aria-checked="false" />
+                      <span class="checkbox default"></span>
+                    </label>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>#231201</span>
+                  </td>
+                  <td class="px-6 flex items-center gap-3" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <img src="./assets/images/users/user-sm-2.png" width="32" class="rounded-full" alt="" />
+                    <div>
+                      <p class="m-text mb-1 font-medium">John Doe</p>
+                      <span class="text-xs">example@example.com</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <div>
+                      <p class="m-text font-medium mb-1">19 Feb 2024</p>
+                      <span class="text-xs">12:00 AM</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>3</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span>$25.00</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-neutral-100 dark:text-neutral-50 bg-neutral-40 dark:bg-neutral-400 border border-neutral-30 dark:border-neutral-500">Refunded</span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <button @click="row2 = !row2" class="size-10 rounded-full hover:bg-primary-50 duration-300 f-center">
+                        <i :class="row2?'rotate-180':''" class="las la-angle-down text-lg duration-300"></i>
+                      </button>
+                      <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                        <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                        <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                          <li>
+                            <a href="order-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                          </li>
+                          <li>
+                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="8">
+                    <div x-show="row2" x-collapse x-cloak class="flex w-full">
+                      <div class="w-full overflow-x-auto">
+                        <table class="w-full whitespace-nowrap">
+                          <tbody>
+                            <tr class="border-b border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904">
+                              <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="./assets/images/products/product-sm-1.png" width="60" height="40" class="rounded" alt="" />
+                                <div>
+                                  <p class="m-text mb-1 font-medium">Nike New Shoe</p>
+                                  <span class="text-xs">Shoe</span>
+                                </div>
+                              </td>
+                              <td class="px-4 py-3">x5</td>
+                              <td class="px-4 py-3">$17.84</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="mt-6 flex items-center gap-5 justify-center flex-col md:flex-row md:justify-between whitespace-nowrap">
+              <label for="switch" class="switch flex">
+                <input x-model="dense" id="switch" type="checkbox" />
+                <span class="inner primary"></span>
+                Dense
+              </label>
+              <div class="flex flex-col sm:flex-row justify-center sm:justify-between gap-5">
+                <div class="flex gap-4 items-center">
+                  <p>Rows per page :</p>
+                  <select name="rows" id="rows" class="bg-transparent dark:bg-neutral-904">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                </div>
+                <div class="f-center gap-4">
+                  <p>1-10 of 100</p>
+                  <button><i class="las la-angle-left text-xl rtl:rotate-180"></i></button> <button><i class="las la-angle-right text-xl rtl:rotate-180"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+  </body>
+</html>

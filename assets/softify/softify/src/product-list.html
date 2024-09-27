@@ -1,0 +1,221 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/dropzone.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 space-y-4 xxl:space-y-6">
+        <!-- Breadcrumb -->
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Product List</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Product</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>List</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- product list -->
+        <div
+          x-data="{products:[{ id:1, checked:false, title:'Nike Air Max 270', category:'Shoes', createdAtDate:'17 Feb 2024', createdAtTime:'12:23 AM', stock:254, price:'$25.00', status:'Published', img:'./assets/images/products/product-sm-1.png' }, { id: 2, checked:false, title: 'Adidas Ultraboost', category: 'Shoes', createdAtDate: '18 Feb 2024', createdAtTime: '02:45 PM', stock: 189, price: '$30.00', status: 'Draft', img: './assets/images/products/product-sm-2.png' }, { id: 3, checked:false, title: 'Puma Suede Classic', category: 'Shoes', createdAtDate: '19 Feb 2024', createdAtTime: '10:12 AM', stock: 312, price: '$20.00', status: 'Published', img: './assets/images/products/product-sm-3.png' }, { id: 4, checked:false, title: 'Reebok Classic Leather', category: 'Shoes', createdAtDate: '20 Feb 2024', createdAtTime: '06:30 PM', stock: 147, price: '$35.00', status: 'Draft', img: './assets/images/products/product-sm-4.png' }, { id: 5, checked:false, title: 'Vans Old Skool', category: 'Shoes', createdAtDate: '21 Feb 2024', createdAtTime: '03:15 AM', stock: 289, price: '$28.00', status: 'Published', img: './assets/images/products/product-sm-5.png' }, { id: 6, checked:false, title: 'Converse Chuck Taylor', category: 'Shoes', createdAtDate: '22 Feb 2024', createdAtTime: '11:45 AM', stock: 205, price: '$22.00', status: 'Draft', img: './assets/images/products/product-sm-6.png' }, { id: 7, checked:false, title: 'New Balance 574', category: 'Shoes', createdAtDate: '23 Feb 2024', createdAtTime: '07:20 PM', stock: 178, price: '$27.00', status: 'Published', img: './assets/images/products/product-sm-1.png' }, { id: 8, checked:false, title: 'Asics Gel-Kayano', category: 'Shoes', createdAtDate: '24 Feb 2024', createdAtTime: '04:10 AM', stock: 265, price: '$33.00', status: 'Draft', img: './assets/images/products/product-sm-2.png' }, { id: 9, checked:false, title: 'Skechers Go Walk', category: 'Shoes', createdAtDate: '25 Feb 2024', createdAtTime: '09:35 PM', stock: 149, price: '$19.00', status: 'Published', img: './assets/images/products/product-sm-3.png' }, { id: 10, checked:false, title: 'Timberland Boots', category: 'Shoes', createdAtDate: '26 Feb 2024', createdAtTime: '01:20 AM', stock: 327, price: '$40.00', status: 'Draft', img: './assets/images/products/product-sm-4.png' }, { id: 11, checked:false, title: 'Clarks Desert Boots', category: 'Shoes', createdAtDate: '27 Feb 2024', createdAtTime: '05:45 PM', stock: 209, price: '$35.00', status: 'Published', img: './assets/images/products/product-sm-5.png' }, { id: 12, checked:false, title: 'Birkenstock Sandals', category: 'Shoes', createdAtDate: '28 Feb 2024', createdAtTime: '11:10 AM', stock: 185, price: '$24.00', status: 'Draft', img: './assets/images/products/product-sm-6.png' }, { id: 13, checked:false, title: 'Crocs Classic Clog', category: 'Shoes', createdAtDate: '01 Mar 2024', createdAtTime: '08:30 PM', stock: 276, price: '$18.00', status: 'Published', img: './assets/images/products/product-sm-1.png' }, { id: 14, checked:false, title: 'Saucony Ride ISO', category: 'Shoes', createdAtDate: '02 Mar 2024', createdAtTime: '03:45 AM', stock: 159, price: '$29.00', status: 'Draft', img: './assets/images/products/product-sm-2.png' }, { id: 15, checked:false, title: 'Under Armour Curry', category: 'Shoes', createdAtDate: '03 Mar 2024', createdAtTime: '07:20 PM', stock: 294, price: '$32.00', status: 'Published', img: './assets/images/products/product-sm-3.png' }],
+           handleSelect(e){
+          const {name,checked} = e.target
+          if(name=='select-all'){
+            this.products= this.products.map(user => ({...user,checked:checked}))
+          }  
+          this.isAllChecked()       
+        },
+        isAllChecked(){
+          return this.products.every(item => item.checked==true)
+        }
+        }"
+          class="white-box"
+        >
+          <div class="flex flex-wrap gap-4 justify-between items-center bb-dashed-n30">
+            <h4>Product List</h4>
+            <div class="flex flex-wrap items-center gap-4">
+              <a href="create-product.html" class="btn-primary-outlined py-2"> <i class="las la-plus-circle text-sm"></i> New Product</a>
+              <div class="flex items-center gap-3">
+                <span>Sort By : </span>
+                <select name="sort" class="nc-select n20">
+                  <option value="all">All</option>
+                  <option value="new">New</option>
+                  <option value="old">Old</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-between items-center gap-4 flex-wrap mb-4 xl:mb-6">
+            <div class="flex gap-4 xxl:gap-6 flex-wrap">
+              <div x-data="{open:false,selected:null, items:['In Stock', 'Low Stock', 'Out of Stock']}" class="relative">
+                <div @click="open=!open" class="flex cursor-pointer items-center justify-between rounded-full border border-neutral-30 dark:border-neutral-500 w-[250px] py-2 px-5">
+                  <span x-text="selected?selected:'Stock'"></span>
+                  <i class="las la-angle-down text-lg"></i>
+                </div>
+                <div x-show="open" @click.away="open=false" class="absolute left-0 top-full z-10 flex max-h-[200px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-0 p-1 shadow-xl dark:bg-neutral-904">
+                  <template x-for="item in items">
+                    <div @click="selected=item, open=false" :class="selected===item?'bg-primary-300  text-neutral-0':'hover:bg-primary-50 dark:hover:bg-neutral-903'" class="cursor-pointer rounded-md text-sm px-4 py-2 duration-300" x-text="item"></div>
+                  </template>
+                </div>
+              </div>
+              <div x-data="{open:false,selected:null, items:['Published', 'Draft']}" class="relative">
+                <div @click="open=!open" class="flex cursor-pointer items-center justify-between rounded-full border border-neutral-30 dark:border-neutral-500 w-[250px] py-2 px-5">
+                  <span x-text="selected?selected:'Publish'"></span>
+                  <i class="las la-angle-down text-lg"></i>
+                </div>
+                <div x-show="open" @click.away="open=false" class="absolute left-0 top-full z-10 flex max-h-[200px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-0 p-1 shadow-xl dark:bg-neutral-904">
+                  <template x-for="item in items">
+                    <div @click="selected=item, open=false" :class="selected===item?'bg-primary-300  text-neutral-0':'hover:bg-primary-50 dark:hover:bg-neutral-903'" class="cursor-pointer rounded-md text-sm px-4 py-2 duration-300" x-text="item"></div>
+                  </template>
+                </div>
+              </div>
+              <div class="flex items-center rounded-full border border-neutral-30 dark:border-neutral-500 max-w-[250px] w-full py-2 px-5">
+                <input type="text" placeholder="Search" class="w-full bg-transparent" />
+                <i class="las la-search text-lg"></i>
+              </div>
+            </div>
+          </div>
+          <!-- product list -->
+          <div x-data="{dense: false}" class="checkboxes-container overflow-x-auto">
+            <table class="w-full whitespace-nowrap">
+              <thead class="text-left">
+                <tr class="bg-neutral-20 dark:bg-neutral-903">
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-4'">
+                    <label for="checkbox2" class="option">
+                      <input type="checkbox" id="checkbox2" :checked="isAllChecked()" @change="handleSelect($event)" name="select-all" aria-checked="false" />
+                      <span class="checkbox primary"></span>
+                    </label>
+                  </th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Product</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Created At</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Stock</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Price</th>
+                  <th class="px-6 duration-300" :class="dense? 'py-2': 'py-5'">Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <template x-for="product in products">
+                  <tr class="border-b border-neutral-30 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:hover:bg-neutral-903" :class="product.checked?'bg-primary-50':'bg-neutral-0 dark:bg-neutral-904'">
+                    <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                      <label :for="product.id" class="option">
+                        <input type="checkbox" :id="product.id" :name="product.id" @change="handleSelect($event)" x-model="product.checked" aria-checked="false" />
+                        <span class="checkbox primary"></span>
+                      </label>
+                    </td>
+                    <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                      <a href="product-details.html" class="flex items-center gap-3">
+                        <img :src="product.img" width="60" class="rounded" alt="product image" />
+                        <div>
+                          <p class="m-text mb-1 font-medium" x-text="product.title"></p>
+                          <span class="text-xs" x-text="product.category"></span>
+                        </div>
+                      </a>
+                    </td>
+                    <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                      <div>
+                        <p class="m-text font-medium mb-1" x-text="product.createdAtDate"></p>
+                        <span class="text-xs" x-text="product.createdAtTime"></span>
+                      </div>
+                    </td>
+                    <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                      <span x-text="product.stock"></span>
+                    </td>
+                    <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                      <span x-text="product.price"></span>
+                    </td>
+                    <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
+                      <span x-show="product.status=='Published'" class="py-2 px-5 rounded-3xl text-xs text-info-300 bg-info-300/10 border border-neutral-30 dark:border-neutral-500">Published</span>
+                      <span x-show="product.status=='Draft'" class="py-2 px-5 rounded-3xl text-xs text-neutral-100 dark:text-neutral-50 bg-neutral-40 dark:bg-neutral-400 border border-neutral-30 dark:border-neutral-500">Draft</span>
+                    </td>
+                    <td>
+                      <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                        <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                        <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                          <li>
+                            <a href="product-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                          </li>
+                          <li>
+                            <a href="edit-product.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-pen text-xl"></i> Edit </a>
+                          </li>
+                          <li>
+                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+            <div class="mt-6 flex items-center gap-5 justify-center flex-col md:flex-row md:justify-between whitespace-nowrap">
+              <label for="switch" class="switch flex">
+                <input x-model="dense" id="switch" type="checkbox" />
+                <span class="inner primary"></span>
+                Dense
+              </label>
+              <div class="flex flex-col sm:flex-row justify-center sm:justify-between gap-5">
+                <div class="flex gap-4 items-center">
+                  <p>Rows per page :</p>
+                  <select name="rows" id="rows" class="bg-transparent dark:bg-neutral-904">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                </div>
+                <div class="f-center gap-4">
+                  <p>1-10 of 100</p>
+                  <button><i class="las la-angle-left text-xl rtl:rotate-180"></i></button> <button><i class="las la-angle-right text-xl rtl:rotate-180"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/dropzone.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+  </body>
+</html>

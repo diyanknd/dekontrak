@@ -1,0 +1,165 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Grid</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Others</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Grid</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Grid -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div class="flex flex-col gap-10 lg:gap-[60px]">
+            <!-- spacing -->
+            <div x-data="{space:'gap-4'}" class="n20-box">
+              <h5 class="bb-dashed-n40">Grid Gap</h5>
+              <h6 class="mb-6 text-center">Gap : <span x-text="space"></span></h6>
+              <div class="grid grid-cols-8" :class="space">
+                <div class="bg-neutral-0 dark:bg-neutral-904 rounded-xl w-full h-24 col-span-1 shadow-10"></div>
+                <div class="bg-neutral-0 dark:bg-neutral-904 rounded-xl w-full h-24 col-span-1 shadow-10"></div>
+                <div class="bg-neutral-0 dark:bg-neutral-904 rounded-xl w-full h-24 col-span-1 shadow-10"></div>
+                <div class="bg-neutral-0 dark:bg-neutral-904 rounded-xl w-full h-24 col-span-1 shadow-10"></div>
+                <div class="bg-neutral-0 dark:bg-neutral-904 rounded-xl w-full h-24 col-span-1 shadow-10"></div>
+                <div class="bg-neutral-0 dark:bg-neutral-904 rounded-xl w-full h-24 col-span-1 shadow-10"></div>
+                <div class="bg-neutral-0 dark:bg-neutral-904 rounded-xl w-full h-24 col-span-1 shadow-10"></div>
+                <div class="bg-neutral-0 dark:bg-neutral-904 rounded-xl w-full h-24 col-span-1 shadow-10"></div>
+              </div>
+              <div class="flex flex-wrap justify-around gap-4 md:gap-6 mt-6">
+                <div class="flex gap-2 items-center custom-radio">
+                  <input @click="space='gap-0'" type="radio" name="spacing" class="scale-125 accent-primary-300" id="space-0" :checked="space=='gap-0'" />
+                  <label class="primary" for="space-0">0</label>
+                </div>
+                <div class="flex gap-2 items-center custom-radio">
+                  <input @click="space='gap-2'" type="radio" name="spacing" class="scale-125 accent-primary-300" id="space-1" :checked="space=='gap-2'" />
+                  <label class="primary" for="space-1">1</label>
+                </div>
+                <div class="flex gap-2 items-center custom-radio">
+                  <input @click="space='gap-4'" type="radio" name="spacing" class="scale-125 accent-primary-300" id="space-2" :checked="space=='gap-4'" />
+                  <label class="primary" for="space-2">2</label>
+                </div>
+                <div class="flex gap-2 items-center custom-radio">
+                  <input @click="space='gap-6'" type="radio" name="spacing" class="scale-125 accent-primary-300" id="space-3" :checked="space=='gap-6'" />
+                  <label class="primary" for="space-3">3</label>
+                </div>
+                <div class="flex gap-2 items-center custom-radio">
+                  <input @click="space='gap-8'" type="radio" name="spacing" class="scale-125 accent-primary-300" id="space-4" :checked="space=='gap-8'" />
+                  <label class="primary" for="space-4">4</label>
+                </div>
+                <div class="flex gap-2 items-center custom-radio">
+                  <input @click="space='gap-10'" type="radio" name="spacing" class="scale-125 accent-primary-300" id="space-5" :checked="space=='gap-10'" />
+                  <label class="primary" for="space-5">5</label>
+                </div>
+                <div class="flex gap-2 items-center custom-radio">
+                  <input @click="space='gap-12'" type="radio" name="spacing" class="scale-125 accent-primary-300" id="space-6" :checked="space=='gap-12'" />
+                  <label class="primary" for="space-6">6</label>
+                </div>
+                <div class="flex gap-2 items-center custom-radio">
+                  <input @click="space='gap-14'" type="radio" name="spacing" class="scale-125 accent-primary-300" id="space-7" :checked="space=='gap-14'" />
+                  <label class="primary" for="space-7">7</label>
+                </div>
+                <div class="flex gap-2 items-center custom-radio">
+                  <input @click="space='gap-16'" type="radio" name="spacing" class="scale-125 accent-primary-300" id="space-8" :checked="space=='gap-16'" />
+                  <label class="primary" for="space-8">8</label>
+                </div>
+                <div class="flex gap-2 items-center custom-radio">
+                  <input @click="space='gap-20'" type="radio" name="spacing" class="scale-125 accent-primary-300" id="space-9" :checked="space=='gap-20'" />
+                  <label class="primary" for="space-9">9</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column -->
+            <div x-data="{column:'col-span-3'}" class="n20-box">
+              <h5 class="bb-dashed-n40">Grid Columns</h5>
+              <div class="grid grid-cols-12 gap-4 lg:gap-6 text-center">
+                <div x-text="column" :class="column" class="bg-neutral-0 dark:bg-neutral-904 text-xs lg:text-sm rounded-xl w-full h-16 shadow-10 f-center"></div>
+                <div x-text="column" :class="column" class="bg-neutral-0 dark:bg-neutral-904 text-xs lg:text-sm rounded-xl w-full h-16 shadow-10 f-center"></div>
+                <div x-text="column" :class="column" class="bg-neutral-0 dark:bg-neutral-904 text-xs lg:text-sm rounded-xl w-full h-16 shadow-10 f-center"></div>
+                <div x-text="column" :class="column" class="bg-neutral-0 dark:bg-neutral-904 text-xs lg:text-sm rounded-xl w-full h-16 shadow-10 f-center"></div>
+                <div x-text="column" :class="column" class="bg-neutral-0 dark:bg-neutral-904 text-xs lg:text-sm rounded-xl w-full h-16 shadow-10 f-center"></div>
+                <div x-text="column" :class="column" class="bg-neutral-0 dark:bg-neutral-904 text-xs lg:text-sm rounded-xl w-full h-16 shadow-10 f-center"></div>
+                <div x-text="column" :class="column" class="bg-neutral-0 dark:bg-neutral-904 text-xs lg:text-sm rounded-xl w-full h-16 shadow-10 f-center"></div>
+                <div x-text="column" :class="column" class="bg-neutral-0 dark:bg-neutral-904 text-xs lg:text-sm rounded-xl w-full h-16 shadow-10 f-center"></div>
+                <div x-text="column" :class="column" class="bg-neutral-0 dark:bg-neutral-904 text-xs lg:text-sm rounded-xl w-full h-16 shadow-10 f-center"></div>
+                <div x-text="column" :class="column" class="bg-neutral-0 dark:bg-neutral-904 text-xs lg:text-sm rounded-xl w-full h-16 shadow-10 f-center"></div>
+                <div x-text="column" :class="column" class="bg-neutral-0 dark:bg-neutral-904 text-xs lg:text-sm rounded-xl w-full h-16 shadow-10 f-center"></div>
+                <div x-text="column" :class="column" class="bg-neutral-0 dark:bg-neutral-904 text-xs lg:text-sm rounded-xl w-full h-16 shadow-10 f-center"></div>
+              </div>
+              <div class="flex flex-wrap justify-around gap-4 md:gap-6 mt-6">
+                <div class="flex gap-2 items-center custom-radio">
+                  <input @click="column='col-span-12'" type="radio" name="column" class="scale-125 accent-primary-300" id="col-1" :checked="column=='col-span-12'" />
+                  <label class="primary" for="col-1">1 Column</label>
+                </div>
+                <div class="flex gap-2 items-center custom-radio">
+                  <input @click="column='col-span-6'" type="radio" name="column" class="scale-125 accent-primary-300" id="col-2" :checked="column=='col-span-6'" />
+                  <label class="primary" for="col-2">2 Column</label>
+                </div>
+                <div class="flex gap-2 items-center custom-radio">
+                  <input @click="column='col-span-4'" type="radio" name="column" class="scale-125 accent-primary-300" id="col-3" :checked="column=='col-span-4'" />
+                  <label class="primary" for="col-3">3 Column</label>
+                </div>
+                <div class="flex gap-2 items-center custom-radio">
+                  <input @click="column='col-span-3'" type="radio" name="column" class="scale-125 accent-primary-300" id="col-4" :checked="column=='col-span-3'" />
+                  <label class="primary" for="col-4">4 Column</label>
+                </div>
+                <div class="flex gap-2 items-center custom-radio">
+                  <input @click="column='col-span-2'" type="radio" name="column" class="scale-125 accent-primary-300" id="col-6" :checked="column=='col-span-2'" />
+                  <label class="primary" for="col-6">6 Column</label>
+                </div>
+                <div class="flex gap-2 items-center custom-radio">
+                  <input @click="column='col-span-1'" type="radio" name="column" class="scale-125 accent-primary-300" id="col-12" :checked="column=='col-span-1'" />
+                  <label class="primary" for="col-12">12 Column</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,440 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" class="relative overflow-x-hidden" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Blogs</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Pages</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Blogs</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- blogs section -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 sm:justify-between items-center mb-7 lg:mb-10">
+              <form class="max-w-[337px] rounded-full bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 p-1 flex">
+                <input type="text" class="px-4 py-2 w-full bg-transparent" placeholder="Search..." />
+                <button class="size-10 shrink-0 rounded-full bg-primary-300 text-neutral-0 f-center">
+                  <i class="las la-search text-2xl"></i>
+                </button>
+              </form>
+              <div class="flex items-center gap-3">
+                <span>Sort By : </span>
+                <select name="sort" class="nc-select">
+                  <option value="day">Latest</option>
+                  <option value="week">Popular</option>
+                  <option value="year"></option>
+                </select>
+              </div>
+            </div>
+            <div class="grid grid-cols-12 gap-4 lg:gap-6 mb-6 xl:mb-10">
+              <div class="col-span-12 lg:col-span-8 xxl:col-span-6">
+                <div class="rounded-xl centered-slide-overlay">
+                  <img src="./assets/images/blog/blog-1.png" class="rounded-xl w-full min-h-[300px] object-cover object-center" alt="" />
+                  <div class="absolute inset-0 p-6 xl:p-8 flex flex-col z-[3] justify-between">
+                    <div class="flex justify-between grow items-start">
+                      <img src="./assets/images/avatar/avatar-1.png" width="48" class="rounded-full" alt="" />
+                      <span class="rounded-lg bg-error-300 text-neutral-0 text-sm px-2.5 xl:px-4 py-1.5"> 24/04/24 </span>
+                    </div>
+                    <div class="flex flex-col">
+                      <div class="flex gap-4 mb-4">
+                        <div class="flex items-center gap-2 text-neutral-0">
+                          <button><i class="las la-thumbs-up text-xl"></i></button>
+                          9.3k
+                        </div>
+                        <div class="flex items-center gap-2 text-neutral-0">
+                          <button><i class="las la-comment text-xl"></i></button>
+                          1.3k
+                        </div>
+                        <div class="flex items-center gap-2 text-neutral-0">
+                          <button><i class="las la-share-alt-square text-xl"></i></button>
+                          16.3k
+                        </div>
+                      </div>
+                      <a href="blog-single.html" class="text-neutral-0 h2 mb-3 xl:mb-6 !leading-tight">5 Tips for Choosing the Perfect Pair of Boots for Fall</a>
+                      <a href="blog-single.html" class="flex items-center gap-2 text-primary-300 font-semibold">Read Blog <i class="las la-arrow-right text-xl"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 md:col-span-6 lg:col-span-4 xxl:col-span-3">
+                <div class="rounded-xl centered-slide-overlay">
+                  <img src="./assets/images/blog/blog-2.png" class="rounded-xl w-full" alt="" />
+                  <div class="absolute inset-0 p-3 sm:p-4 xl:p-6 flex flex-col z-[3] justify-between">
+                    <div class="flex justify-between grow items-start">
+                      <img src="./assets/images/avatar/avatar-1.png" width="48" class="rounded-full" alt="" />
+                      <span class="rounded-lg bg-error-300 text-neutral-0 text-sm px-2.5 xl:px-4 py-1.5"> 24/04/24 </span>
+                    </div>
+                    <div class="flex flex-col">
+                      <div class="flex gap-4 mb-4">
+                        <div class="flex items-center gap-2 text-neutral-0">
+                          <button><i class="las la-thumbs-up text-xl"></i></button>
+                          9.3k
+                        </div>
+                        <div class="flex items-center gap-2 text-neutral-0">
+                          <button><i class="las la-comment text-xl"></i></button>
+                          1.3k
+                        </div>
+                        <div class="flex items-center gap-2 text-neutral-0">
+                          <button><i class="las la-share-alt-square text-xl"></i></button>
+                          16.3k
+                        </div>
+                      </div>
+                      <a href="blog-single.html" class="text-neutral-0 mb-3 h4 xl:mb-6 leading-tight max-two-line">Confessions of a Boot Addict: How I Ended...</a>
+                      <a href="blog-single.html" class="flex items-center gap-2 text-primary-300 font-semibold">Read Blog <i class="las la-arrow-right text-xl"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 md:col-span-6 lg:col-span-4 xxl:col-span-3">
+                <div class="rounded-xl centered-slide-overlay">
+                  <img src="./assets/images/blog/blog-3.png" class="rounded-xl w-full" alt="" />
+                  <div class="absolute inset-0 p-3 sm:p-4 xl:p-6 flex flex-col z-[3] justify-between">
+                    <div class="flex justify-between grow items-start">
+                      <img src="./assets/images/avatar/avatar-1.png" width="48" class="rounded-full" alt="" />
+                      <span class="rounded-lg bg-error-300 text-neutral-0 text-sm px-2.5 xl:px-4 py-1.5"> 24/04/24 </span>
+                    </div>
+                    <div class="flex flex-col">
+                      <div class="flex gap-4 mb-4">
+                        <div class="flex items-center gap-2 text-neutral-0">
+                          <button><i class="las la-thumbs-up text-xl"></i></button>
+                          9.3k
+                        </div>
+                        <div class="flex items-center gap-2 text-neutral-0">
+                          <button><i class="las la-comment text-xl"></i></button>
+                          1.3k
+                        </div>
+                        <div class="flex items-center gap-2 text-neutral-0">
+                          <button><i class="las la-share-alt-square text-xl"></i></button>
+                          16.3k
+                        </div>
+                      </div>
+                      <a href="blog-single.html" class="text-neutral-0 h4 mb-3 xl:mb-6 leading-tight max-two-line">How My Favorite Pair of Boots Helped...</a>
+                      <a href="blog-single.html" class="flex items-center gap-2 text-primary-300 font-semibold">Read Blog <i class="las la-arrow-right text-xl"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 4xl:grid-cols-4 gap-4 xxl:gap-6">
+                <div>
+                  <div class="rounded-xl white-box !p-2 xxl:!p-3">
+                    <div class="relative">
+                      <img src="./assets/images/blog/blog-4.png" class="rounded-xl w-full" alt="" />
+                      <div class="flex justify-between grow items-start absolute inset-0 p-3 z-[3]">
+                        <img src="./assets/images/avatar/avatar-1.png" width="48" class="rounded-full" alt="" />
+                        <span class="rounded-lg bg-error-300 text-neutral-0 text-sm px-2.5 xl:px-4 py-1.5"> 24/04/24 </span>
+                      </div>
+                    </div>
+                    <div class="sm:px-4 flex flex-col justify-between mt-4 lg:mt-6">
+                      <div class="flex flex-col mb-3">
+                        <div class="flex gap-4 mb-4">
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-thumbs-up text-xl"></i></button>
+                            9.3k
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-comment text-xl"></i></button>
+                            1.3k
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-share-alt-square text-xl"></i></button>
+                            16.3k
+                          </div>
+                        </div>
+                        <a href="blog-single.html" class="mb-3 xl:mb-6 h4 leading-tight max-two-line">Exploring the Latest Innovations: Trends</a>
+                        <a href="blog-single.html" class="flex items-center gap-2 text-primary-300 font-semibold">Read Blog <i class="las la-arrow-right text-xl"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="rounded-xl white-box !p-2 xxl:!p-3">
+                    <div class="relative">
+                      <img src="./assets/images/blog/blog-5.png" class="rounded-xl w-full" alt="" />
+                      <div class="flex justify-between grow items-start absolute inset-0 p-3 z-[3]">
+                        <img src="./assets/images/avatar/avatar-1.png" width="48" class="rounded-full" alt="" />
+                        <span class="rounded-lg bg-error-300 text-neutral-0 text-sm px-2.5 xl:px-4 py-1.5"> 24/04/24 </span>
+                      </div>
+                    </div>
+                    <div class="sm:px-4 flex flex-col justify-between mt-4 lg:mt-6">
+                      <div class="flex flex-col mb-3">
+                        <div class="flex gap-4 mb-4">
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-thumbs-up text-xl"></i></button>
+                            9.3k
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-comment text-xl"></i></button>
+                            1.3k
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-share-alt-square text-xl"></i></button>
+                            16.3k
+                          </div>
+                        </div>
+                        <a href="blog-single.html" class="mb-3 xl:mb-6 h4 leading-tight max-two-line">Reviews, and Insights in Technology Today</a>
+                        <a href="blog-single.html" class="flex items-center gap-2 text-primary-300 font-semibold">Read Blog <i class="las la-arrow-right text-xl"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="rounded-xl white-box !p-2 xxl:!p-3">
+                    <div class="relative">
+                      <img src="./assets/images/blog/blog-6.png" class="rounded-xl w-full" alt="" />
+                      <div class="flex justify-between grow items-start absolute inset-0 p-3 z-[3]">
+                        <img src="./assets/images/avatar/avatar-1.png" width="48" class="rounded-full" alt="" />
+                        <span class="rounded-lg bg-error-300 text-neutral-0 text-sm px-2.5 xl:px-4 py-1.5"> 24/04/24 </span>
+                      </div>
+                    </div>
+                    <div class="sm:px-4 flex flex-col justify-between mt-4 lg:mt-6">
+                      <div class="flex flex-col mb-3">
+                        <div class="flex gap-4 mb-4">
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-thumbs-up text-xl"></i></button>
+                            9.3k
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-comment text-xl"></i></button>
+                            1.3k
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-share-alt-square text-xl"></i></button>
+                            16.3k
+                          </div>
+                        </div>
+                        <a href="blog-single.html" class="mb-3 xl:mb-6 h4 leading-tight max-two-line">Achieving Wellness: Practical Tips</a>
+                        <a href="blog-single.html" class="flex items-center gap-2 text-primary-300 font-semibold">Read Blog <i class="las la-arrow-right text-xl"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="rounded-xl white-box !p-2 xxl:!p-3">
+                    <div class="relative">
+                      <img src="./assets/images/blog/blog-7.png" class="rounded-xl w-full" alt="" />
+                      <div class="flex justify-between grow items-start absolute inset-0 p-3 z-[3]">
+                        <img src="./assets/images/avatar/avatar-1.png" width="48" class="rounded-full" alt="" />
+                        <span class="rounded-lg bg-error-300 text-neutral-0 text-sm px-2.5 xl:px-4 py-1.5"> 24/04/24 </span>
+                      </div>
+                    </div>
+                    <div class="sm:px-4 flex flex-col justify-between mt-4 lg:mt-6">
+                      <div class="flex flex-col mb-3">
+                        <div class="flex gap-4 mb-4">
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-thumbs-up text-xl"></i></button>
+                            9.3k
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-comment text-xl"></i></button>
+                            1.3k
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-share-alt-square text-xl"></i></button>
+                            16.3k
+                          </div>
+                        </div>
+                        <a href="blog-single.html" class="mb-3 xl:mb-6 h4 leading-tight max-two-line">Healthier and Happier Life Journey</a>
+                        <a href="blog-single.html" class="flex items-center gap-2 text-primary-300 font-semibold">Read Blog <i class="las la-arrow-right text-xl"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-span-12 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-1 xxl:grid-cols-2 gap-4 xxl:gap-6">
+                <div>
+                  <div class="rounded-xl white-box !p-3 sm:gap-4 grid grid-cols-2 items-center">
+                    <div class="relative col-span-2 sm:col-span-1">
+                      <img src="./assets/images/blog/blog-8.png" class="rounded-xl w-full h-full" alt="" />
+                      <img src="./assets/images/avatar/avatar-1.png" width="48" class="rounded-full absolute top-3 right-3" alt="" />
+                      <span class="rounded-lg bg-error-300 text-neutral-0 text-sm px-2.5 xl:px-4 py-1.5 absolute bottom-3 left-3"> 24/04/24 </span>
+                    </div>
+                    <div class="flex flex-col justify-between max-sm:mt-4 col-span-2 sm:col-span-1">
+                      <div class="flex flex-col mb-3">
+                        <div class="flex gap-4 mb-4">
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-thumbs-up text-xl"></i></button>
+                            9.3k
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-comment text-xl"></i></button>
+                            1.3k
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-share-alt-square text-xl"></i></button>
+                            16.3k
+                          </div>
+                        </div>
+                        <a href="blog-single.html" class="mb-3 xl:mb-6 h4 leading-tight max-two-line">Confessions of a Boot Addict...</a>
+                        <a href="blog-single.html" class="flex items-center gap-2 text-primary-300 font-semibold">Read Blog <i class="las la-arrow-right text-xl"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="rounded-xl white-box !p-3 sm:gap-4 grid grid-cols-2 items-center">
+                    <div class="relative col-span-2 sm:col-span-1">
+                      <img src="./assets/images/blog/blog-9.png" class="rounded-xl w-full h-full" alt="" />
+                      <img src="./assets/images/avatar/avatar-1.png" width="48" class="rounded-full absolute top-3 right-3" alt="" />
+                      <span class="rounded-lg bg-error-300 text-neutral-0 text-sm px-2.5 xl:px-4 py-1.5 absolute bottom-3 left-3"> 24/04/24 </span>
+                    </div>
+                    <div class="flex flex-col justify-between max-sm:mt-4 col-span-2 sm:col-span-1">
+                      <div class="flex flex-col mb-3">
+                        <div class="flex gap-4 mb-4">
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-thumbs-up text-xl"></i></button>
+                            9.3k
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-comment text-xl"></i></button>
+                            1.3k
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-share-alt-square text-xl"></i></button>
+                            16.3k
+                          </div>
+                        </div>
+                        <a href="blog-single.html" class="mb-3 xl:mb-6 h4 leading-tight max-two-line">Discovering Hidden Gems and Adventures Around</a>
+                        <a href="blog-single.html" class="flex items-center gap-2 text-primary-300 font-semibold">Read Blog <i class="las la-arrow-right text-xl"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="rounded-xl white-box !p-3 sm:gap-4 grid grid-cols-2 items-center">
+                    <div class="relative col-span-2 sm:col-span-1">
+                      <img src="./assets/images/blog/blog-10.png" class="rounded-xl w-full h-full" alt="" />
+                      <img src="./assets/images/avatar/avatar-1.png" width="48" class="rounded-full absolute top-3 right-3" alt="" />
+                      <span class="rounded-lg bg-error-300 text-neutral-0 text-sm px-2.5 xl:px-4 py-1.5 absolute bottom-3 left-3"> 24/04/24 </span>
+                    </div>
+                    <div class="flex flex-col justify-between max-sm:mt-4 col-span-2 sm:col-span-1">
+                      <div class="flex flex-col mb-3">
+                        <div class="flex gap-4 mb-4">
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-thumbs-up text-xl"></i></button>
+                            9.3k
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-comment text-xl"></i></button>
+                            1.3k
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-share-alt-square text-xl"></i></button>
+                            16.3k
+                          </div>
+                        </div>
+                        <a href="blog-single.html" class="mb-3 xl:mb-6 h4 leading-tight max-two-line">Culinary Delights: Delicious Recipes, Cooking Tips</a>
+                        <a href="blog-single.html" class="flex items-center gap-2 text-primary-300 font-semibold">Read Blog <i class="las la-arrow-right text-xl"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="rounded-xl white-box !p-3 sm:gap-4 grid grid-cols-2 items-center">
+                    <div class="relative col-span-2 sm:col-span-1">
+                      <img src="./assets/images/blog/blog-11.png" class="rounded-xl w-full h-full" alt="" />
+                      <img src="./assets/images/avatar/avatar-1.png" width="48" class="rounded-full absolute top-3 right-3" alt="" />
+                      <span class="rounded-lg bg-error-300 text-neutral-0 text-sm px-2.5 xl:px-4 py-1.5 absolute bottom-3 left-3"> 24/04/24 </span>
+                    </div>
+                    <div class="flex flex-col justify-between max-sm:mt-4 col-span-2 sm:col-span-1">
+                      <div class="flex flex-col mb-3">
+                        <div class="flex gap-4 mb-4">
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-thumbs-up text-xl"></i></button>
+                            9.3k
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-comment text-xl"></i></button>
+                            1.3k
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <button><i class="las la-share-alt-square text-xl"></i></button>
+                            16.3k
+                          </div>
+                        </div>
+                        <a href="blog-single.html" class="mb-3 xl:mb-6 h4 leading-tight max-two-line">Style and Grace: Fashion Trends, Beauty Tips, and Lifestyle </a>
+                        <a href="blog-single.html" class="flex items-center gap-2 text-primary-300 font-semibold">Read Blog <i class="las la-arrow-right text-xl"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- pagination -->
+            <div x-data="pagination" class="flex flex-wrap items-center justify-center gap-3">
+              <button
+                x-bind:disabled="currentPage === 1"
+                @click="changePage(currentPage - 1)"
+                class="btn-primary-icon-outlined text-primary-300 size-10 select-none hover:bg-primary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-transparent disabled:hover:text-primary-200"
+              >
+                <i class="las la-angle-left text-xl"></i>
+              </button>
+
+              <template x-for="page in pageNumbers">
+                <button
+                  x-text="page"
+                  :class=" {'btn-primary-icon bg-primary-300 !text-neutral-0':page==currentPage, 'flex size-10 text-primary-300 select-none border-primary-300 hover:bg-primary-300 items-center hover:text-neutral-0 justify-center rounded-full border duration-300 font-semibold':page!='...', 'cursor-default':page=='...'}"
+                  @click="changePage(page)"
+                ></button>
+              </template>
+              <button
+                x-bind:disabled="currentPage === totalPages"
+                @click="changePage(currentPage + 1)"
+                class="btn-primary-icon-outlined size-10 select-none text-primary-300 hover:bg-primary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-transparent disabled:hover:text-primary-200"
+              >
+                <i class="las la-angle-right text-xl"></i>
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+  </body>
+</html>

@@ -1,0 +1,333 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Softify html &mdash; Documentation</title>
+  <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+  <link rel="alternate" type="application/rss+xml" title="frittt.com" href="feed/index.html" />
+  <link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/prettify.css" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <nav>
+      <div style="width: 150px; margin: 0 auto">
+        <h1>
+          <a href=""><img style="padding: 10px 0" src="img/logo.png" alt="" /></a>
+        </h1>
+      </div>
+    </nav>
+    <header>
+      <div class="container">
+        <h2 class="lone-header">Softify Documentation</h2>
+      </div>
+    </header>
+    <section>
+      <div class="container">
+        <ul class="docs-nav">
+          <li><strong>Getting Started</strong></li>
+          <li><a href="#welcome" class="cc-active">Welcome</a></li>
+          <li><a href="#features" class="cc-active">Features</a></li>
+          <li><a href="#folder" class="cc-active">Folder Arrange</a></li>
+          <li class="separator"></li>
+          <li><strong>Installation</strong></li>
+          <li><a href="#upload" class="cc-active">Upload</a></li>
+          <li><a href="#fonts" class="cc-active">Fonts</a></li>
+          <li><a href="#css" class="cc-active">CSS File</a></li>
+          <li><a href="#js" class="cc-active">JS File</a></li>
+          <li><strong>Customization</strong></li>
+          <li><a href="#logotype" class="cc-active">Code Structure</a></li>       
+          <li><a href="#tab" class="cc-active">Color Customization</a></li>
+          <li><a href="#copyright" class="cc-active">Change Copyright</a></li>
+        </ul>
+        <div class="docs-content">
+          <img src="./img/app.png" class="banner-img rounded-4" alt="">
+          <h2 class="lone-header">Softify - Client and Admin Dashboard</h2>
+          <h2>Getting Started</h2>
+          <h3 id="welcome">Welcome</h3>
+          <p>Thanks for purchasing our template :)</p>
+
+          <p>
+            It is our great pleasure that you purchased our template. And we
+            want to tell you that you don't need to write any codes for this
+            template. Just follow some instructions for customizing the
+            template.
+          </p>
+          <p>
+            If you have any questions, feel free to contact us at
+            <a href="https://themeforest.net/user/pixelaxis"><b>Pixelaxis</b></a>.
+          </p>
+          <h3 id="features">Features</h3>
+          <ul>
+            <li>Tailwindcss</li>
+            <li>Fully responsive</li>
+            <li>Dark Mode</li>
+            <li>RTL Support</li>
+            <li>125+ Pages</li>
+            <li>Clear &amp; Neat design</li>
+            <li>No Jquery</li>
+            <li>Google Fonts</li>
+            <li>Line Awesome icons</li>
+            <li>Apexcharts</li>
+            <li>Nice Select</li>
+            <li>
+              Browser compatibility (IE10+, Chrome, Safari, Firefox, Opera)
+            </li>
+            <li>Well documented</li>
+          </ul>
+          <h3 id="folder">Folder Arrange</h3>
+          <p>
+            Unzip the archive and find out the folder "buyer-file". There are
+            all the template files in this folder. You can open the following
+            files for viewing in browser.
+          </p>
+          <ol>            
+            <li><b>dist/</b> — Files after build.</li>
+            <li><b>src</b> — Main Sourse files.</li>
+            <li><b>.gitignore</b> — gitignore list.</li>
+            <li><b>.prettierrc</b> — Prettier Config file</li>
+            <li><b>package-lock.json</b> — Package version locked file.</li>
+            <li><b>package.json</b> — Package json file.</li>
+            <li><b>postcss.config.js</b> — Postcss config file.</li>
+            <li><b>readme.md</b> Readme file </li>
+            <li><b>tailwind.config.js</b> Tailwindcss config file</li>
+            <li><b>webpack.config.js</b> — Config files.</li>
+          </ol>
+          <hr />
+          <h3 id="upload">Installation</h3>
+          <ul>
+            <li>Install Node.js : Please install latest version of Node.js from <a href="https://nodejs.org/">https://nodejs.org</a></li>
+            <li>Extract main template : Extract the admin template site to your suitable directory or folder.</li>
+            <li>Open CMD in softify folder and run <code>npm install</code> for installing necessary dependencies
+            </li>
+            <li>Now run <code>npm run dev</code> for modify and see updates on browser </li>
+            <li>For production build run <code>npm run build</code> </li>
+          </ul>
+          <h4>01. FTP Upload</h4>
+          <ul>
+            <li>Open Your FTP manager and connect to your hosting</li>
+            <li>Browse to required directory (/build folder)</li>
+            <li>Upload the files inside <b>dist</b> folder</li>
+          </ul>
+          <br />
+
+          <h4 id="fonts">02. Fonts</h4>
+          <pre class="prettyprint prettyprinted">
+      &lt;!--Google Fonts--&gt;
+      <span style="color: red">
+        &#x3C;link href=&#x22;https://fonts.googleapis.com/css2?family=Inter:wght@100..900&#x26;display=swap&#x22; rel=&#x22;stylesheet&#x22; /&#x3E;
+      </span>
+    </pre>
+          <br />
+          <h4 id="css">03. Source File (CSS)</h4>
+          <pre class="prettyprint prettyprinted">
+        &#x3C;link rel=&#x22;stylesheet&#x22; href=&#x22;./assets/fonts/line-awesome/css/line-awesome.min.css&#x22; /&#x3E;
+        &#x3C;link rel=&#x22;stylesheet&#x22; href=&#x22;./assets/css/nice-select2.css&#x22; /&#x3E;
+        &#x3C;link rel=&#x22;stylesheet&#x22; href=&#x22;./assets/css/animate.min.css&#x22; /&#x3E;
+        &#x3C;link rel=&#x22;stylesheet&#x22; href=&#x22;./assets/css/swiper.min.css&#x22; /&#x3E;
+    </pre>
+          <h3>
+            <h4 id="js">04. Source File (JS)</h4>
+            <pre class="prettyprint prettyprinted" style="margin-bottom: 50px">
+        &#x3C;script src=&#x22;./assets/js/libs/swiper-bundle.min.js&#x22;&#x3E;&#x3C;/script&#x3E;
+        &#x3C;script src=&#x22;./assets/js/libs/alpine.collapse.js&#x22;&#x3E;&#x3C;/script&#x3E;
+        &#x3C;script src=&#x22;./assets/js/libs/alpine.persist.js&#x22;&#x3E;&#x3C;/script&#x3E;
+        &#x3C;script defer src=&#x22;./assets/js/libs/alpine.min.js&#x22;&#x3E;&#x3C;/script&#x3E;
+        &#x3C;script src=&#x22;./assets/js/libs/nice-select2.js&#x22;&#x3E;&#x3C;/script&#x3E;
+        &#x3C;script src=&#x22;./assets/js/libs/apexcharts.min.js&#x22;&#x3E;&#x3C;/script&#x3E;
+        &#x3C;script src=&#x22;./assets/js/charts.js&#x22;&#x3E;&#x3C;/script&#x3E;
+        &#x3C;script src=&#x22;./assets/js/main.js&#x22;&#x3E;&#x3C;/script&#x3E;
+    </pre>
+            <br />
+            <h3 id="logotype">Code Structure</h3>
+            <p>
+              This section will give you a brief description of our code.            
+            </p>           
+            <h3> 1. Navigation Section</h3>
+            <p>Navigation Section contains the top menu bar and sidebar. Top menu bar contains sidebar toggle button, search bar, dark mode toggle button, language switch dropdown, notification dropdown, customizer button and profile dropdown img. Sidebar contains menu items. Navigation section section codes are given below. </p>
+
+            <pre class="prettyprint">
+              &#x3C;section&#x3E;             
+                &#x3C;nav&#x3E;
+                  top navbar
+                &#x3C;/nav&#x3E;              
+                &#x3C;aside&#x3E;
+                  Vertical Sidebar
+                &#x3C;/aside&#x3E;          
+                &#x3C;aside&#x3E;
+                  Hoverd Sidebar
+                &#x3C;/aside&#x3E;                
+                &#x3C;nav&#x3E; 
+                  Horizontal Menu
+                &#x3C;/nav&#x3E;
+              &#x3C;/section&#x3E;
+            </pre>
+
+            <h3>2. Main Container Section</h3>
+            <pre class="prettyprint">
+              &#x3C;body&#x3E;
+                &#x3C;div&#x3E;
+                  customizer
+                &#x3C;/div&#x3E;
+                &#x3C;div&#x3E;
+                  loader
+                &#x3C;/div&#x3E;
+                &#x3C;div&#x3E;
+                  navigation
+                &#x3C;/div&#x3E;
+                &#x3C;main&#x3E;
+                  main content
+                &#x3C;/main&#x3E;
+                &#x3C;footer&#x3E;
+                  footer
+                &#x3C;/footer&#x3E;
+              &#x3C;/body&#x3E;
+            </pre>
+
+            <h3 id="tab">Customize template colors</h3>
+            <p>In order to change your template colors go to tailwind.config.js file and change colors.</p>
+            <pre class="prettyprint">
+              colors: {
+                transparent: 'transparent',
+                primary: {
+                  50: 'rgb(var(--primary-color)/.10)',
+                  75: 'rgb(var(--primary-color)/.20)',
+                  100: 'rgb(var(--primary-color)/.30)',
+                  200: 'rgb(var(--primary-color)/.60)',
+                  300: 'rgb(var(--primary-color)/1)',
+                  400: 'rgb(var(--primary-color)/1.2)',
+                  500: 'rgb(var(--primary-color)/1.4)'
+                },
+                secondary: {
+                  50: '#f4ebff',
+                  75: '#d1abff',
+                  100: '#bd89ff',
+                  200: '#a156ff',
+                  300: 'rgb(var(--secondary-color)/1)',
+                  400: '#6324b3',
+                  500: '#571f9c'
+                },
+                info: {
+                  50: '#e6f8fb',
+                  75: '#96e2ef',
+                  100: '#6bd6e9',
+                  200: '#2bc4df',
+                  300: 'rgb(var(--info-color)/1)',
+                  400: '#008198',
+                  500: '#007084'
+                },
+                success: {
+                  50: '#e9f9ef',
+                  75: '#a4e7bd',
+                  100: '#7fdda2',
+                  200: '#48cf79',
+                  300: 'rgb(var(--success-color)/1)',
+                  400: '#188a42',
+                  500: '#157839'
+                },
+                warning: {
+                  50: '#fff7e6',
+                  75: '#ffdd96',
+                  100: '#ffce6b',
+                  200: '#ffb92b',
+                  300: 'rgb(var(--warning-color)/1)',
+                  400: '#b37800',
+                  500: '#9c6800'
+                },
+                error: {
+                  50: '#ffeeea',
+                  75: '#ffbaaa',
+                  100: '#ff9d87',
+                  200: '#ff7353',
+                  300: 'rgb(var(--error-color)/1)',
+                  400: '#b33c22',
+                  500: '#9c341d'
+                },
+                neutral: {
+                  0: '#FFFFFF',
+                  10: '#FAFAFB',
+                  20: '#f5f6f6',
+                  30: '#ebeced',
+                  40: '#dfe0e2',
+                  50: '#c2c4c8',
+                  60: '#b3b6bb',
+                  70: '#a7aab0',
+                  80: '#999ca3',
+                  90: '#8a8e95',
+                  100: '#7b8088',
+                  200: '#6d717b',
+                  300: '#5e636e',
+                  400: '#525763',
+                  500: '#434956',
+                  600: '#373d4b',
+                  700: '#262d3b',
+                  800: '#171f2e',
+                  900: '#0b1323',
+                  903: '#23262B',
+                  904: '#1D1E24'
+                }
+              },
+      </pre>
+            <p>
+              To change the colors of your site you will need to edit the
+              color values inside
+              <strong>assets/scss</strong>.
+            </p>
+
+            <h3 id="copyright">Change Copyright</h3>
+            <pre class="prettyprint prettyprinted">
+              &#x3C;footer
+              :class=&#x22;[$store.app.sidebar &#x26;&#x26; $store.app.menu==&#x27;vertical&#x27;?&#x27;w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]&#x27;:&#x27;w-full&#x27;,$store.app.sidebar &#x26;&#x26; $store.app.menu==&#x27;hovered&#x27;?&#x27;w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]&#x27;:&#x27;w-full&#x27;]&#x22;
+              class=&#x22;footer bg-neutral-0 dark:bg-neutral-904 text-neutral-700 dark:text-neutral-20&#x22;
+            &#x3E;
+              &#x3C;div :class=&#x22;$store.app.menu==&#x27;horizontal&#x27; ? &#x27;max-w-[1704px] mx-auto&#x27;:&#x27;&#x27;&#x22; class=&#x22;flex flex-col items-center justify-center gap-3 px-4 py-5 lg:flex-row lg:justify-between xxl:px-8 xxl:py-6&#x22;&#x3E;
+                &#x3C;p class=&#x22;text-sm max-md:w-full max-md:text-center&#x22;&#x3E;
+                  Copyright @ &#x3C;span id=&#x22;current-year&#x22;&#x3E;&#x3C;/span&#x3E;
+                  &#x3C;a class=&#x22;text-primary-300 font-medium&#x22; href=&#x22;/&#x22;&#x3E; Softify &#x3C;/a&#x3E;
+                  . All Rights Reserved
+                &#x3C;/p&#x3E;
+            
+                &#x3C;ul class=&#x22;flex gap-3 text-sm max-lg:w-full max-lg:justify-center lg:gap-4&#x22;&#x3E;
+                  &#x3C;li&#x3E;
+                    &#x3C;a href=&#x22;#&#x22; class=&#x22;footer-link&#x22;&#x3E;Help Center&#x3C;/a&#x3E;
+                  &#x3C;/li&#x3E;
+                  &#x3C;li&#x3E;
+                    &#x3C;a href=&#x22;#&#x22; class=&#x22;footer-link&#x22;&#x3E;Privacy Policy&#x3C;/a&#x3E;
+                  &#x3C;/li&#x3E;
+                &#x3C;/ul&#x3E;
+              &#x3C;/div&#x3E;
+            &#x3C;/footer&#x3E;
+            
+    </pre>
+          </h3>
+          <h3>Support</h3>
+          <p>
+            If you have any questions, feel free to contact us at
+            <a href="https://themeforest.net/user/pixelaxis"><b>Pixelaxis</b></a>.
+          </p>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="">
+        <p>
+          &copy; Copyright
+          <a href="https://themeforest.net/user/pixelaxis">Pixelaxis</a>, <span id="year"></span>. All Rights Reserved.
+        </p>
+      </div>
+    </footer>
+  </div>
+  <script src="./js/jquery.min.js"></script>
+  <script type="text/javascript" src="./js/prettify/prettify.js"></script>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
+  <script src="./js/layout.js"></script>
+</body>
+
+</html>

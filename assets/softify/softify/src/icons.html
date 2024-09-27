@@ -1,0 +1,210 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Icons</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Icons</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Icons -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div class="flex flex-col gap-8">
+            <!-- line awesome -->
+            <div class="n20-box">
+              <h4 class="bb-dashed-n40">Line Awesome</h4>
+              <div class="flex flex-wrap gap-6 justify-between lg:gap-8 xl:gap-10 text-2xl text-neutral-700 dark:text-neutral-10">
+                <i class="lab la-500px"></i>
+                <i class="lab la-accessible-icon"></i>
+                <i class="las la-passport"></i>
+                <i class="lab la-accusoft"></i>
+                <i class="lab la-acquisitions-incorporated"></i>
+                <i class="las la-ad"></i>
+                <i class="las la-address-book"></i>
+                <i class="las la-adjust"></i>
+                <i class="las la-address-card"></i>
+                <i class="lab la-adn"></i>
+                <i class="lab la-adobe"></i>
+                <i class="lab la-adversal"></i>
+                <i class="lab la-affiliatetheme"></i>
+                <i class="las la-air-freshener"></i>
+                <i class="lab la-airbnb"></i>
+                <i class="lab la-algolia"></i>
+                <i class="las la-align-center"></i>
+                <i class="las la-align-justify"></i>
+                <i class="las la-align-right"></i>
+                <i class="las la-align-left"></i>
+                <i class="lab la-alipay"></i>
+                <i class="las la-allergies"></i>
+                <i class="lab la-amazon-pay"></i>
+                <i class="lab la-amazon"></i>
+                <i class="las la-ambulance"></i>
+                <i class="las la-american-sign-language-interpreting"></i>
+                <i class="lab la-amilia"></i>
+                <i class="las la-anchor"></i>
+                <i class="lab la-android"></i>
+                <i class="lab la-angellist"></i>
+                <i class="las la-angle-double-down"></i>
+                <i class="las la-angle-double-left"></i>
+                <i class="las la-angle-double-right"></i>
+                <i class="las la-angle-double-up"></i>
+                <i class="las la-angle-down"></i>
+                <i class="las la-angle-left"></i>
+                <i class="las la-angle-right"></i>
+                <i class="las la-angle-up"></i>
+                <i class="las la-angry"></i>
+                <i class="lab la-angrycreative"></i>
+                <i class="lab la-angular"></i>
+                <i class="las la-ankh"></i>
+                <i class="lab la-app-store-ios"></i>
+                <i class="lab la-app-store"></i>
+                <i class="lab la-apper"></i>
+                <i class="las la-apple-alt"></i>
+                <i class="lab la-apple-pay"></i>
+                <i class="lab la-apple"></i>
+                <i class="las la-archive"></i>
+                <i class="las la-archway"></i>
+                <i class="las la-arrow-alt-circle-down"></i>
+                <i class="las la-arrow-circle-left"></i>
+                <i class="las la-arrow-circle-right"></i>
+                <i class="las la-arrow-alt-circle-up"></i>
+                <i class="las la-arrow-circle-down"></i>
+                <i class="las la-arrow-down"></i>
+                <i class="las la-arrow-up"></i>
+                <i class="las la-arrow-left"></i>
+                <i class="las la-arrow-right"></i>
+                <i class="las la-arrows-alt-h"></i>
+                <i class="las la-arrows-alt"></i>
+                <i class="las la-arrows-alt-v"></i>
+                <i class="lab la-artstation"></i>
+                <i class="las la-assistive-listening-systems"></i>
+                <i class="las la-asterisk"></i>
+                <i class="lab la-asymmetrik"></i>
+                <i class="las la-at"></i>
+                <i class="las la-atlas"></i>
+                <i class="lab la-atlassian"></i>
+                <i class="las la-atom"></i>
+                <i class="lab la-audible"></i>
+                <i class="las la-audio-description"></i>
+                <i class="lab la-autoprefixer"></i>
+                <i class="lab la-avianex"></i>
+                <i class="lab la-aviato"></i>
+                <i class="las la-award"></i>
+                <i class="lab la-aws"></i>
+                <i class="las la-baby-carriage"></i>
+                <i class="las la-baby"></i>
+                <i class="las la-backspace"></i>
+                <i class="las la-backward"></i>
+                <i class="las la-bacon"></i>
+                <i class="las la-balance-scale"></i>
+                <i class="las la-balance-scale-left"></i>
+                <i class="las la-balance-scale-right"></i>
+                <i class="las la-ban"></i>
+                <i class="las la-piggy-bank"></i>
+                <i class="lab la-magento"></i>
+                <i class="lab la-pagelines"></i>
+                <i class="las la-pager"></i>
+                <i class="las la-paint-brush"></i>
+                <i class="las la-palette"></i>
+                <i class="las la-object-ungroup"></i>
+                <i class="lab la-kaggle"></i>
+                <i class="las la-paperclip"></i>
+              </div>
+            </div>
+            <!-- line awesome -->
+            <div class="n20-box">
+              <h4 class="bb-dashed-n40">Line Awesome - Social Icon</h4>
+              <div class="flex flex-wrap gap-6 justify-between lg:gap-8 xl:gap-10 text-2xl text-neutral-700 dark:text-neutral-10">
+                <i class="lab la-facebook"></i>
+                <i class="lab la-instagram"></i>
+                <i class="lab la-twitter"></i>
+                <i class="lab la-linkedin-in"></i>
+                <i class="lab la-pinterest"></i>
+                <i class="lab la-snapchat"></i>
+                <i class="lab la-youtube"></i>
+                <i class="lab la-reddit"></i>
+                <i class="lab la-tumblr"></i>
+                <i class="lab la-whatsapp"></i>
+                <i class="lab la-skype"></i>
+                <i class="lab la-discord"></i>
+                <i class="lab la-vimeo"></i>
+                <i class="lab la-flickr"></i>
+                <i class="lab la-quora"></i>
+                <i class="lab la-medium"></i>
+                <i class="lab la-github"></i>
+                <i class="lab la-dribbble"></i>
+                <i class="lab la-behance"></i>
+              </div>
+            </div>
+            <!-- line awesome -->
+            <div class="n20-box">
+              <h4 class="bb-dashed-n40">Line Awesome - Color Icon</h4>
+              <div class="flex flex-wrap gap-6 justify-between lg:gap-8 xl:gap-10 text-2xl text-neutral-700 dark:text-neutral-10">
+                <i class="las la-cookie-bite text-primary-300"></i>
+                <i class="las la-cookie-bite text-secondary-300"></i>
+                <i class="las la-cookie-bite text-info-300"></i>
+                <i class="las la-cookie-bite text-success-300"></i>
+                <i class="las la-cookie-bite text-warning-300"></i>
+                <i class="las la-cookie-bite text-error-300"></i>
+                <i class="las la-cookie-bite text-neutral-900 dark:text-neutral-200"></i>
+                <i class="las la-cookie-bite text-neutral-800 dark:text-neutral-200"></i>
+                <i class="las la-cookie-bite text-neutral-700 dark:text-neutral-200"></i>
+                <i class="las la-cookie-bite text-neutral-600 dark:text-neutral-200"></i>
+                <i class="las la-cookie-bite text-neutral-500 dark:text-neutral-200"></i>
+                <i class="las la-cookie-bite text-neutral-400 dark:text-neutral-200"></i>
+                <i class="las la-cookie-bite text-neutral-300 dark:text-neutral-200"></i>
+                <i class="las la-cookie-bite text-neutral-200 dark:text-neutral-200"></i>
+                <i class="las la-cookie-bite text-neutral-100"></i>
+                <i class="las la-cookie-bite text-neutral-90"></i>
+                <i class="las la-cookie-bite text-neutral-80"></i>
+                <i class="las la-cookie-bite text-neutral-70"></i>
+                <i class="las la-cookie-bite text-neutral-60"></i>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

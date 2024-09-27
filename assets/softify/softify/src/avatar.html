@@ -1,0 +1,387 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/github.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Avatar</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Components</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Avatar</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Avatar -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div class="space-y-4 xl:space-y-6">
+            <!-- Image -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h5 class="bb-dashed-n40">Image</h5>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+              <div x-show="!viewcode" class="flex gap-3">
+                <img class="size-10 rounded-full" src="./assets/images/avatar/avatar-1.png" alt="" />
+                <img class="size-10 rounded-full" src="./assets/images/avatar/avatar-2.png" alt="" />
+                <img class="size-10 rounded-full" src="./assets/images/avatar/avatar-3.png" alt="" />
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex gap-3 &#x22;&#x3E;
+  &#x3C;img class=&#x22;size-10 rounded-full&#x22; src=&#x22;./assets/images/avatar/avatar-1.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;img class=&#x22;size-10 rounded-full&#x22; src=&#x22;./assets/images/avatar/avatar-2.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;img class=&#x22;size-10 rounded-full&#x22; src=&#x22;./assets/images/avatar/avatar-3.png&#x22; alt=&#x22;&#x22; /&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+            <!-- Icons -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h5 class="bb-dashed-n40">Icons</h5>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <div x-show="!viewcode" class="flex gap-3 md:gap-4 flex-wrap">
+                <div class="size-8 lg:size-10 rounded-full f-center text-neutral-0 bg-primary-300">
+                  <i class="las la-user-circle text-2xl"></i>
+                </div>
+                <div class="size-8 lg:size-10 rounded-full f-center text-neutral-0 bg-secondary-300">
+                  <i class="las la-user-circle text-2xl"></i>
+                </div>
+                <div class="size-8 lg:size-10 rounded-full f-center text-neutral-0 bg-info-300">
+                  <i class="las la-user-circle text-2xl"></i>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div  class=&#x22;flex gap-3 md:gap-4 flex-wrap &#x22;&#x3E;
+  &#x3C;div class=&#x22;size-8 lg:size-10 rounded-full f-center text-neutral-0 bg-primary-300&#x22;&#x3E;
+    &#x3C;i class=&#x22;las la-user-circle text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;size-8 lg:size-10 rounded-full f-center text-neutral-0 bg-secondary-300&#x22;&#x3E;
+    &#x3C;i class=&#x22;las la-user-circle text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;size-8 lg:size-10 rounded-full f-center text-neutral-0 bg-info-300&#x22;&#x3E;
+    &#x3C;i class=&#x22;las la-user-circle text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!-- Grouped -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h5 class="bb-dashed-n40">Grouped</h5>
+
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <div x-show="!viewcode" class="flex flex-col gap-4 md:gap-6 justify-center items-center">
+                <div class="f-center">
+                  <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-1.png" alt="" />
+                  <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-2.png" alt="" />
+                  <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-3.png" alt="" />
+                  <img class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2" src="./assets/images/avatar/avatar-4.png" alt="" />
+                  <div class="size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2 bg-primary-300 font-semibold text-neutral-0 text-xs f-center">9+</div>
+                </div>
+                <div class="f-center">
+                  <img class="size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2.5" src="./assets/images/avatar/avatar-1.png" alt="" />
+                  <img class="size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2.5" src="./assets/images/avatar/avatar-2.png" alt="" />
+                  <img class="size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2.5" src="./assets/images/avatar/avatar-3.png" alt="" />
+                  <img class="size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2.5" src="./assets/images/avatar/avatar-4.png" alt="" />
+                  <div class="size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2.5 bg-primary-300 font-semibold text-neutral-0 text-xs f-center">9+</div>
+                </div>
+                <div class="f-center">
+                  <img class="size-10 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3" src="./assets/images/avatar/avatar-1.png" alt="" />
+                  <img class="size-10 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3" src="./assets/images/avatar/avatar-2.png" alt="" />
+                  <img class="size-10 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3" src="./assets/images/avatar/avatar-3.png" alt="" />
+                  <img class="size-10 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3" src="./assets/images/avatar/avatar-4.png" alt="" />
+                  <div class="size-10 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3 bg-primary-300 font-semibold text-neutral-0 m-text f-center">9+</div>
+                </div>
+                <div class="f-center">
+                  <img class="size-12 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3.5" src="./assets/images/avatar/avatar-1.png" alt="" />
+                  <img class="size-12 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3.5" src="./assets/images/avatar/avatar-2.png" alt="" />
+                  <img class="size-12 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3.5" src="./assets/images/avatar/avatar-3.png" alt="" />
+                  <img class="size-12 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3.5" src="./assets/images/avatar/avatar-4.png" alt="" />
+                  <div class="size-12 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3.5 bg-primary-300 font-semibold text-neutral-0 m-text f-center">9+</div>
+                </div>
+                <div class="f-center">
+                  <img class="size-[60px] rounded-full border border-neutral-0 dark:border-neutral-500 -mr-4" src="./assets/images/avatar/avatar-1.png" alt="" />
+                  <img class="size-[60px] rounded-full border border-neutral-0 dark:border-neutral-500 -mr-4" src="./assets/images/avatar/avatar-2.png" alt="" />
+                  <img class="size-[60px] rounded-full border border-neutral-0 dark:border-neutral-500 -mr-4" src="./assets/images/avatar/avatar-3.png" alt="" />
+                  <img class="size-[60px] rounded-full border border-neutral-0 dark:border-neutral-500 -mr-4" src="./assets/images/avatar/avatar-4.png" alt="" />
+                  <div class="size-[60px] rounded-full border border-neutral-0 dark:border-neutral-500 -mr-4 bg-primary-300 font-semibold text-neutral-0 l-text f-center">9+</div>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex flex-col gap-4 md:gap-6 justify-center items-center&#x22;&#x3E;
+&#x3C;div class=&#x22;f-center &#x22;&#x3E;
+  &#x3C;img class=&#x22;size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2&#x22; src=&#x22;./assets/images/avatar/avatar-1.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;img class=&#x22;size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2&#x22; src=&#x22;./assets/images/avatar/avatar-2.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;img class=&#x22;size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2&#x22; src=&#x22;./assets/images/avatar/avatar-3.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;img class=&#x22;size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2&#x22; src=&#x22;./assets/images/avatar/avatar-4.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;div class=&#x22;size-6 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2 bg-primary-300 font-semibold text-neutral-0 text-xs f-center&#x22;&#x3E;9+&#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+&#x3C;div class=&#x22;f-center &#x22;&#x3E;
+  &#x3C;img class=&#x22;size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2.5&#x22; src=&#x22;./assets/images/avatar/avatar-1.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;img class=&#x22;size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2.5&#x22; src=&#x22;./assets/images/avatar/avatar-2.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;img class=&#x22;size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2.5&#x22; src=&#x22;./assets/images/avatar/avatar-3.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;img class=&#x22;size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2.5&#x22; src=&#x22;./assets/images/avatar/avatar-4.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;div class=&#x22;size-8 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-2.5 bg-primary-300 font-semibold text-neutral-0 text-xs f-center&#x22;&#x3E;9+&#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+&#x3C;div class=&#x22;f-center &#x22;&#x3E;
+  &#x3C;img class=&#x22;size-10 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3&#x22; src=&#x22;./assets/images/avatar/avatar-1.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;img class=&#x22;size-10 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3&#x22; src=&#x22;./assets/images/avatar/avatar-2.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;img class=&#x22;size-10 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3&#x22; src=&#x22;./assets/images/avatar/avatar-3.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;img class=&#x22;size-10 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3&#x22; src=&#x22;./assets/images/avatar/avatar-4.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;div class=&#x22;size-10 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3 bg-primary-300 font-semibold text-neutral-0 m-text f-center&#x22;&#x3E;9+&#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+&#x3C;div class=&#x22;f-center &#x22;&#x3E;
+  &#x3C;img class=&#x22;size-12 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3.5&#x22; src=&#x22;./assets/images/avatar/avatar-1.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;img class=&#x22;size-12 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3.5&#x22; src=&#x22;./assets/images/avatar/avatar-2.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;img class=&#x22;size-12 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3.5&#x22; src=&#x22;./assets/images/avatar/avatar-3.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;img class=&#x22;size-12 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3.5&#x22; src=&#x22;./assets/images/avatar/avatar-4.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;div class=&#x22;size-12 rounded-full border border-neutral-0 dark:border-neutral-500 -mr-3.5 bg-primary-300 font-semibold text-neutral-0 m-text f-center&#x22;&#x3E;9+&#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+&#x3C;div class=&#x22;f-center &#x22;&#x3E;
+  &#x3C;img class=&#x22;size-[60px] rounded-full border border-neutral-0 dark:border-neutral-500 -mr-4&#x22; src=&#x22;./assets/images/avatar/avatar-1.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;img class=&#x22;size-[60px] rounded-full border border-neutral-0 dark:border-neutral-500 -mr-4&#x22; src=&#x22;./assets/images/avatar/avatar-2.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;img class=&#x22;size-[60px] rounded-full border border-neutral-0 dark:border-neutral-500 -mr-4&#x22; src=&#x22;./assets/images/avatar/avatar-3.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;img class=&#x22;size-[60px] rounded-full border border-neutral-0 dark:border-neutral-500 -mr-4&#x22; src=&#x22;./assets/images/avatar/avatar-4.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;div class=&#x22;size-[60px] rounded-full border border-neutral-0 dark:border-neutral-500 -mr-4 bg-primary-300 font-semibold text-neutral-0 l-text f-center&#x22;&#x3E;9+&#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!-- Letter -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h5 class="bb-dashed-n40">Letter</h5>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <div x-show="!viewcode" class="flex gap-3 md:gap-4 flex-wrap justify-center">
+                <div class="size-8 lg:size-10 rounded-full f-center text-neutral-0 bg-primary-300">
+                  <h5 class="text-neutral-0">A</h5>
+                </div>
+                <div class="size-8 lg:size-10 rounded-full f-center text-neutral-0 bg-secondary-300">
+                  <h5 class="text-neutral-0">B</h5>
+                </div>
+                <div class="size-8 lg:size-10 rounded-full f-center text-neutral-0 bg-info-300">
+                  <h5 class="text-neutral-0">C</h5>
+                </div>
+                <div class="size-8 lg:size-10 rounded-full f-center text-neutral-0 bg-warning-300">
+                  <h5 class="text-neutral-0">D</h5>
+                </div>
+                <div class="size-8 lg:size-10 rounded-full f-center text-neutral-0 bg-error-300">
+                  <h5 class="text-neutral-0">E</h5>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex gap-3 md:gap-4 flex-wrap justify-center&#x22;&#x3E;               
+  &#x3C;div class=&#x22;size-8 lg:size-10 rounded-full f-center text-neutral-0 bg-primary-300&#x22;&#x3E;
+    &#x3C;h5 class=&#x22;text-neutral-0&#x22;&#x3E;A&#x3C;/h5&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;size-8 lg:size-10 rounded-full f-center text-neutral-0 bg-secondary-300&#x22;&#x3E;
+    &#x3C;h5 class=&#x22;text-neutral-0&#x22;&#x3E;B&#x3C;/h5&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;size-8 lg:size-10 rounded-full f-center text-neutral-0 bg-info-300&#x22;&#x3E;
+    &#x3C;h5 class=&#x22;text-neutral-0&#x22;&#x3E;C&#x3C;/h5&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;size-8 lg:size-10 rounded-full f-center text-neutral-0 bg-warning-300&#x22;&#x3E;
+    &#x3C;h5 class=&#x22;text-neutral-0&#x22;&#x3E;D&#x3C;/h5&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;size-8 lg:size-10 rounded-full f-center text-neutral-0 bg-error-300&#x22;&#x3E;
+    &#x3C;h5 class=&#x22;text-neutral-0&#x22;&#x3E;E&#x3C;/h5&#x3E;
+  &#x3C;/div&#x3E;              
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+            <!-- variants -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h5 class="bb-dashed-n40">Variant</h5>
+
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <div x-show="!viewcode" class="flex gap-3 md:gap-4 flex-wrap justify-center">
+                <div class="size-8 lg:size-10 rounded-full f-center bg-primary-300 text-neutral-0">
+                  <i class="las la-wallet text-2xl"></i>
+                </div>
+                <div class="size-8 lg:size-10 rounded-2xl f-center bg-primary-300 text-neutral-0">
+                  <i class="las la-wallet text-2xl"></i>
+                </div>
+                <div class="size-8 lg:size-10 rounded-xl f-center bg-primary-300 text-neutral-0">
+                  <i class="las la-wallet text-2xl"></i>
+                </div>
+                <div class="size-8 lg:size-10 rounded-lg f-center bg-primary-300 text-neutral-0">
+                  <i class="las la-wallet text-2xl"></i>
+                </div>
+                <div class="size-8 lg:size-10 rounded f-center bg-primary-300 text-neutral-0">
+                  <i class="las la-wallet text-2xl"></i>
+                </div>
+                <div class="size-8 lg:size-10 f-center bg-primary-300 text-neutral-0">
+                  <i class="las la-wallet text-2xl"></i>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex gap-3 md:gap-4 flex-wrap justify-center&#x22;&#x3E;
+  &#x3C;div class=&#x22;size-8 lg:size-10 rounded-full f-center bg-primary-300 text-neutral-0&#x22;&#x3E;
+    &#x3C;i class=&#x22;las la-wallet text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;size-8 lg:size-10 rounded-2xl f-center bg-primary-300 text-neutral-0&#x22;&#x3E;
+    &#x3C;i class=&#x22;las la-wallet text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;size-8 lg:size-10 rounded-xl f-center bg-primary-300 text-neutral-0&#x22;&#x3E;
+    &#x3C;i class=&#x22;las la-wallet text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;size-8 lg:size-10 rounded-lg f-center bg-primary-300 text-neutral-0&#x22;&#x3E;
+    &#x3C;i class=&#x22;las la-wallet text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;size-8 lg:size-10 rounded f-center bg-primary-300 text-neutral-0&#x22;&#x3E;
+    &#x3C;i class=&#x22;las la-wallet text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;size-8 lg:size-10 f-center bg-primary-300 text-neutral-0&#x22;&#x3E;
+    &#x3C;i class=&#x22;las la-wallet text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+            <!-- sizes -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h5 class="bb-dashed-n40">Sizes</h5>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <div x-show="!viewcode" class="flex gap-3 md:gap-4 lg:gap-6 xl:gap-8 flex-wrap justify-center">
+                <div class="flex gap-3 sm:gap-4 lg:gap-6 xxl:gap-8 items-center flex-wrap justify-center">
+                  <img class="size-6 rounded-full" src="./assets/images/avatar/avatar-1.png" alt="" />
+                  <img class="size-8 rounded-full" src="./assets/images/avatar/avatar-big-2.png" alt="" />
+                  <img class="size-10 rounded-full" src="./assets/images/avatar/avatar-big-3.png" alt="" />
+                  <img class="size-12 rounded-full" src="./assets/images/avatar/avatar-big-4.png" alt="" />
+                  <img class="size-[60px] rounded-full" src="./assets/images/avatar/avatar-big-5.png" alt="" />
+                  <img class="size-20 rounded-full" src="./assets/images/avatar/avatar-big-6.png" alt="" />
+                </div>
+                <div class="flex gap-3 sm:gap-4 lg:gap-6 xxl:gap-8 items-center flex-wrap justify-center">
+                  <img class="size-[100px] rounded-full" src="./assets/images/avatar/avatar-big-4.png" alt="" />
+                  <img class="size-[120px] rounded-full" src="./assets/images/avatar/avatar-big-5.png" alt="" />
+                  <img class="size-[140px] rounded-full" src="./assets/images/avatar/avatar-big-6.png" alt="" />
+                </div>
+                <div class="flex gap-3 sm:gap-4 lg:gap-6 xxl:gap-8 items-center flex-wrap justify-center">
+                  <img class="size-[160px] rounded-full" src="./assets/images/avatar/avatar-big-5.png" alt="" />
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+              
+&#x3C;div class=&#x22;flex gap-3 md:gap-4 lg:gap-6 xl:gap-8 flex-wrap justify-center&#x22;&#x3E;
+  &#x3C;div class=&#x22;flex gap-3 sm:gap-4 lg:gap-6 xxl:gap-8 items-center flex-wrap justify-center&#x22;&#x3E;
+    &#x3C;img class=&#x22;size-6 rounded-full&#x22; src=&#x22;./assets/images/avatar/avatar-1.png&#x22; alt=&#x22;&#x22; /&#x3E;
+    &#x3C;img class=&#x22;size-8 rounded-full&#x22; src=&#x22;./assets/images/avatar/avatar-big-2.png&#x22; alt=&#x22;&#x22; /&#x3E;
+    &#x3C;img class=&#x22;size-10 rounded-full&#x22; src=&#x22;./assets/images/avatar/avatar-big-3.png&#x22; alt=&#x22;&#x22; /&#x3E;
+    &#x3C;img class=&#x22;size-12 rounded-full&#x22; src=&#x22;./assets/images/avatar/avatar-big-4.png&#x22; alt=&#x22;&#x22; /&#x3E;
+    &#x3C;img class=&#x22;size-[60px] rounded-full&#x22; src=&#x22;./assets/images/avatar/avatar-big-5.png&#x22; alt=&#x22;&#x22; /&#x3E;
+    &#x3C;img class=&#x22;size-20 rounded-full&#x22; src=&#x22;./assets/images/avatar/avatar-big-6.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;flex gap-3 sm:gap-4 lg:gap-6 xxl:gap-8 items-center flex-wrap justify-center&#x22;&#x3E;
+    &#x3C;img class=&#x22;size-[100px] rounded-full&#x22; src=&#x22;./assets/images/avatar/avatar-big-4.png&#x22; alt=&#x22;&#x22; /&#x3E;
+    &#x3C;img class=&#x22;size-[120px] rounded-full&#x22; src=&#x22;./assets/images/avatar/avatar-big-5.png&#x22; alt=&#x22;&#x22; /&#x3E;
+    &#x3C;img class=&#x22;size-[140px] rounded-full&#x22; src=&#x22;./assets/images/avatar/avatar-big-6.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;flex gap-3 sm:gap-4 lg:gap-6 xxl:gap-8 items-center flex-wrap justify-center&#x22;&#x3E;
+    &#x3C;img class=&#x22;size-[160px] rounded-full&#x22; src=&#x22;./assets/images/avatar/avatar-big-5.png&#x22; alt=&#x22;&#x22; /&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                
+                  </code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+    <script src="./assets/js/libs/highlight.js"></script>
+    <script src="./assets/js/libs/sweetalert.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,375 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/flatpicker.min.css" />
+    <link rel="stylesheet" href="./assets/css/timepicker.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Datepickers</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Forms</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Datepickers</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Pickers -->
+        <section class="white-box grid grid-cols-1 lg:grid-cols-2 gap-4 xl:gap-6">
+          <!-- Basic -->
+          <div class="white-box">
+            <h4 class="bb-dashed-n30">Simple Datepicker</h4>
+            <div class="flex flex-col gap-6">
+              <div class="form-input">
+                <input type="date" placeholder="Enter Date" id="desktop-date" />
+                <label for="desktop">For Desktop</label>
+              </div>
+              <div x-data="calendar" class="form-input">
+                <div x-data="modal">
+                  <div>
+                    <input @click="openModal" type="text" placeholder="For Mobile" id="mobile" :value="selectedDate ? selectedDate.toDateString() : ''" readonly />
+                    <label for="mobile">For Mobile</label>
+
+                    <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                      <div class="relative flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                        <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                          <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                            <h4>Select Date</h4>
+                            <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                          </div>
+                          <h4 class="mb-4 lg:mb-6" x-text="selectedDate ? selectedDate.toDateString() : ''"></h4>
+                          <div class="mb-4 flex items-center justify-between lg:mb-6">
+                            <div class="flex items-center gap-3">
+                              <button @click="prevMonth()" class="flex size-9 items-center justify-center rounded-full bg-neutral-30 dark:bg-neutral-600">
+                                <i class="las la-angle-left"></i>
+                              </button>
+                              <button @click="nextMonth()" class="flex size-9 items-center justify-center rounded-full bg-neutral-30 dark:bg-neutral-600">
+                                <i class="las la-angle-right"></i>
+                              </button>
+                            </div>
+                            <div class="relative" x-data="{dropdown:false}">
+                              <div @click="dropdown = !dropdown" class="flex items-center gap-2 text-lg font-semibold">
+                                <span x-text="monthNames[currentMonth]"></span> <span x-text="currentYear"></span>
+                                <button class="flex size-9 items-center justify-center rounded-full bg-neutral-30 dark:bg-neutral-600">
+                                  <i class="las la-angle-down"></i>
+                                </button>
+                              </div>
+                              <div x-show="dropdown" @click.away="dropdown=false">
+                                <div class="absolute right-0 top-full flex max-h-[250px] w-full min-w-[300px] flex-wrap justify-center gap-2 overflow-y-auto rounded-xl bg-neutral-0 p-4 shadow dark:bg-neutral-904 md:p-6">
+                                  <template x-for="y in years">
+                                    <button @click="year=y, goToYear(),dropdown=false" class="rounded-md px-3 py-2 hover:bg-neutral-20 dark:hover:bg-neutral-903" x-text="y"></button>
+                                  </template>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="grid grid-cols-7 gap-2 bg-neutral-20 py-3 dark:bg-neutral-903">
+                            <template x-for="day in weekDays">
+                              <div class="m-text text-center font-semibold">
+                                <span x-text="day"></span>
+                              </div>
+                            </template>
+                          </div>
+
+                          <div class="grid grid-cols-7 gap-2">
+                            <template x-for="day in daysInMonth">
+                              <div
+                                :class="{
+                                            'text-center': day.isCurrentMonth,
+                                            'text-center': !day.isCurrentMonth,
+                                            'bg-neutral-30 dark:bg-neutral-903': day.isToday ,                                         
+                                            'bg-primary-300 text-neutral-0 hover:!bg-primary-300 hover:!text-neutral-0': day.date && day.date == selectedDate ,                                         
+                                            }"
+                                class="flex cursor-pointer justify-center rounded-lg px-3 py-2 hover:bg-primary-50 hover:text-primary-300 dark:bg-neutral-903"
+                                @click="selectDate(day.date),closeModal"
+                              >
+                                <span x-text="day?.date?day.date.getDate() :''"></span>
+                              </div>
+                            </template>
+                          </div>
+
+                          <div class="mt-6 flex gap-4 border-t border-dashed border-neutral-30 pt-6 dark:border-neutral-500">
+                            <button @click="closeModal" class="btn-primary">Ok</button>
+                            <button @click="closeModal,goToDate" class="font-semibold text-primary-300">Cancel</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Basic -->
+          <div class="white-box">
+            <h4 class="bb-dashed-n30">Year, Year and Month, only Date</h4>
+            <div class="flex flex-col gap-6">
+              <div x-data="{dropdown:false, year:null}" class="form-input">
+                <input @click="dropdown = !dropdown" type="number" id="yearonly" :value="year" name="year" min="1900" max="2100" step="1" placeholder="YYYY" required />
+                <label for="yearonly">Only Year</label>
+                <div x-show="dropdown" @click.away="dropdown=false">
+                  <div class="absolute right-0 top-full z-10 flex max-h-[250px] w-full min-w-[300px] flex-wrap justify-center gap-2 overflow-y-auto rounded-xl bg-neutral-0 p-4 shadow dark:bg-neutral-904 md:p-6">
+                    <template x-for="y in Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - 50 + i)">
+                      <button @click="year=y,dropdown=false" :class="year==y?'bg-primary-300 text-neutral-0':'hover:bg-neutral-20 dark:hover:bg-neutral-903'" class="h-10 w-24 rounded-md" x-text="y"></button>
+                    </template>
+                  </div>
+                </div>
+              </div>
+              <div class="form-input">
+                <input type="month" id="month_year" />
+                <label for="month_year">Year and Month</label>
+              </div>
+              <div x-data="calendar" class="form-input">
+                <div x-data="modal">
+                  <div>
+                    <input @click="openModal" type="text" placeholder="For Mobile" id="just-day" :value="selectedDate ? selectedDate.getDate() : ''" readonly />
+                    <label for="just-day">Just Date</label>
+
+                    <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                      <div class="relative flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                        <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                          <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                            <h4>Select Date</h4>
+                            <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                          </div>
+                          <h4 class="mb-4 lg:mb-6" x-text="selectedDate ? selectedDate.toDateString() : ''"></h4>
+                          <div class="mb-4 flex items-center justify-between lg:mb-6">
+                            <div class="flex items-center gap-3">
+                              <button @click="prevMonth()" class="flex size-9 items-center justify-center rounded-full bg-neutral-30 dark:bg-neutral-600">
+                                <i class="las la-angle-left"></i>
+                              </button>
+                              <button @click="nextMonth()" class="flex size-9 items-center justify-center rounded-full bg-neutral-30 dark:bg-neutral-600">
+                                <i class="las la-angle-right"></i>
+                              </button>
+                            </div>
+                            <div class="relative" x-data="{dropdown:false}">
+                              <div @click="dropdown = !dropdown" class="flex items-center gap-2 text-lg font-semibold">
+                                <span x-text="monthNames[currentMonth]"></span> <span x-text="currentYear"></span>
+                                <button class="flex size-9 items-center justify-center rounded-full bg-neutral-30 dark:bg-neutral-600">
+                                  <i class="las la-angle-down"></i>
+                                </button>
+                              </div>
+                              <div x-show="dropdown" @click.away="dropdown=false">
+                                <div class="absolute right-0 top-full flex max-h-[250px] w-full min-w-[300px] flex-wrap justify-center gap-2 overflow-y-auto rounded-xl bg-neutral-0 p-4 shadow dark:bg-neutral-904 md:p-6">
+                                  <template x-for="y in years">
+                                    <button @click="year=y, goToYear(),dropdown=false" class="rounded-md px-3 py-2 hover:bg-neutral-20 dark:hover:bg-neutral-903" x-text="y"></button>
+                                  </template>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="grid grid-cols-7 gap-2 bg-neutral-20 py-3 dark:bg-neutral-903">
+                            <template x-for="day in weekDays">
+                              <div class="m-text text-center font-semibold">
+                                <span x-text="day"></span>
+                              </div>
+                            </template>
+                          </div>
+
+                          <div class="grid grid-cols-7 gap-2">
+                            <template x-for="day in daysInMonth">
+                              <div
+                                :class="{
+                                            'text-center': day.isCurrentMonth,
+                                            'text-center': !day.isCurrentMonth,
+                                            'bg-neutral-30 dark:bg-neutral-903': day.isToday ,                                         
+                                            'bg-primary-300 text-neutral-0 hover:!bg-primary-300 hover:!text-neutral-0': day.date && day.date == selectedDate ,                                         
+                                            }"
+                                class="flex cursor-pointer justify-center rounded-lg px-3 py-2 hover:bg-primary-50 hover:text-primary-300 dark:bg-neutral-903"
+                                @click="selectDate(day.date),closeModal"
+                              >
+                                <span x-text="day?.date?day.date.getDate() :''"></span>
+                              </div>
+                            </template>
+                          </div>
+
+                          <div class="mt-6 flex gap-4 border-t border-dashed border-neutral-30 pt-6 dark:border-neutral-500">
+                            <button @click="closeModal" class="btn-primary">Ok</button>
+                            <button @click="closeModal,goToDate" class="font-semibold text-primary-300">Cancel</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="white-box">
+            <h4 class="bb-dashed-n30">Inline Calender</h4>
+            <div x-data="calendar" class="p-4">
+              <h4 class="mb-4 lg:mb-6" x-text="selectedDate ? selectedDate.toDateString() : new Date().toDateString()"></h4>
+              <div class="mb-4 flex items-center justify-between lg:mb-6">
+                <div class="flex items-center gap-3">
+                  <button @click="prevMonth()" class="flex size-9 items-center justify-center rounded-full bg-neutral-30 dark:bg-neutral-600">
+                    <i class="las la-angle-left"></i>
+                  </button>
+                  <button @click="nextMonth()" class="flex size-9 items-center justify-center rounded-full bg-neutral-30 dark:bg-neutral-600">
+                    <i class="las la-angle-right"></i>
+                  </button>
+                </div>
+                <div class="relative" x-data="{dropdown:false}">
+                  <div @click="dropdown = !dropdown" class="flex items-center gap-2 text-lg font-semibold">
+                    <span x-text="monthNames[currentMonth]"></span> <span x-text="currentYear"></span>
+                    <button class="flex size-9 items-center justify-center rounded-full bg-neutral-30 dark:bg-neutral-600">
+                      <i class="las la-angle-down"></i>
+                    </button>
+                  </div>
+                  <div x-show="dropdown" @click.away="dropdown=false">
+                    <div class="absolute right-0 top-full flex max-h-[250px] w-full min-w-[300px] flex-wrap justify-center gap-2 overflow-y-auto rounded-xl bg-neutral-0 p-4 shadow dark:bg-neutral-904 md:p-6">
+                      <template x-for="y in years">
+                        <button @click="year=y, goToYear(),dropdown=false" class="rounded-md px-3 py-2 hover:bg-neutral-20 dark:hover:bg-neutral-903" x-text="y"></button>
+                      </template>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-7 gap-2 bg-neutral-20 py-3 dark:bg-neutral-903">
+                <template x-for="day in weekDays">
+                  <div class="m-text text-center font-semibold">
+                    <span x-text="day"></span>
+                  </div>
+                </template>
+              </div>
+
+              <div class="grid grid-cols-7 gap-2">
+                <template x-for="day in daysInMonth">
+                  <div
+                    :class="{
+                        'text-center': day.isCurrentMonth,
+                        'text-center': !day.isCurrentMonth,
+                        'bg-neutral-30 dark:bg-neutral-903': day.isToday ,                                         
+                        'bg-primary-300 text-neutral-0 hover:!bg-primary-300 hover:!text-neutral-0': day.date && day.date == selectedDate ,                                         
+                        }"
+                    class="flex cursor-pointer justify-center rounded-lg px-3 py-2 hover:bg-primary-50 hover:text-primary-300 dark:bg-neutral-903"
+                    @click="selectDate(day.date)"
+                  >
+                    <span x-text="day?.date?day.date.getDate() :''"></span>
+                  </div>
+                </template>
+              </div>
+
+              <div class="mt-6 flex gap-4 border-t border-dashed border-neutral-30 pt-6 dark:border-neutral-500">
+                <button class="btn-primary">Ok</button>
+                <button @click="goToDate" class="font-semibold text-primary-300">Cancel</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="white-box">
+            <h4 class="bb-dashed-n30">Date With Time</h4>
+            <div class="flex flex-col gap-6">
+              <div class="form-input">
+                <input type="datetime-local" id="datetime" />
+                <label for="datetime">DateTimePicker</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="white-box">
+            <h4 class="bb-dashed-n30">12 &amp; 24 Hours Mobile Time Picker</h4>
+            <div class="flex flex-col gap-6">
+              <div class="form-input">
+                <input type="text" id="time12" placeholder="Enter Time" />
+                <label for="time12">12 Hours</label>
+              </div>
+              <div class="form-input">
+                <input type="text" id="time24" placeholder="Enter Time" />
+                <label for="time24">24 Hours</label>
+              </div>
+            </div>
+          </div>
+
+          <div x-data="{start:new Date().toDateString(), end:new Date().toDateString()}" class="white-box">
+            <h4 class="bb-dashed-n40">Date Range With Modal</h4>
+            <div x-data="modal" class="flex flex-col items-center">
+              <button @click="openModal" class="btn-primary mb-6">Click Me!</button>
+              <div class="flex flex-col gap-2">
+                <p class="m-text"><span class="font-medium">Start : </span> <span x-text="start?start:''"></span></p>
+                <p class="m-text"><span class="font-medium">End : </span> <span x-text="end?end:''"></span></p>
+              </div>
+              <template x-teleport="body">
+                <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60 dark:bg-neutral-40/80" :class="isOpen && '!block'">
+                  <div class="flex min-h-screen items-center justify-center px-4 text-neutral-700 dark:text-neutral-20" @click.self="closeModal">
+                    <div x-show="isOpen" x-transition class="panel my-8 w-full max-w-2xl overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                      <form @submit.prevent>
+                        <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                          <h4>Select Date Range</h4>
+                          <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                        </div>
+                        <div class="mb-6 flex flex-col gap-4 lg:gap-6">
+                          <div class="form-input">
+                            <input x-model="start" type="date" id="start" />
+                            <label for="start">For Desktop</label>
+                          </div>
+                          <div class="form-input">
+                            <input x-model="end" type="date" id="end" />
+                            <label for="end">For Desktop</label>
+                          </div>
+                        </div>
+                        <div class="flex gap-4 lg:gap-6">
+                          <button class="btn-primary" @click="closeModal" type="submit">Apply</button>
+                          <button class="btn-primary-outlined" type="reset" @click="closeModal">Cancel</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+
+          <div class="white-box">
+            <h4 class="bb-dashed-n40">Date Range With Flatpiker</h4>
+            <input type="text" class="py-3 bg-transparent border border-neutral-40 dark:border-neutral-500 px-4 rounded-xl w-full" placeholder="Choose date range" id="daterange" />
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+    <script src="./assets/js/libs/mdtimepicker.min.js"></script>
+    <script src="./assets/js/libs/flatpicker.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

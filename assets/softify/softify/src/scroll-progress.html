@@ -1,0 +1,131 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Scroll Progress</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Components</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Scroll Progress</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- scroll Progress -->
+        <section
+          x-data="{
+        init() {
+        window.addEventListener('scroll', () => {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight
+            this.percent = Math.round((winScroll / height) * 100)
+
+            const paraDiv = document.querySelector('.para');
+            paraDiv.addEventListener('scroll', () => {
+            const paraHeight = paraDiv.scrollHeight - paraDiv.clientHeight;
+            this.percentPara = Math.round((paraDiv.scrollTop / paraHeight) * 100);
+        });
+        })
+        },
+        percent: 0,
+        percentPara:0,
+    }"
+          class="text-neutral-700 dark:text-neutral-10 white-box"
+        >
+          <div class="fixed top-0 left-0 h-1 z-20 bg-primary-300 duration-1000 ease-in-out" :style="`width: ${percent}%`"></div>
+          <div>
+            <div class="n20-box relative">
+              <div class="absolute top-12 md:top-14 xl:top-20 left-0 h-1 z-[5] bg-primary-300 ease-in-out duration-1000" :style="`width: ${percentPara}%`"></div>
+              <h4 class="bb-dashed-n40">Scroll Container</h4>
+              <div class="h-[500px] overflow-y-auto para">
+                <p>
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five
+                  centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
+                  of Lorem Ipsum. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content
+                  here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years,
+                  sometimes by accident, sometimes on purpose (injected humour and the like). Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at
+                  Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de
+                  Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.The
+                  standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H.
+                  Rackham. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus quod aperiam tempora perferendis eos vel quia! Hic quisquam necessitatibus est, repellendus modi, nihil, molestias ducimus molestiae ratione eius voluptatem cum eum nemo voluptatum eveniet placeat dolorum esse
+                  omnis sed saepe iure enim. Odio illo iusto accusantium eum minus quod commodi nesciunt corrupti deserunt rem dolor nisi sit animi vitae corporis delectus error voluptate eos, consequatur in nostrum! Veniam nihil commodi ducimus architecto rerum hic, modi, nesciunt, perferendis
+                  expedita reiciendis possimus eaque adipisci? Perspiciatis unde enim non minima, eaque consequuntur illum eveniet ipsum animi. Minima reiciendis fugit, officiis sit placeat nesciunt animi assumenda necessitatibus ad in quo quasi fuga facilis. Odio rerum quo animi ad magnam. Neque
+                  rerum expedita, dolore quod magnam et quo fugit ut odio consectetur cum. Et neque dicta tenetur? Aspernatur, officia voluptatem cupiditate explicabo enim deleniti odit quo dicta. Quos inventore aut impedit accusamus hic sed maiores eveniet quo magnam, non exercitationem libero
+                  nisi. Odio eum cum nemo, placeat sequi recusandae, ut iure tenetur dolore rem laboriosam? Deleniti nesciunt voluptatem pariatur porro voluptatum voluptates sapiente! Pariatur, necessitatibus libero totam exercitationem dolor vero error at delectus odit sit a iure doloremque dolorum
+                  voluptate non distinctio, commodi perspiciatis maxime aperiam! Libero dignissimos soluta vero totam fugiat voluptatem, quod commodi eligendi quidem iste rem amet recusandae placeat quibusdam quae. Itaque, at quasi. Minima excepturi cumque nam suscipit autem nisi, labore accusamus?
+                  Illum dolorum voluptatibus dolores eos cupiditate commodi nihil. Animi dolorum veniam dignissimos et necessitatibus commodi accusantium eaque. Itaque aliquid vero quidem voluptate ad voluptatem, velit quos nostrum commodi voluptatum sit ab modi consequatur tenetur? Impedit, minima.
+                  Voluptatibus magnam mollitia, sequi voluptatem et numquam ipsa libero quae, magni saepe minus blanditiis omnis, totam voluptas optio quod natus consectetur eaque. Iste, debitis provident velit facere iure vero enim asperiores nulla rem. Corrupti voluptatibus nihil doloremque
+                  numquam temporibus illo non ratione similique! Libero facilis quidem corporis quibusdam, vero ex. Porro reprehenderit itaque soluta veritatis facere dicta deleniti! Repellat enim incidunt, atque nulla molestias, reiciendis doloremque inventore pariatur harum fuga itaque quidem ad
+                  aperiam perferendis eius ab laudantium iusto quam earum voluptatum est iste optio quisquam? Voluptatibus delectus facilis voluptate quo iusto itaque sed distinctio veniam culpa quidem dignissimos reiciendis, quis iste veritatis blanditiis consequatur odio ab voluptatum aliquid
+                  accusamus. Voluptatem distinctio commodi tempora id odit necessitatibus perferendis vitae repellat. Natus atque, dicta delectus, ipsum accusantium cum facilis aperiam sapiente esse officia eaque veniam qui dolore fugiat similique tenetur, ut dignissimos voluptates voluptas dolor
+                  ipsam. Esse, natus ullam veniam praesentium placeat nisi sequi eos quasi perspiciatis fugiat provident tenetur numquam soluta sit minima aspernatur perferendis? Expedita suscipit voluptates qui tempore, iusto debitis sapiente illo porro possimus deleniti iste. Dignissimos
+                  cupiditate eligendi, fuga delectus aliquid dolore sapiente. Rem reprehenderit ratione ipsam a, facere iusto quidem fugit sint tempore natus quo veritatis laboriosam at suscipit accusantium debitis? Ducimus incidunt sapiente harum excepturi culpa, cupiditate corrupti aspernatur
+                  nostrum assumenda sint, nihil repellendus provident dolore, quia ut molestias doloribus adipisci. Sint, libero dignissimos et commodi a incidunt. look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a
+                  search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in
+                  a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the
+                  word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during
+                  the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by
+                  Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus quod aperiam tempora perferendis eos vel quia! Hic quisquam necessitatibus est,
+                  repellendus modi, nihil, molestias ducimus molestiae ratione eius voluptatem cum eum nemo voluptatum eveniet placeat dolorum esse omnis sed saepe iure enim. Odio illo iusto accusantium eum minus quod commodi nesciunt corrupti deserunt rem dolor nisi sit animi vitae corporis
+                  delectus error voluptate eos, consequatur in nostrum! Veniam nihil commodi ducimus architecto rerum hic, modi, nesciunt, perferendis expedita reiciendis possimus eaque adipisci? Perspiciatis unde enim non minima, eaque consequuntur illum eveniet ipsum animi. Minima reiciendis
+                  fugit, officiis sit placeat nesciunt animi assumenda necessitatibus ad in quo quasi fuga facilis. Odio rerum quo animi ad magnam. Neque rerum expedita, dolore quod magnam et quo fugit ut odio consectetur cum. Et neque dicta tenetur? Aspernatur, officia voluptatem cupiditate
+                  explicabo enim deleniti odit quo dicta. Quos inventore aut impedit accusamus hic sed maiores eveniet quo magnam, non exercitationem libero nisi. Odio eum cum nemo, placeat sequi recusandae, ut iure tenetur dolore rem laboriosam? Deleniti nesciunt voluptatem pariatur porro
+                  voluptatum voluptates sapiente! Pariatur, necessitatibus libero totam exercitationem dolor vero error at delectus odit sit a iure doloremque dolorum voluptate non distinctio, commodi perspiciatis maxime aperiam! Libero dignissimos soluta vero totam fugiat voluptatem, quod commodi
+                  eligendi quidem iste rem amet recusandae placeat quibusdam quae. Itaque, at quasi. Minima excepturi cumque nam suscipit autem nisi, labore accusamus? Illum dolorum voluptatibus dolores eos cupiditate commodi nihil. Animi dolorum veniam dignissimos et necessitatibus commodi
+                  accusantium eaque. Itaque aliquid vero quidem voluptate ad voluptatem, velit quos nostrum commodi voluptatum sit ab modi consequatur tenetur? Impedit, minima. Voluptatibus magnam mollitia, sequi voluptatem et numquam ipsa libero quae, magni saepe minus blanditiis omnis, totam
+                  voluptas optio quod natus consectetur eaque. Iste, debitis provident velit facere iure vero enim asperiores nulla rem. Corrupti voluptatibus nihil doloremque numquam temporibus illo non ratione similique! Libero facilis quidem corporis quibusdam, vero ex. Porro reprehenderit itaque
+                  soluta veritatis facere dicta deleniti! Repellat enim incidunt, atque nulla molestias, reiciendis doloremque inventore pariatur harum fuga itaque quidem ad aperiam perferendis eius ab laudantium iusto quam earum voluptatum est iste optio quisquam? Voluptatibus delectus facilis
+                  voluptate quo iusto itaque sed distinctio veniam culpa quidem dignissimos reiciendis, quis iste veritatis blanditiis consequatur odio ab voluptatum aliquid accusamus. Voluptatem distinctio commodi tempora id odit necessitatibus perferendis vitae repellat. Natus atque, dicta
+                  delectus, ipsum accusantium cum facilis aperiam sapiente esse officia eaque veniam qui dolore fugiat similique tenetur, ut dignissimos voluptates voluptas dolor ipsam. Esse, natus ullam veniam praesentium placeat nisi sequi eos quasi perspiciatis fugiat provident tenetur numquam
+                  soluta sit minima aspernatur perferendis? Expedita suscipit voluptates qui tempore, iusto debitis sapiente illo porro possimus deleniti iste. Dignissimos cupiditate eligendi, fuga delectus aliquid dolore sapiente. Rem reprehenderit ratione ipsam a, facere iusto quidem fugit sint
+                  tempore natus quo veritatis laboriosam at suscipit accusantium debitis? Ducimus incidunt sapiente harum excepturi culpa, cupiditate corrupti aspernatur nostrum assumenda sint, nihil repellendus provident dolore, quia ut molestias doloribus adipisci. Sint, libero dignissimos et
+                  commodi a incidunt.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

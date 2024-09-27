@@ -1,0 +1,440 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Job Details</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Job</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Job Details</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div x-data="{activeTab:'content'}" class="white-box">
+          <div class="flex justify-between flex-wrap gap-4 items-center bb-dashed-n30">
+            <h4>Job Details</h4>
+            <div class="flex items-center gap-4 xxl:gap-6">
+              <a href="job-details.html" class="size-11 rounded-full f-center bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500 text-xl hover:bg-neutral-40 dark:hover:bg-neutral-500 duration-300">
+                <i class="las la-external-link-alt"></i>
+              </a>
+              <a href="edit-job.html" class="size-11 rounded-full f-center bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500 text-xl hover:bg-neutral-40 dark:hover:bg-neutral-500 duration-300">
+                <i class="las la-pen"></i>
+              </a>
+              <div x-data="{isOpen:false,selected:'Published', items:['Published','Draft']}" class="w-[124px] relative">
+                <div @click="isOpen=!isOpen" class="relative flex cursor-pointer items-center justify-between rounded-full bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 px-4 py-2.5 dark:border-neutral-500">
+                  <span class="text-sm" x-text="selected"></span>
+                  <i class="las la-angle-down duration-300" :class="isOpen?'rotate-180':'rotate-0'"></i>
+                </div>
+                <div x-show="isOpen" @click.away="isOpen=false" class="absolute left-0 top-full z-10 flex max-h-[200px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-0 p-1 shadow-xl dark:bg-neutral-904">
+                  <template x-for="item in items">
+                    <div @click="selected=item, isOpen=false" :class="selected===item?'bg-primary-300  text-neutral-0':'hover:bg-primary-50 dark:hover:bg-neutral-903'" class="cursor-pointer rounded-md px-4 py-2 duration-300 text-sm" x-text="item"></div>
+                  </template>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bb-dashed-n30">
+            <div class="col-span-12 flex flex-wrap gap-4 max-w-max rounded-lg sm:rounded-full border border-neutral-30 p-3 dark:border-neutral-500">
+              <button @click="activeTab='content'" :class="activeTab=='content' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">Job Content</button>
+              <button @click="activeTab='candidate'" :class="activeTab=='candidate' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">candidates</button>
+            </div>
+            <!-- Blog Details -->
+          </div>
+          <div x-show="activeTab=='content'" x-transition class="grid grid-cols-12 gap-4 xxl:gap-6">
+            <div class="col-span-12 lg:col-span-7 xxl:col-span-8">
+              <div class="n20-box">
+                <div class="bb-dashed-n40 flex flex-wrap gap-4 justify-between items-center">
+                  <div class="flex items-center gap-2 sm:gap-4">
+                    <h6>Share -</h6>
+                    <ul class="flex gap-3 sm:gap-4">
+                      <li>
+                        <a class="size-8 f-center text-xl rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-facebook-f"></i></a>
+                      </li>
+                      <li>
+                        <a class="size-8 f-center text-xl rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-twitter"></i></a>
+                      </li>
+                      <li>
+                        <a class="size-8 f-center text-xl rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-instagram"></i></a>
+                      </li>
+                      <li>
+                        <a class="size-8 f-center text-xl rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-pinterest"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <span class="py-2 px-5 rounded-3xl text-xs text-success-300 bg-success-300/10 border border-neutral-30 dark:border-neutral-500">Published</span>
+                </div>
+                <h2 class="mb-6">Chat GPT API developer</h2>
+                <p class="m-text mb-6 xl:mb-8">
+                  I need a Python script that extract a PDF document information. And then we can use this information to create multiple choice question using CHAT GPT. At the moment we are doing next steps: 1- Use to enter de PDF file. And then we ask to chatpdf to generate question from 5 to
+                  five.
+                </p>
+                <div class="bb-dashed-n40 xxl:mb-8 xxl:pb-8">
+                  <img src="./assets/images/job-poster.png" class="rounded-xl" alt="" />
+                </div>
+                <h3 class="bb-dashed-n40">Job Title : <span class="text-primary-300 h3">AI Engineer</span></h3>
+                <h4 class="mb-4 xl:mb-6">Skills Required :</h4>
+                <div class="flex flex-wrap items-center gap-3 lg:gap-4 bb-dashed-n40">
+                  <span class="bg-secondary-300/10 text-xs rounded-md text-secondary-300 font-medium py-1.5 px-3.5 inline-block">Python</span>
+                  <span class="bg-secondary-300/10 text-xs rounded-md text-secondary-300 font-medium py-1.5 px-3.5 inline-block">Software Architechture</span>
+                  <span class="bg-secondary-300/10 text-xs rounded-md text-secondary-300 font-medium py-1.5 px-3.5 inline-block">API Integration</span>
+                  <span class="bg-secondary-300/10 text-xs rounded-md text-secondary-300 font-medium py-1.5 px-3.5 inline-block">OpenAI</span>
+                  <span class="bg-secondary-300/10 text-xs rounded-md text-secondary-300 font-medium py-1.5 px-3.5 inline-block">HTML</span>
+                </div>
+                <h4 class="mb-4 xl:mb-6">Benefits</h4>
+                <div class="flex flex-wrap items-center gap-3 lg:gap-4 bb-dashed-n40">
+                  <span class="bg-success-300/10 text-xs rounded-xl text-success-300 font-medium py-1.5 px-3.5 inline-block">Free Parking</span>
+                  <span class="bg-success-300/10 text-xs rounded-xl text-success-300 font-medium py-1.5 px-3.5 inline-block">Bonus Commission</span>
+                  <span class="bg-success-300/10 text-xs rounded-xl text-success-300 font-medium py-1.5 px-3.5 inline-block">Travel</span>
+                </div>
+                <h5 class="mb-6">Responsibilities :</h5>
+                <ul class="space-y-4 list-disc marker:text-primary-300 ltr:pl-5 rtl:pr-5 bb-dashed-n40 xxl:mb-8 xxl:pb-8">
+                  <li>Develop, implement, and deploy AI models and algorithms for various applications.</li>
+                  <li>Collect, preprocess, and analyze large datasets to train and validate AI models.</li>
+                  <li>Design and optimize machine learning pipelines and workflows.</li>
+                  <li>Explore and experiment with new AI techniques and algorithms to improve model performance.</li>
+                  <li>Collaborate with cross-functional teams to understand business needs and translate them into AI solutions.</li>
+                  <li>Apply natural language processing (NLP) and computer vision techniques to extract insights from unstructured data.</li>
+                  <li>Implement and deploy AI models on production systems, ensuring scalability and performance.</li>
+                </ul>
+                <h5 class="mb-6">Requirements :</h5>
+                <ul class="space-y-4 list-disc marker:text-primary-300 ltr:pl-5 rtl:pr-5 mb-5 xl:mb-8">
+                  <li>Bachelor's or Master's degree in Computer Science, Data Science, or a related field.</li>
+                  <li>Strong knowledge of machine learning algorithms, statistical modeling, and AI techniques.</li>
+                  <li>Proficiency in programming languages such as Python, R, or Java.</li>
+                  <li>Experience with machine learning frameworks and libraries such as TensorFlow, PyTorch, or scikit-learn.</li>
+                  <li>Solid understanding of data preprocessing, feature engineering, and model evaluation techniques.</li>
+                  <li>Familiarity with deep learning architectures and frameworks.</li>
+                  <li>Experience with cloud platforms (e.g., AWS, Azure, GCP) for training and deploying AI models.</li>
+                </ul>
+                <p class="bb-dashed-n40 xxl:mb-8 xxl:pb-8">
+                  This job requirement provides a comprehensive overview of the skills, qualifications, and responsibilities expected from an AI Engineer. The specific requirements may vary depending on the organization and the nature of the AI projects involved.
+                </p>
+                <div class="flex flex-wrap gap-4 items-center justify-between">
+                  <div class="flex items-center flex-wrap gap-3">
+                    <h6 class="flex items-center gap-2">Tag <i class="las la-arrow-right text-xl"></i></h6>
+                    <div class="flex flex-wrap gap-4">
+                      <span class="rounded-3xl bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 px-5 py-2"> Machine Learning </span>
+                      <span class="rounded-3xl bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 px-5 py-2">AI Chatbot </span>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2 sm:gap-4">
+                    <h6>Share -</h6>
+                    <ul class="flex gap-2 sm:gap-4">
+                      <li>
+                        <a class="size-8 f-center text-lg rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-facebook-f"></i></a>
+                      </li>
+                      <li>
+                        <a class="size-8 f-center text-lg rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-twitter"></i></a>
+                      </li>
+                      <li>
+                        <a class="size-8 f-center text-lg rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-instagram"></i></a>
+                      </li>
+                      <li>
+                        <a class="size-8 f-center text-lg rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-pinterest"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12 lg:col-span-5 xxl:col-span-4 space-y-4 xxl:space-y-6">
+              <div class="n20-box space-y-4 xxl:space-y-7">
+                <div class="flex items-start gap-4 xxl:gap-6">
+                  <span class="size-12 rounded-full border border-neutral-40 dark:border-neutral-500 f-center bg-success-300/10 text-success-300 text-xl">
+                    <i class="las la-calendar-alt text-2xl"></i>
+                  </span>
+                  <div>
+                    <p class="m-text font-medium mb-3">Date Posted</p>
+                    <p class="xl-text font-medium">24/03/24</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4 xxl:gap-6">
+                  <span class="size-12 rounded-full border border-neutral-40 dark:border-neutral-500 f-center bg-secondary-300/10 text-secondary-300 text-xl">
+                    <i class="las la-calendar-check text-2xl"></i>
+                  </span>
+                  <div>
+                    <p class="m-text font-medium mb-3">Expiration Date</p>
+                    <p class="xl-text font-medium">24/05/24</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4 xxl:gap-6">
+                  <span class="size-12 rounded-full border border-neutral-40 dark:border-neutral-500 f-center bg-warning-300/10 text-warning-300 text-xl">
+                    <i class="las la-clock text-2xl"></i>
+                  </span>
+                  <div>
+                    <p class="m-text font-medium mb-3">Employment Type</p>
+                    <p class="xl-text font-medium">Part Time</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4 xxl:gap-6">
+                  <span class="size-12 rounded-full border border-neutral-40 dark:border-neutral-500 f-center bg-error-300/10 text-error-300 text-xl">
+                    <i class="las la-wallet text-2xl"></i>
+                  </span>
+                  <div>
+                    <p class="m-text font-medium mb-3">Offered Salary</p>
+                    <p class="xl-text font-medium">Negotiable</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4 xxl:gap-6">
+                  <span class="size-12 rounded-full border border-neutral-40 dark:border-neutral-500 f-center bg-info-300/10 text-info-300 text-xl">
+                    <i class="las la-chart-bar text-2xl"></i>
+                  </span>
+                  <div>
+                    <p class="m-text font-medium mb-3">Experience</p>
+                    <p class="xl-text font-medium">1 Year Exp</p>
+                  </div>
+                </div>
+              </div>
+              <div class="n20-box">
+                <div class="size-[150px] flex items-center rounded-full justify-center border border-neutral-40 dark:border-neutral-500 relative mb-8">
+                  <img src="./assets/images/company-logo-big.png" width="120" height="120" class="rounded-full" alt="" />
+                  <span class="bg-primary-300 grid place-items-center rounded-full border-2 border-neutral-0 dark:border-neutral-904 absolute bottom-4 right-1 size-8">
+                    <i class="las la-check text-lg text-neutral-0"></i>
+                  </span>
+                </div>
+                <h4 class="mb-3">Binford Ltd.</h4>
+                <p class="m-text mb-5">Member since December 31, 2020</p>
+                <ul class="flex gap-4 bb-dashed-n40">
+                  <li>
+                    <a class="size-8 f-center text-xl rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-facebook-f"></i></a>
+                  </li>
+                  <li>
+                    <a class="size-8 f-center text-xl rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-twitter"></i></a>
+                  </li>
+                  <li>
+                    <a class="size-8 f-center text-xl rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-instagram"></i></a>
+                  </li>
+                  <li>
+                    <a class="size-8 f-center text-xl rounded-full border border-primary-300 text-primary-300 hover:text-neutral-0 duration-300 hover:bg-primary-300" href="#"><i class="lab la-pinterest"></i></a>
+                  </li>
+                </ul>
+                <div class="overflow-x-auto">
+                  <table class="w-full whitespace-nowrap">
+                    <tr>
+                      <td class="py-4 m-text min-w-40">Email Address</td>
+                      <td class="py-4 m-text font-medium">demo@example.com</td>
+                    </tr>
+                    <tr>
+                      <td class="py-4 m-text min-w-40">Phone Number</td>
+                      <td class="py-4 m-text font-medium">(225) 555-0118</td>
+                    </tr>
+                    <tr>
+                      <td class="py-4 m-text min-w-40">Address</td>
+                      <td class="py-4 m-text font-medium">4140 Parker Rd. Allentown, New Mexico 31134</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            x-data="{candidates:[
+            {
+              id: 1,
+              name: 'Devon Lane',
+              avatar: './assets/images/avatar/avatar-big-1.png',
+              designation: 'Software Engineer',
+            },
+            {
+              id: 2,
+              name: 'George Washington',
+              avatar: './assets/images/avatar/avatar-big-2.png',
+              designation: 'UI/UX Designer',
+            },
+            {
+              id: 3,
+              name: 'Emily Rodriguez',
+              avatar: './assets/images/avatar/avatar-big-3.png',
+              designation: 'Product Manager',
+            },
+            {
+              id: 4,
+              name: 'Michael Johnson',
+              avatar: './assets/images/avatar/avatar-big-4.png',
+              designation: 'Data Analyst',
+            },
+            {
+              id: 5,
+              name: 'Sarah Thompson',
+              avatar: './assets/images/avatar/avatar-big-5.png',
+              designation: 'Project Manager',
+            },
+            {
+              id: 6,
+              name: 'David Wilson',
+              avatar: './assets/images/avatar/avatar-big-1.png',
+              designation: 'Front-end Developer',
+            },
+            {
+              id: 7,
+              name: 'Jessica Anderson',
+              avatar: './assets/images/avatar/avatar-big-2.png',
+              designation: 'Marketing Specialist',
+            },
+            {
+              id: 8,
+              name: 'Christopher Martinez',
+              avatar: './assets/images/avatar/avatar-big-3.png',
+              designation: 'Business Analyst',
+            },
+            {
+              id: 9,
+              name: 'Ashley Davis',
+              avatar: './assets/images/avatar/avatar-big-4.png',
+              designation: 'Quality Assurance',
+            },
+            {
+              id: 10,
+              name: 'Emily Rodriguez',
+              avatar: './assets/images/avatar/avatar-big-3.png',
+              designation: 'Product Manager',
+            },
+            {
+              id: 11,
+              name: 'Michael Johnson',
+              avatar: './assets/images/avatar/avatar-big-4.png',
+              designation: 'Data Analyst',
+            },
+            {
+              id: 12,
+              name: 'Sarah Thompson',
+              avatar: './assets/images/avatar/avatar-big-5.png',
+              designation: 'Project Manager',
+            },
+            {
+              id: 13,
+              name: 'David Wilson',
+              avatar: './assets/images/avatar/avatar-big-1.png',
+              designation: 'Front-end Developer',
+            },
+            {
+              id: 14,
+              name: 'Jessica Anderson',
+              avatar: './assets/images/avatar/avatar-big-2.png',
+              designation: 'Marketing Specialist',
+            },
+            {
+              id: 15,
+              name: 'Christopher Martinez',
+              avatar: './assets/images/avatar/avatar-big-3.png',
+              designation: 'Business Analyst',
+            },
+            {
+              id: 16,
+              name: 'Ashley Davis',
+              avatar: './assets/images/avatar/avatar-big-4.png',
+              designation: 'Quality Assurance',
+            }
+          ]}"
+            x-show="activeTab=='candidate'"
+            x-transition
+            class="grid grid-cols-12 gap-4 xxl:gap-6"
+          >
+            <template x-for="{id, name, avatar, designation} in candidates">
+              <div class="col-span-12 md:col-span-6 xl:col-span-4 xxl:col-span-3 n20-box relative text-center">
+                <button class="absolute top-6 right-6 size-9 rounded-full duration-300 hover:bg-neutral-40 dark:hover:bg-neutral-600">
+                  <include-verti-option />
+                </button>
+                <div class="size-20 rounded-full relative mb-6 mx-auto">
+                  <img :src="avatar" width="80" class="rounded-full border-2 border-neutral-30 dark:border-neutral-500" alt="" />
+                  <span class="size-5 f-center text-neutral-0 bg-primary-300 border border-neutral-0 dark:border-neutral-904 rounded-full absolute bottom-0 right-0">
+                    <i class="las la-check text-sm"></i>
+                  </span>
+                </div>
+                <h5 class="mb-2" x-text="name"></h5>
+                <p class="s-text mb-6" x-text="designation"></p>
+                <div class="flex justify-center gap-4">
+                  <a href="#" class="size-9 rounded-full border border-neutral-40 dark:border-neutral-500 f-center bg-success-300/10 text-success-300 text-xl">
+                    <i class="las la-phone-volume text-xl"></i>
+                  </a>
+                  <a href="#" class="size-9 rounded-full border border-neutral-40 dark:border-neutral-500 f-center bg-secondary-300/10 text-secondary-300 text-xl">
+                    <i class="lab la-facebook-messenger text-xl"></i>
+                  </a>
+                  <a href="#" class="size-9 rounded-full border border-neutral-40 dark:border-neutral-500 f-center bg-warning-300/10 text-warning-300 text-xl">
+                    <i class="las la-envelope text-xl"></i>
+                  </a>
+                  <a href="#" class="size-9 rounded-full border border-neutral-40 dark:border-neutral-500 f-center bg-error-300/10 text-error-300 text-xl">
+                    <i class="las la-cloud-download-alt text-xl"></i>
+                  </a>
+                </div>
+              </div>
+            </template>
+            <div class="col-span-12">
+              <div x-data="pagination" class="flex flex-wrap items-center justify-center gap-3">
+                <button
+                  x-bind:disabled="currentPage === 1"
+                  @click="changePage(currentPage - 1)"
+                  class="btn-primary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-primary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-transparent disabled:hover:text-primary-200"
+                >
+                  <i class="las la-angle-left text-xl"></i>
+                </button>
+
+                <template x-for="page in pageNumbers">
+                  <button
+                    x-text="page"
+                    :class=" {'btn-primary-icon bg-primary-300 !text-neutral-0':page==currentPage, 'flex text-sm lg:text-base size-10 select-none border-primary-300 hover:bg-primary-300 items-center hover:text-neutral-0 justify-center text-primary-300 rounded-full border duration-300 font-semibold':page!='...', 'cursor-default':page=='...'}"
+                    @click="changePage(page)"
+                  ></button>
+                </template>
+                <button
+                  x-bind:disabled="currentPage === totalPages"
+                  @click="changePage(currentPage + 1)"
+                  class="btn-primary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-primary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-transparent disabled:hover:text-primary-200"
+                >
+                  <i class="las la-angle-right text-xl"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+  </body>
+</html>

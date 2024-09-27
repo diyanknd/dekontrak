@@ -1,0 +1,780 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/tom-select.min.css" />
+    <link rel="stylesheet" href="./assets/css/flatpicker.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative">
+        <div x-data="{detailsOpened:false, currentTask:null}" class="white-box">
+          <div x-data="scrumboard">
+            <div class="flex justify-between items-center bb-dashed-n30">
+              <h4>Kanban</h4>
+              <button type="button" class="btn-primary-outlined xl:py-2 xl:px-5" @click="addEditProject()">
+                <i class="las la-plus"></i>
+                Add Section
+              </button>
+            </div>
+
+            <!-- project list -->
+            <div class="relative pt-5">
+              <div class="h-full">
+                <div class="flex flex-nowrap items-start gap-5 overflow-x-auto px-2 pb-2">
+                  <template x-for="project in projectList" :key="project.id">
+                    <div class="n20-box xl:p-5 w-80 xxl:w-[340px] flex-none">
+                      <div class="mb-5 flex justify-between">
+                        <h4 x-text="project.title" class="text-base font-semibold"></h4>
+                        <div class="flex items-center">
+                          <div x-data="dropdown" @click.outside="isOpen = false" class="relative">
+                            <button type="button" class="hover:text-primary" @click="toggle">
+                              <i class="las la-ellipsis-h text-2xl"></i>
+                            </button>
+                            <ul x-cloak x-show="isOpen" x-transition x-transition.duration.300ms class="ltr:right-0 rtl:left-0 absolute top-full w-[160px] rounded-lg py-1 bg-neutral-0 dark:bg-neutral-904 shadow-xl">
+                              <li>
+                                <a class="flex items-center gap-1 py-1.5 px-5 hover:bg-primary-50 hover:text-primary-300 duration-300" href="javascript:;" @click="toggle, addEditProject(project)"> <i class="las la-edit text-xl"></i> Edit</a>
+                              </li>
+                              <li>
+                                <a class="flex items-center gap-1 py-1.5 px-5 hover:bg-primary-50 hover:text-primary-300 duration-300" href="javascript:;" @click="toggle, deleteProject(project)"> <i class="las la-trash text-xl"></i> Delete</a>
+                              </li>
+                              <li>
+                                <a class="flex items-center gap-1 py-1.5 px-5 hover:bg-primary-50 hover:text-primary-300 duration-300" href="javascript:;" @click="toggle, clearProjects(project)"> <i class="las la-broom text-xl"></i> Clear All</a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- task list -->
+                      <div class="sortable-list min-h-[150px] bb-dashed-n40" :data-id="project.id">
+                        <template x-for="task in project.tasks">
+                          <div :key="project.id + '' + task.id" :data-id="project.id + '' + task.id" class="mb-5 last:mb-0 cursor-move flex flex-col gap-3 rounded-md bg-neutral-0 dark:bg-neutral-904 p-3 xxl:p-4 shadow" @click="detailsOpened=true, currentTask=task">
+                            <template x-if="task.image">
+                              <img src="assets/images/carousel/basic-1.png" alt="images" class="h-32 w-full rounded-md object-cover" />
+                            </template>
+                            <div class="text-base font-medium" x-text="task.title"></div>
+                            <p class="break-all max-two-line" x-text="task.description"></p>
+                            <div class="flex flex-wrap items-center gap-2">
+                              <template x-if="task.tags?.length">
+                                <template x-for="(tag , i) in task.tags" :key="i">
+                                  <div class="py-1 px-2 font-medium rounded-md duration-300 hover:bg-success-300 border border-success-200 bg-success-300/10 text-success-300 hover:text-neutral-0 flex items-center">
+                                    <i class="las la-tag text-lg leading-normal"></i>
+                                    <span class="ltr:ml-1 rtl:mr-1 text-sm" x-text="tag"></span>
+                                  </div>
+                                </template>
+                              </template>
+                              <template x-if="!task.tags?.length">
+                                <div class="flex px-2 rounded-lg py-1 text-neutral-500 dark:text-neutral-100 shadow-none border-neutral-30 dark:border-neutral-500 border">
+                                  <i class="las la-tag text-xl"></i>
+                                  <span class="ltr:ml-1 rtl:mr-1">No Tags</span>
+                                </div>
+                              </template>
+                            </div>
+                            <div class="flex items-center justify-between">
+                              <div class="flex items-center gap-1 font-medium hover:text-primary">
+                                <i class="las la-calendar text-xl"></i>
+                                <span class="text-sm" x-text="task.date"></span>
+                              </div>
+                              <div @click.stop class="flex gap-1 items-center">
+                                <button type="button" class="hover:text-info-300 duration-300" @click="addEditTask(project.id, task)">
+                                  <i class="las la-edit text-2xl"></i>
+                                </button>
+                                <button type="button" class="hover:text-error-300 duration-300" @click="deleteConfirmModal(project.id, task)">
+                                  <i class="las la-trash text-2xl"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </template>
+                      </div>
+
+                      <button type="button" class="btn-primary-outlined xl:px-5 xl:py-2 w-full" @click="addEditTask(project.id)">
+                        <i class="las la-plus-circle text-lg"></i>
+                        Add Task
+                      </button>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </div>
+            <!-- add project modal -->
+            <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60 dark:bg-neutral-40/80 px-4" :class="isAddProjectModal && '!block'">
+              <div class="flex min-h-screen items-center justify-center">
+                <div x-show="isAddProjectModal" x-transition x-transition.duration.300 @click.outside="isAddProjectModal = false" class="white-box xl:p-6 my-8 w-[90%] max-w-lg overflow-hidden rounded-lg border-0 p-0 md:w-full">
+                  <div class="bb-dashed-n30 flex justify-between items-center">
+                    <h5 x-text="params.id ? 'Edit Project' : 'Add Project'"></h5>
+                    <button type="button" @click="isAddProjectModal = false"><i class="las la-times text-xl"></i></button>
+                  </div>
+                  <form @submit.prevent="saveProject">
+                    <div class="grid gap-5">
+                      <div class="relative flex items-center gap-4 rounded-xl border border-neutral-30 px-4 dark:border-neutral-500 lg:px-6">
+                        <label for="title" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Name</label>
+                        <input id="title" x-model="params.title" type="text" class="form-input mt-1 w-full bg-transparent py-2.5 xl:py-3.5" placeholder="Enter Name" />
+                      </div>
+                    </div>
+
+                    <div class="mt-8 flex items-center justify-end">
+                      <button type="button" class="btn-error-outlined xl:py-2 xl:px-5" @click="isAddProjectModal = false">Cancel</button>
+                      <button type="submit" class="btn-primary ltr:ml-4 rtl:mr-4 xl:py-2 xl:px-5" x-text="params.id ? 'Update' : 'Add'"></button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- add task modal -->
+            <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60 dark:bg-neutral-40/80" :class="isAddTaskModal && '!block'">
+              <div class="flex min-h-screen items-center justify-center px-4" @click.self="isAddTaskModal = false">
+                <div x-show="isAddTaskModal" x-transition x-transition.duration.300 class="white-box xl:p-6 my-8 w-[90%] max-w-lg overflow-hidden rounded-lg border-0 p-0 md:w-full">
+                  <div class="bb-dashed-n30 flex justify-between items-center">
+                    <h5 x-text="paramsTask.id ? 'Edit Task' : 'Add Task'"></h5>
+                    <button type="button" @click="isAddTaskModal = false"><i class="las la-times text-xl"></i></button>
+                  </div>
+                  <div>
+                    <form @submit.prevent="saveTask">
+                      <div class="grid gap-5">
+                        <div class="relative flex items-center gap-4 rounded-xl border border-neutral-30 px-4 dark:border-neutral-500 lg:px-6">
+                          <label for="taskTitle" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Name</label>
+                          <input id="taskTitle" x-model="paramsTask.title" type="text" class="w-full bg-transparent py-3 lg:py-4" placeholder="Enter Name" />
+                        </div>
+
+                        <div class="relative flex items-center gap-4 rounded-xl border border-neutral-30 px-4 dark:border-neutral-500 lg:px-6">
+                          <label for="taskTag" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Tag</label>
+                          <input id="taskTag" x-model="paramsTask.tags" type="text" class="w-full bg-transparent py-3 lg:py-4" placeholder="Enter Tag" />
+                        </div>
+                        <div class="relative flex items-center gap-4 rounded-xl border border-neutral-30 px-4 dark:border-neutral-500 lg:px-6">
+                          <label for="taskdesc" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Description</label>
+                          <textarea id="taskdesc" x-model="paramsTask.description" class="form-textarea bg-transparent w-full min-h-[130px] mt-5" placeholder="Enter Description"></textarea>
+                        </div>
+                      </div>
+
+                      <div class="mt-8 flex items-center justify-end gap-4">
+                        <button type="button" class="btn-error-outlined xl:py-2 xl:px-5" @click="isAddTaskModal = false">Cancel</button>
+                        <button type="submit" class="btn-primary xl:py-2 xl:px-5" x-text="paramsTask.id ? 'Update' : 'Add'"></button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- delete task modal -->
+            <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60 dark:bg-neutral-40/80" :class="isDeleteModal && '!block'">
+              <div class="flex min-h-screen items-center justify-center px-4" @click.self="isDeleteModal = false">
+                <div x-show="isDeleteModal" x-transition x-transition.duration.300 class="white-box xl:p-6 my-8 w-[90%] max-w-lg overflow-hidden rounded-lg border-0 p-0 md:w-full">
+                  <div class="flex justify-between items-center bb-dashed-n30">
+                    <h5>Delete Task</h5>
+                    <button type="button" @click="isDeleteModal = false"><i class="las la-times text-xl"></i></button>
+                  </div>
+                  <div class="p-5 text-center">
+                    <div class="mx-auto w-fit rounded-full bg-error-300/10 p-4 text-error-300 ring-2 ring-error-300/50">
+                      <i class="las la-trash text-5xl"></i>
+                    </div>
+                    <div class="mx-auto mt-5 text-base sm:w-3/4">Are you sure you want to delete Task?</div>
+
+                    <div class="mt-8 f-center">
+                      <button type="button" class="btn-error-outlined xl:py-2 xl:px-5" @click="isDeleteModal = false">Cancel</button>
+                      <button type="button" class="btn-primary ltr:ml-4 rtl:mr-4 xl:py-2 xl:px-5" @click="deleteTask">Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="inset-0 fixed bg-black bg-opacity-60 duration-300 z-[29]" x-show="detailsOpened" @click="detailsOpened=false"></div>
+            <div :class="detailsOpened?'translate-x-0 opacity-100 visible':'translate-x-full opacity-0 invisible'" class="w-[312px] md:w-[470px] duration-300 fixed h-full top-0 right-0 z-30 bg-neutral-0 dark:bg-neutral-904 overflow-y-auto custom-scrollbar">
+              <div class="flex justify-between items-center bb-dashed-n30 !mb-0 px-3 sm:px-5 md:px-6 !py-5">
+                <select name="sort" class="nc-select n20">
+                  <option value="todo">To Do</option>
+                  <option value="inprogress">In Progress</option>
+                  <option value="ready">Ready To Test</option>
+                  <option value="done">Done</option>
+                </select>
+                <div class="flex gap-4 items-center shrink-0 text-xl">
+                  <button><i class="las la-thumbs-up"></i></button>
+                  <button><i class="las la-trash"></i></button>
+                  <button @click="detailsOpened=false"><i class="las la-times"></i></button>
+                </div>
+              </div>
+              <div class="flex justify-between items-center bb-dashed-n30 !mb-0 px-3 sm:px-5 md:px-6 !py-5">
+                <h5 x-text="currentTask?.title"></h5>
+              </div>
+              <!-- reporter -->
+              <div x-data="{open:true}" class="bb-dashed-n30 px-3 sm:px-5 md:px-6 !mb-0 !py-5">
+                <div class="flex justify-between items-center">
+                  <p class="l-text font-medium">Reporter</p>
+                  <button x-on:click="open = !open" :class="open?'rotate-180':''" class="size-8 rounded-full hover:bg-neutral-20 dark:bg-neutral-500 duration-300 f-center"><i class="las la-angle-down text-lg"></i></button>
+                </div>
+                <div x-show="open" x-collpase x-cloak>
+                  <div class="mt-4 lg:mt-6">
+                    <img src="./assets/images/avatar/avatar-big-1.png" class="size-10 lg:size-12 rounded-full" alt="" />
+                  </div>
+                </div>
+              </div>
+              <!-- assignee -->
+              <div x-data="{open:true}" class="bb-dashed-n30 px-3 sm:px-5 md:px-6 !mb-0 !py-5">
+                <div class="flex justify-between items-center">
+                  <p class="l-text font-medium">Assignee</p>
+                  <button x-on:click="open = !open" :class="open?'rotate-180':''" class="size-8 rounded-full hover:bg-neutral-20 dark:bg-neutral-500 duration-300 f-center"><i class="las la-angle-down text-lg"></i></button>
+                </div>
+                <div x-show="open" x-collpase x-cloak>
+                  <div x-data="modal" class="flex gap-4 mt-4 lg:mt-6">
+                    <img src="./assets/images/avatar/avatar-big-1.png" class="size-10 lg:size-12 rounded-full" alt="" />
+                    <img src="./assets/images/avatar/avatar-big-2.png" class="size-10 lg:size-12 rounded-full" alt="" />
+                    <img src="./assets/images/avatar/avatar-big-3.png" class="size-10 lg:size-12 rounded-full" alt="" />
+                    <img src="./assets/images/avatar/avatar-big-4.png" class="size-10 lg:size-12 rounded-full" alt="" />
+                    <button @click="openModal()" class="size-10 lg:size-12 rounded-full bg-neutral-20 f-center dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500"><i class="las la-plus text-lg"></i></button>
+                    <template x-teleport="body">
+                      <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                        <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                          <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                            <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                              <h4>Contacts(20)</h4>
+                              <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                            </div>
+                            <div>
+                              <form class="rounded-xl bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 p-2 flex mb-7 xxl:mb-10">
+                                <input type="text" class="px-4 py-2 w-full bg-transparent" placeholder="Email..." />
+                                <button class="size-10 shrink-0 rounded-lg bg-primary-300 text-neutral-0 f-center">
+                                  <i class="las la-arrow-right text-2xl"></i>
+                                </button>
+                              </form>
+                              <div class="flex flex-col gap-3 xxl:gap-5 mb-7 xxl:mb-10">
+                                <div class="flex justify-between items-center">
+                                  <div class="flex items-center gap-2 md:gap-4">
+                                    <img src="./assets/images/avatar/avatar-big-1.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                                    <div>
+                                      <p class="mb-1 l-text font-medium">Arlene McCoy</p>
+                                      <p class="s-text">example@gmail.com</p>
+                                    </div>
+                                  </div>
+                                  <button class="text-primary-300 font-semibold flex items-center gap-2"><i class="las la-check text-xl"></i> Assigned</button>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                  <div class="flex items-center gap-2 md:gap-4">
+                                    <img src="./assets/images/avatar/avatar-big-2.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                                    <div>
+                                      <p class="mb-1 l-text font-medium">Robert Fox</p>
+                                      <p class="s-text">example@gmail.com</p>
+                                    </div>
+                                  </div>
+                                  <button class="text-primary-300 font-semibold flex items-center gap-2"><i class="las la-check text-xl"></i> Assigned</button>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                  <div class="flex items-center gap-2 md:gap-4">
+                                    <img src="./assets/images/avatar/avatar-big-3.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                                    <div>
+                                      <p class="mb-1 l-text font-medium">Kathryn Murphy</p>
+                                      <p class="s-text">example@gmail.com</p>
+                                    </div>
+                                  </div>
+                                  <button class="text-primary-300 font-semibold flex items-center gap-2"><i class="las la-check text-xl"></i> Assigned</button>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                  <div class="flex items-center gap-2 md:gap-4">
+                                    <img src="./assets/images/avatar/avatar-big-4.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                                    <div>
+                                      <p class="mb-1 l-text font-medium">Ronald Richards</p>
+                                      <p class="s-text">example@gmail.com</p>
+                                    </div>
+                                  </div>
+                                  <button class="font-semibold flex items-center gap-2"><i class="las la-plus text-xl"></i> Assign</button>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                  <div class="flex items-center gap-2 md:gap-4">
+                                    <img src="./assets/images/avatar/avatar-big-5.png" class="w-8 lg:w-14 rounded-full" alt="avatar" />
+                                    <div>
+                                      <p class="mb-1 l-text font-medium">Kristin Watson</p>
+                                      <p class="s-text">example@gmail.com</p>
+                                    </div>
+                                  </div>
+                                  <button class="font-semibold flex items-center gap-2"><i class="las la-plus text-xl"></i> Assign</button>
+                                </div>
+                              </div>
+                            </div>
+                            <button class="btn-primary-outlined">See All</button>
+                          </div>
+                        </div>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+              </div>
+
+              <!-- tags -->
+              <div x-data="{open:true}" class="bb-dashed-n30 px-3 sm:px-5 md:px-6 !mb-0 !py-5">
+                <div class="flex justify-between items-center">
+                  <p class="l-text font-medium">Labels</p>
+                  <button x-on:click="open = !open" :class="open?'rotate-180':''" class="size-8 rounded-full hover:bg-neutral-20 dark:bg-neutral-500 duration-300 f-center"><i class="las la-angle-down text-lg"></i></button>
+                </div>
+                <div x-show="open" x-collpase x-cloak x-init="$nextTick(() => { new TomSelect('#tags-kanban', {plugins: ['remove_button']}); });">
+                  <div class="mt-4 lg:mt-6">
+                    <select id="tags-kanban" multiple data-placeholder="Best movies and TV shows">
+                      <option value="Blue Bloods" data-date="2010-2021">Blue Bloods</option>
+                      <option value="Magnum P.I." data-date="1980-1988" selected>Magnum P.I.</option>
+                      <option value="An Innocent Man" data-date="1989" selected>An Innocent</option>
+                      <option value="In & Out" data-date="1997" selected>In &amp Out</option>
+                      <option value="Lassiter" data-date="1984" selected>Lassiter</option>
+                      <option value="Mr. Baseball" data-date="1992">Mr. Baseball</option>
+                      <option value="Quigley Down Under" data-date="1990">Quigley Down Under</option>
+                      <option value="Three Men and a Baby" data-date="1987">Three Men and a Baby</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- due date -->
+              <div x-data="{open:true, date:'05-jan-2024 to 10-jan-2024'}" class="bb-dashed-n30 px-3 sm:px-5 md:px-6 !mb-0 !py-5">
+                <div class="flex justify-between items-center">
+                  <p class="l-text font-medium">Due Date</p>
+                  <button x-on:click="open = !open" :class="open?'rotate-180':''" class="size-8 rounded-full hover:bg-neutral-20 dark:bg-neutral-500 duration-300 f-center"><i class="las la-angle-down text-lg"></i></button>
+                </div>
+                <div x-show="open" x-collpase x-cloak x-init="$nextTick(() => { flatpickr('#duedate', {mode: 'range',dateFormat: 'd M y'}) });">
+                  <div>
+                    <input type="text" class="py-3 bg-transparent" x-model="date" placeholder="Choose Date" id="duedate" />
+                  </div>
+                </div>
+              </div>
+              <!-- priority -->
+              <div x-data="{open:true, priority:'low'}" class="bb-dashed-n30 px-3 sm:px-5 md:px-6 !mb-0 !py-5">
+                <div class="flex justify-between items-center">
+                  <p class="l-text font-medium">Priority</p>
+                  <button x-on:click="open = !open" :class="open?'rotate-180':''" class="size-8 rounded-full hover:bg-neutral-20 dark:bg-neutral-500 duration-300 f-center"><i class="las la-angle-down text-lg"></i></button>
+                </div>
+                <div x-show="open" x-collpase x-cloak>
+                  <div class="flex flex-wrap gap-3 mt-4">
+                    <button @click="priority='low'" class="flex text-sm items-center gap-2 px-4 py-1.5 rounded-full border" :class="priority=='low'?'border-neutral-700 dark:border-neutral-0':'border-neutral-30 dark:border-neutral-500'">
+                      <i class="las la-angle-double-down text-info-300"></i> Low
+                    </button>
+                    <button @click="priority='medium'" class="flex text-sm items-center gap-2 px-4 py-1.5 rounded-full border" :class="priority=='medium'?'border-neutral-700 dark:border-neutral-0':'border-neutral-30 dark:border-neutral-500'">
+                      <i class="las la-angle-double-right text-[#BD7B00]"></i> Medium
+                    </button>
+                    <button @click="priority='high'" class="flex text-sm items-center gap-2 px-4 py-1.5 rounded-full border" :class="priority=='high'?'border-neutral-700 dark:border-neutral-0':'border-neutral-30 dark:border-neutral-500'">
+                      <i class="las la-angle-double-up text-error-300"></i> High
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- description -->
+              <div x-data="{open:true}" class="bb-dashed-n30 px-3 sm:px-5 md:px-6 !mb-0 !py-5">
+                <div class="flex justify-between items-center">
+                  <p class="l-text font-medium">Description</p>
+                  <button x-on:click="open = !open" :class="open?'rotate-180':''" class="size-8 rounded-full hover:bg-neutral-20 dark:bg-neutral-500 duration-300 f-center"><i class="las la-angle-down text-lg"></i></button>
+                </div>
+                <div x-show="open" x-collpase x-cloak>
+                  <div class="mt-4">
+                    <div class="relative flex items-center gap-4 rounded-xl border border-neutral-30 px-3 py-2 dark:border-neutral-500">
+                      <label for="description" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Activated</label>
+                      <textarea name="description" style="field-sizing: content; resize: none" class="w-full text-sm text-neutral-100 bg-transparent" id="description" x-text="currentTask?.description"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- attachment -->
+              <div
+                x-data="{open:true,images:[  {
+                  id: 1,
+                  img: './assets/images/carousel/basic-1.png'
+                },
+                {
+                  id: 2,
+                  img: './assets/images/carousel/basic-2.png'
+                },
+                {
+                  id: 3,
+                  img: './assets/images/carousel/basic-3.png'
+                }], deleteItem(index){
+                  this.images = this.images.filter((item)=>item.id!=index) 
+              }}"
+                class="bb-dashed-n30 px-3 sm:px-5 md:px-6 !mb-0 !py-5"
+              >
+                <div class="flex justify-between items-center">
+                  <p class="l-text font-medium">Attachment</p>
+                  <button x-on:click="open = !open" :class="open?'rotate-180':''" class="size-8 rounded-full hover:bg-neutral-20 dark:bg-neutral-500 duration-300 f-center"><i class="las la-angle-down text-lg"></i></button>
+                </div>
+                <div x-show="open" x-collpase x-cloak>
+                  <div class="mt-4 lg:mt-6 flex gap-3">
+                    <template x-for="item in images" :key="index">
+                      <div class="relative">
+                        <span @click="deleteItem(item.id)" class="bg-error-50 cursor-pointer absolute top-1 right-1 rounded-full size-4 text-xs border border-error-300 text-error-300 f-center"><i class="las la-times"></i></span>
+                        <img :src="item.img" class="size-16 lg:size-20 rounded-md" alt="" />
+                      </div>
+                    </template>
+                    <div class="size-16 lg:size-20 bg-neutral-20 dark:bg-neutral-903 rounded-md border border-neutral-40 dark:border-neutral-500 f-center">
+                      <input type="file" class="sr-only" name="file" id="file" />
+                      <label for="file">
+                        <i class="las la-cloud-upload-alt text-3xl"></i>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- messages -->
+              <div class="bg-neutral-20 dark:bg-neutral-903 px-3 sm:px-5 md:px-6 !mb-0 !py-5">
+                <div class="max-w-[328px] flex gap-3 items-start group">
+                  <div class="relative shrink-0">
+                    <img src="./assets/images/avatar/avatar-big-4.png" width="32" height="32" class="rounded-full shrink-0" alt="" />
+                    <span class="block size-2 border border-neutral-0 dark:border-neutral-904 rounded-full bg-primary-300 absolute bottom-2 right-0"></span>
+                  </div>
+                  <div>
+                    <p class="text-xs text-neutral-100 mb-3">Eleanor, 9 hours ago</p>
+                    <div class="px-5 py-3 rounded-xl bg-neutral-0 dark:bg-neutral-904 mb-3">
+                      <p class="s-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    </div>
+                    <div class="flex items-center gap-1 opacity-0 duration-300 group-hover:opacity-100">
+                      <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-smile text-xl"></i></button>
+                      <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-trash text-xl"></i></button>
+                      <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-share text-xl"></i></button>
+                    </div>
+                  </div>
+                </div>
+                <div class="max-w-[328px] flex gap-3 items-start group">
+                  <div class="relative shrink-0">
+                    <img src="./assets/images/avatar/avatar-big-4.png" width="32" height="32" class="rounded-full shrink-0" alt="" />
+                    <span class="block size-2 border border-neutral-0 dark:border-neutral-904 rounded-full bg-primary-300 absolute bottom-2 right-0"></span>
+                  </div>
+                  <div>
+                    <p class="text-xs text-neutral-100 mb-3">Eleanor, 4 hours ago</p>
+                    <img src="./assets/images/carousel/basic-3.png" class="rounded-xl mb-3" alt="" />
+                    <div class="flex items-center gap-1 opacity-0 duration-300 group-hover:opacity-100">
+                      <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-smile text-xl"></i></button>
+                      <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-trash text-xl"></i></button>
+                      <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-share text-xl"></i></button>
+                    </div>
+                  </div>
+                </div>
+                <div class="max-w-[328px] flex gap-3 items-start group">
+                  <div class="relative shrink-0">
+                    <img src="./assets/images/avatar/avatar-big-4.png" width="32" height="32" class="rounded-full shrink-0" alt="" />
+                    <span class="block size-2 border border-neutral-0 dark:border-neutral-904 rounded-full bg-primary-300 absolute bottom-2 right-0"></span>
+                  </div>
+                  <div>
+                    <p class="text-xs text-neutral-100 mb-3">Eleanor, 9 hours ago</p>
+                    <div class="px-5 py-3 rounded-xl bg-neutral-0 dark:bg-neutral-904 mb-3">
+                      <p class="s-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    </div>
+                    <div class="flex items-center gap-1 opacity-0 duration-300 group-hover:opacity-100">
+                      <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-smile text-xl"></i></button>
+                      <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-trash text-xl"></i></button>
+                      <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-share text-xl"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- reset button -->
+              <div class="px-3 sm:px-5 md:px-6 !mb-0 !py-5 flex gap-4 items-start">
+                <img src="./assets/images/avatar/avatar-1.png" width="40" class="rounded-l-full" alt="" />
+                <div class="grow">
+                  <div class="relative flex items-center gap-4 rounded-xl border border-neutral-30 px-3 py-2 dark:border-neutral-500">
+                    <label for="msg" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Activated</label>
+                    <textarea placeholder="Enter Message" name="description" style="field-sizing: content; resize: none" class="w-full min-h-[80px] text-sm text-neutral-100 bg-transparent" id="msg"></textarea>
+                  </div>
+                  <div class="flex justify-between items-center gap-3 pt-4">
+                    <div class="flex gap-1.5 xxl:gap-3">
+                      <button class="bg-neutral-20 rounded-full dark:bg-neutral-903 size-6 xxl:size-10 border border-neutral-40 dark:border-neutral-500 f-center">
+                        <i class="las la-image text-lg"></i>
+                      </button>
+                      <button class="bg-neutral-20 rounded-full dark:bg-neutral-903 size-6 xxl:size-10 border border-neutral-40 dark:border-neutral-500 f-center">
+                        <i class="las la-cloud-upload-alt text-lg"></i>
+                      </button>
+                    </div>
+                    <button class="px-4 py-2 rounded-3xl bg-primary-300 text-neutral-0 flex items-center gap-2">Send <i class="las la-paper-plane"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/tom-select.js"></script>
+    <script src="./assets/js/libs/sweetalert.min.js"></script>
+    <script src="./assets/js/libs/flatpicker.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/sortable.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+
+    <script>
+      document.addEventListener('alpine:init', () => {
+        Alpine.data('scrumboard', () => ({
+          params: {
+            id: null,
+            title: ''
+          },
+          paramsTask: {
+            projectId: null,
+            id: null,
+            title: '',
+            description: '',
+            tags: ''
+          },
+          selectedTask: null,
+          isAddProjectModal: false,
+          isAddTaskModal: false,
+          isDeleteModal: false,
+          projectList: [
+            {
+              id: 1,
+              title: 'To Do',
+              tasks: [
+                {
+                  projectId: 1,
+                  id: 1,
+                  title: 'Creating a new Portfolio on Dribble',
+                  description: 'This project involves designing and developing a professional portfolio on Dribbble. It includes creating visually appealing designs, organizing work into cohesive collections, and optimizing profiles for visibility.',
+                  image: true,
+                  date: ' 08 Aug, 2024',
+                  tags: ['designing']
+                },
+                {
+                  projectId: 1,
+                  id: 2,
+                  title: 'Singapore Team Meet',
+                  description: 'Organize and execute a team meeting in Singapore for collaboration and strategic planning. Activities include presentations, team-building exercises, and brainstorming sessions. The goal is to strengthen team cohesion, align on objectives, and enhance productivity',
+                  date: ' 09 Aug, 2024',
+                  tags: ['meeting']
+                }
+              ]
+            },
+            {
+              id: 2,
+              title: 'In Progress',
+              tasks: [
+                {
+                  projectId: 2,
+                  id: 1,
+                  title: 'Plan a trip to another country',
+                  tags: ['travel'],
+                  description:
+                    'This project involves organizing a trip abroad, including selecting the destination, booking flights and accommodations, and creating a detailed itinerary. Key activities include researching attractions, arranging transportation, and ensuring travel documents are in order',
+                  date: ' 10 Sep, 2024'
+                }
+              ]
+            },
+            {
+              id: 3,
+              title: 'Ready To Test',
+              tasks: []
+            },
+            {
+              id: 4,
+              title: 'Done',
+              tasks: [
+                {
+                  projectId: 3,
+                  id: 1,
+                  tags: ['event'],
+                  title: 'Dinner with Kelly Young',
+                  description: 'Organize a dinner event with Kelly Young, including selecting a venue, planning the menu, and coordinating schedules. Activities involve sending invitations, confirming attendance, and ensuring a pleasant dining experience. ',
+                  date: ' 08 Aug, 2024'
+                },
+                {
+                  projectId: 3,
+                  id: 2,
+                  image: true,
+                  tags: ['seo', 'meeting'],
+                  title: 'Launch New SEO Wordpress Theme ',
+                  description:
+                    "Develop and launch a new SEO-focused Wordpress theme, emphasizing performance and user experience. Tasks include designing layouts, optimizing for search engines, and integrating essential plugins. The goal is to provide users with a highly functional and visually appealing theme to enhance their website's visibility. Completion is targeted within two months",
+                  date: ' 09 Aug, 2024'
+                }
+              ]
+            }
+          ],
+
+          init() {
+            this.initializeSortable()
+            // this.$watch('projectList', value => {
+            //     this.initializeSortable();
+            // });
+          },
+
+          initializeSortable() {
+            setTimeout(() => {
+              //sortable js
+              const sortable = document.querySelectorAll('.sortable-list')
+              for (let i = 0; i < sortable.length; i++) {
+                Sortable.create(sortable[i], {
+                  animation: 200,
+                  group: 'name',
+                  ghostClass: 'sortable-ghost',
+                  dragClass: 'sortable-drag'
+                })
+              }
+            })
+          },
+
+          addEditProject(project) {
+            setTimeout(() => {
+              this.params = {
+                id: null,
+                title: ''
+              }
+              if (project) {
+                this.params = JSON.parse(JSON.stringify(project))
+              }
+
+              this.isAddProjectModal = true
+            })
+          },
+
+          saveProject() {
+            if (!this.params.title) {
+              this.showMessage('Title is required.', 'error')
+              return false
+            }
+
+            if (this.params.id) {
+              //update project
+              const project = this.projectList.find((d) => d.id === this.params.id)
+              project.title = this.params.title
+            } else {
+              //add project
+              const lastId = this.projectList.length ? this.projectList.reduce((max, obj) => (obj.id > max ? obj.id : max), this.projectList[0].id) : 0
+
+              const project = {
+                id: lastId + 1,
+                title: this.params.title,
+                tasks: []
+              }
+              this.projectList.push(project)
+            }
+
+            this.initializeSortable()
+            this.showMessage('Project has been saved successfully.')
+            this.isAddProjectModal = false
+          },
+
+          deleteProject(project) {
+            this.projectList = this.projectList.filter((d) => d.id != project.id)
+            this.showMessage('Project has been deleted successfully.')
+          },
+
+          clearProjects(project) {
+            project.tasks = []
+          },
+
+          // task
+          addEditTask(projectId, task) {
+            this.paramsTask = {
+              projectId: null,
+              id: null,
+              title: '',
+              description: '',
+              tags: ''
+            }
+            if (task) {
+              this.paramsTask = JSON.parse(JSON.stringify(task))
+              this.paramsTask.tags = this.paramsTask.tags ? this.paramsTask.tags.toString() : ''
+            }
+            this.paramsTask.projectId = projectId
+            this.isAddTaskModal = true
+          },
+
+          saveTask() {
+            if (!this.paramsTask.title) {
+              this.showMessage('Title is required.', 'error')
+              return false
+            }
+
+            const project = this.projectList.find((d) => d.id === this.paramsTask.projectId)
+            if (this.paramsTask.id) {
+              //update task
+              const task = project.tasks.find((d) => d.id === this.paramsTask.id)
+              task.title = this.paramsTask.title
+              task.description = this.paramsTask.description
+              task.tags = this.paramsTask.tags?.length > 0 ? this.paramsTask.tags.split(',') : []
+            } else {
+              //add task
+              let maxid = 0
+              if (project.tasks?.length) {
+                maxid = project.tasks.reduce((max, obj) => (obj.id > max ? obj.id : max), project.tasks[0].id)
+              }
+
+              const today = new Date()
+              const dd = String(today.getDate()).padStart(2, '0')
+              const mm = String(today.getMonth()) //January is 0!
+              const yyyy = today.getFullYear()
+              const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+              const task = {
+                projectId: this.paramsTask.projectId,
+                id: maxid + 1,
+                title: this.paramsTask.title,
+                description: this.paramsTask.description,
+                date: dd + ' ' + monthNames[mm] + ', ' + yyyy,
+                tags: this.paramsTask.tags?.length > 0 ? this.paramsTask.tags.split(',') : []
+              }
+
+              project.tasks.push(task)
+            }
+
+            this.showMessage('Task has been saved successfully.')
+            this.isAddTaskModal = false
+          },
+
+          deleteConfirmModal(projectId, task) {
+            this.selectedTask = task
+            setTimeout(() => {
+              this.isDeleteModal = true
+            }, 10)
+          },
+
+          deleteTask() {
+            let project = this.projectList.find((d) => d.id === this.selectedTask.projectId)
+            project.tasks = project.tasks.filter((d) => d.id != this.selectedTask.id)
+
+            this.showMessage('Task has been deleted successfully.')
+            this.isDeleteModal = false
+          },
+
+          showMessage(msg = '', type = 'success') {
+            const toast = window.Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 3000
+            })
+            toast.fire({
+              icon: type,
+              title: msg,
+              padding: '10px 20px'
+            })
+          }
+        }))
+      })
+    </script>
+  </body>
+</html>

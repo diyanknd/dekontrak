@@ -1,0 +1,481 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 space-y-4 xxl:space-y-6">
+        <!-- Breadcrumb -->
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Job List</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Job</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>List</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Job List -->
+        <div
+          x-data="{filter:false, openFilter(){this.filter=true}, closeFilter(){this.filter=false},
+         jobs :[{id:1,title:'Social Media Manager',date:'10 Mar 2024',salary:'$568',tags:['Social Media','Marketing','Content Creation','Community'],desc:'Were searching for a savvy Social Media Manager to develop and execute engaging social media campaigns that build our brand awareness.',location:'Remote',expiry:'10 Days Left',experience:'2-4 Year Exp',companyName:'Barone LLC.',CompanyLogo:'./assets/images/company-logo.png',proposals:78},{id:2,title:'UI/UX Designer',date:'12 Mar 2024',salary:'$725',tags:['UI/UX','Web Design','Graphic Design','Prototyping'],desc:'Were looking for an experienced UI/UX Designer to create intuitive and visually appealing user interfaces for our web applications.',location:'San Francisco, CA',expiry:'8 Days Left',experience:'4-6 Year Exp',companyName:'TechVentures Inc.',CompanyLogo:'./assets/images/company-logo.png',proposals:65},{id:3,title:'Front-End Developer',date:'15 Mar 2024',salary:'$895',tags:['Front-End','React','JavaScript','HTML/CSS'],desc:'We are seeking a skilled Front-End Developer to build and maintain responsive and performant web applications using modern frameworks.',location:'New York, NY',expiry:'14 Days Left',experience:'3-5 Year Exp',companyName:'CodeMasters Solutions',CompanyLogo:'./assets/images/company-logo.png',proposals:92},{id:4,title:'Digital Marketing Specialist',date:'18 Mar 2024',salary:'$625',tags:['Digital Marketing','SEO','Email Marketing','Analytics'],desc:'We are hiring a Digital Marketing Specialist to develop and execute effective digital marketing strategies to drive brand awareness and customer acquisition.',location:'Remote',expiry:'12 Days Left',experience:'2-4 Year Exp',companyName:'MarketPro Consultants',CompanyLogo:'./assets/images/company-logo.png',proposals:56},{id:5,title:'Software Engineer (Python)',date:'20 Mar 2024',salary:'$1025',tags:['Python','Software Engineering','Data Analysis','Automation'],desc:'We are looking for a talented Software Engineer with expertise in Python to develop scalable and efficient software solutions for our data-driven projects.',location:'Boston, MA',expiry:'7 Days Left',experience:'5-7 Year Exp',companyName:'DataTech Solutions',CompanyLogo:'./assets/images/company-logo.png',proposals:48},{id:6,title:'Content Writer',date:'22 Mar 2024',salary:'$475',tags:['Content Writing','Copywriting','Blogging','SEO'],desc:'We are seeking a skilled Content Writer to create engaging and SEO-optimized content for our website and marketing campaigns.',location:'Remote',expiry:'15 Days Left',experience:'1-3 Year Exp',companyName:'ContentMasters Inc.',CompanyLogo:'./assets/images/company-logo.png',proposals:72},{id:7,title:'Data Analyst',date:'25 Mar 2024',salary:'$825',tags:['Data Analysis','SQL','Python','Tableau'],desc:'We are looking for a Data Analyst to collect, analyze, and interpret complex data sets to drive data-driven decision-making for our organization.',location:'San Jose, CA',expiry:'11 Days Left',experience:'3-5 Year Exp',companyName:'DataInsights Corp.',CompanyLogo:'./assets/images/company-logo.png',proposals:38},{id:8,title:'Project Manager',date:'28 Mar 2024',salary:'$975',tags:['Project Management','Agile','Scrum','Team Leadership'],desc:'We are hiring an experienced Project Manager to lead cross-functional teams and ensure the successful delivery of complex projects within budget and timeline.',location:'Chicago, IL',expiry:'6 Days Left',experience:'5-8 Year Exp',companyName:'ProjectPro Solutions',CompanyLogo:'./assets/images/company-logo.png',proposals:62}]}"
+          class="white-box"
+        >
+          <div class="bb-dashed-n30 flex justify-between items-center">
+            <h4>Job List</h4>
+            <a href="create-job.html" class="btn-primary-outlined"><i class="las la-plus-circle text-xl"></i> New Job</a>
+          </div>
+
+          <div class="bb-dashed-n30 flex flex-wrap gap-4 justify-between items-center">
+            <form class="max-w-[337px] rounded-full bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 p-1 flex">
+              <input type="text" class="px-4 py-1.5 text-sm w-full bg-transparent" placeholder="Search..." />
+              <button class="size-8 shrink-0 rounded-full bg-primary-300 text-neutral-0 f-center">
+                <i class="las la-search text-xl"></i>
+              </button>
+            </form>
+            <div class="flex items-center gap-4">
+              <button @click="openFilter" class="flex items-center gap-3 font-semibold">
+                <i class="las la-filter text-lg"></i>
+                Filter
+              </button>
+              <select name="sort" class="nc-select n20">
+                <option value="all">All</option>
+                <option value="new">New</option>
+                <option value="old">Old</option>
+              </select>
+            </div>
+          </div>
+          <div class="bb-dashed-n30 grid grid-cols-12 gap-4 xxl:gap-6">
+            <template x-for="{title, date, salary, tags, desc, expiry, location, id, companyLogo, companyName,experience,proposals} in jobs">
+              <div class="n20-box col-span-12 lg:col-span-6">
+                <div class="flex gap-3 justify-between items-center mb-6">
+                  <h4 class="h4" x-text="title"></h4>
+                  <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                    <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                    <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                      <li>
+                        <a href="job-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                      </li>
+                      <li>
+                        <a href="edit-job.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-pen text-xl"></i> Edit </a>
+                      </li>
+                      <li>
+                        <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="flex justify-between flex-wrap gap-3 items-center bb-dashed-n40 w-full">
+                  <p class="m-text">Posted Date: <span x-text="date"></span></p>
+                  <div class="flex items-center gap-3">
+                    <p class="xl-text">Fixed:</p>
+                    <h5 class="text-primary-300" x-text="salary"></h5>
+                  </div>
+                </div>
+                <div class="flex gap-3 md:gap-4 lg:gap-6 flex-wrap mb-6">
+                  <template x-for="tag in tags">
+                    <span class="bg-secondary-300/10 rounded-xl text-secondary-300 font-medium py-1.5 px-3.5 inline-block" x-text="tag"></span>
+                  </template>
+                </div>
+                <p class="mb-6" x-text="desc"></p>
+                <div class="flex flex-wrap items-center gap-4 4xl:gap-5 mb-6 pb-6 bb-dashed-n40">
+                  <span class="flex items-center gap-2">
+                    <i class="las shrink-0 la-lock"></i>
+                    <span class="font-medium m-text" x-text="expiry"></span>
+                  </span>
+                  <span class="text-primary text-xs max-[1136px]:hidden">•</span>
+                  <span class="flex items-center gap-2">
+                    <i class="las shrink-0 la-map-marker-alt"></i>
+                    <span class="font-medium m-text" x-text="location"></span>
+                  </span>
+                  <span class="text-primary text-xs max-[1136px]:hidden">•</span>
+                  <span class="flex items-center gap-2">
+                    <i class="las shrink-0 la-chart-bar"></i>
+                    <span class="font-medium m-text" x-text="experience"></span>
+                  </span>
+                  <span class="text-primary text-xs max-[1136px]:hidden">•</span>
+                  <span class="flex items-center gap-2">
+                    <i class="las shrink-0 la-user"></i> <span class="font-medium m-text"> <span x-text="proposals"></span> Proposals</span>
+                  </span>
+                </div>
+                <div class="flex flex-wrap gap-4 justify-between">
+                  <a href="#" class="flex items-center gap-3">
+                    <img src="./assets/images/company-logo.png" width="40" height="40" alt="company logo" />
+                    <span class="l-text font-medium" x-text="companyName"></span>
+                  </a>
+                  <div x-data="{isFav:false}" class="flex gap-4 items-center">
+                    <button @click="isFav = !isFav" class="size-11 f-center rounded-full border text-primary-300 border-primary-300">
+                      <i x-show="!isFav" class="lar la-heart text-xl"></i>
+                      <i x-show="isFav" class="las la-heart text-xl"></i>
+                    </button>
+                    <a href="#" class="btn-primary-outlined xl:py-2">
+                      Send Proposal
+                      <i class="las la-arrow-right text-xl"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
+
+          <!-- pagination -->
+          <div x-data="pagination" class="flex flex-wrap items-center justify-center gap-3">
+            <button
+              x-bind:disabled="currentPage === 1"
+              @click="changePage(currentPage - 1)"
+              class="btn-primary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-primary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-transparent disabled:hover:text-primary-200"
+            >
+              <i class="las la-angle-left text-xl"></i>
+            </button>
+
+            <template x-for="page in pageNumbers">
+              <button
+                x-text="page"
+                :class=" {'btn-primary-icon bg-primary-300 !text-neutral-0':page==currentPage, 'flex text-sm lg:text-base size-10 select-none border-primary-300 hover:bg-primary-300 items-center hover:text-neutral-0 justify-center text-primary-300 rounded-full border duration-300 font-semibold':page!='...', 'cursor-default':page=='...'}"
+                @click="changePage(page)"
+              ></button>
+            </template>
+            <button
+              x-bind:disabled="currentPage === totalPages"
+              @click="changePage(currentPage + 1)"
+              class="btn-primary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-primary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-transparent disabled:hover:text-primary-200"
+            >
+              <i class="las la-angle-right text-xl"></i>
+            </button>
+          </div>
+
+          <!-- job filter -->
+          <div class="inset-0 fixed bg-black bg-opacity-60 duration-300 z-[29]" x-show="filter" @click="closeFilter"></div>
+          <div :class="filter?'translate-x-0 opacity-100 visible':'ltr:translate-x-full rtl:-translate-x-full opacity-0 invisible'" class="w-[312px] duration-300 fixed h-full top-0 right-0 z-30 p-4 md:p-6 lg:p-8 bg-neutral-0 dark:bg-neutral-904 overflow-y-auto custom-scrollbar">
+            <div class="flex justify-between items-center pb-4 lg:pb-6 mb-4 lg:mb-6 border-b border-dashed border-neutral-40 dark:border-neutral-500">
+              <h4 class="text-2xl font-semibold">Filters</h4>
+              <div class="flex gap-4 items-center shrink-0 text-2xl">
+                <button><i class="las la-redo-alt"></i></button>
+                <button @click="closeFilter"><i class="las la-times"></i></button>
+              </div>
+            </div>
+            <form class="w-full rounded-full bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 p-1 flex mb-7 lg:mb-10">
+              <input type="text" class="px-4 py-2 w-full bg-transparent" placeholder="Search..." />
+              <button class="size-10 shrink-0 rounded-full bg-primary-300 text-neutral-0 f-center">
+                <i class="las la-search text-2xl"></i>
+              </button>
+            </form>
+
+            <!-- Employment types -->
+            <div class="mt-6 lg:pt-6 border-t border-dashed border-neutral-30 dark:border-neutral-500">
+              <p class="l-text font-medium mb-6">Employment Types</p>
+              <ul class="flex flex-col gap-3">
+                <li>
+                  <label for="fulltime" class="option">
+                    <input type="checkbox" id="fulltime" aria-checked="true" checked />
+                    <span class="checkbox default"></span>
+                    Full-Time
+                  </label>
+                </li>
+                <li>
+                  <label for="parttime" class="option">
+                    <input type="checkbox" id="parttime" aria-checked="true" />
+                    <span class="checkbox default"></span>
+                    Part-Time
+                  </label>
+                </li>
+                <li>
+                  <label for="ondemand" class="option">
+                    <input type="checkbox" id="ondemand" aria-checked="true" />
+                    <span class="checkbox default"></span>
+                    On Demand
+                  </label>
+                </li>
+                <li>
+                  <label for="negotiable" class="option">
+                    <input type="checkbox" id="negotiable" aria-checked="true" />
+                    <span class="checkbox default"></span>
+                    Negotiable
+                  </label>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Experience -->
+            <div class="mt-6 lg:pt-6 border-t border-dashed border-neutral-30 dark:border-neutral-500">
+              <p class="l-text font-medium mb-6">Experience</p>
+              <ul class="flex flex-col gap-3">
+                <li>
+                  <div class="custom-radio">
+                    <input type="radio" id="all" name="gender" checked />
+                    <label for="all">All</label>
+                  </div>
+                </li>
+                <li>
+                  <div class="custom-radio">
+                    <input type="radio" id="no" name="gender" />
+                    <label for="no">No Experience</label>
+                  </div>
+                </li>
+                <li>
+                  <div class="custom-radio">
+                    <input type="radio" id="1" name="gender" />
+                    <label for="1">1 year exp</label>
+                  </div>
+                </li>
+                <li>
+                  <div class="custom-radio">
+                    <input type="radio" id="2" name="gender" />
+                    <label for="2">2 year exp</label>
+                  </div>
+                </li>
+                <li>
+                  <div class="custom-radio">
+                    <input type="radio" id="3" name="gender" />
+                    <label for="3"> &gt; 3 year exp</label>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Roles -->
+            <div class="mt-6 lg:pt-6 border-t border-dashed border-neutral-30 dark:border-neutral-500">
+              <p class="l-text font-medium mb-6">Roles</p>
+              <div
+                x-data="{isOpen:false,selected:[], items:['Hr Manager','Data Analyst','Legal Counsel','Project Manager','Content Writer','Marketing Manager','UI/UX Designer','Graphics Designer','Frontend Developer','Backend Developer'], handleClick(e){this.selected.includes(e)?this.selected.splice(this.selected.indexOf(e),1):this.selected.push(e)}, isSelected(item){return this.selected.includes(item)}}"
+                class="relative col-span-1"
+              >
+                <div @click="isOpen=!isOpen" class="relative flex cursor-pointer items-center justify-between rounded-xl border border-neutral-30 px-4 py-3 dark:border-neutral-500">
+                  <div class="flex flex-wrap gap-2">
+                    <template x-for="item in selected">
+                      <div class="px-1.5 py-0.5 rounded-full bg-primary-50 flex items-center gap-2 border border-primary-100 text-primary-300">
+                        <span x-text="item" class="text-xs"></span>
+                        <span @click.stop="handleClick(item)" class="text-xs rounded-full size-4 bg-neutral-0 text-primary-300 f-center">
+                          <i class="las la-times cursor-pointer"></i>
+                        </span>
+                      </div>
+                    </template>
+                    <span x-show="!selected.length">Select Roles</span>
+                  </div>
+                  <i class="las la-angle-down text-lg duration-300" :class="isOpen?'rotate-180':'rotate-0'"></i>
+                  <span class="absolute -top-2 left-5 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Roles</span>
+                </div>
+                <div x-show="isOpen" @click.away="isOpen=false" class="absolute left-0 top-full z-10 flex max-h-[200px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-0 p-1 shadow-xl dark:bg-neutral-904">
+                  <template x-for="item in items">
+                    <div @click="handleClick(item), isOpen=false" :class="isSelected(item)?'bg-primary-300/10 ':'hover:bg-primary-50 dark:hover:bg-neutral-903'" class="cursor-pointer rounded-md px-4 py-2 duration-300" x-text="item"></div>
+                  </template>
+                </div>
+              </div>
+            </div>
+
+            <!-- Locations -->
+            <div class="mt-6 lg:pt-6 border-t border-dashed border-neutral-30 dark:border-neutral-500">
+              <p class="l-text font-medium mb-6">Locations</p>
+              <div
+                x-data="{
+                          selectOpen: false,
+                          selectedItems: [],
+                          searchText: '',
+                          optionList: [],
+                          async fetchCountries() {
+                              try {
+                                  const response = await fetch('https://restcountries.com/v3.1/all?fields=name,flags');
+                                  const data = await response.json();                                       
+                                  this.optionList = data.map(country => ({
+                                      title: country.name.common,
+                                      flag: country.flags.svg
+                                  }));
+                              } catch (error) {
+                                  console.error('Error fetching countries:', error);
+                              }
+                          },
+                          filteredOptions() {
+                              if (this.searchText.trim() === '') {
+                                  return this.optionList;
+                              } else {
+                                  return this.optionList.filter(option => option.title.toLowerCase().includes(this.searchText.trim().toLowerCase()));
+                              }
+                          },
+                          toggleItem(item) {
+                              const index = this.selectedItems.findIndex(selectedItem => selectedItem.title === item.title);
+                              if (index === -1) {
+                                  // If item not already selected, add it to selectedItems array
+                                  this.selectedItems.push(item);
+                              } else {
+                                  // If item already selected, remove it from selectedItems array
+                                  this.selectedItems.splice(index, 1);
+                              }
+                              console.log(this.selectedItems)
+                          },
+                          isSelected(item) {
+                              return this.selectedItems.findIndex(selectedItem => selectedItem.title === item.title) !== -1;
+                          }
+                      }"
+                x-init="fetchCountries()"
+                class="relative mt-4"
+              >
+                <button @click="selectOpen = !selectOpen" class="py-3 lg:py-4 px-3 sm:px-4 lg:px-6 lg:pr-10 rounded-xl w-full border bg-neutral-0 dark:bg-neutral-904 border-neutral-40 dark:border-neutral-500 relative flex gap-1 flex-wrap">
+                  <div x-show="selectedItems.length" class="flex gap-2 flex-wrap">
+                    <template x-for="item in selectedItems">
+                      <div class="px-1.5 py-0.5 rounded-full bg-neutral-20 dark:bg-neutral-500 flex items-center gap-2 border border-neutral-40 dark:border-neutral-600 text-neutral-700 dark:text-neutral-20">
+                        <div class="flex gap-2 items-center">
+                          <img x-show="selectedItems.length" class="size-6 rounded-full object-cover object-center" :src="item && item.flag" alt="flag" />
+                          <span x-text="item.title" class="text-xs"></span>
+                        </div>
+                        <i @click.stop="toggleItem(item)" class="las la-times text-xs rounded-full size-4 bg-neutral-70 text-neutral-10"></i>
+                      </div>
+                    </template>
+                  </div>
+                  <input type="text" placeholder="Choose countries" x-model="searchText" class="w-full bg-transparent capitalize text-sm" />
+                  <span class="absolute inset-y-0 right-0 flex items-center pr-3 md:pr-4 lg:pr-6 pointer-events-none">
+                    <i class="las la-angle-down"></i>
+                  </span>
+                </button>
+                <ul x-show="selectOpen" @click.away="selectOpen = false" class="py-1 rounded-xl bg-neutral-0 dark:bg-neutral-904 absolute top-full left-0 right-0 w-full shadow-xl z-30 max-h-[250px] overflow-y-auto">
+                  <template x-for="option in filteredOptions()" :key="option.title">
+                    <li @click="toggleItem(option)" :class="isSelected(option)?'bg-primary-50 dark:bg-neutral-600':''" class="py-2 ltr:pl-6 rtl:pr-6 hover:bg-primary-300 flex items-center gap-2 hover:text-neutral-0 duration-300 cursor-pointer capitalize">
+                      <img :src="option?.flag" alt="flag" class="size-6 shrink-0 rounded-full object-cover object-center" />
+                      <span x-text="option.title"></span>
+                    </li>
+                  </template>
+                </ul>
+              </div>
+            </div>
+
+            <!-- pricing scale -->
+            <div class="mt-6 lg:pt-6 border-t border-dashed border-neutral-30 dark:border-neutral-500">
+              <p class="l-text font-medium mb-6">Pricing Scale</p>
+              <tc-range-slider slider-bg="#96DBC4" slider-bg-fill="#2C7BE5" pointer-bg="#2C7BE5" pointer-bg-focus="#2C7BE5" pointer-bg-hover="#2C7BE5" pointer-border="#2C7BE5" value1="200" value2="650" min="0" max="1000" round="0" value1-label=".value-1" value2-label=".value-2"></tc-range-slider>
+              <div class="rounded-lg bg-neutral-0 mt-3 dark:bg-neutral-904 flex justify-center">
+                <p class="m-text"><span class="font-medium">$</span> <span class="value-1"></span></p>
+                <span>-</span>
+                <p class="m-text"><span class="font-medium">$</span> <span class="value-2"></span></p>
+              </div>
+            </div>
+
+            <!-- Benefits -->
+            <div class="mt-6 lg:pt-6 border-t border-dashed border-neutral-30 dark:border-neutral-500">
+              <p class="l-text font-medium mb-6">Benefits</p>
+              <ul class="flex flex-col gap-3">
+                <li>
+                  <label for="freepark" class="option">
+                    <input type="checkbox" id="freepark" aria-checked="true" checked />
+                    <span class="checkbox default"></span>
+                    Free Parking
+                  </label>
+                </li>
+                <li>
+                  <label for="bonuscommission" class="option">
+                    <input type="checkbox" id="bonuscommission" aria-checked="true" />
+                    <span class="checkbox default"></span>
+                    Bonus Commission
+                  </label>
+                </li>
+                <li>
+                  <label for="travel" class="option">
+                    <input type="checkbox" id="travel" aria-checked="true" />
+                    <span class="checkbox default"></span>
+                    Travel
+                  </label>
+                </li>
+                <li>
+                  <label for="device" class="option">
+                    <input type="checkbox" id="device" aria-checked="true" />
+                    <span class="checkbox default"></span>
+                    Device Support
+                  </label>
+                </li>
+                <li>
+                  <label for="health" class="option">
+                    <input type="checkbox" id="health" aria-checked="true" />
+                    <span class="checkbox default"></span>
+                    Health Care
+                  </label>
+                </li>
+                <li>
+                  <label for="training" class="option">
+                    <input type="checkbox" id="training" aria-checked="true" />
+                    <span class="checkbox default"></span>
+                    Training
+                  </label>
+                </li>
+                <li>
+                  <label for="retirement" class="option">
+                    <input type="checkbox" id="retirement" aria-checked="true" />
+                    <span class="checkbox default"></span>
+                    Retirement Plans
+                  </label>
+                </li>
+                <li>
+                  <label for="paidoff" class="option">
+                    <input type="checkbox" id="paidoff" aria-checked="true" />
+                    <span class="checkbox default"></span>
+                    Paid Time Off
+                  </label>
+                </li>
+                <li>
+                  <label for="flexible" class="option">
+                    <input type="checkbox" id="flexible" aria-checked="true" />
+                    <span class="checkbox default"></span>
+                    Flexible Work Schedule
+                  </label>
+                </li>
+                <li>
+                  <label for="health-insurance" class="option">
+                    <input type="checkbox" id="health-insurance" aria-checked="true" />
+                    <span class="checkbox default"></span>
+                    Health Insurance
+                  </label>
+                </li>
+              </ul>
+            </div>
+
+            <!-- reset button -->
+            <div class="mt-6 lg:pt-6 border-t border-dashed border-neutral-30 dark:border-neutral-500">
+              <button class="w-full btn-primary"><i class="las la-redo-alt"></i> Reset Filters</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/tcrs-binding-labels.min.js"></script>
+    <script src="./assets/js/libs/range-slider.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+  </body>
+</html>

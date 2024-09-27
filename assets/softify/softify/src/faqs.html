@@ -1,0 +1,286 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Faqs</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Pages</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Faqs</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Faq section -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div>
+            <!-- faq categoires -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xxxl:grid-cols-6 gap-4 lg:gap-6 mb-8 lg:mb-10">
+              <a href="#" class="p-4 lg:p-6 rounded-xl border border-neutral-30 dark:border-neutral-500 bg-primary-300/10 dark:bg-neutral-903 text-center flex flex-col items-center gap-6 hover:border-primary-300 dark:hover:border-primary-300 duration-300 group">
+                <img src="./assets/images/faq/faq-1.png" class="group-hover:scale-110 duration-300" alt="" />
+                <p class="l-text font-medium">Managing Your Account</p>
+              </a>
+              <a href="#" class="p-4 lg:p-6 rounded-xl border border-neutral-30 dark:border-neutral-500 bg-primary-300/10 dark:bg-neutral-903 text-center flex flex-col items-center gap-6 hover:border-primary-300 dark:hover:border-primary-300 duration-300 group">
+                <img src="./assets/images/faq/faq-2.png" class="group-hover:scale-110 duration-300" alt="" />
+                <p class="l-text font-medium">Payment</p>
+              </a>
+              <a href="#" class="p-4 lg:p-6 rounded-xl border border-neutral-30 dark:border-neutral-500 bg-primary-300/10 dark:bg-neutral-903 text-center flex flex-col items-center gap-6 hover:border-primary-300 dark:hover:border-primary-300 duration-300 group">
+                <img src="./assets/images/faq/faq-3.png" class="group-hover:scale-110 duration-300" alt="" />
+                <p class="l-text font-medium">Delivery</p>
+              </a>
+              <a href="#" class="p-4 lg:p-6 rounded-xl border border-neutral-30 dark:border-neutral-500 bg-primary-300/10 dark:bg-neutral-903 text-center flex flex-col items-center gap-6 hover:border-primary-300 dark:hover:border-primary-300 duration-300 group">
+                <img src="./assets/images/faq/faq-4.png" class="group-hover:scale-110 duration-300" alt="" />
+                <p class="l-text font-medium">Problem with the Product</p>
+              </a>
+              <a href="#" class="p-4 lg:p-6 rounded-xl border border-neutral-30 dark:border-neutral-500 bg-primary-300/10 dark:bg-neutral-903 text-center flex flex-col items-center gap-6 hover:border-primary-300 dark:hover:border-primary-300 duration-300 group">
+                <img src="./assets/images/faq/faq-5.png" class="group-hover:scale-110 duration-300" alt="" />
+                <p class="l-text font-medium">Return &amp; Refund</p>
+              </a>
+              <a href="#" class="p-4 lg:p-6 rounded-xl border border-neutral-30 dark:border-neutral-500 bg-primary-300/10 dark:bg-neutral-903 text-center flex flex-col items-center gap-6 hover:border-primary-300 dark:hover:border-primary-300 duration-300 group">
+                <img src="./assets/images/faq/faq-6.png" class="group-hover:scale-110 duration-300" alt="" />
+                <p class="l-text font-medium">Guarantees and Assurances</p>
+              </a>
+            </div>
+
+            <!-- faqs -->
+            <div class="n20-box">
+              <h4 class="bb-dashed-n40">Frequently asked questions</h4>
+              <div class="grid grid-cols-2 gap-4 lg:gap-6">
+                <div class="col-span-2 lg:col-span-1">
+                  <div class="bg-neutral-0 dark:bg-neutral-904 rounded-xl border border-neutral-40 dark:border-neutral-500 p-3 sm:p-4 md:p-6 xl:p-8">
+                    <div
+                      x-data="{
+                              activeAccordion: 'accordion-2',
+                              setActiveAccordion(id) {                              
+                                  this.activeAccordion = (this.activeAccordion == id) ? '' : id 
+                                  }
+                              }"
+                      class="relative w-full mx-auto overflow-hidden text-sm font-normal flex flex-col divide-y divide-neutral-30 dark:divide-neutral-500"
+                    >
+                      <div x-data="{ id: $id('accordion') }" class="cursor-pointer group bg-neutral-0 dark:bg-neutral-904 pb-4 xl:pb-6">
+                        <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full text-left select-none">
+                          <h5 class="text-sm md:h5">What's my current conversion rate?</h5>
+                          <span :class="activeAccordion==id?'bg-error-300 rotate-180':'bg-primary-300'" class="size-5 md:size-7 shrink-0 rounded-full f-center xl-text text-neutral-0 font-medium duration-300">
+                            <i x-show="activeAccordion!=id" class="las la-plus"></i>
+                            <i x-show="activeAccordion==id" class="las la-minus"></i>
+                          </span>
+                        </button>
+                        <div x-show="activeAccordion==id" x-collapse x-cloak>
+                          <div>
+                            <p class="m-text pt-5">No, the client dashboard is designed to be user-friendly and intuitive. You can easily navigate the interface and access the information.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div x-data="{ id: $id('accordion') }" class="cursor-pointer group bg-neutral-0 dark:bg-neutral-904 py-4 xl:py-6">
+                        <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full text-left select-none">
+                          <h5 class="text-sm md:h5">Can I set custom goals and track progress?</h5>
+                          <span :class="activeAccordion==id?'bg-error-300 rotate-180':'bg-primary-300'" class="size-5 md:size-7 shrink-0 rounded-full f-center xl-text text-neutral-0 font-medium duration-300">
+                            <i x-show="activeAccordion!=id" class="las la-plus"></i>
+                            <i x-show="activeAccordion==id" class="las la-minus"></i>
+                          </span>
+                        </button>
+                        <div x-show="activeAccordion==id" x-collapse x-cloak>
+                          <div>
+                            <p class="m-text pt-5">No, the client dashboard is designed to be user-friendly and intuitive. You can easily navigate the interface and access the information.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div x-data="{ id: $id('accordion') }" class="cursor-pointer group bg-neutral-0 dark:bg-neutral-904 py-4 xl:py-6">
+                        <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full text-left select-none">
+                          <h5 class="text-sm md:h5">Is data secure and private?</h5>
+                          <span :class="activeAccordion==id?'bg-error-300 rotate-180':'bg-primary-300'" class="size-5 md:size-7 shrink-0 rounded-full f-center xl-text text-neutral-0 font-medium duration-300">
+                            <i x-show="activeAccordion!=id" class="las la-plus"></i>
+                            <i x-show="activeAccordion==id" class="las la-minus"></i>
+                          </span>
+                        </button>
+                        <div x-show="activeAccordion==id" x-collapse x-cloak>
+                          <div>
+                            <p class="m-text pt-5">No, the client dashboard is designed to be user-friendly and intuitive. You can easily navigate the interface and access the information.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div x-data="{ id: $id('accordion') }" class="cursor-pointer group bg-neutral-0 dark:bg-neutral-904 py-4 xl:py-6">
+                        <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full text-left select-none">
+                          <h5 class="text-sm md:h5">Is there a mobile app for the dashboard?</h5>
+                          <span :class="activeAccordion==id?'bg-error-300 rotate-180':'bg-primary-300'" class="size-5 md:size-7 shrink-0 rounded-full f-center xl-text text-neutral-0 font-medium duration-300">
+                            <i x-show="activeAccordion!=id" class="las la-plus"></i>
+                            <i x-show="activeAccordion==id" class="las la-minus"></i>
+                          </span>
+                        </button>
+                        <div x-show="activeAccordion ==id" x-collapse x-cloak>
+                          <div>
+                            <p class="m-text pt-5">No, the client dashboard is designed to be user-friendly and intuitive. You can easily navigate the interface and access the information.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div x-data="{ id: $id('accordion') }" class="cursor-pointer group bg-neutral-0 dark:bg-neutral-904 pt-4 xl:pt-6">
+                        <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full text-left select-none">
+                          <h5 class="text-sm md:h5">How do I add new users?</h5>
+                          <span :class="activeAccordion==id?'bg-error-300 rotate-180':'bg-primary-300'" class="size-5 md:size-7 shrink-0 rounded-full f-center xl-text text-neutral-0 font-medium duration-300">
+                            <i x-show="activeAccordion!=id" class="las la-plus"></i>
+                            <i x-show="activeAccordion==id" class="las la-minus"></i>
+                          </span>
+                        </button>
+                        <div x-show="activeAccordion==id" x-collapse x-cloak>
+                          <div>
+                            <p class="m-text pt-5">No, the client dashboard is designed to be user-friendly and intuitive. You can easily navigate the interface and access the information.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-span-2 lg:col-span-1">
+                  <div class="bg-neutral-0 col-span-1 dark:bg-neutral-904 rounded-xl border border-neutral-40 dark:border-neutral-500 p-3 sm:p-4 md:p-6 xl:p-8">
+                    <div
+                      x-data="{
+                              activeAccordion: 'accordion-9',
+                              setActiveAccordion(id) {                              
+                                  this.activeAccordion = (this.activeAccordion == id) ? '' : id 
+                                  }
+                              }"
+                      class="relative w-full mx-auto overflow-hidden text-sm font-normal flex flex-col divide-y divide-neutral-30 dark:divide-neutral-500"
+                    >
+                      <div x-data="{ id: $id('accordion') }" class="cursor-pointer group bg-neutral-0 dark:bg-neutral-904 pb-4 xl:pb-6">
+                        <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full text-left select-none">
+                          <h5 class="text-sm md:h5">Can I assign different user roles?</h5>
+                          <span :class="activeAccordion==id?'bg-error-300 rotate-180':'bg-primary-300'" class="size-5 md:size-7 shrink-0 rounded-full f-center xl-text text-neutral-0 font-medium duration-300">
+                            <i x-show="activeAccordion!=id" class="las la-plus"></i>
+                            <i x-show="activeAccordion==id" class="las la-minus"></i>
+                          </span>
+                        </button>
+                        <div x-show="activeAccordion==id" x-collapse x-cloak>
+                          <div>
+                            <p class="m-text pt-5">No, the client dashboard is designed to be user-friendly and intuitive. You can easily navigate the interface and access the information.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div x-data="{ id: $id('accordion') }" class="cursor-pointer group bg-neutral-0 dark:bg-neutral-904 py-4 xl:py-6">
+                        <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full text-left select-none">
+                          <h5 class="text-sm md:h5">Can I customize branding and logos?</h5>
+                          <span :class="activeAccordion==id?'bg-error-300 rotate-180':'bg-primary-300'" class="size-5 md:size-7 shrink-0 rounded-full f-center xl-text text-neutral-0 font-medium duration-300">
+                            <i x-show="activeAccordion!=id" class="las la-plus"></i>
+                            <i x-show="activeAccordion==id" class="las la-minus"></i>
+                          </span>
+                        </button>
+                        <div x-show="activeAccordion==id" x-collapse x-cloak>
+                          <div>
+                            <p class="m-text pt-5">No, the client dashboard is designed to be user-friendly and intuitive. You can easily navigate the interface and access the information.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div x-data="{ id: $id('accordion') }" class="cursor-pointer group bg-neutral-0 dark:bg-neutral-904 py-4 xl:py-6">
+                        <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full text-left select-none">
+                          <h5 class="text-sm md:h5">How do I manage billing and subscriptions?</h5>
+                          <span :class="activeAccordion==id?'bg-error-300 rotate-180':'bg-primary-300'" class="size-5 md:size-7 shrink-0 rounded-full f-center xl-text text-neutral-0 font-medium duration-300">
+                            <i x-show="activeAccordion!=id" class="las la-plus"></i>
+                            <i x-show="activeAccordion==id" class="las la-minus"></i>
+                          </span>
+                        </button>
+                        <div x-show="activeAccordion==id" x-collapse x-cloak>
+                          <div>
+                            <p class="m-text pt-5">No, the client dashboard is designed to be user-friendly and intuitive. You can easily navigate the interface and access the information.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div x-data="{ id: $id('accordion') }" class="cursor-pointer group bg-neutral-0 dark:bg-neutral-904 py-4 xl:py-6">
+                        <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full text-left select-none">
+                          <h5 class="text-sm md:h5">Where can I find troubleshooting guides?</h5>
+                          <span :class="activeAccordion==id?'bg-error-300 rotate-180':'bg-primary-300'" class="size-5 md:size-7 shrink-0 rounded-full f-center xl-text text-neutral-0 font-medium duration-300">
+                            <i x-show="activeAccordion!=id" class="las la-plus"></i>
+                            <i x-show="activeAccordion==id" class="las la-minus"></i>
+                          </span>
+                        </button>
+                        <div x-show="activeAccordion ==id" x-collapse x-cloak>
+                          <div>
+                            <p class="m-text pt-5">No, the client dashboard is designed to be user-friendly and intuitive. You can easily navigate the interface and access the information.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div x-data="{ id: $id('accordion') }" class="cursor-pointer group bg-neutral-0 dark:bg-neutral-904 pt-4 xl:pt-6">
+                        <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full text-left select-none">
+                          <h5 class="text-sm md:h5">Is data secure and private?</h5>
+                          <span :class="activeAccordion==id?'bg-error-300 rotate-180':'bg-primary-300'" class="size-5 md:size-7 shrink-0 rounded-full f-center xl-text text-neutral-0 font-medium duration-300">
+                            <i x-show="activeAccordion!=id" class="las la-plus"></i>
+                            <i x-show="activeAccordion==id" class="las la-minus"></i>
+                          </span>
+                        </button>
+                        <div x-show="activeAccordion==id" x-collapse x-cloak>
+                          <div>
+                            <p class="m-text pt-5">No, the client dashboard is designed to be user-friendly and intuitive. You can easily navigate the interface and access the information.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- right help form -->
+            <div class="n20-box mt-6 cursor-cell">
+              <h4 class="bb-dashed-n40">Haven't found the right help?</h4>
+              <form class="grid grid-cols-2 gap-4 lg:gap-6">
+                <div class="col-span-2 md:col-span-1">
+                  <input type="text" class="rounded-full w-full bg-neutral-0 dark:bg-neutral-904 py-2 px-4 md:py-4 md:px-6" placeholder="Enter Name..." />
+                </div>
+                <div class="col-span-2 md:col-span-1">
+                  <input type="number" class="rounded-full w-full bg-neutral-0 dark:bg-neutral-904 py-2 px-4 md:py-4 md:px-6" placeholder="Enter Number..." />
+                </div>
+                <div class="col-span-2">
+                  <input type="email" class="rounded-full w-full bg-neutral-0 dark:bg-neutral-904 py-2 px-4 md:py-4 md:px-6" placeholder="Enter Email..." />
+                </div>
+                <div class="col-span-2">
+                  <textarea type="email" class="rounded-[32px] w-full bg-neutral-0 dark:bg-neutral-904 py-2 px-4 md:py-4 md:px-6" rows="4" placeholder="Say Something..."></textarea>
+                </div>
+                <div class="col-span-2 mt-1 lg:mt-4">
+                  <button class="btn-primary">Send Message</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

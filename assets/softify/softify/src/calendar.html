@@ -1,0 +1,438 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/quill.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <!-- Breadcrumb -->
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Calendar</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Calender</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Calender -->
+        <div class="white-box">
+          <div x-data="calendarpage">
+            <div class="flex items-center justify-between bb-dashed-n30">
+              <h4>Calendar</h4>
+              <button type="button" class="btn-primary-outlined xl:py-2 xl:px-5" @click="editEvent()">
+                <i class="las la-plus"></i>
+                Create Event
+              </button>
+              <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60 dark:bg-neutral-40/80" :class="isAddEventModal && '!block'">
+                <div class="flex min-h-screen items-center justify-center px-4" @click.self="isAddEventModal = false">
+                  <div x-show="isAddEventModal" x-transition x-transition.duration.300 class="white-box xl:p-5 my-8 w-[90%] max-w-lg overflow-hidden rounded-lg border-0 p-0 md:w-full">
+                    <div class="flex justify-between items-center bb-dashed-n30">
+                      <h5 x-text="params.id ? 'Edit Event' : 'Add Event'"></h5>
+                      <button type="button" @click="isAddEventModal = false"><i class="las la-times text-xl"></i></button>
+                    </div>
+                    <div>
+                      <form @submit.prevent="saveEvent">
+                        <div class="mb-5 relative flex items-center gap-4 rounded-xl border border-neutral-30 px-4 dark:border-neutral-500 xl:px-5">
+                          <label for="title" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Event Title :</label>
+                          <input id="title" type="text" name="title" class="w-full bg-transparent py-3" placeholder="Enter Event Title" x-model="params.title" required />
+                          <div class="mt-2 text-danger" id="titleErr"></div>
+                        </div>
+                        <div class="mb-5 relative flex items-center gap-4 rounded-xl border border-neutral-30 px-4 dark:border-neutral-500 xl:px-5">
+                          <label for="description" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Event Description :</label>
+                          <textarea id="description" name="description" class="form-textarea min-h-[130px] pt-4 w-full bg-transparent" placeholder="Enter Event Description" x-model="params.description"></textarea>
+                        </div>
+                        <div class="mb-5">
+                          <label for="switch14" class="switch flex max-w-max">
+                            <input id="switch14" type="checkbox" checked />
+                            <span class="inner primary"></span>
+                            All Day
+                          </label>
+                        </div>
+                        <div class="mb-5 relative flex items-center gap-4 rounded-xl border border-neutral-30 ltr:pl-4 rtl:pr-4 dark:border-neutral-500">
+                          <label for="dateStart" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Start Date :</label>
+                          <input id="dateStart" type="datetime-local" name="start" class="py-3 w-full bg-transparent" placeholder="Event Start Date" x-model="params.start" :min="minStartDate" @change="startDateChange($event)" required />
+                          <div class="mt-2 text-danger" id="startDateErr"></div>
+                        </div>
+                        <div class="mb-5 relative flex items-center gap-4 rounded-xl border border-neutral-30 ltr:pl-4 rtl:pr-4 dark:border-neutral-500">
+                          <label for="dateEnd" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">End Date :</label>
+                          <input id="dateEnd" type="datetime-local" name="end" class="py-3 w-full bg-transparent" placeholder="Event End Date" x-model="params.end" :min="minEndDate" required />
+                          <div class="mt-2 text-danger" id="endDateErr"></div>
+                        </div>
+
+                        <div class="mt-8 flex items-center justify-end">
+                          <button type="button" class="btn-primary-outlined" @click="isAddEventModal = false">Cancel</button>
+                          <button type="submit" class="btn-primary ltr:ml-4 rtl:mr-4" x-text="params.id ? 'Update Event' : 'Create Event'"></button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="overflow-x-auto">
+              <div class="calendar-wrapper min-w-[500px]" id="calendar"></div>
+            </div>
+
+            <!-- filter sidebar -->
+            <div class="inset-0 fixed bg-black bg-opacity-60 duration-300 z-[29]" x-show="filter" @click="filter=false"></div>
+            <div :class="filter?'translate-x-0 opacity-100 visible':'ltr:translate-x-full rtl:-translate-x-full opacity-0 invisible'" class="w-[312px] duration-300 fixed h-full top-0 ltr:right-0 rtl:left-0 z-30 p-4 md:p-6 lg:p-8 bg-neutral-0 dark:bg-neutral-904 overflow-y-auto custom-scrollbar">
+              <div class="flex justify-between items-center pb-4 lg:pb-6 mb-4 lg:mb-6 border-b border-dashed border-neutral-40 dark:border-neutral-500">
+                <h4 class="text-2xl font-semibold">Filters</h4>
+                <div class="flex gap-4 items-center shrink-0 text-xl">
+                  <button><i class="las la-redo-alt"></i></button>
+                  <button @click="filter=false"><i class="las la-times"></i></button>
+                </div>
+              </div>
+              <form class="w-full rounded-full bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 items-center p-1 flex mb-6">
+                <input type="text" class="px-4 py-2 w-full text-sm bg-transparent" placeholder="Search..." />
+                <button class="size-8 shrink-0 rounded-full bg-primary-300 text-neutral-0 f-center">
+                  <i class="las la-search text-xl"></i>
+                </button>
+              </form>
+
+              <!-- durations -->
+              <div class="bb-dashed-n30">
+                <p class="l-text font-medium mb-6">Range</p>
+                <div class="relative flex items-center gap-4 rounded-full border border-neutral-40 px-4 dark:border-neutral-500 lg:px-6 mb-6">
+                  <label for="input" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Start Date</label>
+                  <input type="date" class="w-full bg-transparent py-2.5" />
+                </div>
+                <div class="relative flex items-center gap-4 rounded-full border border-neutral-40 px-4 dark:border-neutral-500 lg:px-6">
+                  <label for="input" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">End Date</label>
+                  <input type="date" class="w-full bg-transparent py-2.5" />
+                </div>
+              </div>
+
+              <!-- destination -->
+              <div class="bb-dashed-n30">
+                <p class="l-text font-medium mb-4">Events (9)</p>
+                <div class="flex flex-col gap-4">
+                  <div class="flex gap-3 items-center">
+                    <img src="./assets/images/tour/tour-1.png" class="w-14 rounded-md object-cover object-center" alt="" />
+                    <div>
+                      <p class="l-text mb-1">Book Launch Party</p>
+                      <p class="s-text">21/03/24 • 23/03/24</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-3 items-center">
+                    <img src="./assets/images/tour/tour-2.png" class="w-14 rounded-md object-cover object-center" alt="" />
+                    <div>
+                      <p class="l-text mb-1">Award Show Night</p>
+                      <p class="s-text">21/03/24 • 23/03/24</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-3 items-center">
+                    <img src="./assets/images/tour/tour-3.png" class="w-14 rounded-md object-cover object-center" alt="" />
+                    <div>
+                      <p class="l-text mb-1">Live music show</p>
+                      <p class="s-text">21/03/24 • 23/03/24</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-3 items-center">
+                    <img src="./assets/images/tour/tour-4.png" class="w-14 rounded-md object-cover object-center" alt="" />
+                    <div>
+                      <p class="l-text mb-1">Fashion Week Show</p>
+                      <p class="s-text">21/03/24 • 23/03/24</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-3 items-center">
+                    <img src="./assets/images/tour/tour-5.png" class="w-14 rounded-md object-cover object-center" alt="" />
+                    <div>
+                      <p class="l-text mb-1">Sports Tournament</p>
+                      <p class="s-text">21/03/24 • 23/03/24</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="w-full btn-primary"><i class="las la-redo-alt"></i> Reset Filters</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/sweetalert.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+    <script src="./assets/js/libs/fullcalender.js"></script>
+
+    <script>
+      document.addEventListener('alpine:init', () => {
+        Alpine.data('calendarpage', () => ({
+          defaultParams: {
+            id: null,
+            title: '',
+            start: '',
+            end: '',
+            description: ''
+          },
+          params: {
+            id: null,
+            title: '',
+            start: '',
+            end: '',
+            description: ''
+          },
+          isAddEventModal: false,
+          minStartDate: '',
+          minEndDate: '',
+          calendar: null,
+          filter: false,
+          now: new Date(),
+          events: [],
+          init() {
+            this.events = [
+              {
+                id: 1,
+                title: 'All Day Event',
+                start: this.now.getFullYear() + '-' + this.getMonth(this.now) + '-01T14:30:00',
+                end: this.now.getFullYear() + '-' + this.getMonth(this.now) + '-02T14:30:00',
+                className: 'danger',
+                description: 'Aenean fermentum quam vel sapien rutrum cursus. Vestibulum imperdiet finibus odio, nec tincidunt felis facilisis eu.'
+              },
+              {
+                id: 2,
+                title: 'Site Visit',
+                start: this.now.getFullYear() + '-' + this.getMonth(this.now) + '-07T19:30:00',
+                end: this.now.getFullYear() + '-' + this.getMonth(this.now) + '-08T14:30:00',
+                className: 'primary',
+                description: 'Etiam a odio eget enim aliquet laoreet. Vivamus auctor nunc ultrices varius lobortis.'
+              },
+              {
+                id: 3,
+                title: 'Product Lunching Event',
+                start: this.now.getFullYear() + '-' + this.getMonth(this.now) + '-17T14:30:00',
+                end: this.now.getFullYear() + '-' + this.getMonth(this.now) + '-18T14:30:00',
+                className: 'info',
+                description: 'Proin et consectetur nibh. Mauris et mollis purus. Ut nec tincidunt lacus. Nam at rutrum justo, vitae egestas dolor.'
+              },
+
+              {
+                id: 8,
+                title: 'Dinner',
+                start: this.now.getFullYear() + '-' + this.getMonth(this.now) + '-12T20:00:00',
+                end: this.now.getFullYear() + '-' + this.getMonth(this.now) + '-13T20:00:00',
+                className: 'danger',
+                description: 'Sed purus urna, aliquam et pharetra ut, efficitur id mi. Pellentesque ut convallis velit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+              },
+              {
+                id: 9,
+                title: 'Birthday Party',
+                start: this.now.getFullYear() + '-' + this.getMonth(this.now) + '-27T20:00:00',
+                end: this.now.getFullYear() + '-' + this.getMonth(this.now) + '-28T20:00:00',
+                className: 'success',
+                description: 'Sed purus urna, aliquam et pharetra ut, efficitur id mi. Pellentesque ut convallis velit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+              },
+              {
+                id: 10,
+                title: 'New Talent Event',
+                start: this.now.getFullYear() + '-' + this.getMonth(this.now, 1) + '-24T08:12:14',
+                end: this.now.getFullYear() + '-' + this.getMonth(this.now, 1) + '-27T22:20:20',
+                className: 'danger',
+                description: 'Sed purus urna, aliquam et pharetra ut, efficitur id mi. Pellentesque ut convallis velit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+              },
+              {
+                id: 11,
+                title: 'Other new',
+                start: this.now.getFullYear() + '-' + this.getMonth(this.now, -1) + '-13T08:12:14',
+                end: this.now.getFullYear() + '-' + this.getMonth(this.now, -1) + '-16T22:20:20',
+                className: 'primary',
+                description: 'Pellentesque ut convallis velit. Sed purus urna, aliquam et pharetra ut, efficitur id mi. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+              },
+              {
+                id: 13,
+                title: 'Upcoming Event',
+                start: this.now.getFullYear() + '-' + this.getMonth(this.now, 1) + '-15T08:12:14',
+                end: this.now.getFullYear() + '-' + this.getMonth(this.now, 1) + '-18T22:20:20',
+                className: 'primary',
+                description: 'Pellentesque ut convallis velit. Sed purus urna, aliquam et pharetra ut, efficitur id mi. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+              }
+            ]
+            var calendarEl = document.getElementById('calendar')
+            this.calendar = new FullCalendar.Calendar(calendarEl, {
+              initialView: 'dayGridMonth',
+              customButtons: {
+                filterButton: {
+                  icon: 'chevrons-right',
+                  click: () => {
+                    this.filter = true
+                  }
+                }
+              },
+              headerToolbar: {
+                left: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+                center: 'prev title next',
+                right: 'today filterButton'
+              },
+              editable: false,
+              dayMaxEvents: true,
+              selectable: true,
+              droppable: true,
+              eventClick: (event) => {
+                this.editEvent(event)
+              },
+              select: (event) => {
+                this.editDate(event)
+              },
+              events: this.events
+            })
+            this.calendar.render()
+
+            this.$watch('$store.app.sidebar', () => {
+              setTimeout(() => {
+                this.calendar.render()
+              }, 300)
+            })
+          },
+
+          getMonth(dt, add = 0) {
+            let month = dt.getMonth() + 1 + add
+            return dt.getMonth() < 10 ? '0' + month : month
+          },
+
+          editEvent(data) {
+            this.params = JSON.parse(JSON.stringify(this.defaultParams))
+            if (data) {
+              let obj = JSON.parse(JSON.stringify(data.event))
+              this.params = {
+                id: obj.id ? obj.id : null,
+                title: obj.title ? obj.title : null,
+                start: this.dateFormat(obj.start),
+                end: this.dateFormat(obj.end),
+                type: obj.classNames ? obj.classNames[0] : 'primary',
+                description: obj.extendedProps ? obj.extendedProps.description : ''
+              }
+              this.minStartDate = new Date()
+              this.minEndDate = this.dateFormat(obj.start)
+            } else {
+              this.minStartDate = new Date()
+              this.minEndDate = new Date()
+            }
+
+            this.isAddEventModal = true
+          },
+
+          editDate(data) {
+            let obj = {
+              event: {
+                start: data.start,
+                end: data.end
+              }
+            }
+            this.editEvent(obj)
+          },
+
+          dateFormat(dt) {
+            dt = new Date(dt)
+            const month = dt.getMonth() + 1 < 10 ? '0' + (dt.getMonth() + 1) : dt.getMonth() + 1
+            const date = dt.getDate() < 10 ? '0' + dt.getDate() : dt.getDate()
+            const hours = dt.getHours() < 10 ? '0' + dt.getHours() : dt.getHours()
+            const mins = dt.getMinutes() < 10 ? '0' + dt.getMinutes() : dt.getMinutes()
+            dt = dt.getFullYear() + '-' + month + '-' + date + 'T' + hours + ':' + mins
+            return dt
+          },
+
+          saveEvent() {
+            if (!this.params.title) {
+              return true
+            }
+            if (!this.params.start) {
+              return true
+            }
+            if (!this.params.end) {
+              return true
+            }
+
+            if (this.params.id) {
+              //update event
+              let event = this.events.find((d) => d.id == this.params.id)
+              event.title = this.params.title
+              event.start = this.params.start
+              event.end = this.params.end
+              event.description = this.params.description
+              event.className = this.params.type
+            } else {
+              //add event
+              let maxEventId = 0
+              if (this.events) {
+                maxEventId = this.events.reduce((max, character) => (character.id > max ? character.id : max), this.events[0].id)
+              }
+
+              let event = {
+                id: maxEventId + 1,
+                title: this.params.title,
+                start: this.params.start,
+                end: this.params.end,
+                description: this.params.description,
+                className: this.params.type
+              }
+              this.events.push(event)
+            }
+            this.calendar.getEventSources()[0].refetch() //refresh Calendar
+            this.showMessage('Event has been saved successfully.')
+            this.isAddEventModal = false
+          },
+
+          startDateChange(event) {
+            const dateStr = event.target.value
+            if (dateStr) {
+              this.minEndDate = this.dateFormat(dateStr)
+              this.params.end = ''
+            }
+          },
+
+          showMessage(msg = '', type = 'success') {
+            const toast = window.Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 3000
+            })
+            toast.fire({
+              icon: type,
+              title: msg,
+              padding: '10px 20px'
+            })
+          }
+        }))
+      })
+    </script>
+  </body>
+</html>

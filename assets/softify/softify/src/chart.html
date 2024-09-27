@@ -1,0 +1,944 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Chart</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Chart</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Chart -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div x-data="chart" class="grid grid-cols-2 gap-4 lg:gap-6">
+            <div class="col-span-2 lg:col-span-1 xl:col-span-2 xxl:col-span-1">
+              <div class="n20-box !pb-2 overflow-hidden">
+                <h5 class="bb-dashed-n40">Area Chart</h5>
+                <div x-ref="areaChart"></div>
+              </div>
+            </div>
+            <div class="col-span-2 lg:col-span-1 xl:col-span-2 xxl:col-span-1">
+              <div class="n20-box !pb-2 overflow-hidden">
+                <h5 class="bb-dashed-n40">Line Chart</h5>
+                <div x-ref="lineChart"></div>
+              </div>
+            </div>
+            <div class="col-span-2 lg:col-span-1 xl:col-span-2 xxl:col-span-1">
+              <div class="n20-box !pb-2 overflow-hidden">
+                <h5 class="bb-dashed-n40">Single Bar Chart</h5>
+                <div x-ref="columnChart"></div>
+              </div>
+            </div>
+            <div class="col-span-2 lg:col-span-1 xl:col-span-2 xxl:col-span-1">
+              <div class="n20-box !pb-2 overflow-hidden">
+                <h5 class="bb-dashed-n40">Multiple Bar Chart</h5>
+                <div x-ref="columnMultiple"></div>
+              </div>
+            </div>
+            <div class="col-span-2 lg:col-span-1 xl:col-span-2 xxl:col-span-1">
+              <div class="n20-box !pb-2 overflow-hidden">
+                <h5 class="bb-dashed-n40">Stacked Bar Chart</h5>
+                <div x-ref="columnStacked"></div>
+              </div>
+            </div>
+            <div class="col-span-2 lg:col-span-1 xl:col-span-2 xxl:col-span-1">
+              <div class="n20-box !pb-2 overflow-hidden">
+                <h5 class="bb-dashed-n40">Bar Negative</h5>
+                <div x-ref="columnNegative"></div>
+              </div>
+            </div>
+            <div class="col-span-2 lg:col-span-1 xl:col-span-2 xxl:col-span-1">
+              <div class="n20-box !pb-2 overflow-hidden">
+                <h5 class="bb-dashed-n40">Horizontal Bar Chart</h5>
+                <div x-ref="barChart"></div>
+              </div>
+            </div>
+            <div class="col-span-2 lg:col-span-1 xl:col-span-2 xxl:col-span-1">
+              <div class="n20-box !pb-2 overflow-hidden">
+                <h5 class="bb-dashed-n40">Mixed Chart</h5>
+                <div x-ref="mixedChart"></div>
+              </div>
+            </div>
+            <div class="col-span-2 lg:col-span-1 xl:col-span-2 xxl:col-span-1">
+              <div class="n20-box !pb-2 overflow-hidden">
+                <h5 class="bb-dashed-n40">Pie Chart</h5>
+                <div x-ref="pieChart"></div>
+              </div>
+            </div>
+            <div class="col-span-2 lg:col-span-1 xl:col-span-2 xxl:col-span-1">
+              <div class="n20-box !pb-2 overflow-hidden">
+                <h5 class="bb-dashed-n40">Donut Chart</h5>
+                <div x-ref="donutChart"></div>
+              </div>
+            </div>
+            <div class="col-span-2 lg:col-span-1 xl:col-span-2 xxl:col-span-1">
+              <div class="n20-box !pb-2 overflow-hidden">
+                <h5 class="bb-dashed-n40">Radialbar Chart</h5>
+                <div x-ref="radialBarChart"></div>
+              </div>
+            </div>
+            <div class="col-span-2 lg:col-span-1 xl:col-span-2 xxl:col-span-1">
+              <div class="n20-box !pb-2 overflow-hidden">
+                <h5 class="bb-dashed-n40">Radar Chart</h5>
+                <div x-ref="radarChart"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <script src="./assets/js/libs/apexcharts.min.js"></script>
+    <!-- <script src="./assets/js/charts.js"></script> -->
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+
+    <script>
+      document.addEventListener('alpine:init', () => {
+        Alpine.data('chart', () => ({
+          areaChart: null,
+          lineChart: null,
+          columnChart: null,
+          columnMultiple: null,
+          columnStacked: null,
+          columnNegative: null,
+          barChart: null,
+          mixedChart: null,
+          pieChart: null,
+          donutChart: null,
+          radialBarChart: null,
+          radarChart: null,
+          init() {
+            isDark = this.$store.app.theme === 'dark' ? true : false
+            isRtl = this.$store.app.dir === 'rtl' ? true : false
+
+            setTimeout(() => {
+              this.areaChart = new ApexCharts(this.$refs.areaChart, this.areaChartOptions)
+              this.areaChart.render()
+
+              this.lineChart = new ApexCharts(this.$refs.lineChart, this.lineChartOptions)
+              this.lineChart.render()
+
+              this.columnChart = new ApexCharts(this.$refs.columnChart, this.columnChartOptions)
+              this.columnChart.render()
+
+              this.columnMultiple = new ApexCharts(this.$refs.columnMultiple, this.columnMultipleChartOptions)
+              this.columnMultiple.render()
+
+              this.columnStacked = new ApexCharts(this.$refs.columnStacked, this.columnStackedOptions)
+              this.columnStacked.render()
+
+              this.columnNegative = new ApexCharts(this.$refs.columnNegative, this.columnNegativeOptions)
+              this.columnNegative.render()
+
+              this.barChart = new ApexCharts(this.$refs.barChart, this.barChartOptions)
+              this.barChart.render()
+
+              this.mixedChart = new ApexCharts(this.$refs.mixedChart, this.mixedChartOptions)
+              this.mixedChart.render()
+
+              this.pieChart = new ApexCharts(this.$refs.pieChart, this.pieChartOptions)
+              this.pieChart.render()
+
+              this.donutChart = new ApexCharts(this.$refs.donutChart, this.donutChartOptions)
+              this.donutChart.render()
+
+              this.radarChart = new ApexCharts(this.$refs.radarChart, this.radarChartOptions)
+              this.radarChart.render()
+
+              this.radialBarChart = new ApexCharts(this.$refs.radialBarChart, this.radialBarChartOptions)
+              this.radialBarChart.render()
+            }, 300)
+
+            this.$watch('$store.app.theme', () => {
+              this.refreshOptions()
+            })
+
+            this.$watch('$store.app.rtlClass', () => {
+              this.refreshOptions()
+            })
+          },
+
+          refreshOptions() {
+            isDark = this.$store.app.theme === 'dark' ? true : false
+            isRtl = this.$store.app.dir === 'rtl' ? true : false
+            this.areaChart.updateOptions(this.areaChartOptions)
+            this.lineChart.updateOptions(this.lineChartOptions)
+            this.columnChart.updateOptions(this.columnChartOptions)
+            this.columnMultiple.updateOptions(this.columnMultipleChartOptions)
+            this.columnStacked.updateOptions(this.columnStackedOptions)
+            this.columnNegative.updateOptions(this.columnNegativeOptions)
+            this.barChart.updateOptions(this.barChartOptions)
+            this.mixedChart.updateOptions(this.mixedChartOptions)
+            this.pieChart.updateOptions(this.pieChartOptions)
+            this.donutChart.updateOptions(this.donutChartOptions)
+            this.radialBarChart.updateOptions(this.radialBarChartOptions)
+            this.radarChart.updateOptions(this.radarChartOptions)
+          },
+
+          get lineChartOptions() {
+            return {
+              series: [
+                {
+                  name: 'Desktops',
+                  data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+                }
+              ],
+              chart: {
+                height: 230,
+                type: 'line',
+                toolbar: {
+                  show: false
+                },
+                zoom: {
+                  enabled: false
+                }
+              },
+              dataLabels: {
+                enabled: false
+              },
+              stroke: {
+                curve: 'straight',
+                colors: ['#2C7BE5']
+              },
+              colors: ['#2C7BE5'],
+              grid: {
+                borderColor: isDark ? '#191e3a' : '#e0e6ed',
+                row: {
+                  opacity: 0.5
+                }
+              },
+              xaxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                axisBorder: {
+                  color: isDark ? '#191e3a' : '#e0e6ed'
+                }
+              }
+            }
+          },
+
+          get areaChartOptions() {
+            return {
+              series: [
+                {
+                  name: 'Income',
+                  data: [16800, 16800, 15500, 17800, 15500, 17000, 19000, 16000, 15000, 17000, 14000, 17000]
+                }
+              ],
+              chart: {
+                type: 'area',
+                height: 230,
+                zoom: {
+                  enabled: false
+                },
+                toolbar: {
+                  show: false
+                }
+              },
+              colors: ['#2C7BE5'],
+              dataLabels: {
+                enabled: false
+              },
+              stroke: {
+                width: 2,
+                curve: 'smooth'
+              },
+              xaxis: {
+                axisBorder: {
+                  color: isDark ? '#191e3a' : '#e0e6ed'
+                }
+              },
+              yaxis: {
+                opposite: isRtl ? true : false,
+                labels: {
+                  offsetX: isRtl ? -40 : 0
+                }
+              },
+              labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+              legend: {
+                horizontalAlign: 'left'
+              },
+              grid: {
+                borderColor: isDark ? '#191e3a' : '#e0e6ed'
+              },
+              tooltip: {
+                theme: isDark ? 'dark' : 'light'
+              }
+            }
+          },
+
+          get columnChartOptions() {
+            return {
+              series: [
+                {
+                  name: 'Inflation',
+                  data: [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2, 2.3, 1.4, 0.8, 0.5, 0.2]
+                }
+              ],
+              chart: {
+                height: 230,
+                type: 'bar',
+                toolbar: {
+                  show: false
+                }
+              },
+              fill: {
+                colors: ['#2C7BE5']
+              },
+              plotOptions: {
+                bar: {
+                  dataLabels: {
+                    position: 'top' // top, center, bottom
+                  }
+                }
+              },
+              dataLabels: {
+                enabled: true,
+                formatter: function (val) {
+                  return val + '%'
+                },
+                offsetY: -20,
+                style: {
+                  fontSize: '12px',
+                  colors: [isDark ? '#ffe6ed' : '#304758']
+                }
+              },
+
+              xaxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                position: 'top',
+                axisBorder: {
+                  show: false
+                },
+                axisTicks: {
+                  show: false
+                },
+                crosshairs: {
+                  fill: {
+                    type: 'gradient',
+                    gradient: {
+                      colorFrom: '#D8E3F0',
+                      colorTo: '#BED1E6',
+                      stops: [0, 100],
+                      opacityFrom: 0.4,
+                      opacityTo: 0.5
+                    }
+                  }
+                },
+                tooltip: {
+                  enabled: true
+                }
+              },
+              yaxis: {
+                axisBorder: {
+                  show: false
+                },
+                axisTicks: {
+                  show: false
+                },
+                labels: {
+                  show: false,
+                  formatter: function (val) {
+                    return val + '%'
+                  }
+                }
+              }
+            }
+          },
+
+          get columnMultipleChartOptions() {
+            return {
+              series: [
+                {
+                  name: 'Net Profit',
+                  data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+                },
+                {
+                  name: 'Revenue',
+                  data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+                },
+                {
+                  name: 'Free Cash Flow',
+                  data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
+                }
+              ],
+              chart: {
+                type: 'bar',
+                height: 230,
+                toolbar: {
+                  show: false
+                }
+              },
+              plotOptions: {
+                bar: {
+                  horizontal: false,
+                  columnWidth: '55%',
+                  endingShape: 'rounded'
+                }
+              },
+              dataLabels: {
+                enabled: false
+              },
+              stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+              },
+              xaxis: {
+                categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']
+              },
+              fill: {
+                opacity: 1,
+                colors: ['#8E33FF', '#2C7BE5', '#FFAB00']
+              },
+              legend: {
+                show: false
+              },
+              tooltip: {
+                y: {
+                  formatter: function (val) {
+                    return '$ ' + val + ' thousands'
+                  }
+                }
+              }
+            }
+          },
+          get columnStackedOptions() {
+            return {
+              series: [
+                {
+                  name: 'PRODUCT A',
+                  data: [44, 55, 41, 67, 22, 43]
+                },
+                {
+                  name: 'PRODUCT B',
+                  data: [13, 23, 20, 8, 13, 27]
+                },
+                {
+                  name: 'PRODUCT C',
+                  data: [11, 17, 15, 15, 21, 14]
+                },
+                {
+                  name: 'PRODUCT D',
+                  data: [21, 7, 25, 13, 22, 8]
+                }
+              ],
+              chart: {
+                type: 'bar',
+                height: 350,
+                stacked: true,
+                toolbar: {
+                  show: false
+                },
+                zoom: {
+                  enabled: true
+                }
+              },
+              colors: ['#2C7BE5', '#8E33FF', '#FFAB00', '#FF5630'],
+              fill: {
+                colors: ['#2C7BE5', '#8E33FF', '#FFAB00', '#FF5630']
+              },
+              responsive: [
+                {
+                  breakpoint: 480,
+                  options: {
+                    legend: {
+                      position: 'bottom',
+                      offsetX: -10,
+                      offsetY: 0
+                    }
+                  }
+                }
+              ],
+              plotOptions: {
+                bar: {
+                  horizontal: false,
+                  borderRadius: 10,
+                  columnWidth: 40,
+                  dataLabels: {
+                    total: {
+                      enabled: true,
+                      style: {
+                        fontSize: '13px',
+                        fontWeight: 900
+                      }
+                    }
+                  }
+                }
+              },
+              xaxis: {
+                type: 'datetime',
+                categories: ['01/01/2011 GMT', '01/02/2011 GMT', '01/03/2011 GMT', '01/04/2011 GMT', '01/05/2011 GMT', '01/06/2011 GMT']
+              },
+              legend: {
+                offsetY: 10,
+                position: 'bottom',
+                markers: {
+                  offsetX: 0,
+                  width: 6,
+                  height: 6,
+                  radius: 20
+                }
+              },
+              fill: {
+                opacity: 1
+              }
+            }
+          },
+          get columnNegativeOptions() {
+            return {
+              series: [
+                {
+                  name: 'Cash Flow',
+                  data: [1.45, 5.42, 5.9, -0.42, -12.6, -18.1, -18.2, -14.16, -11.1, -6.09, 0.34, 3.88, 13.07, 5.8, 2, 7.37, 8.1, 13.57, 15.75, 17.1, 19.8, -27.03, -54.4, -47.2, -43.3, -18.6, -48.6, -41.1, -39.6, -37.6, -29.4, -21.4, -2.4]
+                }
+              ],
+              chart: {
+                type: 'bar',
+                height: 350,
+                toolbar: {
+                  show: false
+                }
+              },
+              plotOptions: {
+                bar: {
+                  colors: {
+                    ranges: [
+                      {
+                        from: -100,
+                        to: -46,
+                        color: '#F15B46'
+                      },
+                      {
+                        from: -45,
+                        to: 0,
+                        color: '#FEB019'
+                      }
+                    ]
+                  },
+                  columnWidth: '80%'
+                }
+              },
+              dataLabels: {
+                enabled: false
+              },
+              yaxis: {
+                labels: {
+                  formatter: function (y) {
+                    return y.toFixed(0) + '%'
+                  }
+                }
+              },
+              colors: ['#2C7BE5'],
+              xaxis: {
+                type: 'datetime',
+                categories: [
+                  '2011-01-01',
+                  '2011-02-01',
+                  '2011-03-01',
+                  '2011-04-01',
+                  '2011-05-01',
+                  '2011-06-01',
+                  '2011-07-01',
+                  '2011-08-01',
+                  '2011-09-01',
+                  '2011-10-01',
+                  '2011-11-01',
+                  '2011-12-01',
+                  '2012-01-01',
+                  '2012-02-01',
+                  '2012-03-01',
+                  '2012-04-01',
+                  '2012-05-01',
+                  '2012-06-01',
+                  '2012-07-01',
+                  '2012-08-01',
+                  '2012-09-01',
+                  '2012-10-01',
+                  '2012-11-01',
+                  '2012-12-01',
+                  '2013-01-01',
+                  '2013-02-01',
+                  '2013-03-01',
+                  '2013-04-01',
+                  '2013-05-01',
+                  '2013-06-01',
+                  '2013-07-01',
+                  '2013-08-01',
+                  '2013-09-01'
+                ],
+                labels: {
+                  rotate: -90
+                }
+              }
+            }
+          },
+
+          get barChartOptions() {
+            return {
+              series: [
+                {
+                  data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+                }
+              ],
+              chart: {
+                type: 'bar',
+                height: 350,
+                toolbar: {
+                  show: false
+                }
+              },
+              plotOptions: {
+                bar: {
+                  borderRadius: 4,
+                  horizontal: true
+                }
+              },
+              colors: ['#2C7BE5'],
+              dataLabels: {
+                enabled: false
+              },
+              xaxis: {
+                categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan', 'United States', 'China', 'Germany']
+              }
+            }
+          },
+
+          get mixedChartOptions() {
+            return {
+              chart: {
+                width: '100%',
+                height: 350,
+                type: 'line',
+                toolbar: {
+                  show: false
+                },
+                animations: {
+                  enabled: true,
+                  easing: 'easeinout',
+                  speed: 800
+                }
+              },
+              series: [
+                {
+                  name: 'Website Blog',
+                  type: 'column',
+                  data: [40, 50, 44, 31, 22, 43, 20, 35, 22, 32, 30, 16]
+                },
+                {
+                  name: 'chart 2',
+                  type: 'area',
+                  data: [15, 28, 20, 25, 18, 30, 22, 36, 32, 46, 30, 27]
+                },
+                {
+                  name: 'Social Media',
+                  type: 'line',
+                  data: [5, 8, 6, 5, 7, 8, 7, 6, 8, 4, 6, 3]
+                }
+              ],
+              plotOptions: {
+                bar: {
+                  columnWidth: window.innerWidth < 768 ? '10' : window.innerWidth < 1400 ? '13' : '16',
+                  dataLabels: {
+                    position: 'center'
+                  }
+                }
+              },
+              dataLabels: {
+                enabled: false
+              },
+              stroke: {
+                width: [0, 3, 3],
+                colors: ['#2C7BE5', '#FFAB00', '#8E33FF'],
+                dashArray: [0, 0, 10],
+                curve: ['straight', 'straight', 'smooth']
+              },
+
+              legend: {
+                show: false
+              },
+              xaxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                axisBorder: {
+                  show: false
+                }
+              },
+              yaxis: [
+                {
+                  seriesName: 'Website Blog',
+                  labels: {
+                    offsetX: -40,
+                    show: window.innerWidth > 768 ? true : false
+                  }
+                },
+                {
+                  seriesName: 'chart 2',
+                  max: 70,
+                  labels: {
+                    show: false
+                  }
+                },
+                {
+                  seriesName: 'Social Media',
+                  max: 30,
+                  labels: {
+                    show: false
+                  }
+                }
+              ],
+              colors: ['#2C7BE5', '#FFAB00'],
+              fill: {
+                colors: ['#2C7BE5', '#FFAB00', '#8E33FF'],
+                opacity: [1, 0.1, 1]
+              },
+              responsive: [
+                {
+                  breakpoint: 570,
+                  options: {
+                    chart: {
+                      height: 250
+                    }
+                  }
+                }
+              ],
+              grid: {
+                padding: {
+                  left: -20
+                }
+              }
+            }
+          },
+
+          get radarChartOptions() {
+            return {
+              series: [
+                {
+                  name: 'Series 1',
+                  data: [80, 50, 30, 40, 100, 20]
+                },
+                {
+                  name: 'Series 2',
+                  data: [20, 30, 40, 80, 20, 80]
+                },
+                {
+                  name: 'Series 3',
+                  data: [44, 76, 78, 13, 43, 10]
+                }
+              ],
+              chart: {
+                height: 310,
+                type: 'radar',
+                toolbar: {
+                  show: false
+                },
+                dropShadow: {
+                  enabled: true,
+                  blur: 1,
+                  left: 1,
+                  top: 1
+                }
+              },
+              stroke: {
+                width: 2
+              },
+              colors: ['#2C7BE5', '#FFAB00', '#8E33FF'],
+              fill: {
+                opacity: 0.1
+              },
+              markers: {
+                size: 0
+              },
+              legend: {
+                show: false
+              },
+              xaxis: {
+                categories: ['2011', '2012', '2013', '2014', '2015', '2016']
+              },
+              tooltip: {
+                theme: isDark ? 'dark' : 'light'
+              }
+            }
+          },
+
+          get pieChartOptions() {
+            return {
+              series: [44, 55, 41, 17, 15],
+              chart: {
+                type: 'pie',
+                height: 350
+              },
+              colors: ['#2C7BE5', '#FFAB00', '#FF5630', '#8E33FF', '#00B8D9'],
+              fill: {
+                colors: ['#2C7BE5', '#FFAB00', '#FF5630', '#8E33FF', '#00B8D9']
+              },
+              plotOptions: {
+                pie: {
+                  donut: {
+                    labels: {
+                      show: true,
+                      value: {
+                        fontSize: '16px',
+                        offsetY: 2
+                      }
+                    }
+                  }
+                }
+              },
+              legend: {
+                position: window.innerWidth > 1400 ? 'right' : 'bottom',
+                itemMargin: {
+                  vertical: window.innerWidth > 1500 ? 4 : 2
+                },
+                horizontalAlign: 'center',
+                markers: {
+                  width: 6,
+                  height: 6,
+                  offsetX: -4
+                },
+                offsetX: 50
+              },
+              labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+              dataLabels: {
+                style: {
+                  fontSize: '10px',
+                  fontWeight: 400
+                }
+              }
+            }
+          },
+
+          get donutChartOptions() {
+            return {
+              series: [44, 55, 41, 17, 15],
+              chart: {
+                type: 'donut',
+                height: 350
+              },
+              colors: ['#2C7BE5', '#FFAB00', '#FF5630', '#8E33FF', '#00B8D9'],
+              fill: {
+                colors: ['#2C7BE5', '#FFAB00', '#FF5630', '#8E33FF', '#00B8D9']
+              },
+              plotOptions: {
+                pie: {
+                  donut: {
+                    labels: {
+                      show: true,
+                      value: {
+                        fontSize: '16px',
+                        offsetY: 2
+                      }
+                    }
+                  }
+                }
+              },
+              legend: {
+                position: window.innerWidth > 1400 ? 'right' : 'bottom',
+                itemMargin: {
+                  vertical: window.innerWidth > 1500 ? 4 : 2
+                },
+                horizontalAlign: 'center',
+                markers: {
+                  width: 6,
+                  height: 6,
+                  offsetX: -4
+                },
+                offsetX: 50
+              },
+              labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+              dataLabels: {
+                style: {
+                  fontSize: '10px',
+                  fontWeight: 400
+                }
+              }
+            }
+          },
+
+          get radialBarChartOptions() {
+            return {
+              series: [44, 55, 67, 83],
+              chart: {
+                height: 350,
+                type: 'radialBar'
+              },
+              colors: ['#00B8D9', '#2C7BE5', '#FFAB00', '#FF5630'],
+              plotOptions: {
+                radialBar: {
+                  track: {
+                    background: isDark ? '#343E56' : '#EBECEF'
+                  },
+                  dataLabels: {
+                    name: {
+                      fontSize: '22px'
+                    },
+                    value: {
+                      fontSize: '16px'
+                    },
+                    total: {
+                      show: true,
+                      label: 'Total',
+                      formatter: function (w) {
+                        // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
+                        return 249
+                      }
+                    }
+                  }
+                }
+              },
+              legend: {
+                position: window.innerWidth > 1400 ? 'right' : 'bottom',
+                itemMargin: {
+                  vertical: window.innerWidth > 1500 ? 4 : 2
+                },
+                horizontalAlign: 'center',
+                markers: {
+                  width: 6,
+                  height: 6,
+                  offsetX: -4
+                },
+                offsetX: 50
+              },
+              labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E']
+            }
+          }
+        }))
+      })
+    </script>
+  </body>
+</html>

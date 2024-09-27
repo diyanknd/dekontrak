@@ -1,0 +1,310 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Typography</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Others</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Typography</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Typography section -->
+        <section class="white-box text-neutral-700 dark:text-neutral-10">
+          <div>
+            <div class="grid grid-cols-12 gap-6">
+              <div class="col-span-12 sm:col-span-4">
+                <h4>Display Title</h4>
+              </div>
+              <div class="col-span-12 sm:col-span-8 flex flex-col gap-4 md:gap-6">
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <h2 class="display-1 mb-4">Display 1</h2>
+                  <p>Size: 80 / Height: 96 / Weight: 700</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <h2 class="display-2 mb-4">Display 2</h2>
+                  <p>Size: 72 / Height: 86 / Weight: 700</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <h2 class="display-3 mb-4">Display 3</h2>
+                  <p>Size: 64 / Height: 77 / Weight: 700</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <h2 class="display-4 mb-4">Display 4</h2>
+                  <p>Size: 56 / Height: 67 / Weight: 700</p>
+                </div>
+              </div>
+            </div>
+            <!-- section divider line  -->
+            <include-section-divider />
+            <!-- Heading font size -->
+            <div class="grid grid-cols-12 gap-6 pt-14 lg:pt-28">
+              <div class="col-span-12 sm:col-span-4">
+                <h4>Heading Title</h4>
+              </div>
+              <div class="col-span-12 sm:col-span-8 flex flex-col gap-4 md:gap-6">
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <h1 class="mb-4">Heading H1</h1>
+                  <p>Size: 48 / Height: 58 / Weight: 600</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <h2 class="mb-4">Heading H2</h2>
+                  <p>Size: 40 / Height: 48 / Weight: 600</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <h3 class="mb-4">Heading H3</h3>
+                  <p>Size: 64 / Height: 77 / Weight: 600</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <h4 class="mb-4">Heading H4</h4>
+                  <p>Size: 24 / Height: 31 / Weight: 600</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <h5 class="mb-4">Heading H5</h5>
+                  <p>Size: 20 / Height: 26 / Weight: 600</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <h6 class="mb-4">Heading H6</h6>
+                  <p>Size: 16 / Height: 21 / Weight: 600</p>
+                </div>
+              </div>
+            </div>
+            <!-- section divider line  -->
+            <include-section-divider />
+            <!-- Lead text -->
+            <div class="grid grid-cols-12 gap-6 pt-14 lg:pt-28">
+              <div class="col-span-12 sm:col-span-4">
+                <h4>Lead Text</h4>
+              </div>
+              <div class="col-span-12 sm:col-span-8 flex flex-col gap-4 md:gap-6">
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 lead-text font-bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 24 / Height: 36 / Weight: 700</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 lead-text font-semibold">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 24 / Height: 36 / Weight: 600</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 lead-text font-medium">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 24 / Height: 36 / Weight: 500</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 lead-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 24 / Height: 36 / Weight: 400</p>
+                </div>
+              </div>
+            </div>
+            <!-- section divider line  -->
+            <include-section-divider />
+            <!-- XL text -->
+            <div class="grid grid-cols-12 gap-6 pt-14 lg:pt-28">
+              <div class="col-span-12 sm:col-span-4">
+                <h4>XL Text</h4>
+              </div>
+              <div class="col-span-12 sm:col-span-8 flex flex-col gap-4 md:gap-6">
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 xl-text font-bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 20 / Height: 30 / Weight: 700</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 xl-text font-semibold">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 20 / Height: 30 / Weight: 600</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 xl-text font-medium">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 20 / Height: 30 / Weight: 500</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 xl-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 20 / Height: 30 / Weight: 400</p>
+                </div>
+              </div>
+            </div>
+            <!-- section divider line  -->
+            <include-section-divider />
+            <!-- L text -->
+            <div class="grid grid-cols-12 gap-6 pt-14 lg:pt-28">
+              <div class="col-span-12 sm:col-span-4">
+                <h4>L Text</h4>
+              </div>
+              <div class="col-span-12 sm:col-span-8 flex flex-col gap-4 md:gap-6">
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 l-text font-bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 18 / Height: 27 / Weight: 700</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 l-text font-semibold">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 18 / Height: 27 / Weight: 600</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 l-text font-medium">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 18 / Height: 27 / Weight: 500</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 l-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 18 / Height: 27 / Weight: 400</p>
+                </div>
+              </div>
+            </div>
+            <!-- section divider line  -->
+            <include-section-divider />
+            <!-- M text -->
+            <div class="grid grid-cols-12 gap-6 pt-14 lg:pt-28">
+              <div class="col-span-12 sm:col-span-4">
+                <h4>M Text</h4>
+              </div>
+              <div class="col-span-12 sm:col-span-8 flex flex-col gap-4 md:gap-6">
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 m-text font-bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 16 / Height: 24 / Weight: 700</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 m-text font-semibold">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 16 / Height: 24 / Weight: 600</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 m-text font-medium">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 16 / Height: 24 / Weight: 500</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 m-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 16 / Height: 24 / Weight: 400</p>
+                </div>
+              </div>
+            </div>
+            <!-- section divider line  -->
+            <include-section-divider />
+            <!-- S text -->
+            <div class="grid grid-cols-12 gap-6 pt-14 lg:pt-28">
+              <div class="col-span-12 sm:col-span-4">
+                <h4>S Text</h4>
+              </div>
+              <div class="col-span-12 sm:col-span-8 flex flex-col gap-4 md:gap-6">
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 s-text font-bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 14 / Height: 21 / Weight: 700</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 s-text font-semibold">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 14 / Height: 21 / Weight: 600</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 s-text font-medium">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 14 / Height: 21 / Weight: 500</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 s-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 14 / Height: 21 / Weight: 400</p>
+                </div>
+              </div>
+            </div>
+            <!-- section divider line  -->
+            <include-section-divider />
+            <!-- XS text -->
+            <div class="grid grid-cols-12 gap-6 pt-14 lg:pt-28">
+              <div class="col-span-12 sm:col-span-4">
+                <h4>XS Text</h4>
+              </div>
+              <div class="col-span-12 sm:col-span-8 flex flex-col gap-4 md:gap-6">
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 text-xs font-bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 12 / Height: 18 / Weight: 700</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 text-xs font-semibold">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 12 / Height: 18 / Weight: 600</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 text-xs font-medium">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 12 / Height: 18 / Weight: 500</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <p class="mb-4 text-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Size: 12 / Height: 18 / Weight: 400</p>
+                </div>
+              </div>
+            </div>
+            <!-- section divider line  -->
+            <include-section-divider />
+            <!-- XS text -->
+            <div class="grid grid-cols-12 gap-6 pt-14 lg:pt-28">
+              <div class="col-span-12 sm:col-span-4">
+                <h4>Colors Text</h4>
+              </div>
+              <div class="col-span-12 sm:col-span-8 flex flex-col gap-4 md:gap-6">
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <h5 class="mb-4 font-semibold text-primary-300">Primary</h5>
+                  <p class="m-text dark:text-primary-300 text-primary-300">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <h5 class="mb-4 font-semibold text-secondary-300">Secondary</h5>
+                  <p class="m-text dark:text-secondary-300 text-secondary-300">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <h5 class="mb-4 font-semibold text-info-300">Info</h5>
+                  <p class="m-text dark:text-info-300 text-info-300">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <h5 class="mb-4 font-semibold text-success-300">Success</h5>
+                  <p class="m-text dark:text-success-300 text-success-300">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <h5 class="mb-4 font-semibold text-warning-300">Warning</h5>
+                  <p class="m-text dark:text-warning-300 text-warning-300">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                </div>
+                <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl p-4 sm:p-6 lg:px-10 lg:py-8">
+                  <h5 class="mb-4 font-semibold text-error-300">Error</h5>
+                  <p class="m-text dark:text-error-300 text-error-300">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

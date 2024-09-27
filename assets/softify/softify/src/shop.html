@@ -1,0 +1,583 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" class="relative overflow-x-hidden" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Store Grid</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Pages</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Shop</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- shop section -->
+        <section x-data="customizer" class="text-neutral-700 dark:text-neutral-20">
+          <div>
+            <div class="flex flex-col md:flex-row justify-center md:justify-between items-center gap-4 mb-7 lg:mb-10">
+              <form class="max-w-[337px] rounded-full bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 p-1 flex">
+                <input type="text" class="px-4 py-1 text-sm w-full bg-transparent" placeholder="Search..." />
+                <button class="size-8 shrink-0 rounded-full bg-primary-300 text-neutral-0 f-center">
+                  <i class="las la-search text-xl"></i>
+                </button>
+              </form>
+              <div class="flex items-center gap-3 md:gap-6">
+                <button @click="openCustomizer" class="flex items-center gap-2 font-semibold">
+                  <i class="las la-filter text-xl"></i>
+                  Filter
+                </button>
+                <div class="flex items-center gap-3">
+                  <span>Sort By : </span>
+                  <select name="sort" class="nc-select">
+                    <option value="day">Last 15 Days</option>
+                    <option value="week">Last 1 Month</option>
+                    <option value="year">Last 6 Month</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-12 gap-4 lg:gap-6 mb-7 lg:mb-10">
+              <div class="col-span-12 sm:col-span-6 lg:col-span-4 xxl:col-span-3 rounded-xl border border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904 p-3">
+                <div class="p-4 bg-neutral-20 dark:bg-neutral-903 rounded-xl relative h-[253px] border border-neutral-30 dark:border-neutral-500 f-center mb-6">
+                  <img src="./assets/images/products/product-1.png" alt="product image" />
+                  <button class="shadow-custom-5 size-10 f-center rounded-lg bg-neutral-0 dark:bg-neutral-904 absolute top-4 right-4"><i class="las la-shopping-cart text-2xl"></i></button>
+                </div>
+                <div class="px-3 md:px-5">
+                  <div class="mb-4 flex justify-between items-center">
+                    <a href="product-details.html" class="h5 hover:underline duration-300">Nike Air Force</a>
+                    <div class="flex gap-1 items-center">
+                      <div class="flex">
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-success-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-secondary-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-warning-300 -ml-2"></span>
+                      </div>
+                      <span class="m-text font-medium">+3</span>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-2">
+                      <i class="las la-star text-warning-300 text-xl"></i>
+                      <span>4.5</span>
+                    </div>
+                    <p class="xl-text font-medium dark:text-primary-300 text-primary-300">$95.25</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 sm:col-span-6 lg:col-span-4 xxl:col-span-3 rounded-xl border border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904 p-3">
+                <div class="p-4 bg-neutral-20 dark:bg-neutral-903 rounded-xl relative h-[253px] border border-neutral-30 dark:border-neutral-500 f-center mb-6">
+                  <img src="./assets/images/products/product-2.png" alt="product image" />
+                  <button class="shadow-custom-5 size-10 f-center rounded-lg bg-neutral-0 dark:bg-neutral-904 absolute top-4 right-4"><i class="las la-shopping-cart text-2xl"></i></button>
+                  <span class="py-2 px-4 rounded-lg bg-error-300 text-nowrap absolute text-neutral-0 top-4 font-semibold left-4">Sale</span>
+                </div>
+                <div class="px-3 md:px-5">
+                  <div class="mb-4 flex justify-between items-center">
+                    <a href="product-details.html" class="h5 hover:underline duration-300">Athletic Sneaker</a>
+                    <div class="flex gap-1 items-center">
+                      <div class="flex">
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-success-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-secondary-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-warning-300 -ml-2"></span>
+                      </div>
+                      <span class="m-text font-medium">+3</span>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-2">
+                      <i class="las la-star text-warning-300 text-xl"></i>
+                      <span>4.5</span>
+                    </div>
+                    <p class="xl-text font-medium dark:text-primary-300 text-primary-300">$95.25</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 sm:col-span-6 lg:col-span-4 xxl:col-span-3 rounded-xl border border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904 p-3">
+                <div class="p-4 bg-neutral-20 dark:bg-neutral-903 rounded-xl relative h-[253px] border border-neutral-30 dark:border-neutral-500 f-center mb-6">
+                  <img src="./assets/images/products/product-3.png" alt="product image" />
+                  <button class="shadow-custom-5 size-10 f-center rounded-lg bg-neutral-0 dark:bg-neutral-904 absolute top-4 right-4"><i class="las la-shopping-cart text-2xl"></i></button>
+                </div>
+                <div class="px-3 md:px-5">
+                  <div class="mb-4 flex justify-between items-center">
+                    <a href="product-details.html" class="h5 hover:underline duration-300">Dressy Boots</a>
+                    <div class="flex gap-1 items-center">
+                      <div class="flex">
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-success-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-secondary-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-warning-300 -ml-2"></span>
+                      </div>
+                      <span class="m-text font-medium">+3</span>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-2">
+                      <i class="las la-star text-warning-300 text-xl"></i>
+                      <span>4.5</span>
+                    </div>
+                    <p class="xl-text font-medium dark:text-primary-300 text-primary-300">$95.25</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 sm:col-span-6 lg:col-span-4 xxl:col-span-3 rounded-xl border border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904 p-3">
+                <div class="p-4 bg-neutral-20 dark:bg-neutral-903 rounded-xl relative h-[253px] border border-neutral-30 dark:border-neutral-500 f-center mb-6">
+                  <img src="./assets/images/products/product-4.png" alt="product image" />
+                  <button class="shadow-custom-5 size-10 f-center rounded-lg bg-neutral-0 dark:bg-neutral-904 absolute top-4 right-4"><i class="las la-shopping-cart text-2xl"></i></button>
+                  <span class="py-2 px-4 rounded-lg bg-success-300 text-nowrap absolute text-neutral-0 top-4 font-semibold left-4">New</span>
+                </div>
+                <div class="px-3 md:px-5">
+                  <div class="mb-4 flex justify-between items-center">
+                    <a href="product-details.html" class="h5 hover:underline duration-300">Popular Loafers</a>
+                    <div class="flex gap-1 items-center">
+                      <div class="flex">
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-success-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-secondary-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-warning-300 -ml-2"></span>
+                      </div>
+                      <span class="m-text font-medium">+3</span>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-2">
+                      <i class="las la-star text-warning-300 text-xl"></i>
+                      <span>4.5</span>
+                    </div>
+                    <p class="xl-text font-medium dark:text-primary-300 text-primary-300">$95.25</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 sm:col-span-6 lg:col-span-4 xxl:col-span-3 rounded-xl border border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904 p-3">
+                <div class="p-4 bg-neutral-20 dark:bg-neutral-903 rounded-xl relative h-[253px] border border-neutral-30 dark:border-neutral-500 f-center mb-6">
+                  <img src="./assets/images/products/product-5.png" alt="product image" />
+                  <button class="shadow-custom-5 size-10 f-center rounded-lg bg-neutral-0 dark:bg-neutral-904 absolute top-4 right-4"><i class="las la-shopping-cart text-2xl"></i></button>
+                </div>
+                <div class="px-3 md:px-5">
+                  <div class="mb-4 flex justify-between items-center">
+                    <a href="product-details.html" class="h5 hover:underline duration-300">Oxfords leather</a>
+                    <div class="flex gap-1 items-center">
+                      <div class="flex">
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-success-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-secondary-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-warning-300 -ml-2"></span>
+                      </div>
+                      <span class="m-text font-medium">+3</span>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-2">
+                      <i class="las la-star text-warning-300 text-xl"></i>
+                      <span>4.5</span>
+                    </div>
+                    <p class="xl-text font-medium dark:text-primary-300 text-primary-300">$95.25</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 sm:col-span-6 lg:col-span-4 xxl:col-span-3 rounded-xl border border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904 p-3">
+                <div class="p-4 bg-neutral-20 dark:bg-neutral-903 rounded-xl relative h-[253px] border border-neutral-30 dark:border-neutral-500 f-center mb-6">
+                  <img src="./assets/images/products/product-6.png" alt="product image" />
+                  <button class="shadow-custom-5 size-10 f-center rounded-lg bg-neutral-0 dark:bg-neutral-904 absolute top-4 right-4"><i class="las la-shopping-cart text-2xl"></i></button>
+                </div>
+                <div class="px-3 md:px-5">
+                  <div class="mb-4 flex justify-between items-center">
+                    <a href="product-details.html" class="h5 hover:underline duration-300">Lacing Derbys</a>
+                    <div class="flex gap-1 items-center">
+                      <div class="flex">
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-success-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-secondary-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-warning-300 -ml-2"></span>
+                      </div>
+                      <span class="m-text font-medium">+3</span>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-2">
+                      <i class="las la-star text-warning-300 text-xl"></i>
+                      <span>4.5</span>
+                    </div>
+                    <p class="xl-text font-medium dark:text-primary-300 text-primary-300">$95.25</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 sm:col-span-6 lg:col-span-4 xxl:col-span-3 rounded-xl border border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904 p-3">
+                <div class="p-4 bg-neutral-20 dark:bg-neutral-903 rounded-xl relative h-[253px] border border-neutral-30 dark:border-neutral-500 f-center mb-6">
+                  <img src="./assets/images/products/product-7.png" alt="product image" />
+                  <button class="shadow-custom-5 size-10 f-center rounded-lg bg-neutral-0 dark:bg-neutral-904 absolute top-4 right-4"><i class="las la-shopping-cart text-2xl"></i></button>
+                  <span class="py-2 px-4 rounded-lg bg-success-300 text-nowrap absolute text-neutral-0 top-4 font-semibold left-4">New</span>
+                </div>
+                <div class="px-3 md:px-5">
+                  <div class="mb-4 flex justify-between items-center">
+                    <a href="product-details.html" class="h5 hover:underline duration-300">Heeled Flats</a>
+                    <div class="flex gap-1 items-center">
+                      <div class="flex">
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-success-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-secondary-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-warning-300 -ml-2"></span>
+                      </div>
+                      <span class="m-text font-medium">+3</span>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-2">
+                      <i class="las la-star text-warning-300 text-xl"></i>
+                      <span>4.5</span>
+                    </div>
+                    <p class="xl-text font-medium dark:text-primary-300 text-primary-300">$95.25</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 sm:col-span-6 lg:col-span-4 xxl:col-span-3 rounded-xl border border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904 p-3">
+                <div class="p-4 bg-neutral-20 dark:bg-neutral-903 rounded-xl relative h-[253px] border border-neutral-30 dark:border-neutral-500 f-center mb-6">
+                  <img src="./assets/images/products/product-8.png" alt="product image" />
+                  <button class="shadow-custom-5 size-10 f-center rounded-lg bg-neutral-0 dark:bg-neutral-904 absolute top-4 right-4"><i class="las la-shopping-cart text-2xl"></i></button>
+                </div>
+                <div class="px-3 md:px-5">
+                  <div class="mb-4 flex justify-between items-center">
+                    <a href="product-details.html" class="h5 hover:underline duration-300">Pumps classic</a>
+                    <div class="flex gap-1 items-center">
+                      <div class="flex">
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-success-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-secondary-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-warning-300 -ml-2"></span>
+                      </div>
+                      <span class="m-text font-medium">+3</span>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-2">
+                      <i class="las la-star text-warning-300 text-xl"></i>
+                      <span>4.5</span>
+                    </div>
+                    <p class="xl-text font-medium dark:text-primary-300 text-primary-300">$95.25</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 sm:col-span-6 lg:col-span-4 xxl:col-span-3 rounded-xl border border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904 p-3">
+                <div class="p-4 bg-neutral-20 dark:bg-neutral-903 rounded-xl relative h-[253px] border border-neutral-30 dark:border-neutral-500 f-center mb-6">
+                  <img src="./assets/images/products/product-9.png" alt="product image" />
+                  <button class="shadow-custom-5 size-10 f-center rounded-lg bg-neutral-0 dark:bg-neutral-904 absolute top-4 right-4"><i class="las la-shopping-cart text-2xl"></i></button>
+                </div>
+                <div class="px-3 md:px-5">
+                  <div class="mb-4 flex justify-between items-center">
+                    <a href="product-details.html" class="h5 hover:underline duration-300">Heels stilettos</a>
+                    <div class="flex gap-1 items-center">
+                      <div class="flex">
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-success-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-secondary-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-warning-300 -ml-2"></span>
+                      </div>
+                      <span class="m-text font-medium">+3</span>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-2">
+                      <i class="las la-star text-warning-300 text-xl"></i>
+                      <span>4.5</span>
+                    </div>
+                    <p class="xl-text font-medium dark:text-primary-300 text-primary-300">$95.25</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 sm:col-span-6 lg:col-span-4 xxl:col-span-3 rounded-xl border border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904 p-3">
+                <div class="p-4 bg-neutral-20 dark:bg-neutral-903 rounded-xl relative h-[253px] border border-neutral-30 dark:border-neutral-500 f-center mb-6">
+                  <img src="./assets/images/products/product-10.png" alt="product image" />
+                  <button class="shadow-custom-5 size-10 f-center rounded-lg bg-neutral-0 dark:bg-neutral-904 absolute top-4 right-4"><i class="las la-shopping-cart text-2xl"></i></button>
+                  <span class="py-2 px-4 rounded-lg bg-success-300 text-nowrap absolute text-neutral-0 top-4 font-semibold left-4">New</span>
+                </div>
+                <div class="px-3 md:px-5">
+                  <div class="mb-4 flex justify-between items-center">
+                    <a href="product-details.html" class="h5 hover:underline duration-300">Sandals various</a>
+                    <div class="flex gap-1 items-center">
+                      <div class="flex">
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-success-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-secondary-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-warning-300 -ml-2"></span>
+                      </div>
+                      <span class="m-text font-medium">+3</span>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-2">
+                      <i class="las la-star text-warning-300 text-xl"></i>
+                      <span>4.5</span>
+                    </div>
+                    <p class="xl-text font-medium dark:text-primary-300 text-primary-300">$95.25</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 sm:col-span-6 lg:col-span-4 xxl:col-span-3 rounded-xl border border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904 p-3">
+                <div class="p-4 bg-neutral-20 dark:bg-neutral-903 rounded-xl relative h-[253px] border border-neutral-30 dark:border-neutral-500 f-center mb-6">
+                  <img src="./assets/images/products/product-11.png" alt="product image" />
+                  <button class="shadow-custom-5 size-10 f-center rounded-lg bg-neutral-0 dark:bg-neutral-904 absolute top-4 right-4"><i class="las la-shopping-cart text-2xl"></i></button>
+                </div>
+                <div class="px-3 md:px-5">
+                  <div class="mb-4 flex justify-between items-center">
+                    <a href="product-details.html" class="h5 hover:underline duration-300">Heels Wedges</a>
+                    <div class="flex gap-1 items-center">
+                      <div class="flex">
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-success-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-secondary-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-warning-300 -ml-2"></span>
+                      </div>
+                      <span class="m-text font-medium">+3</span>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-2">
+                      <i class="las la-star text-warning-300 text-xl"></i>
+                      <span>4.5</span>
+                    </div>
+                    <p class="xl-text font-medium dark:text-primary-300 text-primary-300">$95.25</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 sm:col-span-6 lg:col-span-4 xxl:col-span-3 rounded-xl border border-neutral-30 dark:border-neutral-500 bg-neutral-0 dark:bg-neutral-904 p-3">
+                <div class="p-4 bg-neutral-20 dark:bg-neutral-903 rounded-xl relative h-[253px] border border-neutral-30 dark:border-neutral-500 f-center mb-6">
+                  <img src="./assets/images/products/product-12.png" alt="product image" />
+                  <button class="shadow-custom-5 size-10 f-center rounded-lg bg-neutral-0 dark:bg-neutral-904 absolute top-4 right-4"><i class="las la-shopping-cart text-2xl"></i></button>
+                  <span class="py-2 px-4 rounded-lg bg-error-300 text-nowrap absolute text-neutral-0 top-4 font-semibold left-4">Sale</span>
+                </div>
+                <div class="px-3 md:px-5">
+                  <div class="mb-4 flex justify-between items-center">
+                    <a href="product-details.html" class="h5 hover:underline duration-300">Mules flat sole</a>
+                    <div class="flex gap-1 items-center">
+                      <div class="flex">
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-success-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-secondary-300 -ml-2"></span>
+                        <span class="size-4 rounded-full border border-neutral-0 dark:border-neutral-904 bg-warning-300 -ml-2"></span>
+                      </div>
+                      <span class="m-text font-medium">+3</span>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-2">
+                      <i class="las la-star text-warning-300 text-xl"></i>
+                      <span>4.5</span>
+                    </div>
+                    <p class="xl-text font-medium dark:text-primary-300 text-primary-300">$95.25</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div x-data="pagination" class="flex flex-wrap items-center justify-center gap-3">
+              <button
+                x-bind:disabled="currentPage === 1"
+                @click="changePage(currentPage - 1)"
+                class="btn-primary-icon-outlined text-primary-300 size-10 select-none hover:bg-primary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-transparent disabled:hover:text-primary-200"
+              >
+                <i class="las la-angle-left text-xl"></i>
+              </button>
+
+              <template x-for="page in pageNumbers">
+                <button
+                  x-text="page"
+                  :class=" {'btn-primary-icon bg-primary-300 !text-neutral-0':page==currentPage, 'flex size-10 text-primary-300 select-none border-primary-300 hover:bg-primary-300 items-center hover:text-neutral-0 justify-center rounded-full border duration-300 font-semibold':page!='...', 'cursor-default':page=='...'}"
+                  @click="changePage(page)"
+                ></button>
+              </template>
+              <button
+                x-bind:disabled="currentPage === totalPages"
+                @click="changePage(currentPage + 1)"
+                class="btn-primary-icon-outlined size-10 select-none text-primary-300 hover:bg-primary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-transparent disabled:hover:text-primary-200"
+              >
+                <i class="las la-angle-right text-xl"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- filter offcanvas -->
+          <div class="inset-0 fixed bg-black bg-opacity-60 duration-300 z-[29]" x-show="customizerIsOpen" @click="closeCustomizer"></div>
+          <div :class="customizerIsOpen?'translate-x-0 opacity-100 visible':'translate-x-full opacity-0 invisible'" class="w-[312px] duration-300 fixed h-full top-0 right-0 z-30 p-4 md:p-6 lg:p-8 bg-neutral-0 dark:bg-neutral-904 overflow-y-auto custom-scrollbar">
+            <div class="flex justify-between items-center pb-4 lg:pb-6 mb-4 lg:mb-6 border-b border-dashed border-neutral-40 dark:border-neutral-500">
+              <h5 class="text-2xl font-semibold">Filters</h5>
+              <div class="flex gap-4 items-center shrink-0 text-xl">
+                <button><i class="las la-redo-alt"></i></button>
+                <button @click="closeCustomizer"><i class="las la-times"></i></button>
+              </div>
+            </div>
+            <form class="w-full rounded-full bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 p-1 flex mb-7 lg:mb-10">
+              <input type="text" class="px-4 py-1 text-sm w-full bg-transparent" placeholder="Search..." />
+              <button class="size-8 shrink-0 rounded-full bg-primary-300 text-neutral-0 f-center">
+                <i class="las la-search text-xl"></i>
+              </button>
+            </form>
+            <!-- Gender -->
+            <div class="mt-6 lg:pt-6 border-t border-dashed border-neutral-30 dark:border-neutral-500">
+              <p class="l-text font-medium mb-6">Gender</p>
+              <ul class="flex flex-col gap-3">
+                <li>
+                  <div class="custom-radio">
+                    <input type="radio" id="men" name="gender" />
+                    <label class="primary" for="men">Men</label>
+                  </div>
+                </li>
+                <li>
+                  <div class="custom-radio">
+                    <input type="radio" id="women" name="gender" />
+                    <label class="primary" for="women">Women</label>
+                  </div>
+                </li>
+                <li>
+                  <div class="custom-radio">
+                    <input type="radio" id="kids" name="gender" />
+                    <label class="primary" for="kids">Kids</label>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- category -->
+            <div class="mt-6 lg:pt-6 border-t border-dashed border-neutral-30 dark:border-neutral-500">
+              <p class="l-text font-medium mb-6">Category</p>
+              <ul class="flex flex-col gap-3">
+                <li>
+                  <label for="all" class="option">
+                    <input type="checkbox" id="all" aria-checked="true" checked />
+                    <span class="checkbox primary"></span>
+                    All
+                  </label>
+                </li>
+                <li>
+                  <label for="shoe" class="option">
+                    <input type="checkbox" id="shoe" aria-checked="true" />
+                    <span class="checkbox primary"></span>
+                    Shoes
+                  </label>
+                </li>
+                <li>
+                  <label for="apparel" class="option">
+                    <input type="checkbox" id="apparel" aria-checked="true" />
+                    <span class="checkbox primary"></span>
+                    Apparel
+                  </label>
+                </li>
+                <li>
+                  <label for="accessories" class="option">
+                    <input type="checkbox" id="accessories" aria-checked="true" />
+                    <span class="checkbox primary"></span>
+                    Accessories
+                  </label>
+                </li>
+              </ul>
+            </div>
+
+            <!-- pricing scale -->
+            <div class="mt-6 lg:pt-6 border-t border-dashed border-neutral-30 dark:border-neutral-500">
+              <p class="l-text font-medium mb-6">Pricing Scale</p>
+              <tc-range-slider slider-bg="#96DBC4" slider-bg-fill="#2C7BE5" pointer-bg="#2C7BE5" pointer-bg-focus="#2C7BE5" pointer-bg-hover="#2C7BE5" pointer-border="#2C7BE5" value1="200" value2="650" min="0" max="1000" round="0" value1-label=".value-1" value2-label=".value-2"></tc-range-slider>
+              <div class="rounded-lg bg-neutral-0 mt-3 dark:bg-neutral-904 flex justify-center">
+                <p class="m-text"><span class="font-medium">$</span> <span class="value-1"></span></p>
+                <span>-</span>
+                <p class="m-text"><span class="font-medium">$</span> <span class="value-2"></span></p>
+              </div>
+            </div>
+
+            <!-- color -->
+            <div class="mt-6 lg:pt-6 border-t border-dashed border-neutral-30 dark:border-neutral-500">
+              <p class="l-text font-medium mb-6">Color</p>
+              <div class="flex gap-3 flex-wrap">
+                <button class="size-6 rounded-full bg-neutral-900"></button>
+                <button class="size-6 rounded-full bg-primary-300"></button>
+                <button class="size-6 rounded-full bg-secondary-300"></button>
+                <button class="size-6 rounded-full bg-info-300"></button>
+                <button class="size-6 rounded-full bg-success-300"></button>
+                <button class="size-6 rounded-full bg-warning-300"></button>
+                <button class="size-6 rounded-full bg-error-300"></button>
+                <button class="size-6 rounded-full bg-blue-700"></button>
+                <button class="size-6 rounded-full bg-success-200"></button>
+                <button class="size-6 rounded-full bg-error-200"></button>
+              </div>
+            </div>
+
+            <!-- star category -->
+            <div class="mt-6 lg:pt-6 border-t border-dashed border-neutral-30 dark:border-neutral-500">
+              <p class="l-text font-medium mb-6">Star Category</p>
+              <ul class="flex flex-col gap-3">
+                <li>
+                  <label for="fivestar" class="option">
+                    <input type="checkbox" id="fivestar" aria-checked="true" checked />
+                    <span class="checkbox primary"></span>
+                    <i class="las la-star text-xl text-warning-300"></i> 5 Star
+                  </label>
+                </li>
+                <li>
+                  <label for="fourstar" class="option">
+                    <input type="checkbox" id="fourstar" aria-checked="true" />
+                    <span class="checkbox primary"></span>
+                    <i class="las la-star text-xl text-warning-300"></i> 4 Star
+                  </label>
+                </li>
+                <li>
+                  <label for="threestar" class="option">
+                    <input type="checkbox" id="threestar" aria-checked="true" />
+                    <span class="checkbox primary"></span>
+                    <i class="las la-star text-xl text-warning-300"></i> 3 Star
+                  </label>
+                </li>
+                <li>
+                  <label for="twostar" class="option">
+                    <input type="checkbox" id="twostar" aria-checked="true" />
+                    <span class="checkbox primary"></span>
+                    <i class="las la-star text-xl text-warning-300"></i> 2 Star
+                  </label>
+                </li>
+                <li>
+                  <label for="onestar" class="option">
+                    <input type="checkbox" id="onestar" aria-checked="true" />
+                    <span class="checkbox primary"></span>
+                    <i class="las la-star text-xl text-warning-300"></i> 1 Star
+                  </label>
+                </li>
+              </ul>
+            </div>
+
+            <!-- reset button -->
+            <div class="mt-6 lg:pt-6 border-t border-dashed border-neutral-30 dark:border-neutral-500">
+              <button class="w-full btn-primary"><i class="las la-redo-alt"></i> Reset</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/tcrs-binding-labels.min.js"></script>
+    <script src="./assets/js/libs/range-slider.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+  </body>
+</html>

@@ -1,0 +1,472 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/dropzone.min.css" />
+    <link rel="stylesheet" href="./assets/css/swiper.min.css" />
+    <link rel="stylesheet" href="./assets/css/quill.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 space-y-4 xxl:space-y-6">
+        <!-- Breadcrumb -->
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Edit Tour</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Tour</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Edit</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Edit Tour -->
+        <div class="white-box">
+          <h4 class="bb-dashed-n30">Edit Tour</h4>
+          <div class="flex flex-col gap-4 xxl:gap-6">
+            <div>
+              <h5 class="mb-2">Details</h5>
+              <p class="s-text mb-5 xl:mb-8">Title, short description, image...</p>
+              <div class="form-input mb-4 xl:mb-6">
+                <input type="text" id="post_name" value="Historic Heritage Tour" placeholder="Title" />
+                <label for="post_name">Tour Title</label>
+              </div>
+
+              <p class="l-text font-medium mb-4">Content</p>
+              <section class="mb-4 xl:mb-6">
+                <div id="toolbar-two" class="flex flex-wrap gap-3 justify-between rounded-t-2xl !border-neutral-30 bg-neutral-20 dark:!border-neutral-500 dark:bg-neutral-903">
+                  <span class="ql-formats">
+                    <select class="ql-header">
+                      <option value="1">Heading</option>
+                      <option value="2">Subheading</option>
+                      <option selected>Normal</option>
+                    </select>
+                    <select class="ql-font">
+                      <option selected>Sans Serif</option>
+                      <option value="serif">Serif</option>
+                      <option value="monospace">Monospace</option>
+                    </select>
+                  </span>
+
+                  <div class="flex grow flex-wrap justify-end">
+                    <span class="ql-formats !flex">
+                      <button class="ql-bold"></button>
+                      <button class="ql-italic"></button>
+                      <button class="ql-underline"></button>
+                      <button class="ql-strike"></button>
+                    </span>
+                    <span class="ql-formats !flex">
+                      <select class="ql-color"></select>
+                      <select class="ql-background"></select>
+                    </span>
+                    <span class="ql-formats !flex">
+                      <button class="ql-list" value="ordered"></button>
+                      <button class="ql-list" value="bullet"></button>
+                      <select class="ql-align">
+                        <option selected></option>
+                        <option value="center"></option>
+                        <option value="right"></option>
+                        <option value="justify"></option>
+                      </select>
+                    </span>
+                    <span class="ql-formats !flex">
+                      <button class="ql-blockquote"></button>
+                      <button class="ql-link"></button>
+                      <button class="ql-image"></button>
+                      <button class="ql-code-block"></button>
+                      <button class="ql-video"></button>
+                    </span>
+                    <span class="ql-formats">
+                      <button class="ql-clean"></button>
+                    </span>
+                  </div>
+                </div>
+                <div id="editor-two" class="rounded-b-2xl !border-neutral-30 dark:!border-neutral-500 p-3">
+                  <h1>Description</h1>
+                  <p><br /></p>
+                  <p>Occaecati est et illo quibusdam accusamus qui. Incidunt aut et molestiae ut facere aut. Est quidem iusto praesentium excepturi harum nihil tenetur facilis. Ut omnis voluptates nihil accusantium doloribus eaque debitis.</p>
+                  <p><br /></p>
+                  <p><br /></p>
+                  <p><br /></p>
+                  <h2>Highlights</h2>
+                  <p><br /></p>
+                  <ul>
+                    <li>A fermentum in morbi pretium aliquam adipiscing donec tempus.</li>
+                    <li>Vulputate placerat amet pulvinar lorem nisl.</li>
+                    <li>Consequat feugiat habitant gravida quisque elit bibendum id adipiscing sed.</li>
+                    <li>Etiam duis lobortis in fames ultrices commodo nibh.</li>
+                  </ul>
+                  <p><br /></p>
+                  <p><br /></p>
+                  <p><br /></p>
+                  <h3>Program</h3>
+                  <p><br /></p>
+                  <p><strong>Day 1</strong></p>
+                  <p><br /></p>
+                  <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
+                  <p><br /></p>
+                  <p><strong>Day 2</strong></p>
+                  <p><br /></p>
+                  <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
+                  <p><br /></p>
+                  <p><strong>Day 3</strong></p>
+                  <p><br /></p>
+                  <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
+                  <p><br /></p>
+                  <p><br /></p>
+                </div>
+              </section>
+              <p class="l-text font-medium mb-4">Cover Image</p>
+              <form action="#" id="single-file" class="single-file">
+                <div class="flex flex-col items-center text-center clickable-single cursor-pointer n20-box lg:p-10 xl:p-[60px]">
+                  <img src="./assets/images/single-file.png" class="mb-6 lg:mb-10" alt="" />
+                  <h5 class="font-semibold mb-4">Drop or Select file</h5>
+                  <p>Drop files here or click <span class="text-primary-300">Browse</span> through your machine</p>
+                </div>
+              </form>
+            </div>
+
+            <div>
+              <h5 class="mb-2">Properties</h5>
+              <p class="s-text mb-4 xl:mb-6">Additional functions and attributes...</p>
+              <div class="grid grid-cols-2 gap-4 xxl:gap-6 mb-6">
+                <!-- Guides -->
+                <div x-data="{isOpen:true}" class="col-span-2">
+                  <div x-show="isOpen" x-collapse>
+                    <div class="bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 rounded-xl p-3 lg:p-4 xxl:p-5">
+                      <div
+                        x-data="{
+                                      selectOpen: false,
+                                      selectedItems: ['Taylor Otwel','Rasel Ahmed','Taskin Ahmed'],
+                                      searchText: '',
+                                      optionList: ['Taylor Otwel','Rasel Ahmed','Taskin Ahmed','Babul Mia','John Doe','George Washington','Thomas Jonson', 'Gennady Keretkovich'],
+                                      filteredOptions() {
+                                          if (this.searchText.trim() === '') {
+                                              return this.optionList;
+                                          } else {
+                                              return this.optionList.filter(option => option.toLowerCase().includes(this.searchText.trim().toLowerCase()));
+                                          }
+                                      },
+                                      toggleItem(item) {
+                                          const index = this.selectedItems.findIndex(selectedItem => selectedItem === item);
+                                          if (index === -1) {
+                                              // If item not already selected, add it to selectedItems array
+                                              this.selectedItems.push(item);
+                                          } else {
+                                              // If item already selected, remove it from selectedItems array
+                                              this.selectedItems.splice(index, 1);
+                                          }
+                                      },
+                                      isSelected(item) {
+                                          return this.selectedItems.findIndex(selectedItem => selectedItem === item) !== -1;
+                                      }
+                                  }"
+                        class="relative"
+                      >
+                        <div @click="selectOpen = !selectOpen" class="rounded-xl w-full relative flex gap-2 flex-wrap">
+                          <div x-show="selectedItems.length" class="flex gap-2 grow flex-wrap">
+                            <template x-for="item in selectedItems">
+                              <div class="px-2 py-0.5 rounded-full bg-neutral-20 dark:bg-neutral-904 flex items-center gap-2 border border-neutral-40 dark:border-neutral-600 text-neutral-700 dark:text-neutral-40">
+                                <span x-text="item" class="text-xs whitespace-nowrap"></span>
+                                <span @click.stop="toggleItem(item)" class="text-xs rounded-full size-4 bg-neutral-70 text-neutral-10 f-center">
+                                  <i class="las la-times cursor-pointer"></i>
+                                </span>
+                              </div>
+                            </template>
+                          </div>
+                          <span class="absolute -top-[20px] text-xs -translate-y-1/2 left-2 px-2 bg-neutral-0 dark:bg-neutral-904">Tour Guide</span>
+                          <input type="text" placeholder="Add Guide" x-model="searchText" class="w-full bg-transparent capitalize text-sm" />
+                        </div>
+                        <ul x-show="selectOpen" @click.away="selectOpen = false" class="p-1 rounded-xl bg-neutral-0 dark:bg-neutral-904 absolute top-[120%] left-0 right-0 w-full shadow-xl z-[3] max-h-[250px] overflow-y-auto flex flex-col gap-1">
+                          <template x-for="option in filteredOptions()" :key="option">
+                            <li
+                              @click="toggleItem(option)"
+                              x-text="option"
+                              :class="{ 'bg-primary-50 dark:bg-neutral-600': isSelected(option) }"
+                              class="py-2.5 ltr:pl-6 rtl:pr-6 hover:bg-primary-300 rounded-lg whitespace-nowrap text-sm hover:text-neutral-0 duration-300 cursor-pointer capitalize"
+                            ></li>
+                          </template>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-span-2">
+                  <p class="mb-6 l-text font-medium">Available</p>
+                  <div class="grid grid-cols-2 gap-6">
+                    <div class="form-input col-span-2 md:col-span-1">
+                      <input type="date" id="start_date" value="2024-05-12" placeholder="Start Date" />
+                      <label for="start_date">Start Date</label>
+                    </div>
+                    <div class="form-input col-span-2 md:col-span-1">
+                      <input type="date" id="end_date" value="2024-05-19" placeholder="End Date" />
+                      <label for="end_date">End Date</label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Duration -->
+                <div class="form-input col-span-2">
+                  <input type="text" id="duration" value="4 days 3 nights" placeholder="Duration" />
+                  <label for="duration">Duration</label>
+                </div>
+                <!-- locations -->
+                <div
+                  x-data="{
+                    selectOpen:false,
+                    selectedItem:{title: 'Vietnam',flag: 'https://flagcdn.com/vn.svg'},
+                    searchText:'',
+                    optionList: [],
+                    async fetchCountries() {
+                        try {
+                            const response = await fetch('https://restcountries.com/v3.1/all?fields=name,flags');
+                            const data = await response.json();                                       
+                            this.optionList = data.map(country => ({
+                                title: country.name.common,
+                                flag: country.flags.svg
+                            }));
+                        } catch (error) {
+                            console.error('Error fetching countries:', error);
+                        }
+                    },
+                    filteredOptions() {
+                        if (this.searchText.trim() === '') {
+                            return this.optionList;
+                        } else {
+                            return this.optionList.filter(option => option.title.toLowerCase().includes(this.searchText.trim().toLowerCase()));
+                        }
+                    }
+                }"
+                  x-init="fetchCountries()"
+                  class="relative col-span-2"
+                >
+                  <button @click="selectOpen=!selectOpen" class="py-3 px-3 sm:px-4 lg:px-6 rounded-xl flex items-center gap-3 w-full border bg-neutral-0 dark:bg-neutral-904 border-neutral-40 dark:border-neutral-500 relative">
+                    <img x-show="selectedItem && selectedItem.title==searchText" class="size-6 rounded-full object-cover object-center" :src="selectedItem && selectedItem.flag" alt="flag" />
+                    <input type="text" placeholder="Destination" x-model="searchText" :value="selectedItem?.title?selectedItem?.title:'Select Destination'" class="w-full bg-transparent capitalize" />
+                    <span class="absolute inset-y-0 right-0 flex items-center pr-3 md:pr-4 lg:pr-6 pointer-events-none">
+                      <i class="las la-angle-down"></i>
+                    </span>
+                    <span class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Destination</span>
+                  </button>
+                  <ul x-show="selectOpen" @click.away="selectOpen=false" class="py-1 rounded-xl bg-neutral-0 dark:bg-neutral-904 absolute top-full left-0 right-0 w-full shadow-xl z-[3] max-h-[250px] overflow-y-auto">
+                    <template x-for="option in filteredOptions()" :key="option.title">
+                      <li @click="selectedItem=option,selectOpen=false,searchText=option.title" :class="selectedItem==option?'bg-primary-300 text-neutral-0':''" class="py-2 ltr:pl-6 rtl:pr-6 hover:bg-primary-300 flex items-center gap-2 hover:text-neutral-0 duration-300 cursor-pointer capitalize">
+                        <img :src="option?.flag" alt="flag" class="size-6 shrink-0 rounded-full object-cover object-center" />
+                        <span x-text="option.title"></span>
+                      </li>
+                    </template>
+                  </ul>
+                </div>
+
+                <!-- Select Roles -->
+                <!-- Guides -->
+                <div x-data="{isOpen:true}" class="col-span-2">
+                  <div x-show="isOpen" x-collapse>
+                    <div class="bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 rounded-xl p-3 lg:p-4 xxl:p-5">
+                      <div
+                        x-data="{
+                                    selectOpen: false,
+                                    selectedItems: ['Adventure','Hiking','Nature','Wildlife'],
+                                    searchText: '',
+                                    optionList: ['Adventure','Hiking','Nature','Wildlife','Culture','Beach','Luxury','Culinary','Camping','Wellness'],
+                                    filteredOptions() {
+                                        if (this.searchText.trim() === '') {
+                                            return this.optionList;
+                                        } else {
+                                            return this.optionList.filter(option => option.toLowerCase().includes(this.searchText.trim().toLowerCase()));
+                                        }
+                                    },
+                                    toggleItem(item) {
+                                        const index = this.selectedItems.findIndex(selectedItem => selectedItem === item);
+                                        if (index === -1) {
+                                            // If item not already selected, add it to selectedItems array
+                                            this.selectedItems.push(item);
+                                        } else {
+                                            // If item already selected, remove it from selectedItems array
+                                            this.selectedItems.splice(index, 1);
+                                        }
+                                    },
+                                    isSelected(item) {
+                                        return this.selectedItems.findIndex(selectedItem => selectedItem === item) !== -1;
+                                    }
+                                }"
+                        class="relative"
+                      >
+                        <div @click="selectOpen = !selectOpen" class="rounded-xl w-full relative flex gap-2 flex-wrap">
+                          <div x-show="selectedItems.length" class="flex gap-2 grow flex-wrap">
+                            <template x-for="item in selectedItems">
+                              <div class="px-2 py-0.5 rounded-full bg-neutral-20 dark:bg-neutral-904 flex items-center gap-2 border border-neutral-40 dark:border-neutral-600 text-neutral-700 dark:text-neutral-40">
+                                <span x-text="item" class="text-xs whitespace-nowrap"></span>
+                                <span @click.stop="toggleItem(item)" class="text-xs rounded-full size-4 bg-neutral-70 text-neutral-10 f-center">
+                                  <i class="las la-times cursor-pointer"></i>
+                                </span>
+                              </div>
+                            </template>
+                          </div>
+                          <span class="absolute -top-[20px] text-xs -translate-y-1/2 left-2 px-2 bg-neutral-0 dark:bg-neutral-904">Tags</span>
+                          <input type="text" placeholder="Tags" x-model="searchText" class="w-full bg-transparent capitalize text-sm" />
+                        </div>
+                        <ul x-show="selectOpen" @click.away="selectOpen = false" class="p-1 rounded-xl bg-neutral-0 dark:bg-neutral-904 absolute top-[120%] left-0 right-0 w-full shadow-xl z-[3] max-h-[250px] overflow-y-auto flex flex-col gap-1">
+                          <template x-for="option in filteredOptions()" :key="option">
+                            <li
+                              @click="toggleItem(option)"
+                              x-text="option"
+                              :class="{ 'bg-primary-50 dark:bg-neutral-600': isSelected(option) }"
+                              class="py-2.5 ltr:pl-6 rtl:pr-6 hover:bg-primary-300 rounded-lg whitespace-nowrap text-sm hover:text-neutral-0 duration-300 cursor-pointer capitalize"
+                            ></li>
+                          </template>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-span-2 relative flex items-center gap-4 rounded-xl border border-neutral-30 px-4 dark:border-neutral-500 lg:px-6">
+                  <label for="input" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Cost</label>
+                  <span class="text-lg font-medium text-neutral-80">$</span>
+                  <input type="number" value="85.56" placeholder="0.00" class="w-full bg-transparent py-3 lg:py-4" />
+                </div>
+
+                <div class="mt-6 lg:pt-6 border-t border-dashed border-neutral-30 dark:border-neutral-500 col-span-2">
+                  <p class="l-text font-medium mb-6">Services</p>
+                  <div class="flex sm:gap-20 gap-3 flex-col lg:flex-row">
+                    <ul class="flex flex-col gap-3">
+                      <li>
+                        <label for="freepark" class="option">
+                          <input type="checkbox" id="freepark" aria-checked="true" checked />
+                          <span class="checkbox primary"></span>
+                          Audio Guide
+                        </label>
+                      </li>
+                      <li>
+                        <label for="bonuscommission" class="option">
+                          <input type="checkbox" id="bonuscommission" aria-checked="true" checked />
+                          <span class="checkbox primary"></span>
+                          Lunch
+                        </label>
+                      </li>
+                      <li>
+                        <label for="travel" class="option">
+                          <input type="checkbox" id="travel" aria-checked="true" checked />
+                          <span class="checkbox primary"></span>
+                          Special Activities
+                        </label>
+                      </li>
+                      <li>
+                        <label for="device" class="option">
+                          <input type="checkbox" id="device" aria-checked="true" />
+                          <span class="checkbox primary"></span>
+                          Gratuities
+                        </label>
+                      </li>
+                      <li>
+                        <label for="health" class="option">
+                          <input type="checkbox" id="health" aria-checked="true" checked />
+                          <span class="checkbox primary"></span>
+                          Professional Guides
+                        </label>
+                      </li>
+                      <li>
+                        <label for="training" class="option">
+                          <input type="checkbox" id="training" aria-checked="true" />
+                          <span class="checkbox primary"></span>
+                          Food and Drinks
+                        </label>
+                      </li>
+                    </ul>
+                    <ul class="flex flex-col gap-3">
+                      <li>
+                        <label for="retirement" class="option">
+                          <input type="checkbox" id="retirement" aria-checked="true" checked />
+                          <span class="checkbox primary"></span>
+                          Private Tour
+                        </label>
+                      </li>
+                      <li>
+                        <label for="paidoff" class="option">
+                          <input type="checkbox" id="paidoff" aria-checked="true" checked />
+                          <span class="checkbox primary"></span>
+                          Entrance Fees
+                        </label>
+                      </li>
+                      <li>
+                        <label for="flexible" class="option">
+                          <input type="checkbox" id="flexible" aria-checked="true" checked />
+                          <span class="checkbox primary"></span>
+                          Pickup and drop off
+                        </label>
+                      </li>
+                      <li>
+                        <label for="health-insurance" class="option">
+                          <input type="checkbox" id="health-insurance" aria-checked="true" />
+                          <span class="checkbox primary"></span>
+                          Transport by air-conditioned
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-span-2">
+                  <label for="publish" class="switch flex">
+                    <input id="publish" type="checkbox" checked />
+                    <span class="inner primary"></span>
+                    Publish
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-span-2 flex gap-4">
+              <button class="btn-primary">Create Tour</button>
+              <button class="btn-primary-outlined">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/quill.js"></script>
+    <script src="./assets/js/libs/dropzone.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+  </body>
+</html>

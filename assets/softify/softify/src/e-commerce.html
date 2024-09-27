@@ -1,0 +1,786 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/swiper.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div x-data="chart" :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 grid grid-cols-12 gap-4 xxl:gap-6">
+        <div class="col-span-12 md:col-span-7 xxl:col-span-8 overflow-hidden rounded-xl flex-wrap md:flex-nowrap p-6 xxl:py-[45px] xxl:pl-14 bg-cover flex items-center bg-success-300/10 relative max-h-[360px] rtl:scale-x-[-1]" style="background-image: url(assets/images/e-commerce-hero.png)">
+          <div class="max-w-[400px] rtl:scale-x-[-1] rtl:mr-auto">
+            <h2 class="mb-3 xxl:mb-6 leading-tight">Congratulations Arlene McCoy</h2>
+            <p class="mb-5 xl:mb-8">Congratulations on being recognized as the top performer of the month! you've achieved an impressive 44.8% increase in sales</p>
+            <a href="#" class="btn-primary">Go Now</a>
+          </div>
+        </div>
+
+        <!-- products slider -->
+        <div dir="ltr" class="col-span-12 md:col-span-5 xxl:col-span-4">
+          <div class="swiper product-slider relative rounded-xl max-h-[360px]">
+            <div class="swiper-wrapper rounded-xl">
+              <div class="swiper-slide relative after:bottom-0 after:left-0 after:rounded-xl rounded-xl after:w-full after:h-2/3 after:absolute after:bg-gradient-to-t after:from-black after:to-transparent overflow-hidden">
+                <img src="./assets/images/product-1.png" class="rounded-xl object-center object-cover w-full h-full" alt="" />
+                <div class="absolute left-0 top-24 lg:top-40 z-[3] p-5 xxl:p-6">
+                  <span class="py-1.5 text-xs inline-flex px-3 rounded-3xl bg-secondary-75 text-secondary-500 font-medium">Featured App</span>
+                  <h4 class="text-white mt-4 mb-4 xxl:mb-6">Smart Home Device</h4>
+                  <a href="#" class="btn-primary">Buy Now</a>
+                </div>
+              </div>
+              <div class="swiper-slide relative after:bottom-0 after:left-0 after:rounded-xl rounded-xl after:w-full after:h-2/3 after:absolute after:bg-gradient-to-t after:from-black after:to-transparent overflow-hidden">
+                <img src="./assets/images/product-2.png" class="rounded-xl object-center object-cover w-full h-full" alt="" />
+                <div class="absolute left-0 top-24 lg:top-40 z-[3] p-5 xxl:p-6">
+                  <span class="py-1.5 text-xs inline-flex px-3 rounded-3xl bg-secondary-75 text-secondary-500 font-medium">Featured App</span>
+                  <h4 class="text-white mt-4 mb-4 xxl:mb-6">Colorful Sneaker Purple</h4>
+                  <a href="#" class="btn-primary">Buy Now</a>
+                </div>
+              </div>
+              <div class="swiper-slide relative after:bottom-0 after:left-0 after:rounded-xl rounded-xl after:w-full after:h-2/3 after:absolute after:bg-gradient-to-t after:from-black after:to-transparent overflow-hidden">
+                <img src="./assets/images/product-3.png" class="rounded-xl object-center object-cover w-full h-full" alt="" />
+                <div class="absolute left-0 top-24 lg:top-40 z-[3] p-5 xxl:p-6">
+                  <span class="py-1.5 text-xs inline-flex px-3 rounded-3xl bg-secondary-75 text-secondary-500 font-medium">Featured App</span>
+                  <h4 class="text-white mt-4 mb-4 xxl:mb-6">Levitating Handbag</h4>
+                  <a href="#" class="btn-primary">Buy Now</a>
+                </div>
+              </div>
+              <div class="swiper-slide relative after:bottom-0 after:left-0 after:rounded-xl rounded-xl after:w-full after:h-2/3 after:absolute after:bg-gradient-to-t after:from-black after:to-transparent overflow-hidden">
+                <img src="./assets/images/product-4.png" class="rounded-xl object-center object-cover w-full h-full" alt="" />
+                <div class="absolute left-0 top-24 lg:top-40 z-[3] p-5 xxl:p-6">
+                  <span class="py-1.5 text-xs inline-flex px-3 rounded-3xl bg-secondary-75 text-secondary-500 font-medium">Featured App</span>
+                  <h4 class="text-white mt-4 mb-4 xxl:mb-6">Smart Home Device</h4>
+                  <a href="#" class="btn-primary">Buy Now</a>
+                </div>
+              </div>
+              <div class="swiper-slide relative after:bottom-0 after:left-0 after:rounded-xl rounded-xl after:w-full after:h-2/3 after:absolute after:bg-gradient-to-t after:from-black after:to-transparent overflow-hidden">
+                <img src="./assets/images/product-5.png" class="rounded-xl object-center object-cover w-full h-full" alt="" />
+                <div class="absolute left-0 top-24 lg:top-40 z-[3] p-5 xxl:p-6">
+                  <span class="py-1.5 text-xs inline-flex px-3 rounded-3xl bg-secondary-75 text-secondary-500 font-medium">Featured App</span>
+                  <h4 class="text-white mt-4 mb-4 xxl:mb-6">Modern Headphones</h4>
+                  <a href="#" class="btn-primary">Buy Now</a>
+                </div>
+              </div>
+            </div>
+            <div class="product-pagination"></div>
+          </div>
+        </div>
+        <!-- statistics -->
+        <div class="col-span-12 lg:col-span-8 gap-4 lg:gap-6 grid grid-cols-2">
+          <div class="col-span-2 md:col-span-1 white-box flex justify-between items-start gap-6">
+            <div>
+              <p class="m-text mb-4">Product Sold</p>
+              <h3 class="mb-4">17.5k</h3>
+              <p class="flex items-center gap-3">
+                <span class="text-warning-300 flex items-center gap-1"> <i class="las la-arrows-alt-v"></i> 55.6%</span>
+                <span>Since last month</span>
+              </p>
+            </div>
+            <span class="f-center rounded-lg size-12 bg-primary-50 border border-neutral-30 dark:border-neutral-500 text-primary-300">
+              <i class="las la-shopping-bag text-3xl"></i>
+            </span>
+          </div>
+          <div class="col-span-2 md:col-span-1 white-box flex justify-between items-start gap-6">
+            <div>
+              <p class="m-text mb-4">Total Balance</p>
+              <h3 class="mb-4">$921.12</h3>
+              <p class="flex items-center gap-3">
+                <span class="text-primary-300 flex items-center gap-1"> <i class="las la-arrows-up"></i> 55.6%</span>
+                <span>Since last month</span>
+              </p>
+            </div>
+            <span class="f-center rounded-lg size-12 bg-primary-50 border border-neutral-30 dark:border-neutral-500 text-primary-300">
+              <i class="las la-wallet text-3xl"></i>
+            </span>
+          </div>
+          <div class="col-span-2 md:col-span-1 white-box flex justify-between items-start gap-6">
+            <div>
+              <p class="m-text mb-4">Sales Profit</p>
+              <h3 class="mb-4">$33.51</h3>
+              <p class="flex items-center gap-3">
+                <span class="text-primary-300 flex items-center gap-1"> <i class="las la-arrows-alt-v"></i> 66.6%</span>
+                <span>Since last month</span>
+              </p>
+            </div>
+            <span class="f-center rounded-lg size-12 bg-primary-50 border border-neutral-30 dark:border-neutral-500 text-primary-300">
+              <i class="las la-coins text-3xl"></i>
+            </span>
+          </div>
+          <div class="col-span-2 md:col-span-1 white-box flex justify-between items-start gap-6">
+            <div>
+              <p class="m-text mb-4">Product Refund</p>
+              <h3 class="mb-4">9.6k</h3>
+              <p class="flex items-center gap-3">
+                <span class="text-error-300 flex items-center gap-1"> <i class="las la-arrow-down"></i> 55.6%</span>
+                <span>Since last month</span>
+              </p>
+            </div>
+            <span class="f-center rounded-lg size-12 bg-primary-50 border border-neutral-30 dark:border-neutral-500 text-primary-300">
+              <i class="las la-shopping-basket text-3xl"></i>
+            </span>
+          </div>
+        </div>
+        <!-- current balance -->
+
+        <div class="col-span-12 lg:col-span-4 white-box">
+          <p class="m-text font-medium mb-2">Current Balance</p>
+          <h4 class="bb-dashed-n30">$236,254.00</h4>
+          <ul class="flex flex-col gap-3 mb-6 xxl:mb-8">
+            <li class="flex justify-between items-center">
+              <span>Order Total</span>
+              <span class="m-text font-medium">$236,254</span>
+            </li>
+            <li class="flex justify-between items-center">
+              <span>Earning</span>
+              <span class="m-text font-medium">$136,254</span>
+            </li>
+            <li class="flex justify-between items-center">
+              <span>Sales Profit</span>
+              <span class="m-text font-medium">$66,254</span>
+            </li>
+            <li class="flex justify-between items-center">
+              <span>Refunded</span>
+              <span class="m-text font-medium">$38,254</span>
+            </li>
+          </ul>
+          <div class="flex gap-4 xxl:gap-6">
+            <button class="btn-primary w-full">Transfer</button>
+            <button class="btn-warning w-full">Request</button>
+          </div>
+        </div>
+
+        <!-- Yearly Sales -->
+        <div class="col-span-12 lg:col-span-7 xxl:col-span-8 white-box overflow-hidden">
+          <div class="bb-dashed-n30 flex flex-col sm:flex-row justify-center sm:justify-between gap-4 items-center">
+            <div>
+              <h4>Yearly Sales</h4>
+              <p class="m-text mt-2">(+43%) than last year</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <span>Sort By : </span>
+              <select name="sort" class="nc-select n20">
+                <option value="day">Last 15 Days</option>
+                <option value="week">Last 1 Month</option>
+                <option value="year">Last 6 Month</option>
+              </select>
+            </div>
+          </div>
+          <div x-ref="yearlySale"></div>
+        </div>
+
+        <!-- sale by person -->
+        <div class="col-span-12 lg:col-span-5 xxl:col-span-4 white-box overflow-hidden">
+          <h4 class="bb-dashed-n30">Sale By Person</h4>
+          <div x-ref="radialBar"></div>
+        </div>
+
+        <!-- Sales Overview -->
+        <div class="col-span-12 lg:col-span-7 xxl:col-span-8 white-box">
+          <h4 class="border-b border-dashed border-neutral-40 dark:border-neutral-400 mb-5 pb-5">Sales Overview</h4>
+          <div class="flex flex-col gap-4 lg:gap-6">
+            <div>
+              <div class="flex justify-between items-center mb-4">
+                <p class="m-text font-medium">Total Profit</p>
+                <span>$8,374(20.%)</span>
+              </div>
+              <div x-data="{shown:false}" x-intersect="shown = true" class="h-1.5 w-full rounded-xl bg-success-300/10">
+                <div :class="shown?'w-[20%]':'w-0'" class="h-1.5 duration-[2s] rounded-xl bg-success-300"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between items-center mb-4">
+                <p class="m-text font-medium">Total Income</p>
+                <span>$8,374(80.%)</span>
+              </div>
+              <div x-data="{shown:false}" x-intersect="shown = true" class="h-1.5 w-full rounded-xl bg-secondary-300/10">
+                <div :class="shown?'w-[60%]':'w-0'" class="h-1.5 duration-[2s] rounded-xl bg-secondary-300"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between items-center mb-4">
+                <p class="m-text font-medium">Total Expenses</p>
+                <span>$8,374(80.%)</span>
+              </div>
+              <div x-data="{shown:false}" x-intersect="shown = true" class="h-1.5 w-full rounded-xl bg-warning-300/10">
+                <div :class="shown?'w-[80%]':'w-0'" class="h-1.5 duration-[2s] rounded-xl bg-warning-300"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sale in years -->
+        <div class="col-span-12 lg:col-span-5 xxl:col-span-4 white-box overflow-hidden">
+          <h4 class="bb-dashed-n30">Sale In Years</h4>
+          <div x-ref="saleInYear"></div>
+        </div>
+
+        <!-- top installed countries -->
+        <div class="col-span-12 lg:col-span-7 xxl:col-span-8 white-box">
+          <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4 bb-dashed-n30">
+            <h4>Best Salesman</h4>
+            <div class="flex items-center gap-3">
+              <span>Sort By : </span>
+              <select name="sort" class="nc-select n20">
+                <option value="day">Last 15 Days</option>
+                <option value="week">Last 1 Month</option>
+                <option value="year">Last 6 Month</option>
+              </select>
+            </div>
+          </div>
+          <div x-data="{dense: false}" class="checkboxes-container overflow-x-auto">
+            <table class="w-full whitespace-nowrap">
+              <thead class="text-left">
+                <tr class="bg-neutral-20 dark:bg-neutral-903">
+                  <th class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Seller</th>
+                  <th class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Product</th>
+                  <th class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Country</th>
+                  <th class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Total</th>
+                  <th class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Rank</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <div class="flex items-center gap-2">
+                      <img src="./assets/images/users/user-sm-1.png" class="rounded-full" alt="" />
+                      <span>Guy Hawkins</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Headphone</td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <img src="./assets/images/flag/flag-sm-1.png" class="rounded-full" alt="" />
+                  </td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <span>$2,000</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-primary-300 bg-primary-50 border border-neutral-30 dark:border-neutral-500">Top 01</span>
+                  </td>
+                </tr>
+                <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <div class="flex items-center gap-2">
+                      <img src="./assets/images/users/user-sm-2.png" class="rounded-full" alt="" />
+                      <span>Albert Flores</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Cell Phone</td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <img src="./assets/images/flag/flag-sm-2.png" class="rounded-full" alt="" />
+                  </td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <span>$8,000</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-secondary-300 bg-secondary-50 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500">Top 02</span>
+                  </td>
+                </tr>
+                <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <div class="flex items-center gap-2">
+                      <img src="./assets/images/users/user-sm-3.png" class="rounded-full" alt="" />
+                      <span>Elenor Pena</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Earnings</td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <img src="./assets/images/flag/flag-sm-3.png" class="rounded-full" alt="" />
+                  </td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <span>$3,000</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-warning-300 bg-warning-50 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500">Top 03</span>
+                  </td>
+                </tr>
+                <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <div class="flex items-center gap-2">
+                      <img src="./assets/images/users/user-sm-4.png" class="rounded-full" alt="" />
+                      <span>Ralph Edwards</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Headphone</td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <img src="./assets/images/flag/flag-sm-4.png" class="rounded-full" alt="" />
+                  </td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <span>$4,000</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-error-300 bg-error-50 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500">Top 04</span>
+                  </td>
+                </tr>
+                <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <div class="flex items-center gap-2">
+                      <img src="./assets/images/users/user-sm-5.png" class="rounded-full" alt="" />
+                      <span>Arlene McCoy</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">CAP</td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <img src="./assets/images/flag/flag-sm-5.png" class="rounded-full" alt="" />
+                  </td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <span>$5,000</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-info-300 bg-info-50 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500">Top 05</span>
+                  </td>
+                </tr>
+                <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <div class="flex items-center gap-2">
+                      <img src="./assets/images/users/user-sm-6.png" class="rounded-full" alt="" />
+                      <span>Jerome Bell</span>
+                    </div>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Branded Shoes</td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <img src="./assets/images/flag/flag-sm-6.png" class="rounded-full" alt="" />
+                  </td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <span>$2,000</span>
+                  </td>
+                  <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                    <span class="py-2 px-5 rounded-3xl text-xs text-success-300 bg-success-50 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500">Top 06</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="mt-6 flex items-center gap-5 justify-center flex-col md:flex-row md:justify-between whitespace-nowrap">
+              <label for="switch" class="switch flex">
+                <input x-model="dense" id="switch" type="checkbox" />
+                <span class="inner primary"></span>
+                Dense
+              </label>
+              <div class="flex flex-col sm:flex-row justify-center sm:justify-between gap-5">
+                <div class="flex gap-4 items-center">
+                  <p>Rows per page :</p>
+                  <select name="rows" id="rows" class="bg-transparent dark:bg-neutral-904">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                </div>
+                <div class="f-center gap-4">
+                  <p>1-10 of 100</p>
+                  <button><i class="las la-angle-left text-xl rtl:rotate-180"></i></button> <button><i class="las la-angle-right text-xl rtl:rotate-180"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- latest products -->
+        <div class="col-span-12 lg:col-span-5 xxl:col-span-4 white-box" id="walkLatestProducts">
+          <h4 class="border-b border-dashed border-neutral-40 dark:border-neutral-400 mb-5 pb-5">Latest Products</h4>
+          <div class="flex flex-col gap-6 lg:gap-8">
+            <div class="flex justify-between items-center">
+              <div class="flex gap-4 items-center">
+                <img src="./assets/images/product-1.png" class="size-12 md:size-[60px] rounded" alt="" />
+                <div>
+                  <p class="l-text font-medium mb-2">Colorful Sneaker</p>
+                  <span class="s-text">$32.125</span>
+                </div>
+              </div>
+              <div class="flex">
+                <div>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-primary-300 rtl:-mr-3 ltr:-ml-3"></span>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-secondary-300 rtl:-mr-3 ltr:-ml-3"></span>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-info-300 rtl:-mr-3 ltr:-ml-3"></span>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-warning-300 rtl:-mr-3 ltr:-ml-3"></span>
+                </div>
+                <p class="m-text font-medium">+3</p>
+              </div>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex gap-4 items-center">
+                <img src="./assets/images/product-2.png" class="size-12 md:size-[60px] rounded" alt="" />
+                <div>
+                  <p class="l-text font-medium mb-2">Levitating Handbag</p>
+                  <span class="s-text">$32.125</span>
+                </div>
+              </div>
+              <div class="flex">
+                <div>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-primary-300 rtl:-mr-3 ltr:-ml-3"></span>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-secondary-300 rtl:-mr-3 ltr:-ml-3"></span>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-info-300 rtl:-mr-3 ltr:-ml-3"></span>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-warning-300 rtl:-mr-3 ltr:-ml-3"></span>
+                </div>
+                <p class="m-text font-medium">+3</p>
+              </div>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex gap-4 items-center">
+                <img src="./assets/images/product-3.png" class="size-12 md:size-[60px] rounded" alt="" />
+                <div>
+                  <p class="l-text font-medium mb-2">Beuty Sunglass</p>
+                  <span class="s-text">$32.125</span>
+                </div>
+              </div>
+              <div class="flex">
+                <div>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-primary-300 rtl:-mr-3 ltr:-ml-3"></span>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-secondary-300 rtl:-mr-3 ltr:-ml-3"></span>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-info-300 rtl:-mr-3 ltr:-ml-3"></span>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-warning-300 rtl:-mr-3 ltr:-ml-3"></span>
+                </div>
+                <p class="m-text font-medium">+3</p>
+              </div>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex gap-4 items-center">
+                <img src="./assets/images/product-4.png" class="size-12 md:size-[60px] rounded" alt="" />
+                <div>
+                  <p class="l-text font-medium mb-2">Smart Home Device</p>
+                  <span class="s-text">$32.125</span>
+                </div>
+              </div>
+              <div class="flex">
+                <div>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-primary-300 rtl:-mr-3 ltr:-ml-3"></span>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-secondary-300 rtl:-mr-3 ltr:-ml-3"></span>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-info-300 rtl:-mr-3 ltr:-ml-3"></span>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-warning-300 rtl:-mr-3 ltr:-ml-3"></span>
+                </div>
+                <p class="m-text font-medium">+3</p>
+              </div>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex gap-4 items-center">
+                <img src="./assets/images/product-1.png" class="size-12 md:size-[60px] rounded" alt="" />
+                <div>
+                  <p class="l-text font-medium mb-2">Colorful Sneaker</p>
+                  <span class="s-text">$32.125</span>
+                </div>
+              </div>
+              <div class="flex">
+                <div>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-primary-300 rtl:-mr-3 ltr:-ml-3"></span>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-secondary-300 rtl:-mr-3 ltr:-ml-3"></span>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-info-300 rtl:-mr-3 ltr:-ml-3"></span>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-warning-300 rtl:-mr-3 ltr:-ml-3"></span>
+                </div>
+                <p class="m-text font-medium">+3</p>
+              </div>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex gap-4 items-center">
+                <img src="./assets/images/product-5.png" class="size-12 md:size-[60px] rounded" alt="" />
+                <div>
+                  <p class="l-text font-medium mb-2">Modern Headphone</p>
+                  <span class="s-text">$32.125</span>
+                </div>
+              </div>
+              <div class="flex">
+                <div>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-primary-300 rtl:-mr-3 ltr:-ml-3"></span>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-secondary-300 rtl:-mr-3 ltr:-ml-3"></span>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-info-300 rtl:-mr-3 ltr:-ml-3"></span>
+                  <span class="size-4 xxl:size-6 inline-block rounded-full border border-neutral-0 dark:border-neutral-904 bg-warning-300 rtl:-mr-3 ltr:-ml-3"></span>
+                </div>
+                <p class="m-text font-medium">+3</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/swiper-bundle.min.js"></script>
+    <script defer src="./assets/js/libs/alpine.intersect.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+    <script src="./assets/js/libs/apexcharts.min.js"></script>
+    <script src="./assets/js/charts.js"></script>
+
+    <script>
+      document.addEventListener('alpine:init', () => {
+        Alpine.data('chart', () => ({
+          yearlySale: null,
+          radialBar: null,
+          saleInYear: null,
+          init() {
+            isDark = this.$store.app.theme === 'dark' ? true : false
+            isRtl = this.$store.app.dir === 'rtl' ? true : false
+
+            setTimeout(() => {
+              this.yearlySale = new ApexCharts(this.$refs.yearlySale, this.yearlySalesOptions)
+              this.yearlySale.render()
+
+              this.radialBar = new ApexCharts(this.$refs.radialBar, this.radialBarChartOptions)
+              this.radialBar.render()
+
+              this.saleInYear = new ApexCharts(this.$refs.saleInYear, this.saleInYearChartOptions)
+              this.saleInYear.render()
+            }, 300)
+
+            this.$watch('$store.app.theme', () => {
+              this.refreshOptions()
+            })
+
+            this.$watch('$store.app.rtlClass', () => {
+              this.refreshOptions()
+            })
+          },
+
+          refreshOptions() {
+            isDark = this.$store.app.theme === 'dark' ? true : false
+            isRtl = this.$store.app.dir === 'rtl' ? true : false
+            this.yearlySale.updateOptions(this.yearlySalesOptions)
+            this.radialBar.updateOptions(this.radialBarChartOptions)
+            this.saleInYear.updateOptions(this.saleInYearChartOptions)
+          },
+
+          get yearlySalesOptions() {
+            return {
+              series: [
+                {
+                  name: 'Website Blog',
+                  type: 'column',
+                  data: [40, 50, 44, 31, 22, 43, 20, 35, 22, 32, 30, 16]
+                },
+                {
+                  name: 'chart 2',
+                  type: 'area',
+                  data: [15, 28, 20, 25, 18, 30, 22, 36, 32, 46, 30, 27]
+                },
+                {
+                  name: 'Social Media',
+                  type: 'line',
+                  data: [5, 8, 6, 5, 7, 8, 7, 6, 8, 4, 6, 3]
+                }
+              ],
+              chart: {
+                width: '100%',
+                height: 330,
+                type: 'line',
+                toolbar: {
+                  show: false
+                },
+                animations: {
+                  enabled: true,
+                  easing: 'easeinout',
+                  speed: 800
+                }
+              },
+              plotOptions: {
+                bar: {
+                  columnWidth: window.innerWidth < 768 ? '10' : window.innerWidth < 1400 ? '13' : '20',
+                  dataLabels: {
+                    position: 'center'
+                  }
+                }
+              },
+              dataLabels: {
+                enabled: false
+              },
+              stroke: {
+                width: [0, 3, 3],
+                colors: ['#2C7BE5', '#FFC861', '#4371E9'],
+                dashArray: [0, 0, 10],
+                curve: ['straight', 'straight', 'smooth']
+              },
+
+              legend: {
+                show: true,
+                offsetY: 10,
+                markers: {
+                  width: 6,
+                  height: 6,
+                  offsetX: isRtl ? 4 : -4
+                }
+              },
+              xaxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                labels: {
+                  style: {
+                    colors: !isDark ? '#404A60' : '#EBECEF'
+                  }
+                },
+                axisBorder: {
+                  show: false
+                },
+                axisTicks: {
+                  color: !isDark ? '#404A60' : '#EBECEF'
+                }
+              },
+              yaxis: [
+                {
+                  seriesName: 'Website Blog',
+                  labels: {
+                    offsetX: -40,
+                    show: window.innerWidth > 768 ? true : false,
+                    style: {
+                      colors: !isDark ? '#404A60' : '#EBECEF'
+                    }
+                  }
+                },
+                {
+                  seriesName: 'chart 2',
+                  max: 70,
+                  labels: {
+                    show: false
+                  }
+                },
+                {
+                  seriesName: 'Social Media',
+                  max: 30,
+                  labels: {
+                    show: false
+                  }
+                }
+              ],
+              colors: ['#2C7BE5', '#FFC861'],
+              fill: {
+                colors: ['#2C7BE5', '#FFC861', '#4371E9'],
+                opacity: [1, 0.1, 1]
+              },
+              responsive: [
+                {
+                  breakpoint: 570,
+                  options: {
+                    chart: {
+                      height: 250
+                    }
+                  }
+                }
+              ],
+              grid: {
+                borderColor: isDark ? '#404A60' : '#EBECEF',
+                padding: {
+                  left: -20
+                }
+              }
+            }
+          },
+          get radialBarChartOptions() {
+            return {
+              series: [44, 55, 67, 83],
+              chart: {
+                height: 350,
+                type: 'radialBar'
+              },
+              colors: ['#00B8D9', '#2C7BE5', '#FFAB00', '#FF5630'],
+              plotOptions: {
+                radialBar: {
+                  track: {
+                    background: isDark ? '#343E56' : '#EBECEF'
+                  },
+                  dataLabels: {
+                    name: {
+                      fontSize: '22px'
+                    },
+                    value: {
+                      fontSize: '16px'
+                    },
+                    total: {
+                      show: true,
+                      label: 'Total',
+                      formatter: function (w) {
+                        // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
+                        return 249
+                      }
+                    }
+                  }
+                }
+              },
+              legend: {
+                show: true,
+                position: 'bottom',
+                horizontalAlign: 'center',
+                markers: {
+                  width: 6,
+                  height: 6,
+                  offsetX: isRtl ? 4 : -4
+                }
+              },
+              labels: ['Team A', 'Team B', 'Team C', 'Team D']
+            }
+          },
+          get saleInYearChartOptions() {
+            return {
+              series: [67],
+              chart: {
+                height: 250,
+                type: 'radialBar',
+                offsetY: -10
+              },
+              colors: ['#2C7BE5'],
+              plotOptions: {
+                radialBar: {
+                  startAngle: -135,
+                  endAngle: 135,
+                  track: {
+                    background: isDark ? '#343E56' : '#EBECEF'
+                  },
+                  dataLabels: {
+                    name: {
+                      fontSize: '14px',
+                      color: undefined,
+                      offsetY: 70
+                    },
+                    value: {
+                      offsetY: 35,
+                      fontSize: '22px',
+                      color: undefined,
+                      formatter: function (val) {
+                        return val + '%'
+                      }
+                    }
+                  }
+                }
+              },
+              fill: {
+                type: 'gradient',
+                gradient: {
+                  shade: 'dark',
+                  shadeIntensity: 0.15,
+                  inverseColors: false,
+                  opacityFrom: 1,
+                  opacityTo: 1,
+                  stops: [0, 50, 65, 91]
+                }
+              },
+              stroke: {
+                dashArray: 4
+              },
+              labels: ['Median Ratio']
+            }
+          }
+        }))
+      })
+    </script>
+  </body>
+</html>

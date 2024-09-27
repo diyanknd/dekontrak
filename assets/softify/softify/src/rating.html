@@ -1,0 +1,456 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="./assets/css/half-star.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/github.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div x-data="copyorviewcode" class="n20-box xxxl:p-6 relative bg-right bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Rating</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Components</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Rating</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Rating  -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div class="grid grid-cols-1 xxl:grid-cols-2 gap-4 xxl:gap-6">
+            <!-- Basic -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h4 class="bb-dashed-n40">Basic</h4>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <!-- Preview -->
+              <div x-show="!viewcode" x-data="{ rating: 3, maxRating: 5, hoverRating: 0 }">
+                <div class="flex items-center">
+                  <template x-for="star in maxRating">
+                    <svg class="h-6 w-6 cursor-pointer text-gray-300 hover:!text-yellow-500" :class="{ 'text-yellow-500': hoverRating >= star || rating >= star }" @mouseover="hoverRating = star" @mouseleave="hoverRating = 0" @click="rating = star" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                      />
+                    </svg>
+                  </template>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div x-data=&#x22;{ rating: 3, maxRating: 5, hoverRating: 0 }&#x22;&#x3E;
+  &#x3C;div class=&#x22;flex items-center&#x22;&#x3E;
+    &#x3C;template x-for=&#x22;star in maxRating&#x22;&#x3E;
+      &#x3C;svg class=&#x22;h-6 w-6 cursor-pointer text-gray-300 hover:!text-yellow-500&#x22; :class=&#x22;{ &#x27;text-yellow-500&#x27;: hoverRating &#x3E;= star || rating &#x3E;= star }&#x22; @mouseover=&#x22;hoverRating = star&#x22; @mouseleave=&#x22;hoverRating = 0&#x22; @click=&#x22;rating = star&#x22; fill=&#x22;currentColor&#x22; viewBox=&#x22;0 0 20 20&#x22;&#x3E;
+        &#x3C;path
+          d=&#x22;M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z&#x22;
+        /&#x3E;
+      &#x3C;/svg&#x3E;
+    &#x3C;/template&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!-- Read Only -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h4 class="bb-dashed-n40">Read Only</h4>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <!-- Preview -->
+              <div x-show="!viewcode" x-data="{ rating: 3, maxRating: 5, hoverRating: 0 }">
+                <div class="flex items-center">
+                  <template x-for="star in maxRating">
+                    <svg class="h-6 w-6 text-gray-300" :class="{ 'text-yellow-500': hoverRating >= star || rating >= star }" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                      />
+                    </svg>
+                  </template>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div x-data=&#x22;{ rating: 3, maxRating: 5, hoverRating: 0 }&#x22;&#x3E;
+  &#x3C;div class=&#x22;flex items-center&#x22;&#x3E;
+    &#x3C;template x-for=&#x22;star in maxRating&#x22;&#x3E;
+      &#x3C;svg class=&#x22;h-6 w-6 text-gray-300&#x22; :class=&#x22;{ &#x27;text-yellow-500&#x27;: hoverRating &#x3E;= star || rating &#x3E;= star }&#x22; fill=&#x22;currentColor&#x22; viewBox=&#x22;0 0 20 20&#x22;&#x3E;
+        &#x3C;path
+          d=&#x22;M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z&#x22;
+        /&#x3E;
+      &#x3C;/svg&#x3E;
+    &#x3C;/template&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!-- Disabled -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h4 class="bb-dashed-n40">Disabled</h4>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <!-- Preview -->
+              <div x-show="!viewcode" x-data="{ rating: 3, maxRating: 5, hoverRating: 0 }">
+                <div class="flex items-center">
+                  <template x-for="star in maxRating">
+                    <svg class="h-6 w-6 text-gray-300" :class="{ 'text-yellow-300': hoverRating >= star || rating >= star }" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                      />
+                    </svg>
+                  </template>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div x-data=&#x22;{ rating: 3, maxRating: 5, hoverRating: 0 }&#x22;&#x3E;
+  &#x3C;div class=&#x22;flex items-center&#x22;&#x3E;
+    &#x3C;template x-for=&#x22;star in maxRating&#x22;&#x3E;
+      &#x3C;svg class=&#x22;h-6 w-6 text-gray-300&#x22; :class=&#x22;{ &#x27;text-yellow-300&#x27;: hoverRating &#x3E;= star || rating &#x3E;= star }&#x22; fill=&#x22;currentColor&#x22; viewBox=&#x22;0 0 20 20&#x22;&#x3E;
+        &#x3C;path
+          d=&#x22;M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z&#x22;
+        /&#x3E;
+      &#x3C;/svg&#x3E;
+    &#x3C;/template&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!-- Custom Icon and Color -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h4 class="bb-dashed-n40">Custom Icon and Color</h4>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <!-- Preview -->
+              <div x-show="!viewcode" x-data="{ rating: 3, maxRating: 5, hoverRating: 0 }">
+                <div class="flex items-center gap-1">
+                  <template x-for="star in maxRating">
+                    <div class="h-6 w-6 cursor-pointer text-gray-300 duration-300 hover:scale-125 hover:text-primary-300" :class="{ '!text-primary-300': hoverRating >= star || rating >= star }" @mouseover="hoverRating = star" @mouseleave="hoverRating = 0" @click="rating = star">
+                      <i class="las la-heart text-2xl"></i>
+                    </div>
+                  </template>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div x-data=&#x22;{ rating: 3, maxRating: 5, hoverRating: 0 }&#x22;&#x3E;
+  &#x3C;div class=&#x22;flex items-center gap-1&#x22;&#x3E;
+    &#x3C;template x-for=&#x22;star in maxRating&#x22;&#x3E;
+      &#x3C;div class=&#x22;h-6 w-6 cursor-pointer text-gray-300 duration-300 hover:scale-125 hover:text-primary-300&#x22; :class=&#x22;{ &#x27;!text-primary-300&#x27;: hoverRating &#x3E;= star || rating &#x3E;= star }&#x22; @mouseover=&#x22;hoverRating = star&#x22; @mouseleave=&#x22;hoverRating = 0&#x22; @click=&#x22;rating = star&#x22;&#x3E;
+        &#x3C;i class=&#x22;las la-heart text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+      &#x3C;/div&#x3E;
+    &#x3C;/template&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!-- 10 stars -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h4 class="bb-dashed-n40">10 Stars</h4>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <!-- Preview -->
+              <div x-show="!viewcode" x-data="{ rating: 3, maxRating: 10, hoverRating: 0 }">
+                <div class="flex items-center">
+                  <template x-for="star in maxRating">
+                    <svg class="h-6 w-6 cursor-pointer text-gray-300 hover:!text-yellow-500" :class="{ 'text-yellow-500': hoverRating >= star || rating >= star }" @mouseover="hoverRating = star" @mouseleave="hoverRating = 0" @click="rating = star" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                      />
+                    </svg>
+                  </template>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div x-data=&#x22;{ rating: 3, maxRating: 10, hoverRating: 0 }&#x22;&#x3E;
+  &#x3C;div class=&#x22;flex items-center&#x22;&#x3E;
+    &#x3C;template x-for=&#x22;star in maxRating&#x22;&#x3E;
+      &#x3C;svg class=&#x22;h-6 w-6 cursor-pointer text-gray-300 hover:!text-yellow-500&#x22; :class=&#x22;{ &#x27;text-yellow-500&#x27;: hoverRating &#x3E;= star || rating &#x3E;= star }&#x22; @mouseover=&#x22;hoverRating = star&#x22; @mouseleave=&#x22;hoverRating = 0&#x22; @click=&#x22;rating = star&#x22; fill=&#x22;currentColor&#x22; viewBox=&#x22;0 0 20 20&#x22;&#x3E;
+        &#x3C;path
+          d=&#x22;M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z&#x22;
+        /&#x3E;
+      &#x3C;/svg&#x3E;
+    &#x3C;/template&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!-- Custom Icons -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h4 class="bb-dashed-n40">Custom Icons</h4>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <!-- Preview -->
+              <div x-show="!viewcode" x-data="{ rating: 3, stars: [{id:1,icon:'las la-tired'},{id:2,icon:'las la-frown'},{id:3,icon:'las la-meh'},{id:4,icon:'las la-smile'},{id:5,icon:'las la-grin'}], hoverRating: 0 }">
+                <div class="flex items-center gap-1">
+                  <template x-for="{id,icon} in stars">
+                    <div class="h-6 w-6 cursor-pointer text-gray-300 duration-300 hover:scale-125 hover:text-warning-300" :class="{ '!text-warning-300': hoverRating >= id || rating >= id }" @mouseover="hoverRating = id" @mouseleave="hoverRating = 0" @click="rating = id">
+                      <i :class="icon" class="text-2xl"></i>
+                    </div>
+                  </template>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div x-data=&#x22;{ rating: 3, stars: [{id:1,icon:&#x27;las la-tired&#x27;},{id:2,icon:&#x27;las la-frown&#x27;},{id:3,icon:&#x27;las la-meh&#x27;},{id:4,icon:&#x27;las la-smile&#x27;},{id:5,icon:&#x27;las la-grin&#x27;}], hoverRating: 0 }&#x22;&#x3E;
+  &#x3C;div class=&#x22;flex items-center gap-1&#x22;&#x3E;
+    &#x3C;template x-for=&#x22;{id,icon} in stars&#x22;&#x3E;
+      &#x3C;div class=&#x22;h-6 w-6 cursor-pointer text-gray-300 duration-300 hover:scale-125 hover:text-warning-300&#x22; :class=&#x22;{ &#x27;!text-warning-300&#x27;: hoverRating &#x3E;= id || rating &#x3E;= id }&#x22; @mouseover=&#x22;hoverRating = id&#x22; @mouseleave=&#x22;hoverRating = 0&#x22; @click=&#x22;rating = id&#x22;&#x3E;
+        &#x3C;i :class=&#x22;icon&#x22; class=&#x22;text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+      &#x3C;/div&#x3E;
+    &#x3C;/template&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!-- Hover  -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h4 class="bb-dashed-n40">Hover</h4>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <!-- Preview -->
+              <div x-show="!viewcode" x-data="{ rating: 2, stars: [{id:1,title:'Useless'},{id:2,title:'Poor'},{id:3,title:'Ok'},{id:4,title:'Good'},{id:5,title:'Excellent'}], hoverRating: 0 }" class="flex justify-between">
+                <div class="flex items-center gap-1">
+                  <template x-for="{id,icon} in stars">
+                    <div class="h-6 w-6 cursor-pointer text-gray-300 duration-300 hover:scale-125 hover:text-warning-300" :class="{ '!text-warning-300': hoverRating >= id || rating >= id }" @mouseover="hoverRating = id" @mouseleave="hoverRating = 0" @click="rating = id">
+                      <i class="las la-star text-2xl"></i>
+                    </div>
+                  </template>
+                </div>
+                <p x-text="stars.find(star => star.id === hoverRating)?.title || stars.find(star => star.id === rating)?.title"></p>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div x-data=&#x22;{ rating: 2, stars: [{id:1,title:&#x27;Useless&#x27;},{id:2,title:&#x27;Poor&#x27;},{id:3,title:&#x27;Ok&#x27;},{id:4,title:&#x27;Good&#x27;},{id:5,title:&#x27;Excellent&#x27;}], hoverRating: 0 }&#x22; class=&#x22;flex justify-between&#x22;&#x3E;
+  &#x3C;div class=&#x22;flex items-center gap-1&#x22;&#x3E;
+    &#x3C;template x-for=&#x22;{id,icon} in stars&#x22;&#x3E;
+      &#x3C;div class=&#x22;h-6 w-6 cursor-pointer text-gray-300 duration-300 hover:scale-125 hover:text-warning-300&#x22; :class=&#x22;{ &#x27;!text-warning-300&#x27;: hoverRating &#x3E;= id || rating &#x3E;= id }&#x22; @mouseover=&#x22;hoverRating = id&#x22; @mouseleave=&#x22;hoverRating = 0&#x22; @click=&#x22;rating = id&#x22;&#x3E;
+        &#x3C;i class=&#x22;las la-star text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+      &#x3C;/div&#x3E;
+    &#x3C;/template&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;p x-text=&#x22;stars.find(star =&#x3E; star.id === hoverRating)?.title || stars.find(star =&#x3E; star.id === rating)?.title&#x22;&#x3E;&#x3C;/p&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!-- Half Ratings -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h4 class="bb-dashed-n40">Half Ratings</h4>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <!-- Preview -->
+              <div x-show="!viewcode" class="half-star flex">
+                <fieldset class="rate">
+                  <input type="radio" id="rating10" name="rating" value="10" /><label for="rating10" title="5 stars"></label> <input type="radio" id="rating9" name="rating" value="9" /><label class="half" for="rating9" title="4 1/2 stars"></label>
+                  <input type="radio" id="rating8" name="rating" value="8" /><label for="rating8" title="4 stars"></label> <input type="radio" id="rating7" name="rating" value="7" /><label class="half" for="rating7" title="3 1/2 stars"></label>
+                  <input type="radio" id="rating6" name="rating" value="6" /><label for="rating6" title="3 stars"></label> <input type="radio" id="rating5" name="rating" value="5" /><label class="half" for="rating5" title="2 1/2 stars"></label>
+                  <input type="radio" id="rating4" name="rating" value="4" /><label for="rating4" title="2 stars"></label> <input type="radio" id="rating3" name="rating" value="3" /><label class="half" for="rating3" title="1 1/2 stars"></label>
+                  <input type="radio" id="rating2" name="rating" value="2" /><label for="rating2" title="1 star"></label> <input type="radio" id="rating1" name="rating" value="1" /><label class="half" for="rating1" title="1/2 star"></label>
+                </fieldset>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;half-star flex justify-center&#x22;&#x3E;
+  &#x3C;fieldset class=&#x22;rate&#x22;&#x3E;
+    &#x3C;input type=&#x22;radio&#x22; id=&#x22;rating10&#x22; name=&#x22;rating&#x22; value=&#x22;10&#x22; /&#x3E;&#x3C;label for=&#x22;rating10&#x22; title=&#x22;5 stars&#x22;&#x3E;&#x3C;/label&#x3E; &#x3C;input type=&#x22;radio&#x22; id=&#x22;rating9&#x22; name=&#x22;rating&#x22; value=&#x22;9&#x22; /&#x3E;&#x3C;label class=&#x22;half&#x22; for=&#x22;rating9&#x22; title=&#x22;4 1/2 stars&#x22;&#x3E;&#x3C;/label&#x3E;
+    &#x3C;input type=&#x22;radio&#x22; id=&#x22;rating8&#x22; name=&#x22;rating&#x22; value=&#x22;8&#x22; /&#x3E;&#x3C;label for=&#x22;rating8&#x22; title=&#x22;4 stars&#x22;&#x3E;&#x3C;/label&#x3E; &#x3C;input type=&#x22;radio&#x22; id=&#x22;rating7&#x22; name=&#x22;rating&#x22; value=&#x22;7&#x22; /&#x3E;&#x3C;label class=&#x22;half&#x22; for=&#x22;rating7&#x22; title=&#x22;3 1/2 stars&#x22;&#x3E;&#x3C;/label&#x3E;
+    &#x3C;input type=&#x22;radio&#x22; id=&#x22;rating6&#x22; name=&#x22;rating&#x22; value=&#x22;6&#x22; /&#x3E;&#x3C;label for=&#x22;rating6&#x22; title=&#x22;3 stars&#x22;&#x3E;&#x3C;/label&#x3E; &#x3C;input type=&#x22;radio&#x22; id=&#x22;rating5&#x22; name=&#x22;rating&#x22; value=&#x22;5&#x22; /&#x3E;&#x3C;label class=&#x22;half&#x22; for=&#x22;rating5&#x22; title=&#x22;2 1/2 stars&#x22;&#x3E;&#x3C;/label&#x3E;
+    &#x3C;input type=&#x22;radio&#x22; id=&#x22;rating4&#x22; name=&#x22;rating&#x22; value=&#x22;4&#x22; /&#x3E;&#x3C;label for=&#x22;rating4&#x22; title=&#x22;2 stars&#x22;&#x3E;&#x3C;/label&#x3E; &#x3C;input type=&#x22;radio&#x22; id=&#x22;rating3&#x22; name=&#x22;rating&#x22; value=&#x22;3&#x22; /&#x3E;&#x3C;label class=&#x22;half&#x22; for=&#x22;rating3&#x22; title=&#x22;1 1/2 stars&#x22;&#x3E;&#x3C;/label&#x3E;
+    &#x3C;input type=&#x22;radio&#x22; id=&#x22;rating2&#x22; name=&#x22;rating&#x22; value=&#x22;2&#x22; /&#x3E;&#x3C;label for=&#x22;rating2&#x22; title=&#x22;1 star&#x22;&#x3E;&#x3C;/label&#x3E; &#x3C;input type=&#x22;radio&#x22; id=&#x22;rating1&#x22; name=&#x22;rating&#x22; value=&#x22;1&#x22; /&#x3E;&#x3C;label class=&#x22;half&#x22; for=&#x22;rating1&#x22; title=&#x22;1/2 star&#x22;&#x3E;&#x3C;/label&#x3E;
+  &#x3C;/fieldset&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!-- Sizes -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h4 class="bb-dashed-n40">Sizes</h4>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <!-- Preview -->
+              <div x-show="!viewcode" class="flex flex-wrap gap-4">
+                <div x-data="{ rating: 3, maxRating: 5, hoverRating: 0 }">
+                  <div class="flex items-center">
+                    <template x-for="star in maxRating">
+                      <div class="h-6 w-6 cursor-pointer text-gray-300 hover:!text-yellow-500" :class="{ 'text-yellow-500': hoverRating >= star || rating >= star }" @mouseover="hoverRating = star" @mouseleave="hoverRating = 0" @click="rating = star">
+                        <i class="las la-star"></i>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+                <div x-data="{ rating: 3, maxRating: 5, hoverRating: 0 }">
+                  <div class="flex items-center gap-0.5">
+                    <template x-for="star in maxRating">
+                      <div class="h-6 w-6 cursor-pointer text-gray-300 hover:!text-yellow-500" :class="{ 'text-yellow-500': hoverRating >= star || rating >= star }" @mouseover="hoverRating = star" @mouseleave="hoverRating = 0" @click="rating = star">
+                        <i class="las la-star text-xl"></i>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+                <div x-data="{ rating: 3, maxRating: 5, hoverRating: 0 }">
+                  <div class="flex items-center gap-2">
+                    <template x-for="star in maxRating">
+                      <div class="h-6 w-6 cursor-pointer text-gray-300 hover:!text-yellow-500" :class="{ 'text-yellow-500': hoverRating >= star || rating >= star }" @mouseover="hoverRating = star" @mouseleave="hoverRating = 0" @click="rating = star">
+                        <i class="las la-star text-3xl"></i>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex flex-wrap justify-center gap-4&#x22;&#x3E;
+  &#x3C;div x-data=&#x22;{ rating: 3, maxRating: 5, hoverRating: 0 }&#x22;&#x3E;
+    &#x3C;div class=&#x22;flex items-center&#x22;&#x3E;
+      &#x3C;template x-for=&#x22;star in maxRating&#x22;&#x3E;
+        &#x3C;div class=&#x22;h-6 w-6 cursor-pointer text-gray-300 hover:!text-yellow-500&#x22; :class=&#x22;{ &#x27;text-yellow-500&#x27;: hoverRating &#x3E;= star || rating &#x3E;= star }&#x22; @mouseover=&#x22;hoverRating = star&#x22; @mouseleave=&#x22;hoverRating = 0&#x22; @click=&#x22;rating = star&#x22;&#x3E;
+          &#x3C;i class=&#x22;las la-star&#x22;&#x3E;&#x3C;/i&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/template&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div x-data=&#x22;{ rating: 3, maxRating: 5, hoverRating: 0 }&#x22;&#x3E;
+    &#x3C;div class=&#x22;flex items-center gap-0.5&#x22;&#x3E;
+      &#x3C;template x-for=&#x22;star in maxRating&#x22;&#x3E;
+        &#x3C;div class=&#x22;h-6 w-6 cursor-pointer text-gray-300 hover:!text-yellow-500&#x22; :class=&#x22;{ &#x27;text-yellow-500&#x27;: hoverRating &#x3E;= star || rating &#x3E;= star }&#x22; @mouseover=&#x22;hoverRating = star&#x22; @mouseleave=&#x22;hoverRating = 0&#x22; @click=&#x22;rating = star&#x22;&#x3E;
+          &#x3C;i class=&#x22;las la-star text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/template&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div x-data=&#x22;{ rating: 3, maxRating: 5, hoverRating: 0 }&#x22;&#x3E;
+    &#x3C;div class=&#x22;flex items-center gap-2&#x22;&#x3E;
+      &#x3C;template x-for=&#x22;star in maxRating&#x22;&#x3E;
+        &#x3C;div class=&#x22;h-6 w-6 cursor-pointer text-gray-300 hover:!text-yellow-500&#x22; :class=&#x22;{ &#x27;text-yellow-500&#x27;: hoverRating &#x3E;= star || rating &#x3E;= star }&#x22; @mouseover=&#x22;hoverRating = star&#x22; @mouseleave=&#x22;hoverRating = 0&#x22; @click=&#x22;rating = star&#x22;&#x3E;
+          &#x3C;i class=&#x22;las la-star text-3xl&#x22;&#x3E;&#x3C;/i&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/template&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <script src="./assets/js/libs/highlight.js"></script>
+    <script src="./assets/js/libs/sweetalert.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

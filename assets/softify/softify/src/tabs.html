@@ -1,0 +1,192 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="./assets/css/github.min.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Tabs</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Components</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Tabs</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Tabs -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div class="space-y-4 xl:space-y-6">
+            <!-- Text -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h4 class="bb-dashed-n40">Basic Tab</h4>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <!-- Preview -->
+              <div x-show="!viewcode" x-data="{activeTab:'tab-1'}">
+                <div class="flex gap-4 md:gap-6 xl:gap-8">
+                  <button @click="activeTab='tab-1'" class="border-b pb-1 font-medium" :class="activeTab=='tab-1' ? 'border-neutral-900 dark:border-neutral-30':'border-transparent text-neutral-500 dark:text-neutral-40'">Item One</button>
+                  <button @click="activeTab='tab-2'" class="border-b pb-1 font-medium" :class="activeTab=='tab-2' ? 'border-neutral-900 dark:border-neutral-30':'border-transparent text-neutral-500 dark:text-neutral-40'">Item Two</button>
+                  <button @click="activeTab='tab-3'" class="border-b pb-1 font-medium" :class="activeTab=='tab-3' ? 'border-neutral-900 dark:border-neutral-30':'border-transparent text-neutral-500 dark:text-neutral-40'">Item Three</button>
+                </div>
+                <div x-show="activeTab=='tab-1'" class="mt-6">
+                  <div class="rounded-2xl border border-neutral-30 bg-neutral-0 px-6 py-4 dark:border-neutral-500 dark:bg-neutral-904">
+                    <p>Item One</p>
+                  </div>
+                </div>
+                <div x-show="activeTab=='tab-2'" class="mt-6">
+                  <div class="rounded-2xl border border-neutral-30 bg-neutral-0 px-6 py-4 dark:border-neutral-500 dark:bg-neutral-904">
+                    <p>Item Two</p>
+                  </div>
+                </div>
+                <div x-show="activeTab=='tab-3'" class="mt-6">
+                  <div class="rounded-2xl border border-neutral-30 bg-neutral-0 px-6 py-4 dark:border-neutral-500 dark:bg-neutral-904">
+                    <p>Item Three</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div x-data=&#x22;{activeTab:&#x27;tab-1&#x27;}&#x22;&#x3E;
+  &#x3C;div class=&#x22;flex gap-4 md:gap-6 xl:gap-8&#x22;&#x3E;
+    &#x3C;button @click=&#x22;activeTab=&#x27;tab-1&#x27;&#x22; class=&#x22;border-b pb-1 font-medium&#x22; :class=&#x22;activeTab==&#x27;tab-1&#x27; ? &#x27;border-neutral-900 dark:border-neutral-30&#x27;:&#x27;border-transparent text-neutral-500 dark:text-neutral-40&#x27;&#x22;&#x3E;Item One&#x3C;/button&#x3E;
+    &#x3C;button @click=&#x22;activeTab=&#x27;tab-2&#x27;&#x22; class=&#x22;border-b pb-1 font-medium&#x22; :class=&#x22;activeTab==&#x27;tab-2&#x27; ? &#x27;border-neutral-900 dark:border-neutral-30&#x27;:&#x27;border-transparent text-neutral-500 dark:text-neutral-40&#x27;&#x22;&#x3E;Item Two&#x3C;/button&#x3E;
+    &#x3C;button @click=&#x22;activeTab=&#x27;tab-3&#x27;&#x22; class=&#x22;border-b pb-1 font-medium&#x22; :class=&#x22;activeTab==&#x27;tab-3&#x27; ? &#x27;border-neutral-900 dark:border-neutral-30&#x27;:&#x27;border-transparent text-neutral-500 dark:text-neutral-40&#x27;&#x22;&#x3E;Item Three&#x3C;/button&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div x-show=&#x22;activeTab==&#x27;tab-1&#x27;&#x22; class=&#x22;mt-6&#x22;&#x3E;
+    &#x3C;div class=&#x22;rounded-2xl border border-neutral-30 bg-neutral-0 px-6 py-4 dark:border-neutral-500 dark:bg-neutral-904&#x22;&#x3E;
+      &#x3C;p&#x3E;Item One&#x3C;/p&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div x-show=&#x22;activeTab==&#x27;tab-2&#x27;&#x22; class=&#x22;mt-6&#x22;&#x3E;
+    &#x3C;div class=&#x22;rounded-2xl border border-neutral-30 bg-neutral-0 px-6 py-4 dark:border-neutral-500 dark:bg-neutral-904&#x22;&#x3E;
+      &#x3C;p&#x3E;Item Two&#x3C;/p&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div x-show=&#x22;activeTab==&#x27;tab-3&#x27;&#x22; class=&#x22;mt-6&#x22;&#x3E;
+    &#x3C;div class=&#x22;rounded-2xl border border-neutral-30 bg-neutral-0 px-6 py-4 dark:border-neutral-500 dark:bg-neutral-904&#x22;&#x3E;
+      &#x3C;p&#x3E;Item Three&#x3C;/p&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!-- Icon -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h4 class="bb-dashed-n40">Tab With Icon</h4>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <!-- Preview -->
+              <di x-show="!viewcode" v x-data="{activeTab:'tab-1'}">
+                <div class="flex gap-4 md:gap-6 xl:gap-8">
+                  <button @click="activeTab='tab-1'" class="border-b pb-1 font-medium" :class="activeTab=='tab-1' ? 'border-neutral-900 dark:border-neutral-30':'border-transparent text-neutral-500 dark:text-neutral-40'"><i class="las la-phone text-2xl"></i></button>
+                  <button @click="activeTab='tab-2'" class="border-b pb-1 font-medium" :class="activeTab=='tab-2' ? 'border-neutral-900 dark:border-neutral-30':'border-transparent text-neutral-500 dark:text-neutral-40'"><i class="lar la-heart text-2xl"></i></button>
+                  <button @click="activeTab='tab-3'" class="border-b pb-1 font-medium" :class="activeTab=='tab-3' ? 'border-neutral-900 dark:border-neutral-30':'border-transparent text-neutral-500 dark:text-neutral-40'"><i class="las la-headphones text-2xl"></i></button>
+                </div>
+
+                <div x-show="activeTab=='tab-1'" class="mt-6">
+                  <div class="rounded-2xl border border-neutral-30 bg-neutral-0 px-6 py-4 dark:border-neutral-500 dark:bg-neutral-904">
+                    <p>Item One</p>
+                  </div>
+                </div>
+                <div x-show="activeTab=='tab-2'" class="mt-6">
+                  <div class="rounded-2xl border border-neutral-30 bg-neutral-0 px-6 py-4 dark:border-neutral-500 dark:bg-neutral-904">
+                    <p>Item Two</p>
+                  </div>
+                </div>
+                <div x-show="activeTab=='tab-3'" class="mt-6">
+                  <div class="rounded-2xl border border-neutral-30 bg-neutral-0 px-6 py-4 dark:border-neutral-500 dark:bg-neutral-904">
+                    <p>Item Three</p>
+                  </div>
+                </div>
+              </di>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div x-data=&#x22;{activeTab:&#x27;tab-1&#x27;}&#x22;&#x3E;
+  &#x3C;div class=&#x22;flex gap-4 md:gap-6 xl:gap-8&#x22;&#x3E;
+    &#x3C;button @click=&#x22;activeTab=&#x27;tab-1&#x27;&#x22; class=&#x22;border-b pb-1 font-medium&#x22; :class=&#x22;activeTab==&#x27;tab-1&#x27; ? &#x27;border-neutral-900 dark:border-neutral-30&#x27;:&#x27;border-transparent text-neutral-500 dark:text-neutral-40&#x27;&#x22;&#x3E;&#x3C;i class=&#x22;las la-phone text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;&#x3C;/button&#x3E;
+    &#x3C;button @click=&#x22;activeTab=&#x27;tab-2&#x27;&#x22; class=&#x22;border-b pb-1 font-medium&#x22; :class=&#x22;activeTab==&#x27;tab-2&#x27; ? &#x27;border-neutral-900 dark:border-neutral-30&#x27;:&#x27;border-transparent text-neutral-500 dark:text-neutral-40&#x27;&#x22;&#x3E;&#x3C;i class=&#x22;lar la-heart text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;&#x3C;/button&#x3E;
+    &#x3C;button @click=&#x22;activeTab=&#x27;tab-3&#x27;&#x22; class=&#x22;border-b pb-1 font-medium&#x22; :class=&#x22;activeTab==&#x27;tab-3&#x27; ? &#x27;border-neutral-900 dark:border-neutral-30&#x27;:&#x27;border-transparent text-neutral-500 dark:text-neutral-40&#x27;&#x22;&#x3E;&#x3C;i class=&#x22;las la-headphones text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;&#x3C;/button&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;div x-show=&#x22;activeTab==&#x27;tab-1&#x27;&#x22; class=&#x22;mt-6&#x22;&#x3E;
+    &#x3C;div class=&#x22;rounded-2xl border border-neutral-30 bg-neutral-0 px-6 py-4 dark:border-neutral-500 dark:bg-neutral-904&#x22;&#x3E;
+      &#x3C;p&#x3E;Item One&#x3C;/p&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div x-show=&#x22;activeTab==&#x27;tab-2&#x27;&#x22; class=&#x22;mt-6&#x22;&#x3E;
+    &#x3C;div class=&#x22;rounded-2xl border border-neutral-30 bg-neutral-0 px-6 py-4 dark:border-neutral-500 dark:bg-neutral-904&#x22;&#x3E;
+      &#x3C;p&#x3E;Item Two&#x3C;/p&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div x-show=&#x22;activeTab==&#x27;tab-3&#x27;&#x22; class=&#x22;mt-6&#x22;&#x3E;
+    &#x3C;div class=&#x22;rounded-2xl border border-neutral-30 bg-neutral-0 px-6 py-4 dark:border-neutral-500 dark:bg-neutral-904&#x22;&#x3E;
+      &#x3C;p&#x3E;Item Three&#x3C;/p&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <script src="./assets/js/libs/sweetalert.min.js"></script>
+    <script src="./assets/js/libs/highlight.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

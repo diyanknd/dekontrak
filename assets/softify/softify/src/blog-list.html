@@ -1,0 +1,171 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 space-y-4 xxl:space-y-6">
+        <!-- Breadcrumb -->
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Blog List</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Blog</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>List</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Blog List -->
+
+        <div
+          x-data="{activeTab:'all', blogs:[{id:1,title:'Confessions of a Boot Addict...',status:'Published',img:'./assets/images/blog/blog-9.png',writerImg:'./assets/images/avatar/avatar-1.png',date:'24/05/24'},{id:2,title:'How to Make Your Own Soap at Home',status:'Draft',img:'./assets/images/blog/blog-10.png',writerImg:'./assets/images/avatar/avatar-2.png',date:'25/05/24'},{id:3,title:'The Power of Positive Thinking',status:'Published',img:'./assets/images/blog/blog-11.png',writerImg:'./assets/images/avatar/avatar-3.png',date:'26/05/24'},{id:4,title:'A Journey Through the Ancient Cities of Greece',status:'Draft',img:'./assets/images/blog/blog-9.png',writerImg:'./assets/images/avatar/avatar-4.png',date:'27/05/24'},{id:5,title:'The Secret Garden of Painting',status:'Published',img:'./assets/images/blog/blog-10.png',writerImg:'./assets/images/avatar/avatar-5.png',date:'28/05/24'},{id:6,title:'Exploring the World of Fashion Design',status:'Draft',img:'./assets/images/blog/blog-11.png',writerImg:'./assets/images/avatar/avatar-6.png',date:'29/05/24'},{id:7,title:'The Art of Wood Carving',status:'Published',img:'./assets/images/blog/blog-9.png',writerImg:'./assets/images/avatar/avatar-7.png',date:'30/05/24'},{id:8,title:'Culinary Adventures in Exotic Lands',status:'Draft',img:'./assets/images/blog/blog-10.png',writerImg:'./assets/images/avatar/avatar-8.png',date:'31/05/24'},{id:9,title:'The Joy of Gardening',status:'Published',img:'./assets/images/blog/blog-11.png',writerImg:'./assets/images/avatar/avatar-9.png',date:'01/06/24'},{id:10,title:'Mastering the Craft of Pottery',status:'Draft',img:'./assets/images/blog/blog-9.png',writerImg:'./assets/images/avatar/avatar-1.png',date:'02/06/24'},{id:11,title:'The World of Wine Appreciation',status:'Published',img:'./assets/images/blog/blog-10.png',writerImg:'./assets/images/avatar/avatar-2.png',date:'03/06/24'},{id:12,title:'Exploring the Mysteries of Ancient Civilizations',status:'Draft',img:'./assets/images/blog/blog-11.png',writerImg:'./assets/images/avatar/avatar-3.png',date:'04/06/24'},{id:13,title:'The Art of Calligraphy',status:'Published',img:'./assets/images/blog/blog-9.png',writerImg:'./assets/images/avatar/avatar-4.png',date:'05/06/24'},{id:14,title:'Journeys in the Land of Music',status:'Draft',img:'./assets/images/blog/blog-10.png',writerImg:'./assets/images/avatar/avatar-5.png',date:'06/06/24'},{id:15,title:'The Secrets of Successful Entrepreneurship',status:'Published',img:'./assets/images/blog/blog-11.png',writerImg:'./assets/images/avatar/avatar-6.png',date:'07/06/24'},{id:16,title:'The World of Photography',status:'Draft',img:'./assets/images/blog/blog-9.png',writerImg:'./assets/images/avatar/avatar-7.png',date:'08/06/24'},{id:17,title:'Exploring the Realms of Fiction',status:'Published',img:'./assets/images/blog/blog-10.png',writerImg:'./assets/images/avatar/avatar-8.png',date:'09/06/24'},{id:18,title:'The Art of Jewelry Making',status:'Draft',img:'./assets/images/blog/blog-11.png',writerImg:'./assets/images/avatar/avatar-9.png',date:'10/06/24'},{id:19,title:'Adventures in the Great Outdoors',status:'Published',img:'./assets/images/blog/blog-9.png',writerImg:'./assets/images/avatar/avatar-1.png',date:'11/06/24'},{id:20,title:'The World of Fashion Illustration',status:'Draft',img:'./assets/images/blog/blog-10.png',writerImg:'./assets/images/avatar/avatar-2.png',date:'12/06/24'}], filteredBlog:[], filterBlog(status){
+          if(status =='all'){            
+           this.filteredBlog= this.blogs
+          } else{
+            this.filteredBlog= this.blogs.filter(blog => blog.status === status)
+          }         
+        }}"
+          x-init="filteredBlog=blogs"
+          class="white-box"
+        >
+          <div class="bb-dashed-n30 flex justify-between items-center">
+            <h4>Blog List</h4>
+            <a href="create-blog.html" class="btn-primary-outlined"><i class="las la-plus-circle text-xl"></i> New Post</a>
+          </div>
+          <div class="bb-dashed-n30 flex flex-wrap gap-4 justify-between items-center">
+            <div class="flex max-w-max flex-wrap gap-4 rounded-xl md:rounded-[40px] border border-neutral-30 p-3 dark:border-neutral-500">
+              <button @click="activeTab='all', filterBlog('all')" :class="activeTab=='all' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full capitalize px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">all</button>
+              <button @click="activeTab='Published', filterBlog('Published')" :class="activeTab=='Published' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full capitalize px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">Published</button>
+              <button @click="activeTab='Draft', filterBlog('Draft')" :class="activeTab=='Draft' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full capitalize px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">Draft</button>
+            </div>
+            <select name="sort" class="nc-select n20">
+              <option value="all">All</option>
+              <option value="new">New</option>
+              <option value="old">Old</option>
+            </select>
+          </div>
+          <div class="bb-dashed-n30 grid grid-cols-12 gap-4 xxl:gap-6">
+            <template x-for="{id, title, description, status,img,writerImg,date} in filteredBlog">
+              <div class="col-span-12 lg:col-span-6">
+                <div class="rounded-xl n20-box !p-2 4xl:!p-3 sm:gap-4 grid grid-cols-2 items-center">
+                  <div class="relative col-span-2 sm:col-span-1 h-full">
+                    <img :src="img" class="rounded-xl w-full h-full object-cover object-center" alt="" />
+                    <img :src="writerImg" width="48" class="rounded-full absolute top-3 right-3" alt="" />
+                    <span class="rounded-xl bg-error-300 text-neutral-0 text-sm px-4 xl:px-6 py-2 absolute bottom-3 left-3" x-text="date"></span>
+                  </div>
+                  <div class="flex flex-col justify-between max-sm:mt-4 col-span-2 sm:col-span-1">
+                    <div class="flex flex-col mb-3">
+                      <div class="flex justify-between items-center mb-5">
+                        <span x-show="status=='Published'" class="py-2 px-5 rounded-3xl text-xs text-success-300 bg-success-300/10 border border-neutral-30 dark:border-neutral-500">Published</span>
+                        <span x-show="status=='Draft'" class="py-2 px-5 rounded-3xl text-xs text-neutral-100 dark:text-neutral-50 bg-neutral-40 dark:bg-neutral-400 border border-neutral-30 dark:border-neutral-500">Draft</span>
+                        <button class="size-9 rounded-full border hover:bg-neutral-40 dark:hover:bg-neutral-600 duration-300 border-neutral-30 dark:border-neutral-500 f-center">
+                          <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                            <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                            <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                              <li>
+                                <a href="blog-details.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-eye text-xl"></i> View </a>
+                              </li>
+                              <li>
+                                <a href="edit-blog.html" class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-pen text-xl"></i> Edit </a>
+                              </li>
+                              <li>
+                                <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                              </li>
+                            </ul>
+                          </div>
+                        </button>
+                      </div>
+                      <a href="blog-single.html" class="mb-2 lg:mb-4 h4 leading-tight max-two-line" x-text="title"></a>
+                      <div class="flex gap-2 xxl:gap-3 4xl:gap-4 flex-wrap mb-4">
+                        <div class="flex items-center gap-2">
+                          <button><i class="las la-thumbs-up text-xl"></i></button>
+                          9.3k
+                        </div>
+                        <div class="flex items-center gap-2">
+                          <button><i class="las la-comment text-xl"></i></button>
+                          1.3k
+                        </div>
+                        <div class="flex items-center gap-2">
+                          <button><i class="las la-share-alt-square text-xl"></i></button>
+                          16.3k
+                        </div>
+                      </div>
+                      <a href="blog-single.html" class="flex items-center gap-2 text-primary-300 font-semibold">Read Blog <i class="las la-arrow-right text-lg"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
+          <!-- pagination -->
+          <div x-data="pagination" class="flex flex-wrap items-center justify-center gap-3">
+            <button
+              x-bind:disabled="currentPage === 1"
+              @click="changePage(currentPage - 1)"
+              class="btn-primary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-primary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-transparent disabled:hover:text-primary-200"
+            >
+              <i class="las la-angle-left text-xl"></i>
+            </button>
+
+            <template x-for="page in pageNumbers">
+              <button
+                x-text="page"
+                :class=" {'btn-primary-icon bg-primary-300 !text-neutral-0':page==currentPage, 'flex text-sm lg:text-base size-10 select-none border-primary-300 hover:bg-primary-300 items-center hover:text-neutral-0 justify-center text-primary-300 rounded-full border duration-300 font-semibold':page!='...', 'cursor-default':page=='...'}"
+                @click="changePage(page)"
+              ></button>
+            </template>
+            <button
+              x-bind:disabled="currentPage === totalPages"
+              @click="changePage(currentPage + 1)"
+              class="btn-primary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-primary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-transparent disabled:hover:text-primary-200"
+            >
+              <i class="las la-angle-right text-xl"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+  </body>
+</html>

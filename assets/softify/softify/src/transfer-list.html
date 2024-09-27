@@ -1,0 +1,232 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Transfer List</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Components</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Transfer List</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Transfer List -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div class="grid grid-cols-12 gap-4 lg:gap-6">
+            <div class="col-span-12 flex flex-col gap-6">
+              <div class="n20-box">
+                <h4 class="bb-dashed-n40">Transfer List One</h4>
+                <div
+                  x-data="{
+                list1: ['List Item 01', 'List Item 02', 'List Item 03', 'List Item 04', 'List Item 05'],
+                list2: ['List Item 06', 'List Item 07', 'List Item 08', 'List Item 09', 'List Item 10'],
+                selectedItems1: [],
+                selectedItems2: [],
+              }"
+                  class="checkboxes-container flex flex-wrap items-center gap-2 sm:gap-4 xxl:gap-6"
+                >
+                  <div class="flex max-h-[280px] h-full flex-col gap-4 overflow-y-auto rounded-xl border border-neutral-30 bg-neutral-0 py-2 dark:border-neutral-500 dark:bg-neutral-904 min-w-[230px] px-3 xxxl:py-5">
+                    <ul>
+                      <template x-for="item in list1">
+                        <li>
+                          <label :for="item" class="option block !justify-start px-3 py-3 duration-300 hover:bg-neutral-30 dark:hover:bg-neutral-903 md:px-5">
+                            <input type="checkbox" :id="item" aria-checked="true" x-model="selectedItems1" :value="item" />
+                            <span class="checkbox default"></span>
+                            <span x-text="item"></span>
+                          </label>
+                        </li>
+                      </template>
+                    </ul>
+                  </div>
+                  <div class="flex flex-col gap-3">
+                    <div @click="list2.push(...list1), list1=[]">
+                      <button
+                        :disabled="!list1.length"
+                        class="f-center rounded-lg duration-300 hover:bg-neutral-900 hover:text-neutral-0 disabled:hover:bg-transparent border border-neutral-900 dark:border-neutral-20 disabled:border-neutral-50 disabled:dark:border-neutral-300 size-8 md:size-10 disabled:text-neutral-50"
+                      >
+                        <i class="las la-angle-double-right text-lg"></i>
+                      </button>
+                    </div>
+                    <div @click="list2.push(...selectedItems1), list1 = list1.filter(item => !selectedItems1.includes(item)), selectedItems1 = []" class="">
+                      <button
+                        :disabled="!selectedItems1.length"
+                        class="f-center rounded-lg duration-300 hover:bg-neutral-900 hover:text-neutral-0 disabled:hover:bg-transparent border border-neutral-900 dark:border-neutral-20 disabled:border-neutral-50 disabled:dark:border-neutral-300 size-8 md:size-10 disabled:text-neutral-50"
+                      >
+                        <i class="las la-angle-right text-lg"></i>
+                      </button>
+                    </div>
+                    <div @click="list1.push(...selectedItems2), list2 = list2.filter(item => !selectedItems2.includes(item)), selectedItems2 = []">
+                      <button
+                        :disabled="!selectedItems2.length"
+                        class="f-center rounded-lg duration-300 hover:bg-neutral-900 hover:text-neutral-0 disabled:hover:bg-transparent border border-neutral-900 dark:border-neutral-20 disabled:border-neutral-50 disabled:dark:border-neutral-300 size-8 md:size-10 disabled:text-neutral-50"
+                      >
+                        <i class="las la-angle-left text-lg"></i>
+                      </button>
+                    </div>
+                    <div @click="list1.push(...list2), list2=[]">
+                      <button
+                        :disabled="!list2.length"
+                        class="f-center rounded-lg duration-300 hover:bg-neutral-900 hover:text-neutral-0 disabled:hover:bg-transparent border border-neutral-900 dark:border-neutral-20 disabled:border-neutral-50 disabled:dark:border-neutral-300 size-8 md:size-10 disabled:text-neutral-50"
+                      >
+                        <i class="las la-angle-double-left text-lg"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="flex max-h-[280px] h-full flex-col gap-4 overflow-y-auto rounded-xl border border-neutral-30 bg-neutral-0 py-2 dark:border-neutral-500 dark:bg-neutral-904 min-w-[230px] px-3 xxxl:py-5">
+                    <ul>
+                      <template x-for="item in list2">
+                        <li>
+                          <label :for="item" class="option block !justify-start px-3 py-3 duration-300 hover:bg-neutral-30 dark:hover:bg-neutral-903 md:px-5">
+                            <input type="checkbox" :id="item" x-model="selectedItems2" :value="item" aria-checked="true" />
+                            <span class="checkbox default"></span>
+                            <span x-text="item"></span>
+                          </label>
+                        </li>
+                      </template>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="n20-box">
+                <h4 class="bb-dashed-n40">Transfer List Two</h4>
+                <div
+                  x-data="{
+                list1: ['List Item 11', 'List Item 12', 'List Item 13', 'List Item 14', 'List Item 15'],
+                list2: ['List Item 16', 'List Item 17', 'List Item 18', 'List Item 19', 'List Item 20'],
+                selectedItems1: [],
+                selectedItems2: [],
+              }"
+                  class="flex flex-wrap items-center gap-4 xxl:gap-6"
+                >
+                  <div class="flex-col gap-4 rounded-xl border border-neutral-30 bg-neutral-0 py-2 dark:border-neutral-500 dark:bg-neutral-904 min-w-[230px] xxxl:py-5 px-3">
+                    <div class="flex items-center gap-3 border-b border-neutral-30 px-5 pb-4 dark:border-neutral-600">
+                      <label for="checkbox22" class="option">
+                        <input @change="selectedItems1.length?selectedItems1=[]:selectedItems1.push(...list1)" type="checkbox" id="checkbox22" aria-checked="false" :checked="selectedItems1.length==list1.length" />
+                        <span class="checkbox default"></span>
+                      </label>
+                      <div>
+                        <p class="l-text font-medium">Choices</p>
+                        <span class="s-text"> <span x-text="selectedItems1.length"></span> / <span x-text="list1.length"></span> Selected </span>
+                      </div>
+                    </div>
+                    <ul class="max-h-[260px] h-full overflow-y-auto">
+                      <template x-for="item in list1">
+                        <li>
+                          <label :for="item" class="option block !justify-start px-3 py-3 duration-300 hover:bg-neutral-30 dark:hover:bg-neutral-903 md:px-5">
+                            <input type="checkbox" :id="item" aria-checked="true" x-model="selectedItems1" :value="item" />
+                            <span class="checkbox default"></span>
+                            <span x-text="item"></span>
+                          </label>
+                        </li>
+                      </template>
+                    </ul>
+                  </div>
+                  <div class="flex flex-col gap-3">
+                    <div @click="list2.push(...list1), list1=[]">
+                      <button
+                        :disabled="!list1.length"
+                        class="f-center rounded-lg duration-300 hover:bg-neutral-900 hover:text-neutral-0 disabled:hover:bg-transparent border border-neutral-900 dark:border-neutral-20 disabled:border-neutral-50 disabled:dark:border-neutral-300 size-8 md:size-10 disabled:text-neutral-50"
+                      >
+                        <i class="las la-angle-double-right text-lg"></i>
+                      </button>
+                    </div>
+                    <div @click="list2.push(...selectedItems1), list1 = list1.filter(item => !selectedItems1.includes(item)), selectedItems1 = []">
+                      <button
+                        :disabled="!selectedItems1.length"
+                        class="f-center rounded-lg duration-300 hover:bg-neutral-900 hover:text-neutral-0 disabled:hover:bg-transparent border border-neutral-900 dark:border-neutral-20 disabled:border-neutral-50 disabled:dark:border-neutral-300 size-8 md:size-10 disabled:text-neutral-50"
+                      >
+                        <i class="las la-angle-right text-lg"></i>
+                      </button>
+                    </div>
+                    <div @click="list1.push(...selectedItems2), list2 = list2.filter(item => !selectedItems2.includes(item)), selectedItems2 = []">
+                      <button
+                        :disabled="!selectedItems2.length"
+                        class="f-center rounded-lg duration-300 hover:bg-neutral-900 hover:text-neutral-0 disabled:hover:bg-transparent border border-neutral-900 dark:border-neutral-20 disabled:border-neutral-50 disabled:dark:border-neutral-300 size-8 md:size-10 disabled:text-neutral-50"
+                      >
+                        <i class="las la-angle-left text-lg"></i>
+                      </button>
+                    </div>
+                    <div @click="list1.push(...list2), list2=[]">
+                      <button
+                        :disabled="!list2.length"
+                        class="f-center rounded-lg duration-300 hover:bg-neutral-900 hover:text-neutral-0 disabled:hover:bg-transparent border border-neutral-900 dark:border-neutral-20 disabled:border-neutral-50 disabled:dark:border-neutral-300 size-8 md:size-10 disabled:text-neutral-50"
+                      >
+                        <i class="las la-angle-double-left text-lg"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-4 rounded-xl border border-neutral-30 bg-neutral-0 py-2 dark:border-neutral-500 dark:bg-neutral-904 min-w-[230px] px-3 xxxl:py-5">
+                    <div class="flex items-center gap-3 border-b border-neutral-30 px-5 pb-4 dark:border-neutral-600">
+                      <label for="checkbox23" class="option">
+                        <input @change="selectedItems2.length?selectedItems1=[]:selectedItems2.push(...list2)" type="checkbox" id="checkbox23" aria-checked="false" :checked="selectedItems2.length==list2.length" />
+                        <span class="checkbox default"></span>
+                      </label>
+                      <div>
+                        <p class="l-text font-medium">Chosen</p>
+                        <span class="s-text"> <span x-text="selectedItems2.length"></span> / <span x-text="list2.length"></span> Selected </span>
+                      </div>
+                    </div>
+                    <ul class="max-h-[260px] h-full overflow-y-auto">
+                      <template x-for="item in list2">
+                        <li>
+                          <label :for="item" class="option block !justify-start px-3 py-3 duration-300 hover:bg-neutral-30 dark:hover:bg-neutral-903 md:px-5">
+                            <input type="checkbox" :id="item" x-model="selectedItems2" :value="item" aria-checked="true" />
+                            <span class="checkbox default"></span>
+                            <span x-text="item"></span>
+                          </label>
+                        </li>
+                      </template>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+    <script src="./assets/js/libs/popper.js"></script>
+    <script src="./assets/js/libs/tippy.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

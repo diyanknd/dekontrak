@@ -1,0 +1,1351 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/swiper.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6">
+        <div x-data="chart" class="grid grid-cols-12 gap-4 xxl:gap-6">
+          <!-- statistics -->
+          <div class="col-span-12 !p-2 white-box xxl:!p-6 flex justify-center max-xxxl:flex-wrap gap-4 4xl:gap-6">
+            <div dir="ltr" class="bg-neutral-20 shrink dark:bg-neutral-903 w-full max-w-[450px] rounded-xl relative">
+              <div class="swiper cardSlider">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <div class="px-3 py-4 md:p-4 xl:p-6 xxl:p-8 relative z-[1] min-h-[280px]">
+                      <img src="./assets/images/visa-bg.png" class="absolute top-0 right-20 opacity-5 dark:opacity-10" alt="" />
+                      <div class="flex justify-between items-start mb-5 xl:mb-8">
+                        <div>
+                          <p class="m-text dark:text-neutral-10 font-medium mb-4">Current Balance</p>
+                          <h3 class="mb-4">$80,700.00</h3>
+                        </div>
+                        <button class="size-10 xl:size-[52px] rounded-full bg-[#9C6800] text-neutral-0 f-center">
+                          <i class="las la-plus text-2xl xl:text-3xl"></i>
+                        </button>
+                      </div>
+                      <div class="flex gap-2 mb-5 xl:mb-8">
+                        <img src="./assets/images/visa-m.png" alt="" />
+                        <p>•••• •••• •••• 8854</p>
+                      </div>
+                      <div class="flex gap-5">
+                        <div>
+                          <p class="s-text mb-3">Card Holder</p>
+                          <p class="xl-text font-medium">Felecia Brown</p>
+                        </div>
+                        <div>
+                          <p class="s-text mb-3">Valid Dates</p>
+                          <p class="xl-text font-medium">12/24</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="px-3 py-4 md:p-4 xl:p-6 xxl:p-8 relative z-[1] min-h-[280px]">
+                      <img src="./assets/images/visa-bg.png" class="absolute top-0 right-20 opacity-5 dark:opacity-10" alt="" />
+                      <div class="flex justify-between items-start mb-5 xl:mb-8">
+                        <div>
+                          <p class="m-text dark:text-neutral-10 font-medium mb-4">Current Balance</p>
+                          <h3 class="mb-4">$80,700.00</h3>
+                        </div>
+                        <button class="size-10 xl:size-[52px] rounded-full bg-[#9C6800] text-neutral-0 f-center">
+                          <i class="las la-plus text-3xl"></i>
+                        </button>
+                      </div>
+                      <div class="flex gap-2 mb-5 xl:mb-8">
+                        <img src="./assets/images/visa-m.png" alt="" />
+                        <p>•••• •••• •••• 8854</p>
+                      </div>
+                      <div class="flex gap-5">
+                        <div>
+                          <p class="s-text mb-3">Card Holder</p>
+                          <p class="xl-text font-medium">Felecia Brown</p>
+                        </div>
+                        <div>
+                          <p class="s-text mb-3">Valid Dates</p>
+                          <p class="xl-text font-medium">12/24</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="px-3 py-4 md:p-4 xl:p-6 xxl:p-8 relative z-[1] min-h-[280px]">
+                      <img src="./assets/images/visa-bg.png" class="absolute top-0 right-20 opacity-5 dark:opacity-10" alt="" />
+                      <div class="flex justify-between items-start mb-5 xl:mb-8">
+                        <div>
+                          <p class="m-text dark:text-neutral-10 font-medium mb-4">Current Balance</p>
+                          <h3 class="mb-4">$80,700.00</h3>
+                        </div>
+                        <button class="size-10 xl:size-[52px] rounded-full bg-[#9C6800] text-neutral-0 f-center">
+                          <i class="las la-plus text-3xl"></i>
+                        </button>
+                      </div>
+                      <div class="flex gap-2 mb-5 xl:mb-8">
+                        <img src="./assets/images/visa-m.png" alt="" />
+                        <p>•••• •••• •••• 8854</p>
+                      </div>
+                      <div class="flex gap-5">
+                        <div>
+                          <p class="s-text mb-3">Card Holder</p>
+                          <p class="xl-text font-medium">Felecia Brown</p>
+                        </div>
+                        <div>
+                          <p class="s-text mb-3">Valid Dates</p>
+                          <p class="xl-text font-medium">12/24</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="px-3 py-4 md:p-4 xl:p-6 xxl:p-8 relative z-[1] min-h-[280px]">
+                      <img src="./assets/images/visa-bg.png" class="absolute top-0 right-20 opacity-5 dark:opacity-10" alt="" />
+                      <div class="flex justify-between items-start mb-5 xl:mb-8">
+                        <div>
+                          <p class="m-text dark:text-neutral-10 font-medium mb-4">Current Balance</p>
+                          <h3 class="mb-4">$80,700.00</h3>
+                        </div>
+                        <button class="size-10 xl:size-[52px] rounded-full bg-[#9C6800] text-neutral-0 f-center">
+                          <i class="las la-plus text-3xl"></i>
+                        </button>
+                      </div>
+                      <div class="flex gap-2 mb-5 xl:mb-8">
+                        <img src="./assets/images/visa-m.png" alt="" />
+                        <p>•••• •••• •••• 8854</p>
+                      </div>
+                      <div class="flex gap-5">
+                        <div>
+                          <p class="s-text mb-3">Card Holder</p>
+                          <p class="xl-text font-medium">Felecia Brown</p>
+                        </div>
+                        <div>
+                          <p class="s-text mb-3">Valid Dates</p>
+                          <p class="xl-text font-medium">12/24</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="px-3 py-4 md:p-4 xl:p-6 xxl:p-8 relative z-[1] min-h-[280px]">
+                      <img src="./assets/images/visa-bg.png" class="absolute top-0 right-20 opacity-5 dark:opacity-10" alt="" />
+                      <div class="flex justify-between items-start mb-5 xl:mb-8">
+                        <div>
+                          <p class="m-text dark:text-neutral-10 font-medium mb-4">Current Balance</p>
+                          <h3 class="mb-4">$80,700.00</h3>
+                        </div>
+                        <button class="size-10 xl:size-[52px] rounded-full bg-[#9C6800] text-neutral-0 f-center">
+                          <i class="las la-plus text-3xl"></i>
+                        </button>
+                      </div>
+                      <div class="flex gap-2 mb-5 xl:mb-8">
+                        <img src="./assets/images/visa-m.png" alt="" />
+                        <p>•••• •••• •••• 8854</p>
+                      </div>
+                      <div class="flex gap-5">
+                        <div>
+                          <p class="s-text mb-3">Card Holder</p>
+                          <p class="xl-text font-medium">Felecia Brown</p>
+                        </div>
+                        <div>
+                          <p class="s-text mb-3">Valid Dates</p>
+                          <p class="xl-text font-medium">12/24</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-pagination"></div>
+            </div>
+            <div class="rounded-xl shrink w-full max-4xl:max-w-[230px] max-sm:max-w-full max-md:max-w-1/2 bg-primary-300/30 p-3 md:p-4 xl:p-6 pb-0 md:pb-0 lg:pb-0 xl:pb-0 border border-neutral-30 dark:border-neutral-500">
+              <span class="size-12 f-center xxl:size-[72px] rounded-full bg-primary-300 text-neutral-0 mb-6">
+                <i class="las la-plane-departure text-3xl xxl:text-5xl"></i>
+              </span>
+              <h3 class="mb-4">714.52k</h3>
+              <p class="mb-4">Total Booking</p>
+              <div x-ref="bookingOne"></div>
+            </div>
+            <div class="rounded-xl shrink w-full max-4xl:max-w-[230px] max-sm:max-w-full max-md:max-w-1/2 bg-secondary-300/30 p-3 md:p-4 xl:p-6 pb-0 md:pb-0 lg:pb-0 xl:pb-0 border border-neutral-30 dark:border-neutral-500">
+              <span class="size-12 f-center xxl:size-[72px] rounded-full bg-secondary-300 text-neutral-0 mb-6">
+                <i class="las la-ticket-alt text-3xl xxl:text-5xl"></i>
+              </span>
+              <h3 class="mb-4">311k</h3>
+              <p class="mb-4">Sold</p>
+              <div x-ref="bookingTwo"></div>
+            </div>
+            <div class="rounded-xl shrink w-full max-4xl:max-w-[230px] max-sm:max-w-full max-md:max-w-1/2 bg-warning-300/30 p-3 md:p-4 xl:p-6 pb-0 md:pb-0 lg:pb-0 xl:pb-0 border border-neutral-30 dark:border-neutral-500">
+              <span class="size-12 f-center xxl:size-[72px] rounded-full bg-warning-300 text-neutral-0 mb-6">
+                <i class="las la-plane-departure text-3xl xxl:text-5xl"></i>
+              </span>
+              <h3 class="mb-4">214.32k</h3>
+              <p class="mb-4">Total Pending</p>
+              <div x-ref="bookingThree"></div>
+            </div>
+            <div class="rounded-xl shrink w-full max-4xl:max-w-[230px] max-sm:max-w-full max-md:max-w-1/2 bg-error-300/30 p-3 md:p-4 xl:p-6 pb-0 md:pb-0 lg:pb-0 xl:pb-0 border border-neutral-30 dark:border-neutral-500">
+              <span class="size-12 f-center xxl:size-[72px] rounded-full bg-error-300 text-neutral-0 mb-6">
+                <i class="las la-bug text-3xl xxl:text-5xl"></i>
+              </span>
+              <h3 class="mb-4">124k</h3>
+              <p class="mb-4">Cancelled</p>
+              <div x-ref="bookingFour"></div>
+            </div>
+          </div>
+
+          <!-- statictics -->
+          <div class="col-span-12 lg:col-span-8 white-box overflow-hidden">
+            <div class="bb-dashed-n30 flex flex-col sm:flex-row justify-center sm:justify-between gap-4 items-center">
+              <div>
+                <h4>Statictics</h4>
+                <p class="m-text mt-2">(+43%) than last year</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <span>Sort By : </span>
+                <select name="sort" class="nc-select n20">
+                  <option value="day">Last 15 Days</option>
+                  <option value="week">Last 1 Month</option>
+                  <option value="year">Last 6 Month</option>
+                </select>
+              </div>
+            </div>
+            <div x-ref="bookingRef"></div>
+          </div>
+
+          <!-- Tours available -->
+          <div class="col-span-12 lg:col-span-4 white-box overflow-hidden">
+            <h4 class="bb-dashed-n30">Tours Available</h4>
+            <div x-ref="toursAvailable"></div>
+            <div class="flex flex-col gap-5 border-t border-dashed border-neutral-30 dark:border-neutral-500 pt-4">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                  <div class="size-3 rounded-full bg-primary-300"></div>
+                  <p class="l-text">Sold out</p>
+                </div>
+                <p class="l-text font-medium">120 Tours</p>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                  <div class="size-3 rounded-full bg-primary-300/20"></div>
+                  <p class="l-text">Available</p>
+                </div>
+                <p class="l-text font-medium">66 Tours</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- stats -->
+          <div class="col-span-12 lg:col-span-8 4xl:col-span-6 grid grid-cols-2 gap-4 xxl:gap-6">
+            <div class="col-span-2 md:col-span-1 white-box xl:py-6">
+              <p class="m-text font-medium bb-dashed-n30">Total Income</p>
+              <div class="flex justify-between items-center">
+                <div>
+                  <h4 class="mb-4">$981.56</h4>
+                  <p class="text-primary-300"><i class="las la-arrow-up"></i> 88.2 AVG</p>
+                </div>
+                <div class="progress-chart"></div>
+              </div>
+            </div>
+            <div class="col-span-2 md:col-span-1 white-box xl:py-6">
+              <p class="m-text font-medium bb-dashed-n30">Pending for Payment</p>
+              <div class="flex justify-between items-center">
+                <div>
+                  <h4 class="mb-4">$251.56</h4>
+                  <p class="text-warning-300"><i class="las la-arrow-up"></i> 88.2 AVG</p>
+                </div>
+                <div class="progress-chart"></div>
+              </div>
+            </div>
+            <div class="col-span-2 md:col-span-1 white-box xl:py-6">
+              <p class="m-text font-medium bb-dashed-n30">Total Sold</p>
+              <div class="flex justify-between items-center">
+                <div>
+                  <h4 class="mb-4">$981.56</h4>
+                  <p class="text-primary-300"><i class="las la-arrow-up"></i> 88.2 AVG</p>
+                </div>
+                <div class="progress-chart"></div>
+              </div>
+            </div>
+            <div class="col-span-2 md:col-span-1 white-box xl:py-6">
+              <p class="m-text font-medium bb-dashed-n30">Total Cancelled</p>
+              <div class="flex justify-between items-center">
+                <div>
+                  <h4 class="mb-4">$981.56</h4>
+                  <p class="text-error-300"><i class="las la-arrow-up"></i> 88.2 AVG</p>
+                </div>
+                <div class="progress-chart"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- booked overview -->
+          <div class="col-span-12 lg:col-span-4 4xl:col-span-6 white-box">
+            <h4 class="border-b border-dashed border-neutral-40 dark:border-neutral-400 mb-5 pb-5">Booked Overview</h4>
+            <div class="flex flex-col gap-4 lg:gap-6">
+              <div>
+                <div class="flex justify-between items-center mb-4">
+                  <p class="m-text font-medium">Total Booking</p>
+                  <span>654.25k</span>
+                </div>
+                <div x-data="{shown:false}" x-intersect="shown = true" class="h-1.5 w-full rounded-xl bg-success-300/10">
+                  <div :class="shown?'w-[20%]':'w-0'" class="h-1.5 duration-[2s] rounded-xl bg-success-300"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-4">
+                  <p class="m-text font-medium">Total Sold</p>
+                  <span>99.45k</span>
+                </div>
+                <div x-data="{shown:false}" x-intersect="shown = true" class="h-1.5 w-full rounded-xl bg-secondary-300/10">
+                  <div :class="shown?'w-[60%]':'w-0'" class="h-1.5 duration-[2s] rounded-xl bg-secondary-300"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-4">
+                  <p class="m-text font-medium">Total Pending</p>
+                  <span>55.65k</span>
+                </div>
+                <div x-data="{shown:false}" x-intersect="shown = true" class="h-1.5 w-full rounded-xl bg-warning-300/10">
+                  <div :class="shown?'w-[80%]':'w-0'" class="h-1.5 duration-[2s] rounded-xl bg-warning-300"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-4">
+                  <p class="m-text font-medium">Total Cancelled</p>
+                  <span>55.65k</span>
+                </div>
+                <div x-data="{shown:false}" x-intersect="shown = true" class="h-1.5 w-full rounded-xl bg-error-300/10">
+                  <div :class="shown?'w-[80%]':'w-0'" class="h-1.5 duration-[2s] rounded-xl bg-error-300"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Newest booking -->
+          <div class="col-span-12 white-box">
+            <div class="flex justify-between items-center bb-dashed-n30">
+              <div>
+                <h4 class="mb-2">Newest Booking</h4>
+                <p class="m-text">12 Booking</p>
+              </div>
+              <div class="flex justify-center gap-4">
+                <button class="booking-prev rtl:rotate-180 size-9 xxl:size-12 border rounded-full border-primary-300 text-primary-300 hover:bg-primary-300 hover:text-neutral-0 f-center duration-300">
+                  <i class="las la-angle-left text-xl"></i>
+                </button>
+                <button class="booking-next rtl:rotate-180 size-9 xxl:size-12 border rounded-full border-primary-300 text-primary-300 hover:bg-primary-300 hover:text-neutral-0 f-center duration-300">
+                  <i class="las la-angle-right text-xl"></i>
+                </button>
+              </div>
+            </div>
+            <div dir="ltr" class="swiper bookingSlider">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <div class="n20-box !p-2 xxl:!p-3">
+                    <img src="./assets/images/booking-1.png" class="rounded-xl w-full mb-5 xxl:mb-7" alt="" />
+                    <div class="sm:px-2 xl:px-4 pb-3">
+                      <div class="flex gap-2 xl:gap-4 items-center bb-dashed-n40">
+                        <span class="flex items-center gap-2">
+                          <i class="las la-clock text-lg"></i>
+                          <span class="text-xs md:text-sm">3 days 2 nights</span>
+                        </span>
+                        <span class="flex items-center gap-2">
+                          <i class="las la-user-friends text-lg"></i>
+                          <span class="text-xs md:text-sm">3-5 Guests</span>
+                        </span>
+                      </div>
+                      <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-2 md:gap-4">
+                          <img src="./assets/images/avatar/avatar-big-1.png" class="rounded-full size-10 lg:size-14" alt="" />
+                          <div>
+                            <p class="l-text font-medium mb-2">Devon Lane</p>
+                            <p class="s-text">28 Feb 2024 5:35 AM</p>
+                          </div>
+                        </div>
+                        <span class="btn-error rounded-xl">$52.64</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="n20-box !p-2 xxl:!p-3">
+                    <img src="./assets/images/booking-2.png" class="rounded-xl w-full mb-5 xxl:mb-7" alt="" />
+                    <div class="sm:px-2 xl:px-4 pb-3">
+                      <div class="flex gap-2 xl:gap-4 items-center bb-dashed-n40">
+                        <span class="flex items-center gap-2">
+                          <i class="las la-clock text-lg"></i>
+                          <span class="text-xs md:text-sm">3 days 2 nights</span>
+                        </span>
+                        <span class="flex items-center gap-2">
+                          <i class="las la-user-friends text-lg"></i>
+                          <span class="text-xs md:text-sm">3-5 Guests</span>
+                        </span>
+                      </div>
+                      <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-2 md:gap-4">
+                          <img src="./assets/images/avatar/avatar-big-2.png" class="rounded-full size-10 lg:size-14" alt="" />
+                          <div>
+                            <p class="l-text font-medium mb-2">Devon Lane</p>
+                            <p class="s-text">28 Feb 2024 5:35 AM</p>
+                          </div>
+                        </div>
+                        <span class="btn-error rounded-xl">$52.64</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="n20-box !p-2 xxl:!p-3">
+                    <img src="./assets/images/booking-3.png" class="rounded-xl w-full mb-5 xxl:mb-7" alt="" />
+                    <div class="sm:px-2 xl:px-4 pb-3">
+                      <div class="flex gap-2 xl:gap-4 items-center bb-dashed-n40">
+                        <span class="flex items-center gap-2">
+                          <i class="las la-clock text-lg"></i>
+                          <span class="text-xs md:text-sm">3 days 2 nights</span>
+                        </span>
+                        <span class="flex items-center gap-2">
+                          <i class="las la-user-friends text-lg"></i>
+                          <span class="text-xs md:text-sm">3-5 Guests</span>
+                        </span>
+                      </div>
+                      <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-2 md:gap-4">
+                          <img src="./assets/images/avatar/avatar-big-3.png" class="rounded-full size-10 lg:size-14" alt="" />
+                          <div>
+                            <p class="l-text font-medium mb-2">Devon Lane</p>
+                            <p class="s-text">28 Feb 2024 5:35 AM</p>
+                          </div>
+                        </div>
+                        <span class="btn-error rounded-xl">$52.64</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="n20-box !p-2 xxl:!p-3">
+                    <img src="./assets/images/booking-1.png" class="rounded-xl w-full mb-5 xxl:mb-7" alt="" />
+                    <div class="sm:px-2 xl:px-4 pb-3">
+                      <div class="flex gap-2 xl:gap-4 items-center bb-dashed-n40">
+                        <span class="flex items-center gap-2">
+                          <i class="las la-clock text-lg"></i>
+                          <span class="text-xs md:text-sm">3 days 2 nights</span>
+                        </span>
+                        <span class="flex items-center gap-2">
+                          <i class="las la-user-friends text-lg"></i>
+                          <span class="text-xs md:text-sm">3-5 Guests</span>
+                        </span>
+                      </div>
+                      <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-2 md:gap-4">
+                          <img src="./assets/images/avatar/avatar-big-1.png" class="rounded-full size-10 lg:size-14" alt="" />
+                          <div>
+                            <p class="l-text font-medium mb-2">Devon Lane</p>
+                            <p class="s-text">28 Feb 2024 5:35 AM</p>
+                          </div>
+                        </div>
+                        <span class="btn-error rounded-xl">$52.64</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="n20-box !p-2 xxl:!p-3">
+                    <img src="./assets/images/booking-2.png" class="rounded-xl w-full mb-5 xxl:mb-7" alt="" />
+                    <div class="sm:px-2 xl:px-4 pb-3">
+                      <div class="flex gap-2 xl:gap-4 items-center bb-dashed-n40">
+                        <span class="flex items-center gap-2">
+                          <i class="las la-clock text-lg"></i>
+                          <span class="text-xs md:text-sm">3 days 2 nights</span>
+                        </span>
+                        <span class="flex items-center gap-2">
+                          <i class="las la-user-friends text-lg"></i>
+                          <span class="text-xs md:text-sm">3-5 Guests</span>
+                        </span>
+                      </div>
+                      <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-2 md:gap-4">
+                          <img src="./assets/images/avatar/avatar-big-2.png" class="rounded-full size-10 lg:size-14" alt="" />
+                          <div>
+                            <p class="l-text font-medium mb-2">Devon Lane</p>
+                            <p class="s-text">28 Feb 2024 5:35 AM</p>
+                          </div>
+                        </div>
+                        <span class="btn-error rounded-xl">$52.64</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="n20-box !p-2 xxl:!p-3">
+                    <img src="./assets/images/booking-3.png" class="rounded-xl w-full mb-5 xxl:mb-7" alt="" />
+                    <div class="sm:px-2 xl:px-4 pb-3">
+                      <div class="flex gap-2 xl:gap-4 items-center bb-dashed-n40">
+                        <span class="flex items-center gap-2">
+                          <i class="las la-clock text-lg"></i>
+                          <span class="text-xs md:text-sm">3 days 2 nights</span>
+                        </span>
+                        <span class="flex items-center gap-2">
+                          <i class="las la-user-friends text-lg"></i>
+                          <span class="text-xs md:text-sm">3-5 Guests</span>
+                        </span>
+                      </div>
+                      <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-2 md:gap-4">
+                          <img src="./assets/images/avatar/avatar-big-3.png" class="rounded-full size-10 lg:size-14" alt="" />
+                          <div>
+                            <p class="l-text font-medium mb-2">Devon Lane</p>
+                            <p class="s-text">28 Feb 2024 5:35 AM</p>
+                          </div>
+                        </div>
+                        <span class="btn-error rounded-xl">$52.64</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="booking-pagination xxl:mt-8"></div>
+          </div>
+
+          <!-- Booking Details -->
+          <div class="col-span-12 xxl:col-span-8">
+            <div class="white-box">
+              <div class="bb-dashed-n30 flex flex-col sm:flex-row justify-center sm:justify-between gap-4 items-center">
+                <h4>Booking Details</h4>
+                <div class="flex items-center gap-3">
+                  <span>Sort By : </span>
+                  <select name="sort" class="nc-select n20">
+                    <option value="day">Last 15 Days</option>
+                    <option value="week">Last 1 Month</option>
+                    <option value="year">Last 6 Month</option>
+                  </select>
+                </div>
+              </div>
+              <div x-data="{dense: false}" class="checkboxes-container overflow-x-auto">
+                <table class="w-full whitespace-nowrap">
+                  <thead class="text-left">
+                    <tr class="bg-neutral-20 dark:bg-neutral-903">
+                      <th class="px-6 duration-300" :class="dense? 'py-2': 'py-3 lg:py-5'">Destination</th>
+                      <th class="px-6 duration-300" :class="dense? 'py-2': 'py-3 lg:py-5'">Customer</th>
+                      <th class="px-6 duration-300" :class="dense? 'py-2': 'py-3 lg:py-5'">Check In</th>
+                      <th class="px-6 duration-300" :class="dense? 'py-2': 'py-3 lg:py-5'">Check Out</th>
+                      <th class="px-6 duration-300" :class="dense? 'py-2': 'py-3 lg:py-5'">Status</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                      <td class="px-6 min-w-[250px]" :class="dense? 'py-1.5': 'py-3'">
+                        <div class="flex items-center gap-4">
+                          <img src="./assets/images/booking-1.png" class="rounded" width="60" alt="" />
+                          <div>
+                            <p class="m-text font-medium mb-1">Fernsehturm</p>
+                            <span class="text-xs">$8.99</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <div>
+                          <p class="m-text font-medium mb-1">Theresa Webb</p>
+                          <span class="text-xs">(505) 555-0125</span>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <div>
+                          <p class="m-text font-medium mb-1">03 Mar 2024</p>
+                          <span class="text-xs">9:29 AM</span>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <div>
+                          <p class="m-text font-medium mb-1">03 Mar 2024</p>
+                          <span class="text-xs">9:29 AM</span>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <span class="py-2 px-5 rounded-3xl text-xs text-primary-300 bg-primary-50 border border-neutral-30 dark:border-neutral-500">Paid</span>
+                      </td>
+                      <td>
+                        <include-verti-option />
+                      </td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                      <td class="px-6 min-w-[250px]" :class="dense? 'py-1.5': 'py-3'">
+                        <div class="flex items-center gap-4">
+                          <img src="./assets/images/booking-2.png" class="rounded" width="60" alt="" />
+                          <div>
+                            <p class="m-text font-medium mb-1">Spreebogen</p>
+                            <span class="text-xs">$8.99</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <div>
+                          <p class="m-text font-medium mb-1">Savannah Nguyen</p>
+                          <span class="text-xs">(505) 555-0125</span>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <div>
+                          <p class="m-text font-medium mb-1">03 Mar 2024</p>
+                          <span class="text-xs">9:29 AM</span>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <div>
+                          <p class="m-text font-medium mb-1">03 Mar 2024</p>
+                          <span class="text-xs">9:29 AM</span>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <span class="py-2 px-5 rounded-3xl text-xs text-primary-300 bg-primary-50 border border-neutral-30 dark:border-neutral-500">Paid</span>
+                      </td>
+                      <td>
+                        <include-verti-option />
+                      </td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                      <td class="px-6 min-w-[250px]" :class="dense? 'py-1.5': 'py-3'">
+                        <div class="flex items-center gap-4">
+                          <img src="./assets/images/booking-3.png" class="rounded" width="60" alt="" />
+                          <div>
+                            <p class="m-text font-medium mb-1">Lessinghaus</p>
+                            <span class="text-xs">$8.99</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <div>
+                          <p class="m-text font-medium mb-1">Devon Lane</p>
+                          <span class="text-xs">(505) 555-0125</span>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <div>
+                          <p class="m-text font-medium mb-1">03 Mar 2024</p>
+                          <span class="text-xs">9:29 AM</span>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <div>
+                          <p class="m-text font-medium mb-1">03 Mar 2024</p>
+                          <span class="text-xs">9:29 AM</span>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <span class="py-2 px-5 rounded-3xl text-xs text-primary-300 bg-primary-50 border border-neutral-30 dark:border-neutral-500">Paid</span>
+                      </td>
+                      <td>
+                        <include-verti-option />
+                      </td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                      <td class="px-6 min-w-[250px]" :class="dense? 'py-1.5': 'py-3'">
+                        <div class="flex items-center gap-4">
+                          <img src="./assets/images/booking-1.png" class="rounded" width="60" alt="" />
+                          <div>
+                            <p class="m-text font-medium mb-1">Innenministerium</p>
+                            <span class="text-xs">$8.99</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <div>
+                          <p class="m-text font-medium mb-1">Courtney Henry</p>
+                          <span class="text-xs">(505) 555-0125</span>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <div>
+                          <p class="m-text font-medium mb-1">03 Mar 2024</p>
+                          <span class="text-xs">9:29 AM</span>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <div>
+                          <p class="m-text font-medium mb-1">03 Mar 2024</p>
+                          <span class="text-xs">9:29 AM</span>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <span class="py-2 px-5 rounded-3xl text-xs text-primary-300 bg-primary-50 border border-neutral-30 dark:border-neutral-500">Paid</span>
+                      </td>
+                      <td>
+                        <include-verti-option />
+                      </td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                      <td class="px-6 min-w-[250px]" :class="dense? 'py-1.5': 'py-3'">
+                        <div class="flex items-center gap-4">
+                          <img src="./assets/images/booking-2.png" class="rounded" width="60" alt="" />
+                          <div>
+                            <p class="m-text font-medium mb-1">Innenministerium</p>
+                            <span class="text-xs">$8.99</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <div>
+                          <p class="m-text font-medium mb-1">Courtney Henry</p>
+                          <span class="text-xs">(505) 555-0125</span>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <div>
+                          <p class="m-text font-medium mb-1">03 Mar 2024</p>
+                          <span class="text-xs">9:29 AM</span>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <div>
+                          <p class="m-text font-medium mb-1">03 Mar 2024</p>
+                          <span class="text-xs">9:29 AM</span>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <span class="py-2 px-5 rounded-3xl text-xs text-primary-300 bg-primary-50 border border-neutral-30 dark:border-neutral-500">Paid</span>
+                      </td>
+                      <td>
+                        <include-verti-option />
+                      </td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                      <td class="px-6 min-w-[250px]" :class="dense? 'py-1.5': 'py-3'">
+                        <div class="flex items-center gap-4">
+                          <img src="./assets/images/booking-3.png" class="rounded" width="60" alt="" />
+                          <div>
+                            <p class="m-text font-medium mb-1">Innenministerium</p>
+                            <span class="text-xs">$8.99</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <div>
+                          <p class="m-text font-medium mb-1">Courtney Henry</p>
+                          <span class="text-xs">(505) 555-0125</span>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <div>
+                          <p class="m-text font-medium mb-1">03 Mar 2024</p>
+                          <span class="text-xs">9:29 AM</span>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <div>
+                          <p class="m-text font-medium mb-1">03 Mar 2024</p>
+                          <span class="text-xs">9:29 AM</span>
+                        </div>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3'">
+                        <span class="py-2 px-5 rounded-3xl text-xs text-primary-300 bg-primary-50 border border-neutral-30 dark:border-neutral-500">Paid</span>
+                      </td>
+                      <td>
+                        <include-verti-option />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="mt-6 flex items-center gap-5 justify-center flex-col md:flex-row md:justify-between whitespace-nowrap">
+                  <label for="switch" class="switch flex">
+                    <input x-model="dense" id="switch" type="checkbox" />
+                    <span class="inner primary"></span>
+                    Dense
+                  </label>
+                  <div class="flex flex-col sm:flex-row justify-center sm:justify-between gap-5">
+                    <div class="flex items-center gap-4">
+                      <p>Rows per page :</p>
+                      <select name="rows" id="rows" class="bg-transparent dark:bg-neutral-904">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                      </select>
+                    </div>
+                    <div class="f-center gap-4">
+                      <p>1-10 of 100</p>
+                      <button><i class="las la-angle-left text-xl rtl:rotate-180"></i></button> <button><i class="las la-angle-right text-xl rtl:rotate-180"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-12 xxl:col-span-4 white-box">
+            <div class="flex justify-between items-center bb-dashed-n30">
+              <div>
+                <h4 class="mb-2">Customer Reviews</h4>
+                <p class="m-text">12+ Reviews</p>
+              </div>
+              <div class="flex justify-center gap-4">
+                <button class="booking-review-prev rtl:rotate-180 size-9 xxl:size-12 border rounded-full border-primary-300 text-primary-300 hover:bg-primary-300 hover:text-neutral-0 f-center duration-300">
+                  <i class="las la-angle-left text-xl"></i>
+                </button>
+                <button class="booking-review-next rtl:rotate-180 size-9 xxl:size-12 border rounded-full border-primary-300 text-primary-300 hover:bg-primary-300 hover:text-neutral-0 f-center duration-300">
+                  <i class="las la-angle-right text-xl"></i>
+                </button>
+              </div>
+            </div>
+            <div dir="ltr" class="swiper bookingReviewSwiper rounded-xl">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <div class="n20-box relative">
+                    <img src="./assets/images/why-choose-el-1.png" width="69" class="absolute top-6 right-6" alt="" />
+                    <div class="relative max-w-max mb-8">
+                      <img src="./assets/images/users/user-m-1.png" width="88" class="rounded-full" alt="" />
+                      <span class="absolute -bottom-2 -right-2 f-center size-10 rounded-full text-neutral-0 bg-primary-300 border-2 border-neutral-0 dark:border-neutral-904">
+                        <i class="las la-quote-right text-2xl"></i>
+                      </span>
+                    </div>
+                    <div class="flex gap-1 text-2xl text-warning-300 mb-4">
+                      <i class="las la-star"></i>
+                      <i class="las la-star"></i>
+                      <i class="las la-star"></i>
+                      <i class="las la-star"></i>
+                      <i class="las la-star-half-alt"></i>
+                    </div>
+                    <p class="mb-4 l-text">Softify has been a game-changer for our business. We can now track our key metrics in real-time</p>
+                    <div class="flex flex-wrap gap-4 bb-dashed-n40 xl:mb-5 xl:pb-5">
+                      <span class="rounded-full bg-neutral-0 dark:bg-neutral-904 border border-neutral-30 dark:border-neutral-500 py-2 px-5">Great Service</span>
+                      <span class="rounded-full bg-neutral-0 dark:bg-neutral-904 border border-neutral-30 dark:border-neutral-500 py-2 px-5">Best Price</span>
+                      <span class="rounded-full bg-neutral-0 dark:bg-neutral-904 border border-neutral-30 dark:border-neutral-500 py-2 px-5">Amazing</span>
+                    </div>
+                    <h5 class="mb-3">Brooklyn Simmons</h5>
+                    <p class="s-text">Posted 04 Mar 2024 09:25 AM</p>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="n20-box relative">
+                    <img src="./assets/images/why-choose-el-1.png" width="69" class="absolute top-6 right-6" alt="" />
+                    <div class="relative max-w-max mb-8">
+                      <img src="./assets/images/users/user-m-1.png" width="88" class="rounded-full" alt="" />
+                      <span class="absolute -bottom-2 -right-2 f-center size-10 rounded-full text-neutral-0 bg-primary-300 border-2 border-neutral-0 dark:border-neutral-904">
+                        <i class="las la-quote-right text-2xl"></i>
+                      </span>
+                    </div>
+                    <div class="flex gap-1 text-2xl text-warning-300 mb-4">
+                      <i class="las la-star"></i>
+                      <i class="las la-star"></i>
+                      <i class="las la-star"></i>
+                      <i class="las la-star"></i>
+                      <i class="las la-star-half-alt"></i>
+                    </div>
+                    <p class="mb-4 l-text">Softify has been a game-changer for our business. We can now track our key metrics in real-time</p>
+                    <div class="flex flex-wrap gap-4 bb-dashed-n40 xl:mb-5 xl:pb-5">
+                      <span class="rounded-full bg-neutral-0 dark:bg-neutral-904 border border-neutral-30 dark:border-neutral-500 py-2 px-5">Great Service</span>
+                      <span class="rounded-full bg-neutral-0 dark:bg-neutral-904 border border-neutral-30 dark:border-neutral-500 py-2 px-5">Best Price</span>
+                      <span class="rounded-full bg-neutral-0 dark:bg-neutral-904 border border-neutral-30 dark:border-neutral-500 py-2 px-5">Amazing</span>
+                    </div>
+                    <h5 class="mb-3">Brooklyn Simmons</h5>
+                    <p class="s-text">Posted 04 Mar 2024 09:25 AM</p>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="n20-box relative">
+                    <img src="./assets/images/why-choose-el-1.png" width="69" class="absolute top-6 right-6" alt="" />
+                    <div class="relative max-w-max mb-8">
+                      <img src="./assets/images/users/user-m-1.png" width="88" class="rounded-full" alt="" />
+                      <span class="absolute -bottom-2 -right-2 f-center size-10 rounded-full text-neutral-0 bg-primary-300 border-2 border-neutral-0 dark:border-neutral-904">
+                        <i class="las la-quote-right text-2xl"></i>
+                      </span>
+                    </div>
+                    <div class="flex gap-1 text-2xl text-warning-300 mb-4">
+                      <i class="las la-star"></i>
+                      <i class="las la-star"></i>
+                      <i class="las la-star"></i>
+                      <i class="las la-star"></i>
+                      <i class="las la-star-half-alt"></i>
+                    </div>
+                    <p class="mb-4 l-text">Softify has been a game-changer for our business. We can now track our key metrics in real-time</p>
+                    <div class="flex flex-wrap gap-4 bb-dashed-n40 xl:mb-5 xl:pb-5">
+                      <span class="rounded-full bg-neutral-0 dark:bg-neutral-904 border border-neutral-30 dark:border-neutral-500 py-2 px-5">Great Service</span>
+                      <span class="rounded-full bg-neutral-0 dark:bg-neutral-904 border border-neutral-30 dark:border-neutral-500 py-2 px-5">Best Price</span>
+                      <span class="rounded-full bg-neutral-0 dark:bg-neutral-904 border border-neutral-30 dark:border-neutral-500 py-2 px-5">Amazing</span>
+                    </div>
+                    <h5 class="mb-3">Brooklyn Simmons</h5>
+                    <p class="s-text">Posted 04 Mar 2024 09:25 AM</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="booking-review-pagination"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/swiper-bundle.min.js"></script>
+    <script defer src="./assets/js/libs/alpine.intersect.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+    <script src="./assets/js/libs/apexcharts.min.js"></script>
+    <script src="./assets/js/charts.js"></script>
+
+    <script>
+      document.addEventListener('alpine:init', () => {
+        Alpine.data('chart', () => ({
+          bookingRef: null,
+          toursAvailable: null,
+          bookingOne: null,
+          bookingTwo: null,
+          bookingThree: null,
+          bookingFour: null,
+          init() {
+            isDark = this.$store.app.theme === 'dark' ? true : false
+            isRtl = this.$store.app.dir === 'rtl' ? true : false
+
+            setTimeout(() => {
+              this.bookingRef = new ApexCharts(this.$refs.bookingRef, this.bookingRefOptions)
+              this.bookingRef.render()
+
+              this.toursAvailable = new ApexCharts(this.$refs.toursAvailable, this.toursAvailableOptions)
+              this.toursAvailable.render()
+
+              this.bookingOne = new ApexCharts(this.$refs.bookingOne, this.bookingOneOptions)
+              this.bookingOne.render()
+
+              this.bookingTwo = new ApexCharts(this.$refs.bookingTwo, this.bookingTwoOptions)
+              this.bookingTwo.render()
+
+              this.bookingThree = new ApexCharts(this.$refs.bookingThree, this.bookingThreeOptions)
+              this.bookingThree.render()
+
+              this.bookingFour = new ApexCharts(this.$refs.bookingFour, this.bookingFourOptions)
+              this.bookingFour.render()
+            }, 300)
+
+            this.$watch('$store.app.theme', () => {
+              this.refreshOptions()
+            })
+
+            this.$watch('$store.app.rtlClass', () => {
+              this.refreshOptions()
+            })
+          },
+
+          refreshOptions() {
+            isDark = this.$store.app.theme === 'dark' ? true : false
+            isRtl = this.$store.app.dir === 'rtl' ? true : false
+            this.bookingRef.updateOptions(this.bookingRefOptions)
+            this.toursAvailable.updateOptions(this.toursAvailableOptions)
+            this.bookingOne.updateOptions(this.bookingOneOptions)
+            this.bookingTwo.updateOptions(this.bookingTwoOptions)
+            this.bookingThree.updateOptions(this.bookingThreeOptions)
+            this.bookingFour.updateOptions(this.bookingFourOptions)
+          },
+
+          get bookingRefOptions() {
+            return {
+              chart: {
+                height: 320,
+                type: 'line',
+                toolbar: {
+                  show: false
+                },
+                animations: {
+                  enabled: true,
+                  easing: 'easeinout',
+                  speed: 800
+                }
+              },
+              series: [
+                {
+                  name: 'Sold',
+                  data: [77, 78, 38, 38, 38, 73, 73, 54, 54, 17, 17, 58],
+                  type: 'line'
+                },
+                {
+                  name: 'Cancelled',
+                  data: [36, 36, 63, 63, 13, 13, 60, 60, 40, 40, 82, 82],
+                  type: 'line'
+                }
+              ],
+              dataLabels: {
+                enabled: false
+              },
+              stroke: {
+                curve: 'smooth',
+                lineCap: 'round',
+                width: 2,
+                colors: ['#2C7BE5', '#FFC861']
+              },
+              xaxis: {
+                categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan', '10 Jan', '11 Jan', '12 Jan'],
+                axisBorder: {
+                  show: false
+                }
+              },
+              yaxis: {
+                min: 0,
+                max: 100,
+                tickAmount: 5,
+                labels: {
+                  formatter: function (v) {
+                    return v + ''
+                  }
+                }
+              },
+              legend: {
+                show: true,
+                offsetY: 10,
+                markers: {
+                  width: 6,
+                  height: 6,
+                  offsetX: isRtl ? 4 : -4
+                }
+              },
+              colors: ['rgba(32, 183, 87)', 'rgba(255, 200, 97)'],
+              responsive: [
+                {
+                  breakpoint: 1820,
+                  options: {
+                    chart: {
+                      height: 340
+                    }
+                  }
+                },
+                {
+                  breakpoint: 1600,
+                  options: {
+                    chart: {
+                      height: 308
+                    }
+                  }
+                },
+                {
+                  breakpoint: 992,
+                  options: {
+                    chart: {
+                      height: 350
+                    }
+                  }
+                },
+                {
+                  breakpoint: 570,
+                  options: {
+                    chart: {
+                      height: 250
+                    }
+                  }
+                },
+                {
+                  breakpoint: 400,
+                  options: {
+                    chart: {
+                      height: 200
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          get toursAvailableOptions() {
+            return {
+              chart: {
+                type: 'radialBar',
+                width: '100%',
+                height: 300,
+                sparkline: {
+                  enabled: false
+                }
+              },
+              series: ['33.5'],
+              legend: {
+                show: false
+              },
+              colors: ['#2C7BE5'],
+              plotOptions: {
+                radialBar: {
+                  track: {
+                    background: isDark ? '#343E56' : '#EBECEF'
+                  },
+                  dataLabels: {
+                    value: {
+                      show: false
+                    },
+                    name: {
+                      offsetY: 5
+                    }
+                  },
+                  hollow: {
+                    size: '75%'
+                  }
+                }
+              },
+              labels: ['33.5%']
+            }
+          },
+          get bookingOneOptions() {
+            return {
+              series: [
+                {
+                  name: 'Desktops',
+                  data: [5, 38, 52, 58, 85, 60, 40, 48, 38, 18, 29, 38]
+                }
+              ],
+              chart: {
+                height: 60,
+                width: '100%',
+                type: 'line',
+                zoom: {
+                  enabled: false
+                },
+                toolbar: {
+                  show: false
+                }
+              },
+              dataLabels: {
+                enabled: false
+              },
+              stroke: {
+                curve: 'smooth',
+                lineCap: 'round',
+                width: 3
+              },
+              xaxis: {
+                tooltip: {
+                  enabled: false
+                },
+                axisBorder: {
+                  show: false
+                },
+                axisTicks: {
+                  show: false
+                },
+                labels: {
+                  show: false
+                }
+              },
+              colors: ['#2C7BE5'],
+              yaxis: {
+                labels: {
+                  show: false
+                },
+                tooltip: {
+                  enabled: false
+                }
+              },
+              grid: {
+                show: false,
+                padding: {
+                  top: -30,
+                  bottom: -25,
+                  left: -15,
+                  right: -15
+                }
+              }
+            }
+          },
+          get bookingTwoOptions() {
+            return {
+              series: [
+                {
+                  name: 'Desktops',
+                  data: [5, 38, 52, 58, 85, 60, 40, 48, 38, 18, 29, 38]
+                }
+              ],
+              chart: {
+                height: 60,
+                width: '100%',
+                type: 'line',
+                zoom: {
+                  enabled: false
+                },
+                toolbar: {
+                  show: false
+                }
+              },
+              dataLabels: {
+                enabled: false
+              },
+              stroke: {
+                curve: 'smooth',
+                lineCap: 'round',
+                width: 3
+              },
+              xaxis: {
+                tooltip: {
+                  enabled: false
+                },
+                axisBorder: {
+                  show: false
+                },
+                axisTicks: {
+                  show: false
+                },
+                labels: {
+                  show: false
+                }
+              },
+              colors: ['#8E33FF'],
+              yaxis: {
+                labels: {
+                  show: false
+                },
+                tooltip: {
+                  enabled: false
+                }
+              },
+              grid: {
+                show: false,
+                padding: {
+                  top: -30,
+                  bottom: -25,
+                  left: -15,
+                  right: -15
+                }
+              }
+            }
+          },
+          get bookingThreeOptions() {
+            return {
+              series: [
+                {
+                  name: 'Desktops',
+                  data: [5, 38, 52, 58, 85, 60, 40, 48, 38, 18, 29, 38]
+                }
+              ],
+              chart: {
+                height: 60,
+                width: '100%',
+                type: 'line',
+                zoom: {
+                  enabled: false
+                },
+                toolbar: {
+                  show: false
+                }
+              },
+              dataLabels: {
+                enabled: false
+              },
+              stroke: {
+                curve: 'smooth',
+                lineCap: 'round',
+                width: 3
+              },
+              xaxis: {
+                tooltip: {
+                  enabled: false
+                },
+                axisBorder: {
+                  show: false
+                },
+                axisTicks: {
+                  show: false
+                },
+                labels: {
+                  show: false
+                }
+              },
+              colors: ['#BD7B00'],
+              yaxis: {
+                labels: {
+                  show: false
+                },
+                tooltip: {
+                  enabled: false
+                }
+              },
+              grid: {
+                show: false,
+                padding: {
+                  top: -30,
+                  bottom: -25,
+                  left: -15,
+                  right: -15
+                }
+              }
+            }
+          },
+          get bookingFourOptions() {
+            return {
+              series: [
+                {
+                  name: 'Desktops',
+                  data: [5, 38, 52, 58, 85, 60, 40, 48, 38, 18, 29, 38]
+                }
+              ],
+              chart: {
+                height: 60,
+                width: '100%',
+                type: 'line',
+                zoom: {
+                  enabled: false
+                },
+                toolbar: {
+                  show: false
+                }
+              },
+              dataLabels: {
+                enabled: false
+              },
+              stroke: {
+                curve: 'smooth',
+                lineCap: 'round',
+                width: 3
+              },
+              xaxis: {
+                tooltip: {
+                  enabled: false
+                },
+                axisBorder: {
+                  show: false
+                },
+                axisTicks: {
+                  show: false
+                },
+                labels: {
+                  show: false
+                }
+              },
+              colors: ['#B33C22'],
+              yaxis: {
+                labels: {
+                  show: false
+                },
+                tooltip: {
+                  enabled: false
+                }
+              },
+              grid: {
+                show: false,
+                padding: {
+                  top: -30,
+                  bottom: -25,
+                  left: -15,
+                  right: -15
+                }
+              }
+            }
+          }
+        }))
+      })
+    </script>
+  </body>
+</html>

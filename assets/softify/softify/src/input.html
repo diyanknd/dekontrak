@@ -1,0 +1,506 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Input</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Forms</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Input</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Textfield -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div x-data="{activeTab:'outlined'}" class="grid grid-cols-12 gap-4 lg:gap-6">
+            <div class="col-span-12 flex max-w-max flex-wrap gap-4 rounded-xl sm:rounded-[40px] border border-neutral-30 p-3 dark:border-neutral-500">
+              <button @click="activeTab='outlined'" :class="activeTab=='outlined' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">Outlined</button>
+              <button @click="activeTab='filled'" :class="activeTab=='filled' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">Filled</button>
+              <button @click="activeTab='standard'" :class="activeTab=='standard' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">Standard</button>
+            </div>
+            <!-- Input -->
+            <div x-cloak x-show="activeTab=='outlined'" x-transition class="col-span-12 grid grid-cols-12 gap-4 lg:gap-6">
+              <div class="col-span-12 flex flex-col gap-4 lg:col-span-6 lg:gap-6">
+                <!-- Basic -->
+                <div class="white-box">
+                  <h5 class="bb-dashed-n30">Basic</h5>
+                  <div class="flex flex-col gap-6">
+                    <div class="form-input">
+                      <input type="text" id="desktop" placeholder="Enter Text" />
+                      <label for="desktop">Empty</label>
+                    </div>
+                    <div class="form-input">
+                      <input type="text" id="Filled" value="Filled" placeholder="Enter Text" />
+                      <label for="Filled">Filled</label>
+                    </div>
+                    <div class="form-input border-neutral-50 dark:border-neutral-400">
+                      <input type="text" id="disabled" class="text-neutral-50 dark:text-neutral-400" value="Hello World" placeholder="Enter Text" disabled />
+                      <label for="disabled" class="text-neutral-50 dark:text-neutral-400">Disabled</label>
+                    </div>
+                  </div>
+                </div>
+                <!-- Type -->
+                <div class="white-box">
+                  <h5 class="bb-dashed-n30">Type Variants</h5>
+                  <div class="flex flex-col gap-6">
+                    <div x-data="{showPass: false}" class="form-input">
+                      <input :type="showPass?'text':'password'" id="pass2" placeholder="Enter Text" />
+                      <label for="pass2">Password</label>
+                      <span @click="showPass = !showPass" class="absolute ltr:right-5 rtl:left-5 top-1/2 flex size-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full duration-300 hover:bg-neutral-40 dark:hover:bg-neutral-700">
+                        <i x-show="showPass" class="las la-eye text-2xl"></i>
+                        <i x-show="!showPass" class="las la-eye-slash text-2xl"></i>
+                      </span>
+                    </div>
+                    <div class="form-input">
+                      <input type="text" id="number" value="20" placeholder="Enter Text" />
+                      <label for="number">Number</label>
+                    </div>
+                    <div class="form-input">
+                      <input type="search" id="search" placeholder="Enter Text" />
+                      <label for="search">Search</label>
+                    </div>
+                    <div>
+                      <div x-data="{isOpen:false,selected:'USD', items:['USD','EUR','GBP','JPY','CAD','CNR','INR','RUB']}" class="relative">
+                        <div @click="isOpen=!isOpen" class="relative flex cursor-pointer items-center justify-between rounded-xl border border-neutral-30 px-6 py-3 dark:border-neutral-500">
+                          <span x-text="selected"></span>
+                          <i class="las la-angle-down text-lg duration-300" :class="isOpen?'rotate-180':'rotate-0'"></i>
+                          <span class="absolute -top-2 left-5 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Select</span>
+                        </div>
+                        <div x-show="isOpen" @click.away="isOpen=false" class="absolute left-0 top-full z-10 flex max-h-[200px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-0 p-1 shadow-xl dark:bg-neutral-904">
+                          <template x-for="item in items">
+                            <div @click="selected=item, isOpen=false" :class="selected===item?'bg-primary-300  text-neutral-0':'hover:bg-primary-50 dark:hover:bg-neutral-903'" class="cursor-pointer rounded-md px-4 py-2 duration-300" x-text="item"></div>
+                          </template>
+                        </div>
+                      </div>
+                      <p class="mt-2 text-xs">Please Select Your Currency</p>
+                    </div>
+                    <div>
+                      <div class="rounded-xl border border-neutral-30 rtl:pl-6 ltr:pr-6 dark:border-neutral-500">
+                        <select name="default" id="default" class="w-full rounded-xl border-none bg-neutral-0 px-6 py-3 focus:border-none focus:outline-none dark:bg-neutral-904">
+                          <option value="USD">USD</option>
+                          <option value="EUR">EUR</option>
+                          <option value="GBP">GBP</option>
+                          <option value="JPY">JPY</option>
+                          <option value="CAD">CAD</option>
+                          <option value="CNR">CNR</option>
+                          <option value="INR">INR</option>
+                          <option value="RUB">RUB</option>
+                        </select>
+                      </div>
+                      <p class="mt-2 text-xs">Please Select Your Currency</p>
+                    </div>
+                    <div class="form-input">
+                      <textarea id="multiline2" style="field-sizing: content; resize: none" placeholder="Enter Text"></textarea>
+                      <label for="multiline2">Multiline Placeholder</label>
+                    </div>
+                    <div class="form-input">
+                      <textarea id="multiline3" rows="4" placeholder="Enter Text"></textarea>
+                      <label for="multiline3" class="textarea">Multiline</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 flex flex-col gap-4 lg:col-span-6 lg:gap-6">
+                <!-- With Icon -->
+                <div class="white-box">
+                  <h5 class="bb-dashed-n30">With Icon</h5>
+                  <div class="flex flex-col gap-6">
+                    <div class="relative flex items-center gap-4 rounded-xl border border-neutral-30 px-4 dark:border-neutral-500 lg:px-6">
+                      <label for="input" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Filled</label>
+                      <i class="las la-user text-2xl"></i>
+                      <input type="text" placeholder="Input" class="w-full bg-transparent py-3 lg:py-4" />
+                    </div>
+                    <div class="relative flex items-center gap-4 rounded-xl border border-neutral-30 px-4 dark:border-neutral-500 lg:px-6">
+                      <label for="input" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Filled</label>
+                      <span class="font-medium">Coin</span>
+                      <input type="text" placeholder="Input" class="w-full bg-transparent py-3 lg:py-4" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- With caption -->
+                <div class="white-box">
+                  <h5 class="bb-dashed-n30">Error and Warning</h5>
+                  <div class="flex flex-col gap-6">
+                    <div class="form-input">
+                      <input type="text" id="desktoptwo" placeholder="Enter Text" />
+                      <label for="desktoptwo">Filled</label>
+                    </div>
+                    <div>
+                      <div class="form-input">
+                        <input type="text" id="warning" value="Warning" class="!border-warning-300" placeholder="Enter Text" />
+                        <label for="warning" class="text-warning-300">Warning</label>
+                      </div>
+                      <p class="mt-2 text-xs text-warning-300">Your text not perfect</p>
+                    </div>
+                    <div>
+                      <div class="form-input">
+                        <input type="text" id="error" value="Error" class="!border-error-300" placeholder="Enter Text" />
+                        <label for="error" class="text-error-300">Error</label>
+                      </div>
+                      <p class="mt-2 text-xs text-error-300">Incorrect Input</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Sizes -->
+                <div class="white-box">
+                  <h5 class="bb-dashed-n30">Sizes</h5>
+                  <div class="flex flex-col gap-6">
+                    <div class="form-input">
+                      <input type="text" id="size1" class="!py-2 px-4 text-sm" placeholder="Enter Text" value="Small" />
+                      <label for="size1" class="text-sm">Size</label>
+                    </div>
+                    <div class="form-input">
+                      <input type="text" id="size2" value="Normal" placeholder="Enter Text" />
+                      <label for="size2">Size</label>
+                    </div>
+                    <div class="form-input">
+                      <input type="text" class="md:text-lg xl:!py-6" id="size3" value="Big" placeholder="Enter Text" />
+                      <label for="size3">Size</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div x-cloak x-show="activeTab=='filled'" x-transition class="col-span-12 grid grid-cols-12 gap-4 lg:gap-6">
+              <div class="col-span-12 flex flex-col gap-4 lg:col-span-6 lg:gap-6">
+                <!-- Basic -->
+                <div class="white-box">
+                  <h5 class="bb-dashed-n30">Basic</h5>
+                  <div class="flex flex-col gap-6">
+                    <div class="form-input-filled">
+                      <input type="text" id="desktop11" placeholder="Enter Text" />
+                      <label for="desktop11">Filled <span class="text-error-300">*</span> </label>
+                    </div>
+                    <div class="form-input-filled">
+                      <input type="text" id="Filled11" value="Filled" placeholder="Enter Text" />
+                      <label for="Filled11">Filled <span class="text-error-300">*</span> </label>
+                    </div>
+                    <div class="form-input-filled">
+                      <input type="text" id="disabled11" value="Hello World" class="text-neutral-50 dark:text-neutral-400" placeholder="Enter Text" disabled />
+                      <label for="disabled11" class="text-neutral-50 dark:text-neutral-400">Disabled</label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Type -->
+                <div class="white-box">
+                  <h5 class="bb-dashed-n30">Type Variants</h5>
+                  <div class="flex flex-col gap-6">
+                    <div x-data="{showPass: false}" class="form-input-filled">
+                      <input :type="showPass?'text':'password'" id="pass3" placeholder="Enter Text" />
+                      <label for="pass3">Password</label>
+                      <span @click="showPass = !showPass" class="absolute ltr:right-5 rtl:left-5 top-1/2 flex size-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full duration-300 hover:bg-neutral-40 dark:hover:bg-neutral-700">
+                        <i x-show="showPass" class="las la-eye text-2xl"></i>
+                        <i x-show="!showPass" class="las la-eye-slash text-2xl"></i>
+                      </span>
+                    </div>
+                    <div class="form-input-filled">
+                      <input type="text" id="number-filled" value="20" placeholder="Enter Text" />
+                      <label for="number-filled">Number</label>
+                    </div>
+                    <div class="form-input-filled">
+                      <input type="search" id="search-filled" placeholder="Enter Text" />
+                      <label for="search-filled">Search</label>
+                    </div>
+
+                    <div>
+                      <div x-data="{isOpen:false,selected:'USD', items:['USD','EUR','GBP','JPY','CAD','CNR','INR','RUB']}" class="relative">
+                        <div @click="isOpen=!isOpen" class="relative flex cursor-pointer items-center justify-between rounded-xl bg-neutral-20 px-6 py-2 dark:bg-neutral-903">
+                          <div class="flex flex-col gap-1">
+                            <span class="text-xs">Select</span>
+                            <span x-text="selected"></span>
+                          </div>
+                          <i class="las la-angle-down text-lg duration-300" :class="isOpen?'rotate-180':'rotate-0'"></i>
+                        </div>
+                        <div x-show="isOpen" @click.away="isOpen=false" class="absolute left-0 top-full z-10 flex max-h-[200px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-20 p-1 shadow-xl dark:bg-neutral-903">
+                          <template x-for="item in items">
+                            <div @click="selected=item, isOpen=false" :class="selected===item?'bg-primary-300  text-neutral-0':'hover:bg-primary-50 dark:hover:bg-neutral-903'" class="cursor-pointer rounded-md px-4 py-2 duration-300" x-text="item"></div>
+                          </template>
+                        </div>
+                      </div>
+                      <p class="mt-2 text-xs">Please Select Your Currency</p>
+                    </div>
+
+                    <div>
+                      <div class="rounded-xl bg-neutral-20 pr-6 dark:bg-neutral-903">
+                        <select name="default" id="default-filled" class="w-full rounded-xl border-none bg-neutral-20 px-6 py-3 focus:border-none focus:outline-none dark:bg-neutral-903">
+                          <option value="USD">USD</option>
+                          <option value="EUR">EUR</option>
+                          <option value="GBP">GBP</option>
+                          <option value="JPY">JPY</option>
+                          <option value="CAD">CAD</option>
+                          <option value="CNR">CNR</option>
+                          <option value="INR">INR</option>
+                          <option value="RUB">RUB</option>
+                        </select>
+                      </div>
+                      <p class="mt-2 text-xs">Please Select Your Currency</p>
+                    </div>
+                    <div class="form-input-filled">
+                      <textarea id="multiline5" style="field-sizing: content; resize: none" placeholder="Enter Text"></textarea>
+                      <label for="multiline5">Multiline Placeholder</label>
+                    </div>
+                    <div class="form-input-filled">
+                      <textarea id="multiline6" rows="4" placeholder="Enter Text"></textarea>
+                      <label for="multiline6" class="textarea">Multiline</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-span-12 flex flex-col gap-4 lg:col-span-6 lg:gap-6">
+                <!-- Basic -->
+                <div class="white-box">
+                  <h5 class="bb-dashed-n30">With Icon</h5>
+                  <div class="flex flex-col gap-6">
+                    <div class="relative flex flex-col rounded-xl bg-neutral-20 px-4 py-2 dark:bg-neutral-903 lg:px-6">
+                      <label for="input" class="text-xs">Filled<span class="text-error-300">*</span> </label>
+                      <div class="flex items-center gap-2">
+                        <i class="las la-user text-2xl"></i>
+                        <input type="text" placeholder="Input" class="w-full bg-transparent" />
+                      </div>
+                    </div>
+                    <div class="relative flex flex-col rounded-xl bg-neutral-20 px-4 py-2 dark:bg-neutral-903 lg:px-6">
+                      <label for="input" class="text-xs">Filled<span class="text-error-300">*</span> </label>
+                      <div class="flex items-center gap-2">
+                        <span class="font-medium">Coin</span>
+                        <input type="text" placeholder="Input" class="w-full bg-transparent" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- With caption -->
+                <div class="white-box">
+                  <h5 class="bb-dashed-n30">Warning And Errors</h5>
+                  <div class="flex flex-col gap-6">
+                    <div>
+                      <div class="form-input-filled">
+                        <input type="text" id="warning-filled" value="Warning" class="!bg-warning-300/10" placeholder="Enter Text" />
+                        <label for="warning-filled" class="text-warning-300">Warning</label>
+                      </div>
+                      <p class="mt-2 text-xs text-warning-300">Your text not perfect</p>
+                    </div>
+                    <div>
+                      <div class="form-input-filled">
+                        <input type="text" id="error-filled" value="Error" class="!bg-error-300/10" placeholder="Enter Text" />
+                        <label for="error-filled" class="text-error-300">Error</label>
+                      </div>
+                      <p class="mt-2 text-xs text-error-300">Incorrect entry</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Sizes -->
+                <div class="white-box">
+                  <h5 class="bb-dashed-n30">Sizes</h5>
+                  <div class="flex flex-col gap-6">
+                    <div class="form-input-filled">
+                      <input type="text" id="size1-filled" class="px-4 !pb-1 pt-2 text-sm" placeholder="Enter Text" value="Small" />
+                      <label for="size1-filled" class="text-sm">Size</label>
+                    </div>
+                    <div class="form-input-filled">
+                      <input type="text" id="size2-filled" value="Normal" placeholder="Enter Text" />
+                      <label for="size2-filled">Size</label>
+                    </div>
+                    <div class="form-input-filled">
+                      <input type="text" class="md:text-lg xl:!py-6" id="size3-filled" value="Big" placeholder="Enter Text" />
+                      <label for="size3-filled">Size</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div x-cloak x-show="activeTab=='standard'" x-transition class="col-span-12 grid grid-cols-12 gap-4 lg:gap-6">
+              <div class="col-span-12 flex flex-col gap-4 lg:col-span-6 lg:gap-6">
+                <!-- Basic -->
+                <div class="white-box">
+                  <h5 class="bb-dashed-n30">Basic Input</h5>
+                  <div class="flex flex-col gap-6">
+                    <div class="form-input-standard">
+                      <input type="text" id="desktop-standard" placeholder="Enter Text" />
+                      <label for="desktop-standard">Filled<span class="text-error-300">*</span> </label>
+                    </div>
+                    <div class="form-input-standard">
+                      <input type="text" id="Filled-standard" value="Filled" placeholder="Enter Text" />
+                      <label for="Filled-standard">Filled<span class="text-error-300">*</span> </label>
+                    </div>
+                    <div class="form-input-standard">
+                      <input type="text" id="disabled-standard" class="text-neutral-50 dark:text-neutral-400" value="Hello World" placeholder="Enter Text" disabled />
+                      <label for="disabled-standard" class="text-neutral-50 dark:text-neutral-400">Disabled</label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Type -->
+                <div class="white-box">
+                  <h5 class="bb-dashed-n30">Type Variants</h5>
+                  <div class="flex flex-col gap-6">
+                    <div x-data="{showPass: false}" class="form-input-standard">
+                      <input :type="showPass?'text':'password'" id="pass-standard" placeholder="Enter Text" />
+                      <label for="pass-standard">Password</label>
+                      <span @click="showPass = !showPass" class="absolute ltr:right-5 rtl:left-5 top-1/2 flex size-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full duration-300 hover:bg-neutral-40 dark:hover:bg-neutral-700">
+                        <i x-show="showPass" class="las la-eye text-2xl"></i>
+                        <i x-show="!showPass" class="las la-eye-slash text-2xl"></i>
+                      </span>
+                    </div>
+                    <div class="form-input-standard">
+                      <input type="text" id="number-standard" value="20" placeholder="Enter Text" />
+                      <label for="number-standard">Number</label>
+                    </div>
+                    <div class="form-input-standard">
+                      <input type="search" id="search-standard" placeholder="Enter Text" />
+                      <label for="search-standard">Search</label>
+                    </div>
+
+                    <div>
+                      <div x-data="{isOpen:false,selected:'USD', items:['USD','EUR','GBP','JPY','CAD','CNR','INR','RUB']}" class="relative">
+                        <div @click="isOpen=!isOpen" class="relative flex cursor-pointer items-center justify-between border-b border-neutral-40 py-3 dark:border-neutral-500">
+                          <span x-text="selected"></span>
+                          <i class="las la-angle-down text-lg duration-300" :class="isOpen?'rotate-180':'rotate-0'"></i>
+                          <span class="absolute -top-2 left-0 bg-neutral-0 text-xs dark:bg-neutral-904">Select</span>
+                        </div>
+                        <div x-show="isOpen" @click.away="isOpen=false" class="absolute left-0 top-full z-10 flex max-h-[200px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-0 p-1 shadow-xl dark:bg-neutral-904">
+                          <template x-for="item in items">
+                            <div @click="selected=item, isOpen=false" :class="selected===item?'bg-primary-300  text-neutral-0':'hover:bg-primary-50 dark:hover:bg-neutral-903'" class="cursor-pointer rounded-md px-4 py-2 duration-300" x-text="item"></div>
+                          </template>
+                        </div>
+                      </div>
+                      <p class="mt-2 text-xs">Please Select Your Currency</p>
+                    </div>
+
+                    <div>
+                      <div class="border-b border-neutral-40 dark:border-neutral-500">
+                        <select name="default" id="standard" class="w-full rounded-xl border-none bg-neutral-0 py-3 focus:border-none focus:outline-none dark:bg-neutral-904">
+                          <option value="USD">USD</option>
+                          <option value="EUR">EUR</option>
+                          <option value="GBP">GBP</option>
+                          <option value="JPY">JPY</option>
+                          <option value="CAD">CAD</option>
+                          <option value="CNR">CNR</option>
+                          <option value="INR">INR</option>
+                          <option value="RUB">RUB</option>
+                        </select>
+                      </div>
+                      <p class="mt-2 text-xs">Please Select Your Currency</p>
+                    </div>
+
+                    <div class="form-input-standard">
+                      <textarea id="multiline-standard2" style="field-sizing: content; resize: none" placeholder="Enter Text"></textarea>
+                      <label for="multiline-standard2">Multiline Placeholder</label>
+                    </div>
+                    <div class="form-input-standard">
+                      <textarea id="multiline-standard3" rows="4" placeholder="Enter Text"></textarea>
+                      <label for="multiline-standard3" class="textarea">Multiline</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 flex flex-col gap-4 lg:col-span-6 lg:gap-6">
+                <!-- Basic -->
+                <div class="white-box">
+                  <h5 class="bb-dashed-n30">With Icon</h5>
+                  <div class="flex flex-col gap-6">
+                    <div class="relative flex items-center gap-4 border-b border-neutral-40 dark:border-neutral-500">
+                      <label for="input" class="absolute -top-2 bg-neutral-0 text-xs dark:bg-neutral-904">Filled<span class="text-error-300">*</span> </label>
+                      <i class="las la-user text-2xl"></i>
+                      <input type="text" placeholder="Input" class="w-full bg-transparent py-3 lg:py-4" />
+                    </div>
+                    <div class="relative flex items-center gap-4 border-b border-neutral-40 dark:border-neutral-500">
+                      <label for="input" class="absolute -top-2 bg-neutral-0 text-xs dark:bg-neutral-904">Filled<span class="text-error-300">*</span> </label>
+                      <span class="font-medium">Coin</span>
+                      <input type="text" placeholder="Input" class="w-full bg-transparent py-3 lg:py-4" />
+                    </div>
+                    <div class="relative flex items-center gap-4 border-b border-neutral-40 dark:border-neutral-500">
+                      <label for="input" class="absolute -top-2 bg-neutral-0 text-xs text-neutral-50 dark:text-neutral-400 dark:bg-neutral-904">Empty</label>
+                      <span class="text-lg font-medium text-neutral-80">$</span>
+                      <input type="text" placeholder="Input" class="w-full bg-transparent text-neutral-50 dark:text-neutral-400 py-3 lg:py-4" disabled />
+                    </div>
+                  </div>
+                </div>
+                <!-- With caption -->
+                <div class="white-box">
+                  <h5 class="bb-dashed-n30">Warning and Errors</h5>
+                  <div class="flex flex-col gap-6">
+                    <div>
+                      <div class="form-input-standard">
+                        <input type="text" id="warning-standard" value="Warning" class="!border-warning-300" placeholder="Enter Text" />
+                        <label for="warning-standard" class="text-warning-300">Warning</label>
+                      </div>
+                      <p class="mt-2 text-xs text-warning-300">Your text not perfect</p>
+                    </div>
+                    <div>
+                      <div class="form-input-standard">
+                        <input type="text" id="error-standard" value="Error" class="!border-error-300" placeholder="Enter Text" />
+                        <label for="error-standard" class="text-error-300">Error</label>
+                      </div>
+                      <p class="mt-2 text-xs text-error-300">Incorrect Input</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Sizes -->
+                <div class="white-box">
+                  <h5 class="bb-dashed-n30">Sizes</h5>
+                  <div class="flex flex-col gap-6">
+                    <div class="form-input-standard">
+                      <input type="text" id="size1-standard" class="!py-2 text-sm" placeholder="Enter Text" value="Small" />
+                      <label for="size1-standard" class="text-sm">Size</label>
+                    </div>
+                    <div class="form-input-standard">
+                      <input type="text" id="size2-standard" value="Normal" placeholder="Enter Text" />
+                      <label for="size2-standard">Size</label>
+                    </div>
+                    <div class="form-input-standard">
+                      <input type="text" class="md:text-lg xl:!py-6" id="size3-standard" value="Big" placeholder="Enter Text" />
+                      <label for="size3-standard">Size</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

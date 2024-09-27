@@ -1,0 +1,696 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/swiper.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6">
+        <h2 class="mb-7 xl:mb-10">Hi, Welcome back 👋</h2>
+        <div x-data="chart" class="grid grid-cols-12 gap-4 xxl:gap-6">
+          <!-- statistics -->
+          <div class="col-span-12 md:col-span-6 xxxl:col-span-3">
+            <div class="p-3 md:p-4 lg:p-6 xxl:p-8 rounded-xl bg-primary-100">
+              <div class="flex justify-between items-start">
+                <span class="bg-neutral-0 dark:bg-neutral-904 rounded-lg size-14 xxl:size-16 f-center">
+                  <i class="las la-shopping-bag text-4xl xxl:text-5xl text-primary-300"></i>
+                </span>
+                <div class="analytics-stat-chart-1"></div>
+              </div>
+              <div class="flex justify-between items-end">
+                <div>
+                  <h3 class="mb-4">714.52k</h3>
+                  <p class="text-xs shrink-0 xxl:m-text font-medium">Weekly Sales</p>
+                </div>
+                <span class="m-text rounded-full bg-neutral-0/50 dark:bg-neutral-904/50 text-primary-300 inline-flex py-2 px-4 items-center gap-1"> <i class="las la-arrow-up text-lg"></i> 75.8%</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-6 xxxl:col-span-3">
+            <div class="p-3 md:p-4 lg:p-6 xxl:p-8 rounded-xl bg-secondary-300/40">
+              <div class="flex justify-between items-start">
+                <span class="bg-neutral-0 dark:bg-neutral-904 rounded-lg size-14 xxl:size-16 f-center">
+                  <i class="las la-user-friends text-4xl xxl:text-5xl text-secondary-300"></i>
+                </span>
+                <div class="analytics-stat-chart-2"></div>
+              </div>
+              <div class="flex justify-between items-end">
+                <div>
+                  <h3 class="mb-4">1.35m</h3>
+                  <p class="text-xs shrink-0 xxl:m-text font-medium">New Users</p>
+                </div>
+                <span class="m-text rounded-full bg-neutral-0/50 dark:bg-neutral-904/50 text-secondary-300 inline-flex py-2 px-4 items-center gap-1"> <i class="las la-arrow-up text-lg"></i> 44.8%</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-6 xxxl:col-span-3">
+            <div class="p-3 md:p-4 lg:p-6 xxl:p-8 rounded-xl bg-warning-300/40">
+              <div class="flex justify-between items-start">
+                <span class="bg-neutral-0 dark:bg-neutral-904 rounded-lg size-14 xxl:size-16 f-center">
+                  <i class="las la-shopping-basket text-4xl xxl:text-5xl text-warning-300"></i>
+                </span>
+                <div class="analytics-stat-chart-3"></div>
+              </div>
+              <div class="flex justify-between items-end">
+                <div>
+                  <h3 class="mb-4">714.52k</h3>
+                  <p class="text-xs shrink-0 xxl:m-text font-medium">Weekly Sales</p>
+                </div>
+                <span class="m-text rounded-full bg-neutral-0/50 dark:bg-neutral-904/50 text-warning-300 inline-flex py-2 px-4 items-center gap-1"> <i class="las la-arrow-up text-lg"></i> 75.8%</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-6 xxxl:col-span-3">
+            <div class="p-3 md:p-4 lg:p-6 xxl:p-8 rounded-xl bg-error-300/40">
+              <div class="flex justify-between items-start">
+                <span class="bg-neutral-0 dark:bg-neutral-904 rounded-lg size-14 xxl:size-16 f-center">
+                  <i class="las la-bug text-4xl xxl:text-5xl text-error-300"></i>
+                </span>
+                <div class="analytics-stat-chart-4"></div>
+              </div>
+              <div class="flex justify-between items-end">
+                <div>
+                  <h3 class="mb-4">714.52k</h3>
+                  <p class="text-xs shrink-0 xxl:m-text font-medium">Weekly Sales</p>
+                </div>
+                <span class="m-text rounded-full bg-neutral-0/50 dark:bg-neutral-904/50 text-error-300 inline-flex py-2 px-4 items-center gap-1"> <i class="las la-arrow-up text-lg"></i> 75.8%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Website visits -->
+
+          <div class="col-span-12 lg:col-span-7 xxl:col-span-8 white-box overflow-hidden">
+            <div class="bb-dashed-n30 flex flex-col sm:flex-row justify-center sm:justify-between gap-4 items-center">
+              <div>
+                <h4>Website visits</h4>
+                <p class="m-text mt-2">(+43%) than last year</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <span>Sort By : </span>
+                <select name="sort" class="nc-select n20">
+                  <option value="day">Last 15 Days</option>
+                  <option value="week">Last 1 Month</option>
+                  <option value="year">Last 6 Month</option>
+                </select>
+              </div>
+            </div>
+            <div x-ref="websiteVisits"></div>
+          </div>
+
+          <!-- current visits -->
+          <div class="col-span-12 lg:col-span-5 xxl:col-span-4 white-box overflow-hidden">
+            <h4 class="bb-dashed-n30">Current visits</h4>
+            <div x-ref="currentVisits"></div>
+          </div>
+
+          <!-- conversion rates -->
+          <div class="col-span-12 lg:col-span-7 xxl:col-span-8 white-box overflow-hidden">
+            <div class="bb-dashed-n30 flex flex-col sm:flex-row justify-center sm:justify-between gap-4 items-center">
+              <div>
+                <h4>Conversion Rates</h4>
+                <p class="m-text mt-2">(+43%) than last year</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <span>Sort By : </span>
+                <select name="sort" class="nc-select n20">
+                  <option value="day">Last 15 Days</option>
+                  <option value="week">Last 1 Month</option>
+                  <option value="year">Last 6 Month</option>
+                </select>
+              </div>
+            </div>
+            <div x-ref="conversionRates"></div>
+          </div>
+
+          <!-- current subjects -->
+          <div class="col-span-12 lg:col-span-5 xxl:col-span-4 overflow-hidden">
+            <div class="white-box">
+              <h4 class="bb-dashed-n30">Current Subject</h4>
+              <div x-ref="CurrentSubjects"></div>
+            </div>
+          </div>
+
+          <!-- Recent News -->
+          <div class="col-span-12 lg:col-span-7 xxl:col-span-8 white-box">
+            <h4 class="bb-dashed-n30">Recent News</h4>
+            <div class="flex flex-col gap-6 xxl:gap-8 w-full">
+              <div class="flex justify-between items-center w-full gap-3 flex-wrap">
+                <div class="flex items-start gap-4 xxl:gap-6">
+                  <img src="./assets/images/product-1.png" class="rounded-lg size-10 xl:size-[60px] object-cover object-center" alt="" />
+                  <div>
+                    <p class="l-text mb-2 font-medium">My Adventures in Fashion (and Mishaps)</p>
+                    <p class="s-text">Join us as we explore the fascinating world of [topic] and answer your burning questions.</p>
+                  </div>
+                </div>
+                <p class="text-xs shrink-0 xxl:m-text">28 minutes ago</p>
+              </div>
+              <div class="flex justify-between items-center w-full gap-3 flex-wrap">
+                <div class="flex items-start gap-4 xxl:gap-6">
+                  <img src="./assets/images/product-2.png" class="rounded-lg size-10 xl:size-[60px] object-cover object-center" alt="" />
+                  <div>
+                    <p class="l-text mb-2 font-medium">Tech Fails and Funny Fixes</p>
+                    <p class="s-text">In this blog post, we'll delve into the latest trends in [topic] and provide you with practical tips to [benefit].</p>
+                  </div>
+                </div>
+                <p class="text-xs shrink-0 xxl:m-text">28 minutes ago</p>
+              </div>
+              <div class="flex justify-between items-center w-full gap-3 flex-wrap">
+                <div class="flex items-start gap-4 xxl:gap-6">
+                  <img src="./assets/images/product-3.png" class="rounded-lg size-10 xl:size-[60px] object-cover object-center" alt="" />
+                  <div>
+                    <p class="l-text mb-2 font-medium">Travel with Laughs: Lighthearted Adventures</p>
+                    <p class="s-text">Get ready to laugh along as I share my hilarious [experiences/mishaps] in [topic].</p>
+                  </div>
+                </div>
+                <p class="text-xs shrink-0 xxl:m-text">1 day ago</p>
+              </div>
+              <div class="flex justify-between items-center w-full gap-3 flex-wrap">
+                <div class="flex items-start gap-4 xxl:gap-6">
+                  <img src="./assets/images/product-4.png" class="rounded-lg size-10 xl:size-[60px] object-cover object-center" alt="" />
+                  <div>
+                    <p class="l-text mb-2 font-medium">Growing Together: Personal Development Blog</p>
+                    <p class="s-text">We've all been there, so let's embrace the funny side of [topic] together.</p>
+                  </div>
+                </div>
+                <p class="text-xs shrink-0 xxl:m-text">3 days ago</p>
+              </div>
+              <div class="flex justify-between items-center w-full gap-3 flex-wrap">
+                <div class="flex items-start gap-4 xxl:gap-6">
+                  <img src="./assets/images/product-5.png" class="rounded-lg size-10 xl:size-[60px] object-cover object-center" alt="" />
+                  <div>
+                    <p class="l-text mb-2 font-medium">Wanderlust: Travel Tips and Tales</p>
+                    <p class="s-text">Welcome to my little corner of the internet, where I share my [experiences/thoughts/perspectives] on [topic].</p>
+                  </div>
+                </div>
+                <p class="text-xs shrink-0 xxl:m-text">4 days ago</p>
+              </div>
+              <div class="flex justify-between items-center w-full gap-3 flex-wrap">
+                <div class="flex items-start gap-4 xxl:gap-6">
+                  <img src="./assets/images/product-3.png" class="rounded-lg size-10 xl:size-[60px] object-cover object-center" alt="" />
+                  <div>
+                    <p class="l-text mb-2 font-medium">The Culinary Journey</p>
+                    <p class="s-text">I'm on a journey of [goal/discovery] and I'd love to take you along for the ride!</p>
+                  </div>
+                </div>
+                <p class="text-xs shrink-0 xxl:m-text">7 days ago</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- current visits -->
+          <div class="col-span-12 lg:col-span-5 xxl:col-span-4 white-box">
+            <h4 class="bb-dashed-n30">Order Timeline</h4>
+            <div class="order-timeline flex w-full flex-col gap-10">
+              <div class="right !w-[95%] primary">
+                <p class="l-text font-medium mb-1">F2D89D0F-0007</p>
+                <p class="s-text">29 Feb 2024 9:11 AM</p>
+              </div>
+              <div class="right !w-[95%] secondary">
+                <p class="l-text font-medium mb-1">F2D89D0F-0008</p>
+                <p class="s-text">29 Feb 2024 9:11 AM</p>
+              </div>
+              <div class="right !w-[95%] info">
+                <p class="l-text font-medium mb-1">F2D89D0F-0009</p>
+                <p class="s-text">29 Feb 2024 9:11 AM</p>
+              </div>
+              <div class="right !w-[95%] success">
+                <p class="l-text font-medium mb-1">F2D89D0F-0010</p>
+                <p class="s-text">29 Feb 2024 9:11 AM</p>
+              </div>
+              <div class="right !w-[95%] warning">
+                <p class="l-text font-medium mb-1">F2D89D0F-0011</p>
+                <p class="s-text">29 Feb 2024 9:11 AM</p>
+              </div>
+              <div class="right !w-[95%] error">
+                <p class="l-text font-medium mb-1">F2D89D0F-0012</p>
+                <p class="s-text">29 Feb 2024 9:11 AM</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tasks -->
+          <div class="col-span-12 lg:col-span-7 xxl:col-span-8 white-box">
+            <h4 class="bb-dashed-n30">Tasks</h4>
+            <div class="flex flex-col">
+              <div x-data="{checked:false}" class="flex justify-between items-center pb-5 border-b border-neutral-30 dark:border-neutral-500">
+                <label for="checkbox1" class="option" :class="{'line-through text-neutral-100':checked}">
+                  <input type="checkbox" id="checkbox1" aria-checked="false" x-model="checked" />
+                  <span class="checkbox primary"></span>
+                  Implement Authentication System
+                </label>
+                <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                  <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                  <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                    <li>
+                      <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-check-square text-xl"></i> Mark </span>
+                    </li>
+                    <li>
+                      <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-share-alt-square text-xl"></i> Share </span>
+                    </li>
+                    <li>
+                      <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div x-data="{checked:true}" class="flex justify-between items-center py-5 border-b border-neutral-30 dark:border-neutral-500">
+                <label for="checkbox2" class="option" :class="{'line-through text-neutral-100':checked}">
+                  <input type="checkbox" id="checkbox2" aria-checked="false" x-model="checked" checked />
+                  <span class="checkbox primary"></span>
+                  Develop Backed API
+                </label>
+                <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                  <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                  <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                    <li>
+                      <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-check-square text-xl"></i> Mark </span>
+                    </li>
+                    <li>
+                      <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-share-alt-square text-xl"></i> Share </span>
+                    </li>
+                    <li>
+                      <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div x-data="{checked:false}" class="flex justify-between items-center py-5 border-b border-neutral-30 dark:border-neutral-500">
+                <label for="checkbox3" class="option" :class="{'line-through text-neutral-100':checked}">
+                  <input type="checkbox" id="checkbox3" aria-checked="false" x-model="checked" />
+                  <span class="checkbox primary"></span>
+                  Design User Interface Mockups
+                </label>
+                <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                  <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                  <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                    <li>
+                      <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-check-square text-xl"></i> Mark </span>
+                    </li>
+                    <li>
+                      <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-share-alt-square text-xl"></i> Share </span>
+                    </li>
+                    <li>
+                      <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div x-data="{checked:true}" class="flex justify-between items-center py-5 border-b border-neutral-30 dark:border-neutral-500">
+                <label for="checkbox4" class="option" :class="{'line-through text-neutral-100':checked}">
+                  <input type="checkbox" id="checkbox4" aria-checked="false" x-model="checked" checked />
+                  <span class="checkbox primary"></span>
+                  Conduct Market Research
+                </label>
+                <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                  <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                  <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                    <li>
+                      <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-check-square text-xl"></i> Mark </span>
+                    </li>
+                    <li>
+                      <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-share-alt-square text-xl"></i> Share </span>
+                    </li>
+                    <li>
+                      <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div x-data="{checked:false}" class="flex justify-between items-center py-5 border-b border-neutral-30 dark:border-neutral-500">
+                <label for="checkbox5" class="option" :class="{'line-through text-neutral-100':checked}">
+                  <input type="checkbox" id="checkbox5" aria-checked="false" x-model="checked" />
+                  <span class="checkbox primary"></span>
+                  Complete Project Proposal
+                </label>
+                <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                  <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                  <ul class="horiz-option" :class="isOpen?'show':'hide'">
+                    <li>
+                      <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-check-square text-xl"></i> Mark </span>
+                    </li>
+                    <li>
+                      <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-share-alt-square text-xl"></i> Share </span>
+                    </li>
+                    <li>
+                      <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50"> <i class="las la-trash text-xl"></i> Delete </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Traffic by site -->
+          <div class="col-span-12 xl:col-span-5 xxl:col-span-4 white-box">
+            <h4 class="bb-dashed-n30">Traffic by Site</h4>
+            <div class="flex flex-col gap-6 xxl:gap-8">
+              <div class="flex justify-between items-center">
+                <div class="flex gap-4 xxl:gap-6 items-center">
+                  <span class="size-14 rounded-lg border border-neutral-40 bg-neutral-20 dark:bg-neutral-903 dark:border-neutral-500 f-center"><i class="lab la-facebook text-4xl text-primary-300"></i></span>
+                  <div class="flex flex-col gap-2">
+                    <p class="l-text font-medium">Facebook</p>
+                    <p class="flex items-center gap-1">
+                      <i class="lab la-windows"></i>
+                      <span class="s-text">Windows</span>
+                    </p>
+                  </div>
+                </div>
+                <h4>36.75k</h4>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex gap-4 xxl:gap-6 items-center">
+                  <span class="size-14 rounded-lg border border-neutral-40 bg-neutral-20 dark:bg-neutral-903 dark:border-neutral-500 f-center"><i class="lab la-google text-4xl text-primary-300"></i></span>
+                  <div class="flex flex-col gap-2">
+                    <p class="l-text font-medium">Google</p>
+                    <p class="flex items-center gap-1">
+                      <i class="lab la-mac"></i>
+                      <span class="s-text">Mac</span>
+                    </p>
+                  </div>
+                </div>
+                <h4>96.75k</h4>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex gap-4 xxl:gap-6 items-center">
+                  <span class="size-14 rounded-lg border border-neutral-40 bg-neutral-20 dark:bg-neutral-903 dark:border-neutral-500 f-center"><i class="lab la-linkedin-in text-4xl text-primary-300"></i></span>
+                  <div class="flex flex-col gap-2">
+                    <p class="l-text font-medium">Linkedin</p>
+                    <p class="flex items-center gap-1">
+                      <i class="lab la-apple"></i>
+                      <span class="s-text">Mac</span>
+                    </p>
+                  </div>
+                </div>
+                <h4>32.75k</h4>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex gap-4 xxl:gap-6 items-center">
+                  <span class="size-14 rounded-lg border border-neutral-40 bg-neutral-20 dark:bg-neutral-903 dark:border-neutral-500 f-center"><i class="lab la-twitter text-4xl text-primary-300"></i></span>
+                  <div class="flex flex-col gap-2">
+                    <p class="l-text font-medium">Twitter</p>
+                    <p class="flex items-center gap-1">
+                      <i class="lab la-windows"></i>
+                      <span class="s-text">Windows</span>
+                    </p>
+                  </div>
+                </div>
+                <h4>14.75k</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/swiper-bundle.min.js"></script>
+    <script defer src="./assets/js/libs/alpine.intersect.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+    <script src="./assets/js/libs/apexcharts.min.js"></script>
+    <script src="./assets/js/charts.js"></script>
+
+    <script>
+      document.addEventListener('alpine:init', () => {
+        Alpine.data('chart', () => ({
+          websiteVisits: null,
+          currentVisits: null,
+          conversionRates: null,
+          CurrentSubjects: null,
+          init() {
+            isDark = this.$store.app.theme === 'dark' ? true : false
+            isRtl = this.$store.app.dir === 'rtl' ? true : false
+
+            setTimeout(() => {
+              this.websiteVisits = new ApexCharts(this.$refs.websiteVisits, this.websiteVisitsOptions)
+              this.websiteVisits.render()
+
+              this.currentVisits = new ApexCharts(this.$refs.currentVisits, this.currentVisitsOptions)
+              this.currentVisits.render()
+
+              this.conversionRates = new ApexCharts(this.$refs.conversionRates, this.conversionRatesOptions)
+              this.conversionRates.render()
+
+              this.CurrentSubjects = new ApexCharts(this.$refs.CurrentSubjects, this.CurrentSubjectsOptions)
+              this.CurrentSubjects.render()
+            }, 300)
+
+            this.$watch('$store.app.theme', () => {
+              this.refreshOptions()
+            })
+
+            this.$watch('$store.app.rtlClass', () => {
+              this.refreshOptions()
+            })
+          },
+
+          refreshOptions() {
+            isDark = this.$store.app.theme === 'dark' ? true : false
+            isRtl = this.$store.app.dir === 'rtl' ? true : false
+            this.websiteVisits.updateOptions(this.websiteVisitsOptions)
+            this.currentVisits.updateOptions(this.currentVisitsOptions)
+            this.conversionRates.updateOptions(this.conversionRatesOptions)
+            this.CurrentSubjects.updateOptions(this.CurrentSubjectsOptions)
+          },
+
+          get websiteVisitsOptions() {
+            return {
+              chart: {
+                height: 320,
+                type: 'area',
+                toolbar: {
+                  show: false
+                },
+                animations: {
+                  enabled: true,
+                  easing: 'easeinout',
+                  speed: 800
+                }
+              },
+              series: [
+                {
+                  name: 'This Years',
+                  data: [25, 32, 38, 43, 47, 53, 75, 105, 152, 172, 208, 258]
+                },
+                {
+                  name: 'Last Years',
+                  data: [20, 24, 50, 42, 34, 40, 48, 65, 78, 104, 120, 140]
+                }
+              ],
+              dataLabels: {
+                enabled: false
+              },
+              stroke: {
+                curve: 'smooth',
+                lineCap: 'round',
+                width: 3,
+                colors: ['#2C7BE5', '#FFC861']
+              },
+              xaxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                axisBorder: {
+                  show: false
+                }
+              },
+              yaxis: {
+                min: 0,
+                max: 260,
+                tickAmount: 5,
+                labels: {
+                  formatter: function (v) {
+                    return '$' + v + 'k'
+                  },
+                  offsetX: 10
+                }
+              },
+              legend: {
+                show: true,
+                offsetY: 10,
+                markers: {
+                  width: 6,
+                  height: 6,
+                  offsetX: isRtl ? 4 : -4
+                }
+              },
+              colors: ['rgba(32, 183, 87, 0.21)', 'rgba(255, 200, 97, 0.21)'],
+              responsive: [
+                {
+                  breakpoint: 570,
+                  options: {
+                    chart: {
+                      height: 250
+                    }
+                  }
+                },
+                {
+                  breakpoint: 400,
+                  options: {
+                    chart: {
+                      height: 200
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          get currentVisitsOptions() {
+            return {
+              series: [44, 55, 41, 17, 15],
+              chart: {
+                type: 'pie',
+                height: 400
+              },
+              colors: ['#2C7BE5', '#FFAB00', '#FF5630', '#8E33FF', '#00B8D9'],
+              fill: {
+                colors: ['#2C7BE5', '#FFAB00', '#FF5630', '#8E33FF', '#00B8D9']
+              },
+              plotOptions: {
+                pie: {
+                  donut: {
+                    labels: {
+                      show: true,
+                      value: {
+                        fontSize: '16px',
+                        offsetY: 2
+                      }
+                    }
+                  }
+                }
+              },
+              legend: {
+                show: true,
+                position: 'bottom',
+                itemMargin: {
+                  vertical: window.innerWidth > 1500 ? 4 : 2
+                },
+                horizontalAlign: 'center',
+                markers: {
+                  width: 6,
+                  height: 6,
+                  offsetX: isRtl ? 4 : -4
+                }
+              },
+              labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+              dataLabels: {
+                style: {
+                  fontSize: '10px',
+                  fontWeight: 400
+                }
+              }
+            }
+          },
+          get conversionRatesOptions() {
+            return {
+              series: [
+                {
+                  data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+                }
+              ],
+              chart: {
+                type: 'bar',
+                height: 280,
+                toolbar: {
+                  show: false
+                }
+              },
+              plotOptions: {
+                bar: {
+                  borderRadius: 4,
+                  horizontal: true
+                }
+              },
+              colors: ['#2C7BE5'],
+              dataLabels: {
+                enabled: false
+              },
+              xaxis: {
+                categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan', 'United States', 'China', 'Germany']
+              }
+            }
+          },
+          get CurrentSubjectsOptions() {
+            return {
+              series: [
+                {
+                  name: 'Series 1',
+                  data: [80, 50, 30, 40, 100, 20]
+                },
+                {
+                  name: 'Series 2',
+                  data: [20, 30, 40, 80, 20, 80]
+                },
+                {
+                  name: 'Series 3',
+                  data: [44, 76, 78, 13, 43, 10]
+                }
+              ],
+              chart: {
+                height: 310,
+                type: 'radar',
+                toolbar: {
+                  show: false
+                },
+                dropShadow: {
+                  enabled: true,
+                  blur: 1,
+                  left: 1,
+                  top: 1
+                }
+              },
+              stroke: {
+                width: 2
+              },
+              colors: ['#2C7BE5', '#FFAB00', '#8E33FF'],
+              fill: {
+                opacity: 0.1
+              },
+              markers: {
+                size: 0
+              },
+              legend: {
+                show: true,
+                markers: {
+                  width: 6,
+                  height: 6,
+                  offsetX: isRtl ? 4 : -4
+                }
+              },
+              xaxis: {
+                categories: ['2011', '2012', '2013', '2014', '2015', '2016']
+              }
+            }
+          }
+        }))
+      })
+    </script>
+  </body>
+</html>

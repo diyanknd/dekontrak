@@ -1,0 +1,46 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- Main Content -->
+    <main class="relative min-h-screen f-center overflow-x-hidden bg-neutral-20 dark:bg-neutral-903 text-neutral-700 dark:text-neutral-20 py-12 xl:py-14">
+      <div class="h-full absolute inset-0 overflow-hidden">
+        <div class="absolute -top-8 -left-8 lg:-top-32 lg:-left-40 size-40 lg:size-[440px] rounded-full bg-secondary-300 opacity-[0.4] blur-[250px]"></div>
+        <div class="absolute -top-8 -right-8 lg:-top-32 lg:-right-40 size-40 lg:size-[440px] rounded-full bg-error-300 opacity-[0.4] blur-[250px]"></div>
+        <div class="absolute -right-8 -bottom-8 lg:-right-40 lg:-bottom-28 size-40 lg:size-[440px] rounded-full bg-info-300 opacity-[0.4] blur-[250px]"></div>
+        <div class="absolute -left-8 -bottom-8 lg:-left-40 lg:-bottom-28 size-40 lg:size-[440px] rounded-full bg-warning-300 opacity-[0.4] blur-[250px]"></div>
+      </div>
+
+      <div class="container">
+        <div class="relative z-10">
+          <div class="flex justify-center mb-10 xl:mb-[60px]">
+            <img src="./assets/images/500.png" alt="" />
+          </div>
+          <div class="text-center max-w-3xl mx-auto bb-dashed-n40 xl:pb-8 xl:mb-8">
+            <h2 class="mb-4 xl:mb-6">500 Internal Server Error</h2>
+            <p class="max-w-md mx-auto">There was an error, please try again later.</p>
+          </div>
+          <div class="flex justify-center">
+            <a href="index.html" class="btn-primary"><i class="las la-arrow-left text-xl"></i>Back To Home</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

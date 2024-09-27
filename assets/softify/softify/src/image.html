@@ -1,0 +1,144 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Image</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Components</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Image</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Image -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div class="flex flex-col gap-6">
+            <div class="n20-box">
+              <h4 class="bb-dashed-n40">List</h4>
+              <div class="grid grid-cols-12 gap-4 lg:gap-6 gallery">
+                <a data-fslightbox href="./assets/images/carousel/basic-1.png" data-thumb="./assets/images/carousel/basic-1.png" class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3">
+                  <img src="./assets/images/carousel/basic-1.png" class="rounded-xl w-full" alt="" />
+                </a>
+                <a data-fslightbox href="./assets/images/carousel/basic-2.png" data-thumb="./assets/images/carousel/basic-2.png" class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3">
+                  <img src="./assets/images/carousel/basic-2.png" class="rounded-xl w-full" alt="" />
+                </a>
+                <a data-fslightbox href="./assets/images/carousel/basic-3.png" data-thumb="./assets/images/carousel/basic-3.png" class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3">
+                  <img src="./assets/images/carousel/basic-3.png" class="rounded-xl w-full" alt="" />
+                </a>
+                <a data-fslightbox href="./assets/images/carousel/basic-4.png" data-thumb="./assets/images/carousel/basic-4.png" class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3">
+                  <img src="./assets/images/carousel/basic-4.png" class="rounded-xl w-full" alt="" />
+                </a>
+                <a data-fslightbox href="./assets/images/carousel/basic-5.png" data-thumb="./assets/images/carousel/basic-5.png" class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3">
+                  <img src="./assets/images/carousel/basic-5.png" class="rounded-xl w-full" alt="" />
+                </a>
+                <a data-fslightbox href="./assets/images/carousel/basic-6.png" data-thumb="./assets/images/carousel/basic-6.png" class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3">
+                  <img src="./assets/images/carousel/basic-6.png" class="rounded-xl w-full" alt="" />
+                </a>
+                <a data-fslightbox href="./assets/images/carousel/basic-4.png" data-thumb="./assets/images/carousel/basic-4.png" class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3">
+                  <img src="./assets/images/carousel/basic-4.png" class="rounded-xl w-full" alt="" />
+                </a>
+                <a data-fslightbox href="./assets/images/carousel/basic-2.png" data-thumb="./assets/images/carousel/basic-2.png" class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3">
+                  <img src="./assets/images/carousel/basic-2.png" class="rounded-xl w-full" alt="" />
+                </a>
+              </div>
+            </div>
+            <div class="n20-box">
+              <h4 class="bb-dashed-n40">Aspect Ratio</h4>
+              <div class="grid grid-cols-12 gap-4 lg:gap-6">
+                <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3">
+                  <p class="l-text mb-4 font-medium">4/3</p>
+                  <img src="./assets/images/image/4by3.png" class="rounded-xl w-full" alt="" />
+                </div>
+                <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3">
+                  <p class="l-text mb-4 font-medium">3/4</p>
+                  <img src="./assets/images/image/3by4.png" class="rounded-xl w-full" alt="" />
+                </div>
+                <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3">
+                  <p class="l-text mb-4 font-medium">6/4</p>
+                  <img src="./assets/images/image/6by4.png" class="rounded-xl w-full" alt="" />
+                </div>
+                <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3">
+                  <p class="l-text mb-4 font-medium">4/6</p>
+                  <img src="./assets/images/image/4by6.png" class="rounded-xl w-full" alt="" />
+                </div>
+                <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3">
+                  <p class="l-text mb-4 font-medium">16/9</p>
+                  <img src="./assets/images/image/16by9.png" class="rounded-xl w-full" alt="" />
+                </div>
+                <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3">
+                  <p class="l-text mb-4 font-medium">9/16</p>
+                  <img src="./assets/images/image/9by16.png" class="rounded-xl w-full" alt="" />
+                </div>
+                <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3">
+                  <p class="l-text mb-4 font-medium">21/9</p>
+                  <img src="./assets/images/image/21by9.png" class="rounded-xl w-full" alt="" />
+                </div>
+                <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3">
+                  <p class="l-text mb-4 font-medium">9/21</p>
+                  <img src="./assets/images/image/9by21.png" class="rounded-xl w-full" alt="" />
+                </div>
+                <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3">
+                  <p class="l-text mb-4 font-medium">1/1</p>
+                  <img src="./assets/images/image/1by1.png" class="rounded-xl w-full" alt="" />
+                </div>
+                <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3">
+                  <p class="l-text mb-4 font-medium">1/2</p>
+                  <img src="./assets/images/image/1by2.png" class="rounded-xl w-full" alt="" />
+                </div>
+                <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3">
+                  <p class="l-text mb-4 font-medium">2/1</p>
+                  <img src="./assets/images/image/2by1.png" class="rounded-xl w-full" alt="" />
+                </div>
+                <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3">
+                  <p class="l-text mb-4 font-medium">3/1</p>
+                  <img src="./assets/images/image/3by1.png" class="rounded-xl w-full" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+    <script src="./assets/js/libs/fslightbox.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

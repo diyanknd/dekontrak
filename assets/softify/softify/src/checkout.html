@@ -1,0 +1,700 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" class="relative overflow-x-hidden" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Checkout</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Product</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Checkout</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- checkout -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div class="white-box">
+            <div x-data="{step: 1, deliveryType:'free', paymentMethod:'paypal'}" class="bg-neutral-0 dark:bg-neutral-904">
+              <div class="flex items-center max-w-[856px] mx-auto w-full gap-3 md:gap-4 xxl:gap-6 mb-10 xl:mb-[60px]">
+                <div class="flex flex-col items-center gap-2">
+                  <div class="flex size-6 items-center justify-center rounded-full bg-primary-300 text-neutral-0">
+                    <template x-if="step == 1">
+                      <span>1</span>
+                    </template>
+                    <template x-if="step > 1">
+                      <i class="las la-check"></i>
+                    </template>
+                  </div>
+                  <p class="m-text font-medium">Cart</p>
+                </div>
+                <span class="h-px grow bg-neutral-40 dark:bg-neutral-400"></span>
+                <div class="flex flex-col items-center gap-2">
+                  <div class="flex size-6 items-center justify-center rounded-full text-neutral-0" :class="{'bg-primary-300': step >= 2, 'bg-neutral-80':step<2}">
+                    <template x-if="step < 3">
+                      <span>2</span>
+                    </template>
+                    <template x-if="step > 2">
+                      <i class="las la-check"></i>
+                    </template>
+                  </div>
+                  <p class="m-text font-medium">Billing &amp; Address</p>
+                </div>
+                <span class="h-px grow bg-neutral-40 dark:bg-neutral-400"></span>
+                <div class="flex flex-col items-center gap-2">
+                  <div class="flex size-6 items-center justify-center rounded-full text-neutral-0" :class="{'bg-primary-300': step >= 3, 'bg-neutral-80':step<3}">
+                    <template x-if="step < 4">
+                      <span>3</span>
+                    </template>
+                    <template x-if="step > 3">
+                      <i class="las la-check"></i>
+                    </template>
+                  </div>
+                  <p class="m-text font-medium">Payment</p>
+                </div>
+              </div>
+              <div x-show="step==1" class="grid grid-cols-12 gap-4 xxl:gap-6">
+                <div class="col-span-12 lg:col-span-7 xxl:col-span-8">
+                  <div class="rounded-xl p-3 sm:p-4 md:p-6 xl:p-8 bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500">
+                    <div class="flex gap-1 items-center border-b border-dashed border-neutral-30 dark:border-neutral-500 pb-6 mb-6">
+                      <h4>Cart</h4>
+                      <p class="l-text text-neutral-100">(4 item)</p>
+                    </div>
+                    <div class="overflow-x-auto">
+                      <table class="w-full whitespace-nowrap">
+                        <thead>
+                          <tr class="bg-neutral-0 text-start dark:bg-neutral-904 border-b border-dashed border-neutral-30 dark:border-neutral-500">
+                            <th class="py-5 px-6">Product</th>
+                            <th class="py-5 px-6">Price</th>
+                            <th class="py-5 px-6">Quantity</th>
+                            <th class="py-5 px-6">Total Price</th>
+                            <th class="py-5 px-6"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="border-b border-dashed border-neutral-40 dark:border-neutral-500">
+                            <td class="py-4">
+                              <div class="flex items-center gap-6">
+                                <div class="rounded-lg size-14 bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 p-1">
+                                  <img src="./assets/images/products/product-5.png" alt="" />
+                                </div>
+                                <div>
+                                  <p class="m-text font-medium mb-3">Chuck 70 Hi Sneaker</p>
+                                  <div class="flex items-center divide-x divide-neutral-40 dark:divide-neutral-500">
+                                    <span class="flex items-center gap-2 ltr:pr-4 rtl:pl-4">Size : <span class="size-5 f-center bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 rounded text-xs">7</span></span>
+                                    <span class="flex items-center gap-2 ltr:pl-4 rtl:pr-4"
+                                      >Color : <span class="size-5 f-center bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 rounded text-xs"><span class="size-3 rounded-full bg-yellow-300"></span></span
+                                    ></span>
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                            <td class="px-5">
+                              <span class="m-text">$11.70</span>
+                            </td>
+                            <td class="py-3">
+                              <div class="flex flex-col items-start gap-2">
+                                <div x-data="{quantity: 3, increment() { this.quantity++ }, decrement() { this.quantity > 1 && this.quantity-- }}" class="p-1 border border-neutral-40 dark:border-neutral-500 bg-neutral-20 dark:bg-neutral-903 rounded-full flex items-center gap-3">
+                                  <button @click="decrement()" class="size-7 md:size-9 rounded-full hover:bg-primary-300 hover:text-neutral-0 duration-300 f-center bg-neutral-0 dark:bg-neutral-904">
+                                    <i class="las la-minus text-xl"></i>
+                                  </button>
+                                  <span class="l-text font-medium" x-text="quantity"></span>
+                                  <button @click="increment()" class="size-7 md:size-9 rounded-full hover:bg-primary-300 hover:text-neutral-0 duration-300 f-center bg-neutral-0 dark:bg-neutral-904">
+                                    <i class="las la-plus text-xl"></i>
+                                  </button>
+                                </div>
+                                <p class="text-neutral-100 text-xs">Available: 72</p>
+                              </div>
+                            </td>
+                            <td class="px-5">
+                              <span class="m-text">$66.70</span>
+                            </td>
+                            <td>
+                              <button class="size-10 rounded-full hover:bg-neutral-30 dark:hover:bg-neutral-500 duration-300 f-center">
+                                <i class="las la-trash text-xl"></i>
+                              </button>
+                            </td>
+                          </tr>
+                          <tr class="border-b border-dashed border-neutral-40 dark:border-neutral-500">
+                            <td class="py-4">
+                              <div class="flex items-center gap-6">
+                                <div class="rounded-lg size-14 bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 p-1">
+                                  <img src="./assets/images/products/product-2.png" alt="" />
+                                </div>
+                                <div>
+                                  <p class="m-text font-medium mb-3">Cotu Classic Sneaker</p>
+                                  <div class="flex items-center divide-x divide-neutral-40 dark:divide-neutral-500">
+                                    <span class="flex items-center gap-2 ltr:pr-4 rtl:pl-4">Size : <span class="size-5 f-center bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 rounded text-xs">7</span></span>
+                                    <span class="flex items-center gap-2 ltr:pl-4 rtl:pr-4"
+                                      >Color : <span class="size-5 f-center bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 rounded text-xs"><span class="size-3 rounded-full bg-success-300"></span></span
+                                    ></span>
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                            <td class="px-5">
+                              <span class="m-text">$11.70</span>
+                            </td>
+                            <td class="py-3">
+                              <div class="flex flex-col items-start gap-2">
+                                <div x-data="{quantity: 4, increment() { this.quantity++ }, decrement() { this.quantity > 1 && this.quantity-- }}" class="p-1 border border-neutral-40 dark:border-neutral-500 bg-neutral-20 dark:bg-neutral-903 rounded-full flex items-center gap-3">
+                                  <button @click="decrement()" class="size-7 md:size-9 rounded-full hover:bg-primary-300 hover:text-neutral-0 duration-300 f-center bg-neutral-0 dark:bg-neutral-904">
+                                    <i class="las la-minus text-xl"></i>
+                                  </button>
+                                  <span class="l-text font-medium" x-text="quantity"></span>
+                                  <button @click="increment()" class="size-7 md:size-9 rounded-full hover:bg-primary-300 hover:text-neutral-0 duration-300 f-center bg-neutral-0 dark:bg-neutral-904">
+                                    <i class="las la-plus text-xl"></i>
+                                  </button>
+                                </div>
+                                <p class="text-neutral-100 text-xs">Available: 72</p>
+                              </div>
+                            </td>
+                            <td class="px-5">
+                              <span class="m-text">$66.70</span>
+                            </td>
+                            <td>
+                              <button class="size-10 rounded-full hover:bg-neutral-30 dark:hover:bg-neutral-500 duration-300 f-center">
+                                <i class="las la-trash text-xl"></i>
+                              </button>
+                            </td>
+                          </tr>
+                          <tr class="border-b border-dashed border-neutral-40 dark:border-neutral-500">
+                            <td class="py-4">
+                              <div class="flex items-center gap-6">
+                                <div class="rounded-lg size-14 bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 p-1">
+                                  <img src="./assets/images/products/product-3.png" alt="" />
+                                </div>
+                                <div>
+                                  <p class="m-text font-medium mb-3">Zoom Freak 2</p>
+                                  <div class="flex items-center divide-x divide-neutral-40 dark:divide-neutral-500">
+                                    <span class="flex items-center gap-2 ltr:pr-4 rtl:pl-4">Size : <span class="size-5 f-center bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 rounded text-xs">7</span></span>
+                                    <span class="flex items-center gap-2 ltr:pl-4 rtl:pr-4"
+                                      >Color : <span class="size-5 f-center bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 rounded text-xs"><span class="size-3 rounded-full bg-[#931F5C]"></span></span
+                                    ></span>
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                            <td class="px-5">
+                              <span class="m-text">$11.70</span>
+                            </td>
+                            <td class="py-3">
+                              <div class="flex flex-col items-start gap-2">
+                                <div x-data="{quantity: 1, increment() { this.quantity++ }, decrement() { this.quantity > 1 && this.quantity-- }}" class="p-1 border border-neutral-40 dark:border-neutral-500 bg-neutral-20 dark:bg-neutral-903 rounded-full flex items-center gap-3">
+                                  <button @click="decrement()" class="size-7 md:size-9 rounded-full hover:bg-primary-300 hover:text-neutral-0 duration-300 f-center bg-neutral-0 dark:bg-neutral-904">
+                                    <i class="las la-minus text-xl"></i>
+                                  </button>
+                                  <span class="l-text font-medium" x-text="quantity"></span>
+                                  <button @click="increment()" class="size-7 md:size-9 rounded-full hover:bg-primary-300 hover:text-neutral-0 duration-300 f-center bg-neutral-0 dark:bg-neutral-904">
+                                    <i class="las la-plus text-xl"></i>
+                                  </button>
+                                </div>
+                                <p class="text-neutral-100 text-xs">Available: 72</p>
+                              </div>
+                            </td>
+                            <td class="px-5">
+                              <span class="m-text">$66.70</span>
+                            </td>
+                            <td>
+                              <button class="size-10 rounded-full hover:bg-neutral-30 dark:hover:bg-neutral-500 duration-300 f-center">
+                                <i class="las la-trash text-xl"></i>
+                              </button>
+                            </td>
+                          </tr>
+                          <tr class="border-b border-dashed border-neutral-40 dark:border-neutral-500">
+                            <td class="py-4">
+                              <div class="flex items-center gap-6">
+                                <div class="rounded-lg size-14 bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 p-1">
+                                  <img src="./assets/images/products/product-4.png" alt="" />
+                                </div>
+                                <div>
+                                  <p class="m-text font-medium mb-3">Classic Sneaker</p>
+                                  <div class="flex items-center divide-x divide-neutral-40 dark:divide-neutral-500">
+                                    <span class="flex items-center gap-2 ltr:pr-4 rtl:pl-4">Size : <span class="size-5 f-center bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 rounded text-xs">7</span></span>
+                                    <span class="flex items-center gap-2 ltr:pl-4 rtl:pr-4"
+                                      >Color : <span class="size-5 f-center bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 rounded text-xs"><span class="size-3 rounded-full bg-error-300"></span></span
+                                    ></span>
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                            <td class="px-5">
+                              <span class="m-text">$11.70</span>
+                            </td>
+                            <td class="py-3">
+                              <div class="flex flex-col items-start gap-2">
+                                <div x-data="{quantity: 2, increment() { this.quantity++ }, decrement() { this.quantity > 1 && this.quantity-- }}" class="p-1 border border-neutral-40 dark:border-neutral-500 bg-neutral-20 dark:bg-neutral-903 rounded-full flex items-center gap-3">
+                                  <button @click="decrement()" class="size-7 md:size-9 rounded-full hover:bg-primary-300 hover:text-neutral-0 duration-300 f-center bg-neutral-0 dark:bg-neutral-904">
+                                    <i class="las la-minus text-xl"></i>
+                                  </button>
+                                  <span class="l-text font-medium" x-text="quantity"></span>
+                                  <button @click="increment()" class="size-7 md:size-9 rounded-full hover:bg-primary-300 hover:text-neutral-0 duration-300 f-center bg-neutral-0 dark:bg-neutral-904">
+                                    <i class="las la-plus text-xl"></i>
+                                  </button>
+                                </div>
+                                <p class="text-neutral-100 text-xs">Available: 72</p>
+                              </div>
+                            </td>
+                            <td class="px-5">
+                              <span class="m-text">$66.70</span>
+                            </td>
+                            <td>
+                              <button class="size-10 rounded-full hover:bg-neutral-30 dark:hover:bg-neutral-500 duration-300 f-center">
+                                <i class="las la-trash text-xl"></i>
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <a href="shop.html" class="h-6 font-semibold text-primary-300 mt-6 flex items-center gap-2">
+                      <i class="las la-arrow-left text-xl"></i>
+                      Continue Shopping
+                    </a>
+                  </div>
+                </div>
+                <div class="col-span-12 lg:col-span-5 xxl:col-span-4">
+                  <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl border border-neutral-30 dark:border-neutral-500 p-3 sm:p-4 md:p-6 xl:p-8">
+                    <p class="l-text mb-3">Price</p>
+                    <div class="flex gap-4 items-end mb-6 pb-6 lg:pb-10 border-b border-dashed border-neutral-40 dark:border-neutral-500">
+                      <i class="las la-tag text-3xl"></i>
+                      <span>From</span>
+                      <div class="flex items-start gap-1">
+                        <h2>$39.99</h2>
+                        <i class="las la-info-circle"></i>
+                      </div>
+                    </div>
+                    <ul class="flex flex-col gap-4 xxl:gap-6 bb-dashed-n40">
+                      <li class="flex justify-between items-center">
+                        <span class="m-text">Base Price</span>
+                        <span class="m-text font-medium">$9.99</span>
+                      </li>
+                      <li class="flex justify-between items-center">
+                        <span class="m-text">State Tax</span>
+                        <span class="m-text font-medium">$5</span>
+                      </li>
+                      <li class="flex justify-between items-center">
+                        <span class="m-text">Shipping</span>
+                        <span class="font-medium m-text">Free</span>
+                      </li>
+                    </ul>
+                    <div class="mb-4">
+                      <form class="rounded-full bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 p-1 flex">
+                        <input type="text" class="px-4 py-2 w-full bg-transparent" placeholder="Coupon" />
+                        <button class="size-10 shrink-0 rounded-full bg-primary-300 text-neutral-0 f-center">
+                          <i class="las la-arrow-right text-2xl"></i>
+                        </button>
+                      </form>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-dashed border-neutral-40 dark:border-neutral-500 mb-4 pb-4">
+                      <span class="m-text">Discount</span>
+                      <span class="m-text font-medium text-error-300">$9</span>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-dashed border-neutral-40 dark:border-neutral-500 mb-6 xl:mb-10 pb-4">
+                      <span class="m-text">Total</span>
+                      <span class="m-text font-medium">$1025</span>
+                    </div>
+                    <button @click="step++" class="btn-primary w-full">Checkout</button>
+                  </div>
+                </div>
+              </div>
+              <div x-show="step==2" class="grid grid-cols-12 gap-4 xxl:gap-6">
+                <div class="col-span-12 lg:col-span-7 xxl:col-span-8">
+                  <div class="rounded-xl p-3 sm:p-4 md:p-6 xl:p-8 bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500">
+                    <h4 class="bb-dashed-n40">Shipping Address</h4>
+                    <div class="flex flex-col gap-6">
+                      <div class="white-box flex flex-wrap items-center justify-between gap-4">
+                        <div>
+                          <div class="flex items-center gap-3 mb-4">
+                            <h5>Jayvion Simon <span class="font-normal">(Home)</span></h5>
+                            <button class="font-semibold text-info-300 text-xs md:text-sm py-1.5 bg-info-300/10 px-3 rounded-lg">Default</button>
+                          </div>
+                          <p class="s-text">4517 Washington Ave. Manchester, Kentucky 39495</p>
+                        </div>
+                        <div class="flex items-center gap-4 xxl:gap-6 flex-wrap">
+                          <button class="font-semibold text-error-300">Delete</button>
+                          <button @click="step++" class="btn-primary-outlined">Deliver to this Address</button>
+                        </div>
+                      </div>
+                      <div class="white-box flex flex-wrap items-center justify-between gap-4">
+                        <div>
+                          <div class="flex items-center gap-3 mb-4">
+                            <h5>Lucian Obreian <span class="font-normal">(Home)</span></h5>
+                          </div>
+                          <p class="s-text">4517 Washington Ave. Manchester, Kentucky 39495</p>
+                        </div>
+                        <div class="flex items-center gap-4 xxl:gap-6 flex-wrap">
+                          <button class="font-semibold text-error-300">Delete</button>
+                          <button @click="step++" class="btn-primary-outlined">Deliver to this Address</button>
+                        </div>
+                      </div>
+                      <div class="white-box flex flex-wrap items-center justify-between gap-4">
+                        <div>
+                          <div class="flex items-center gap-3 mb-4">
+                            <h5>Deja Bredy <span class="font-normal">(Office)</span></h5>
+                          </div>
+                          <p class="s-text">4517 Washington Ave. Manchester, Kentucky 39495</p>
+                        </div>
+                        <div class="flex items-center gap-4 xxl:gap-6 flex-wrap">
+                          <button class="font-semibold text-error-300">Delete</button>
+                          <button @click="step++" class="btn-primary-outlined">Deliver to this Address</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div x-data="modal" class="flex justify-between items-center mt-6">
+                      <button @click="step--" class="font-semibold flex items-center gap-2"><i class="las la-arrow-left text-xl"></i> Back</button>
+                      <button @click="toggle()" class="flex text-primary-300 font-semibold items-center gap-3"><i class="las la-plus-circle text-xl"></i> New Address</button>
+                      <template x-teleport="body">
+                        <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                          <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                            <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                              <div class="mb-4 flex items-center justify-between border-b border-dashed border-neutral-30 dark:border-neutral-500 pb-4 lg:mb-6 lg:pb-6">
+                                <h4>New Address</h4>
+                                <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                              </div>
+                              <form class="grid grid-cols-2 gap-4 xxl:gap-6" @submit.prevent>
+                                <div class="col-span-2 flex gap-4">
+                                  <div class="custom-radio">
+                                    <input type="radio" id="home" name="address" checked />
+                                    <label for="home">Home</label>
+                                  </div>
+                                  <div class="custom-radio">
+                                    <input type="radio" id="office" name="address" />
+                                    <label for="office">Office</label>
+                                  </div>
+                                </div>
+                                <div class="col-span-2">
+                                  <div class="form-input">
+                                    <input type="text" id="name" placeholder="Name" required />
+                                    <label for="name">Name</label>
+                                  </div>
+                                </div>
+                                <div class="col-span-2 sm:col-span-1">
+                                  <div class="form-input">
+                                    <input type="email" id="email" placeholder="Email" required />
+                                    <label for="email">Email</label>
+                                  </div>
+                                </div>
+                                <div class="col-span-2 sm:col-span-1">
+                                  <div class="form-input">
+                                    <input type="number" id="phone" placeholder="phone" required />
+                                    <label for="phone">Phone</label>
+                                  </div>
+                                </div>
+                                <div class="col-span-2 sm:col-span-1">
+                                  <div class="rounded-xl border border-neutral-30 bg-neutral-0 dark:bg-neutral-904 pr-6 dark:border-neutral-500">
+                                    <select name="default" id="default-filled" class="w-full rounded-xl border-none bg-neutral-0 px-6 py-3 xl:py-4 focus:border-none focus:outline-none dark:bg-neutral-904">
+                                      <option value="" selected>Country</option>
+                                      <option value="usa">USA</option>
+                                      <option value="canada">Canada</option>
+                                      <option value="egypt">Egypt</option>
+                                      <option value="uk">UK</option>
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="col-span-2 sm:col-span-1">
+                                  <div class="form-input">
+                                    <input type="text" id="city" placeholder="phone" required />
+                                    <label for="city">City</label>
+                                  </div>
+                                </div>
+                                <div class="col-span-2">
+                                  <div class="form-input">
+                                    <textarea id="address" rows="4" placeholder="Address" required></textarea>
+                                    <label for="address" class="textarea">Enter Your Address</label>
+                                  </div>
+                                </div>
+                                <div class="col-span-2 sm:col-span-1">
+                                  <div class="form-input">
+                                    <input type="text" id="state" placeholder="Email" required />
+                                    <label for="state">State</label>
+                                  </div>
+                                </div>
+                                <div class="col-span-2 sm:col-span-1">
+                                  <div class="form-input">
+                                    <input type="number" id="zip" placeholder="phone" required />
+                                    <label for="zip">Enter Zip Code</label>
+                                  </div>
+                                </div>
+
+                                <div class="col-span-2 flex gap-4 mt-2">
+                                  <button @click="closeModal" type="submit" class="btn-primary">Deliver to this Address</button>
+                                  <button @click="closeModal" type="reset" class="btn-primary-outlined">Cancel</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </template>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-span-12 lg:col-span-5 xxl:col-span-4">
+                  <div class="bg-neutral-20 dark:bg-neutral-903 rounded-xl border border-neutral-30 dark:border-neutral-500 p-3 sm:p-4 md:p-6 xl:p-8">
+                    <p class="l-text mb-3">Price</p>
+                    <div class="flex gap-4 items-end mb-6 pb-6 lg:pb-10 border-b border-dashed border-neutral-40 dark:border-neutral-500">
+                      <i class="las la-tag text-3xl"></i>
+                      <span>From</span>
+                      <div class="flex items-start gap-1">
+                        <h2>$39.99</h2>
+                        <i class="las la-info-circle"></i>
+                      </div>
+                    </div>
+                    <ul class="flex flex-col gap-4 xxl:gap-6 bb-dashed-n40">
+                      <li class="flex justify-between items-center">
+                        <span class="m-text">Base Price</span>
+                        <span class="m-text font-medium">$9.99</span>
+                      </li>
+                      <li class="flex justify-between items-center">
+                        <span class="m-text">State Tax</span>
+                        <span class="m-text font-medium">$5</span>
+                      </li>
+                      <li class="flex justify-between items-center">
+                        <span class="m-text">Shipping</span>
+                        <span class="font-medium m-text">Free</span>
+                      </li>
+                    </ul>
+
+                    <div class="flex justify-between items-center border-b border-dashed border-neutral-40 dark:border-neutral-500 mb-4 pb-4">
+                      <span class="m-text">Discount</span>
+                      <span class="m-text font-medium text-error-300">$9</span>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-dashed border-neutral-40 dark:border-neutral-500 pb-4">
+                      <span class="m-text">Total</span>
+                      <span class="m-text font-medium text-secondary-300">$1025</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div x-show="step==3" class="grid grid-cols-12 gap-4 xxl:gap-6">
+                <div class="col-span-12 lg:col-span-7 xxl:col-span-8 flex flex-col gap-4 lg:gap-6">
+                  <div class="rounded-xl p-3 sm:p-4 md:p-6 xl:p-8 bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500">
+                    <h4 class="bb-dashed-n40">Delivery</h4>
+                    <div class="grid grid-cols-2 gap-4 xxl:gap-6">
+                      <div @click="deliveryType='free'" :class="{'!border-primary-300 dark:!border-primary-300':deliveryType=='free'}" class="col-span-2 md:col-span-1 white-box flex gap-4 xxl:gap-6 items-start cursor-pointer">
+                        <i class="las la-truck-loading text-3xl"></i>
+                        <div class="grow">
+                          <h5 class="font-semibold mb-3">Free</h5>
+                          <p class="s-text">5-7 Days delivery</p>
+                        </div>
+                        <p class="xl-text font-medium">$00</p>
+                      </div>
+                      <div @click="deliveryType='standard'" :class="{'!border-primary-300 dark:!border-primary-300':deliveryType=='standard'}" class="col-span-2 md:col-span-1 white-box flex gap-4 xxl:gap-6 items-start cursor-pointer">
+                        <i class="las la-truck-loading text-3xl"></i>
+                        <div class="grow">
+                          <h5 class="font-semibold mb-3">Standard</h5>
+                          <p class="s-text">3-5 Days delivery</p>
+                        </div>
+                        <p class="xl-text font-medium">$10</p>
+                      </div>
+                      <div @click="deliveryType='express'" :class="{'!border-primary-300 dark:!border-primary-300':deliveryType=='express'}" class="col-span-2 md:col-span-1 white-box flex gap-4 xxl:gap-6 items-start cursor-pointer">
+                        <i class="las la-truck-loading text-3xl"></i>
+                        <div class="grow">
+                          <h5 class="font-semibold mb-3">Express</h5>
+                          <p class="s-text">2-3 Days delivery</p>
+                        </div>
+                        <p class="xl-text font-medium">$25</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="rounded-xl p-3 sm:p-4 md:p-6 xl:p-8 bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500">
+                    <h4 class="bb-dashed-n40">Payment</h4>
+                    <div class="flex flex-col gap-4 xxl:gap-6 mb-6">
+                      <div @click="paymentMethod='paypal'" :class="{'!border-primary-300 dark:!border-primary-300':paymentMethod=='paypal'}" class="white-box cursor-pointer flex items-center justify-between gap-4">
+                        <div>
+                          <h5 class="mb-4">Pay with Paypal</h5>
+                          <p class="s-text">4517 Washington Ave. Manchester, Kentucky 39495</p>
+                        </div>
+                        <img src="./assets/images/paypal.png" alt="" />
+                      </div>
+                      <div @click="paymentMethod='card'" :class="{'!border-primary-300 dark:!border-primary-300':paymentMethod=='card'}" class="white-box cursor-pointer">
+                        <div class="flex flex-wrap items-center justify-between gap-4">
+                          <div>
+                            <h5 class="mb-4">Credit / Debit Card</h5>
+                            <p class="s-text">We support Mastercard, Visa, Discover and Stripe.</p>
+                          </div>
+                          <div class="flex gap-3">
+                            <img src="./assets/images/payoneer.png" alt="" />
+                            <img src="./assets/images/mastercard.png" alt="" />
+                            <img src="./assets/images/visa.png" alt="" />
+                          </div>
+                        </div>
+                        <div x-data="modal" x-show="paymentMethod=='card'" x-collapse>
+                          <div x-data="{isOpen:false,selected:'**** **** ****3652-Jane', items:['**** **** ****3652-Jane','**** **** ****3652-John','**** **** ****3652-Sara','**** **** ****3652-Adam','**** **** ****3652-Mary']}" class="relative mb-4 mt-6">
+                            <div @click="isOpen=!isOpen" class="relative bg-neutral-0 dark:bg-neutral-904 flex cursor-pointer items-center justify-between rounded-full px-6 py-3 border border-neutral-30 dark:border-neutral-500">
+                              <span x-text="selected"></span>
+                              <i class="las la-angle-down text-lg duration-300" :class="isOpen?'rotate-180':'rotate-0'"></i>
+                            </div>
+                            <div x-show="isOpen" @click.away="isOpen=false" class="absolute left-0 top-full z-10 flex max-h-[200px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-0 p-1 shadow-xl dark:bg-neutral-904">
+                              <template x-for="item in items">
+                                <div @click="selected=item, isOpen=false" :class="selected===item?'bg-primary-300  text-neutral-0':'hover:bg-primary-50 dark:hover:bg-neutral-903'" class="cursor-pointer rounded-md px-4 py-2 duration-300" x-text="item"></div>
+                              </template>
+                            </div>
+                          </div>
+                          <div class="flex justify-end">
+                            <span @click="toggle()" class="font-semibold text-primary-300 flex items-center gap-3 cursor-pointer select-none">
+                              <i class="las la-plus text-xl"></i>
+                              Add New Card
+                            </span>
+                          </div>
+                          <template x-teleport="body">
+                            <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                              <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                                <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                                  <div class="mb-4 flex items-center justify-between border-b border-dashed border-neutral-30 dark:border-neutral-500 pb-4 lg:mb-6 lg:pb-6">
+                                    <h4>New Card</h4>
+                                    <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                                  </div>
+                                  <form class="grid grid-cols-2 gap-4 xxl:gap-6" @submit.prevent>
+                                    <div class="col-span-2">
+                                      <div class="form-input">
+                                        <input type="number" id="card-number" placeholder="Card Number" required />
+                                        <label for="card-number">Card Number</label>
+                                      </div>
+                                    </div>
+                                    <div class="col-span-2">
+                                      <div class="form-input">
+                                        <input type="text" id="card-holder" placeholder="Card Holder" required />
+                                        <label for="card-holder">Card Holder</label>
+                                      </div>
+                                    </div>
+                                    <div class="col-span-2 sm:col-span-1">
+                                      <div class="form-input">
+                                        <input type="text" id="expire-date" placeholder="Expire Date" required />
+                                        <label for="expire-date">Expiration Date</label>
+                                      </div>
+                                    </div>
+                                    <div class="col-span-2 sm:col-span-1">
+                                      <div class="form-input">
+                                        <input type="text" id="cvc" placeholder="CVC" required />
+                                        <label for="cvc">CVV/CVC</label>
+                                      </div>
+                                    </div>
+                                    <div class="col-span-2 flex items-center gap-2">
+                                      <i class="las la-lock text-xl"></i>
+                                      <p class="m-text text-neutral-100">Your transaction is secured with SSL encryption</p>
+                                    </div>
+                                    <div class="col-span-2 flex gap-4 mt-2">
+                                      <button @click="closeModal" type="submit" class="btn-primary">Add Now</button>
+                                      <button @click="closeModal" type="reset" class="btn-primary-outlined">Cancel</button>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </template>
+                        </div>
+                      </div>
+                      <div @click="paymentMethod='cash'" :class="{'!border-primary-300 dark:!border-primary-300':paymentMethod=='cash'}" class="white-box cursor-pointer flex items-center justify-between gap-4">
+                        <div>
+                          <h5 class="mb-4">Cash</h5>
+                          <p class="s-text">Pay with cash when your order is delivered.</p>
+                        </div>
+                        <img src="./assets/images/cash.png" alt="" />
+                      </div>
+                    </div>
+                    <button @click="step--" class="font-semibold flex items-center gap-2"><i class="las la-arrow-left text-xl"></i> Back</button>
+                  </div>
+                </div>
+                <div class="col-span-12 lg:col-span-5 xxl:col-span-4 flex flex-col gap-4 xxl:gap-6">
+                  <div class="n20-box">
+                    <div class="flex justify-between items-center bb-dashed-n40">
+                      <h4>Address</h4>
+                      <button @click="step=2" class="flex items-center gap-2 font-semibold">
+                        <i class="las la-pen text-xl"></i>
+                        <span>Edit</span>
+                      </button>
+                    </div>
+                    <p class="l-text mb-4"><span class="font-medium">Jayvion Simon</span> (Home)</p>
+                    <p class="mb-4 s-text">4517 Washington Ave. Manchester, Kentucky 39495</p>
+                    <p class="s-text">(208) 555-0112, (319) 555-0115</p>
+                  </div>
+
+                  <div class="n20-box">
+                    <p class="l-text mb-3">Price</p>
+                    <div class="flex gap-4 items-end mb-6 pb-6 lg:pb-10 border-b border-dashed border-neutral-40 dark:border-neutral-500">
+                      <i class="las la-tag text-3xl"></i>
+                      <span>From</span>
+                      <div class="flex items-start gap-1">
+                        <h2>$39.99</h2>
+                        <i class="las la-info-circle"></i>
+                      </div>
+                    </div>
+                    <ul class="flex flex-col gap-4 xxl:gap-6 bb-dashed-n40">
+                      <li class="flex justify-between items-center">
+                        <span class="m-text">Base Price</span>
+                        <span class="m-text font-medium">$9.99</span>
+                      </li>
+                      <li class="flex justify-between items-center">
+                        <span class="m-text">State Tax</span>
+                        <span class="m-text font-medium">$5</span>
+                      </li>
+                      <li class="flex justify-between items-center">
+                        <span class="m-text">Shipping</span>
+                        <span class="font-medium m-text">Free</span>
+                      </li>
+                    </ul>
+
+                    <div class="flex justify-between items-center border-b border-dashed border-neutral-40 dark:border-neutral-500 mb-4 pb-4">
+                      <span class="m-text">Discount</span>
+                      <span class="m-text font-medium text-error-300">$9</span>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-dashed border-neutral-40 dark:border-neutral-500 mb-6 xl:mb-10 pb-4">
+                      <span class="m-text">Total</span>
+                      <span class="m-text font-medium">$1025</span>
+                    </div>
+                    <a href="checkout-success.html" class="btn-primary w-full">Complete Order</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+  </body>
+</html>

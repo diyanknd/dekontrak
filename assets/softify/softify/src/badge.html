@@ -1,0 +1,447 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="./assets/css/github.min.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Badge</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Components</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Badge</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Badge -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div class="space-y-4 xl:space-y-6">
+            <!-- Basic -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h5 class="bb-dashed-n40">Number</h5>
+
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <div x-show="!viewcode" class="flex gap-4 lg:gap-6 flex-wrap">
+                <div class="relative">
+                  <span class="absolute -top-0.5 -right-0 border border-neutral-0 dark:border-neutral-904 text-[10px] rounded-full size-4 bg-primary-300 text-neutral-0 f-center font-bold"></span>
+                  <i class="las la-bell text-4xl"></i>
+                </div>
+                <div class="relative">
+                  <span class="absolute -top-0.5 -right-1.5 text-[10px] rounded-full size-4 bg-secondary-300 text-neutral-0 f-center font-bold">5</span>
+                  <i class="las la-bell text-4xl"></i>
+                </div>
+                <div class="relative">
+                  <span class="absolute -top-0.5 -right-1.5 text-[10px] rounded-full size-4 bg-info-300 text-neutral-0 f-center font-bold">5</span>
+                  <i class="las la-bell text-4xl"></i>
+                </div>
+                <div class="relative">
+                  <span class="absolute -top-0.5 -right-1.5 text-[10px] rounded-full size-4 bg-success-300 text-neutral-0 f-center font-bold">5</span>
+                  <i class="las la-bell text-4xl"></i>
+                </div>
+                <div class="relative">
+                  <span class="absolute -top-0.5 -right-1.5 text-[10px] rounded-full size-4 bg-info-300 text-neutral-0 f-center font-bold">5</span>
+                  <i class="las la-bell text-4xl"></i>
+                </div>
+                <div class="relative">
+                  <span class="absolute -top-0.5 -right-1.5 text-[10px] rounded-full size-4 bg-error-300 text-neutral-0 f-center font-bold">5</span>
+                  <i class="las la-bell text-4xl"></i>
+                </div>
+                <div class="relative">
+                  <span class="absolute -top-0.5 -right-1.5 text-[10px] rounded-full size-4 bg-neutral-900 text-neutral-0 f-center font-bold">5</span>
+                  <i class="las la-bell text-4xl"></i>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex gap-4 lg:gap-6 flex-wrap&#x22;&#x3E;
+  &#x3C;div class=&#x22;relative&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-0.5 -right-1.5 text-xs rounded-full size-5 bg-primary-300 text-neutral-0 f-center font-bold&#x22;&#x3E;5&#x3C;/span&#x3E;
+    &#x3C;i class=&#x22;las la-bell text-4xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;relative&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-0.5 -right-1.5 text-xs rounded-full size-5 bg-secondary-300 text-neutral-0 f-center font-bold&#x22;&#x3E;5&#x3C;/span&#x3E;
+    &#x3C;i class=&#x22;las la-bell text-4xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;relative&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-0.5 -right-1.5 text-xs rounded-full size-5 bg-info-300 text-neutral-0 f-center font-bold&#x22;&#x3E;5&#x3C;/span&#x3E;
+    &#x3C;i class=&#x22;las la-bell text-4xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;relative&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-0.5 -right-1.5 text-xs rounded-full size-5 bg-success-300 text-neutral-0 f-center font-bold&#x22;&#x3E;5&#x3C;/span&#x3E;
+    &#x3C;i class=&#x22;las la-bell text-4xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;relative&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-0.5 -right-1.5 text-xs rounded-full size-5 bg-info-300 text-neutral-0 f-center font-bold&#x22;&#x3E;5&#x3C;/span&#x3E;
+    &#x3C;i class=&#x22;las la-bell text-4xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;relative&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-0.5 -right-1.5 text-xs rounded-full size-5 bg-error-300 text-neutral-0 f-center font-bold&#x22;&#x3E;5&#x3C;/span&#x3E;
+    &#x3C;i class=&#x22;las la-bell text-4xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;relative&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-0.5 -right-1.5 text-xs rounded-full size-5 bg-neutral-900 text-neutral-0 f-center font-bold&#x22;&#x3E;5&#x3C;/span&#x3E;
+    &#x3C;i class=&#x22;las la-bell text-4xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!-- Dot Badge -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h5 class="bb-dashed-n40">Dot Badge</h5>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <div x-data="copyorviewcode" class="flex gap-4 lg:gap-6 flex-wrap items-center">
+                <div class="relative">
+                  <span class="absolute top-1.5 right-0 border border-neutral-0 dark:border-neutral-904 rounded-full size-2 bg-primary-300"></span>
+                  <i class="las la-bell text-4xl"></i>
+                </div>
+
+                <div class="relative size-10 f-center border-2 border-primary-75 bg-primary-50">
+                  <span class="absolute -top-1 -right-1 rounded-full size-2.5 bg-primary-300 border-2 border-neutral-20 dark:border-neutral-903"></span>
+                  <i class="las la-bell text-2xl"></i>
+                </div>
+
+                <div class="relative rounded size-10 f-center border-2 border-primary-75 bg-primary-50">
+                  <span class="absolute -top-1 -right-1 rounded-full size-2.5 bg-primary-300 border-2 border-neutral-20 dark:border-neutral-903"></span>
+                  <i class="las la-bell text-2xl"></i>
+                </div>
+
+                <div class="relative rounded-lg size-10 f-center border-2 border-primary-75 bg-primary-50">
+                  <span class="absolute -top-1 -right-1 rounded-full size-2.5 bg-primary-300 border-2 border-neutral-20 dark:border-neutral-903"></span>
+                  <i class="las la-bell text-2xl"></i>
+                </div>
+
+                <div class="relative rounded-xl size-10 f-center border-2 border-primary-75 bg-primary-50">
+                  <span class="absolute -top-0.5 -right-0.5 rounded-full size-2.5 bg-primary-300 border-2 border-neutral-20 dark:border-neutral-903"></span>
+                  <i class="las la-bell text-2xl"></i>
+                </div>
+
+                <div class="relative rounded-2xl size-10 f-center border-2 border-primary-75 bg-primary-50">
+                  <span class="absolute -top-0.5 -right-0.5 rounded-full size-2.5 bg-primary-300 border-2 border-neutral-20 dark:border-neutral-903"></span>
+                  <i class="las la-bell text-2xl"></i>
+                </div>
+
+                <div class="relative rounded-[20px] size-10 f-center border-2 border-primary-75 bg-primary-50">
+                  <span class="absolute top-0 right-0 rounded-full size-2.5 bg-primary-300 border-2 border-neutral-20 dark:border-neutral-903"></span>
+                  <i class="las la-bell text-2xl"></i>
+                </div>
+
+                <div class="relative rounded-[20px] flex items-center">
+                  <span class="absolute -top-1 -right-1 rounded-full size-2.5 bg-primary-300 border-2 border-neutral-20 dark:border-neutral-903"></span>
+                  <span class="l-text">Typography</span>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex gap-4 lg:gap-6 flex-wrap items-center&#x22;&#x3E;
+  &#x3C;div class=&#x22;relative&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute top-0 -right-1.5 rounded-full size-2 bg-primary-300&#x22;&#x3E;&#x3C;/span&#x3E;
+    &#x3C;i class=&#x22;las la-bell text-4xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;div class=&#x22;relative size-10 f-center border-2 border-primary-75 bg-primary-50&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-1 -right-1 rounded-full size-2.5 bg-primary-300 border-2 border-neutral-20 dark:border-neutral-903&#x22;&#x3E;&#x3C;/span&#x3E;
+    &#x3C;i class=&#x22;las la-bell text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;div class=&#x22;relative rounded size-10 f-center border-2 border-primary-75 bg-primary-50&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-1 -right-1 rounded-full size-2.5 bg-primary-300 border-2 border-neutral-20 dark:border-neutral-903&#x22;&#x3E;&#x3C;/span&#x3E;
+    &#x3C;i class=&#x22;las la-bell text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;div class=&#x22;relative rounded-lg size-10 f-center border-2 border-primary-75 bg-primary-50&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-1 -right-1 rounded-full size-2.5 bg-primary-300 border-2 border-neutral-20 dark:border-neutral-903&#x22;&#x3E;&#x3C;/span&#x3E;
+    &#x3C;i class=&#x22;las la-bell text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;div class=&#x22;relative rounded-xl size-10 f-center border-2 border-primary-75 bg-primary-50&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-0.5 -right-0.5 rounded-full size-2.5 bg-primary-300 border-2 border-neutral-20 dark:border-neutral-903&#x22;&#x3E;&#x3C;/span&#x3E;
+    &#x3C;i class=&#x22;las la-bell text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;div class=&#x22;relative rounded-2xl size-10 f-center border-2 border-primary-75 bg-primary-50&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-0.5 -right-0.5 rounded-full size-2.5 bg-primary-300 border-2 border-neutral-20 dark:border-neutral-903&#x22;&#x3E;&#x3C;/span&#x3E;
+    &#x3C;i class=&#x22;las la-bell text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;div class=&#x22;relative rounded-[20px] size-10 f-center border-2 border-primary-75 bg-primary-50&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute top-0 right-0 rounded-full size-2.5 bg-primary-300 border-2 border-neutral-20 dark:border-neutral-903&#x22;&#x3E;&#x3C;/span&#x3E;
+    &#x3C;i class=&#x22;las la-bell text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;div class=&#x22;relative rounded-[20px] flex items-center&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-1 -right-1 rounded-full size-2.5 bg-primary-300 border-2 border-neutral-20 dark:border-neutral-903&#x22;&#x3E;&#x3C;/span&#x3E;
+    &#x3C;span class=&#x22;l-text&#x22;&#x3E;Typography&#x3C;/span&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!-- Status -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h5 class="bb-dashed-n40">Status</h5>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+              <div x-show="!viewcode" class="flex gap-4 lg:gap-6 flex-wrap items-center">
+                <div class="relative size-10 rounded-full bg-neutral-50 dark:bg-neutral-400">
+                  <span class="absolute bottom-0 f-center size-4 right-0 text-neutral-0 bg-secondary-300 rounded-full border border-neutral-0 dark:border-neutral-903">
+                    <i class="las la-clock text-xs"></i>
+                  </span>
+                </div>
+                <div class="relative size-10 rounded-full bg-neutral-50 dark:bg-neutral-400">
+                  <span class="absolute bottom-0 f-center size-4 right-0 text-neutral-0 bg-info-300 rounded-full border border-neutral-0 dark:border-neutral-903">
+                    <i class="las la-plus text-xs"></i>
+                  </span>
+                </div>
+                <div class="relative size-10 rounded-full bg-neutral-50 dark:bg-neutral-400">
+                  <span class="absolute bottom-0 f-center size-4 right-0 text-neutral-0 bg-error-300 rounded-full border border-neutral-0 dark:border-neutral-903">
+                    <i class="las la-minus text-xs"></i>
+                  </span>
+                </div>
+
+                <div class="relative size-10 rounded-full bg-neutral-50 dark:bg-neutral-400">
+                  <span class="absolute bottom-0 f-center size-4 right-0 text-neutral-0 bg-info-300 rounded-full border-2 border-neutral-0 dark:border-neutral-903"> </span>
+                </div>
+
+                <div class="relative size-10 rounded-full bg-neutral-50 dark:bg-neutral-400">
+                  <span class="absolute bottom-0 f-center size-4 right-0 text-neutral-0 bg-success-300 rounded-full border-[0.5px] border-neutral-0 dark:border-neutral-903"> </span>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex gap-4 lg:gap-6 flex-wrap items-center&#x22;&#x3E;
+  &#x3C;div class=&#x22;relative size-10 rounded-full bg-neutral-50 dark:bg-neutral-400&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute bottom-0 f-center size-4 right-0 text-neutral-0 bg-secondary-300 rounded-full border border-neutral-0 dark:border-neutral-903&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-clock text-xs&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/span&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;relative size-10 rounded-full bg-neutral-50 dark:bg-neutral-400&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute bottom-0 f-center size-4 right-0 text-neutral-0 bg-info-300 rounded-full border border-neutral-0 dark:border-neutral-903&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-plus text-xs&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/span&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;relative size-10 rounded-full bg-neutral-50 dark:bg-neutral-400&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute bottom-0 f-center size-4 right-0 text-neutral-0 bg-error-300 rounded-full border border-neutral-0 dark:border-neutral-903&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-minus text-xs&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/span&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;div class=&#x22;relative size-10 rounded-full bg-neutral-50 dark:bg-neutral-400&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute bottom-0 f-center size-4 right-0 text-neutral-0 bg-info-300 rounded-full border-2 border-neutral-0 dark:border-neutral-903&#x22;&#x3E; &#x3C;/span&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;div class=&#x22;relative size-10 rounded-full bg-neutral-50 dark:bg-neutral-400&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute bottom-0 f-center size-4 right-0 text-neutral-0 bg-success-300 rounded-full border-[0.5px] border-neutral-0 dark:border-neutral-903&#x22;&#x3E; &#x3C;/span&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!-- Maximum value -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h5 class="bb-dashed-n40">Auto Width</h5>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <!-- Preview -->
+              <div x-show="!viewcode" class="flex gap-5 lg:gap-8 flex-wrap">
+                <div class="relative">
+                  <span class="absolute -top-1 -right-1.5 text-xs rounded-full size-5 bg-error-300 text-neutral-0 f-center font-bold">9</span>
+                  <i class="las la-bell text-4xl"></i>
+                </div>
+                <div class="relative">
+                  <span class="absolute -top-1 -right-2 text-xs rounded-full h-5 min-w-max px-1.5 bg-error-300 text-neutral-0 f-center font-bold">99</span>
+                  <i class="las la-bell text-4xl"></i>
+                </div>
+                <div class="relative">
+                  <span class="absolute -top-1 -right-3 text-xs rounded-full h-5 min-w-max px-1.5 bg-error-300 text-neutral-0 f-center font-bold">999</span>
+                  <i class="las la-bell text-4xl"></i>
+                </div>
+                <div class="relative">
+                  <span class="absolute -top-1 -right-5 text-xs rounded-full h-5 min-w-max px-1.5 bg-error-300 text-neutral-0 f-center font-bold">9999</span>
+                  <i class="las la-bell text-4xl"></i>
+                </div>
+                <div class="relative">
+                  <span class="absolute -top-1 -right-7 text-xs rounded-full h-5 min-w-max px-1.5 bg-error-300 text-neutral-0 f-center font-bold">99999</span>
+                  <i class="las la-bell text-4xl"></i>
+                </div>
+                <div class="relative">
+                  <span class="absolute -top-1 -right-3 text-xs rounded-full h-5 min-w-max px-1.5 bg-error-300 text-neutral-0 f-center font-bold">99+</span>
+                  <i class="las la-bell text-4xl"></i>
+                </div>
+                <div class="relative">
+                  <span class="absolute -top-1 -right-5 text-xs rounded-full h-5 min-w-max px-1.5 bg-error-300 text-neutral-0 f-center font-bold">999+</span>
+                  <i class="las la-bell text-4xl"></i>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex gap-5 lg:gap-8 flex-wrap&#x22;&#x3E;
+  &#x3C;div class=&#x22;relative&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-1 -right-1.5 text-xs rounded-full size-5 bg-error-300 text-neutral-0 f-center font-bold&#x22;&#x3E;9&#x3C;/span&#x3E;
+    &#x3C;i class=&#x22;las la-bell text-4xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;relative&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-1 -right-2 text-xs rounded-full h-5 min-w-max px-1.5 bg-error-300 text-neutral-0 f-center font-bold&#x22;&#x3E;99&#x3C;/span&#x3E;
+    &#x3C;i class=&#x22;las la-bell text-4xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;relative&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-1 -right-3 text-xs rounded-full h-5 min-w-max px-1.5 bg-error-300 text-neutral-0 f-center font-bold&#x22;&#x3E;999&#x3C;/span&#x3E;
+    &#x3C;i class=&#x22;las la-bell text-4xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;relative&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-1 -right-5 text-xs rounded-full h-5 min-w-max px-1.5 bg-error-300 text-neutral-0 f-center font-bold&#x22;&#x3E;9999&#x3C;/span&#x3E;
+    &#x3C;i class=&#x22;las la-bell text-4xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;relative&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-1 -right-7 text-xs rounded-full h-5 min-w-max px-1.5 bg-error-300 text-neutral-0 f-center font-bold&#x22;&#x3E;99999&#x3C;/span&#x3E;
+    &#x3C;i class=&#x22;las la-bell text-4xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;relative&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-1 -right-3 text-xs rounded-full h-5 min-w-max px-1.5 bg-error-300 text-neutral-0 f-center font-bold&#x22;&#x3E;99+&#x3C;/span&#x3E;
+    &#x3C;i class=&#x22;las la-bell text-4xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;relative&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-1 -right-5 text-xs rounded-full h-5 min-w-max px-1.5 bg-error-300 text-neutral-0 f-center font-bold&#x22;&#x3E;999+&#x3C;/span&#x3E;
+    &#x3C;i class=&#x22;las la-bell text-4xl&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!-- Basic -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h5 class="bb-dashed-n40">Badge Overlap</h5>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <div x-show="!viewcode" class="flex gap-5 lg:gap-8 flex-wrap">
+                <div class="relative bg-info-300 size-10">
+                  <span class="absolute -top-1 -right-1 text-xs rounded-full size-3 bg-neutral-900 border-2 border-neutral-0 dark:border-neutral-903"></span>
+                </div>
+                <div class="relative bg-info-300 size-10 rounded">
+                  <span class="absolute -top-1 -right-1 text-xs rounded-full size-3 bg-neutral-900 border-2 border-neutral-0 dark:border-neutral-903"></span>
+                </div>
+                <div class="relative bg-info-300 size-10 rounded-lg">
+                  <span class="absolute -top-1 -right-1 text-xs rounded-full size-3 bg-neutral-900 border-2 border-neutral-0 dark:border-neutral-903"></span>
+                </div>
+                <div class="relative bg-info-300 size-10 rounded-xl">
+                  <span class="absolute -top-1 -right-1 text-xs rounded-full size-3 bg-neutral-900 border-2 border-neutral-0 dark:border-neutral-903"></span>
+                </div>
+                <div class="relative bg-info-300 size-10 rounded-2xl">
+                  <span class="absolute -top-0.5 -right-0.5 text-xs rounded-full size-3 bg-neutral-900 border-2 border-neutral-0 dark:border-neutral-903"></span>
+                </div>
+                <div class="relative bg-info-300 size-10 rounded-full">
+                  <span class="absolute top-0 right-0 text-xs rounded-full size-3 bg-neutral-900 border-2 border-neutral-0 dark:border-neutral-903"></span>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex gap-5 lg:gap-8 flex-wrap&#x22;&#x3E;
+  &#x3C;div class=&#x22;relative bg-info-300 size-10&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-1 -right-1 text-xs rounded-full size-3 bg-neutral-900 border-2 border-neutral-0 dark:border-neutral-903&#x22;&#x3E;&#x3C;/span&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;relative bg-info-300 size-10 rounded&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-1 -right-1 text-xs rounded-full size-3 bg-neutral-900 border-2 border-neutral-0 dark:border-neutral-903&#x22;&#x3E;&#x3C;/span&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;relative bg-info-300 size-10 rounded-lg&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-1 -right-1 text-xs rounded-full size-3 bg-neutral-900 border-2 border-neutral-0 dark:border-neutral-903&#x22;&#x3E;&#x3C;/span&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;relative bg-info-300 size-10 rounded-xl&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-1 -right-1 text-xs rounded-full size-3 bg-neutral-900 border-2 border-neutral-0 dark:border-neutral-903&#x22;&#x3E;&#x3C;/span&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;relative bg-info-300 size-10 rounded-2xl&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute -top-0.5 -right-0.5 text-xs rounded-full size-3 bg-neutral-900 border-2 border-neutral-0 dark:border-neutral-903&#x22;&#x3E;&#x3C;/span&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;relative bg-info-300 size-10 rounded-full&#x22;&#x3E;
+    &#x3C;span class=&#x22;absolute top-0 right-0 text-xs rounded-full size-3 bg-neutral-900 border-2 border-neutral-0 dark:border-neutral-903&#x22;&#x3E;&#x3C;/span&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <script src="./assets/js/libs/highlight.js"></script>
+    <script src="./assets/js/libs/sweetalert.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

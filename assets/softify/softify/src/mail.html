@@ -1,0 +1,562 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/quill.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <!-- Breadcrumb -->
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Mail</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Mail</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Mail -->
+
+        <div
+          x-data="{activeTab:'all', mail:false,contact:false, newEmail:false, activeChat:null, chats:[
+          {
+          id: 1,
+          to: ['example@mail.com', 'hello@yahoo.net'],
+          type: 'inbox',
+          name: 'Albert Flores',
+          messageTitle: 'Welcome to our new project',
+          desc: 'Hi team, Im excited to kick off our new project. We have a lot of work ahead, but Im confident we can deliver an outstanding result. Please review the attached project brief and let me know if you have any questions.',
+          time: '6 m ago',
+          active: true,
+          avatar: './assets/images/avatar/avatar-1.png',
+          attachments: ['./assets/images/story/story-1.png', './assets/images/story/story-5.png', './assets/images/story/story-3.png']
+          },
+          {
+          id: 2,
+          to: ['example@mail.com', 'hello@yahoo.net'],
+          type: 'inbox',
+          name: 'Ryan Ortiz',
+          messageTitle: 'Invitation to team building event',
+          desc: 'Hello everyone, Im pleased to invite you to our upcoming team building event next Friday. This is a great opportunity for us to bond, have some fun, and get to know each other better. Please RSVP by the end of the week.',
+          time: '12 m ago',
+          active: false,
+          avatar: './assets/images/avatar/avatar-2.png'
+          },
+          {
+          id: 3,
+          to: ['example@mail.com', 'hello@yahoo.net'],
+          type: 'inbox',
+          name: 'Jessica Hayes',
+          messageTitle: 'Weekly progress report',
+          desc: 'Heres the weekly progress report for your review. Please note the issues we\'ve encountered and the proposed solutions. Let me know if you have any feedback or concerns.',
+          time: '30 m ago',
+          active: true,
+          avatar: './assets/images/avatar/avatar-3.png',
+          attachments: ['./assets/images/story/story-2.png', './assets/images/story/story-3.png']
+          },
+          {
+          id: 4,
+          to: ['example@mail.com', 'hello@yahoo.net'],
+          type: 'sent',
+          name: 'Matthew Thompson',
+          messageTitle: 'New client proposal',
+          desc: 'I\'ve attached the proposal for our potential new client. Please review it carefully and provide any comments or suggestions before our meeting with them next week.',
+          time: '1 h ago',
+          active: false,
+          avatar: './assets/images/avatar/avatar-4.png'
+          },
+          {
+          id: 5,
+          to: ['example@mail.com', 'hello@yahoo.net'],
+          type: 'sent',
+          name: 'Sarah Wilson',
+          messageTitle: 'Reminder: Annual performance reviews',
+          desc: 'Just a friendly reminder that annual performance reviews are coming up next month. Please start preparing your self-evaluations and goals for the upcoming year.',
+          time: '2 h ago',
+          active: true,
+          avatar: './assets/images/avatar/avatar-5.png'
+          },
+          {
+          id: 6,
+          to: ['example@mail.com', 'hello@yahoo.net'],
+          type: 'spam',
+          name: 'Christopher Nolan',
+          messageTitle: 'Earn money from home!',
+          desc: 'Attention! Exciting opportunity to make money from the comfort of your own home. No experience necessary. Click here to learn more.',
+          time: 'Yesterday',
+          active: true,
+          avatar: './assets/images/avatar/avatar-6.png',
+          attachments: ['./assets/images/story/story-1.png', './assets/images/story/story-2.png', './assets/images/story/story-3.png']
+          },
+          {
+          id: 7,
+          to: ['example@mail.com', 'hello@yahoo.net'],
+          type: 'spam',
+          name: 'Sarah Taylor',
+          messageTitle: 'Lose weight fast!',
+          desc: 'Discover the secret to losing weight quickly and easily with our revolutionary new product. Order now and get a special discount!',
+          time: '2 d ago',
+          active: false,
+          avatar: './assets/images/avatar/avatar-7.png'
+          },
+          {
+          id: 8,
+          to: ['example@mail.com', 'hello@yahoo.net'],
+          type: 'important',
+          name: 'Anna Smith',
+          messageTitle: 'Urgent: Server maintenance',
+          desc: 'This is an important notice regarding scheduled server maintenance this weekend. Please review the attached document for details on expected downtime and impact on our services.',
+          time: '3 d ago',
+          active: true,
+          avatar: './assets/images/avatar/avatar-8.png',
+          attachments: ['./assets/images/story/story-1.png', './assets/images/story/story-2.png']
+          },
+          {
+          id: 9,
+          to: ['example@mail.com', 'hello@yahoo.net'],
+          type: 'starred',
+          name: 'Loren Booth',
+          messageTitle: 'Upcoming conference',
+          desc: 'I wanted to share details about an upcoming industry conference that could be beneficial for our team to attend. Please let me know if you\'re interested in attending, and we can arrange registration and travel accommodations.',
+          time: '3 d ago',
+          active: true,
+          avatar: './assets/images/avatar/avatar-3.png'
+          },
+          {
+          id: 10,
+          to: ['example@mail.com', 'hello@yahoo.net'],
+          type: 'promotion',
+          name: 'Noa Nolan',
+          messageTitle: 'Limited-time offer!',
+          desc: 'Don\'t miss out on our limited-time offer! Get 50% off on all products for this week only. Hurry, this offer won\'t last long!',
+          time: '3 d ago',
+          active: false,
+          avatar: './assets/images/avatar/avatar-8.png'
+          },
+          {
+          id: 11,
+          to: ['example@mail.com', 'hello@yahoo.net'],
+          type: 'forum',
+          name: 'Dianne Russel',
+          messageTitle: 'New software update',
+          desc: 'There\'s a new software update available that addresses several critical security vulnerabilities. Please ensure you update your systems as soon as possible.',
+          time: '3 d ago',
+          active: true,
+          avatar: './assets/images/avatar/avatar-1.png',
+          attachments: ['./assets/images/story/story-1.png', './assets/images/story/story-2.png', './assets/images/story/story-3.png']
+          },
+          {
+          id: 12,
+          to: ['example@mail.com', 'hello@yahoo.net'],
+          type: 'forum',
+          name: 'John Hopkins',
+          messageTitle: 'Best practices for data security',
+          desc: 'In light of recent data breaches, I wanted to share some best practices for ensuring data security within our organization. Please review the attached guidelines and let me know if you have any questions.',
+          time: '3 d ago',
+          active: false,
+          avatar: './assets/images/avatar/avatar-2.png'
+          },
+          {
+          id: 13,
+          to: ['example@mail.com', 'hello@yahoo.net'],
+          type: 'inbox',
+          name: 'Marvin Macckinney',
+          messageTitle: 'New client onboarding',
+          desc: 'We have a new client starting with us next week. Please review the attached onboarding documents and be prepared to assist with their integration process.',
+          time: '3 d ago',
+          active: false,
+          avatar: './assets/images/avatar/avatar-3.png',
+          attachments: ['./assets/images/story/story-1.png', './assets/images/story/story-3.png']
+          },
+          {
+            id: 14,
+            to: ['example@mail.com', 'hello@yahoo.net'],
+            type: 'inbox',
+            name: 'Albert Flores',
+            messageTitle: 'Meeting agenda',
+            desc: 'Please find attached the agenda for our upcoming team meeting. We have several important topics to discuss, including the Q2 sales forecast and the new marketing campaign. Please review the materials and come prepared with your updates and questions.',
+            time: '3 d ago',
+            active: true,
+            avatar: './assets/images/avatar/avatar-4.png'
+            },
+            {
+            id: 15,
+            to: ['example@mail.com', 'hello@yahoo.net'],
+            type: 'inbox',
+            name: 'Taylor Otwel',
+            messageTitle: 'Office relocation update',
+            desc: 'I wanted to provide an update on our upcoming office relocation. The move is scheduled for next month, and we\'ve secured a new space that better suits our growing needs. Please review the attached relocation plan and let me know if you have any questions or concerns.',
+            time: '3 d ago',
+            active: false,
+            avatar: './assets/images/avatar/avatar-5.png'
+            }
+        ], 
+      filteredChats:[], 
+      filterChat(type){       
+            if(type=='all'){
+                this.filteredChats=this.chats
+            }else{
+              this.filteredChats=this.chats.filter(chat => chat.type==type) 
+            }
+            this.activeChat=this.filteredChats[0]             
+            console.log(this.activeChat)
+        }
+        
+        }"
+          class="white-box !p-2 xl:!p-3 xxl:!p-6"
+          x-init="filteredChats = chats,activeChat=chats[0]"
+        >
+          <h4 class="bb-dashed-n30">Mail</h4>
+
+          <div class="n20-box flex max-lg:flex-col gap-4 xxl:gap-6 !p-2 xl:!p-3 xxl:!p-6 relative">
+            <div>
+              <div class="flex gap-4 xxl:hidden mb-4">
+                <button class="lg:hidden" @click="mail=!mail"><i class="las la-envelope text-xl"></i></button>
+                <button @click="contact=!contact"><i class="las la-comment text-xl"></i></button>
+                <div class="rounded-full flex items-center gap-2 border border-neutral-40 dark:border-neutral-500 py-1 xxl:py-2 px-2.5 xxl:px-4">
+                  <i class="las la-search text-xl"></i>
+                  <input type="text" class="w-full bg-transparent" placeholder="Search..." />
+                </div>
+              </div>
+              <!-- mail menu -->
+              <div :class="mail?'translate-x-0':'max-lg:-translate-x-[150%]'" class="white-box !p-3 xxl:!p-6 max-lg:z-[13] duration-300 max-lg:absolute left-0 top-16 w-[220px] lg:w-[300px] xl:p-6">
+                <div class="bb-dashed-n30">
+                  <button @click="newEmail=true" class="btn-primary xl:py-2.5 w-full h6"><i class="las la-pen"></i> Compose</button>
+                </div>
+                <div class="flex flex-col gap-3 xxl:gap-5">
+                  <div @click="activeTab='all',filterChat('all')" class="flex justify-between items-center cursor-pointer">
+                    <button :class="activeTab=='all'?'text-primary-300':''" class="flex items-center gap-3 m-text font-medium">
+                      <i class="las la-envelope text-2xl"></i>
+                      All
+                    </button>
+                    <span class="size-5 rounded-full bg-primary-300 text-neutral-0 text-xs f-center"> 9 </span>
+                  </div>
+                  <div @click="activeTab='inbox',filterChat('inbox')" class="flex justify-between items-center cursor-pointer">
+                    <button :class="activeTab=='inbox'?'text-primary-300':''" class="flex items-center gap-3 m-text font-medium">
+                      <i class="las la-inbox text-2xl"></i>
+                      Inbox
+                    </button>
+                    <span class="size-5 rounded-full bg-primary-300 text-neutral-0 text-xs f-center"> 2 </span>
+                  </div>
+                  <div @click="activeTab='sent',filterChat('sent')" class="flex justify-between items-center cursor-pointer">
+                    <button :class="activeTab=='sent'?'text-primary-300':''" class="flex items-center gap-3 m-text font-medium">
+                      <i class="las la-paper-plane text-2xl"></i>
+                      Sent
+                    </button>
+                  </div>
+                  <div @click="activeTab='draft',filterChat('draft')" class="flex justify-between items-center cursor-pointer">
+                    <button :class="activeTab=='draft'?'text-primary-300':''" class="flex items-center gap-3 m-text font-medium">
+                      <i class="las la-envelope-open text-2xl"></i>
+                      Draft
+                    </button>
+                  </div>
+                  <div @click="activeTab='trash',filterChat('trash')" class="flex justify-between items-center cursor-pointer">
+                    <button :class="activeTab=='trash'?'text-primary-300':''" class="flex items-center gap-3 m-text font-medium">
+                      <i class="las la-trash text-2xl"></i>
+                      Trash
+                    </button>
+                  </div>
+                  <div @click="activeTab='spam',filterChat('spam')" class="flex justify-between items-center cursor-pointer">
+                    <button :class="activeTab=='spam'?'text-primary-300':''" class="flex items-center gap-3 m-text font-medium">
+                      <i class="las la-info-circle text-2xl"></i>
+                      Spam
+                    </button>
+                    <span class="size-5 rounded-full bg-primary-300 text-neutral-0 text-xs f-center"> 1 </span>
+                  </div>
+                  <div @click="activeTab='important',filterChat('important')" class="flex justify-between items-center cursor-pointer">
+                    <button :class="activeTab=='important'?'text-primary-300':''" class="flex items-center gap-3 m-text font-medium">
+                      <i class="las la-map-signs text-2xl"></i>
+                      Important
+                    </button>
+                    <span class="size-5 rounded-full bg-primary-300 text-neutral-0 text-xs f-center"> 2 </span>
+                  </div>
+                  <div @click="activeTab='starred',filterChat('starred')" class="flex justify-between items-center cursor-pointer">
+                    <button :class="activeTab=='starred'?'text-primary-300':''" class="flex items-center gap-3 m-text font-medium">
+                      <i class="las la-star text-2xl"></i>
+                      Starred
+                    </button>
+                    <span class="size-5 rounded-full bg-primary-300 text-neutral-0 text-xs f-center"> 1 </span>
+                  </div>
+                  <div @click="activeTab='social',filterChat('social')" class="flex justify-between items-center cursor-pointer">
+                    <button :class="activeTab=='social'?'text-primary-300':''" class="flex items-center gap-3 m-text font-medium">
+                      <i class="las la-share-square text-2xl"></i>
+                      Social
+                    </button>
+                  </div>
+                  <div @click="activeTab='promotion',filterChat('promotion')" class="flex justify-between items-center cursor-pointer">
+                    <button :class="activeTab=='promotion'?'text-primary-300':''" class="flex items-center gap-3 m-text font-medium">
+                      <i class="las la-share-square text-2xl"></i>
+                      Promotions
+                    </button>
+                    <span class="size-5 rounded-full bg-primary-300 text-neutral-0 text-xs f-center"> 2 </span>
+                  </div>
+                  <div @click="activeTab='forum',filterChat('forum')" class="flex justify-between items-center cursor-pointer">
+                    <button :class="activeTab=='forum'?'text-primary-300':''" class="flex items-center gap-3 m-text font-medium">
+                      <i class="las la-share-square text-2xl"></i>
+                      Forums
+                    </button>
+                    <span class="size-5 rounded-full bg-primary-300 text-neutral-0 text-xs f-center"> 1 </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- contacts -->
+            <div :class="contact?'translate-x-0 visible':'max-xxl:-translate-x-[220%] max-xxl:invisible'" class="white-box !p-3 xxl:!p-6 max-xxl:z-[13] duration-300 max-xxl:absolute left-0 top-16 w-[290px] xxl:w-[340px] xl:p-6 h-[740px] overflow-y-auto custom-scrollbar">
+              <div x-show="filteredChats.length">
+                <div class="bb-dashed-n30">
+                  <div class="rounded-full flex items-center gap-2 border border-neutral-30 dark:border-neutral-500 py-1.5 xxl:py-2.5 px-4 xxl:px-6">
+                    <i class="las la-search text-xl"></i>
+                    <input type="text" class="w-full bg-transparent" placeholder="Search..." />
+                  </div>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <template x-for="chat in filteredChats">
+                    <div @click="activeChat=chat" class="flex justify-between items-start cursor-pointer py-2 px-4 rounded-xl hover:bg-primary-300/10 duration-300" :class="activeChat.id==chat.id?'!bg-primary-300/10':''">
+                      <div class="flex gap-2 items-center">
+                        <img :src="chat.avatar" width="40" alt="" />
+                        <div>
+                          <p class="m-text font-medium mb-1 max-one-line" x-text="chat.name"></p>
+                          <p class="text-neutral-100 text-xs max-one-line" x-text="chat.desc"></p>
+                        </div>
+                      </div>
+                      <div class="flex flex-col items-end">
+                        <span class="mb-3 text-xs text-neutral-100 max-one-line" x-text="chat.time"></span>
+                        <span x-show="chat.active" class="size-2 rounded-full bg-success-300 block"></span>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </div>
+              <div x-show="!filteredChats.length" class="flex flex-col h-full items-center justify-center">
+                <div class="text-center">
+                  <img src="./assets/images/empty-folder.png" class="mb-6 xl:mb-8" alt="" />
+                  <h4 class="text-neutral-100 mb-4">Nothing in <span class="h4" x-text="activeTab"></span></h4>
+                  <p class="text-neutral-100 m-text">This folder is empty</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- view email -->
+            <div class="white-box !p-3 xxl:!p-6 w-full flex-1 xl:p-6">
+              <div x-show="filteredChats.length" class="flex flex-col gap-10 h-full">
+                <div class="flex-1">
+                  <div class="bb-dashed-n30 flex items-center justify-end gap-4">
+                    <i class="las la-star text-2xl text-warning-300"></i>
+                    <i class="las la-map-signs text-2xl"></i>
+                    <i class="las la-archive text-2xl"></i>
+                    <i class="las la-envelope text-2xl"></i>
+                    <include-verti-option />
+                  </div>
+                  <div class="bb-dashed-n30 flex justify-between items-start flex-wrap">
+                    <h6>Re: <span class="h6" x-text="activeChat?.messageTitle"></span></h6>
+                    <div class="flex flex-col items-end gap-2">
+                      <div class="flex gap-4">
+                        <button><i class="las la-arrow-left text-xl"></i></button>
+                        <button><i class="las la-share-square text-xl"></i></button>
+                        <button><i class="las la-arrow-right text-xl"></i></button>
+                      </div>
+                      <p class="text-xs">13 Mar 2024 1:32 PM</p>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex gap-3 mb-6 items-start">
+                      <img :src="activeChat?.avatar" width="40" class="rounded-full" alt="" />
+                      <div>
+                        <p class="m-text font-medium mb-1">13 Mar 2024 1:32 PM <span class="text-xs text-neutral-100">&gt;demo@yahoo.com&gt;</span></p>
+                        <p class="text-neutral-100 text-xs">
+                          To:
+                          <template x-for="mail in activeChat?.to">
+                            <span x-text="mail"></span>
+                          </template>
+                        </p>
+                      </div>
+                    </div>
+                    <div x-data="{opened:false}" x-show="activeChat?.attachments" class="my-5 n20-box xl:p-5">
+                      <div class="flex justify-between gap-4 flex-wrap items-center">
+                        <button @click="opened=!opened" class="flex items-center gap-3">
+                          <i class="las la-link"></i>
+                          <span><span x-text="activeChat?.attachments?.length"></span> attachments</span>
+                          <i :class="opened?'rotate-180':''" class="las la-angle-down duration-300"></i>
+                        </button>
+                        <button class="flex items-center gap-2 h6"><i class="las la-download text-lg"></i> Download</button>
+                      </div>
+                      <div x-transition x-collapse x-show="opened">
+                        <div class="flex gap-3 mt-4">
+                          <template x-for="img in activeChat?.attachments">
+                            <img :src="img" class="rounded-md size-12 lg:size-14 object-center object-cover" alt="" />
+                          </template>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="s-text" x-text="activeChat?.desc"></p>
+                  </div>
+                </div>
+                <div>
+                  <section>
+                    <div id="toolbar-two" class="flex flex-wrap gap-3 justify-between rounded-t-2xl !border-neutral-30 bg-neutral-20 dark:!border-neutral-500 dark:bg-neutral-903">
+                      <span class="ql-formats">
+                        <select class="ql-header">
+                          <option value="1">Heading</option>
+                          <option value="2">Subheading</option>
+                          <option selected>Normal</option>
+                        </select>
+                      </span>
+                      <div class="flex grow justify-end">
+                        <span class="ql-formats">
+                          <button class="ql-bold"></button>
+                          <button class="ql-italic"></button>
+                          <button class="ql-underline"></button>
+                        </span>
+                        <span class="ql-formats">
+                          <button class="ql-list" value="ordered"></button>
+                          <button class="ql-list" value="bullet"></button>
+                        </span>
+                        <span class="ql-formats">
+                          <button class="ql-clean"></button>
+                        </span>
+                      </div>
+                    </div>
+                    <div id="editor-two" class="rounded-b-2xl !border-neutral-30 dark:!border-neutral-500 h-[150px]">
+                      <p>Write something new ...</p>
+                    </div>
+                  </section>
+                  <div class="flex justify-between items-center flex-wrap gap-5 mt-6">
+                    <div class="flex gap-1.5 xxl:gap-4">
+                      <button class="bg-neutral-20 rounded-full dark:bg-neutral-903 size-6 xxl:size-10 border border-neutral-40 dark:border-neutral-500 f-center">
+                        <i class="las la-smile text-lg lg:text-2xl"></i>
+                      </button>
+                      <button class="bg-neutral-20 rounded-full dark:bg-neutral-903 size-6 xxl:size-10 border border-neutral-40 dark:border-neutral-500 f-center">
+                        <i class="las la-camera text-lg lg:text-2xl"></i>
+                      </button>
+                      <button class="bg-neutral-20 rounded-full dark:bg-neutral-903 size-6 xxl:size-10 border border-neutral-40 dark:border-neutral-500 f-center">
+                        <i class="las la-image text-lg lg:text-2xl"></i>
+                      </button>
+                      <button class="bg-neutral-20 rounded-full dark:bg-neutral-903 size-6 xxl:size-10 border border-neutral-40 dark:border-neutral-500 f-center">
+                        <i class="las la-video text-lg lg:text-2xl"></i>
+                      </button>
+                      <button class="bg-neutral-20 rounded-full dark:bg-neutral-903 size-6 xxl:size-10 border border-neutral-40 dark:border-neutral-500 f-center">
+                        <i class="lab la-google-drive text-lg lg:text-2xl"></i>
+                      </button>
+                    </div>
+                    <button class="px-4 py-2 rounded-3xl bg-primary-300 text-neutral-0 flex items-center gap-2">Send <i class="las la-paper-plane text-lg"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div x-show="!filteredChats.length" class="flex flex-col h-full items-center justify-center">
+                <div class="text-center">
+                  <img src="./assets/images/empty-mail.png" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- new email -->
+          <div x-show="newEmail" class="panel my-8 w-full max-w-[732px] shadow-lg fixed bottom-0 rtl:left-5 ltr:right-5 z-[99] overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+            <div class="mb-4 flex items-center justify-between border-b border-dashed dark:shadow-lg border-neutral-30 dark:border-neutral-500 pb-4 lg:mb-6 lg:pb-6">
+              <h4>New Mail</h4>
+              <i class="las la-times cursor-pointer text-xl" @click="newEmail=false"></i>
+            </div>
+            <form class="flex flex-col gap-4 xxl:gap-6" @submit.prevent>
+              <div class="relative flex items-center gap-4 rounded-xl border border-neutral-30 px-4 dark:border-neutral-500 lg:px-6">
+                <label for="input" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">To</label>
+                <input type="email" placeholder="Enter Email..." class="w-full bg-transparent py-3 lg:py-4" />
+              </div>
+              <div class="relative flex items-center gap-4 rounded-xl border border-neutral-30 px-4 dark:border-neutral-500 lg:px-6">
+                <label for="input" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Subject</label>
+                <input type="text" placeholder="Subject" class="w-full bg-transparent py-3 lg:py-4" />
+              </div>
+              <section>
+                <div id="toolbar-one" class="flex justify-between rounded-t-2xl !border-neutral-30 bg-neutral-20 dark:!border-neutral-500 dark:bg-neutral-903">
+                  <span class="ql-formats">
+                    <select class="ql-header">
+                      <option value="1">Heading</option>
+                      <option value="2">Subheading</option>
+                      <option selected>Normal</option>
+                    </select>
+                  </span>
+                  <div class="flex grow justify-end">
+                    <span class="ql-formats">
+                      <button class="ql-bold"></button>
+                      <button class="ql-italic"></button>
+                      <button class="ql-underline"></button>
+                    </span>
+                    <span class="ql-formats">
+                      <button class="ql-list" value="ordered"></button>
+                      <button class="ql-list" value="bullet"></button>
+                    </span>
+                    <span class="ql-formats">
+                      <button class="ql-clean"></button>
+                    </span>
+                  </div>
+                </div>
+                <div id="editor-one" class="rounded-b-2xl !border-neutral-30 dark:!border-neutral-500 h-[150px]">
+                  <p>Write something new ...</p>
+                </div>
+              </section>
+              <div class="flex justify-between items-center">
+                <div class="flex gap-4">
+                  <button class="bg-neutral-20 rounded-full dark:bg-neutral-903 size-6 xxl:size-10 border border-neutral-40 dark:border-neutral-500 f-center">
+                    <i class="las la-smile text-2xl"></i>
+                  </button>
+                  <button class="bg-neutral-20 rounded-full dark:bg-neutral-903 size-6 xxl:size-10 border border-neutral-40 dark:border-neutral-500 f-center">
+                    <i class="las la-camera text-2xl"></i>
+                  </button>
+                  <button class="bg-neutral-20 rounded-full dark:bg-neutral-903 size-6 xxl:size-10 border border-neutral-40 dark:border-neutral-500 f-center">
+                    <i class="las la-image text-2xl"></i>
+                  </button>
+                  <button class="bg-neutral-20 rounded-full dark:bg-neutral-903 size-6 xxl:size-10 border border-neutral-40 dark:border-neutral-500 f-center">
+                    <i class="las la-video text-2xl"></i>
+                  </button>
+                  <button class="bg-neutral-20 rounded-full dark:bg-neutral-903 size-6 xxl:size-10 border border-neutral-40 dark:border-neutral-500 f-center">
+                    <i class="lab la-google-drive text-2xl"></i>
+                  </button>
+                </div>
+                <button class="btn-primary">Send <i class="las la-paper-plane text-lg"></i></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/quill.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+  </body>
+</html>

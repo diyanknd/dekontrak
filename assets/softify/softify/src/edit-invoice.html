@@ -1,0 +1,318 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 space-y-4 xxl:space-y-6">
+        <!-- Breadcrumb -->
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Edit Invoice</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Invoice</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Edit</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Edit Invoice -->
+        <div class="white-box">
+          <h4 class="bb-dashed-n30">Edit Invoice</h4>
+          <div
+            x-data="{
+                invoiceProducts:[{id:1,title:'Nike Air Force 1',desc:'The sun slowly set...',qty:3,price:35,service:'Hr Manager'},{id:2,title:'Adidas Stan Smith',desc:'The sun slowly set...',qty:2,price:45,service:'Data Analyst'},{id:3,title:'Puma Air Zoom',desc:'The sun slowly set...',qty:4,price:55,service:'Legal Counsel'}], 
+                removeItem(id){
+                    this.invoiceProducts = this.invoiceProducts.filter((item)=>item.id!=id)
+                },
+                shipping:20,
+                discount:15,
+                tax:9,
+                getTotal(){
+                    return this.invoiceProducts.reduce((total,product)=>total+product.price*product.qty,0);
+                },
+          }"
+            class="white-box xxl:p-[60px]"
+          >
+            <!-- From and two -->
+            <div
+              x-data="{customers:[{id:1,name:'Jayvion Simon',address:'4140 Parker Rd. Allentown, New Mexico 31134',default:true},{id:2,name:'Lucian Obraian',address:'2367 Sunset Blvd. Los Angeles, California 90028',default:false},{id:3,name:'Alen Shopon',address:'1633 Broadway, New York, NY 10019',default:false},{id:4,name:'Alfred Kinsey',address:'3550 Waukegan Rd. McHenry, Illinois 60050',default:false},{id:5,name:'Mark Mullarey',address:'1901 Chouteau Ave. St. Louis, Missouri 63103',default:false},{id:6,name:'John Hopkins',address:'5501 Royalmount Ave. Montreal, Quebec H4P 1H9, Canada',default:false}], 
+             }"
+              x
+              class="mb-7 xxl:mb-10 grid sm:grid-cols-2 divide-x rtl:divide-x-reverse divide-dashed divide-neutral-30 dark:divide-neutral-500"
+            >
+              <div x-data="modal" class="ltr:sm:pr-5 rtl:sm:pl-5 xxl:ltr:pr-10 xxl:rtl:pl-10">
+                <div x-data="{selected:{id:1,name:'Jayvion Simon',address:'4140 Parker Rd. Allentown, New Mexico 31134',default:true}}">
+                  <div class="flex justify-between items-center mb-4">
+                    <p class="xl-text font-medium text-neutral-100">From:</p>
+                    <button @click="openModal" class="size-11 rounded-full f-center bg-neutral-0 dark:bg-neutral-904 border border-neutral-30 dark:border-neutral-500 text-xl hover:bg-neutral-20 dark:hover:bg-neutral-903 duration-300">
+                      <i class="las la-pen"></i>
+                    </button>
+                  </div>
+                  <p class="m-text font-medium mb-4" x-text="selected.name"></p>
+                  <span class="m-text" x-text="selected.address"></span>
+                  <template x-teleport="body">
+                    <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                      <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                        <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-[540px] overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                          <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                            <h4>Customers</h4>
+                            <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                          </div>
+                          <div class="flex flex-col gap-4 lg:gap-6">
+                            <div class="flex gap-4 xxl:gap-6">
+                              <form class="w-full rounded-full bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 p-1 flex items-center">
+                                <input type="text" class="px-4 py-2 w-full bg-transparent" placeholder="Search..." />
+                                <span class="size-10 shrink-0 rounded-full bg-primary-300 text-neutral-0 f-center"><i class="las la-search text-2xl"></i></span>
+                              </form>
+                              <button class="btn-primary-outlined shrink-0 xl:px-3 xl:py-2"><i class="las la-plus text-xl"></i>Add New</button>
+                            </div>
+                            <div class="max-h-[350px] overflow-y-auto flex flex-col gap-4 custom-scrollbar">
+                              <template x-for="customer in customers">
+                                <div class="white-box xl:p-6 hover:bg-primary-50 duration-300 cursor-pointer" @click="selected=customer, closeModal()">
+                                  <div class="flex items-center gap-4 mb-4">
+                                    <h5 x-text="customer.name"></h5>
+                                    <button x-show="customer.default" class="bg-info-300/10 text-xs text-info-300 rounded-lg py-1 px-3 font-semibold">Default</button>
+                                  </div>
+                                  <p class="s-text" x-text="customer.address"></p>
+                                </div>
+                              </template>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </div>
+              <div x-data="modal" class="ltr:sm:pl-5 rtl:sm:pr-5 xxl:ltr:pl-10 xxl:rtl:pr-10">
+                <div x-data="{selected:{id:6,name:'John Hopkins',address:'5501 Royalmount Ave. Montreal, Quebec H4P 1H9, Canada',default:false}}">
+                  <div class="flex justify-between items-center mb-4">
+                    <p class="xl-text font-medium text-neutral-100">To:</p>
+                    <button @click="openModal" class="size-11 rounded-full f-center bg-neutral-0 dark:bg-neutral-904 border border-neutral-30 dark:border-neutral-500 text-xl hover:bg-neutral-20 dark:hover:bg-neutral-903 duration-300">
+                      <i x-show="!selected.name" class="las la-plus"></i>
+                      <i x-show="selected.name" class="las la-pen"></i>
+                    </button>
+                  </div>
+                  <p x-show="selected.name" class="m-text font-medium mb-4" x-text="selected.name"></p>
+                  <span x-show="selected.address" class="m-text" x-text="selected.address"></span>
+                  <template x-teleport="body">
+                    <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                      <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                        <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-[540px] overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                          <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                            <h4>Customers</h4>
+                            <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                          </div>
+                          <div class="flex flex-col gap-4 lg:gap-6">
+                            <div class="flex gap-4 xxl:gap-6">
+                              <form class="w-full rounded-full bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 p-1 flex items-center">
+                                <input type="text" class="px-4 py-2 w-full bg-transparent" placeholder="Search..." />
+                                <span class="size-10 shrink-0 rounded-full bg-primary-300 text-neutral-0 f-center"><i class="las la-search text-2xl"></i></span>
+                              </form>
+                              <button class="btn-primary-outlined shrink-0 xl:px-3 xl:py-2"><i class="las la-plus text-xl"></i>Add New</button>
+                            </div>
+                            <div class="max-h-[350px] overflow-y-auto flex flex-col gap-4 custom-scrollbar">
+                              <template x-for="customer in customers">
+                                <div class="white-box xl:p-6 hover:bg-primary-50 duration-300 cursor-pointer" @click="selected=customer, closeModal()">
+                                  <div class="flex items-center gap-4 mb-4">
+                                    <h5 x-text="customer.name"></h5>
+                                    <button x-show="customer.default" class="bg-info-300/10 text-xs text-info-300 rounded-lg py-1 px-3 font-semibold">Default</button>
+                                  </div>
+                                  <p class="s-text" x-text="customer.address"></p>
+                                </div>
+                              </template>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </div>
+
+            <div class="n20-box xl:p-6 grid grid-cols-12 gap-4 xxl:gap-6 mb-7 xxl:mb-10">
+              <div class="col-span-12 md:col-span-6 xl:col-span-3">
+                <div class="relative flex items-center gap-4 rounded-full border border-neutral-40 px-4 dark:border-neutral-500 lg:px-6">
+                  <label for="input" class="absolute -top-2 bg-neutral-20 px-2 text-xs dark:bg-neutral-903">Invoice Number</label>
+                  <input type="text" placeholder="INV-1920" class="w-full bg-transparent py-2.5 lg:py-3.5" disabled />
+                </div>
+              </div>
+              <div class="col-span-12 md:col-span-6 xl:col-span-3">
+                <div x-data="{isOpen:false,selected:'Paid', items:['Paid','Pending','Overdue','Draft']}" class="relative">
+                  <div @click="isOpen=!isOpen" class="relative flex cursor-pointer items-center justify-between rounded-full border border-neutral-40 px-6 py-3 dark:border-neutral-500">
+                    <span x-text="selected"></span>
+                    <i class="las la-angle-down text-lg duration-300" :class="isOpen?'rotate-180':'rotate-0'"></i>
+                    <span class="absolute -top-2 left-5 bg-neutral-20 px-2 text-xs dark:bg-neutral-903">Service</span>
+                  </div>
+                  <div x-show="isOpen" @click.away="isOpen=false" class="absolute left-0 top-full z-10 flex max-h-[200px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-0 p-1 shadow-xl dark:bg-neutral-904">
+                    <template x-for="item in items">
+                      <div @click="selected=item, isOpen=false" :class="selected===item?'bg-primary-300  text-neutral-0':'hover:bg-primary-50 dark:hover:bg-neutral-903'" class="cursor-pointer rounded-md px-4 py-2 duration-300" x-text="item"></div>
+                    </template>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-12 md:col-span-6 xl:col-span-3">
+                <div class="relative flex items-center gap-4 rounded-full border border-neutral-40 px-4 dark:border-neutral-500 lg:px-6">
+                  <label for="input" class="absolute -top-2 bg-neutral-20 px-2 text-xs dark:bg-neutral-903">Create Date</label>
+                  <input type="date" value="2024-11-05" class="w-full bg-transparent py-2.5 lg:py-3.5" />
+                </div>
+              </div>
+              <div class="col-span-12 md:col-span-6 xl:col-span-3">
+                <div class="relative flex items-center gap-4 rounded-full border border-neutral-40 px-4 dark:border-neutral-500 lg:px-6">
+                  <label for="input" class="absolute -top-2 bg-neutral-20 px-2 text-xs dark:bg-neutral-903">Due Date</label>
+                  <input type="date" value="2025-01-01" class="w-full bg-transparent py-2.5 lg:py-3.5" />
+                </div>
+              </div>
+            </div>
+
+            <!-- product list -->
+            <div class="bb-dashed-n30 xxl:mb-10 xxl:pb-10">
+              <p class="xl-text font-medium text-neutral-100 mb-6">Details</p>
+              <template x-for="item in invoiceProducts">
+                <div>
+                  <div class="grid grid-cols-12 gap-4 xxl:gap-6 mb-6">
+                    <div class="col-span-12 sm:col-span-6 lg:col-span-4 xxl:col-span-3 4xl:col-span-2">
+                      <div class="relative flex items-center gap-4 rounded-full border border-neutral-30 px-4 dark:border-neutral-500 lg:px-6">
+                        <label for="input" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Title</label>
+                        <input type="text" :value="item.title" placeholder="Enter Title" class="w-full bg-transparent py-2.5 lg:py-3.5" />
+                      </div>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6 lg:col-span-4 xxl:col-span-3 4xl:col-span-2">
+                      <div class="relative flex items-center gap-4 rounded-full border border-neutral-30 px-4 dark:border-neutral-500 lg:px-6">
+                        <label for="input" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Description</label>
+                        <input type="text" :value="item.desc" placeholder="Enter Desc..." class="w-full bg-transparent py-2.5 lg:py-3.5" />
+                      </div>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6 lg:col-span-4 xxl:col-span-3 4xl:col-span-2">
+                      <div x-data="{isOpen:false,selected:item.service, items:['Hr Manager','Data Analyst','Legal Counsel','Project Manager']}" class="relative">
+                        <div @click="isOpen=!isOpen" class="relative flex cursor-pointer items-center justify-between rounded-full border border-neutral-40 px-6 py-3 dark:border-neutral-500">
+                          <span x-text="selected?selected:'Select Service'"></span>
+                          <i class="las la-angle-down text-lg duration-300" :class="isOpen?'rotate-180':'rotate-0'"></i>
+                          <span class="absolute -top-2 left-5 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Status</span>
+                        </div>
+                        <div x-show="isOpen" @click.away="isOpen=false" class="absolute left-0 top-full z-10 flex max-h-[200px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-0 p-1 shadow-xl dark:bg-neutral-904">
+                          <template x-for="item in items">
+                            <div @click="selected=item, isOpen=false" :class="selected===item?'bg-primary-300  text-neutral-0':'hover:bg-primary-50 dark:hover:bg-neutral-903'" class="cursor-pointer rounded-md px-4 py-2 duration-300" x-text="item"></div>
+                          </template>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6 lg:col-span-4 xxl:col-span-3 4xl:col-span-2">
+                      <div class="relative flex items-center gap-4 rounded-full border border-neutral-30 px-4 dark:border-neutral-500 lg:px-6">
+                        <label for="input" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Quantity</label>
+                        <input type="number" value="1" x-model="item.qty" placeholder="Quantity" class="w-full bg-transparent py-3 lg:py-3.5" />
+                      </div>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6 lg:col-span-4 xxl:col-span-3 4xl:col-span-2">
+                      <div class="relative flex items-center gap-2 rounded-full border border-neutral-30 px-4 dark:border-neutral-500 lg:px-6">
+                        <label for="input" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Price</label>
+                        <i class="las la-dollar-sign text-lg"></i>
+                        <input type="number" x-model="item.price" placeholder="0.00" class="w-full bg-transparent py-3 lg:py-3.5" />
+                      </div>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6 lg:col-span-4 xxl:col-span-3 4xl:col-span-2">
+                      <div class="relative flex items-center gap-2 rounded-full border border-neutral-30 px-4 dark:border-neutral-500 lg:px-6">
+                        <label for="input" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Total</label>
+                        <i class="las la-dollar-sign text-lg"></i>
+                        <input type="number" :value="item.price?item.price*item.qty:''" placeholder="0.00" class="w-full bg-transparent py-3 lg:py-3.5" disabled />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex justify-end mb-6">
+                    <button @click="removeItem(item.id)" class="flex items-center gap-2 text-error-300 font-semibold"><i class="las la-trash text-xl"></i> Remove</button>
+                  </div>
+                </div>
+              </template>
+            </div>
+            <div class="flex justify-between flex-wrap gap-4 items-center mb-6">
+              <button @click="invoiceProducts.push({id:invoiceProducts.length+1,title:'',desc:'',qty:1,price:'',service:''})" class="flex items-center gap-2 font-semibold text-primary-300"><i class="las la-plus-circle"></i> Add Item</button>
+              <div class="flex items-center flex-wrap gap-4 xxl:gap-6">
+                <div class="relative flex items-center gap-4 rounded-full border w-[160px] border-neutral-30 px-4 dark:border-neutral-500 lg:px-6">
+                  <label for="input" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Shipping($)</label>
+                  <input type="number" x-model="shipping" placeholder="Enter Shipping" class="w-full bg-transparent py-3 lg:py-3.5" />
+                </div>
+                <div class="relative flex items-center gap-4 rounded-full border w-[160px] border-neutral-30 px-4 dark:border-neutral-500 lg:px-6">
+                  <label for="input" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Discount($)</label>
+                  <input type="number" x-model="discount" placeholder="Enter Discount" class="w-full bg-transparent py-3 lg:py-3.5" />
+                </div>
+                <div class="relative flex items-center gap-4 rounded-full border w-[160px] border-neutral-30 px-4 dark:border-neutral-500 lg:px-6">
+                  <label for="input" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Taxes($)</label>
+                  <input type="number" x-model="tax" placeholder="Enter Taxes" class="w-full bg-transparent py-3 lg:py-3.5" />
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-end bb-dashed-n30 xxl:mb-10 xxl:pb-10">
+              <div class="w-[300px] flex flex-col divide-y divide-neutral-30 dark:divide-neutral-500">
+                <div class="flex justify-between items-center">
+                  <p class="py-3 xl:py-4 px-5">Subtotal</p>
+                  <p x-text="getTotal()?getTotal():'-'"></p>
+                </div>
+                <div class="flex justify-between items-center">
+                  <p class="py-3 xl:py-4 px-5">Shipping</p>
+                  <p x-text="shipping?shipping:'-'"></p>
+                </div>
+                <div class="flex justify-between items-center">
+                  <p class="py-3 xl:py-4 px-5">Discount</p>
+                  <p x-text="discount?discount:'-'"></p>
+                </div>
+                <div class="flex justify-between items-center">
+                  <p class="py-3 xl:py-4 px-5">Taxes</p>
+                  <p x-text="tax?tax:'-'"></p>
+                </div>
+                <div class="flex justify-between items-center">
+                  <p class="py-3 xl:py-4 px-5 font-semibold">Total</p>
+                  <p x-text="getTotal()+Number(shipping)-Number(discount)+Number(tax)"></p>
+                </div>
+              </div>
+            </div>
+            <div class="flex gap-4 flex-wrap xxl:gap-6">
+              <button class="btn-primary">Save changes</button>
+              <button class="btn-primary-outlined">Save as Draft</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

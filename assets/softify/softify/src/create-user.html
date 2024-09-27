@@ -1,0 +1,223 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/dropzone.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Create User</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>User</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Create</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="white-box">
+          <h4 class="bb-dashed-n30">Create a new user</h4>
+          <div class="grid grid-cols-12 gap-4 lg:gap-6 lg:divide-x divide-neutral-30 divide-dashed dark:divide-neutral-500">
+            <div class="col-span-12 lg:col-span-4 xxl:col-span-3">
+              <div class="flex flex-col items-center">
+                <form action="#" id="avatar-upload">
+                  <div class="size-40 rounded-full flex items-center justify-center cursor-pointer clickable-avatar bg-neutral-20 dark:bg-neutral-903 border-4 border-neutral-0 dark:border-neutral-904">
+                    <div class="flex flex-col items-center justify-center avatar-img">
+                      <i class="las la-camera text-3xl text-neutral-100"></i>
+                      <p>Upload Photo</p>
+                    </div>
+                  </div>
+                </form>
+
+                <p class="my-6 xxl:mb-8 text-center mx-auto max-w-[250px]">Allowed *webp, *.jpeg, *.jpg, *.png, max size of 5 Mb</p>
+              </div>
+            </div>
+            <div class="col-span-12 lg:col-span-8 xxl:col-span-9">
+              <div class="lg:px-4 xl:px-6">
+                <div class="grid grid-cols-2 gap-4 xxl:gap-6 my-6">
+                  <div class="col-span-2 md:col-span-1">
+                    <div class="relative flex items-center gap-4 rounded-xl border border-neutral-40 w-full px-4 dark:border-neutral-500 lg:px-6">
+                      <label for="name" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Full Name</label>
+                      <input type="text" id="name" placeholder="Enter Name..." class="w-full s-text bg-transparent py-2.5 xl:py-3.5" />
+                    </div>
+                  </div>
+                  <div class="col-span-2 md:col-span-1">
+                    <div class="relative flex items-center gap-4 rounded-xl border border-neutral-40 w-full px-4 dark:border-neutral-500 lg:px-6">
+                      <label for="email" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Your Email</label>
+                      <input type="email" id="email" placeholder="Enter Email..." class="w-full s-text bg-transparent py-2.5 xl:py-3.5" />
+                    </div>
+                  </div>
+                  <div class="col-span-2 md:col-span-1">
+                    <div class="relative flex items-center gap-4 rounded-xl border border-neutral-40 w-full px-4 dark:border-neutral-500 lg:px-6">
+                      <label for="number" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Your Number</label>
+                      <input type="number" id="number" placeholder="Enter Number..." class="w-full s-text bg-transparent py-2.5 xl:py-3.5" />
+                    </div>
+                  </div>
+                  <div class="col-span-2 md:col-span-1">
+                    <div
+                      x-data="{
+                                selectOpen:false,
+                                selectedItem:null,
+                                searchText:'',
+                                optionList: [],
+                                async fetchCountries() {
+                                    try {
+                                        const response = await fetch('https://restcountries.com/v3.1/all?fields=name,flags');
+                                        const data = await response.json();                                       
+                                        this.optionList = data.map(country => ({
+                                            title: country.name.common,
+                                            flag: country.flags.svg
+                                        }));
+                                    } catch (error) {
+                                        console.error('Error fetching countries:', error);
+                                    }
+                                },
+                                filteredOptions() {
+                                    if (this.searchText.trim() === '') {
+                                        return this.optionList;
+                                    } else {
+                                        return this.optionList.filter(option => option.title.toLowerCase().includes(this.searchText.trim().toLowerCase()));
+                                    }
+                                },                              
+                                
+                            }"
+                      x-init="fetchCountries()"
+                      class="relative"
+                    >
+                      <button @click="selectOpen=!selectOpen" class="py-3 px-3 sm:px-4 lg:px-6 rounded-xl flex items-center gap-3 w-full border bg-neutral-0 dark:bg-neutral-904 border-neutral-40 dark:border-neutral-500 relative">
+                        <img x-show="selectedItem && selectedItem?.title==searchText" class="size-6 rounded-full object-cover object-center" :src="selectedItem && selectedItem.flag" alt="flag" />
+                        <input type="text" placeholder="Select Country" x-model="searchText" :value="selectedItem?.title" class="w-full bg-transparent capitalize" />
+                        <span class="absolute inset-y-0 ltr:right-0 rtl:left-0 flex items-center ltr:pr-3 rtl:pl-3 rtl:xl:pl-6 ltr:xl:pr-6 pointer-events-none">
+                          <i class="las la-angle-down"></i>
+                        </span>
+                      </button>
+                      <ul x-show="selectOpen" @click.away="selectOpen=false" class="py-1 rounded-xl bg-neutral-0 dark:bg-neutral-904 absolute top-full left-0 right-0 w-full shadow-xl z-[3] max-h-[250px] overflow-y-auto">
+                        <template x-for="option in filteredOptions" :key="option.title">
+                          <li
+                            @click="selectedItem=option,selectOpen=false,searchText=option.title,console.log(option)"
+                            :class="selectedItem==option?'bg-primary-300 text-neutral-0':''"
+                            class="py-2 ltr:pl-6 rtl:pr-6 hover:bg-primary-300 flex items-center gap-2 hover:text-neutral-0 duration-300 cursor-pointer capitalize"
+                          >
+                            <img :src="option?.flag" alt="flag" class="size-6 shrink-0 rounded-full object-cover object-center" />
+                            <span x-text="option.title"></span>
+                          </li>
+                        </template>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-span-2 md:col-span-1">
+                    <div class="relative flex items-center gap-4 rounded-xl border border-neutral-40 w-full px-4 dark:border-neutral-500 lg:px-6">
+                      <label for="state" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">State/Region</label>
+                      <input type="text" id="state" placeholder="Enter state..." class="w-full s-text bg-transparent py-2.5 xl:py-3.5" />
+                    </div>
+                  </div>
+                  <div class="col-span-2 md:col-span-1">
+                    <div class="relative flex items-center gap-4 rounded-xl border border-neutral-40 w-full px-4 dark:border-neutral-500 lg:px-6">
+                      <label for="city" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">City</label>
+                      <input type="text" id="city" placeholder="Enter City..." class="w-full s-text bg-transparent py-2.5 xl:py-3.5" />
+                    </div>
+                  </div>
+                  <div class="col-span-2 md:col-span-1">
+                    <div class="relative flex items-center gap-4 rounded-xl border border-neutral-40 w-full px-4 dark:border-neutral-500 lg:px-6">
+                      <label for="address" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Address</label>
+                      <input type="text" id="address" placeholder="Enter Address..." class="w-full s-text bg-transparent py-2.5 xl:py-3.5" />
+                    </div>
+                  </div>
+                  <div class="col-span-2 md:col-span-1">
+                    <div class="relative flex items-center gap-4 rounded-xl border border-neutral-40 w-full px-4 dark:border-neutral-500 lg:px-6">
+                      <label for="zip" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Zip Code</label>
+                      <input type="text" id="zip" placeholder="Enter Zip..." class="w-full s-text bg-transparent py-2.5 xl:py-3.5" />
+                    </div>
+                  </div>
+                  <div class="col-span-2 md:col-span-1">
+                    <div class="relative flex items-center gap-4 rounded-xl border border-neutral-40 w-full px-4 dark:border-neutral-500 lg:px-6">
+                      <label for="company" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Company</label>
+                      <input type="text" id="company" placeholder="Enter Company..." class="w-full s-text bg-transparent py-2.5 xl:py-3.5" />
+                    </div>
+                  </div>
+                  <div class="col-span-2 md:col-span-1">
+                    <div class="relative flex items-center gap-4 rounded-xl border border-neutral-40 w-full px-4 dark:border-neutral-500 lg:px-6">
+                      <label for="role" class="absolute -top-2 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Role</label>
+                      <input type="text" id="role" placeholder="Enter Role..." class="w-full s-text bg-transparent py-2.5 xl:py-3.5" />
+                    </div>
+                  </div>
+                  <div class="col-span-2">
+                    <div x-data="{isOpen:false,selected:'Active', items:['Active','Inactive']}" class="relative">
+                      <div @click="isOpen=!isOpen" class="relative flex cursor-pointer items-center justify-between rounded-xl border border-neutral-40 px-6 py-3 dark:border-neutral-500">
+                        <span x-text="selected"></span>
+                        <i class="las la-angle-down text-lg duration-300" :class="isOpen?'rotate-180':'rotate-0'"></i>
+                        <span class="absolute -top-2 left-5 bg-neutral-0 px-2 text-xs dark:bg-neutral-904">Status</span>
+                      </div>
+                      <div x-show="isOpen" @click.away="isOpen=false" class="absolute left-0 top-full z-10 flex max-h-[200px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-0 p-1 shadow-xl dark:bg-neutral-904">
+                        <template x-for="item in items">
+                          <div @click="selected=item, isOpen=false" :class="selected===item?'bg-primary-300  text-neutral-0':'hover:bg-primary-50 dark:hover:bg-neutral-903'" class="cursor-pointer rounded-md px-4 py-2 duration-300" x-text="item"></div>
+                        </template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex gap-4 xxl:gap-6 items-center mb-4 lg:mb-6 max-w-xl">
+                  <label for="switch" class="switch flex justify-center">
+                    <input id="switch" type="checkbox" checked />
+                    <span class="inner primary"></span>
+                  </label>
+                  <div>
+                    <p class="l-text font-medium mb-2">Email Verified</p>
+                    <p class="s-text">Disabling this will automatically send the user a verification email</p>
+                  </div>
+                </div>
+                <div class="flex gap-4 xxl:gap-6">
+                  <button class="btn-primary">Create User</button>
+                  <button class="btn-primary-outlined">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/dropzone.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+  </body>
+</html>

@@ -1,0 +1,425 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/dropzone.min.css" />
+    <link rel="stylesheet" href="./assets/css/dropzone.min.css" />
+    <link rel="stylesheet" href="./assets/css/swiper.min.css" />
+    <link rel="stylesheet" href="./assets/css/quill.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 space-y-4 xxl:space-y-6">
+        <!-- Breadcrumb -->
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Edit Blog</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Blog</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Edit</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Edit blog -->
+
+        <div class="white-box">
+          <h4 class="bb-dashed-n30">Edit Blog</h4>
+          <div class="flex flex-col gap-4 xxl:gap-6">
+            <div>
+              <h5 class="mb-2">Details</h5>
+              <p class="s-text mb-5 xl:mb-8">Title, short description, image...</p>
+              <div class="form-input mb-4 xl:mb-6">
+                <input type="text" id="post_name" value="Exploring the Hidden Gems of [Destination]" placeholder="Name" />
+                <label for="post_name">Post Title</label>
+              </div>
+              <div class="form-input mb-4 xl:mb-6">
+                <textarea id="sub-desc" rows="4" placeholder="Say something">
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                </textarea>
+                <label for="sub-desc" class="textarea">Sub Description</label>
+              </div>
+              <p class="l-text font-medium mb-4">Content</p>
+              <section class="mb-4 xl:mb-6">
+                <div id="toolbar-two" class="flex flex-wrap gap-3 justify-between rounded-t-2xl !border-neutral-30 bg-neutral-20 dark:!border-neutral-500 dark:bg-neutral-903">
+                  <span class="ql-formats">
+                    <select class="ql-header">
+                      <option value="1">Heading</option>
+                      <option value="2">Subheading</option>
+                      <option selected>Normal</option>
+                    </select>
+                    <select class="ql-font">
+                      <option selected>Sans Serif</option>
+                      <option value="serif">Serif</option>
+                      <option value="monospace">Monospace</option>
+                    </select>
+                  </span>
+
+                  <div class="flex grow flex-wrap justify-end">
+                    <span class="ql-formats !flex">
+                      <button class="ql-bold"></button>
+                      <button class="ql-italic"></button>
+                      <button class="ql-underline"></button>
+                      <button class="ql-strike"></button>
+                    </span>
+                    <span class="ql-formats !flex">
+                      <select class="ql-color"></select>
+                      <select class="ql-background"></select>
+                    </span>
+                    <span class="ql-formats !flex">
+                      <button class="ql-list" value="ordered"></button>
+                      <button class="ql-list" value="bullet"></button>
+                      <select class="ql-align">
+                        <option selected></option>
+                        <option value="center"></option>
+                        <option value="right"></option>
+                        <option value="justify"></option>
+                      </select>
+                    </span>
+                    <span class="ql-formats !flex">
+                      <button class="ql-blockquote"></button>
+                      <button class="ql-link"></button>
+                      <button class="ql-image"></button>
+                      <button class="ql-code-block"></button>
+                      <button class="ql-video"></button>
+                    </span>
+                    <span class="ql-formats">
+                      <button class="ql-clean"></button>
+                    </span>
+                  </div>
+                </div>
+                <div id="editor-two" class="rounded-b-2xl !border-neutral-30 dark:!border-neutral-500">
+                  <div class="ql-editor" data-gramm="false" contenteditable="true" data-placeholder="Write something awesome...">
+                    <h1>Heading H1</h1>
+                    <p><br /></p>
+                    <h2>Heading H2</h2>
+                    <p><br /></p>
+                    <h3>Heading H3</h3>
+                    <p><br /></p>
+                    <h4>Heading H4</h4>
+                    <p><br /></p>
+                    <h6>Heading H5</h6>
+                    <p><br /></p>
+                    <h6>Heading H6</h6>
+                    <p><br /></p>
+                    <p><br /></p>
+                    <h3>Paragraph</h3>
+                    <p><br /></p>
+                    <p>What is MTAweb Directory?</p>
+                    <p><br /></p>
+                    <p>
+                      So you have heard about this site or you have been to it, but you cannot figure out what it is or what it can do. MTA web directory is the simplest way in which one can bid on a link, or a few links if they wish to do so. The link directory on MTA displays all of the links it
+                      currently has, and does so in alphabetical order, which makes it much easier for someone to find what they are looking for if it is something specific and they do not want to go through all the other sites and links as well. It allows you to start your bid at the bottom and
+                      slowly work your way to the top of the list.
+                    </p>
+                    <p><br /></p>
+                    <p>
+                      With a very low costing starting bid of just $1, you are guaranteed to have a spot in MTA's successful directory list. When you would like to increase your bid to one of the top positions, you have to know that this would be a wise decision to make as it will not only get your
+                      link to be at a higher point in the directory but it will also give you a chance to have your site advertised with the rest of the top ten on the home page of the website. This means that when visitors come to MTAweb.com, your site will be one of the first things they see. In
+                      other words, you stand a great chance at getting a comeback to your site sooner than you thought.
+                    </p>
+                    <p><br /></p>
+                    <p><strong>This is strong text.</strong></p>
+                    <p><br /></p>
+                    <p><em>This is italic text</em></p>
+                    <p><br /></p>
+                    <p><u>This is underline text</u></p>
+                    <p><br /></p>
+                    <h3>Unordered list</h3>
+                    <p><br /></p>
+                    <ul>
+                      <li>Implements <a href="#" rel="noopener noreferrer" target="_blank">This is an external link</a></li>
+                      <li>Implements <a href="/dashboard/blog" rel="noopener noreferrer" target="_blank">This is an inside link</a></li>
+                      <li>Renders actual, "native" React DOM elements</li>
+                      <li>Allows you to escape or skip HTML (try toggling the checkboxes above)</li>
+                      <li>If you escape or skip the HTML, no dangerouslySetInnerHTML is used! Yay!</li>
+                    </ul>
+                    <p><br /></p>
+                    <h3>Ordered list</h3>
+                    <p><br /></p>
+                    <ol>
+                      <li>Analysis</li>
+                      <li>Design</li>
+                      <li>Implementation</li>
+                    </ol>
+                    <p><br /></p>
+                    <h3>Blockquote</h3>
+                    <p><br /></p>
+                    <blockquote>Life is short, Smile while you still have teeth!&nbsp;</blockquote>
+                    <p><br /></p>
+                    <h3>Block Code</h3>
+                    <p><br /></p>
+                    <pre class="ql-syntax" spellcheck="false"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">ReactDOM</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">ReactMarkdown</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'react-markdown'</span>;
+<span class="hljs-keyword">import</span> rehypeHighlight <span class="hljs-keyword">from</span> <span class="hljs-string">'rehype-highlight'</span>;
+
+<span class="hljs-title class_">ReactDOM</span>.<span class="hljs-title function_">render</span>(
+  <span class="hljs-tag">&lt;<span class="hljs-name">ReactMarkdown</span> <span class="hljs-attr">rehypePlugins</span>=<span class="hljs-string">{[rehypeHighlight]}</span>&gt;</span>{'# Your markdown here'}<span class="hljs-tag">&lt;/<span class="hljs-name">ReactMarkdown</span>&gt;</span>,
+  <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'#content'</span>)
+);
+</pre>
+                    <p><br /></p>
+                    <p>
+                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five
+                      centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
+                      versions of Lorem Ipsum.
+                    </p>
+                    <p><br /></p>
+                    <p><br /></p>
+                    <p>Why do we use it?</p>
+                    <p><br /></p>
+                    <p><br /></p>
+                    <p>
+                      It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it
+                      look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by
+                      accident, sometimes on purpose (injected humour and the like).
+                    </p>
+                    <p><br /></p>
+                    <p><br /></p>
+                    <p><img src="./assets/images/blog/blog-1.png" /></p>
+                    <p><br /></p>
+                    <p><br /></p>
+                    <p>
+                      It is important that you buy links because the links are what get you the results that you want. The popularity of the links that are listed in the MTA directory is in fact one of the most important factors in the performance of the search engine. Links are important and this
+                      is why you have to purchase a link in order to bid on something and the best part is that a link will only cost you $1, which is nothing compared to what you would pay if you decided to do it through any other company or website.
+                    </p>
+                    <p><br /></p>
+                    <p><br /></p>
+                    <p><img src="./assets/images/blog/blog-2.png" /></p>
+                    <p><br /></p>
+                  </div>
+                </div>
+              </section>
+              <p class="l-text font-medium mb-4">Cover Image</p>
+              <form action="#" id="single-file" class="single-file">
+                <div class="flex flex-col items-center text-center clickable-single cursor-pointer n20-box lg:p-10 xl:p-[60px]">
+                  <img src="./assets/images/single-file.png" class="mb-6 lg:mb-10" alt="" />
+                  <h5 class="font-semibold mb-4">Drop or Select file</h5>
+                  <p>Drop files here or click <span class="text-primary-300">Browse</span> through your machine</p>
+                </div>
+              </form>
+            </div>
+
+            <div>
+              <h5 class="mb-2">Properties</h5>
+              <p class="s-text mb-5 xl:mb-8">Additional functions and attributes...</p>
+              <div class="grid grid-cols-2 gap-4 xxl:gap-6 mb-6">
+                <!-- Tags -->
+                <div x-data="{isOpen:true}" class="col-span-2">
+                  <div x-show="isOpen" x-collapse>
+                    <div class="bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 rounded-xl p-3 lg:p-4 xxl:p-5">
+                      <div
+                        x-data="{
+                                      selectOpen: false,
+                                      selectedItems: [ { title: 'Fashion' },
+                                          { title: 'Food' },
+                                          { title: 'Tech' },
+                                          { title: 'Trending' },],
+                                      searchText: '',
+                                      optionList: [
+                                          { title: 'Fashion' },
+                                          { title: 'Food' },
+                                          { title: 'Tech' },
+                                          { title: 'Trending' },
+                                          { title: 'Travel' },
+                                          { title: 'Business' },
+                                          { title: 'Fitness' },
+                                          { title: 'Nature' },
+                                          { title: 'Education' },
+                                          { title: 'Cooking' },
+                                          { title: 'Finance' },
+                                      ],
+                                      filteredOptions() {
+                                          if (this.searchText.trim() === '') {
+                                              return this.optionList;
+                                          } else {
+                                              return this.optionList.filter(option => option.title.toLowerCase().includes(this.searchText.trim().toLowerCase()));
+                                          }
+                                      },
+                                      toggleItem(item) {
+                                          const index = this.selectedItems.findIndex(selectedItem => selectedItem.title === item.title);
+                                          if (index === -1) {
+                                              // If item not already selected, add it to selectedItems array
+                                              this.selectedItems.push(item);
+                                          } else {
+                                              // If item already selected, remove it from selectedItems array
+                                              this.selectedItems.splice(index, 1);
+                                          }
+                                      },
+                                      isSelected(item) {
+                                          return this.selectedItems.findIndex(selectedItem => selectedItem.title === item.title) !== -1;
+                                      }
+                                  }"
+                        class="relative"
+                      >
+                        <div @click="selectOpen = !selectOpen" class="rounded-xl w-full relative flex flex-wrap gap-2">
+                          <div x-show="selectedItems.length" class="flex flex-wrap gap-2 grow">
+                            <template x-for="item in selectedItems">
+                              <div class="px-1.5 py-0.5 rounded-full bg-primary-50 flex items-center gap-2 border border-primary-100 text-primary-300">
+                                <span x-text="item.title" class="text-xs"></span>
+                                <span @click.stop="toggleItem(item)" class="text-xs rounded-full size-4 bg-neutral-0 text-primary-300 f-center">
+                                  <i class="las la-times cursor-pointer"></i>
+                                </span>
+                              </div>
+                            </template>
+                          </div>
+                          <span class="absolute -top-[20px] text-xs -translate-y-1/2 left-2 px-2 bg-neutral-0 dark:bg-neutral-904">Tags</span>
+                          <input type="text" placeholder="Add tags" x-model="searchText" class="w-full bg-transparent capitalize text-sm" />
+                        </div>
+                        <ul x-show="selectOpen" @click.away="selectOpen = false" class="p-1 rounded-xl bg-neutral-0 dark:bg-neutral-904 absolute top-full left-0 right-0 w-full shadow-xl z-[3] max-h-[250px] overflow-y-auto flex flex-col gap-1">
+                          <template x-for="option in filteredOptions()" :key="option.title">
+                            <li @click="toggleItem(option)" x-text="option.title" :class="{ 'bg-primary-50 dark:bg-neutral-600': isSelected(option) }" class="py-1.5 ltr:pl-6 rtl:pr-6 hover:bg-primary-300 rounded-lg text-sm hover:text-neutral-0 duration-300 cursor-pointer capitalize"></li>
+                          </template>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Meta title -->
+                <div class="form-input col-span-2">
+                  <input type="text" id="meta_title" placeholder="Meta Title" />
+                  <label for="meta_title">Meta Title</label>
+                </div>
+
+                <!-- Meta desc -->
+                <div class="form-input col-span-2">
+                  <textarea id="meta-desc" rows="4" placeholder="Meta Description">
+The starting point for your next project with Softify UI Kit
+                  </textarea>
+                  <label for="meta-desc" class="textarea">Meta Description</label>
+                </div>
+                <!-- meta keywords -->
+                <div x-data="{isOpen:true}" class="col-span-2">
+                  <div x-show="isOpen" x-collapse>
+                    <div class="bg-neutral-0 dark:bg-neutral-904 border border-neutral-40 dark:border-neutral-500 rounded-xl p-3 lg:p-4 xxl:p-5">
+                      <div
+                        x-data="{
+                                    selectOpen: false,
+                                    selectedItems: [  { title: 'Design' },
+                                        { title: 'Marketing' },
+                                        { title: 'Trending' },],
+                                    searchText: '',
+                                    optionList: [
+                                        { title: 'Technology' },
+                                        { title: 'Design' },
+                                        { title: 'Marketing' },
+                                        { title: 'Trending' },
+                                        { title: 'Ai' },
+                                        { title: 'Business' },
+                                    ],
+                                    filteredOptions() {
+                                        if (this.searchText.trim() === '') {
+                                            return this.optionList;
+                                        } else {
+                                            return this.optionList.filter(option => option.title.toLowerCase().includes(this.searchText.trim().toLowerCase()));
+                                        }
+                                    },
+                                    toggleItem(item) {
+                                        const index = this.selectedItems.findIndex(selectedItem => selectedItem.title === item.title);
+                                        if (index === -1) {
+                                            // If item not already selected, add it to selectedItems array
+                                            this.selectedItems.push(item);
+                                        } else {
+                                            // If item already selected, remove it from selectedItems array
+                                            this.selectedItems.splice(index, 1);
+                                        }
+                                    },
+                                    isSelected(item) {
+                                        return this.selectedItems.findIndex(selectedItem => selectedItem.title === item.title) !== -1;
+                                    }
+                                }"
+                        class="relative"
+                      >
+                        <div @click="selectOpen = !selectOpen" class="rounded-xl w-full relative flex flex-wrap gap-2">
+                          <div x-show="selectedItems.length" class="flex gap-2 flex-wrap grow">
+                            <template x-for="item in selectedItems">
+                              <div class="px-1.5 py-0.5 rounded-full bg-primary-50 flex items-center gap-2 border border-primary-100 text-primary-300">
+                                <span x-text="item.title" class="text-xs"></span>
+                                <span @click.stop="toggleItem(item)" class="text-xs rounded-full size-4 bg-neutral-0 text-primary-300 f-center">
+                                  <i class="las la-times cursor-pointer"></i>
+                                </span>
+                              </div>
+                            </template>
+                          </div>
+                          <span class="absolute -top-[20px] text-xs -translate-y-1/2 left-2 px-2 bg-neutral-0 dark:bg-neutral-904">Meta Keywords</span>
+                          <input type="text" placeholder="Add tags" x-model="searchText" class="w-full bg-transparent capitalize text-sm" />
+                        </div>
+                        <ul x-show="selectOpen" @click.away="selectOpen = false" class="p-1 rounded-xl bg-neutral-0 dark:bg-neutral-904 absolute top-full left-0 right-0 w-full shadow-xl z-[3] max-h-[250px] overflow-y-auto flex flex-col gap-1">
+                          <template x-for="option in filteredOptions()" :key="option.title">
+                            <li @click="toggleItem(option)" x-text="option.title" :class="{ 'bg-primary-50 dark:bg-neutral-600': isSelected(option) }" class="py-1.5 ltr:pl-6 rtl:pr-6 hover:bg-primary-300 rounded-lg text-sm hover:text-neutral-0 duration-300 cursor-pointer capitalize"></li>
+                          </template>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-span-2">
+                  <label for="enable-comment" class="switch flex">
+                    <input id="enable-comment" type="checkbox" />
+                    <span class="inner primary"></span>
+                    Enable Comments
+                  </label>
+                </div>
+                <div class="col-span-2">
+                  <label for="publish" class="switch flex">
+                    <input id="publish" type="checkbox" checked />
+                    <span class="inner primary"></span>
+                    Publish
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-span-2 flex gap-4">
+              <button class="btn-primary">Save Changes</button>
+              <button class="btn-primary-outlined">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/quill.js"></script>
+    <script src="./assets/js/libs/dropzone.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+  </body>
+</html>

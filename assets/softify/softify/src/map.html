@@ -1,0 +1,289 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <script src="./assets/js/libs/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.css" type="text/css" />
+    <script src="./assets/js/libs/mapbox-gl-compare.js"></script>
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Map</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Map</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Maps -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div class="flex flex-col gap-4 lg:gap-6">
+            <!-- Appearance Settings -->
+            <div class="n30-box">
+              <h5 class="bb-dashed-n40">Appearance Settings</h5>
+              <div class="relative">
+                <div id="map1" class="min-h-[500px] w-full rounded-xl"></div>
+                <div id="menu" class="absolute right-6 top-6 rounded-lg bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 lg:p-6">
+                  <p class="l-text mb-4 border-b border-neutral-30 pb-4 font-medium dark:border-neutral-500">Select Theme</p>
+                  <div class="flex flex-col gap-3">
+                    <div class="custom-radio">
+                      <input type="radio" id="streets-v12" name="theme" checked />
+                      <label for="streets-v12" class="primary !text-neutral-700 dark:!text-neutral-20">Streets</label>
+                    </div>
+                    <div class="custom-radio">
+                      <input type="radio" id="outdoors-v12" name="theme" />
+                      <label for="outdoors-v12" class="primary !text-neutral-700 dark:!text-neutral-20">Outdoors</label>
+                    </div>
+                    <div class="custom-radio">
+                      <input type="radio" id="light-v11" name="theme" />
+                      <label for="light-v11" class="primary !text-neutral-700 dark:!text-neutral-20">Light</label>
+                    </div>
+                    <div class="custom-radio">
+                      <input type="radio" id="dark-v11" name="theme" />
+                      <label for="dark-v11" class="primary !text-neutral-700 dark:!text-neutral-20">Dark</label>
+                    </div>
+                    <div class="custom-radio">
+                      <input type="radio" id="satellite-v9" name="theme" />
+                      <label for="satellite-v9" class="primary !text-neutral-700 dark:!text-neutral-20">Sattelite</label>
+                    </div>
+                    <div class="custom-radio">
+                      <input type="radio" id="satellite-streets-v12" name="theme" />
+                      <label for="satellite-streets-v12" class="primary !text-neutral-700 dark:!text-neutral-20">Sattelite Streets</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Pin -->
+            <div class="n30-box">
+              <h5 class="bb-dashed-n40">Pin Location</h5>
+              <div class="relative">
+                <div id="map2" class="h-[500px] w-full rounded-xl"></div>
+              </div>
+            </div>
+
+            <!-- Draggable Markers -->
+            <div class="n30-box">
+              <h5 class="bb-dashed-n40">Draggable Pin</h5>
+              <div class="relative">
+                <div id="map3" class="h-[500px] w-full rounded-xl"></div>
+                <div class="absolute right-6 bottom-6 w-[250px] rounded-lg bg-neutral-0 p-4 shadow-xl dark:bg-neutral-904 lg:p-6">
+                  <p>onDragStart:</p>
+                  <p class="text-primary-300" id="ondragstart"></p>
+                  <p>onDrag:</p>
+                  <p class="text-primary-300" id="ondrag"></p>
+                  <p>onDragEnd:</p>
+                  <p class="text-primary-300" id="ondragend"></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Clusters -->
+            <div class="n30-box">
+              <h5 class="bb-dashed-n40">Regions</h5>
+              <div class="relative">
+                <div id="map5" class="h-[500px] w-full rounded-xl"></div>
+              </div>
+            </div>
+
+            <!-- Interaction -->
+            <div class="n30-box">
+              <h5 class="bb-dashed-n40">User Interaction</h5>
+              <div class="relative">
+                <div id="map6" class="h-[500px] w-full rounded-xl"></div>
+                <nav id="listing-group" class="listing-group absolute right-1.5 top-1.5 flex w-[265px] flex-col gap-2 rounded-lg bg-neutral-0 p-3 shadow-xl dark:bg-neutral-904 sm:p-4 lg:p-6">
+                  <div class="flex items-center justify-between">
+                    <label for="minZoom" class="m-text whitespace-nowrap">Min Zoom</label>
+                    <input value="0" id="minZoom" class="w-8 rounded-md border border-neutral-30 bg-neutral-20 px-1 text-sm dark:border-neutral-500 dark:bg-neutral-903" type="number" />
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <label for="maxZoom" class="m-text whitespace-nowrap">Max Zoom</label>
+                    <input value="20" id="maxZoom" class="w-8 rounded-md border border-neutral-30 bg-neutral-20 px-1 text-sm dark:border-neutral-500 dark:bg-neutral-903" type="number" />
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <label for="minPitch" class="m-text whitespace-nowrap">Min Pitch</label>
+                    <input value="0" id="minPitch" class="w-8 rounded-md border border-neutral-30 bg-neutral-20 px-1 text-sm dark:border-neutral-500 dark:bg-neutral-903" type="number" />
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <label for="maxPitch" class="m-text whitespace-nowrap">Max Pitch</label>
+                    <input value="85" id="maxPitch" class="w-8 rounded-md border border-neutral-30 bg-neutral-20 px-1 text-sm dark:border-neutral-500 dark:bg-neutral-903" type="number" />
+                  </div>
+
+                  <div class="flex items-center justify-between">
+                    <span class="m-text">Drag Pan</span>
+                    <label for="dragPan" class="switch flex justify-center">
+                      <input id="dragPan" type="checkbox" checked />
+                      <span class="inner primary"></span>
+                    </label>
+                  </div>
+
+                  <div class="flex items-center justify-between">
+                    <span class="m-text">Box Zoom</span>
+                    <label for="boxZoom" class="switch flex justify-center">
+                      <input id="boxZoom" type="checkbox" checked />
+                      <span class="inner primary"></span>
+                    </label>
+                  </div>
+
+                  <div class="flex items-center justify-between">
+                    <span class="m-text">Keyboard</span>
+                    <label for="keyboard" class="switch flex justify-center">
+                      <input id="keyboard" type="checkbox" />
+                      <span class="inner primary"></span>
+                    </label>
+                  </div>
+
+                  <div class="flex items-center justify-between">
+                    <span class="m-text">Touch Zoom</span>
+                    <label for="touchZoom" class="switch flex justify-center">
+                      <input id="touchZoom" type="checkbox" checked />
+                      <span class="inner primary"></span>
+                    </label>
+                  </div>
+
+                  <div class="flex items-center justify-between">
+                    <span class="m-text">Drag Rotate</span>
+                    <label for="dragRotate" class="switch flex justify-center">
+                      <input id="dragRotate" type="checkbox" checked />
+                      <span class="inner primary"></span>
+                    </label>
+                  </div>
+
+                  <div class="flex items-center justify-between">
+                    <span class="m-text">Scroll Zoom</span>
+                    <label for="scrollZoom" class="switch flex justify-center">
+                      <input id="scrollZoom" type="checkbox" checked />
+                      <span class="inner primary"></span>
+                    </label>
+                  </div>
+
+                  <div class="flex items-center justify-between">
+                    <span class="m-text">Touch Pitch</span>
+                    <label for="touchPitch" class="switch flex justify-center">
+                      <input id="touchPitch" type="checkbox" checked />
+                      <span class="inner primary"></span>
+                    </label>
+                  </div>
+
+                  <div class="flex items-center justify-between">
+                    <span class="m-text">Touch Rotate</span>
+                    <label for="touchRotate" class="switch flex justify-center">
+                      <input id="touchRotate" type="checkbox" />
+                      <span class="inner primary"></span>
+                    </label>
+                  </div>
+
+                  <div class="flex items-center justify-between">
+                    <span class="m-text">Double Click Zoom</span>
+                    <label for="doubleClickZoom" class="switch flex justify-center">
+                      <input id="doubleClickZoom" type="checkbox" checked />
+                      <span class="inner primary"></span>
+                    </label>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="m-text">Touch Zoom Rotate</span>
+                    <label for="touchZoomRotate" class="switch flex justify-center">
+                      <input id="touchZoomRotate" type="checkbox" checked />
+                      <span class="inner primary"></span>
+                    </label>
+                  </div>
+                </nav>
+              </div>
+            </div>
+
+            <!-- Viewport animation -->
+            <div class="n30-box">
+              <h5 class="bb-dashed-n40">Animate Location</h5>
+              <div class="relative">
+                <div id="map7" class="h-[500px] w-full rounded-xl"></div>
+                <div id="places" class="absolute right-6 top-6 rounded-lg bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 lg:p-6">
+                  <div class="flex flex-col gap-3">
+                    <div class="custom-radio">
+                      <input type="radio" id="0" name="theme" checked />
+                      <label for="0" class="primary !text-neutral-700 dark:!text-neutral-20">Houston</label>
+                    </div>
+                    <div class="custom-radio">
+                      <input type="radio" id="1" name="theme" />
+                      <label for="1" class="primary !text-neutral-700 dark:!text-neutral-20">San Antonio</label>
+                    </div>
+                    <div class="custom-radio">
+                      <input type="radio" id="2" name="theme" />
+                      <label for="2" class="primary !text-neutral-700 dark:!text-neutral-20">Dallas</label>
+                    </div>
+                    <div class="custom-radio">
+                      <input type="radio" id="3" name="theme" />
+                      <label for="3" class="primary !text-neutral-700 dark:!text-neutral-20">Austin</label>
+                    </div>
+                    <div class="custom-radio">
+                      <input type="radio" id="4" name="theme" />
+                      <label for="4" class="primary !text-neutral-700 dark:!text-neutral-20">Fort Worth</label>
+                    </div>
+                    <div class="custom-radio">
+                      <input type="radio" id="5" name="theme" />
+                      <label for="5" class="primary !text-neutral-700 dark:!text-neutral-20">Haluaghat</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Heatmap -->
+            <div class="n30-box">
+              <h5 class="bb-dashed-n40">Temperature</h5>
+              <div class="relative">
+                <div id="map9" class="h-[500px] w-full rounded-xl"></div>
+              </div>
+            </div>
+            <!-- comparison -->
+            <div class="n30-box">
+              <h5 class="bb-dashed-n40">Dark and Light Map Compare</h5>
+              <div class="relative">
+                <div id="comparison-container" class="h-[500px] rounded-xl">
+                  <div id="before" class="map w-full absolute top-0 bottom-0 rounded-xl"></div>
+                  <div id="after" class="map w-full absolute top-0 bottom-0 rounded-xl"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/map.js"></script>
+  </body>
+</html>

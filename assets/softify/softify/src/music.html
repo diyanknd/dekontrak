@@ -1,0 +1,585 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/swiper.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903 relative">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6">
+        <div class="grid grid-cols-12 gap-4 xxl:gap-6">
+          <div class="col-span-12 lg:col-span-7 xxl:col-span-8 space-y-4 xxl:space-y-6">
+            <!-- music hero slider -->
+            <div dir="ltr" class="relative">
+              <div class="swiper music-hero-slider">
+                <div class="swiper-wrapper rounded-xl">
+                  <div class="swiper-slide">
+                    <div class="music-hero" style="background-image: url(assets/images/music-hero-1.png)">
+                      <div class="max-w-md relative z-[3] py-8 sm:py-10">
+                        <h2 class="mb-3 xxl:mb-6 leading-tight text-white">Where Harmony and Passion Meet</h2>
+                        <p class="mb-6 xl:mb-8 l-text text-white">Connect with fellow music enthusiasts and professionals. Share your passion.</p>
+                        <div class="flex gap-4 items-center">
+                          <a href="#" class="btn-primary"><i class="la la-music"></i>Listen Now</a>
+                          <button class="bg-warning-300 rounded-full text-neutral-700 size-10 f-center"><i class="lar la-heart"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="music-hero" style="background-image: url(assets/images/music-hero-2.png)">
+                      <div class="max-w-md relative z-[3] py-8 sm:py-10">
+                        <h2 class="mb-3 xxl:mb-6 leading-tight text-white">Feel the Rhythm, Live the Music</h2>
+                        <p class="mb-6 xl:mb-8 l-text text-white">Experience the pulse of the music scene with live event updates, concert reviews</p>
+                        <div class="flex gap-4 items-center">
+                          <a href="#" class="btn-primary"><i class="la la-music"></i>Listen Now</a>
+                          <button class="bg-warning-300 rounded-full text-neutral-700 size-10 f-center"><i class="lar la-heart"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="music-hero" style="background-image: url(assets/images/music-hero-3.png)">
+                      <div class="max-w-md relative z-[3] py-8 sm:py-10">
+                        <h2 class="mb-3 xxl:mb-6 leading-tight text-white">Experience the Magic of Music</h2>
+                        <p class="mb-6 xl:mb-8 l-text text-white">Discover the enchanting world of music with our curated playlists, artist spotlights</p>
+                        <div class="flex gap-4 items-center">
+                          <a href="#" class="btn-primary"><i class="la la-music"></i>Listen Now</a>
+                          <button class="bg-warning-300 rounded-full text-neutral-700 size-10 f-center"><i class="lar la-heart"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="music-hero" style="background-image: url(assets/images/music-hero-4.png)">
+                      <div class="max-w-md relative z-[3] py-8 sm:py-10">
+                        <h2 class="mb-3 xxl:mb-6 leading-tight text-white">Unleash Your Inner Musical Talent</h2>
+                        <p class="mb-6 xl:mb-8 l-text text-white">Join our community of passionate musicians and enhance your skills with expert tutorials</p>
+                        <div class="flex gap-4 items-center">
+                          <a href="#" class="btn-primary"><i class="la la-music"></i>Listen Now</a>
+                          <button class="bg-warning-300 rounded-full text-neutral-700 size-10 f-center"><i class="lar la-heart"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="music-hero" style="background-image: url(assets/images/music-hero-5.png)">
+                      <div class="max-w-md relative z-[3] py-8 sm:py-10">
+                        <h2 class="mb-3 xxl:mb-6 leading-tight text-white">Creating Beautiful Moments with Music</h2>
+                        <p class="mb-6 xl:mb-8 l-text text-white">Let music be the soundtrack to your life's most memorable moments.</p>
+                        <div class="flex gap-4 items-center">
+                          <a href="#" class="btn-primary"><i class="la la-music"></i>Listen Now</a>
+                          <button class="bg-warning-300 rounded-full text-neutral-700 size-10 f-center"><i class="lar la-heart"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="music-hero-pagination"></div>
+            </div>
+
+            <!-- top artists -->
+            <div class="white-box">
+              <div class="bb-dashed-n30 flex justify-between items-center">
+                <h4>Top Artists</h4>
+                <a class="flex items-center gap-2 text-primary-300 h6" href="#">See All <i class="las la-arrow-right"></i></a>
+              </div>
+              <div class="flex flex-wrap gap-4 xxxl:gap-6 4xl:gap-8 text-center justify-center xxxl:justify-between">
+                <div class="flex flex-col items-center">
+                  <div class="relative mb-5">
+                    <img src="./assets/images/users/user-s-2.png" width="80" height="80" class="rounded-full" alt="" />
+                    <span class="size-5 f-center text-xs bg-success-300 rounded-full text-neutral-0 border border-neutral-0 absolute right-0 bottom-0"><i class="las la-check"></i></span>
+                  </div>
+                  <p class="l-text font-medium mb-1">Wade Warren</p>
+                  <p class="s-text">Latin Singers</p>
+                </div>
+                <div class="flex flex-col items-center">
+                  <div class="relative mb-5">
+                    <img src="./assets/images/users/user-s-3.png" width="80" height="80" class="rounded-full" alt="" />
+                    <span class="size-5 f-center text-xs bg-success-300 rounded-full text-neutral-0 border border-neutral-0 absolute right-0 bottom-0"><i class="las la-check"></i></span>
+                  </div>
+                  <p class="l-text font-medium mb-1">Robert Fox</p>
+                  <p class="s-text">Pop Singers</p>
+                </div>
+                <div class="flex flex-col items-center">
+                  <div class="relative mb-5">
+                    <img src="./assets/images/users/user-s-4.png" width="80" height="80" class="rounded-full" alt="" />
+                    <span class="size-5 f-center text-xs bg-success-300 rounded-full text-neutral-0 border border-neutral-0 absolute right-0 bottom-0"><i class="las la-check"></i></span>
+                  </div>
+                  <p class="l-text font-medium mb-1">Annette Black</p>
+                  <p class="s-text">Jazz Singers</p>
+                </div>
+                <div class="flex flex-col items-center">
+                  <div class="relative mb-5">
+                    <img src="./assets/images/users/user-s-5.png" width="80" height="80" class="rounded-full" alt="" />
+                    <span class="size-5 f-center text-xs bg-success-300 rounded-full text-neutral-0 border border-neutral-0 absolute right-0 bottom-0"><i class="las la-check"></i></span>
+                  </div>
+                  <p class="l-text font-medium mb-1">Kathryn Murphy</p>
+                  <p class="s-text">Pop Singers</p>
+                </div>
+                <div class="flex flex-col items-center">
+                  <div class="relative mb-5">
+                    <img src="./assets/images/users/user-s-6.png" width="80" height="80" class="rounded-full" alt="" />
+                    <span class="size-5 f-center text-xs bg-success-300 rounded-full text-neutral-0 border border-neutral-0 absolute right-0 bottom-0"><i class="las la-check"></i></span>
+                  </div>
+                  <p class="l-text font-medium mb-1">Dianne Russell</p>
+                  <p class="s-text">Rock Singers</p>
+                </div>
+                <div class="flex flex-col items-center">
+                  <div class="relative mb-5">
+                    <img src="./assets/images/users/user-s-1.png" width="80" height="80" class="rounded-full" alt="" />
+                    <span class="size-5 f-center text-xs bg-success-300 rounded-full text-neutral-0 border border-neutral-0 absolute right-0 bottom-0"><i class="las la-check"></i></span>
+                  </div>
+                  <p class="l-text font-medium mb-1">Albert Flores</p>
+                  <p class="s-text">Folk Singers</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Special Music -->
+            <div dir="ltr" class="col-span-12 lg:col-span-7 xxl:col-span-8 white-box">
+              <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4 bb-dashed-n30">
+                <h4>Special Music</h4>
+                <div class="flex gap-4">
+                  <button class="music-prev size-10 text-xl f-center text-primary-300 border border-primary-300 rounded-full hover:bg-primary-300 hover:text-neutral-0 duration-300"><i class="las la-angle-left"></i></button>
+                  <button class="music-next size-10 text-xl f-center text-primary-300 border border-primary-300 rounded-full hover:bg-primary-300 hover:text-neutral-0 duration-300"><i class="las la-angle-right"></i></button>
+                </div>
+              </div>
+              <div class="swiper special-music-slider">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <div class="bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500 rounded-xl p-3 group">
+                      <div class="relative mb-4 xxl:mb-6 overflow-hidden rounded-xl">
+                        <img src="./assets/images/special-music-1.png" class="rounded-xl w-full" alt="" />
+                        <button class="absolute size-10 f-center z-[2] text-neutral-0 rounded-full bg-primary-300 text-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"><i class="las la-play"></i></button>
+                      </div>
+                      <div class="px-2 xl:px-4 pb-2 xl:pb-3">
+                        <div class="flex justify-between items-start">
+                          <div>
+                            <p class="xl-text font-medium mb-2">Midnight Serenade</p>
+                            <p class="s-text">Nocturnal Melodies</p>
+                          </div>
+                          <button class="text-error-300 text-xl"><i class="lar la-heart"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500 rounded-xl p-3 group">
+                      <div class="relative mb-4 xxl:mb-6 overflow-hidden rounded-xl">
+                        <img src="./assets/images/special-music-2.png" class="rounded-xl w-full" alt="" />
+                        <button class="absolute size-10 f-center z-[2] text-neutral-0 rounded-full bg-primary-300 text-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"><i class="las la-play"></i></button>
+                      </div>
+                      <div class="px-2 xl:px-4 pb-2 xl:pb-3">
+                        <div class="flex justify-between items-start">
+                          <div>
+                            <p class="xl-text font-medium mb-2">Electric Dreams</p>
+                            <p class="s-text">Nocturnal Melodies</p>
+                          </div>
+                          <button class="text-error-300 text-xl"><i class="lar la-heart"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500 rounded-xl p-3 group">
+                      <div class="relative mb-4 xxl:mb-6 overflow-hidden rounded-xl">
+                        <img src="./assets/images/special-music-3.png" class="rounded-xl w-full" alt="" />
+                        <button class="absolute size-10 f-center z-[2] text-neutral-0 rounded-full bg-primary-300 text-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"><i class="las la-play"></i></button>
+                      </div>
+                      <div class="px-2 xl:px-4 pb-2 xl:pb-3">
+                        <div class="flex justify-between items-start">
+                          <div>
+                            <p class="xl-text font-medium mb-2">Echoes of Eternity</p>
+                            <p class="s-text">Nocturnal Melodies</p>
+                          </div>
+                          <button class="text-error-300 text-xl"><i class="lar la-heart"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500 rounded-xl p-3 group">
+                      <div class="relative mb-4 xxl:mb-6 overflow-hidden rounded-xl">
+                        <img src="./assets/images/special-music-1.png" class="rounded-xl w-full" alt="" />
+                        <button class="absolute size-10 f-center z-[2] text-neutral-0 rounded-full bg-primary-300 text-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"><i class="las la-play"></i></button>
+                      </div>
+                      <div class="px-2 xl:px-4 pb-2 xl:pb-3">
+                        <div class="flex justify-between items-start">
+                          <div>
+                            <p class="xl-text font-medium mb-2">Midnight Serenade</p>
+                            <p class="s-text">Nocturnal Melodies</p>
+                          </div>
+                          <button class="text-error-300 text-xl"><i class="lar la-heart"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500 rounded-xl p-3 group">
+                      <div class="relative mb-4 xxl:mb-6 overflow-hidden rounded-xl">
+                        <img src="./assets/images/special-music-2.png" class="rounded-xl w-full" alt="" />
+                        <button class="absolute size-10 f-center z-[2] text-neutral-0 rounded-full bg-primary-300 text-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"><i class="las la-play"></i></button>
+                      </div>
+                      <div class="px-2 xl:px-4 pb-2 xl:pb-3">
+                        <div class="flex justify-between items-start">
+                          <div>
+                            <p class="xl-text font-medium mb-2">Echoes of Eternity</p>
+                            <p class="s-text">Nocturnal Melodies</p>
+                          </div>
+                          <button class="text-error-300 text-xl"><i class="lar la-heart"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="special-music-pagination flex justify-center mt-4 xxl:mt-6"></div>
+            </div>
+          </div>
+          <!-- Recent player -->
+          <div class="col-span-12 lg:col-span-5 xxl:col-span-4 white-box">
+            <div class="bb-dashed-n30 flex justify-between items-center">
+              <h4>Recent Player</h4>
+              <a class="flex items-center gap-2 text-primary-300 h6" href="#">See All <i class="las la-arrow-right"></i></a>
+            </div>
+            <img src="./assets/images/recent-player.png" class="rounded-xl mb-6" alt="" />
+            <div class="mb-6 flex justify-between items-start">
+              <div>
+                <p class="l-text font-semibold mb-2">Back OF Top Song</p>
+                <p class="s-text">Music</p>
+              </div>
+              <button class="text-error-300 text-xl"><i class="lar la-heart"></i></button>
+            </div>
+            <div class="mb-6">
+              <div class="bg-primary-75 w-full h-1 rounded-full mb-2">
+                <div class="bg-primary-300 h-1 w-[80%] rounded-s-full"></div>
+              </div>
+              <div class="flex justify-between">
+                <span>00:00</span>
+                <span>-09:00</span>
+              </div>
+            </div>
+            <div class="bb-dashed-primary xl:mb-8 xxl:pb-10 f-center gap-4 xxxl:gap-7">
+              <button class="text-lg xxl:text-xl 4xl:text-3xl"><i class="las la-cog"></i></button>
+              <button class="text-lg xxl:text-xl 4xl:text-3xl"><i class="las la-random"></i></button>
+              <button class="text-lg xxl:text-xl 4xl:text-3xl"><i class="las la-angle-double-left"></i></button>
+              <button class="bg-primary-300 f-center size-10 xxl:size-14 text-neutral-0 text-lg xl:text-xl 4xl:text-3xl rounded-full"><i class="las la-play"></i></button>
+              <button class="text-lg xxl:text-xl 4xl:text-3xl"><i class="las la-angle-double-right"></i></button>
+              <button class="text-lg xxl:text-xl 4xl:text-3xl"><i class="las la-volume-up"></i></button>
+              <button class="text-lg xxl:text-xl 4xl:text-3xl"><i class="las la-redo-alt"></i></button>
+            </div>
+            <div>
+              <p class="l-text font-medium mb-4 xxl:mb-8">More Songs</p>
+              <div class="space-y-5 xxl:space-y-7">
+                <div class="flex justify-between items-center">
+                  <a href="#" class="flex items-center gap-4 xxl:gap-6">
+                    <img src="./assets/images/song-1.png" class="rounded-lg" alt="" />
+                    <div>
+                      <p class="l-text font-medium mb-2">Midnight Serenade</p>
+                      <span class="s-text">Nocturnal Melodies</span>
+                    </div>
+                  </a>
+                  <include-verti-option />
+                </div>
+                <div class="flex justify-between items-center">
+                  <a href="#" class="flex items-center gap-4 xxl:gap-6">
+                    <img src="./assets/images/song-2.png" class="rounded-lg" alt="" />
+                    <div>
+                      <p class="l-text font-medium mb-2">Echoes of Eternity</p>
+                      <span class="s-text">Timeless Tunes</span>
+                    </div>
+                  </a>
+                  <include-verti-option />
+                </div>
+                <div class="flex justify-between items-center">
+                  <a href="#" class="flex items-center gap-4 xxl:gap-6">
+                    <img src="./assets/images/song-3.png" class="rounded-lg" alt="" />
+                    <div>
+                      <p class="l-text font-medium mb-2">Dancing the Stars</p>
+                      <span class="s-text">Celestial Rhythms</span>
+                    </div>
+                  </a>
+                  <include-verti-option />
+                </div>
+                <div class="flex justify-between items-center">
+                  <a href="#" class="flex items-center gap-4 xxl:gap-6">
+                    <img src="./assets/images/song-4.png" class="rounded-lg" alt="" />
+                    <div>
+                      <p class="l-text font-medium mb-2">Whispers in the Wind</p>
+                      <span class="s-text">Breezy Ballads</span>
+                    </div>
+                  </a>
+                  <include-verti-option />
+                </div>
+                <div class="flex justify-between items-center">
+                  <a href="#" class="flex items-center gap-4 xxl:gap-6">
+                    <img src="./assets/images/song-5.png" class="rounded-lg" alt="" />
+                    <div>
+                      <p class="l-text font-medium mb-2">Electric Dreams</p>
+                      <span class="s-text">Synthwave Chronicles</span>
+                    </div>
+                  </a>
+                  <include-verti-option />
+                </div>
+                <div class="flex justify-between items-center">
+                  <a href="#" class="flex items-center gap-4 xxl:gap-6">
+                    <img src="./assets/images/song-6.png" class="rounded-lg" alt="" />
+                    <div>
+                      <p class="l-text font-medium mb-2">Golden Horizons</p>
+                      <span class="s-text">unset Symphony</span>
+                    </div>
+                  </a>
+                  <include-verti-option />
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- recommended album -->
+          <div class="col-span-12 lg:col-span-6 xxxl:col-span-4 white-box">
+            <div class="bb-dashed-primary flex justify-between items-center">
+              <h4>Recommended Album</h4>
+              <include-verti-option />
+            </div>
+            <div class="space-y-5 xxl:space-y-8 max-h-[745px] overflow-y-auto">
+              <a class="flex" href="#"><img src="./assets/images/album-1.png" class="rounded-xl" alt="" /></a>
+              <a class="flex" href="#"><img src="./assets/images/album-2.png" class="rounded-xl" alt="" /></a>
+              <a class="flex" href="#"><img src="./assets/images/album-3.png" class="rounded-xl" alt="" /></a>
+              <a class="flex" href="#"><img src="./assets/images/album-2.png" class="rounded-xl" alt="" /></a>
+              <a class="flex" href="#"><img src="./assets/images/album-3.png" class="rounded-xl" alt="" /></a>
+            </div>
+          </div>
+          <!-- top playlist -->
+          <div class="col-span-12 lg:col-span-6 xxxl:col-span-4 white-box">
+            <div class="bb-dashed-primary flex justify-between items-center">
+              <h4>Top Playlist</h4>
+              <include-verti-option />
+            </div>
+            <div class="space-y-5 xxl:space-y-8 bb-dashed-primary">
+              <a href="#" class="flex justify-between items-center gap-2">
+                <div class="flex items-center gap-4 xxxl:gap-6">
+                  <div class="size-14 rounded-lg bg-primary-5 border border-neutral-30 dark:border-neutral-500 f-center">
+                    <button class="size-10 rounded-full bg-primary-300 text-2xl text-neutral-0 f-center"><i class="las la-play"></i></button>
+                  </div>
+                  <div>
+                    <p class="l-text font-medium mb-2">Midnight Serenade</p>
+                    <span class="s-text">Nocturnal Melodies</span>
+                  </div>
+                </div>
+                <button class="text-error-300 text-2xl"><i class="lar la-heart"></i></button>
+              </a>
+              <a href="#" class="flex justify-between items-center gap-2">
+                <div class="flex items-center gap-4 xxxl:gap-6">
+                  <div class="size-14 rounded-lg bg-primary-5 border border-neutral-30 dark:border-neutral-500 f-center">
+                    <button class="size-10 rounded-full bg-primary-300 text-2xl text-neutral-0 f-center"><i class="las la-play"></i></button>
+                  </div>
+                  <div>
+                    <p class="l-text font-medium mb-2">Echoes of Eternity</p>
+                    <span class="s-text">Timeless Tunes</span>
+                  </div>
+                </div>
+                <button class="text-error-300 text-2xl"><i class="lar la-heart"></i></button>
+              </a>
+              <a href="#" class="flex justify-between items-center gap-2">
+                <div class="flex items-center gap-4 xxxl:gap-6">
+                  <div class="size-14 rounded-lg bg-primary-5 border border-neutral-30 dark:border-neutral-500 f-center">
+                    <button class="size-10 rounded-full bg-primary-300 text-2xl text-neutral-0 f-center"><i class="las la-play"></i></button>
+                  </div>
+                  <div>
+                    <p class="l-text font-medium mb-2">Dancing the Stars</p>
+                    <span class="s-text">Celestial Rhythms</span>
+                  </div>
+                </div>
+                <button class="text-error-300 text-2xl"><i class="lar la-heart"></i></button>
+              </a>
+              <a href="#" class="flex justify-between items-center gap-2">
+                <div class="flex items-center gap-4 xxxl:gap-6">
+                  <div class="size-14 rounded-lg bg-primary-5 border border-neutral-30 dark:border-neutral-500 f-center">
+                    <button class="size-10 rounded-full bg-primary-300 text-2xl text-neutral-0 f-center"><i class="las la-play"></i></button>
+                  </div>
+                  <div>
+                    <p class="l-text font-medium mb-2">Whispers in the Wind</p>
+                    <span class="s-text">Breezy Ballads</span>
+                  </div>
+                </div>
+                <button class="text-error-300 text-2xl"><i class="lar la-heart"></i></button>
+              </a>
+              <a href="#" class="flex justify-between items-center gap-2">
+                <div class="flex items-center gap-4 xxxl:gap-6">
+                  <div class="size-14 rounded-lg bg-primary-5 border border-neutral-30 dark:border-neutral-500 f-center">
+                    <button class="size-10 rounded-full bg-primary-300 text-2xl text-neutral-0 f-center"><i class="las la-play"></i></button>
+                  </div>
+                  <div>
+                    <p class="l-text font-medium mb-2">Electric Dreams</p>
+                    <span class="s-text">Synthwave Chronicles</span>
+                  </div>
+                </div>
+                <button class="text-error-300 text-2xl"><i class="lar la-heart"></i></button>
+              </a>
+              <a href="#" class="flex justify-between items-center gap-2">
+                <div class="flex items-center gap-4 xxxl:gap-6">
+                  <div class="size-14 rounded-lg bg-primary-5 border border-neutral-30 dark:border-neutral-500 f-center">
+                    <button class="size-10 rounded-full bg-primary-300 text-2xl text-neutral-0 f-center"><i class="las la-play"></i></button>
+                  </div>
+                  <div>
+                    <p class="l-text font-medium mb-2">Golden Horizons</p>
+                    <span class="s-text">unset Symphony</span>
+                  </div>
+                </div>
+                <button class="text-error-300 text-2xl"><i class="lar la-heart"></i></button>
+              </a>
+              <a href="#" class="flex justify-between items-center gap-2">
+                <div class="flex items-center gap-4 xxxl:gap-6">
+                  <div class="size-14 rounded-lg bg-primary-5 border border-neutral-30 dark:border-neutral-500 f-center">
+                    <button class="size-10 rounded-full bg-primary-300 text-2xl text-neutral-0 f-center"><i class="las la-play"></i></button>
+                  </div>
+                  <div>
+                    <p class="l-text font-medium mb-2">Mystic Voyage</p>
+                    <span class="s-text">Ethereal Journeys</span>
+                  </div>
+                </div>
+                <button class="text-error-300 text-2xl"><i class="lar la-heart"></i></button>
+              </a>
+              <a href="#" class="flex justify-between items-center gap-2">
+                <div class="flex items-center gap-4 xxxl:gap-6">
+                  <div class="size-14 rounded-lg bg-primary-5 border border-neutral-30 dark:border-neutral-500 f-center">
+                    <button class="size-10 rounded-full bg-primary-300 text-2xl text-neutral-0 f-center"><i class="las la-play"></i></button>
+                  </div>
+                  <div>
+                    <p class="l-text font-medium mb-2">Silent Reverie</p>
+                    <span class="s-text">Tranquil Tunes</span>
+                  </div>
+                </div>
+                <button class="text-error-300 text-2xl"><i class="lar la-heart"></i></button>
+              </a>
+            </div>
+            <a href="#" class="text-primary-300 flex items-center gap-2 font-semibold">See All <i class="las la-arrow-right text-xl"></i></a>
+          </div>
+
+          <!-- top playlist -->
+          <div class="col-span-12 lg:col-span-6 xxxl:col-span-4 white-box">
+            <div class="bb-dashed-primary flex justify-between items-center">
+              <h4>Most Popular this week</h4>
+              <include-verti-option />
+            </div>
+            <div class="space-y-5 xxl:space-y-8 bb-dashed-primary">
+              <a href="#" class="flex justify-between items-center gap-2">
+                <div class="flex items-center gap-4 xxxl:gap-6">
+                  <div class="size-20 rounded-lg f-center">
+                    <img src="./assets/images/popular-music.png" class="rounded-lg" alt="" />
+                    <button class="size-10 absolute rounded-full bg-error-300 text-2xl text-neutral-0 f-center"><i class="las la-play"></i></button>
+                  </div>
+                  <div>
+                    <p class="l-text font-medium mb-1">Midnight Serenade</p>
+                    <p class="s-text mb-4">Nocturnal Melodies</p>
+                    <button class="flex gap-3 items-center text-primary-300 font-semibold">Play Now <i class="las la-arrow-right"></i></button>
+                  </div>
+                </div>
+              </a>
+              <a href="#" class="flex justify-between items-center gap-2">
+                <div class="flex items-center gap-4 xxxl:gap-6">
+                  <div class="size-20 rounded-lg f-center">
+                    <img src="./assets/images/popular-music.png" class="rounded-lg" alt="" />
+                    <button class="size-10 absolute rounded-full bg-error-300 text-2xl text-neutral-0 f-center"><i class="las la-play"></i></button>
+                  </div>
+                  <div>
+                    <p class="l-text font-medium mb-1">Echoes of Eternity</p>
+                    <p class="s-text mb-4">Nocturnal Melodies</p>
+                    <button class="flex gap-3 items-center text-primary-300 font-semibold">Play Now <i class="las la-arrow-right"></i></button>
+                  </div>
+                </div>
+              </a>
+              <a href="#" class="flex justify-between items-center gap-2">
+                <div class="flex items-center gap-4 xxxl:gap-6">
+                  <div class="size-20 rounded-lg f-center">
+                    <img src="./assets/images/popular-music.png" class="rounded-lg" alt="" />
+                    <button class="size-10 absolute rounded-full bg-error-300 text-2xl text-neutral-0 f-center"><i class="las la-play"></i></button>
+                  </div>
+                  <div>
+                    <p class="l-text font-medium mb-1">Dancing with Stars</p>
+                    <p class="s-text mb-4">Nocturnal Melodies</p>
+                    <button class="flex gap-3 items-center text-primary-300 font-semibold">Play Now <i class="las la-arrow-right"></i></button>
+                  </div>
+                </div>
+              </a>
+              <a href="#" class="flex justify-between items-center gap-2">
+                <div class="flex items-center gap-4 xxxl:gap-6">
+                  <div class="size-20 rounded-lg f-center">
+                    <img src="./assets/images/popular-music.png" class="rounded-lg" alt="" />
+                    <button class="size-10 absolute rounded-full bg-error-300 text-2xl text-neutral-0 f-center"><i class="las la-play"></i></button>
+                  </div>
+                  <div>
+                    <p class="l-text font-medium mb-1">Electric Dreams</p>
+                    <p class="s-text mb-4">Nocturnal Melodies</p>
+                    <button class="flex gap-3 items-center text-primary-300 font-semibold">Play Now <i class="las la-arrow-right"></i></button>
+                  </div>
+                </div>
+              </a>
+              <a href="#" class="flex justify-between items-center gap-2">
+                <div class="flex items-center gap-4 xxxl:gap-6">
+                  <div class="size-20 rounded-lg f-center">
+                    <img src="./assets/images/popular-music.png" class="rounded-lg" alt="" />
+                    <button class="size-10 absolute rounded-full bg-error-300 text-2xl text-neutral-0 f-center"><i class="las la-play"></i></button>
+                  </div>
+                  <div>
+                    <p class="l-text font-medium mb-1">Golden Horizons</p>
+                    <p class="s-text mb-4">Nocturnal Melodies</p>
+                    <button class="flex gap-3 items-center text-primary-300 font-semibold">Play Now <i class="las la-arrow-right"></i></button>
+                  </div>
+                </div>
+              </a>
+              <a href="#" class="flex justify-between items-center gap-2">
+                <div class="flex items-center gap-4 xxxl:gap-6">
+                  <div class="size-20 rounded-lg f-center">
+                    <img src="./assets/images/popular-music.png" class="rounded-lg" alt="" />
+                    <button class="size-10 absolute rounded-full bg-error-300 text-2xl text-neutral-0 f-center"><i class="las la-play"></i></button>
+                  </div>
+                  <div>
+                    <p class="l-text font-medium mb-1">Silent Reverie</p>
+                    <p class="s-text mb-4">Nocturnal Melodies</p>
+                    <button class="flex gap-3 items-center text-primary-300 font-semibold">Play Now <i class="las la-arrow-right"></i></button>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <a href="#" class="text-primary-300 flex items-center gap-2 font-semibold">See All <i class="las la-arrow-right text-xl"></i></a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/apexcharts.min.js"></script>
+    <script src="./assets/js/libs/swiper-bundle.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+    <script src="./assets/js/charts.js"></script>
+  </body>
+</html>

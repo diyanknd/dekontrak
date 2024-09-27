@@ -1,0 +1,743 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="./assets/css/github.min.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Modal</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Components</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Modal</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div class="grid grid-cols-12 gap-4 lg:gap-6">
+            <div class="col-span-12 flex flex-col gap-4 lg:gap-6">
+              <!-- Simple -->
+              <div x-data="copyorviewcode" class="n20-box">
+                <div>
+                  <h4 class="bb-dashed-n40">Basic</h4>
+                  <!-- Buttons -->
+                  <div class="flex gap-3 mb-6">
+                    <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                    <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+                  </div>
+
+                  <!-- Preview -->
+                  <div x-show="!viewcode" x-data="modal" class="flex items-center gap-6">
+                    <button class="btn-primary-outlined" @click="openModal">Open Basic Modal</button>
+                    <template x-teleport="body">
+                      <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                        <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                          <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                            <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                              <h4>Set Backup Account</h4>
+                              <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                            </div>
+                            <div class="flex flex-col gap-4 lg:gap-6">
+                              <div class="flex cursor-pointer items-center gap-4" @click="closeModal()">
+                                <span class="btn-primary-icon">
+                                  <i class="las la-user text-2xl"></i>
+                                </span>
+                                <span class="l-text font-medium">example@gmail.com</span>
+                              </div>
+                              <div class="flex cursor-pointer items-center gap-4" @click="closeModal()">
+                                <span class="btn-primary-icon">
+                                  <i class="las la-user text-2xl"></i>
+                                </span>
+                                <span class="l-text font-medium">user@gmail.com</span>
+                              </div>
+                              <div class="flex cursor-pointer items-center gap-4" @click="closeModal()">
+                                <span class="btn-primary-icon">
+                                  <i class="las la-user text-2xl"></i>
+                                </span>
+                                <span class="l-text font-medium">info@gmail.com</span>
+                              </div>
+                              <div class="flex cursor-pointer items-center gap-4" @click="closeModal()">
+                                <span class="btn-default-icon">
+                                  <i class="las la-plus text-2xl"></i>
+                                </span>
+                                <span class="l-text font-medium">Add Account</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </template>
+                  </div>
+
+                  <!-- Code Block -->
+                  <div x-show="viewcode" class="code mt-3 relative">
+                    <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                    <pre><code class="code-block rounded-lg">
+&#x3C;div x-data=&#x22;modal&#x22; class=&#x22;flex items-center gap-6&#x22;&#x3E;
+  &#x3C;button class=&#x22;btn-primary-outlined&#x22; @click=&#x22;openModal&#x22;&#x3E;Open Simple Modal&#x3C;/button&#x3E;
+  &#x3C;template x-teleport=&#x22;body&#x22;&#x3E;
+    &#x3C;div class=&#x22;fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20&#x22; :class=&#x22;isOpen &#x26;&#x26; &#x27;!block&#x27;&#x22;&#x3E;
+      &#x3C;div class=&#x22;flex min-h-screen items-center justify-center px-4&#x22; @click.self=&#x22;closeModal&#x22;&#x3E;
+        &#x3C;div x-show=&#x22;isOpen&#x22; x-transition x-transition.duration.300 class=&#x22;panel my-8 w-full max-w-lg overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8&#x22;&#x3E;
+          &#x3C;div class=&#x22;mb-4 flex items-center justify-between bb-dashed-n30&#x22;&#x3E;
+            &#x3C;h4&#x3E;Set Backup Account&#x3C;/h4&#x3E;
+            &#x3C;i class=&#x22;las la-times cursor-pointer text-xl&#x22; @click=&#x22;closeModal&#x22;&#x3E;&#x3C;/i&#x3E;
+          &#x3C;/div&#x3E;
+          &#x3C;div class=&#x22;flex flex-col gap-4 lg:gap-6&#x22;&#x3E;
+            &#x3C;div class=&#x22;flex cursor-pointer items-center gap-4&#x22; @click=&#x22;closeModal()&#x22;&#x3E;
+              &#x3C;span class=&#x22;btn-primary-icon&#x22;&#x3E;
+                &#x3C;i class=&#x22;las la-user text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+              &#x3C;/span&#x3E;
+              &#x3C;span class=&#x22;l-text font-medium&#x22;&#x3E;example@gmail.com&#x3C;/span&#x3E;
+            &#x3C;/div&#x3E;
+            &#x3C;div class=&#x22;flex cursor-pointer items-center gap-4&#x22; @click=&#x22;closeModal()&#x22;&#x3E;
+              &#x3C;span class=&#x22;btn-primary-icon&#x22;&#x3E;
+                &#x3C;i class=&#x22;las la-user text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+              &#x3C;/span&#x3E;
+              &#x3C;span class=&#x22;l-text font-medium&#x22;&#x3E;user@gmail.com&#x3C;/span&#x3E;
+            &#x3C;/div&#x3E;
+            &#x3C;div class=&#x22;flex cursor-pointer items-center gap-4&#x22; @click=&#x22;closeModal()&#x22;&#x3E;
+              &#x3C;span class=&#x22;btn-primary-icon&#x22;&#x3E;
+                &#x3C;i class=&#x22;las la-user text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+              &#x3C;/span&#x3E;
+              &#x3C;span class=&#x22;l-text font-medium&#x22;&#x3E;info@gmail.com&#x3C;/span&#x3E;
+            &#x3C;/div&#x3E;
+            &#x3C;div class=&#x22;flex cursor-pointer items-center gap-4&#x22; @click=&#x22;closeModal()&#x22;&#x3E;
+              &#x3C;span class=&#x22;btn-default-icon&#x22;&#x3E;
+                &#x3C;i class=&#x22;las la-plus text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+              &#x3C;/span&#x3E;
+              &#x3C;span class=&#x22;l-text font-medium&#x22;&#x3E;Add Account&#x3C;/span&#x3E;
+            &#x3C;/div&#x3E;
+          &#x3C;/div&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/div&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/template&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <!-- form -->
+              <div x-data="copyorviewcode" class="n20-box">
+                <h4 class="bb-dashed-n40">Form</h4>
+                <!-- Buttons -->
+                <div class="flex gap-3 mb-6">
+                  <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                  <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+                </div>
+
+                <div x-show="!viewcode" x-data="modal" class="flex gap-6">
+                  <button class="btn-primary-outlined" @click="openModal">Form Modal</button>
+                  <template x-teleport="body">
+                    <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60 dark:bg-neutral-40/80" :class="isOpen && '!block'">
+                      <div class="flex min-h-screen items-center justify-center px-4 text-neutral-700 dark:text-neutral-20" @click.self="closeModal">
+                        <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-3xl overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                          <form>
+                            <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                              <h4>Subscribe</h4>
+                              <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                            </div>
+                            <p>To subscribe to this website, please enter your email address here. We will send updates occasionally.</p>
+                            <input type="text" class="my-5 w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4 dark:border-neutral-500 dark:bg-neutral-903 lg:my-8" placeholder="Email Address..." required />
+                            <div class="flex gap-4 lg:gap-6">
+                              <button class="btn-primary" type="submit">Subscribe</button>
+                              <button class="btn-primary-outlined" type="reset" @click="closeModal">Cancel</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+
+                <!-- Code Block -->
+                <div x-show="viewcode" class="code mt-3 relative">
+                  <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                  <pre><code class="code-block rounded-lg">
+&#x3C;div x-data=&#x22;modal&#x22; class=&#x22;flex gap-6&#x22;&#x3E;
+  &#x3C;button class=&#x22;btn-primary-outlined&#x22; @click=&#x22;openModal&#x22;&#x3E;Form Modal&#x3C;/button&#x3E;
+  &#x3C;template x-teleport=&#x22;body&#x22;&#x3E;
+    &#x3C;div class=&#x22;fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60 dark:bg-neutral-40/80&#x22; :class=&#x22;isOpen &#x26;&#x26; &#x27;!block&#x27;&#x22;&#x3E;
+      &#x3C;div class=&#x22;flex min-h-screen items-center justify-center px-4 text-neutral-700 dark:text-neutral-20&#x22; @click.self=&#x22;closeModal&#x22;&#x3E;
+        &#x3C;div x-show=&#x22;isOpen&#x22; x-transition x-transition.duration.300 class=&#x22;panel my-8 w-full max-w-3xl overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8&#x22;&#x3E;
+          &#x3C;form&#x3E;
+            &#x3C;div class=&#x22;mb-4 flex items-center justify-between bb-dashed-n30&#x22;&#x3E;
+              &#x3C;h4&#x3E;Subscribe&#x3C;/h4&#x3E;
+              &#x3C;i class=&#x22;las la-times cursor-pointer text-xl&#x22; @click=&#x22;closeModal&#x22;&#x3E;&#x3C;/i&#x3E;
+            &#x3C;/div&#x3E;
+            &#x3C;p&#x3E;To subscribe to this website, please enter your email address here. We will send updates occasionally.&#x3C;/p&#x3E;
+            &#x3C;input type=&#x22;text&#x22; class=&#x22;my-5 w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4 dark:border-neutral-500 dark:bg-neutral-903 lg:my-8&#x22; placeholder=&#x22;Email Address...&#x22; required /&#x3E;
+            &#x3C;div class=&#x22;flex gap-4 lg:gap-6&#x22;&#x3E;
+              &#x3C;button class=&#x22;btn-primary&#x22; type=&#x22;submit&#x22;&#x3E;Subscribe&#x3C;/button&#x3E;
+              &#x3C;button class=&#x22;btn-primary-outlined&#x22; type=&#x22;reset&#x22; @click=&#x22;closeModal&#x22;&#x3E;Cancel&#x3C;/button&#x3E;
+            &#x3C;/div&#x3E;
+          &#x3C;/form&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/div&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/template&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+                </div>
+              </div>
+
+              <!-- Scrolling content Modal -->
+              <div x-data="copyorviewcode" class="n20-box">
+                <h4 class="bb-dashed-n40">Scrolling Body</h4>
+                <!-- Buttons -->
+                <div class="flex gap-3 mb-6">
+                  <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                  <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+                </div>
+
+                <div x-show="!viewcode">
+                  <div x-data="modal" class="flex gap-6">
+                    <button class="btn-primary-outlined" @click="openModal">Scroll Body</button>
+                    <template x-teleport="body">
+                      <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/60 dark:bg-neutral-40/80" :class="isOpen && '!block'">
+                        <div class="flex min-h-screen items-center justify-center px-4 text-neutral-700 dark:text-neutral-20" @click.self="closeModal">
+                          <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-6 h-full w-full max-w-3xl rounded-lg border-0 bg-neutral-0 dark:bg-neutral-904 lg:my-8">
+                            <div class="px-6 pt-6 lg:px-8 lg:pt-8">
+                              <div class="flex items-center justify-between border-b border-dashed border-primary-100 pb-6">
+                                <h4>Subscribe</h4>
+                                <i class="las la-times cursor-pointer text-xl" @click="closeModal,document.documentElement.style.overflowY='auto'"></i>
+                              </div>
+                            </div>
+                            <div class="px-6 pt-6 lg:px-8">
+                              <p>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque qui magni illum dolorem veritatis tenetur! Possimus fugiat eveniet hic totam commodi itaque quae eum labore inventore nostrum, minus error deserunt odit ex repellat consequatur reiciendis corrupti.
+                                Corrupti reprehenderit minus ipsa in facilis, mollitia ex temporibus cupiditate doloremque, officia rem animi nobis asperiores earum adipisci? Omnis aspernatur iusto quaerat tenetur itaque quo iste nihil, error nesciunt, facere natus minima ab perferendis quis,
+                                reiciendis dolor repellendus sit commodi nulla. Impedit nihil commodi praesentium corporis accusantium autem mollitia velit dicta eligendi porro. Iusto praesentium sit atque repudiandae quos qui repellat eos nobis reiciendis omnis quisquam, aspernatur deleniti, odio
+                                blanditiis repellendus eveniet id laborum aperiam maxime velit a voluptatem dolore esse! Autem corporis deleniti eius. Illum, itaque veniam provident voluptatibus voluptatem aperiam, ipsum minus earum, nesciunt rem suscipit. Ipsam illum perspiciatis dolorem, a dicta
+                                sit suscipit iste accusantium reiciendis veniam voluptatem placeat nesciunt molestiae, velit nemo, unde necessitatibus dolor. Sed voluptate repellendus repudiandae dolore odio? Commodi placeat corporis cumque pariatur hic assumenda veritatis, quidem provident alias
+                                nam. Ad cupiditate vitae assumenda ipsa temporibus suscipit libero adipisci commodi, tempora itaque? Vel voluptate sint nemo. Vel deleniti voluptatum delectus aperiam numquam quibusdam iure nobis repudiandae, expedita ratione quaerat facere reprehenderit eaque quae
+                                aspernatur animi obcaecati sunt. Adipisci, molestias veritatis assumenda quisquam, quas, praesentium doloremque blanditiis odio repellendus minima impedit modi temporibus eveniet perspiciatis laboriosam dolore quam quae odit nam enim sint. Accusamus neque fugit earum
+                                nemo beatae est et iusto eos, necessitatibus dignissimos! Nihil aperiam numquam inventore neque voluptatem ad deserunt rem exercitationem iste sit ullam nisi repellat quaerat in consectetur corporis doloribus, asperiores modi. Veniam, blanditiis cupiditate tempora
+                                unde perferendis officiis laudantium reiciendis, suscipit quis cumque ipsa, magnam nobis harum alias consectetur reprehenderit error eius ullam provident quod minus! Ipsam porro repellendus blanditiis qui earum adipisci. Esse totam pariatur ab amet quaerat, sit
+                                perspiciatis itaque asperiores enim laborum, non temporibus iste ipsum expedita, consequuntur id nam dolores maxime corrupti ex vitae quis eius sint. Ipsum blanditiis culpa illo debitis harum et fugiat velit beatae. Molestiae assumenda incidunt, perferendis ex dolorem
+                                perspiciatis nihil, similique mollitia alias eos ratione veniam. Totam officiis harum at architecto, nesciunt nobis perferendis excepturi nihil nam labore, officia, expedita consequuntur laborum neque aspernatur tempora aliquid? Accusantium quaerat suscipit laborum
+                                delectus hic nisi repellendus alias fugit dolore incidunt maiores ullam id aut esse, ipsum quidem nobis molestias totam? Facilis hic at dolorum, tempora ut reiciendis exercitationem iure nobis magnam non natus expedita quo, voluptatem eum. Facere, necessitatibus
+                                debitis. Quod, minus reprehenderit quibusdam quaerat provident odit asperiores ducimus optio eius dolores veniam explicabo impedit corporis sit quo enim aut eaque, dignissimos qui. Quae facere tenetur sed, distinctio officiis exercitationem assumenda eveniet vitae
+                                natus suscipit repellendus quibusdam corporis eos, dolorem voluptatem nulla facilis eaque voluptatibus. Iusto doloribus beatae qui earum cum tempora illo similique quaerat provident totam asperiores quisquam modi sint culpa vero praesentium est dolorem dolore
+                                assumenda neque atque, possimus vitae amet. Voluptatibus fugit nulla nobis suscipit omnis non expedita explicabo corporis sapiente natus? officiis laudantium reiciendis, suscipit quis cumque ipsa, magnam nobis harum alias consectetur reprehenderit error eius ullam
+                                provident quod minus! Ipsam porro repellendus blanditiis qui earum adipisci. Esse totam pariatur ab amet quaerat, sit perspiciatis itaque asperiores enim laborum, non temporibus iste ipsum expedita, consequuntur id nam dolores maxime corrupti ex vitae quis eius sint.
+                                Ipsum blanditiis culpa illo debitis harum et fugiat velit beatae. Molestiae assumenda incidunt, perferendis ex dolorem perspiciatis nihil, similique mollitia alias eos ratione veniam. Totam officiis harum at architecto, nesciunt nobis perferendis excepturi nihil nam
+                                labore, officia, expedita consequuntur laborum neque aspernatur tempora aliquid? Accusantium quaerat suscipit laborum delectus hic nisi repellendus alias fugit dolore incidunt maiores ullam id aut esse, ipsum quidem nobis molestias totam? Facilis hic at dolorum,
+                                tempora ut reiciendis exercitationem iure nobis magnam non natus expedita quo, voluptatem eum. Facere, necessitatibus debitis. Quod, minus reprehenderit quibusdam quaerat provident odit asperiores ducimus optio eius dolores veniam explicabo impedit corporis sit quo
+                                enim aut eaque, dignissimos qui. Quae facere tenetur sed, distinctio officiis exercitationem assumenda eveniet vitae natus suscipit repellendus quibusdam corporis eos, dolorem voluptatem nulla facilis eaque voluptatibus. Iusto doloribus beatae qui earum cum tempora
+                                illo similique quaerat provident totam asperiores quisquam modi sint culpa vero praesentium est dolorem dolore assumenda neque atque, possimus vitae amet. Voluptatibus fugit nulla nobis suscipit omnis non expedita explicabo corporis sapiente natus?
+                              </p>
+                            </div>
+                            <div class="flex gap-4 px-6 py-6 lg:gap-6 lg:px-8 lg:py-8">
+                              <button class="btn-primary">Subscribe</button>
+                              <button class="btn-primary-outlined" @click="closeModal,document.documentElement.style.overflowY='auto'">Cancel</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+
+                <!-- Code Block -->
+                <div x-show="viewcode" class="code mt-3 relative">
+                  <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                  <pre><code class="code-block rounded-lg">
+&#x3C;div x-data=&#x22;modal&#x22; class=&#x22;flex gap-6&#x22;&#x3E;
+  &#x3C;button class=&#x22;btn-default-outlined&#x22; @click=&#x22;openModal&#x22;&#x3E;Scroll Body&#x3C;/button&#x3E;
+  &#x3C;template x-teleport=&#x22;body&#x22;&#x3E;
+    &#x3C;div class=&#x22;fixed inset-0 z-[999] hidden overflow-y-auto bg-neutral-900/60 dark:bg-neutral-40/80&#x22; :class=&#x22;isOpen &#x26;&#x26; &#x27;!block&#x27;&#x22;&#x3E;
+      &#x3C;div class=&#x22;flex min-h-screen items-center justify-center px-4 text-neutral-700 dark:text-neutral-20&#x22; @click.self=&#x22;closeModal&#x22;&#x3E;
+        &#x3C;div x-show=&#x22;isOpen&#x22; x-transition x-transition.duration.300 class=&#x22;panel my-6 h-full w-full max-w-3xl rounded-lg border-0 bg-neutral-0 dark:bg-neutral-904 lg:my-8&#x22;&#x3E;
+          &#x3C;div class=&#x22;px-6 pt-6 lg:px-8 lg:pt-8&#x22;&#x3E;
+            &#x3C;div class=&#x22;flex items-center justify-between border-b border-dashed border-primary-100 pb-6&#x22;&#x3E;
+              &#x3C;h4&#x3E;Subscribe&#x3C;/h4&#x3E;
+              &#x3C;i class=&#x22;las la-times cursor-pointer text-xl&#x22; @click=&#x22;closeModal,document.documentElement.style.overflowY=&#x27;auto&#x27;&#x22;&#x3E;&#x3C;/i&#x3E;
+            &#x3C;/div&#x3E;
+          &#x3C;/div&#x3E;
+          &#x3C;div class=&#x22;px-6 pt-6 lg:px-8&#x22;&#x3E;
+            &#x3C;p&#x3E;
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque qui magni illum dolorem veritatis tenetur! Possimus fugiat eveniet hic totam commodi itaque quae eum labore inventore nostrum, minus error deserunt odit ex repellat consequatur reiciendis corrupti.
+              Corrupti reprehenderit minus ipsa in facilis, mollitia ex temporibus cupiditate doloremque, officia rem animi nobis asperiores earum adipisci? Omnis aspernatur iusto quaerat tenetur itaque quo iste nihil, error nesciunt, facere natus minima ab perferendis quis,
+              reiciendis dolor repellendus sit commodi nulla. Impedit nihil commodi praesentium corporis accusantium autem mollitia velit dicta eligendi porro. Iusto praesentium sit atque repudiandae quos qui repellat eos nobis reiciendis omnis quisquam, aspernatur deleniti, odio
+              blanditiis repellendus eveniet id laborum aperiam maxime velit a voluptatem dolore esse! Autem corporis deleniti eius. Illum, itaque veniam provident voluptatibus voluptatem aperiam, ipsum minus earum, nesciunt rem suscipit. Ipsam illum perspiciatis dolorem, a dicta
+              sit suscipit iste accusantium reiciendis veniam voluptatem placeat nesciunt molestiae, velit nemo, unde necessitatibus dolor. Sed voluptate repellendus repudiandae dolore odio? Commodi placeat corporis cumque pariatur hic assumenda veritatis, quidem provident alias
+              nam. Ad cupiditate vitae assumenda ipsa temporibus suscipit libero adipisci commodi, tempora itaque? Vel voluptate sint nemo. Vel deleniti voluptatum delectus aperiam numquam quibusdam iure nobis repudiandae, expedita ratione quaerat facere reprehenderit eaque quae
+              aspernatur animi obcaecati sunt. Adipisci, molestias veritatis assumenda quisquam, quas, praesentium doloremque blanditiis odio repellendus minima impedit modi temporibus eveniet perspiciatis laboriosam dolore quam quae odit nam enim sint. Accusamus neque fugit earum
+              nemo beatae est et iusto eos, necessitatibus dignissimos! Nihil aperiam numquam inventore neque voluptatem ad deserunt rem exercitationem iste sit ullam nisi repellat quaerat in consectetur corporis doloribus, asperiores modi. Veniam, blanditiis cupiditate tempora
+              unde perferendis officiis laudantium reiciendis, suscipit quis cumque ipsa, magnam nobis harum alias consectetur reprehenderit error eius ullam provident quod minus! Ipsam porro repellendus blanditiis qui earum adipisci. Esse totam pariatur ab amet quaerat, sit
+              perspiciatis itaque asperiores enim laborum, non temporibus iste ipsum expedita, consequuntur id nam dolores maxime corrupti ex vitae quis eius sint. Ipsum blanditiis culpa illo debitis harum et fugiat velit beatae. Molestiae assumenda incidunt, perferendis ex dolorem
+              perspiciatis nihil, similique mollitia alias eos ratione veniam. Totam officiis harum at architecto, nesciunt nobis perferendis excepturi nihil nam labore, officia, expedita consequuntur laborum neque aspernatur tempora aliquid? Accusantium quaerat suscipit laborum
+              delectus hic nisi repellendus alias fugit dolore incidunt maiores ullam id aut esse, ipsum quidem nobis molestias totam? Facilis hic at dolorum, tempora ut reiciendis exercitationem iure nobis magnam non natus expedita quo, voluptatem eum. Facere, necessitatibus
+              debitis. Quod, minus reprehenderit quibusdam quaerat provident odit asperiores ducimus optio eius dolores veniam explicabo impedit corporis sit quo enim aut eaque, dignissimos qui. Quae facere tenetur sed, distinctio officiis exercitationem assumenda eveniet vitae
+              natus suscipit repellendus quibusdam corporis eos, dolorem voluptatem nulla facilis eaque voluptatibus. Iusto doloribus beatae qui earum cum tempora illo similique quaerat provident totam asperiores quisquam modi sint culpa vero praesentium est dolorem dolore
+              assumenda neque atque, possimus vitae amet. Voluptatibus fugit nulla nobis suscipit omnis non expedita explicabo corporis sapiente natus? officiis laudantium reiciendis, suscipit quis cumque ipsa, magnam nobis harum alias consectetur reprehenderit error eius ullam
+              provident quod minus! Ipsam porro repellendus blanditiis qui earum adipisci. Esse totam pariatur ab amet quaerat, sit perspiciatis itaque asperiores enim laborum, non temporibus iste ipsum expedita, consequuntur id nam dolores maxime corrupti ex vitae quis eius sint.
+              Ipsum blanditiis culpa illo debitis harum et fugiat velit beatae. Molestiae assumenda incidunt, perferendis ex dolorem perspiciatis nihil, similique mollitia alias eos ratione veniam. Totam officiis harum at architecto, nesciunt nobis perferendis excepturi nihil nam
+              labore, officia, expedita consequuntur laborum neque aspernatur tempora aliquid? Accusantium quaerat suscipit laborum delectus hic nisi repellendus alias fugit dolore incidunt maiores ullam id aut esse, ipsum quidem nobis molestias totam? Facilis hic at dolorum,
+              tempora ut reiciendis exercitationem iure nobis magnam non natus expedita quo, voluptatem eum. Facere, necessitatibus debitis. Quod, minus reprehenderit quibusdam quaerat provident odit asperiores ducimus optio eius dolores veniam explicabo impedit corporis sit quo
+              enim aut eaque, dignissimos qui. Quae facere tenetur sed, distinctio officiis exercitationem assumenda eveniet vitae natus suscipit repellendus quibusdam corporis eos, dolorem voluptatem nulla facilis eaque voluptatibus. Iusto doloribus beatae qui earum cum tempora
+              illo similique quaerat provident totam asperiores quisquam modi sint culpa vero praesentium est dolorem dolore assumenda neque atque, possimus vitae amet. Voluptatibus fugit nulla nobis suscipit omnis non expedita explicabo corporis sapiente natus?
+            &#x3C;/p&#x3E;
+          &#x3C;/div&#x3E;
+          &#x3C;div class=&#x22;flex gap-4 px-6 py-6 lg:gap-6 lg:px-8 lg:py-8&#x22;&#x3E;
+            &#x3C;button class=&#x22;btn-primary&#x22;&#x3E;Subscribe&#x3C;/button&#x3E;
+            &#x3C;button class=&#x22;btn-primary-outlined&#x22; @click=&#x22;closeModal,document.documentElement.style.overflowY=&#x27;auto&#x27;&#x22;&#x3E;Cancel&#x3C;/button&#x3E;
+          &#x3C;/div&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/div&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/template&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+                </div>
+              </div>
+
+              <!-- Scrolling inside Modal -->
+              <div x-data="copyorviewcode" class="n20-box">
+                <h4 class="bb-dashed-n40">Scrolling Inside</h4>
+                <!-- Buttons -->
+                <div class="flex gap-3 mb-6">
+                  <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                  <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+                </div>
+
+                <div x-show="!viewcode">
+                  <div x-data="modal" class="flex gap-6">
+                    <button class="btn-primary-outlined" @click="openModal">Scroll Inside Modal</button>
+                    <template x-teleport="body">
+                      <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60 dark:bg-neutral-40/80" :class="isOpen && '!block'">
+                        <div class="flex min-h-screen items-center justify-center px-4 text-neutral-700 dark:text-neutral-20" @click.self="closeModal">
+                          <div x-show="isOpen" x-transition x-transition.duration.300 class="panel h-full max-h-[95vh] w-full max-w-3xl rounded-lg border-0 bg-neutral-0 dark:bg-neutral-904">
+                            <div class="px-6 pt-6 lg:px-8 lg:pt-8">
+                              <div class="flex items-center justify-between border-b border-dashed border-primary-100 pb-6">
+                                <h4>Subscribe</h4>
+                                <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                              </div>
+                            </div>
+                            <div class="h-[60vh] overflow-y-auto px-6 pt-6 lg:px-8">
+                              <p>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque qui magni illum dolorem veritatis tenetur! Possimus fugiat eveniet hic totam commodi itaque quae eum labore inventore nostrum, minus error deserunt odit ex repellat consequatur reiciendis corrupti.
+                                Corrupti reprehenderit minus ipsa in facilis, mollitia ex temporibus cupiditate doloremque, officia rem animi nobis asperiores earum adipisci? Omnis aspernatur iusto quaerat tenetur itaque quo iste nihil, error nesciunt, facere natus minima ab perferendis quis,
+                                reiciendis dolor repellendus sit commodi nulla. Impedit nihil commodi praesentium corporis accusantium autem mollitia velit dicta eligendi porro. Iusto praesentium sit atque repudiandae quos qui repellat eos nobis reiciendis omnis quisquam, aspernatur deleniti, odio
+                                blanditiis repellendus eveniet id laborum aperiam maxime velit a voluptatem dolore esse! Autem corporis deleniti eius. Illum, itaque veniam provident voluptatibus voluptatem aperiam, ipsum minus earum, nesciunt rem suscipit. Ipsam illum perspiciatis dolorem, a dicta
+                                sit suscipit iste accusantium reiciendis veniam voluptatem placeat nesciunt molestiae, velit nemo, unde necessitatibus dolor. Sed voluptate repellendus repudiandae dolore odio? Commodi placeat corporis cumque pariatur hic assumenda veritatis, quidem provident alias
+                                nam. Ad cupiditate vitae assumenda ipsa temporibus suscipit libero adipisci commodi, tempora itaque? Vel voluptate sint nemo. Vel deleniti voluptatum delectus aperiam numquam quibusdam iure nobis repudiandae, expedita ratione quaerat facere reprehenderit eaque quae
+                                aspernatur animi obcaecati sunt. Adipisci, molestias veritatis assumenda quisquam, quas, praesentium doloremque blanditiis odio repellendus minima impedit modi temporibus eveniet perspiciatis laboriosam dolore quam quae odit nam enim sint. Accusamus neque fugit earum
+                                nemo beatae est et iusto eos, necessitatibus dignissimos! Nihil aperiam numquam inventore neque voluptatem ad deserunt rem exercitationem iste sit ullam nisi repellat quaerat in consectetur corporis doloribus, asperiores modi. Veniam, blanditiis cupiditate tempora
+                                unde perferendis officiis laudantium reiciendis, suscipit quis cumque ipsa, magnam nobis harum alias consectetur reprehenderit error eius ullam provident quod minus! Ipsam porro repellendus blanditiis qui earum adipisci. Esse totam pariatur ab amet quaerat, sit
+                                perspiciatis itaque asperiores enim laborum, non temporibus iste ipsum expedita, consequuntur id nam dolores maxime corrupti ex vitae quis eius sint. Ipsum blanditiis culpa illo debitis harum et fugiat velit beatae. Molestiae assumenda incidunt, perferendis ex dolorem
+                                perspiciatis nihil, similique mollitia alias eos ratione veniam. Totam officiis harum at architecto, nesciunt nobis perferendis excepturi nihil nam labore, officia, expedita consequuntur laborum neque aspernatur tempora aliquid? Accusantium quaerat suscipit laborum
+                                delectus hic nisi repellendus alias fugit dolore incidunt maiores ullam id aut esse, ipsum quidem nobis molestias totam? Facilis hic at dolorum, tempora ut reiciendis exercitationem iure nobis magnam non natus expedita quo, voluptatem eum. Facere, necessitatibus
+                                debitis. Quod, minus reprehenderit quibusdam quaerat provident odit asperiores ducimus optio eius dolores veniam explicabo impedit corporis sit quo enim aut eaque, dignissimos qui. Quae facere tenetur sed, distinctio officiis exercitationem assumenda eveniet vitae
+                                natus suscipit repellendus quibusdam corporis eos, dolorem voluptatem nulla facilis eaque voluptatibus. Iusto doloribus beatae qui earum cum tempora illo similique quaerat provident totam asperiores quisquam modi sint culpa vero praesentium est dolorem dolore
+                                assumenda neque atque, possimus vitae amet. Voluptatibus fugit nulla nobis suscipit omnis non expedita explicabo corporis sapiente natus?
+                              </p>
+                            </div>
+                            <div class="flex gap-4 px-6 py-6 lg:gap-6 lg:px-8 lg:py-8">
+                              <button class="btn-primary">Subscribe</button>
+                              <button class="btn-primary-outlined" @click="closeModal">Cancel</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+
+                <!-- Code Block -->
+                <div x-show="viewcode" class="code mt-3 relative">
+                  <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                  <pre><code class="code-block rounded-lg">
+&#x3C;div x-data=&#x22;modal&#x22; class=&#x22;flex gap-6&#x22;&#x3E;
+  &#x3C;button class=&#x22;btn-default-outlined&#x22; @click=&#x22;openModal&#x22;&#x3E;Scroll Paper&#x3C;/button&#x3E;
+  &#x3C;template x-teleport=&#x22;body&#x22;&#x3E;
+    &#x3C;div class=&#x22;fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60 dark:bg-neutral-40/80&#x22; :class=&#x22;isOpen &#x26;&#x26; &#x27;!block&#x27;&#x22;&#x3E;
+      &#x3C;div class=&#x22;flex min-h-screen items-center justify-center px-4 text-neutral-700 dark:text-neutral-20&#x22; @click.self=&#x22;closeModal&#x22;&#x3E;
+        &#x3C;div x-show=&#x22;isOpen&#x22; x-transition x-transition.duration.300 class=&#x22;panel h-full max-h-[95vh] w-full max-w-3xl rounded-lg border-0 bg-neutral-0 dark:bg-neutral-904&#x22;&#x3E;
+          &#x3C;div class=&#x22;px-6 pt-6 lg:px-8 lg:pt-8&#x22;&#x3E;
+            &#x3C;div class=&#x22;flex items-center justify-between border-b border-dashed border-primary-100 pb-6&#x22;&#x3E;
+              &#x3C;h4&#x3E;Subscribe&#x3C;/h4&#x3E;
+              &#x3C;i class=&#x22;las la-times cursor-pointer text-xl&#x22; @click=&#x22;closeModal&#x22;&#x3E;&#x3C;/i&#x3E;
+            &#x3C;/div&#x3E;
+          &#x3C;/div&#x3E;
+          &#x3C;div class=&#x22;h-[60vh] overflow-y-auto px-6 pt-6 lg:px-8&#x22;&#x3E;
+            &#x3C;p&#x3E;
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque qui magni illum dolorem veritatis tenetur! Possimus fugiat eveniet hic totam commodi itaque quae eum labore inventore nostrum, minus error deserunt odit ex repellat consequatur reiciendis corrupti.
+              Corrupti reprehenderit minus ipsa in facilis, mollitia ex temporibus cupiditate doloremque, officia rem animi nobis asperiores earum adipisci? Omnis aspernatur iusto quaerat tenetur itaque quo iste nihil, error nesciunt, facere natus minima ab perferendis quis,
+              reiciendis dolor repellendus sit commodi nulla. Impedit nihil commodi praesentium corporis accusantium autem mollitia velit dicta eligendi porro. Iusto praesentium sit atque repudiandae quos qui repellat eos nobis reiciendis omnis quisquam, aspernatur deleniti, odio
+              blanditiis repellendus eveniet id laborum aperiam maxime velit a voluptatem dolore esse! Autem corporis deleniti eius. Illum, itaque veniam provident voluptatibus voluptatem aperiam, ipsum minus earum, nesciunt rem suscipit. Ipsam illum perspiciatis dolorem, a dicta
+              sit suscipit iste accusantium reiciendis veniam voluptatem placeat nesciunt molestiae, velit nemo, unde necessitatibus dolor. Sed voluptate repellendus repudiandae dolore odio? Commodi placeat corporis cumque pariatur hic assumenda veritatis, quidem provident alias
+              nam. Ad cupiditate vitae assumenda ipsa temporibus suscipit libero adipisci commodi, tempora itaque? Vel voluptate sint nemo. Vel deleniti voluptatum delectus aperiam numquam quibusdam iure nobis repudiandae, expedita ratione quaerat facere reprehenderit eaque quae
+              aspernatur animi obcaecati sunt. Adipisci, molestias veritatis assumenda quisquam, quas, praesentium doloremque blanditiis odio repellendus minima impedit modi temporibus eveniet perspiciatis laboriosam dolore quam quae odit nam enim sint. Accusamus neque fugit earum
+              nemo beatae est et iusto eos, necessitatibus dignissimos! Nihil aperiam numquam inventore neque voluptatem ad deserunt rem exercitationem iste sit ullam nisi repellat quaerat in consectetur corporis doloribus, asperiores modi. Veniam, blanditiis cupiditate tempora
+              unde perferendis officiis laudantium reiciendis, suscipit quis cumque ipsa, magnam nobis harum alias consectetur reprehenderit error eius ullam provident quod minus! Ipsam porro repellendus blanditiis qui earum adipisci. Esse totam pariatur ab amet quaerat, sit
+              perspiciatis itaque asperiores enim laborum, non temporibus iste ipsum expedita, consequuntur id nam dolores maxime corrupti ex vitae quis eius sint. Ipsum blanditiis culpa illo debitis harum et fugiat velit beatae. Molestiae assumenda incidunt, perferendis ex dolorem
+              perspiciatis nihil, similique mollitia alias eos ratione veniam. Totam officiis harum at architecto, nesciunt nobis perferendis excepturi nihil nam labore, officia, expedita consequuntur laborum neque aspernatur tempora aliquid? Accusantium quaerat suscipit laborum
+              delectus hic nisi repellendus alias fugit dolore incidunt maiores ullam id aut esse, ipsum quidem nobis molestias totam? Facilis hic at dolorum, tempora ut reiciendis exercitationem iure nobis magnam non natus expedita quo, voluptatem eum. Facere, necessitatibus
+              debitis. Quod, minus reprehenderit quibusdam quaerat provident odit asperiores ducimus optio eius dolores veniam explicabo impedit corporis sit quo enim aut eaque, dignissimos qui. Quae facere tenetur sed, distinctio officiis exercitationem assumenda eveniet vitae
+              natus suscipit repellendus quibusdam corporis eos, dolorem voluptatem nulla facilis eaque voluptatibus. Iusto doloribus beatae qui earum cum tempora illo similique quaerat provident totam asperiores quisquam modi sint culpa vero praesentium est dolorem dolore
+              assumenda neque atque, possimus vitae amet. Voluptatibus fugit nulla nobis suscipit omnis non expedita explicabo corporis sapiente natus?
+            &#x3C;/p&#x3E;
+          &#x3C;/div&#x3E;
+          &#x3C;div class=&#x22;flex gap-4 px-6 py-6 lg:gap-6 lg:px-8 lg:py-8&#x22;&#x3E;
+            &#x3C;button class=&#x22;btn-primary&#x22;&#x3E;Subscribe&#x3C;/button&#x3E;
+            &#x3C;button class=&#x22;btn-primary-outlined&#x22; @click=&#x22;closeModal&#x22;&#x3E;Cancel&#x3C;/button&#x3E;
+          &#x3C;/div&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/div&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/template&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+                </div>
+              </div>
+
+              <div class="col-span-12 flex flex-col gap-4 lg:gap-6">
+                <!-- alerts -->
+                <div x-data="copyorviewcode" class="n20-box">
+                  <h4 class="bb-dashed-n40">Alerts</h4>
+                  <!-- Buttons -->
+                  <div class="flex gap-3 mb-6">
+                    <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                    <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+                  </div>
+
+                  <div x-show="!viewcode" x-data="modal" class="flex gap-6">
+                    <button class="btn-primary-outlined" @click="openModal">Open alert Modal</button>
+                    <template x-teleport="body">
+                      <div class="fixed inset-0 z-[999] hidden overflow-y-auto overflow-x-hidden bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                        <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                          <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-3xl overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                            <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                              <h4>Use envato location service?</h4>
+                              <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                            </div>
+                            <p class="m-text">
+                              There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum
+                            </p>
+                            <div class="flex gap-4 pt-6 lg:gap-6 lg:pt-8">
+                              <button class="btn-primary" @click="closeModal">Agree</button>
+                              <button class="btn-primary-outlined" @click="closeModal">Disagree</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </template>
+                  </div>
+
+                  <!-- Code Block -->
+                  <div x-show="viewcode" class="code mt-3 relative">
+                    <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                    <pre><code class="code-block rounded-lg">
+&#x3C;div x-data=&#x22;modal&#x22; class=&#x22;flex gap-6&#x22;&#x3E;
+  &#x3C;button class=&#x22;btn-secondary-outlined&#x22; @click=&#x22;openModal&#x22;&#x3E;Open alert Modal&#x3C;/button&#x3E;
+  &#x3C;template x-teleport=&#x22;body&#x22;&#x3E;
+    &#x3C;div class=&#x22;fixed inset-0 z-[999] hidden overflow-y-auto overflow-x-hidden bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20&#x22; :class=&#x22;isOpen &#x26;&#x26; &#x27;!block&#x27;&#x22;&#x3E;
+      &#x3C;div class=&#x22;flex min-h-screen items-center justify-center px-4&#x22; @click.self=&#x22;closeModal&#x22;&#x3E;
+        &#x3C;div x-show=&#x22;isOpen&#x22; x-transition x-transition.duration.300 class=&#x22;panel my-8 w-full max-w-3xl overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8&#x22;&#x3E;
+          &#x3C;div class=&#x22;mb-4 flex items-center justify-between bb-dashed-n30&#x22;&#x3E;
+            &#x3C;h4&#x3E;Use envato location service?&#x3C;/h4&#x3E;
+            &#x3C;i class=&#x22;las la-times cursor-pointer text-xl&#x22; @click=&#x22;closeModal&#x22;&#x3E;&#x3C;/i&#x3E;
+          &#x3C;/div&#x3E;
+          &#x3C;p class=&#x22;m-text&#x22;&#x3E;
+            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#x27;t look even slightly believable. If you are going to use a passage of Lorem Ipsum
+          &#x3C;/p&#x3E;
+          &#x3C;div class=&#x22;flex gap-4 pt-6 lg:gap-6 lg:pt-8&#x22;&#x3E;
+            &#x3C;button class=&#x22;btn-primary&#x22; @click=&#x22;closeModal&#x22;&#x3E;Agree&#x3C;/button&#x3E;
+            &#x3C;button class=&#x22;btn-primary-outlined&#x22; @click=&#x22;closeModal&#x22;&#x3E;Disagree&#x3C;/button&#x3E;
+          &#x3C;/div&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/div&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/template&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+                  </div>
+                </div>
+
+                <!-- full screen Modal  -->
+                <div x-data="copyorviewcode" class="n20-box">
+                  <h4 class="bb-dashed-n40">Full Screen</h4>
+                  <!-- Buttons -->
+                  <div class="flex gap-3 mb-6">
+                    <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                    <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+                  </div>
+
+                  <div x-show="!viewcode" x-data="modal">
+                    <button class="btn-primary-outlined" @click="openModal">Open Fullscreen Modal</button>
+                    <template x-teleport="body">
+                      <div class="fixed inset-0 z-[999] hidden overflow-y-auto overflow-x-hidden bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                        <div class="flex min-h-screen items-center justify-center" @click.self="closeModal">
+                          <div x-show="isOpen" x-transition x-transition.duration.300 class="panel h-screen w-screen overflow-hidden border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                            <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                              <div class="flex items-center gap-3">
+                                <i class="las la-times cursor-pointer text-xl" @click="closeModal,document.documentElement.style.overflowY='auto'"></i>
+                                <h4>Subscribe?</h4>
+                              </div>
+                              <button class="btn-primary" @click="closeModal,document.documentElement.style.overflowY='auto'">Save Now</button>
+                            </div>
+                            <p class="m-text">
+                              There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum
+                            </p>
+                            <div class="flex gap-4 pt-6 lg:gap-6 lg:pt-8">
+                              <button class="btn-primary" @click="closeModal,document.documentElement.style.overflowY='auto'">Agree</button>
+                              <button class="btn-primary-outlined" @click="closeModal,document.documentElement.style.overflowY='auto'">Disagree</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </template>
+                  </div>
+
+                  <!-- Code Block -->
+                  <div x-show="viewcode" class="code mt-3 relative">
+                    <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                    <pre><code class="code-block rounded-lg">
+&#x3C;div x-data=&#x22;modal&#x22;&#x3E;
+  &#x3C;button class=&#x22;btn-warning-outlined&#x22; @click=&#x22;openModal&#x22;&#x3E;Open Fullscreen Modal&#x3C;/button&#x3E;
+  &#x3C;template x-teleport=&#x22;body&#x22;&#x3E;
+    &#x3C;div class=&#x22;fixed inset-0 z-[999] hidden overflow-y-auto overflow-x-hidden bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20&#x22; :class=&#x22;isOpen &#x26;&#x26; &#x27;!block&#x27;&#x22;&#x3E;
+      &#x3C;div class=&#x22;flex min-h-screen items-center justify-center&#x22; @click.self=&#x22;closeModal&#x22;&#x3E;
+        &#x3C;div x-show=&#x22;isOpen&#x22; x-transition x-transition.duration.300 class=&#x22;panel h-screen w-screen overflow-hidden border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8&#x22;&#x3E;
+          &#x3C;div class=&#x22;mb-4 flex items-center justify-between bb-dashed-n30&#x22;&#x3E;
+            &#x3C;div class=&#x22;flex items-center gap-3&#x22;&#x3E;
+              &#x3C;i class=&#x22;las la-times cursor-pointer text-xl&#x22; @click=&#x22;closeModal,document.documentElement.style.overflowY=&#x27;auto&#x27;&#x22;&#x3E;&#x3C;/i&#x3E;
+              &#x3C;h4&#x3E;Subscribe?&#x3C;/h4&#x3E;
+            &#x3C;/div&#x3E;
+            &#x3C;button class=&#x22;btn-primary&#x22; @click=&#x22;closeModal,document.documentElement.style.overflowY=&#x27;auto&#x27;&#x22;&#x3E;Save Now&#x3C;/button&#x3E;
+          &#x3C;/div&#x3E;
+          &#x3C;p class=&#x22;m-text&#x22;&#x3E;
+            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#x27;t look even slightly believable. If you are going to use a passage of Lorem Ipsum
+          &#x3C;/p&#x3E;
+          &#x3C;div class=&#x22;flex gap-4 pt-6 lg:gap-6 lg:pt-8&#x22;&#x3E;
+            &#x3C;button class=&#x22;btn-primary&#x22; @click=&#x22;closeModal,document.documentElement.style.overflowY=&#x27;auto&#x27;&#x22;&#x3E;Agree&#x3C;/button&#x3E;
+            &#x3C;button class=&#x22;btn-primary-outlined&#x22; @click=&#x22;closeModal,document.documentElement.style.overflowY=&#x27;auto&#x27;&#x22;&#x3E;Disagree&#x3C;/button&#x3E;
+          &#x3C;/div&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/div&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/template&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-span-12 flex flex-col gap-4 lg:gap-6">
+                <!-- Transitions -->
+                <div x-data="copyorviewcode" class="n20-box">
+                  <h4 class="bb-dashed-n40">Modal With Animation</h4>
+                  <!-- Buttons -->
+                  <div class="flex gap-3 mb-6">
+                    <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                    <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+                  </div>
+
+                  <div x-show="!viewcode" x-data="modal" class="flex gap-6">
+                    <button class="btn-primary-outlined" @click="openModal">Animation Modal</button>
+                    <template x-teleport="body">
+                      <div class="fixed inset-0 z-[999] hidden overflow-y-auto overflow-x-hidden bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                        <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                          <div x-show="isOpen" x-transition x-transition.duration.300 class="panel animate__animated animate__fadeInUp my-8 w-full max-w-3xl overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                            <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                              <h4>Use envato location service?</h4>
+                              <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                            </div>
+                            <p class="m-text">
+                              There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum
+                            </p>
+                            <div class="flex gap-4 pt-6 lg:gap-6 lg:pt-8">
+                              <button class="btn-primary" @click="closeModal">Agree</button>
+                              <button class="btn-primary-outlined" @click="closeModal">Disagree</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </template>
+                  </div>
+
+                  <!-- Code Block -->
+                  <div x-show="viewcode" class="code mt-3 relative">
+                    <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                    <pre><code class="code-block rounded-lg">
+&#x3C;div x-data=&#x22;modal&#x22; class=&#x22;flex gap-6&#x22;&#x3E;
+  &#x3C;button class=&#x22;btn-info-outlined&#x22; @click=&#x22;openModal&#x22;&#x3E;Transitions Modal&#x3C;/button&#x3E;
+  &#x3C;template x-teleport=&#x22;body&#x22;&#x3E;
+    &#x3C;div class=&#x22;fixed inset-0 z-[999] hidden overflow-y-auto overflow-x-hidden bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20&#x22; :class=&#x22;isOpen &#x26;&#x26; &#x27;!block&#x27;&#x22;&#x3E;
+      &#x3C;div class=&#x22;flex min-h-screen items-center justify-center px-4&#x22; @click.self=&#x22;closeModal&#x22;&#x3E;
+        &#x3C;div x-show=&#x22;isOpen&#x22; x-transition x-transition.duration.300 class=&#x22;panel animate__animated animate__fadeInUp my-8 w-full max-w-3xl overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8&#x22;&#x3E;
+          &#x3C;div class=&#x22;mb-4 flex items-center justify-between bb-dashed-n30&#x22;&#x3E;
+            &#x3C;h4&#x3E;Use envato location service?&#x3C;/h4&#x3E;
+            &#x3C;i class=&#x22;las la-times cursor-pointer text-xl&#x22; @click=&#x22;closeModal&#x22;&#x3E;&#x3C;/i&#x3E;
+          &#x3C;/div&#x3E;
+          &#x3C;p class=&#x22;m-text&#x22;&#x3E;
+            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#x27;t look even slightly believable. If you are going to use a passage of Lorem Ipsum
+          &#x3C;/p&#x3E;
+          &#x3C;div class=&#x22;flex gap-4 pt-6 lg:gap-6 lg:pt-8&#x22;&#x3E;
+            &#x3C;button class=&#x22;btn-primary&#x22; @click=&#x22;closeModal&#x22;&#x3E;Agree&#x3C;/button&#x3E;
+            &#x3C;button class=&#x22;btn-primary-outlined&#x22; @click=&#x22;closeModal&#x22;&#x3E;Disagree&#x3C;/button&#x3E;
+          &#x3C;/div&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/div&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/template&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+                  </div>
+                </div>
+                <!-- full screen Modal  -->
+                <div x-data="copyorviewcode" class="n20-box">
+                  <div x-data="{width:'max-w-xl',fullwidth:true}">
+                    <h4 class="bb-dashed-n40">Max Width Modal</h4>
+                    <!-- Buttons -->
+                    <div class="flex gap-3 mb-6">
+                      <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                      <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+                    </div>
+
+                    <div x-show="!viewcode" x-data="modal" class="flex gap-6">
+                      <button class="btn-primary-outlined" @click="openModal">Max Width Modal</button>
+                      <template x-teleport="body">
+                        <div class="fixed inset-0 z-[999] hidden overflow-y-auto overflow-x-hidden bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                          <div class="flex min-h-screen items-center justify-center" @click.self="closeModal">
+                            <div x-show="isOpen" x-transition x-transition.duration.300 :class="fullwidth && width?width:'max-w-2xl'" class="w-full overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                              <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                                <h4>Optional Sizes</h4>
+                                <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                              </div>
+                              <p class="m-text pb-6 lg:pb-8">You can set my maximum width and whether to adapt or not.</p>
+                              <div class="flex flex-col">
+                                <select x-model="width" name="sort" class="nc-select nice-select full">
+                                  <option value="max-w-sm">xs</option>
+                                  <option value="max-w-lg">sm</option>
+                                  <option value="max-w-xl" selected>md</option>
+                                  <option value="max-w-3xl">lg</option>
+                                  <option value="max-w-5xl">xl</option>
+                                </select>
+                                <div class="mt-6 flex items-center gap-4">
+                                  <div class="f-center">
+                                    <label for="google" class="flex cursor-pointer items-center">
+                                      <div class="relative">
+                                        <input x-model="fullwidth" type="checkbox" id="google" class="custom-checkbox sr-only" checked />
+                                        <div class="bg block h-8 w-14 rounded-full" :class="fullwidth?'bg-primary-300':'bg-primary-50'"></div>
+                                        <div class="dot absolute left-1 top-1 h-6 w-6 rounded-full bg-white transition" :class="fullwidth?'translate-x-full':''"></div>
+                                      </div>
+                                      <span class="ltr:pl-3 rtl:pr-3">Full width</span>
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="flex gap-4 pt-6 lg:gap-6 lg:pt-8">
+                                <button class="btn-primary" @click="closeModal">Agree</button>
+                                <button class="btn-primary-outlined" @click="closeModal">Disagree</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </template>
+                    </div>
+
+                    <!-- Code Block -->
+                    <div x-show="viewcode" class="code mt-3 relative">
+                      <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                      <pre><code class="code-block rounded-lg">
+&#x3C;div x-data=&#x22;modal&#x22; class=&#x22;flex gap-6&#x22;&#x3E;
+  &#x3C;button class=&#x22;btn-error-outlined&#x22; @click=&#x22;openModal&#x22;&#x3E;Max Width Modal&#x3C;/button&#x3E;
+  &#x3C;template x-teleport=&#x22;body&#x22;&#x3E;
+    &#x3C;div class=&#x22;fixed inset-0 z-[999] hidden overflow-y-auto overflow-x-hidden bg-neutral-900/80 dark:bg-neutral-40/80 text-neutral-700 dark:text-neutral-20&#x22; :class=&#x22;isOpen &#x26;&#x26; &#x27;!block&#x27;&#x22;&#x3E;
+      &#x3C;div class=&#x22;flex min-h-screen items-center justify-center&#x22; @click.self=&#x22;closeModal&#x22;&#x3E;
+        &#x3C;div x-show=&#x22;isOpen&#x22; x-transition x-transition.duration.300 :class=&#x22;fullwidth &#x26;&#x26; width?width:&#x27;max-w-2xl&#x27;&#x22; class=&#x22;w-full overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8&#x22;&#x3E;
+          &#x3C;div class=&#x22;mb-4 flex items-center justify-between bb-dashed-n30&#x22;&#x3E;
+            &#x3C;h4&#x3E;Optional Sizes&#x3C;/h4&#x3E;
+            &#x3C;i class=&#x22;las la-times cursor-pointer text-xl&#x22; @click=&#x22;closeModal&#x22;&#x3E;&#x3C;/i&#x3E;
+          &#x3C;/div&#x3E;
+          &#x3C;p class=&#x22;m-text pb-6 lg:pb-8&#x22;&#x3E;You can set my maximum width and whether to adapt or not.&#x3C;/p&#x3E;
+          &#x3C;div class=&#x22;flex flex-col&#x22;&#x3E;
+            &#x3C;select x-model=&#x22;width&#x22; name=&#x22;sort&#x22; class=&#x22;nc-select nice-select full&#x22;&#x3E;
+              &#x3C;option value=&#x22;max-w-sm&#x22;&#x3E;xs&#x3C;/option&#x3E;
+              &#x3C;option value=&#x22;max-w-lg&#x22;&#x3E;sm&#x3C;/option&#x3E;
+              &#x3C;option value=&#x22;max-w-xl&#x22; selected&#x3E;md&#x3C;/option&#x3E;
+              &#x3C;option value=&#x22;max-w-3xl&#x22;&#x3E;lg&#x3C;/option&#x3E;
+              &#x3C;option value=&#x22;max-w-5xl&#x22;&#x3E;xl&#x3C;/option&#x3E;
+            &#x3C;/select&#x3E;
+            &#x3C;div class=&#x22;mt-6 flex items-center gap-4&#x22;&#x3E;
+              &#x3C;div class=&#x22;f-center&#x22;&#x3E;
+                &#x3C;label for=&#x22;google&#x22; class=&#x22;flex cursor-pointer items-center&#x22;&#x3E;
+                  &#x3C;div class=&#x22;relative&#x22;&#x3E;
+                    &#x3C;input x-model=&#x22;fullwidth&#x22; type=&#x22;checkbox&#x22; id=&#x22;google&#x22; class=&#x22;custom-checkbox sr-only&#x22; checked /&#x3E;
+                    &#x3C;div class=&#x22;bg block h-8 w-14 rounded-full&#x22; :class=&#x22;fullwidth?&#x27;bg-primary-300&#x27;:&#x27;bg-primary-50&#x27;&#x22;&#x3E;&#x3C;/div&#x3E;
+                    &#x3C;div class=&#x22;dot absolute left-1 top-1 h-6 w-6 rounded-full bg-white transition&#x22; :class=&#x22;fullwidth?&#x27;translate-x-full&#x27;:&#x27;&#x27;&#x22;&#x3E;&#x3C;/div&#x3E;
+                  &#x3C;/div&#x3E;
+                  &#x3C;span class=&#x22;ltr:pl-3 rtl:pr-3&#x22;&#x3E;Full width&#x3C;/span&#x3E;
+                &#x3C;/label&#x3E;
+              &#x3C;/div&#x3E;
+            &#x3C;/div&#x3E;
+          &#x3C;/div&#x3E;
+          &#x3C;div class=&#x22;flex gap-4 pt-6 lg:gap-6 lg:pt-8&#x22;&#x3E;
+            &#x3C;button class=&#x22;btn-primary&#x22; @click=&#x22;closeModal&#x22;&#x3E;Agree&#x3C;/button&#x3E;
+            &#x3C;button class=&#x22;btn-primary-outlined&#x22; @click=&#x22;closeModal&#x22;&#x3E;Disagree&#x3C;/button&#x3E;
+          &#x3C;/div&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/div&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/template&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+    <script src="./assets/js/libs/highlight.js"></script>
+    <script src="./assets/js/libs/sweetalert.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+  </body>
+</html>

@@ -1,0 +1,963 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="./assets/css/github.min.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Paginations</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Components</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Paginations</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Paginations -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div class="space-y-4 xl:space-y-6">
+            <!-- Circular -->
+            <div x-data="copyorviewcode" class="white-box">
+              <h4 class="bb-dashed-n40">Circular</h4>
+
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <!-- preview -->
+              <div x-show="!viewcode" class="flex flex-col gap-6">
+                <div x-data="pagination" class="flex flex-wrap items-center gap-3">
+                  <button x-bind:disabled="currentPage === 1" @click="changePage(currentPage - 1)" class="btn-default-icon-outlined dark:border-neutral-100 text-sm lg:text-base size-10 select-none hover:bg-neutral-900 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30">
+                    <i class="las la-angle-left text-xl"></i>
+                  </button>
+
+                  <template x-for="page in pageNumbers">
+                    <button
+                      x-text="page"
+                      :class="{ 'border-neutral-900 dark:border-neutral-100 bg-neutral-900 text-neutral-0':page==currentPage, 'flex text-sm lg:text-base size-10 select-none items-center justify-center hover:bg-neutral-900 hover:text-neutral-0 rounded-full border border-neutral-900 dark:border-neutral-100 font-semibold duration-300':page != '...', 'cursor-default':page=='...'}"
+                      @click="changePage(page)"
+                    ></button>
+                  </template>
+
+                  <button x-bind:disabled="currentPage === totalPages" @click="changePage(currentPage + 1)" class="btn-default-icon-outlined dark:border-neutral-100 text-sm lg:text-base size-10 select-none hover:bg-neutral-900 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30">
+                    <i class="las la-angle-right text-xl"></i>
+                  </button>
+                </div>
+
+                <!-- circular four -->
+                <div x-data="pagination" class="flex flex-wrap items-center gap-3">
+                  <button
+                    x-bind:disabled="currentPage === 1"
+                    @click="changePage(currentPage - 1)"
+                    class="flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border border-neutral-40 duration-300 hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-30 dark:border-neutral-100 dark:hover:bg-neutral-500"
+                  >
+                    <i class="las la-angle-left text-xl"></i>
+                  </button>
+
+                  <template x-for="page in pageNumbers">
+                    <button
+                      x-text="page"
+                      :class=" {'bg-neutral-50 dark:bg-neutral-100  border-neutral-40 dark:border-neutral-100':page==currentPage, 'flex text-sm lg:text-base size-10 select-none items-center justify-center dark:border-neutral-100 rounded-full border font-semibold':page!='...', 'cursor-default':page=='...'}"
+                      @click="changePage(page)"
+                    ></button>
+                  </template>
+                  <button
+                    x-bind:disabled="currentPage === totalPages"
+                    @click="changePage(currentPage + 1)"
+                    class="flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border border-neutral-40 duration-300 hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-30 dark:border-neutral-100 dark:hover:bg-neutral-500"
+                  >
+                    <i class="las la-angle-right text-xl"></i>
+                  </button>
+                </div>
+
+                <!-- circular five -->
+                <div x-data="pagination" class="flex flex-wrap items-center gap-3">
+                  <button
+                    x-bind:disabled="currentPage === 1"
+                    @click="changePage(currentPage - 1)"
+                    class="flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border border-transparent duration-300 hover:border-neutral-40 hover:bg-neutral-40 disabled:cursor-not-allowed disabled:opacity-30 dark:border-transparent dark:hover:bg-neutral-600"
+                  >
+                    <i class="las la-angle-left text-xl"></i>
+                  </button>
+
+                  <template x-for="page in pageNumbers">
+                    <button
+                      x-text="page"
+                      :class=" {'bg-neutral-40  dark:bg-neutral-500 border-neutral-40 dark:border-neutral-500':page==currentPage, 'flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border-neutral-50 border-transparent border font-semibold duration-300 hover:bg-neutral-40 dark:hover:bg-neutral-500':page!='...', 'cursor-default':page=='...'}"
+                      @click="changePage(page)"
+                    ></button>
+                  </template>
+                  <button
+                    x-bind:disabled="currentPage === totalPages"
+                    @click="changePage(currentPage + 1)"
+                    class="flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border border-transparent duration-300 hover:border-neutral-40 hover:bg-neutral-40 disabled:cursor-not-allowed disabled:opacity-30 dark:border-transparent dark:hover:bg-neutral-600"
+                  >
+                    <i class="las la-angle-right text-xl"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex flex-col gap-6&#x22;&#x3E;
+  &#x3C;div x-data=&#x22;pagination&#x22; class=&#x22;flex flex-wrap items-center gap-3&#x22;&#x3E;
+    &#x3C;button x-bind:disabled=&#x22;currentPage === 1&#x22; @click=&#x22;changePage(currentPage - 1)&#x22; class=&#x22;btn-default-icon-outlined dark:border-neutral-100 text-sm lg:text-base size-10 select-none hover:bg-neutral-900 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-angle-left text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+
+    &#x3C;template x-for=&#x22;page in pageNumbers&#x22;&#x3E;
+      &#x3C;button
+        x-text=&#x22;page&#x22;
+        :class=&#x22;{ &#x27;border-neutral-900 dark:border-neutral-100 bg-neutral-900 text-neutral-0&#x27;:page==currentPage, &#x27;flex text-sm lg:text-base size-10 select-none items-center justify-center hover:bg-neutral-900 hover:text-neutral-0 rounded-full border border-neutral-900 dark:border-neutral-100 font-semibold duration-300&#x27;:page != &#x27;...&#x27;, &#x27;cursor-default&#x27;:page==&#x27;...&#x27;}&#x22;
+        @click=&#x22;changePage(page)&#x22;
+      &#x3E;&#x3C;/button&#x3E;
+    &#x3C;/template&#x3E;
+
+    &#x3C;button x-bind:disabled=&#x22;currentPage === totalPages&#x22; @click=&#x22;changePage(currentPage + 1)&#x22; class=&#x22;btn-default-icon-outlined dark:border-neutral-100 text-sm lg:text-base size-10 select-none hover:bg-neutral-900 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-angle-right text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;!-- circular four --&#x3E;
+  &#x3C;div x-data=&#x22;pagination&#x22; class=&#x22;flex flex-wrap items-center gap-3&#x22;&#x3E;
+    &#x3C;button
+      x-bind:disabled=&#x22;currentPage === 1&#x22;
+      @click=&#x22;changePage(currentPage - 1)&#x22;
+      class=&#x22;flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border border-neutral-40 duration-300 hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-30 dark:border-neutral-100 dark:hover:bg-neutral-500&#x22;
+    &#x3E;
+      &#x3C;i class=&#x22;las la-angle-left text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+
+    &#x3C;template x-for=&#x22;page in pageNumbers&#x22;&#x3E;
+      &#x3C;button
+        x-text=&#x22;page&#x22;
+        :class=&#x22; {&#x27;bg-neutral-50 dark:bg-neutral-100  border-neutral-40 dark:border-neutral-100&#x27;:page==currentPage, &#x27;flex text-sm lg:text-base size-10 select-none items-center justify-center dark:border-neutral-100 rounded-full border font-semibold&#x27;:page!=&#x27;...&#x27;, &#x27;cursor-default&#x27;:page==&#x27;...&#x27;}&#x22;
+        @click=&#x22;changePage(page)&#x22;
+      &#x3E;&#x3C;/button&#x3E;
+    &#x3C;/template&#x3E;
+    &#x3C;button
+      x-bind:disabled=&#x22;currentPage === totalPages&#x22;
+      @click=&#x22;changePage(currentPage + 1)&#x22;
+      class=&#x22;flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border border-neutral-40 duration-300 hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-30 dark:border-neutral-100 dark:hover:bg-neutral-500&#x22;
+    &#x3E;
+      &#x3C;i class=&#x22;las la-angle-right text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;!-- circular five --&#x3E;
+  &#x3C;div x-data=&#x22;pagination&#x22; class=&#x22;flex flex-wrap items-center gap-3&#x22;&#x3E;
+    &#x3C;button
+      x-bind:disabled=&#x22;currentPage === 1&#x22;
+      @click=&#x22;changePage(currentPage - 1)&#x22;
+      class=&#x22;flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border border-transparent duration-300 hover:border-neutral-40 hover:bg-neutral-40 disabled:cursor-not-allowed disabled:opacity-30 dark:border-transparent dark:hover:bg-neutral-600&#x22;
+    &#x3E;
+      &#x3C;i class=&#x22;las la-angle-left text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+
+    &#x3C;template x-for=&#x22;page in pageNumbers&#x22;&#x3E;
+      &#x3C;button
+        x-text=&#x22;page&#x22;
+        :class=&#x22; {&#x27;bg-neutral-40  dark:bg-neutral-500 border-neutral-40 dark:border-neutral-500&#x27;:page==currentPage, &#x27;flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border-neutral-50 border-transparent border font-semibold duration-300 hover:bg-neutral-40 dark:hover:bg-neutral-500&#x27;:page!=&#x27;...&#x27;, &#x27;cursor-default&#x27;:page==&#x27;...&#x27;}&#x22;
+        @click=&#x22;changePage(page)&#x22;
+      &#x3E;&#x3C;/button&#x3E;
+    &#x3C;/template&#x3E;
+    &#x3C;button
+      x-bind:disabled=&#x22;currentPage === totalPages&#x22;
+      @click=&#x22;changePage(currentPage + 1)&#x22;
+      class=&#x22;flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border border-transparent duration-300 hover:border-neutral-40 hover:bg-neutral-40 disabled:cursor-not-allowed disabled:opacity-30 dark:border-transparent dark:hover:bg-neutral-600&#x22;
+    &#x3E;
+      &#x3C;i class=&#x22;las la-angle-right text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!-- colors -->
+            <div x-data="copyorviewcode" class="white-box">
+              <h4 class="bb-dashed-n40">Colors</h4>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <!-- Preview -->
+              <div x-show="!viewcode" class="flex gap-3 mb-6">
+                <div class="flex flex-col gap-6">
+                  <!-- primary -->
+                  <div x-data="pagination" class="flex flex-wrap items-center gap-3">
+                    <button
+                      x-bind:disabled="currentPage === 1"
+                      @click="changePage(currentPage - 1)"
+                      class="btn-primary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-primary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-transparent disabled:hover:text-primary-200"
+                    >
+                      <i class="las la-angle-left text-xl"></i>
+                    </button>
+
+                    <template x-for="page in pageNumbers">
+                      <button
+                        x-text="page"
+                        :class=" {'btn-primary-icon bg-primary-300 !text-neutral-0':page==currentPage, 'flex text-sm lg:text-base size-10 select-none border-primary-300 hover:bg-primary-300 items-center hover:text-neutral-0 justify-center text-primary-300 rounded-full border duration-300 font-semibold':page!='...', 'cursor-default':page=='...'}"
+                        @click="changePage(page)"
+                      ></button>
+                    </template>
+                    <button
+                      x-bind:disabled="currentPage === totalPages"
+                      @click="changePage(currentPage + 1)"
+                      class="btn-primary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-primary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-transparent disabled:hover:text-primary-200"
+                    >
+                      <i class="las la-angle-right text-xl"></i>
+                    </button>
+                  </div>
+
+                  <!-- secondary -->
+                  <div x-data="pagination" class="flex flex-wrap items-center gap-3">
+                    <button
+                      x-bind:disabled="currentPage === 1"
+                      @click="changePage(currentPage - 1)"
+                      class="btn-secondary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-secondary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-secondary-200"
+                    >
+                      <i class="las la-angle-left text-xl"></i>
+                    </button>
+
+                    <template x-for="page in pageNumbers">
+                      <button
+                        x-text="page"
+                        :class=" {'btn-secondary-icon bg-secondary-300 !text-neutral-0':page==currentPage, 'flex text-sm lg:text-base size-10 select-none border-secondary-300 hover:bg-secondary-300 items-center hover:text-neutral-0 text-secondary-300 justify-center rounded-full border duration-300 font-semibold':page!='...', 'cursor-default':page=='...'}"
+                        @click="changePage(page)"
+                      ></button>
+                    </template>
+
+                    <button
+                      x-bind:disabled="currentPage === totalPages"
+                      @click="changePage(currentPage + 1)"
+                      class="btn-secondary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-secondary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-secondary-200"
+                    >
+                      <i class="las la-angle-right text-xl"></i>
+                    </button>
+                  </div>
+
+                  <!-- primary outline -->
+                  <div x-data="pagination" class="flex flex-wrap items-center gap-3">
+                    <button x-bind:disabled="currentPage === 1" @click="changePage(currentPage - 1)" class="btn-primary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-primary-50 rounded-full disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent">
+                      <i class="las la-angle-left text-xl"></i>
+                    </button>
+
+                    <template x-for="page in pageNumbers">
+                      <button
+                        x-text="page"
+                        :class="{
+                                'bg-primary-50 text-primary-300 hover:bg-primary-75': page==currentPage, 'btn-primary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-primary-50 rounded-full':page != '...', 'cursor-default': page =='...'
+                              }"
+                        @click="changePage(page)"
+                      ></button>
+                    </template>
+                    <button x-bind:disabled="currentPage === totalPages" @click="changePage(currentPage + 1)" class="btn-primary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-primary-50 rounded-full disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent">
+                      <i class="las la-angle-right text-xl"></i>
+                    </button>
+                  </div>
+
+                  <!-- secondary outline -->
+                  <div x-data="pagination" class="flex flex-wrap items-center gap-3">
+                    <button x-bind:disabled="currentPage === 1" @click="changePage(currentPage - 1)" class="btn-secondary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-secondary-50 rounded-full disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent">
+                      <i class="las la-angle-left text-xl"></i>
+                    </button>
+
+                    <template x-for="page in pageNumbers">
+                      <button
+                        x-text="page"
+                        :class="{
+                                'bg-secondary-300/10 text-secondary-300 hover:bg-secondary-75': page==currentPage, 'btn-secondary-icon-outlined text-sm lg:text-base size-10 select-none rounded-full hover:bg-secondary-300/10': page!= '...', 'cursor-default': page== '...'
+                              }"
+                        @click="changePage(page)"
+                      ></button>
+                    </template>
+                    <button
+                      x-bind:disabled="currentPage === totalPages"
+                      @click="changePage(currentPage + 1)"
+                      class="btn-secondary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-secondary-300/10 rounded-full disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent"
+                    >
+                      <i class="las la-angle-right text-xl"></i>
+                    </button>
+                  </div>
+
+                  <!-- primary soft -->
+                  <div x-data="pagination" class="flex flex-wrap items-center gap-3">
+                    <button
+                      x-bind:disabled="currentPage === 1"
+                      @click="changePage(currentPage - 1)"
+                      class="flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border border-transparent text-primary-300 duration-300 hover:border-primary-50 hover:bg-primary-50 disabled:cursor-not-allowed disabled:opacity-30 dark:border-transparent dark:hover:bg-neutral-600"
+                    >
+                      <i class="las la-angle-left text-xl"></i>
+                    </button>
+
+                    <template x-for="page in pageNumbers">
+                      <button
+                        x-text="page"
+                        :class=" {'bg-primary-50  border-primary-50 dark:border-neutral-500':page==currentPage, 'flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border-neutral-50 border-transparent border font-semibold duration-300 hover:bg-primary-50 dark:hover:bg-neutral-500 text-primary-300':page!='...', 'cursor-default':page=='...'}"
+                        @click="changePage(page)"
+                      ></button>
+                    </template>
+                    <button
+                      x-bind:disabled="currentPage === totalPages"
+                      @click="changePage(currentPage + 1)"
+                      class="flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border border-transparent text-primary-300 duration-300 hover:border-primary-50 hover:bg-primary-50 disabled:cursor-not-allowed disabled:opacity-30 dark:border-transparent dark:hover:bg-neutral-600"
+                    >
+                      <i class="las la-angle-right text-xl"></i>
+                    </button>
+                  </div>
+
+                  <!-- secondary soft -->
+                  <div x-data="pagination" class="flex flex-wrap items-center gap-3">
+                    <button
+                      x-bind:disabled="currentPage === 1"
+                      @click="changePage(currentPage - 1)"
+                      class="flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border border-transparent text-secondary-300 duration-300 hover:border-secondary-50 hover:bg-secondary-300/10 disabled:cursor-not-allowed disabled:opacity-30 dark:border-transparent dark:hover:bg-neutral-600"
+                    >
+                      <i class="las la-angle-left text-xl"></i>
+                    </button>
+
+                    <template x-for="page in pageNumbers">
+                      <button
+                        x-text="page"
+                        :class=" {'bg-secondary-300/10  border-secondary-300/10 dark:border-neutral-500':page==currentPage, 'flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border-neutral-50 border-transparent border font-semibold duration-300 hover:bg-secondary-300/10 dark:hover:bg-neutral-500 text-secondary-300':page!='...', 'cursor-default':page=='...'}"
+                        @click="changePage(page)"
+                      ></button>
+                    </template>
+                    <button
+                      x-bind:disabled="currentPage === totalPages"
+                      @click="changePage(currentPage + 1)"
+                      class="flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border border-transparent text-secondary-300 duration-300 hover:border-secondary-300/10 hover:bg-secondary-300/10 disabled:cursor-not-allowed disabled:opacity-30 dark:border-transparent dark:hover:bg-neutral-600"
+                    >
+                      <i class="las la-angle-right text-xl"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex gap-3 mb-6&#x22;&#x3E;
+&#x3C;div class=&#x22;flex flex-col gap-6&#x22;&#x3E;
+  &#x3C;!-- primary --&#x3E;
+  &#x3C;div x-data=&#x22;pagination&#x22; class=&#x22;flex flex-wrap items-center gap-3&#x22;&#x3E;
+    &#x3C;button
+      x-bind:disabled=&#x22;currentPage === 1&#x22;
+      @click=&#x22;changePage(currentPage - 1)&#x22;
+      class=&#x22;btn-primary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-primary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-transparent disabled:hover:text-primary-200&#x22;
+    &#x3E;
+      &#x3C;i class=&#x22;las la-angle-left text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+
+    &#x3C;template x-for=&#x22;page in pageNumbers&#x22;&#x3E;
+      &#x3C;button
+        x-text=&#x22;page&#x22;
+        :class=&#x22; {&#x27;btn-primary-icon !text-neutral-0&#x27;:page==currentPage, &#x27;flex text-sm lg:text-base size-10 select-none border-primary-300 hover:bg-primary-300 items-center hover:text-neutral-0 justify-center text-primary-300 rounded-full border duration-300 font-semibold&#x27;:page!=&#x27;...&#x27;, &#x27;cursor-default&#x27;:page==&#x27;...&#x27;}&#x22;
+        @click=&#x22;changePage(page)&#x22;
+      &#x3E;&#x3C;/button&#x3E;
+    &#x3C;/template&#x3E;
+    &#x3C;button
+      x-bind:disabled=&#x22;currentPage === totalPages&#x22;
+      @click=&#x22;changePage(currentPage + 1)&#x22;
+      class=&#x22;btn-primary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-primary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-transparent disabled:hover:text-primary-200&#x22;
+    &#x3E;
+      &#x3C;i class=&#x22;las la-angle-right text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;!-- secondary --&#x3E;
+  &#x3C;div x-data=&#x22;pagination&#x22; class=&#x22;flex flex-wrap items-center gap-3&#x22;&#x3E;
+    &#x3C;button
+      x-bind:disabled=&#x22;currentPage === 1&#x22;
+      @click=&#x22;changePage(currentPage - 1)&#x22;
+      class=&#x22;btn-secondary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-secondary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-secondary-200&#x22;
+    &#x3E;
+      &#x3C;i class=&#x22;las la-angle-left text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+
+    &#x3C;template x-for=&#x22;page in pageNumbers&#x22;&#x3E;
+      &#x3C;button
+        x-text=&#x22;page&#x22;
+        :class=&#x22; {&#x27;btn-secondary-icon !text-neutral-0&#x27;:page==currentPage, &#x27;flex text-sm lg:text-base size-10 select-none border-secondary-300 hover:bg-secondary-300 items-center hover:text-neutral-0 text-secondary-300 justify-center rounded-full border duration-300 font-semibold&#x27;:page!=&#x27;...&#x27;, &#x27;cursor-default&#x27;:page==&#x27;...&#x27;}&#x22;
+        @click=&#x22;changePage(page)&#x22;
+      &#x3E;&#x3C;/button&#x3E;
+    &#x3C;/template&#x3E;
+
+    &#x3C;button
+      x-bind:disabled=&#x22;currentPage === totalPages&#x22;
+      @click=&#x22;changePage(currentPage + 1)&#x22;
+      class=&#x22;btn-secondary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-secondary-300 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-secondary-200&#x22;
+    &#x3E;
+      &#x3C;i class=&#x22;las la-angle-right text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;!-- primary outline --&#x3E;
+  &#x3C;div x-data=&#x22;pagination&#x22; class=&#x22;flex flex-wrap items-center gap-3&#x22;&#x3E;
+    &#x3C;button x-bind:disabled=&#x22;currentPage === 1&#x22; @click=&#x22;changePage(currentPage - 1)&#x22; class=&#x22;btn-primary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-primary-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-angle-left text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+
+    &#x3C;template x-for=&#x22;page in pageNumbers&#x22;&#x3E;
+      &#x3C;button
+        x-text=&#x22;page&#x22;
+        :class=&#x22;{
+                &#x27;bg-primary-50 text-primary-300 hover:bg-primary-75&#x27;: page==currentPage, &#x27;btn-primary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-primary-50&#x27;:page != &#x27;...&#x27;, &#x27;cursor-default&#x27;: page ==&#x27;...&#x27;
+              }&#x22;
+        @click=&#x22;changePage(page)&#x22;
+      &#x3E;&#x3C;/button&#x3E;
+    &#x3C;/template&#x3E;
+    &#x3C;button x-bind:disabled=&#x22;currentPage === totalPages&#x22; @click=&#x22;changePage(currentPage + 1)&#x22; class=&#x22;btn-primary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-primary-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-angle-right text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;!-- secondary outline --&#x3E;
+  &#x3C;div x-data=&#x22;pagination&#x22; class=&#x22;flex flex-wrap items-center gap-3&#x22;&#x3E;
+    &#x3C;button x-bind:disabled=&#x22;currentPage === 1&#x22; @click=&#x22;changePage(currentPage - 1)&#x22; class=&#x22;btn-secondary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-secondary-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-angle-left text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+
+    &#x3C;template x-for=&#x22;page in pageNumbers&#x22;&#x3E;
+      &#x3C;button
+        x-text=&#x22;page&#x22;
+        :class=&#x22;{
+                &#x27;bg-secondary-300/10 text-secondary-300 hover:bg-secondary-75&#x27;: page==currentPage, &#x27;btn-secondary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-secondary-300/10&#x27;: page!= &#x27;...&#x27;, &#x27;cursor-default&#x27;: page== &#x27;...&#x27;
+              }&#x22;
+        @click=&#x22;changePage(page)&#x22;
+      &#x3E;&#x3C;/button&#x3E;
+    &#x3C;/template&#x3E;
+    &#x3C;button x-bind:disabled=&#x22;currentPage === totalPages&#x22; @click=&#x22;changePage(currentPage + 1)&#x22; class=&#x22;btn-secondary-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-secondary-300/10 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-angle-right text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;!-- primary soft --&#x3E;
+  &#x3C;div x-data=&#x22;pagination&#x22; class=&#x22;flex flex-wrap items-center gap-3&#x22;&#x3E;
+    &#x3C;button
+      x-bind:disabled=&#x22;currentPage === 1&#x22;
+      @click=&#x22;changePage(currentPage - 1)&#x22;
+      class=&#x22;flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border border-transparent text-primary-300 duration-300 hover:border-primary-50 hover:bg-primary-50 disabled:cursor-not-allowed disabled:opacity-30 dark:border-transparent dark:hover:bg-neutral-600&#x22;
+    &#x3E;
+      &#x3C;i class=&#x22;las la-angle-left text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+
+    &#x3C;template x-for=&#x22;page in pageNumbers&#x22;&#x3E;
+      &#x3C;button
+        x-text=&#x22;page&#x22;
+        :class=&#x22; {&#x27;bg-primary-50  border-primary-50 dark:border-neutral-500&#x27;:page==currentPage, &#x27;flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border-neutral-50 border-transparent border font-semibold duration-300 hover:bg-primary-50 dark:hover:bg-neutral-500 text-primary-300&#x27;:page!=&#x27;...&#x27;, &#x27;cursor-default&#x27;:page==&#x27;...&#x27;}&#x22;
+        @click=&#x22;changePage(page)&#x22;
+      &#x3E;&#x3C;/button&#x3E;
+    &#x3C;/template&#x3E;
+    &#x3C;button
+      x-bind:disabled=&#x22;currentPage === totalPages&#x22;
+      @click=&#x22;changePage(currentPage + 1)&#x22;
+      class=&#x22;flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border border-transparent text-primary-300 duration-300 hover:border-primary-50 hover:bg-primary-50 disabled:cursor-not-allowed disabled:opacity-30 dark:border-transparent dark:hover:bg-neutral-600&#x22;
+    &#x3E;
+      &#x3C;i class=&#x22;las la-angle-right text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;!-- secondary soft --&#x3E;
+  &#x3C;div x-data=&#x22;pagination&#x22; class=&#x22;flex flex-wrap items-center gap-3&#x22;&#x3E;
+    &#x3C;button
+      x-bind:disabled=&#x22;currentPage === 1&#x22;
+      @click=&#x22;changePage(currentPage - 1)&#x22;
+      class=&#x22;flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border border-transparent text-secondary-300 duration-300 hover:border-secondary-50 hover:bg-secondary-300/10 disabled:cursor-not-allowed disabled:opacity-30 dark:border-transparent dark:hover:bg-neutral-600&#x22;
+    &#x3E;
+      &#x3C;i class=&#x22;las la-angle-left text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+
+    &#x3C;template x-for=&#x22;page in pageNumbers&#x22;&#x3E;
+      &#x3C;button
+        x-text=&#x22;page&#x22;
+        :class=&#x22; {&#x27;bg-secondary-300/10  border-secondary-300/10 dark:border-neutral-500&#x27;:page==currentPage, &#x27;flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border-neutral-50 border-transparent border font-semibold duration-300 hover:bg-secondary-300/10 dark:hover:bg-neutral-500 text-secondary-300&#x27;:page!=&#x27;...&#x27;, &#x27;cursor-default&#x27;:page==&#x27;...&#x27;}&#x22;
+        @click=&#x22;changePage(page)&#x22;
+      &#x3E;&#x3C;/button&#x3E;
+    &#x3C;/template&#x3E;
+    &#x3C;button
+      x-bind:disabled=&#x22;currentPage === totalPages&#x22;
+      @click=&#x22;changePage(currentPage + 1)&#x22;
+      class=&#x22;flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-full border border-transparent text-secondary-300 duration-300 hover:border-secondary-300/10 hover:bg-secondary-300/10 disabled:cursor-not-allowed disabled:opacity-30 dark:border-transparent dark:hover:bg-neutral-600&#x22;
+    &#x3E;
+      &#x3C;i class=&#x22;las la-angle-right text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+            <!-- Rounded -->
+            <div x-data="copyorviewcode" class="white-box">
+              <h4 class="bb-dashed-n40">Rounded</h4>
+
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <!-- Preview -->
+              <div x-show="!viewcode" class="flex flex-col gap-6">
+                <div x-data="pagination" class="flex flex-wrap items-center gap-3">
+                  <button x-bind:disabled="currentPage === 1" @click="changePage(currentPage - 1)" class="btn-default-icon-outlined text-sm lg:text-base size-10 select-none rounded-lg hover:bg-neutral-900 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30">
+                    <i class="las la-angle-left text-xl"></i>
+                  </button>
+
+                  <template x-for="page in pageNumbers">
+                    <button
+                      x-text="page"
+                      :class="{ 'border-neutral-900 dark:border-neutral-0 bg-neutral-900 text-neutral-0':page==currentPage, 'flex text-sm lg:text-base size-10 select-none items-center justify-center hover:bg-neutral-900 border-neutral-100 hover:text-neutral-0 rounded-lg border font-semibold duration-300':page != '...', 'cursor-default':page=='...'}"
+                      @click="changePage(page)"
+                    ></button>
+                  </template>
+
+                  <button x-bind:disabled="currentPage === totalPages" @click="changePage(currentPage + 1)" class="btn-default-icon-outlined text-sm lg:text-base size-10 select-none rounded-lg hover:bg-neutral-900 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30">
+                    <i class="las la-angle-right text-xl"></i>
+                  </button>
+                </div>
+
+                <!-- circular four -->
+                <div x-data="pagination" class="flex flex-wrap items-center gap-3">
+                  <button
+                    x-bind:disabled="currentPage === 1"
+                    @click="changePage(currentPage - 1)"
+                    class="flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-lg border border-neutral-40 duration-300 hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-30 dark:hover:bg-neutral-500"
+                  >
+                    <i class="las la-angle-left text-xl"></i>
+                  </button>
+
+                  <template x-for="page in pageNumbers">
+                    <button
+                      x-text="page"
+                      :class=" {'bg-neutral-50 dark:bg-neutral-100  border-neutral-40 dark:border-neutral-100':page==currentPage, 'flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-lg border font-semibold':page!='...', 'cursor-default':page=='...'}"
+                      @click="changePage(page)"
+                    ></button>
+                  </template>
+                  <button
+                    x-bind:disabled="currentPage === totalPages"
+                    @click="changePage(currentPage + 1)"
+                    class="flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-lg border border-neutral-40 duration-300 hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-30 dark:hover:bg-neutral-500"
+                  >
+                    <i class="las la-angle-right text-xl"></i>
+                  </button>
+                </div>
+
+                <!-- circular five -->
+                <div x-data="pagination" class="flex flex-wrap items-center gap-3">
+                  <button
+                    x-bind:disabled="currentPage === 1"
+                    @click="changePage(currentPage - 1)"
+                    class="flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-lg border border-transparent duration-300 hover:border-neutral-40 hover:bg-neutral-40 disabled:cursor-not-allowed disabled:opacity-30 dark:border-transparent dark:hover:bg-neutral-600"
+                  >
+                    <i class="las la-angle-left text-xl"></i>
+                  </button>
+
+                  <template x-for="page in pageNumbers">
+                    <button
+                      x-text="page"
+                      :class=" {'bg-neutral-40  dark:bg-neutral-500 border-neutral-40 dark:border-neutral-500':page==currentPage, 'flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-lg border-neutral-50 border-transparent border font-semibold duration-300 hover:bg-neutral-40 dark:hover:bg-neutral-500':page!='...', 'cursor-default':page=='...'}"
+                      @click="changePage(page)"
+                    ></button>
+                  </template>
+                  <button
+                    x-bind:disabled="currentPage === totalPages"
+                    @click="changePage(currentPage + 1)"
+                    class="flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-lg border border-transparent duration-300 hover:border-neutral-40 hover:bg-neutral-40 disabled:cursor-not-allowed disabled:opacity-30 dark:border-transparent dark:hover:bg-neutral-600"
+                  >
+                    <i class="las la-angle-right text-xl"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex flex-col gap-6&#x22;&#x3E;
+  &#x3C;div x-data=&#x22;pagination&#x22; class=&#x22;flex flex-wrap items-center gap-3&#x22;&#x3E;
+    &#x3C;button x-bind:disabled=&#x22;currentPage === 1&#x22; @click=&#x22;changePage(currentPage - 1)&#x22; class=&#x22;btn-default-icon-outlined text-sm lg:text-base size-10 select-none rounded-lg hover:bg-neutral-900 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-angle-left text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+
+    &#x3C;template x-for=&#x22;page in pageNumbers&#x22;&#x3E;
+      &#x3C;button
+        x-text=&#x22;page&#x22;
+        :class=&#x22;{ &#x27;border-neutral-900 dark:border-neutral-0 bg-neutral-900 text-neutral-0&#x27;:page==currentPage, &#x27;flex text-sm lg:text-base size-10 select-none items-center justify-center hover:bg-neutral-900 border-neutral-100 hover:text-neutral-0 rounded-lg border font-semibold duration-300&#x27;:page != &#x27;...&#x27;, &#x27;cursor-default&#x27;:page==&#x27;...&#x27;}&#x22;
+        @click=&#x22;changePage(page)&#x22;
+      &#x3E;&#x3C;/button&#x3E;
+    &#x3C;/template&#x3E;
+
+    &#x3C;button x-bind:disabled=&#x22;currentPage === totalPages&#x22; @click=&#x22;changePage(currentPage + 1)&#x22; class=&#x22;btn-default-icon-outlined text-sm lg:text-base size-10 select-none rounded-lg hover:bg-neutral-900 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-angle-right text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;!-- circular four --&#x3E;
+  &#x3C;div x-data=&#x22;pagination&#x22; class=&#x22;flex flex-wrap items-center gap-3&#x22;&#x3E;
+    &#x3C;button
+      x-bind:disabled=&#x22;currentPage === 1&#x22;
+      @click=&#x22;changePage(currentPage - 1)&#x22;
+      class=&#x22;flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-lg border border-neutral-40 duration-300 hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-30 dark:hover:bg-neutral-500&#x22;
+    &#x3E;
+      &#x3C;i class=&#x22;las la-angle-left text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+
+    &#x3C;template x-for=&#x22;page in pageNumbers&#x22;&#x3E;
+      &#x3C;button
+        x-text=&#x22;page&#x22;
+        :class=&#x22; {&#x27;bg-neutral-50 dark:bg-neutral-100  border-neutral-40 dark:border-neutral-100&#x27;:page==currentPage, &#x27;flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-lg border font-semibold&#x27;:page!=&#x27;...&#x27;, &#x27;cursor-default&#x27;:page==&#x27;...&#x27;}&#x22;
+        @click=&#x22;changePage(page)&#x22;
+      &#x3E;&#x3C;/button&#x3E;
+    &#x3C;/template&#x3E;
+    &#x3C;button
+      x-bind:disabled=&#x22;currentPage === totalPages&#x22;
+      @click=&#x22;changePage(currentPage + 1)&#x22;
+      class=&#x22;flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-lg border border-neutral-40 duration-300 hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-30 dark:hover:bg-neutral-500&#x22;
+    &#x3E;
+      &#x3C;i class=&#x22;las la-angle-right text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;!-- circular five --&#x3E;
+  &#x3C;div x-data=&#x22;pagination&#x22; class=&#x22;flex flex-wrap items-center gap-3&#x22;&#x3E;
+    &#x3C;button
+      x-bind:disabled=&#x22;currentPage === 1&#x22;
+      @click=&#x22;changePage(currentPage - 1)&#x22;
+      class=&#x22;flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-lg border border-transparent duration-300 hover:border-neutral-40 hover:bg-neutral-40 disabled:cursor-not-allowed disabled:opacity-30 dark:border-transparent dark:hover:bg-neutral-600&#x22;
+    &#x3E;
+      &#x3C;i class=&#x22;las la-angle-left text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+
+    &#x3C;template x-for=&#x22;page in pageNumbers&#x22;&#x3E;
+      &#x3C;button
+        x-text=&#x22;page&#x22;
+        :class=&#x22; {&#x27;bg-neutral-40  dark:bg-neutral-500 border-neutral-40 dark:border-neutral-500&#x27;:page==currentPage, &#x27;flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-lg border-neutral-50 border-transparent border font-semibold duration-300 hover:bg-neutral-40 dark:hover:bg-neutral-500&#x27;:page!=&#x27;...&#x27;, &#x27;cursor-default&#x27;:page==&#x27;...&#x27;}&#x22;
+        @click=&#x22;changePage(page)&#x22;
+      &#x3E;&#x3C;/button&#x3E;
+    &#x3C;/template&#x3E;
+    &#x3C;button
+      x-bind:disabled=&#x22;currentPage === totalPages&#x22;
+      @click=&#x22;changePage(currentPage + 1)&#x22;
+      class=&#x22;flex text-sm lg:text-base size-10 select-none items-center justify-center rounded-lg border border-transparent duration-300 hover:border-neutral-40 hover:bg-neutral-40 disabled:cursor-not-allowed disabled:opacity-30 dark:border-transparent dark:hover:bg-neutral-600&#x22;
+    &#x3E;
+      &#x3C;i class=&#x22;las la-angle-right text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!-- Sizes -->
+            <div x-data="copyorviewcode" class="white-box">
+              <h4 class="bb-dashed-n40">Sizes</h4>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <!-- Preview -->
+              <div x-show="!viewcode" class="flex flex-col gap-6">
+                <!-- small -->
+                <div x-data="pagination" class="flex flex-wrap items-center gap-3">
+                  <button x-bind:disabled="currentPage === 1" @click="changePage(currentPage - 1)" class="btn-default-icon-outlined size-7 select-none hover:bg-neutral-900 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30">
+                    <i class="las la-angle-left text-base"></i>
+                  </button>
+
+                  <template x-for="page in pageNumbers">
+                    <button
+                      x-text="page"
+                      :class="{ 'border-neutral-900 dark:border-neutral-0 bg-neutral-900 text-neutral-0':page==currentPage, 'flex size-7 select-none items-center justify-center hover:bg-neutral-900 hover:text-neutral-0 rounded-full border s-text font-semibold duration-300':page != '...', 'cursor-default':page=='...'}"
+                      @click="changePage(page)"
+                    ></button>
+                  </template>
+
+                  <button x-bind:disabled="currentPage === totalPages" @click="changePage(currentPage + 1)" class="btn-default-icon-outlined s-text size-7 select-none hover:bg-neutral-900 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30">
+                    <i class="las la-angle-right text-base"></i>
+                  </button>
+                </div>
+
+                <!-- Regular -->
+                <div x-data="pagination" class="flex flex-wrap items-center gap-3">
+                  <button x-bind:disabled="currentPage === 1" @click="changePage(currentPage - 1)" class="btn-default-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-neutral-900 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30">
+                    <i class="las la-angle-left text-xl"></i>
+                  </button>
+
+                  <template x-for="page in pageNumbers">
+                    <button
+                      x-text="page"
+                      :class="{ 'border-neutral-900 dark:border-neutral-0 bg-neutral-900 text-neutral-0':page==currentPage, 'flex text-sm lg:text-base size-10 select-none items-center justify-center hover:bg-neutral-900 hover:text-neutral-0 rounded-full border font-semibold duration-300':page != '...', 'cursor-default':page=='...'}"
+                      @click="changePage(page)"
+                    ></button>
+                  </template>
+
+                  <button x-bind:disabled="currentPage === totalPages" @click="changePage(currentPage + 1)" class="btn-default-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-neutral-900 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30">
+                    <i class="las la-angle-right text-xl"></i>
+                  </button>
+                </div>
+
+                <!-- Large -->
+                <div x-data="pagination" class="flex flex-wrap items-center gap-3">
+                  <button x-bind:disabled="currentPage === 1" @click="changePage(currentPage - 1)" class="btn-default-icon-outlined size-12 select-none hover:bg-neutral-900 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30">
+                    <i class="las la-angle-left text-2xl"></i>
+                  </button>
+
+                  <template x-for="page in pageNumbers">
+                    <button
+                      x-text="page"
+                      :class="{ 'border-neutral-900 dark:border-neutral-0 bg-neutral-900 text-neutral-0':page==currentPage, 'flex size-12 select-none items-center justify-center hover:bg-neutral-900 l-text hover:text-neutral-0 rounded-full border font-semibold duration-300':page != '...', 'cursor-default':page=='...'}"
+                      @click="changePage(page)"
+                    ></button>
+                  </template>
+
+                  <button x-bind:disabled="currentPage === totalPages" @click="changePage(currentPage + 1)" class="btn-default-icon-outlined size-12 select-none hover:bg-neutral-900 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30">
+                    <i class="las la-angle-right text-2xl"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex flex-col gap-6&#x22;&#x3E;
+  &#x3C;!-- small --&#x3E;
+  &#x3C;div x-data=&#x22;pagination&#x22; class=&#x22;flex flex-wrap items-center gap-3&#x22;&#x3E;
+    &#x3C;button x-bind:disabled=&#x22;currentPage === 1&#x22; @click=&#x22;changePage(currentPage - 1)&#x22; class=&#x22;btn-default-icon-outlined size-7 select-none hover:bg-neutral-900 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-angle-left text-base&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+
+    &#x3C;template x-for=&#x22;page in pageNumbers&#x22;&#x3E;
+      &#x3C;button
+        x-text=&#x22;page&#x22;
+        :class=&#x22;{ &#x27;border-neutral-900 dark:border-neutral-0 bg-neutral-900 text-neutral-0&#x27;:page==currentPage, &#x27;flex size-7 select-none items-center justify-center hover:bg-neutral-900 hover:text-neutral-0 rounded-full border s-text font-semibold duration-300&#x27;:page != &#x27;...&#x27;, &#x27;cursor-default&#x27;:page==&#x27;...&#x27;}&#x22;
+        @click=&#x22;changePage(page)&#x22;
+      &#x3E;&#x3C;/button&#x3E;
+    &#x3C;/template&#x3E;
+
+    &#x3C;button x-bind:disabled=&#x22;currentPage === totalPages&#x22; @click=&#x22;changePage(currentPage + 1)&#x22; class=&#x22;btn-default-icon-outlined s-text size-7 select-none hover:bg-neutral-900 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-angle-right text-base&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;!-- Regular --&#x3E;
+  &#x3C;div x-data=&#x22;pagination&#x22; class=&#x22;flex flex-wrap items-center gap-3&#x22;&#x3E;
+    &#x3C;button x-bind:disabled=&#x22;currentPage === 1&#x22; @click=&#x22;changePage(currentPage - 1)&#x22; class=&#x22;btn-default-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-neutral-900 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-angle-left text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+
+    &#x3C;template x-for=&#x22;page in pageNumbers&#x22;&#x3E;
+      &#x3C;button
+        x-text=&#x22;page&#x22;
+        :class=&#x22;{ &#x27;border-neutral-900 dark:border-neutral-0 bg-neutral-900 text-neutral-0&#x27;:page==currentPage, &#x27;flex text-sm lg:text-base size-10 select-none items-center justify-center hover:bg-neutral-900 hover:text-neutral-0 rounded-full border font-semibold duration-300&#x27;:page != &#x27;...&#x27;, &#x27;cursor-default&#x27;:page==&#x27;...&#x27;}&#x22;
+        @click=&#x22;changePage(page)&#x22;
+      &#x3E;&#x3C;/button&#x3E;
+    &#x3C;/template&#x3E;
+
+    &#x3C;button x-bind:disabled=&#x22;currentPage === totalPages&#x22; @click=&#x22;changePage(currentPage + 1)&#x22; class=&#x22;btn-default-icon-outlined text-sm lg:text-base size-10 select-none hover:bg-neutral-900 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-angle-right text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;!-- Large --&#x3E;
+  &#x3C;div x-data=&#x22;pagination&#x22; class=&#x22;flex flex-wrap items-center gap-3&#x22;&#x3E;
+    &#x3C;button x-bind:disabled=&#x22;currentPage === 1&#x22; @click=&#x22;changePage(currentPage - 1)&#x22; class=&#x22;btn-default-icon-outlined size-12 select-none hover:bg-neutral-900 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-angle-left text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+
+    &#x3C;template x-for=&#x22;page in pageNumbers&#x22;&#x3E;
+      &#x3C;button
+        x-text=&#x22;page&#x22;
+        :class=&#x22;{ &#x27;border-neutral-900 dark:border-neutral-0 bg-neutral-900 text-neutral-0&#x27;:page==currentPage, &#x27;flex size-12 select-none items-center justify-center hover:bg-neutral-900 l-text hover:text-neutral-0 rounded-full border font-semibold duration-300&#x27;:page != &#x27;...&#x27;, &#x27;cursor-default&#x27;:page==&#x27;...&#x27;}&#x22;
+        @click=&#x22;changePage(page)&#x22;
+      &#x3E;&#x3C;/button&#x3E;
+    &#x3C;/template&#x3E;
+
+    &#x3C;button x-bind:disabled=&#x22;currentPage === totalPages&#x22; @click=&#x22;changePage(currentPage + 1)&#x22; class=&#x22;btn-default-icon-outlined size-12 select-none hover:bg-neutral-900 hover:text-neutral-0 disabled:cursor-not-allowed disabled:opacity-30&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-angle-right text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <!-- Ranges -->
+            <div x-data="copyorviewcode" class="white-box">
+              <h4 class="bb-dashed-n40">Ranges</h4>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <!-- Preview -->
+              <div x-show="!viewcode" class="flex flex-col gap-6">
+                <!-- Regular -->
+                <div class="flex items-center gap-3">
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">
+                    <i class="las la-angle-left text-xl"></i>
+                  </button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">1</button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">...</button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">6</button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">...</button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">8</button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">
+                    <i class="las la-angle-right text-xl"></i>
+                  </button>
+                </div>
+
+                <div class="flex items-center gap-3">
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">
+                    <i class="las la-angle-left text-xl"></i>
+                  </button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">1</button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">...</button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">5</button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">6</button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">7</button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">...</button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">8</button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">
+                    <i class="las la-angle-right text-xl"></i>
+                  </button>
+                </div>
+
+                <div class="flex items-center gap-3">
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">
+                    <i class="las la-angle-left text-xl"></i>
+                  </button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">1</button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">...</button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">4</button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">...</button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">6</button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">7</button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">...</button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">16</button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">...</button>
+                  <button class="btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0">
+                    <i class="las la-angle-right text-xl"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex flex-col gap-6&#x22;&#x3E;
+  &#x3C;!-- Regular --&#x3E;
+  &#x3C;div class=&#x22;flex items-center gap-3&#x22;&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-angle-left text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;1&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;...&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;6&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;...&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;8&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-angle-right text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;div class=&#x22;flex items-center gap-3&#x22;&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-angle-left text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;1&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;...&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;5&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;6&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;7&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;...&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;8&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-angle-right text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+  &#x3C;/div&#x3E;
+
+  &#x3C;div class=&#x22;flex items-center gap-3&#x22;&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-angle-left text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;1&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;...&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;4&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;...&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;6&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;7&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;...&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;16&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;...&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;btn-default-icon-outlined size-10 hover:bg-neutral-900 hover:text-neutral-0&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-angle-right text-xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/button&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/highlight.js"></script>
+    <script src="./assets/js/libs/sweetalert.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+  </body>
+</html>

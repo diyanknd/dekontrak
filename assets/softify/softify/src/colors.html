@@ -1,0 +1,621 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Colors</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Others</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Colors</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Colors -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div class="grid grid-cols-12 gap-4 lg:gap-6">
+            <div class="col-span-12 md:col-span-6 xxl:col-span-4 white-box xxl:p-6">
+              <p class="text-xl lg:text-2xl font-medium mb-4">Primary</p>
+              <div class="flex flex-col gap-4">
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-primary-50"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Primary 50</p>
+                    <p class="text-xs">#e6f6f1</p>
+                    <p class="text-xs">rgb(230, 246, 241)</p>
+                  </div>
+                </div>
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-primary-75"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Primary 75</p>
+                    <p class="text-xs">#96dbc4</p>
+                    <p class="text-xs">rgb(150, 219, 196)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-primary-100"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Primary 100</p>
+                    <p class="text-xs">#6bccab</p>
+                    <p class="text-xs">rgb(107, 204, 171)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-primary-200"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Primary 200</p>
+                    <p class="text-xs">#2bb687</p>
+                    <p class="text-xs">rgb(43, 182, 135)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-primary-300"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Primary 300</p>
+                    <p class="text-xs">#2C7BE5</p>
+                    <p class="text-xs">rgb(0, 167, 111)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-primary-400"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Primary 400</p>
+                    <p class="text-xs">#00754e</p>
+                    <p class="text-xs">rgb(0, 117, 78)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-primary-500"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Primary 500</p>
+                    <p class="text-xs">#006644</p>
+                    <p class="text-xs">rgb(0, 102, 68)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12 md:col-span-6 xxl:col-span-4 white-box xxl:p-6">
+              <p class="text-xl lg:text-2xl font-medium mb-4">Secondary</p>
+              <div class="flex flex-col gap-4">
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-secondary-50"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">secondary 50</p>
+                    <p class="text-xs">#f4ebff</p>
+                    <p class="text-xs">rgb(244, 235, 255)</p>
+                  </div>
+                </div>
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-secondary-75"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">secondary 75</p>
+                    <p class="text-xs">#d1abff</p>
+                    <p class="text-xs">rgb(209, 171, 255)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-secondary-100"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">secondary 100</p>
+                    <p class="text-xs">#bd89ff</p>
+                    <p class="text-xs">rgb(189, 137, 255)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-secondary-200"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">secondary 200</p>
+                    <p class="text-xs">#a156ff</p>
+                    <p class="text-xs">rgb(161, 86, 255)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-secondary-300"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">secondary 300</p>
+                    <p class="text-xs">#8e33ff</p>
+                    <p class="text-xs">rgb(142, 51, 255)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-secondary-400"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">secondary 400</p>
+                    <p class="text-xs">#6324b3</p>
+                    <p class="text-xs">rgb(99, 36, 179)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-secondary-500"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">secondary 500</p>
+                    <p class="text-xs">#571f9c</p>
+                    <p class="text-xs">rgb(87, 31, 156)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12 md:col-span-6 xxl:col-span-4 white-box xxl:p-6">
+              <p class="text-xl lg:text-2xl font-medium mb-4">Info</p>
+              <div class="flex flex-col gap-4">
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-info-50"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">info 50</p>
+                    <p class="text-xs">#e6f8fb</p>
+                    <p class="text-xs">rgb(230, 248, 251)</p>
+                  </div>
+                </div>
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-info-75"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">info 75</p>
+                    <p class="text-xs">#96e2ef</p>
+                    <p class="text-xs">rgb(150, 226, 239)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-info-100"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">info 100</p>
+                    <p class="text-xs">#6bd6e9</p>
+                    <p class="text-xs">rgb(107, 214, 233)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-info-200"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">info 200</p>
+                    <p class="text-xs">#2bc4df</p>
+                    <p class="text-xs">rgb(43, 196, 223)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-info-300"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">info 300</p>
+                    <p class="text-xs">#00b8d9</p>
+                    <p class="text-xs">rgb(0, 184, 217)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-info-400"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">info 400</p>
+                    <p class="text-xs">#008198</p>
+                    <p class="text-xs">rgb(0, 129, 152)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-info-500"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">info 500</p>
+                    <p class="text-xs">#007084</p>
+                    <p class="text-xs">rgb(0, 112, 132)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12 md:col-span-6 xxl:col-span-4 white-box xxl:p-6">
+              <p class="text-xl lg:text-2xl font-medium mb-4">Success</p>
+              <div class="flex flex-col gap-4">
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-success-50"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">success 50</p>
+                    <p class="text-xs">#e9f9ef</p>
+                    <p class="text-xs">rgb(233, 249, 239)</p>
+                  </div>
+                </div>
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-success-75"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">success 75</p>
+                    <p class="text-xs">#a4e7bd</p>
+                    <p class="text-xs">rgb(164, 231, 189)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-success-100"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">success 100</p>
+                    <p class="text-xs">#7fdda2</p>
+                    <p class="text-xs">rgb(127, 221, 162)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-success-200"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">success 200</p>
+                    <p class="text-xs">#48cf79</p>
+                    <p class="text-xs">rgb(72, 207, 121)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-success-300"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">success 300</p>
+                    <p class="text-xs">#22c55e</p>
+                    <p class="text-xs">rgb(34, 197, 94)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-success-400"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">success 400</p>
+                    <p class="text-xs">#188a42</p>
+                    <p class="text-xs">rgb(24, 138, 66)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-success-500"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">success 500</p>
+                    <p class="text-xs">#157839</p>
+                    <p class="text-xs">rgb(21, 120, 57)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12 md:col-span-6 xxl:col-span-4 white-box xxl:p-6">
+              <p class="text-xl lg:text-2xl font-medium mb-4">Warning</p>
+              <div class="flex flex-col gap-4">
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-warning-50"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">warning 50</p>
+                    <p class="text-xs">#fff7e6</p>
+                    <p class="text-xs">rgb(255, 247, 230)</p>
+                  </div>
+                </div>
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-warning-75"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">warning 75</p>
+                    <p class="text-xs">#ffdd96</p>
+                    <p class="text-xs">rgb(255, 221, 150)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-warning-100"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">warning 100</p>
+                    <p class="text-xs">#ffce6b</p>
+                    <p class="text-xs">rgb(255, 206, 107)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-warning-200"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">warning 200</p>
+                    <p class="text-xs">#ffb92b</p>
+                    <p class="text-xs">rgb(255, 185, 43)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-warning-300"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">warning 300</p>
+                    <p class="text-xs">#ffab00</p>
+                    <p class="text-xs">rgb(255, 171, 0)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-warning-400"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">warning 400</p>
+                    <p class="text-xs">#b37800</p>
+                    <p class="text-xs">rgb(179, 120, 0)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-warning-500"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">warning 500</p>
+                    <p class="text-xs">#9c6800</p>
+                    <p class="text-xs">rgb(156, 104, 0)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12 md:col-span-6 xxl:col-span-4 white-box xxl:p-6">
+              <p class="text-xl lg:text-2xl font-medium mb-4">Error</p>
+              <div class="flex flex-col gap-4">
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-error-50"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">error 50</p>
+                    <p class="text-xs">#ffeeea</p>
+                    <p class="text-xs">rgb(255, 238, 234)</p>
+                  </div>
+                </div>
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-error-75"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">error 75</p>
+                    <p class="text-xs">#ffbaaa</p>
+                    <p class="text-xs">rgb(255, 186, 170)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-error-100"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">error 100</p>
+                    <p class="text-xs">#ff9d87</p>
+                    <p class="text-xs">rgb(255, 157, 135)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-error-200"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">error 200</p>
+                    <p class="text-xs">#ff7353</p>
+                    <p class="text-xs">rgb(255, 115, 83)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-error-300"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">error 300</p>
+                    <p class="text-xs">#ff5630</p>
+                    <p class="text-xs">rgb(255, 86, 48)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-error-400"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">error 400</p>
+                    <p class="text-xs">#b33c22</p>
+                    <p class="text-xs">rgb(179, 60, 34)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-error-500"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">error 500</p>
+                    <p class="text-xs">#9c341d</p>
+                    <p class="text-xs">rgb(156, 52, 29)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12 md:col-span-6 xxl:col-span-4 white-box xxl:p-6">
+              <p class="text-xl lg:text-2xl font-medium mb-4">Neutral</p>
+              <div class="flex flex-col gap-4">
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-neutral-0"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Neutral 0</p>
+                    <p class="text-xs">#ffffff</p>
+                    <p class="text-xs">rgb(255, 255, 255)</p>
+                  </div>
+                </div>
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-neutral-10"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Neutral 10</p>
+                    <p class="text-xs">#fafafb</p>
+                    <p class="text-xs">rgb(250, 250, 251)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-neutral-20"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Neutral 20</p>
+                    <p class="text-xs">#f5f6f6</p>
+                    <p class="text-xs">rgb(245, 246, 246)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-neutral-30"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Neutral 30</p>
+                    <p class="text-xs">#ebeced</p>
+                    <p class="text-xs">rgb(235, 236, 237)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-neutral-40"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Neutral 40</p>
+                    <p class="text-xs">#dfe0e2</p>
+                    <p class="text-xs">rgb(223, 224, 226)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-neutral-50"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Neutral 50</p>
+                    <p class="text-xs">#c2c4c8</p>
+                    <p class="text-xs">rgb(194, 196, 200)</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-neutral-60"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Neutral 60</p>
+                    <p class="text-xs">#b3b6bb</p>
+                    <p class="text-xs">rgb(179, 182, 187)</p>
+                  </div>
+                </div>
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-neutral-70"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Neutral 70</p>
+                    <p class="text-xs">#a7aab0</p>
+                    <p class="text-xs">rgb(167, 170, 176)</p>
+                  </div>
+                </div>
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-neutral-80"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Neutral 80</p>
+                    <p class="text-xs">#999ca3</p>
+                    <p class="text-xs">rgb(153, 156, 163)</p>
+                  </div>
+                </div>
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-neutral-90"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Neutral 90</p>
+                    <p class="text-xs">#8a8e95</p>
+                    <p class="text-xs">rgb(138, 142, 149)</p>
+                  </div>
+                </div>
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-neutral-100"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Neutral 100</p>
+                    <p class="text-xs">#7b8088</p>
+                    <p class="text-xs">rgb(123, 128, 136)</p>
+                  </div>
+                </div>
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-neutral-200"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Neutral 200</p>
+                    <p class="text-xs">#6d717b</p>
+                    <p class="text-xs">rgb(109, 113, 123)</p>
+                  </div>
+                </div>
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-neutral-300"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Neutral 300</p>
+                    <p class="text-xs">#5e636e</p>
+                    <p class="text-xs">rgb(94, 99, 110)</p>
+                  </div>
+                </div>
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-neutral-400"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Neutral 400</p>
+                    <p class="text-xs">#525763</p>
+                    <p class="text-xs">rgb(82, 87, 99)</p>
+                  </div>
+                </div>
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-neutral-500"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Neutral 500</p>
+                    <p class="text-xs">#434956</p>
+                    <p class="text-xs">rgb(67, 73, 86)</p>
+                  </div>
+                </div>
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-neutral-600"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Neutral 600</p>
+                    <p class="text-xs">#373d4b</p>
+                    <p class="text-xs">rgb(55, 61, 75)</p>
+                  </div>
+                </div>
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-neutral-700"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Neutral 700</p>
+                    <p class="text-xs">#262d3b</p>
+                    <p class="text-xs">rgb(38, 45, 59)</p>
+                  </div>
+                </div>
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-neutral-800"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Neutral 800</p>
+                    <p class="text-xs">#171f2e</p>
+                    <p class="text-xs">rgb(23, 31, 46)</p>
+                  </div>
+                </div>
+                <div class="flex gap-4 items-center">
+                  <div class="rounded-2xl border h-14 border-neutral-30 dark:border-neutral-500 w-24 lg:w-40 bg-neutral-900"></div>
+                  <div>
+                    <p class="text-sm font-medium capitalize">Neutral 900</p>
+                    <p class="text-xs">#0b1323</p>
+                    <p class="text-xs">rgb(11, 19, 35)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

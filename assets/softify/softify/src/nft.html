@@ -1,0 +1,848 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/swiper.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903 relative">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6">
+        <div x-data="chart" class="grid grid-cols-12 gap-4 xxl:gap-6">
+          <div class="col-span-12 lg:col-span-7 xxl:col-span-8 white-box xxl:!p-6">
+            <div class="bg-primary-5 nft-hero rounded-xl overflow-hidden p-6 h-full xxl:py-[45px] xxl:pl-14 bg-cover flex items-center flex-wrap sm:flex-nowrap relative rtl:scale-x-[-1]" style="background-image: url(assets/images/nft-hero-bg.png)">
+              <div class="size-[192px] rounded-full opacity-30 blur-[100px] bg-warning-300 absolute -bottom-10 -right-10"></div>
+              <div class="max-w-[438px] rtl:mr-auto rtl:scale-x-[-1]">
+                <h2 class="mb-3 xxl:mb-6 leading-tight">Discover, Collect, Sell and Create NFTs.</h2>
+                <p class="mb-6 xl:mb-8 l-text">The world's first and largest digital marketplace, you need to be sure there isn't anything.</p>
+                <div class="flex gap-4 flex-wrap">
+                  <a href="#" class="btn-primary">Discover Now</a>
+                  <a href="#" class="btn-error">Create NFT</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- products slider -->
+          <div class="col-span-12 lg:col-span-5 xxl:col-span-4 white-box">
+            <div class="bb-dashed-n30 flex justify-between items-center">
+              <h4>Top Collections</h4>
+              <a class="flex items-center gap-2 text-primary-300 h6" href="#">See All <i class="las la-arrow-right"></i></a>
+            </div>
+            <div dir="ltr" class="swiper product-slider relative rounded-xl max-h-[350px]">
+              <div class="swiper-wrapper rounded-xl">
+                <div class="swiper-slide relative after:bottom-0 after:left-0 after:rounded-xl rounded-xl after:w-full after:h-2/3 after:absolute after:bg-gradient-to-t after:from-black after:to-transparent">
+                  <img src="./assets/images/nft-collection-1.png" class="w-full rounded-xl h-full object-cover object-center" alt="" />
+                  <div class="absolute bottom-0 z-[3] p-5 xl:p-6">
+                    <span class="text-secondary-300 inline-flex py-2 px-3 rounded-3xl bg-secondary-75 font-semibold text-xs">745+ Item</span>
+                    <h4 class="text-white mt-4">Collectibles</h4>
+                  </div>
+                </div>
+                <div class="swiper-slide relative after:bottom-0 after:left-0 after:rounded-xl rounded-xl after:w-full after:h-2/3 after:absolute after:bg-gradient-to-t after:from-black after:to-transparent">
+                  <img src="./assets/images/nft-collection-2.png" class="w-full rounded-xl h-full object-cover object-center" alt="" />
+                  <div class="absolute bottom-0 z-[3] p-5 xl:p-6">
+                    <span class="text-secondary-300 inline-flex py-2 px-3 rounded-3xl bg-secondary-75 font-semibold text-xs">745+ Item</span>
+                    <h4 class="text-white mt-4">Graphic Styles</h4>
+                  </div>
+                </div>
+                <div class="swiper-slide relative after:bottom-0 after:left-0 after:rounded-xl rounded-xl after:w-full after:h-2/3 after:absolute after:bg-gradient-to-t after:from-black after:to-transparent">
+                  <img src="./assets/images/nft-collection-3.png" class="w-full rounded-xl h-full object-cover object-center" alt="" />
+                  <div class="absolute bottom-0 z-[3] p-5 xl:p-6">
+                    <span class="text-secondary-300 inline-flex py-2 px-3 rounded-3xl bg-secondary-75 font-semibold text-xs">745+ Item</span>
+                    <h4 class="text-white mt-4">3D Styles</h4>
+                  </div>
+                </div>
+                <div class="swiper-slide relative after:bottom-0 after:left-0 after:rounded-xl rounded-xl after:w-full after:h-2/3 after:absolute after:bg-gradient-to-t after:from-black after:to-transparent">
+                  <img src="./assets/images/nft-collection-4.png" class="w-full rounded-xl h-full object-cover object-center" alt="" />
+                  <div class="absolute bottom-0 z-[3] p-5 xl:p-6">
+                    <span class="text-secondary-300 inline-flex py-2 px-3 rounded-3xl bg-secondary-75 font-semibold text-xs">745+ Item</span>
+                    <h4 class="text-white mt-4">Crypto Cards</h4>
+                  </div>
+                </div>
+                <div class="swiper-slide relative after:bottom-0 after:left-0 after:rounded-xl rounded-xl after:w-full after:h-2/3 after:absolute after:bg-gradient-to-t after:from-black after:to-transparent">
+                  <img src="./assets/images/nft-collection-5.png" class="w-full rounded-xl h-full object-cover object-center" alt="" />
+                  <div class="absolute bottom-0 z-[3] p-5 xl:p-6">
+                    <span class="text-secondary-300 inline-flex py-2 px-3 rounded-3xl bg-secondary-75 font-semibold text-xs">745+ Item</span>
+                    <h4 class="text-white mt-4">Artworks</h4>
+                  </div>
+                </div>
+              </div>
+              <div class="product-pagination"></div>
+            </div>
+          </div>
+
+          <!-- statistics -->
+          <div class="col-span-12 grid grid-cols-12 gap-4 lg:gap-6">
+            <div class="col-span-12 sm:col-span-6 xxxl:col-span-4">
+              <div class="white-box flex justify-between items-start gap-6">
+                <div>
+                  <p class="m-text mb-4 font-medium">Total Revenue</p>
+                  <h3 class="mb-4">$748,846.55</h3>
+                  <p class="flex items-center gap-3">
+                    <span class="text-error-300 flex items-center gap-1"> <i class="las la-arrow-down"></i> 55.6%</span>
+                    <span>vs. last month</span>
+                  </p>
+                </div>
+                <span class="f-center rounded-lg size-12 bg-primary-50 border border-neutral-30 dark:border-neutral-500 text-primary-300">
+                  <i class="las la-coins text-3xl"></i>
+                </span>
+              </div>
+            </div>
+            <div class="col-span-12 sm:col-span-6 xxxl:col-span-4">
+              <div class="white-box flex justify-between items-start gap-6">
+                <div>
+                  <p class="m-text mb-4 font-medium">Estimated</p>
+                  <h3 class="mb-4">$954,475.54</h3>
+                  <p class="flex items-center gap-3">
+                    <span class="text-primary-300 flex items-center gap-1"> <i class="las la-arrow-up"></i> 15.6%</span>
+                    <span>vs. last month</span>
+                  </p>
+                </div>
+                <span class="f-center rounded-lg size-12 bg-primary-50 border border-neutral-30 dark:border-neutral-500 text-primary-300">
+                  <i class="las la-wallet text-3xl"></i>
+                </span>
+              </div>
+            </div>
+            <div class="col-span-12 sm:col-span-6 xxxl:col-span-4">
+              <div class="white-box flex justify-between items-start gap-6">
+                <div>
+                  <p class="m-text mb-4 font-medium">Transactions</p>
+                  <h3 class="mb-4">$546,354.12</h3>
+                  <p class="flex items-center gap-3">
+                    <span class="text-primary-300 flex items-center gap-1"> <i class="las la-arrow-up"></i> 20.6%</span>
+                    <span>vs. last month</span>
+                  </p>
+                </div>
+                <span class="f-center rounded-lg size-12 bg-primary-50 border border-neutral-30 dark:border-neutral-500 text-primary-300">
+                  <i class="las la-exchange-alt text-3xl"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-span-12 grid grid-cols-12 lg:divide-x divide-neutral-30 dark:divide-neutral-500 bg-neutral-0 rounded-xl dark:bg-neutral-904">
+            <div class="col-span-12 lg:col-span-7 xl:col-span-8 p-4 xl:p-6 xxl:p-8">
+              <div x-data="{selected:'all'}" class="flex justify-between items-center flex-wrap gap-5 bb-dashed-primary">
+                <h4>Marketplace</h4>
+                <div class="flex gap-2">
+                  <button :class="selected === 'all' ? 'bg-primary-300 text-neutral-0' : 'bg-primary-5 text-primary-300'" @click="selected = 'all'" class="rounded-lg px-3 border border-primary-300 py-2 font-semibold">All</button>
+                  <button :class="selected === '1m' ? 'bg-primary-300 text-neutral-0' : 'bg-primary-5 text-primary-300'" @click="selected = '1m'" class="rounded-lg px-3 border border-primary-300 py-2 font-semibold">1M</button>
+                  <button :class="selected === '6m' ? 'bg-primary-300 text-neutral-0' : 'bg-primary-5 text-primary-300'" @click="selected = '6m'" class="rounded-lg px-3 border border-primary-300 py-2 font-semibold">6M</button>
+                  <button :class="selected === '1y' ? 'bg-primary-300 text-neutral-0' : 'bg-primary-5 text-primary-300'" @click="selected = '1y'" class="rounded-lg px-3 border border-primary-300 py-2 font-semibold">1Y</button>
+                </div>
+              </div>
+              <div class="bb-dashed-primary">
+                <div class="max-w-md mx-auto flex justify-between">
+                  <div>
+                    <h4 class="mb-2">36.48k</h4>
+                    <p class="s-text font-medium">Artworks</p>
+                  </div>
+                  <div class="h-14 shrink-0 w-px border-l border-primary-75 border-dashed"></div>
+                  <div>
+                    <h4 class="mb-2">92.48k</h4>
+                    <p class="s-text font-medium">Auction</p>
+                  </div>
+                </div>
+              </div>
+              <div x-ref="marketplace"></div>
+            </div>
+            <div class="col-span-12 lg:col-span-5 xl:col-span-4 p-4 xl:p-6 xxl:p-8">
+              <div class="flex justify-between items-center mb-6 xl:mb-8">
+                <div class="flex items-center gap-4">
+                  <img src="./assets/images/users/user-m-1.png" width="48" class="rounded-full" alt="" />
+                  <div>
+                    <p class="xl-text font-medium mb-2">Trendy Fashion Portraits</p>
+                    <span class="s-text">Artwork</span>
+                  </div>
+                </div>
+                <button class="text-4xl f-center"><i class="las la-share-alt-square"></i></button>
+              </div>
+              <div class="mb-6 xl:mb-8">
+                <div class="flex items-center gap-2">
+                  <i class="lab la-ethereum text-2xl"></i>
+                  <p class="l-text font-medium">346.12 ETH</p>
+                </div>
+                <p class="s-text text-primary-300">+586.85 (40.6%)</p>
+              </div>
+              <p class="mb-5 xxl:mb-8">NFT art is a digital asset that is collectable, unique, and non-transferrable, Cortes explained Every NFT is unique duplicated.</p>
+              <div class="flex justify-between mb-5 xxl:mb-8">
+                <div>
+                  <p class="s-text mb-2">Current Bid</p>
+                  <h4>342.74 ETH</h4>
+                </div>
+                <div class="h-14 shrink-0 w-px border-l border-primary-75 border-dashed"></div>
+                <div>
+                  <p class="s-text mb-2">Highest Bid</p>
+                  <h4>348.74 ETH</h4>
+                </div>
+              </div>
+              <div x-data="countdown" x-init="start" class="bb-dashed-primary flex justify-between items-center">
+                <div class="flex flex-col items-center">
+                  <p class="s-text mb-4">Days</p>
+                  <div class="size-12 xxl:size-14 bg-primary-5 rounded-md border border-neutral-30 dark:border-neutral-500 f-center">
+                    <p class="l-text font-medium" x-text="days"></p>
+                  </div>
+                </div>
+                <p class="text-xl pt-7">:</p>
+                <div class="flex flex-col items-center">
+                  <p class="s-text mb-4">Hours</p>
+                  <div class="size-12 xxl:size-14 bg-primary-5 rounded-md border border-neutral-30 dark:border-neutral-500 f-center">
+                    <p class="l-text font-medium" x-text="hours"></p>
+                  </div>
+                </div>
+                <p class="text-xl pt-7">:</p>
+                <div class="flex flex-col items-center">
+                  <p class="s-text mb-4">Minutes</p>
+                  <div class="size-12 xxl:size-14 bg-primary-5 rounded-md border border-neutral-30 dark:border-neutral-500 f-center">
+                    <p class="l-text font-medium" x-text="minutes"></p>
+                  </div>
+                </div>
+                <p class="text-xl pt-7">:</p>
+                <div class="flex flex-col items-center">
+                  <p class="s-text mb-4">Seconds</p>
+                  <div class="size-12 xxl:size-14 bg-primary-5 rounded-md border border-neutral-30 dark:border-neutral-500 f-center">
+                    <p class="l-text font-medium" x-text="seconds"></p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex gap-4 flex-wrap">
+                <a href="#" class="btn-primary">View Details</a>
+                <a href="#" class="btn-error">Bid Now</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- featured nfts -->
+          <div class="col-span-12 lg:col-span-7 xxl:col-span-8 white-box">
+            <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4 bb-dashed-n30">
+              <h4>Featured NFTs Artworks</h4>
+              <div class="flex gap-4">
+                <button class="nft-prev size-10 text-xl f-center text-primary-300 border border-primary-300 rounded-full hover:bg-primary-300 hover:text-neutral-0 duration-300"><i class="las la-angle-left"></i></button>
+                <button class="nft-next size-10 text-xl f-center text-primary-300 border border-primary-300 rounded-full hover:bg-primary-300 hover:text-neutral-0 duration-300"><i class="las la-angle-right"></i></button>
+              </div>
+            </div>
+            <div dir="ltr" class="swiper nft-slider">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <div class="bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500 rounded-xl p-3 group">
+                    <div class="relative mb-5 xxl:mb-8 after:-bottom-full group-hover:after:bottom-0 after:left-0 after:rounded-xl after:duration-300 overflow-hidden rounded-xl after:w-full after:h-2/3 after:absolute group-hover:after:bg-gradient-to-t after:from-black after:to-transparent">
+                      <img src="./assets/images/nft-collection-1.png" class="rounded-xl w-full" alt="" />
+                      <a href="#" class="absolute btn-primary -top-full z-[3] group-hover:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2"><i class="las la-gavel text-lg"></i> Place Bid</a>
+                    </div>
+                    <div class="px-2 xl:px-4 pb-2 xl:pb-4">
+                      <div class="flex justify-between items-start bb-dashed-primary">
+                        <div>
+                          <p class="xl-text mb-2">Filtered Portrait</p>
+                          <p class="s-text">Artwork</p>
+                        </div>
+                        <p class="font-medium m-text flex items-center gap-2"><i class="lar la-heart"></i>19.5k</p>
+                      </div>
+                      <div class="flex justify-between items-center">
+                        <p><i class="las la-tag text-primary-300 text-lg"></i> Highest : <span class="font-medium">75.56 ETH</span></p>
+                        <p class="m-text font-medium">24.75 ETH</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500 rounded-xl p-3 group">
+                    <div class="relative mb-5 xxl:mb-8 after:-bottom-full group-hover:after:bottom-0 after:left-0 after:rounded-xl after:duration-300 overflow-hidden rounded-xl after:w-full after:h-2/3 after:absolute group-hover:after:bg-gradient-to-t after:from-black after:to-transparent">
+                      <img src="./assets/images/nft-collection-2.png" class="rounded-xl w-full" alt="" />
+                      <a href="#" class="absolute btn-primary -top-full z-[3] group-hover:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2"><i class="las la-gavel text-lg"></i> Place Bid</a>
+                    </div>
+                    <div class="px-2 xl:px-4 pb-2 xl:pb-4">
+                      <div class="flex justify-between items-start bb-dashed-primary">
+                        <div>
+                          <p class="xl-text mb-2">Walking On Air</p>
+                          <p class="s-text">Artwork</p>
+                        </div>
+                        <p class="font-medium m-text flex items-center gap-2"><i class="lar la-heart"></i>19.5k</p>
+                      </div>
+                      <div class="flex justify-between items-center">
+                        <p><i class="las la-tag text-primary-300 text-lg"></i> Highest : <span class="font-medium">75.56 ETH</span></p>
+                        <p class="m-text font-medium">24.75 ETH</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500 rounded-xl p-3 group">
+                    <div class="relative mb-5 xxl:mb-8 after:-bottom-full group-hover:after:bottom-0 after:left-0 after:rounded-xl after:duration-300 overflow-hidden rounded-xl after:w-full after:h-2/3 after:absolute group-hover:after:bg-gradient-to-t after:from-black after:to-transparent">
+                      <img src="./assets/images/nft-collection-3.png" class="rounded-xl w-full" alt="" />
+                      <a href="#" class="absolute btn-primary -top-full z-[3] group-hover:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2"><i class="las la-gavel text-lg"></i> Place Bid</a>
+                    </div>
+                    <div class="px-2 xl:px-4 pb-2 xl:pb-4">
+                      <div class="flex justify-between items-start bb-dashed-primary">
+                        <div>
+                          <p class="xl-text mb-2">Filtered Portrait</p>
+                          <p class="s-text">Artwork</p>
+                        </div>
+                        <p class="font-medium m-text flex items-center gap-2"><i class="lar la-heart"></i>19.5k</p>
+                      </div>
+                      <div class="flex justify-between items-center">
+                        <p><i class="las la-tag text-primary-300 text-lg"></i> Highest : <span class="font-medium">75.56 ETH</span></p>
+                        <p class="m-text font-medium">24.75 ETH</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="nft-pagination flex justify-center mt-4 xxl:mt-6"></div>
+          </div>
+
+          <!-- history of bids -->
+          <div class="col-span-12 lg:col-span-5 xxl:col-span-4">
+            <div class="white-box">
+              <div class="bb-dashed-n30 flex justify-between items-center">
+                <h4>History of Bids</h4>
+                <a class="flex items-center gap-2 text-primary-300 h6" href="#">See All <i class="las la-arrow-right"></i></a>
+              </div>
+              <div class="space-y-4 xl:space-y-6 xxl:space-y-8">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/users/user-s-5.png" class="rounded-full" width="56" height="56" alt="" />
+                    <div>
+                      <p class="l-text mb-2 font-medium">Jane Cooper</p>
+                      <p class="s-text">@demo.dE1</p>
+                    </div>
+                  </div>
+                  <p class="l-text font-medium">174.36 ETH</p>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/users/user-s-4.png" class="rounded-full" width="56" height="56" alt="" />
+                    <div>
+                      <p class="l-text mb-2 font-medium">Esther Holden</p>
+                      <p class="s-text">@demo.dE1</p>
+                    </div>
+                  </div>
+                  <p class="l-text font-medium">174.36 ETH</p>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/users/user-s-3.png" class="rounded-full" width="56" height="56" alt="" />
+                    <div>
+                      <p class="l-text mb-2 font-medium">Ralph Ford</p>
+                      <p class="s-text">@demo.dE1</p>
+                    </div>
+                  </div>
+                  <p class="l-text font-medium">174.36 ETH</p>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/users/user-s-2.png" class="rounded-full" width="56" height="56" alt="" />
+                    <div>
+                      <p class="l-text mb-2 font-medium">History of Bids</p>
+                      <p class="s-text">@demo.dE1</p>
+                    </div>
+                  </div>
+                  <p class="l-text font-medium">174.36 ETH</p>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/users/user-s-1.png" class="rounded-full" width="56" height="56" alt="" />
+                    <div>
+                      <p class="l-text mb-2 font-medium">Robert Fox</p>
+                      <p class="s-text">@demo.dE1</p>
+                    </div>
+                  </div>
+                  <p class="l-text font-medium">174.36 ETH</p>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/users/user-s-6.png" class="rounded-full" width="56" height="56" alt="" />
+                    <div>
+                      <p class="l-text mb-2 font-medium">Savannah Simmons</p>
+                      <p class="s-text">@demo.dE1</p>
+                    </div>
+                  </div>
+                  <p class="l-text font-medium">174.36 ETH</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- recent nfts -->
+          <div class="col-span-12 lg:col-span-7 xxl:col-span-8 white-box">
+            <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4 bb-dashed-n30">
+              <h4>Recent NFTs</h4>
+              <div class="flex items-center gap-3">
+                <span>Sort By : </span>
+                <select name="sort" class="nc-select n20">
+                  <option value="day">Last 15 Days</option>
+                  <option value="week">Last 1 Month</option>
+                  <option value="year">Last 6 Month</option>
+                </select>
+              </div>
+            </div>
+            <div x-data="{dense: false}" class="checkboxes-container overflow-x-auto">
+              <table class="w-full whitespace-nowrap">
+                <thead class="text-left">
+                  <tr class="bg-neutral-20 dark:bg-neutral-903">
+                    <th class="px-6 py-3 lg:py-5">Collection</th>
+                    <th class="px-6 py-3 lg:py-5">Volume</th>
+                    <th class="px-6 py-3 lg:py-5">24h %</th>
+                    <th class="px-6 py-3 lg:py-5">Creators</th>
+                    <th class="px-6 py-3 lg:py-5">Items</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                    <td class="px-6 py-3">
+                      <div class="flex items-center gap-3">
+                        <img src="./assets/images/collection-icon/item-1.png" width="32" class="rounded-full shrink-0" alt="" />
+                        <div>
+                          <p class="m-text font-medium mb-1">Moonbirds</p>
+                          <span class="text-xs">Artworks</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3">
+                      <div class="flex items-center gap-2">
+                        <img src="./assets/images/btc.png" width="24" class="rounded-full" alt="" />
+                        <span class="m-text font-medium">24,525.25</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 flex items-center gap-2">
+                      <i class="las la-level-up-alt text-primary-300 text-xl"></i>
+                      79.54
+                    </td>
+                    <td class="px-6 py-3">154k</td>
+                    <td class="px-6 py-3">396k</td>
+                  </tr>
+                  <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                    <td class="px-6 py-3">
+                      <div class="flex items-center gap-3">
+                        <img src="./assets/images/collection-icon/item-2.png" width="32" class="rounded-full shrink-0" alt="" />
+                        <div>
+                          <p class="m-text font-medium mb-1">Doodles</p>
+                          <span class="text-xs">Games</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3">
+                      <div class="flex items-center gap-2">
+                        <img src="./assets/images/ltc.png" width="24" class="rounded-full" alt="" />
+                        <span class="m-text font-medium">16,525.25</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 flex items-center gap-2">
+                      <i class="las la-level-down-alt text-error-300 text-xl"></i>
+                      79.54
+                    </td>
+                    <td class="px-6 py-3">154k</td>
+                    <td class="px-6 py-3">396k</td>
+                  </tr>
+                  <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                    <td class="px-6 py-3">
+                      <div class="flex items-center gap-3">
+                        <img src="./assets/images/collection-icon/item-3.png" width="32" class="rounded-full shrink-0" alt="" />
+                        <div>
+                          <p class="m-text font-medium mb-1">NFArcade Pass</p>
+                          <span class="text-xs">Photography</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3">
+                      <div class="flex items-center gap-2">
+                        <img src="./assets/images/eth.png" width="24" class="rounded-full" alt="" />
+                        <span class="m-text font-medium">14,525.25</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 flex items-center gap-2">
+                      <i class="las la-level-down-alt text-error-300 text-xl"></i>
+                      79.54
+                    </td>
+                    <td class="px-6 py-3">154k</td>
+                    <td class="px-6 py-3">396k</td>
+                  </tr>
+                  <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                    <td class="px-6 py-3">
+                      <div class="flex items-center gap-3">
+                        <img src="./assets/images/collection-icon/item-4.png" width="32" class="rounded-full shrink-0" alt="" />
+                        <div>
+                          <p class="m-text font-medium mb-1">Block Explorer</p>
+                          <span class="text-xs">Artworks</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3">
+                      <div class="flex items-center gap-2">
+                        <img src="./assets/images/bnb.png" width="24" class="rounded-full" alt="" />
+                        <span class="m-text font-medium">24,525.25</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 flex items-center gap-2">
+                      <i class="las la-level-down-alt text-error-300 text-xl"></i>
+                      79.54
+                    </td>
+                    <td class="px-6 py-3">154k</td>
+                    <td class="px-6 py-3">396k</td>
+                  </tr>
+                  <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                    <td class="px-6 py-3">
+                      <div class="flex items-center gap-3">
+                        <img src="./assets/images/collection-icon/item-5.png" width="32" class="rounded-full shrink-0" alt="" />
+                        <div>
+                          <p class="m-text font-medium mb-1">Moonbirds</p>
+                          <span class="text-xs">Artworks</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3">
+                      <div class="flex items-center gap-2">
+                        <img src="./assets/images/usdt.png" width="24" class="rounded-full" alt="" />
+                        <span class="m-text font-medium">24,525.25</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 flex items-center gap-2">
+                      <i class="las la-level-up-alt text-primary-300 text-xl"></i>
+                      79.54
+                    </td>
+                    <td class="px-6 py-3">154k</td>
+                    <td class="px-6 py-3">396k</td>
+                  </tr>
+                  <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                    <td class="px-6 py-3">
+                      <div class="flex items-center gap-3">
+                        <img src="./assets/images/collection-icon/item-6.png" width="32" class="rounded-full shrink-0" alt="" />
+                        <div>
+                          <p class="m-text font-medium mb-1">Moonbirds</p>
+                          <span class="text-xs">Artworks</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3">
+                      <div class="flex items-center gap-2">
+                        <img src="./assets/images/usdc.png" width="24" class="rounded-full" alt="" />
+                        <span class="m-text font-medium">5,525.25</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 flex items-center gap-2">
+                      <i class="las la-level-up-alt text-primary-300 text-xl"></i>
+                      79.54
+                    </td>
+                    <td class="px-6 py-3">154k</td>
+                    <td class="px-6 py-3">396k</td>
+                  </tr>
+                  <tr class="border-b border-neutral-30 bg-neutral-0 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:bg-neutral-904 dark:hover:bg-neutral-903">
+                    <td class="px-6 py-3">
+                      <div class="flex items-center gap-3">
+                        <img src="./assets/images/collection-icon/item-6.png" width="32" class="rounded-full shrink-0" alt="" />
+                        <div>
+                          <p class="m-text font-medium mb-1">Moonbirds</p>
+                          <span class="text-xs">Artworks</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3">
+                      <div class="flex items-center gap-2">
+                        <img src="./assets/images/dgc.png" width="24" class="rounded-full" alt="" />
+                        <span class="m-text font-medium">4,525.25</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-3 flex items-center gap-2">
+                      <i class="las la-level-up-alt text-primary-300 text-xl"></i>
+                      79.54
+                    </td>
+                    <td class="px-6 py-3">154k</td>
+                    <td class="px-6 py-3">396k</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="mt-6 flex items-center gap-5 justify-center flex-col md:flex-row md:justify-end whitespace-nowrap">
+                <div class="flex flex-col sm:flex-row justify-center sm:justify-between gap-5">
+                  <div class="flex gap-4 items-center">
+                    <p>Rows per page :</p>
+                    <select name="rows" id="rows" class="bg-transparent dark:bg-neutral-904">
+                      <option value="10">10</option>
+                      <option value="25">25</option>
+                      <option value="50">50</option>
+                      <option value="100">100</option>
+                    </select>
+                  </div>
+                  <div class="f-center gap-4">
+                    <p>1-10 of 100</p>
+                    <button><i class="las la-angle-left text-xl rtl:rotate-180"></i></button> <button><i class="las la-angle-right text-xl rtl:rotate-180"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- top artworks -->
+          <div class="col-span-12 lg:col-span-5 xxl:col-span-4 white-box">
+            <div>
+              <div class="bb-dashed-n30 flex justify-between items-center">
+                <h4>Top Artworks</h4>
+                <a class="flex items-center gap-2 text-primary-300 h6" href="#">See All <i class="las la-arrow-right"></i></a>
+              </div>
+              <div class="space-y-4 xl:space-y-6 xxl:space-y-8">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/users/user-s-2.png" class="rounded-full" width="56" height="56" alt="" />
+                    <div>
+                      <p class="l-text mb-2 font-medium">Jacob Jones</p>
+                      <p class="s-text">51,028 Sales</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="l-text font-medium mb-2">$256.58</p>
+                    <span class="s-text">Total USD</span>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/users/user-s-1.png" class="rounded-full" width="56" height="56" alt="" />
+                    <div>
+                      <p class="l-text mb-2 font-medium">Jenny Wilson</p>
+                      <p class="s-text">51,028 Sales</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="l-text font-medium mb-2">$146.58</p>
+                    <span class="s-text">Total USD</span>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/users/user-s-3.png" class="rounded-full" width="56" height="56" alt="" />
+                    <div>
+                      <p class="l-text mb-2 font-medium">Eleanor Pena</p>
+                      <p class="s-text">51,028 Sales</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="l-text font-medium mb-2">$227.58</p>
+                    <span class="s-text">Total USD</span>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/users/user-s-4.png" class="rounded-full" width="56" height="56" alt="" />
+                    <div>
+                      <p class="l-text mb-2 font-medium">Wade Warren</p>
+                      <p class="s-text">51,028 Sales</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="l-text font-medium mb-2">$1126.58</p>
+                    <span class="s-text">Total USD</span>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/users/user-s-5.png" class="rounded-full" width="56" height="56" alt="" />
+                    <div>
+                      <p class="l-text mb-2 font-medium">Esther Howard</p>
+                      <p class="s-text">51,028 Sales</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="l-text font-medium mb-2">$106.58</p>
+                    <span class="s-text">Total USD</span>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/users/user-s-6.png" class="rounded-full" width="56" height="56" alt="" />
+                    <div>
+                      <p class="l-text mb-2 font-medium">Theresa Webb</p>
+                      <p class="s-text">51,028 Sales</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="l-text font-medium mb-2">$554.58</p>
+                    <span class="s-text">Total USD</span>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/users/user-s-3.png" class="rounded-full" width="56" height="56" alt="" />
+                    <div>
+                      <p class="l-text mb-2 font-medium">Courtney Henry</p>
+                      <p class="s-text">51,028 Sales</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="l-text font-medium mb-2">$246.58</p>
+                    <span class="s-text">Total USD</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/apexcharts.min.js"></script>
+    <script src="./assets/js/libs/swiper-bundle.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+
+    <script>
+      document.addEventListener('alpine:init', () => {
+        Alpine.data('chart', () => ({
+          marketplace: null,
+          init() {
+            isDark = this.$store.app.theme === 'dark' ? true : false
+            isRtl = this.$store.app.dir === 'rtl' ? true : false
+
+            setTimeout(() => {
+              this.marketplace = new ApexCharts(this.$refs.marketplace, this.marketplaceOptions)
+              this.marketplace.render()
+            }, 300)
+
+            this.$watch('$store.app.theme', () => {
+              this.refreshOptions()
+            })
+
+            this.$watch('$store.app.rtlClass', () => {
+              this.refreshOptions()
+            })
+          },
+
+          refreshOptions() {
+            isDark = this.$store.app.theme === 'dark' ? true : false
+            isRtl = this.$store.app.dir === 'rtl' ? true : false
+            this.marketplace.updateOptions(this.marketplaceOptions)
+          },
+
+          get marketplaceOptions() {
+            return {
+              chart: {
+                height: 320,
+                type: 'line',
+                toolbar: {
+                  show: false
+                },
+                animations: {
+                  enabled: true,
+                  easing: 'easeinout',
+                  speed: 800
+                }
+              },
+              series: [
+                {
+                  name: 'Artwork',
+                  data: [77, 78, 38, 38, 38, 73, 73, 54, 54, 17, 17, 58],
+                  type: 'line'
+                },
+                {
+                  name: 'Auction',
+                  data: [36, 36, 63, 63, 13, 13, 60, 60, 40, 40, 82, 82],
+                  type: 'line'
+                }
+              ],
+              dataLabels: {
+                enabled: false
+              },
+              stroke: {
+                curve: 'smooth',
+                lineCap: 'round',
+                width: 2,
+                colors: ['#2C7BE5', '#FFAB00']
+              },
+              xaxis: {
+                categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan', '10 Jan', '11 Jan', '12 Jan'],
+                axisBorder: {
+                  show: false
+                }
+              },
+              yaxis: {
+                min: 0,
+                max: 100,
+                tickAmount: 5,
+                labels: {
+                  formatter: function (v) {
+                    return v + ''
+                  }
+                }
+              },
+              legend: {
+                show: true,
+                offsetY: 10,
+                markers: {
+                  width: 6,
+                  height: 6,
+                  offsetX: isRtl ? 4 : -4
+                }
+              },
+              colors: ['rgba(32, 183, 87)', 'rgba(255, 200, 97)'],
+              responsive: [
+                {
+                  breakpoint: 1820,
+                  options: {
+                    chart: {
+                      height: 340
+                    }
+                  }
+                },
+                {
+                  breakpoint: 1600,
+                  options: {
+                    chart: {
+                      height: 308
+                    }
+                  }
+                },
+                {
+                  breakpoint: 992,
+                  options: {
+                    chart: {
+                      height: 350
+                    }
+                  }
+                },
+                {
+                  breakpoint: 570,
+                  options: {
+                    chart: {
+                      height: 250
+                    }
+                  }
+                },
+                {
+                  breakpoint: 400,
+                  options: {
+                    chart: {
+                      height: 200
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }))
+      })
+    </script>
+  </body>
+</html>

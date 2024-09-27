@@ -1,0 +1,470 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Animate</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Pages</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Animate</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- animations -->
+        <section class="text-neutral-700 dark:text-neutral-20 animate-page white-box">
+          <div x-data="{activeTab:'inview'}" class="grid grid-cols-12 gap-4 lg:gap-6">
+            <div class="col-span-12 flex max-w-max flex-wrap gap-4 rounded-xl md:rounded-[40px] border border-neutral-30 p-3 dark:border-neutral-500">
+              <button @click="activeTab='inview'" :class="activeTab=='inview' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">In View</button>
+              <button @click="activeTab='scroll'" :class="activeTab=='scroll' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">Scroll</button>
+              <button @click="activeTab='dialog'" :class="activeTab=='dialog' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">Dialog</button>
+              <button @click="activeTab='background'" :class="activeTab=='background' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">Background</button>
+              <button @click="activeTab='other'" :class="activeTab=='other' ?'bg-primary-300 text-neutral-0': 'bg-neutral-20 dark:bg-neutral-903'" class="rounded-full px-4 py-2 text-sm font-semibold lg:px-6 lg:py-2.5">Other</button>
+            </div>
+            <!-- In View -->
+            <div x-cloak x-show="activeTab=='inview'" x-transition class="col-span-12 grid grid-cols-12 gap-4 lg:gap-6">
+              <div class="col-span-12">
+                <!-- Basic -->
+                <div
+                  x-data="{text:false,animation:'animate__animated animate__slideInUp', multi:false, temp:'', reset(){
+                this.temp=this.animation
+                this.animation=''
+                this.$nextTick(()=>{this.animation=this.temp})
+            }}"
+                  class="white-box"
+                >
+                  <div class="bb-dashed-n40 flex flex-col sm:flex-row gap-3 justify-center sm:justify-between items-center">
+                    <label for="switch14" class="switch flex justify-center">
+                      <input x-model="text" id="switch14" type="checkbox" />
+                      <span class="inner primary"></span>
+                      Text Object
+                    </label>
+                    <div class="flex items-center gap-4">
+                      <label x-show="!text" for="switch15" class="switch flex justify-center">
+                        <input x-model="multi" id="switch15" type="checkbox" />
+                        <span class="inner primary"></span>
+                        Multi Item
+                      </label>
+                      <button title="Replay" @click="reset"><i class="las la-redo-alt text-xl"></i></button>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-12 gap-4 lg:gap-6">
+                    <div class="col-span-12 md:col-span-7 xl:col-span-8 rounded-xl bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500 p-3 sm:p-5 lg:p-10 xl:p-[60px] overflow-hidden h-[320px] sm:h-[400px] xl:h-[600px] f-center">
+                      <img x-show="!multi && !text" src="./assets/images/app-5.png" class="rounded-xl my-4 w-[90%] wow" :class="animation" alt="" />
+                      <div x-show="multi && !text" class="flex flex-col gap-4 xxl:gap-6 w-full">
+                        <img src="./assets/images/carousel/basic-caption-1.png" class="rounded-xl wow h-20 w-full object-cover" :class="animation" alt="" />
+                        <img src="./assets/images/carousel/basic-caption-2.png" class="rounded-xl wow h-20 w-full object-cover animate__delay-50ms" :class="animation" alt="" />
+                        <img src="./assets/images/carousel/basic-caption-3.png" class="rounded-xl wow h-20 w-full object-cover animate__delay-100ms" :class="animation" alt="" />
+                        <img src="./assets/images/carousel/basic-caption-4.png" class="rounded-xl wow h-20 w-full object-cover animate__delay-150ms" :class="animation" alt="" />
+                        <img src="./assets/images/carousel/basic-caption-2.png" class="rounded-xl wow h-20 w-full object-cover animate__delay-200ms" :class="animation" alt="" />
+                      </div>
+                      <h2 x-show="text" :class="animation" class="text-center text-5xl lg:text-7xl font-extrabold">Softify</h2>
+                    </div>
+                    <div class="col-span-12 md:col-span-5 xl:col-span-4 rounded-xl bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500 p-3 md:p-4 flex flex-col gap-4 h-[320px] sm:h-[400px] xl:h-[600px] overflow-y-auto">
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">Slide In</p>
+                        <ul
+                          x-data="{animList:[{title:'slideInUp', anim:'animate__animated animate__slideInUp'},{title:'slideInDown', anim:'animate__animated animate__slideInDown'},{title:'slideInLeft', anim:'animate__animated animate__slideInLeft'},{title:'slideInRight', anim:'animate__animated animate__slideInRight'}]}"
+                        >
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">Slide Out</p>
+                        <ul
+                          x-data="{animList:[{title:'slideOutUp', anim:'animate__animated animate__slideOutUp'},{title:'slideOutDown', anim:'animate__animated animate__slideOutDown'},{title:'slideOutLeft', anim:'animate__animated animate__slideOutLeft'},{title:'slideOutRight', anim:'animate__animated animate__slideOutRight'}]}"
+                        >
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">Fade In</p>
+                        <ul
+                          x-data="{animList:[{title:'fadeIn', anim:'animate__animated animate__fadeIn'},{title:'fadeInDown', anim:'animate__animated animate__fadeInDown'},{title:'fadeInDownBig', anim:'animate__animated animate__fadeInDownBig'},{title:'fadeInLeft',anim:'animate__animated animate__fadeInLeft'},{title:'fadeInLeftBig',anim:'animate__animated animate__fadeInLeftBig'},{title:'fadeInRight',anim:'animate__animated animate__fadeInRight'},{title:'fadeInRightBig',anim:'animate__animated animate__fadeInRightBig'},{title:'fadeInUp',anim:'animate__animated animate__fadeInUp'},{title:'fadeInUpBig',anim:'animate__animated animate__fadeInUpBig'}, {title:'fadeInTopLeft',anim:'animate__animated animate__fadeInTopLeft'},{title:'fadeInTopRight',anim:'animate__animated animate__fadeInTopRight'},{title:'fadeInBottomLeft',anim:'animate__animated animate__fadeInBottomLeft'},{title:'fadeInBottomRight',anim:'animate__animated animate__fadeInBottomRight'}]}"
+                        >
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">Fade Out</p>
+                        <ul
+                          x-data="{animList:[{title:'fadeOut', anim:'animate__animated animate__fadeOut'},{title:'fadeOutDown', anim:'animate__animated animate__fadeOutDown'},{title:'fadeOutDownBig', anim:'animate__animated animate__fadeOutDownBig'},{title:'fadeOutLeft',anim:'animate__animated animate__fadeOutLeft'},{title:'fadeOutLeftBig',anim:'animate__animated animate__fadeOutLeftBig'},{title:'fadeOutRight',anim:'animate__animated animate__fadeOutRight'},{title:'fadeOutRightBig',anim:'animate__animated animate__fadeOutRightBig'},{title:'fadeOutUp',anim:'animate__animated animate__fadeOutUp'},{title:'fadeOutUpBig',anim:'animate__animated animate__fadeOutUpBig'}, {title:'fadeOutTopLeft',anim:'animate__animated animate__fadeOutTopLeft'},{title:'fadeOutTopRight',anim:'animate__animated animate__fadeOutTopRight'},{title:'fadeOutBottomLeft',anim:'animate__animated animate__fadeOutBottomLeft'},{title:'fadeOutBottomRight',anim:'animate__animated animate__fadeOutBottomRight'}]}"
+                        >
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+                      <!-- flip -->
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">Flip</p>
+                        <ul
+                          x-data="{animList:[{title:'flip', anim:'animate__animated animate__flip'},{title:'flipInX', anim:'animate__animated animate__flipInX'},{title:'flipInY', anim:'animate__animated animate__flipInY'},{title:'flipOutX',anim:'animate__animated animate__flipOutX'},{title:'flipOutY',anim:'animate__animated animate__flipOutY'}]}"
+                        >
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+                      <!-- lightspeed -->
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">LightSpeed</p>
+                        <ul
+                          x-data="{animList:[{title:'lightspeedInRight', anim:'animate__animated animate__lightSpeedInRight'},{title:'lightSpeedInLeft', anim:'animate__animated animate__lightSpeedInLeft'},{title:'lightSpeedOutRight', anim:'animate__animated animate__lightSpeedOutRight'},{title:'rightSpeedOutLeft',anim:'animate__animated animate__lightSpeedOutLeft'}]}"
+                        >
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+                      <!-- Zoom In -->
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">Zoom In</p>
+                        <ul
+                          x-data="{animList:[{title:'zoomIn', anim:'animate__animated animate__zoomIn'},{title:'zoomInDown', anim:'animate__animated animate__zoomInDown'},{title:'zoomInUp', anim:'animate__animated animate__zoomInUp'},{title:'zoomInLeft',anim:'animate__animated animate__zoomInLeft'},{title:'zoomInRight',anim:'animate__animated animate__zoomInRight'}]}"
+                        >
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+
+                      <!-- zoom out -->
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">Zoom Out</p>
+                        <ul
+                          x-data="{animList:[{title:'zoomOut', anim:'animate__animated animate__zoomOut'},{title:'zoomOutDown', anim:'animate__animated animate__zoomOutDown'},{title:'zoomOutUp', anim:'animate__animated animate__zoomOutUp'},{title:'zoomOutLeft',anim:'animate__animated animate__zoomOutLeft'},{title:'zoomOutRight',anim:'animate__animated animate__zoomOutRight'}]}"
+                        >
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div x-cloak x-show="activeTab=='scroll'" x-transition class="col-span-12 grid grid-cols-12 gap-4 lg:gap-6">
+              <div class="col-span-12">
+                <!-- Basic -->
+                <div
+                  x-data="{animation:'animate__animated animate__slideInUp', temp:'', items:Array.from({length: 30}), reset(){
+                this.temp=this.animation
+                this.animation=''
+                this.$nextTick(()=>{this.animation=this.temp})
+            },scrollToTop() { document.querySelector('#scrollableDiv').scrollTo({ top: 0}); }}"
+                  class="white-box"
+                >
+                  <div class="bb-dashed-n40 flex justify-between items-center">
+                    <div class="flex items-center gap-4">
+                      <button title="Replay" @click="reset,scrollToTop()"><i class="las la-redo-alt text-xl"></i></button>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-12 gap-4 lg:gap-6">
+                    <div id="scrollableDiv" class="col-span-12 md:col-span-7 xl:col-span-8 rounded-xl bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500 p-3 sm:p-5 lg:p-10 overflow-hidden h-[320px] sm:h-[400px] xl:h-[600px] flex flex-col gap-6 overflow-y-auto">
+                      <template x-for="(item,i) in items">
+                        <div x-data="{showAnimation:false}" x-intersect="showAnimation=true" :class="showAnimation ? animation : 'opacity-0'" x-intersect:leave="showAnimation=false" class="px-6 py-7 rounded-xl wow shadow-custom-6 text-center bg-neutral-0 dark:bg-neutral-904 animate__delay-250ms">
+                          <p>Item</p>
+                          <p># <span x-text="i+1"></span></p>
+                        </div>
+                      </template>
+                    </div>
+
+                    <div class="col-span-12 md:col-span-5 xl:col-span-4 rounded-xl bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500 p-3 md:p-4 flex flex-col gap-4 h-[320px] sm:h-[400px] xl:h-[600px] overflow-y-auto">
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">Slide In</p>
+                        <ul
+                          x-data="{animList:[{title:'slideInUp', anim:'animate__animated animate__slideInUp'},{title:'slideInDown', anim:'animate__animated animate__slideInDown'},{title:'slideInLeft', anim:'animate__animated animate__slideInLeft'},{title:'slideInRight', anim:'animate__animated animate__slideInRight'}]}"
+                        >
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim,scrollToTop()" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">Slide Out</p>
+                        <ul
+                          x-data="{animList:[{title:'slideOutUp', anim:'animate__animated animate__slideOutUp'},{title:'slideOutDown', anim:'animate__animated animate__slideOutDown'},{title:'slideOutLeft', anim:'animate__animated animate__slideOutLeft'},{title:'slideOutRight', anim:'animate__animated animate__slideOutRight'}]}"
+                        >
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim,scrollToTop()" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">Fade In</p>
+                        <ul
+                          x-data="{animList:[{title:'fadeIn', anim:'animate__animated animate__fadeIn'},{title:'fadeInDown', anim:'animate__animated animate__fadeInDown'},{title:'fadeInDownBig', anim:'animate__animated animate__fadeInDownBig'},{title:'fadeInLeft',anim:'animate__animated animate__fadeInLeft'},{title:'fadeInLeftBig',anim:'animate__animated animate__fadeInLeftBig'},{title:'fadeInRight',anim:'animate__animated animate__fadeInRight'},{title:'fadeInRightBig',anim:'animate__animated animate__fadeInRightBig'},{title:'fadeInUp',anim:'animate__animated animate__fadeInUp'},{title:'fadeInUpBig',anim:'animate__animated animate__fadeInUpBig'}, {title:'fadeInTopLeft',anim:'animate__animated animate__fadeInTopLeft'},{title:'fadeInTopRight',anim:'animate__animated animate__fadeInTopRight'},{title:'fadeInBottomLeft',anim:'animate__animated animate__fadeInBottomLeft'},{title:'fadeInBottomRight',anim:'animate__animated animate__fadeInBottomRight'}]}"
+                        >
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim,scrollToTop()" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">Fade Out</p>
+                        <ul
+                          x-data="{animList:[{title:'fadeOut', anim:'animate__animated animate__fadeOut'},{title:'fadeOutDown', anim:'animate__animated animate__fadeOutDown'},{title:'fadeOutDownBig', anim:'animate__animated animate__fadeOutDownBig'},{title:'fadeOutLeft',anim:'animate__animated animate__fadeOutLeft'},{title:'fadeOutLeftBig',anim:'animate__animated animate__fadeOutLeftBig'},{title:'fadeOutRight',anim:'animate__animated animate__fadeOutRight'},{title:'fadeOutRightBig',anim:'animate__animated animate__fadeOutRightBig'},{title:'fadeOutUp',anim:'animate__animated animate__fadeOutUp'},{title:'fadeOutUpBig',anim:'animate__animated animate__fadeOutUpBig'}, {title:'fadeOutTopLeft',anim:'animate__animated animate__fadeOutTopLeft'},{title:'fadeOutTopRight',anim:'animate__animated animate__fadeOutTopRight'},{title:'fadeOutBottomLeft',anim:'animate__animated animate__fadeOutBottomLeft'},{title:'fadeOutBottomRight',anim:'animate__animated animate__fadeOutBottomRight'}]}"
+                        >
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim,scrollToTop()" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+                      <!-- flip -->
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">Flip</p>
+                        <ul
+                          x-data="{animList:[{title:'flip', anim:'animate__animated animate__flip'},{title:'flipInX', anim:'animate__animated animate__flipInX'},{title:'flipInY', anim:'animate__animated animate__flipInY'},{title:'flipOutX',anim:'animate__animated animate__flipOutX'},{title:'flipOutY',anim:'animate__animated animate__flipOutY'}]}"
+                        >
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim,scrollToTop()" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+                      <!-- lightspeed -->
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">LightSpeed</p>
+                        <ul
+                          x-data="{animList:[{title:'lightspeedInRight', anim:'animate__animated animate__lightSpeedInRight'},{title:'lightSpeedInLeft', anim:'animate__animated animate__lightSpeedInLeft'},{title:'lightSpeedOutRight', anim:'animate__animated animate__lightSpeedOutRight'},{title:'rightSpeedOutLeft',anim:'animate__animated animate__lightSpeedOutLeft'}]}"
+                        >
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim,scrollToTop()" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+                      <!-- Zoom In -->
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">Zoom In</p>
+                        <ul
+                          x-data="{animList:[{title:'zoomIn', anim:'animate__animated animate__zoomIn'},{title:'zoomInDown', anim:'animate__animated animate__zoomInDown'},{title:'zoomInUp', anim:'animate__animated animate__zoomInUp'},{title:'zoomInLeft',anim:'animate__animated animate__zoomInLeft'},{title:'zoomInRight',anim:'animate__animated animate__zoomInRight'}]}"
+                        >
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim,scrollToTop()" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+
+                      <!-- zoom out -->
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">Zoom Out</p>
+                        <ul
+                          x-data="{animList:[{title:'zoomOut', anim:'animate__animated animate__zoomOut'},{title:'zoomOutDown', anim:'animate__animated animate__zoomOutDown'},{title:'zoomOutUp', anim:'animate__animated animate__zoomOutUp'},{title:'zoomOutLeft',anim:'animate__animated animate__zoomOutLeft'},{title:'zoomOutRight',anim:'animate__animated animate__zoomOutRight'}]}"
+                        >
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim,scrollToTop()" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div x-cloak x-show="activeTab=='dialog'" x-transition class="col-span-12 grid grid-cols-12 gap-4 lg:gap-6">
+              <div class="col-span-12">
+                <!-- Basic -->
+                <div x-data="{animation:'animate__animated animate__slideInUp'}" class="white-box">
+                  <div class="grid grid-cols-12 gap-4 lg:gap-6">
+                    <div class="col-span-12 md:col-span-7 xl:col-span-8 rounded-xl bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500 p-3 sm:p-5 lg:p-10 overflow-hidden h-[320px] sm:h-[400px] xl:h-[600px] f-center gap-6 overflow-y-auto">
+                      <div x-data="modal" class="flex flex-col items-center gap-6">
+                        <button class="btn-primary" @click="openModal">Click Me</button>
+                        <template x-teleport="body">
+                          <div class="fixed inset-0 z-[999] hidden overflow-y-auto overflow-x-hidden bg-neutral-900/80 text-neutral-700 dark:text-neutral-20" :class="isOpen && '!block'">
+                            <div class="flex min-h-screen items-center justify-center px-4" @click.self="closeModal">
+                              <div x-show="isOpen" x-transition x-transition.duration.300 :class="animation" class="panel my-8 w-full max-w-3xl overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                                <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                                  <h4>Use envato location service?</h4>
+                                  <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                                </div>
+                                <p class="m-text">
+                                  There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum
+                                </p>
+                                <div class="flex gap-4 pt-6 lg:gap-6 lg:pt-8">
+                                  <button class="btn-primary" @click="closeModal">Agree</button>
+                                  <button class="btn-primary-outlined" @click="closeModal">Disagree</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </template>
+                      </div>
+                    </div>
+                    <div class="col-span-12 md:col-span-5 xl:col-span-4 rounded-xl bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500 p-3 md:p-4 flex flex-col gap-4 h-[320px] sm:h-[400px] xl:h-[600px] overflow-y-auto">
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">Slide In</p>
+                        <ul
+                          x-data="{animList:[{title:'slideInUp', anim:'animate__animated animate__slideInUp'},{title:'slideInDown', anim:'animate__animated animate__slideInDown'},{title:'slideInLeft', anim:'animate__animated animate__slideInLeft'},{title:'slideInRight', anim:'animate__animated animate__slideInRight'}]}"
+                        >
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">Fade In</p>
+                        <ul
+                          x-data="{animList:[{title:'fadeIn', anim:'animate__animated animate__fadeIn'},{title:'fadeInDown', anim:'animate__animated animate__fadeInDown'},{title:'fadeInDownBig', anim:'animate__animated animate__fadeInDownBig'},{title:'fadeInLeft',anim:'animate__animated animate__fadeInLeft'},{title:'fadeInLeftBig',anim:'animate__animated animate__fadeInLeftBig'},{title:'fadeInRight',anim:'animate__animated animate__fadeInRight'},{title:'fadeInRightBig',anim:'animate__animated animate__fadeInRightBig'},{title:'fadeInUp',anim:'animate__animated animate__fadeInUp'},{title:'fadeInUpBig',anim:'animate__animated animate__fadeInUpBig'}, {title:'fadeInTopLeft',anim:'animate__animated animate__fadeInTopLeft'},{title:'fadeInTopRight',anim:'animate__animated animate__fadeInTopRight'},{title:'fadeInBottomLeft',anim:'animate__animated animate__fadeInBottomLeft'},{title:'fadeInBottomRight',anim:'animate__animated animate__fadeInBottomRight'}]}"
+                        >
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+
+                      <!-- flip -->
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">Flip</p>
+                        <ul x-data="{animList:[{title:'flip', anim:'animate__animated animate__flip'},{title:'flipInX', anim:'animate__animated animate__flipInX'},{title:'flipInY', anim:'animate__animated animate__flipInY'}]}">
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+                      <!-- lightspeed -->
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">LightSpeed</p>
+                        <ul
+                          x-data="{animList:[{title:'lightspeedInRight', anim:'animate__animated animate__lightSpeedInRight'},{title:'lightSpeedInLeft', anim:'animate__animated animate__lightSpeedInLeft'},{title:'lightSpeedOutRight', anim:'animate__animated animate__lightSpeedOutRight'},{title:'rightSpeedOutLeft',anim:'animate__animated animate__lightSpeedOutLeft'}]}"
+                        >
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+                      <!-- Zoom In -->
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">Zoom In</p>
+                        <ul
+                          x-data="{animList:[{title:'zoomIn', anim:'animate__animated animate__zoomIn'},{title:'zoomInDown', anim:'animate__animated animate__zoomInDown'},{title:'zoomInUp', anim:'animate__animated animate__zoomInUp'},{title:'zoomInLeft',anim:'animate__animated animate__zoomInLeft'},{title:'zoomInRight',anim:'animate__animated animate__zoomInRight'}]}"
+                        >
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div x-cloak x-show="activeTab=='background'" x-transition class="col-span-12 grid grid-cols-12 gap-4 lg:gap-6">
+              <div class="col-span-12">
+                <!-- Basic -->
+                <div x-data="{animation:'kenburnstop'}" class="white-box">
+                  <div class="grid grid-cols-12 gap-4 lg:gap-6">
+                    <div class="col-span-12 md:col-span-7 xl:col-span-8 rounded-xl bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500 p-3 sm:p-5 lg:p-10 overflow-hidden h-[320px] md:h-[400px] xxl:h-[600px]">
+                      <div class="overflow-hidden w-full h-full rounded-xl">
+                        <div :class="animation" class="h-full w-full"></div>
+                      </div>
+                    </div>
+                    <div class="col-span-12 md:col-span-5 xl:col-span-4 rounded-xl bg-neutral-20 dark:bg-neutral-903 border border-neutral-30 dark:border-neutral-500 p-3 md:p-4 flex flex-col gap-4 h-[320px] sm:h-[400px] xl:h-[600px] overflow-y-auto">
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">Kenburns</p>
+                        <ul x-data="{animList:[{title:'KenburnsTop', anim:'kenburnstop'},{title:'KenburnsBottom', anim:'kenburnsbottom'},{title:'kenburnsleft', anim:'kenburnsleft'},{title:'kenburnsright', anim:'kenburnsright'}]}">
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation='',animation=anim" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">Pan</p>
+                        <ul x-data="{animList:[{title:'panTop', anim:'pantop'},{title:'panBottom', anim:'panbottom'},{title:'panLeft', anim:'panleft'},{title:'panRight', anim:'panright'}]}">
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+
+                      <!-- flip -->
+                      <div>
+                        <p class="l-text font-medium px-5 py-2">Color Change</p>
+                        <ul x-data="{animList:[{title:'color2x', anim:'color2x'},{title:'color3x', anim:'color3x'},{title:'color4x', anim:'color4x'},{title:'color5x', anim:'color5x'}]}">
+                          <template x-for="{anim,title} in animList">
+                            <li><button @click="animation=anim" :class="anim==animation ?'bg-primary-300 text-neutral-0': ''" class="w-full text-start px-5 py-2 rounded-lg" x-text="title"></button></li>
+                          </template>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div x-cloak x-show="activeTab=='other'" x-transition class="col-span-12 grid grid-cols-12 gap-4 lg:gap-6">
+              <div class="col-span-12">
+                <!-- Basic -->
+                <div class="white-box">
+                  <div class="grid grid-cols-12 gap-4 lg:gap-6">
+                    <div class="col-span-12 md:col-span-6 n20-box">
+                      <h4 class="bb-dashed-n40">Button Click</h4>
+                      <div class="f-center gap-4 flex-wrap h-2/3">
+                        <button class="active:scale-110 btn-large-icon"><i class="las la-plus text-2xl"></i></button>
+                        <button class="active:scale-110 btn-primary-icon"><i class="las la-plus text-2xl"></i></button>
+                        <button class="active:scale-110 btn-small-icon"><i class="las la-plus text-2xl"></i></button>
+                        <button class="active:scale-110 btn-large-icon-text"><i class="las la-clock text-4xl"></i></button>
+                        <button class="active:scale-110 btn-primary-icon-text"><i class="las la-clock text-2xl"></i></button>
+                        <button class="active:scale-110 btn-small-icon-text"><i class="las la-clock text-xl"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+    <script defer src="./assets/js/libs/alpine.intersect.class.js"></script>
+    <script defer src="./assets/js/libs/alpine.intersect.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

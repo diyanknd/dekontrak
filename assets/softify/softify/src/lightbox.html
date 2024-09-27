@@ -1,0 +1,88 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Lightbox</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Plugins</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Lightbox</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- lightbox -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div>
+            <div class="n20-box gallery grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 gap-4 lg:gap-6">
+              <a data-fslightbox href="./assets/images/carousel/thumb-1.png" data-thumb="./assets/images/carousel/thumb-1.png" class="min-h-[350px] glightbox">
+                <img src="./assets/images/carousel/thumb-1.png" class="rounded-xl object-center object-cover h-full w-full" alt="" />
+              </a>
+              <a data-fslightbox href="./assets/images/carousel/thumb-2.png" data-thumb="./assets/images/carousel/thumb-2.png" class="min-h-[350px] glightbox">
+                <img src="./assets/images/carousel/thumb-2.png" class="rounded-xl object-center object-cover h-full w-full" alt="" />
+              </a>
+              <a data-fslightbox href="./assets/images/carousel/thumb-3.png" data-thumb="./assets/images/carousel/thumb-3.png" class="min-h-[350px] glightbox">
+                <img src="./assets/images/carousel/thumb-3.png" class="rounded-xl object-center object-cover h-full w-full" alt="" />
+              </a>
+              <a data-fslightbox href="./assets/images/carousel/thumb-4.png" data-thumb="./assets/images/carousel/thumb-4.png" class="min-h-[350px] glightbox">
+                <img src="./assets/images/carousel/thumb-4.png" class="rounded-xl object-center object-cover h-full w-full" alt="" />
+              </a>
+              <a data-fslightbox href="./assets/images/carousel/thumb-3.png" data-thumb="./assets/images/carousel/thumb-3.png" class="min-h-[350px] glightbox">
+                <img src="./assets/images/carousel/thumb-3.png" class="rounded-xl object-center object-cover h-full w-full" alt="" />
+              </a>
+              <a data-fslightbox href="./assets/images/carousel/thumb-1.png" data-thumb="./assets/images/carousel/thumb-1.png" class="min-h-[350px] glightbox">
+                <img src="./assets/images/carousel/thumb-1.png" class="rounded-xl object-center object-cover h-full w-full" alt="" />
+              </a>
+              <a data-fslightbox href="./assets/images/carousel/thumb-4.png" data-thumb="./assets/images/carousel/thumb-4.png" class="min-h-[350px] glightbox">
+                <img src="./assets/images/carousel/thumb-4.png" class="rounded-xl object-center object-cover h-full w-full" alt="" />
+              </a>
+              <a data-fslightbox href="./assets/images/carousel/thumb-2.png" data-thumb="./assets/images/carousel/thumb-2.png" class="min-h-[350px] glightbox">
+                <img src="./assets/images/carousel/thumb-2.png" class="rounded-xl object-center object-cover h-full w-full" alt="" />
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+    <script src="./assets/js/libs/fslightbox.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,347 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
+    <!-- Customizer -->
+    <include-customizer />
+
+    <!-- loader -->
+    <include-loader />
+
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <!-- Breadcrumb -->
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Chat</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Chat</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Chat -->
+        <div
+          x-data="{activeChat:1, info:false, contacts:false,chats:[
+            { id: 1, type: 'inbox', name: 'Albert Flores', desc: 'Paperless opt-in email...', time: '6 m ago', active: true, avatar: './assets/images/avatar/avatar-1.png' },
+            { id: 2, type: 'inbox', name: 'Ryan Ortiz', desc: 'Paperless opt-in sent...', time: '12 m ago', active: false, avatar: './assets/images/avatar/avatar-2.png' },
+            { id: 3, type: 'inbox', name: 'Jessica Hayes', desc: 'Paperless opt-in email sent...', time: '30 m ago', active: true, avatar: './assets/images/avatar/avatar-3.png' },
+            { id: 4, type: 'sent', name: 'Matthew Thompson', desc: 'Paperless email sent...', time: '1 h ago', active: false, avatar: './assets/images/avatar/avatar-4.png' },
+            { id: 5, type: 'sent', name: 'Sarah Wilson', desc: 'Paperless opt-in sent...', time: '2 h ago', active: true, avatar: './assets/images/avatar/avatar-5.png' },
+            { id: 6, type: 'spam', name: 'Christopher Nolan', desc: 'Paperless opt-in email sent...', time: 'Yesterday', active: true, avatar: './assets/images/avatar/avatar-6.png' },
+            { id: 7, type: 'spam', name: 'Sarah Taylor', desc: 'Opt-in email sent...', time: '2 d ago', active: false, avatar: './assets/images/avatar/avatar-7.png' },
+            { id: 8, type: 'important', name: 'Anna Smith', desc: 'Paperless email sent...', time: '3 d ago', active: true, avatar: './assets/images/avatar/avatar-8.png' },
+            { id: 9, type: 'starred', name: 'Loren Booth', desc: 'Paperless email sent...', time: '3 d ago', active: true, avatar: './assets/images/avatar/avatar-3.png' },
+            { id: 10, type: 'promotion', name: 'Noa Nolan', desc: 'Paperless email sent...', time: '3 d ago', active: false, avatar: './assets/images/avatar/avatar-8.png' },
+            { id: 11, type: 'forum', name: 'Dianne Russel', desc: 'Paperless email sent...', time: '3 d ago', active: true, avatar: './assets/images/avatar/avatar-1.png' },
+            { id: 12, type: 'forum', name: 'John Hopkins', desc: 'Paperless email sent...', time: '3 d ago', active: false, avatar: './assets/images/avatar/avatar-2.png' },
+            { id: 13, type: 'inbox', name: 'Marvin Macckinney', desc: 'Paperless email sent...', time: '3 d ago', active: false, avatar: './assets/images/avatar/avatar-3.png' },
+            { id: 14, type: 'inbox', name: 'Albert Flores', desc: 'Paperless email sent...', time: '3 d ago', active: true, avatar: './assets/images/avatar/avatar-4.png' },
+            { id: 15, type: 'inbox', name: 'Taylor Otwel', desc: 'Paperless email sent...', time: '3 d ago', active: false, avatar: './assets/images/avatar/avatar-5.png' }
+          ]}"
+          class="white-box"
+        >
+          <h4 class="bb-dashed-n30">Chat</h4>
+          <div class="n20-box !p-2 xxl:!p-6">
+            <div class="bg-neutral-0 dark:bg-neutral-904 rounded-xl border border-neutral-30 dark:border-neutral-500 flex">
+              <div
+                class="max-lg:fixed max-lg:ltr:left-0 top-0 max-lg:h-full max-lg:z-50 lg:ltr:border-r lg:rtl:border-l border-dashed border-neutral-30 dark:border-neutral-500 w-[270px] xxl:w-[300px] 4xl:w-[420px] bg-neutral-0 dark:bg-neutral-904 duration-300 ltr:rounded-l-xl rtl:rounded-r-xl"
+                :class="contacts?'translate-x-0':'max-lg:ltr:-translate-x-full max-lg:z-50 max-lg:rtl:translate-x-full'"
+              >
+                <div class="bb-dashed-n30">
+                  <div class="px-4 pt-4 lg:pt-6 xxl:px-6 xxl:pt-8">
+                    <div class="flex justify-between items-center mb-5 xxl:mb-8">
+                      <div class="relative">
+                        <img src="./assets/images/avatar/avatar-big-4.png" width="48" height="48" class="rounded-full" alt="" />
+                        <span class="block size-2 border border-neutral-0 dark:border-neutral-904 rounded-full bg-primary-300 absolute bottom-2 right-0"></span>
+                      </div>
+                      <div class="flex gap-4">
+                        <button class="size-10 rounded-full bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 text-2xl f-center"><i class="las la-angle-left"></i></button>
+                        <button class="size-10 rounded-full bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 text-2xl f-center"><i class="las la-user-plus"></i></button>
+                      </div>
+                    </div>
+                    <div class="rounded-full flex items-center gap-2 border border-neutral-30 dark:border-neutral-500 py-1.5 xxl:py-2.5 px-4 xxl:px-6">
+                      <i class="las la-search text-xl"></i>
+                      <input type="text" class="w-full bg-transparent" placeholder="Search..." />
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-2 px-4 pb-4 xxl:px-6 xxl:pb-6 max-h-[670px] overflow-y-auto custom-scrollbar-hovered">
+                  <template x-for="{id,name,desc,time,active,avatar} in chats">
+                    <div @click="activeChat=id" class="flex justify-between items-start cursor-pointer py-2 xxl:py-3 px-4 rounded-xl hover:bg-primary-300/10 duration-300" :class="activeChat==id?'bg-primary-300/10':''">
+                      <div class="flex gap-2 items-center">
+                        <img :src="avatar" width="40" alt="" />
+                        <div>
+                          <p class="m-text font-medium mb-1 max-one-line" x-text="name"></p>
+                          <p class="text-neutral-100 text-xs max-one-line" x-text="desc"></p>
+                        </div>
+                      </div>
+                      <div class="flex flex-col items-end">
+                        <span class="mb-3 text-xs text-neutral-100 max-one-line" x-text="time"></span>
+                        <span x-show="active" class="size-2 rounded-full bg-success-300 block"></span>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </div>
+
+              <!-- chat -->
+              <div class="pt-6 xxl:pt-8 flex-1">
+                <div class="px-4 xxl:px-6 flex flex-wrap justify-between gap-4 items-center pb-4 xxl:pb-6 border-b border-dashed border-neutral-30 dark:border-neutral-500">
+                  <div class="flex gap-3 items-center">
+                    <div class="relative">
+                      <img src="./assets/images/avatar/avatar-5.png" width="40" height="40" class="rounded-full" alt="" />
+                      <span class="block size-2 border border-neutral-0 dark:border-neutral-904 rounded-full bg-primary-300 absolute bottom-1 right-0"></span>
+                    </div>
+                    <div>
+                      <p class="m-text font-medium mb-1 max-one-line">Eleanor Pena</p>
+                      <p class="text-neutral-100 text-xs max-one-line">Online</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-3 items-center">
+                    <button class="size-10 rounded-full bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 text-2xl f-center"><i class="las la-phone"></i></button>
+                    <button class="size-10 rounded-full bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 text-2xl f-center"><i class="las la-video"></i></button>
+                    <button class="size-10 rounded-full bg-neutral-20 dark:bg-neutral-903 border border-neutral-40 dark:border-neutral-500 text-2xl f-center"><include-verti-option /></button>
+                  </div>
+                </div>
+                <div class="flex relative">
+                  <div class="lg:ltr:border-r lg:rtl:border-l border-dashed border-neutral-30 dark:border-neutral-500 flex-1 relative">
+                    <button @click="info=!info" class="rounded-l-full z-[3] lg:hidden py-2 px-1.5 bg-primary-300 text-neutral-0 absolute right-0 top-5">
+                      <i class="las la-angle-right text-xl"></i>
+                    </button>
+                    <button @click="contacts=!contacts" class="rounded-r-full z-[3] lg:hidden py-2 px-1.5 bg-primary-300 text-neutral-0 absolute left-0 top-5">
+                      <i class="las la-user-friends text-xl"></i>
+                    </button>
+                    <div class="max-h-[700px] overflow-y-auto custom-scrollbar-hovered px-3 md:px-4 xxl:px-6 pt-3">
+                      <div class="max-w-[328px] flex gap-3 items-start group">
+                        <div class="relative shrink-0">
+                          <img src="./assets/images/avatar/avatar-big-4.png" width="32" height="32" class="rounded-full shrink-0" alt="" />
+                          <span class="block size-2 border border-neutral-0 dark:border-neutral-904 rounded-full bg-primary-300 absolute bottom-2 right-0"></span>
+                        </div>
+                        <div>
+                          <p class="text-xs text-neutral-100 mb-3">Eleanor, 9 hours ago</p>
+                          <div class="px-5 py-3 rounded-xl bg-neutral-20 dark:bg-neutral-903 mb-3">
+                            <p class="s-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                          </div>
+                          <div class="flex items-center gap-1 opacity-0 duration-300 group-hover:opacity-100">
+                            <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-smile text-xl"></i></button>
+                            <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-trash text-xl"></i></button>
+                            <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-share text-xl"></i></button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="flex gap-3 items-start justify-end group">
+                        <div class="max-w-[328px]">
+                          <p class="text-xs text-neutral-100 mb-3">8 hours ago</p>
+                          <div class="px-5 py-3 rounded-xl bg-primary-300/10 mb-3">
+                            <p class="s-text">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                          </div>
+                          <div class="flex items-center justify-end gap-1 opacity-0 duration-300 group-hover:opacity-100">
+                            <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-smile text-xl"></i></button>
+                            <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-trash text-xl"></i></button>
+                            <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-share text-xl"></i></button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="max-w-[328px] flex gap-3 items-start group">
+                        <div class="relative shrink-0">
+                          <img src="./assets/images/avatar/avatar-big-4.png" width="32" height="32" class="rounded-full shrink-0" alt="" />
+                          <span class="block size-2 border border-neutral-0 dark:border-neutral-904 rounded-full bg-primary-300 absolute bottom-2 right-0"></span>
+                        </div>
+                        <div>
+                          <p class="text-xs text-neutral-100 mb-3">Eleanor, 6 hours ago</p>
+                          <div class="px-5 py-3 rounded-xl bg-neutral-20 dark:bg-neutral-903 mb-3">
+                            <p class="s-text">When an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                          </div>
+                          <div class="flex items-center gap-1 opacity-0 duration-300 group-hover:opacity-100">
+                            <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-smile text-xl"></i></button>
+                            <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-trash text-xl"></i></button>
+                            <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-share text-xl"></i></button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="flex gap-3 items-start justify-end group">
+                        <div class="max-w-[328px]">
+                          <p class="text-xs text-neutral-100 mb-3">8 hours ago</p>
+                          <div class="px-5 py-3 rounded-xl bg-primary-300/10 mb-3">
+                            <p class="s-text">It has survived not only five centuries,</p>
+                          </div>
+                          <div class="flex items-center justify-end gap-1 opacity-0 duration-300 group-hover:opacity-100">
+                            <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-smile text-xl"></i></button>
+                            <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-trash text-xl"></i></button>
+                            <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-share text-xl"></i></button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="max-w-[328px] flex gap-3 items-start group">
+                        <div class="relative shrink-0">
+                          <img src="./assets/images/avatar/avatar-big-4.png" width="32" height="32" class="rounded-full shrink-0" alt="" />
+                          <span class="block size-2 border border-neutral-0 dark:border-neutral-904 rounded-full bg-primary-300 absolute bottom-2 right-0"></span>
+                        </div>
+                        <div>
+                          <p class="text-xs text-neutral-100 mb-3">Eleanor, 4 hours ago</p>
+                          <img src="./assets/images/carousel/basic-3.png" class="rounded-xl mb-3" alt="" />
+                          <div class="flex items-center gap-1 opacity-0 duration-300 group-hover:opacity-100">
+                            <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-smile text-xl"></i></button>
+                            <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-trash text-xl"></i></button>
+                            <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-share text-xl"></i></button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="flex gap-3 items-start justify-end group">
+                        <div class="max-w-[328px]">
+                          <p class="text-xs text-neutral-100 mb-3">8 hours ago</p>
+                          <div class="px-5 py-3 rounded-xl bg-primary-300/10 mb-3">
+                            <p class="mb-4 s-text">Thanks a lot...</p>
+                            <p class="s-text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                          </div>
+                          <div class="flex items-center justify-end gap-1 opacity-0 duration-300 group-hover:opacity-100">
+                            <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-smile text-xl"></i></button>
+                            <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-trash text-xl"></i></button>
+                            <button class="size-7 rounded-full f-center hover:bg-neutral-30 hover:dark:bg-neutral-500 duration-300"><i class="las la-share text-xl"></i></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex justify-between items-center gap-3 xl:gap-4 px-3 md:px-4 xxl:px-6 pt-2">
+                      <div class="flex gap-1.5 xxl:gap-4">
+                        <button class="bg-neutral-20 rounded-full dark:bg-neutral-903 size-6 xxl:size-10 border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="las la-smile text-lg lg:text-xl"></i>
+                        </button>
+                        <button class="bg-neutral-20 rounded-full dark:bg-neutral-903 size-6 xxl:size-10 border border-neutral-40 dark:border-neutral-500 f-center">
+                          <i class="las la-camera text-lg lg:text-xl"></i>
+                        </button>
+                      </div>
+                      <input type="text" placeholder="Enter message..." class="w-full bg-neutral-0 dark:bg-neutral-904 flex-1 rounded-full py-2 px-3 border border-neutral-30 dark:border-neutral-500" />
+                      <button class="px-4 py-2 rounded-3xl bg-primary-300 text-neutral-0 flex items-center gap-2">Send <i class="las la-paper-plane"></i></button>
+                    </div>
+                  </div>
+
+                  <!-- overlay -->
+                  <div class="inset-0 fixed bg-neutral-903/20 z-40" @click="info=false,contacts=false" :class="info || contacts?'block':'hidden'"></div>
+
+                  <!-- right infobar -->
+                  <div
+                    class="max-lg:w-[300px] duration-300 w-[250px] xxxl:w-[300px] max-lg:z-50 max-lg:fixed max-lg:h-full max-lg:ltr:right-0 max-lg:rtl:left-0 top-0 bg-neutral-0 dark:bg-neutral-904"
+                    :class="info?'translate-x-0':'max-lg:ltr:translate-x-full max-lg:z-50 max-lg:rtl:-translate-x-full'"
+                  >
+                    <div class="p-8 xl:p-10 flex flex-col items-center text-center">
+                      <div class="relative shrink-0 mb-6">
+                        <img src="./assets/images/avatar/avatar-big-4.png" width="80" height="80" class="rounded-full shrink-0" alt="" />
+                        <span class="block size-2 border border-neutral-0 dark:border-neutral-904 rounded-full bg-primary-300 absolute bottom-2 right-0"></span>
+                      </div>
+                      <h5 class="mb-2">Eleanor Pena</h5>
+                      <p class="s-text text-neutral-500 dark:text-neutral-30">UX/UI Designer</p>
+                    </div>
+                    <div x-data="{opened:true}">
+                      <div class="px-4 xxl:px-6 py-3 flex justify-between items-center bg-neutral-20 dark:bg-neutral-903">
+                        <p class="l-text font-medium">Information</p>
+                        <button @click="opened=!opened" class="size-8 rounded-full f-center hover:bg-neutral-40 duration-300 dark:bg-neutral-600">
+                          <i class="las la-angle-down text-xl"></i>
+                        </button>
+                      </div>
+                      <div x-show="opened" x-collapse>
+                        <div class="p-4 xxl:p-6 space-y-4">
+                          <div class="flex items-center gap-4">
+                            <span class="size-10 shrink-0 flex justify-center bg-success-300/10 items-center rounded-lg border border-success-300 text-success-300">
+                              <i class="las la-phone-volume text-2xl"></i>
+                            </span>
+                            <p class="s-text">
+                              (702) 555-0122, <br />
+                              (217) 555-0113
+                            </p>
+                          </div>
+                          <div class="flex items-center gap-4">
+                            <span class="size-10 shrink-0 flex justify-center bg-secondary-300/10 items-center rounded-lg border border-secondary-300 text-secondary-300">
+                              <i class="las la-envelope-open-text text-2xl"></i>
+                            </span>
+                            <p class="s-text">tim@example.com</p>
+                          </div>
+                          <div class="flex items-center gap-4">
+                            <span class="size-10 shrink-0 flex justify-center bg-warning-300/10 items-center rounded-lg border border-warning-300 text-warning-300">
+                              <i class="las la-map-marker-alt text-2xl"></i>
+                            </span>
+                            <p class="s-text">4140 Parker Rd. Allentown, New Mexico 31134</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div x-data="{opened:true}">
+                      <div class="px-4 xxl:px-6 py-3 flex justify-between items-center bg-neutral-20 dark:bg-neutral-903">
+                        <p class="l-text font-medium">Attachments</p>
+                        <button @click="opened=!opened" class="size-8 rounded-full f-center hover:bg-neutral-40 duration-300 dark:bg-neutral-600">
+                          <i class="las la-angle-down text-xl"></i>
+                        </button>
+                      </div>
+                      <div x-show="opened" x-collapse>
+                        <div class="p-4 xxl:p-6 space-y-4">
+                          <div class="flex items-center gap-4">
+                            <span class="size-10 shrink-0 flex justify-center bg-success-300/10 items-center rounded-lg border border-success-300 text-success-300">
+                              <i class="las la-file-image text-2xl"></i>
+                            </span>
+                            <div>
+                              <p class="m-text font-medium mb-1">Product-photo.jpg</p>
+                              <p class="text-xs">03 Mar 2024 9:29 AM</p>
+                            </div>
+                          </div>
+                          <div class="flex items-center gap-4">
+                            <span class="size-10 shrink-0 flex justify-center bg-secondary-300/10 items-center rounded-lg border border-secondary-300 text-secondary-300">
+                              <i class="las la-file-video text-2xl"></i>
+                            </span>
+                            <div>
+                              <p class="m-text font-medium mb-1">Bake-cake.mp4</p>
+                              <p class="text-xs">03 Mar 2024 9:29 AM</p>
+                            </div>
+                          </div>
+                          <div class="flex items-center gap-4">
+                            <span class="size-10 shrink-0 flex justify-center bg-warning-300/10 items-center rounded-lg border border-warning-300 text-warning-300">
+                              <i class="las la-file-pdf text-2xl"></i>
+                            </span>
+                            <div>
+                              <p class="m-text font-medium mb-1">Financial-analysis.pdf</p>
+                              <p class="text-xs">03 Mar 2024 9:29 AM</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,430 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/swiper.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Carousel</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Plugins</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Carousel</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Carousel -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div class="grid grid-cols-2 gap-4 lg:gap-6">
+            <!-- carousel basic one -->
+            <div class="col-span-2 xxl:col-span-1">
+              <div class="rounded-xl bg-neutral-20 p-3 dark:bg-neutral-903 sm:p-4 md:p-6 xl:p-8 border border-neutral-30 dark:border-neutral-500">
+                <h5 class="bb-dashed-n40">Carousel Basic 1</h5>
+                <div dir="ltr" class="swiper basic-one relative rounded-xl">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide rounded-xl overflow-hidden">
+                      <img src="./assets/images/carousel/basic-1.png" alt="carousel-1" class="w-full rounded-xl" />
+                    </div>
+                    <div class="swiper-slide rounded-xl overflow-hidden">
+                      <img src="./assets/images/carousel/basic-2.png" alt="carousel-1" class="w-full rounded-xl" />
+                    </div>
+                    <div class="swiper-slide rounded-xl overflow-hidden">
+                      <img src="./assets/images/carousel/basic-3.png" alt="carousel-1" class="w-full rounded-xl" />
+                    </div>
+                    <div class="swiper-slide rounded-xl overflow-hidden">
+                      <img src="./assets/images/carousel/basic-4.png" alt="carousel-1" class="w-full rounded-xl" />
+                    </div>
+                  </div>
+                  <div class="absolute right-3 bottom-3 h-9 w-20 md:h-12 md:w-28 items-center justify-center rounded-lg border bg-neutral-900 bg-opacity-50 border-neutral-100 flex gap-2 z-[3]">
+                    <button class="basic-one-prev">
+                      <i class="las la-angle-left text-lg text-neutral-0"></i>
+                    </button>
+                    <div class="basic-one-pagination text-neutral-0"></div>
+                    <button class="basic-one-next">
+                      <i class="las la-angle-right text-lg text-neutral-0"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- carousel basic two -->
+            <div class="col-span-2 xxl:col-span-1">
+              <div class="rounded-xl bg-neutral-20 p-3 dark:bg-neutral-903 sm:p-4 md:p-6 xl:p-8 border border-neutral-30 dark:border-neutral-500">
+                <h5 class="bb-dashed-n40">Carousel Basic 2</h5>
+                <div dir="ltr" class="swiper basic-two relative rounded-xl">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide rounded-xl overflow-hidden">
+                      <img src="./assets/images/carousel/basic-caption-1.png" alt="carousel-1" class="w-full rounded-t-xl" />
+                      <div class="bg-neutral-0 dark:bg-neutral-904 rounded-b-xl p-3 md:p-4 xl:p-6">
+                        <h4 class="mb-2 md:mb-4">Embracing the Wilderness</h4>
+                        <p class="max-sm:hidden m-text">In the heart of nature lies a sanctuary of tranquility and wonder.</p>
+                      </div>
+                    </div>
+                    <div class="swiper-slide rounded-xl overflow-hidden">
+                      <img src="./assets/images/carousel/basic-caption-2.png" alt="carousel-1" class="w-full rounded-t-xl" />
+                      <div class="bg-neutral-0 dark:bg-neutral-904 rounded-b-xl p-3 md:p-4 xl:p-6">
+                        <h4 class="mb-2 md:mb-4">Embracing the Wilderness</h4>
+                        <p class="max-sm:hidden m-text">In the heart of nature lies a sanctuary of tranquility and wonder.</p>
+                      </div>
+                    </div>
+                    <div class="swiper-slide rounded-xl overflow-hidden">
+                      <img src="./assets/images/carousel/basic-caption-3.png" alt="carousel-1" class="w-full rounded-t-xl" />
+                      <div class="bg-neutral-0 dark:bg-neutral-904 rounded-b-xl p-3 md:p-4 xl:p-6">
+                        <h4 class="mb-2 md:mb-4">Embracing the Wilderness</h4>
+                        <p class="max-sm:hidden m-text">In the heart of nature lies a sanctuary of tranquility and wonder.</p>
+                      </div>
+                    </div>
+                    <div class="swiper-slide rounded-xl overflow-hidden">
+                      <img src="./assets/images/carousel/basic-caption-4.png" alt="carousel-1" class="w-full rounded-t-xl" />
+                      <div class="bg-neutral-0 dark:bg-neutral-904 rounded-b-xl p-3 md:p-4 xl:p-6">
+                        <h4 class="mb-2 md:mb-4">Embracing the Wilderness</h4>
+                        <p class="max-sm:hidden m-text">In the heart of nature lies a sanctuary of tranquility and wonder.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="absolute right-3 bottom-32 h-9 w-20 md:h-12 md:w-28 items-center justify-center rounded-lg border bg-neutral-900 bg-opacity-50 border-neutral-100 flex gap-2 z-[3]">
+                    <button class="basic-two-prev">
+                      <i class="las la-angle-left text-lg text-neutral-0"></i>
+                    </button>
+                    <div class="basic-two-pagination text-neutral-0"></div>
+                    <button class="basic-two-next">
+                      <i class="las la-angle-right text-lg text-neutral-0"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- basic three -->
+            <div class="col-span-2 xxl:col-span-1">
+              <div class="rounded-xl bg-neutral-20 p-3 dark:bg-neutral-903 sm:p-4 md:p-6 xl:p-8 border border-neutral-30 dark:border-neutral-500">
+                <h5 class="bb-dashed-n40">Carousel Basic 3</h5>
+                <div dir="ltr" class="swiper basic-three relative rounded-xl">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide rounded-xl overflow-hidden">
+                      <img src="./assets/images/carousel/basic-6.png" alt="carousel-1" class="w-full rounded-xl" />
+                    </div>
+                    <div class="swiper-slide rounded-xl overflow-hidden">
+                      <img src="./assets/images/carousel/basic-5.png" alt="carousel-1" class="w-full rounded-xl" />
+                    </div>
+                    <div class="swiper-slide rounded-xl overflow-hidden">
+                      <img src="./assets/images/carousel/basic-3.png" alt="carousel-1" class="w-full rounded-xl" />
+                    </div>
+                    <div class="swiper-slide rounded-xl overflow-hidden">
+                      <img src="./assets/images/carousel/basic-4.png" alt="carousel-1" class="w-full rounded-xl" />
+                    </div>
+                    <div class="swiper-slide rounded-xl overflow-hidden">
+                      <img src="./assets/images/carousel/basic-2.png" alt="carousel-1" class="w-full rounded-xl" />
+                    </div>
+                  </div>
+                  <button class="basic-three-prev z-[3] bg-neutral-900 bg-opacity-50 border border-neutral-100 hover:border-primary-300 rounded-full size-10 f-center text-neutral-0 hover:bg-primary-300 hover:text-neutral-0 duration-300 left-3 md:left-6 absolute top-1/2 -translate-y-1/2">
+                    <i class="las la-angle-left text-lg text-neutral-0"></i>
+                  </button>
+                  <button class="basic-three-next z-[3] bg-neutral-900 bg-opacity-50 border border-neutral-100 hover:border-primary-300 rounded-full size-10 f-center text-neutral-0 hover:bg-primary-300 hover:text-neutral-0 duration-300 right-3 md:right-6 absolute top-1/2 -translate-y-1/2">
+                    <i class="las la-angle-right text-lg text-neutral-0"></i>
+                  </button>
+                </div>
+                <div class="basic-three-pagination"></div>
+              </div>
+            </div>
+
+            <!-- basic four -->
+            <div class="col-span-2 xxl:col-span-1">
+              <div class="rounded-xl bg-neutral-20 p-3 dark:bg-neutral-903 sm:p-4 md:p-6 xl:p-8 border border-neutral-30 dark:border-neutral-500">
+                <h5 class="bb-dashed-n40">Carousel Basic 4</h5>
+                <div dir="ltr" class="swiper basic-four relative rounded-xl">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide rounded-xl overflow-hidden">
+                      <img src="./assets/images/carousel/basic-caption-1.png" alt="carousel-1" class="w-full rounded-t-xl object-cover object-center min-h-[325px]" />
+                      <div class="bg-neutral-0 dark:bg-neutral-904 rounded-b-xl p-3 md:p-4 xl:p-6 flex justify-between items-start">
+                        <div>
+                          <h4 class="mb-2 md:mb-4">Embracing the Wilderness</h4>
+                          <p class="max-sm:hidden m-text">In the heart of nature lies a sanctuary of tranquility and wonder.</p>
+                        </div>
+                        <button class="size-8 rounded-full hover:bg-neutral-30 duration-300 shrink-0 dark:hover:bg-neutral-700">
+                          <i class="las la-ellipsis-v text-2xl"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="swiper-slide rounded-xl overflow-hidden">
+                      <img src="./assets/images/carousel/basic-caption-2.png" alt="carousel-1" class="w-full rounded-t-xl object-cover object-center min-h-[325px]" />
+                      <div class="bg-neutral-0 dark:bg-neutral-904 rounded-b-xl p-3 md:p-4 xl:p-6 flex justify-between items-start">
+                        <div>
+                          <h4 class="mb-2 md:mb-4">Embracing the Wilderness</h4>
+                          <p class="max-sm:hidden m-text">In the heart of nature lies a sanctuary of tranquility and wonder.</p>
+                        </div>
+                        <button class="size-8 rounded-full hover:bg-neutral-30 duration-300 shrink-0 dark:hover:bg-neutral-700">
+                          <i class="las la-ellipsis-v text-2xl"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="swiper-slide rounded-xl overflow-hidden">
+                      <img src="./assets/images/carousel/basic-caption-3.png" alt="carousel-1" class="w-full rounded-t-xl object-cover object-center min-h-[325px]" />
+                      <div class="bg-neutral-0 dark:bg-neutral-904 rounded-b-xl p-3 md:p-4 xl:p-6 flex justify-between items-start">
+                        <div>
+                          <h4 class="mb-2 md:mb-4">Embracing the Wilderness</h4>
+                          <p class="max-sm:hidden m-text">In the heart of nature lies a sanctuary of tranquility and wonder.</p>
+                        </div>
+                        <button class="size-8 rounded-full hover:bg-neutral-30 duration-300 shrink-0 dark:hover:bg-neutral-700">
+                          <i class="las la-ellipsis-v text-2xl"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="swiper-slide rounded-xl overflow-hidden">
+                      <img src="./assets/images/carousel/basic-caption-4.png" alt="carousel-1" class="w-full rounded-t-xl object-cover object-center min-h-[325px]" />
+                      <div class="bg-neutral-0 dark:bg-neutral-904 rounded-b-xl p-3 md:p-4 xl:p-6 flex justify-between items-start">
+                        <div>
+                          <h4 class="mb-2 md:mb-4">Embracing the Wilderness</h4>
+                          <p class="max-sm:hidden m-text">In the heart of nature lies a sanctuary of tranquility and wonder.</p>
+                        </div>
+                        <button class="size-8 rounded-full hover:bg-neutral-30 duration-300 shrink-0 dark:hover:bg-neutral-700">
+                          <i class="las la-ellipsis-v text-2xl"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="basic-four-prev z-[3] bg-neutral-900 bg-opacity-50 border border-neutral-100 hover:border-primary-300 rounded-full size-10 f-center text-neutral-0 hover:bg-primary-300 hover:text-neutral-0 duration-300 left-6 absolute top-[37%] -translate-y-1/2">
+                    <i class="las la-angle-left text-lg text-neutral-0"></i>
+                  </button>
+                  <button class="basic-four-next z-[3] bg-neutral-900 bg-opacity-50 border border-neutral-100 hover:border-primary-300 rounded-full size-10 f-center text-neutral-0 hover:bg-primary-300 hover:text-neutral-0 duration-300 right-6 absolute top-[37%] -translate-y-1/2">
+                    <i class="las la-angle-right text-lg text-neutral-0"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Thumbs swiper -->
+            <div class="col-span-2">
+              <div class="rounded-xl bg-neutral-20 p-3 dark:bg-neutral-903 sm:p-4 md:p-6 xl:p-8 border border-neutral-30 dark:border-neutral-500">
+                <h5 class="bb-dashed-n40">Carousel Thumbnail</h5>
+                <div dir="ltr" style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper thumbswiper1 relative rounded-xl">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide rounded-xl">
+                      <img class="rounded-xl w-full min-h-[250px] object-cover object-center" src="./assets/images/carousel/thumb-1.png" />
+                    </div>
+                    <div class="swiper-slide rounded-xl">
+                      <img class="rounded-xl w-full min-h-[250px] object-cover object-center" src="./assets/images/carousel/thumb-2.png" />
+                    </div>
+                    <div class="swiper-slide rounded-xl">
+                      <img class="rounded-xl w-full min-h-[250px] object-cover object-center" src="./assets/images/carousel/thumb-3.png" />
+                    </div>
+                    <div class="swiper-slide rounded-xl">
+                      <img class="rounded-xl w-full min-h-[250px] object-cover object-center" src="./assets/images/carousel/thumb-4.png" />
+                    </div>
+                  </div>
+                  <div class="absolute right-3 bottom-3 h-9 w-20 md:h-12 md:w-28 items-center justify-center rounded-lg border bg-neutral-900 bg-opacity-50 border-neutral-100 flex gap-2 z-[3]">
+                    <button class="thumb-prev">
+                      <i class="las la-angle-left text-lg text-neutral-0"></i>
+                    </button>
+                    <div class="thumb-pagination text-neutral-0"></div>
+                    <button class="thumb-next">
+                      <i class="las la-angle-right text-lg text-neutral-0"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="flex justify-center">
+                  <div dir="ltr" class="swiper thumbswiper2 mt-6">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide !size-14 md:!size-28 cursor-pointer rounded-lg">
+                        <img class="h-full rounded-lg object-center object-cover" src="./assets/images/carousel/thumb-1.png" />
+                      </div>
+                      <div class="swiper-slide !size-14 md:!size-28 cursor-pointer rounded-lg">
+                        <img class="h-full rounded-lg object-center object-cover" src="./assets/images/carousel/thumb-2.png" />
+                      </div>
+                      <div class="swiper-slide !size-14 md:!size-28 cursor-pointer rounded-lg">
+                        <img class="h-full rounded-lg object-center object-cover" src="./assets/images/carousel/thumb-3.png" />
+                      </div>
+                      <div class="swiper-slide !size-14 md:!size-28 cursor-pointer rounded-lg">
+                        <img class="h-full rounded-lg object-center object-cover" src="./assets/images/carousel/thumb-4.png" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- center mode carousel -->
+            <div class="col-span-2">
+              <div class="rounded-xl bg-neutral-20 p-3 dark:bg-neutral-903 sm:p-4 md:p-6 xl:p-8 border border-neutral-30 dark:border-neutral-500">
+                <h5 class="bb-dashed-n40">Carousel Center Mode</h5>
+                <div dir="ltr" class="swiper center-mode-carousel relative rounded-xl group">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide centered-slide-overlay">
+                      <img src="./assets/images/carousel/center-mode-1.png" alt="carousel-1" class="w-full rounded-xl" />
+                      <div class="absolute bottom-0 px-5 pb-5 z-[3]">
+                        <h6 class="text-neutral-0 font-medium mb-4">Nurturing the Soul in Nature's Embrace</h6>
+                        <a href="#" class="text-neutral-0 flex items-center gap-1 font-semibold"><span>Learn More</span> <i class="las la-arrow-right"></i> </a>
+                      </div>
+                    </div>
+                    <div class="swiper-slide centered-slide-overlay">
+                      <img src="./assets/images/carousel/center-mode-2.png" alt="carousel-1" class="w-full rounded-xl" />
+                      <div class="absolute bottom-0 px-5 pb-5 z-[3]">
+                        <h6 class="text-neutral-0 font-medium mb-4">Syncing with Nature: Exploring Harmonious Rhythms</h6>
+                        <a href="#" class="text-neutral-0 flex items-center gap-1 font-semibold"><span>Learn More</span> <i class="las la-arrow-right"></i> </a>
+                      </div>
+                    </div>
+                    <div class="swiper-slide centered-slide-overlay">
+                      <img src="./assets/images/carousel/center-mode-3.png" alt="carousel-1" class="w-full rounded-xl" />
+                      <div class="absolute bottom-0 px-5 pb-5 z-[3]">
+                        <h6 class="text-neutral-0 font-medium mb-4">Embracing Nature's Melodies: Finding Harmony Within</h6>
+                        <a href="#" class="text-neutral-0 flex items-center gap-1 font-semibold"><span>Learn More</span> <i class="las la-arrow-right"></i> </a>
+                      </div>
+                    </div>
+                    <div class="swiper-slide centered-slide-overlay">
+                      <img src="./assets/images/carousel/center-mode-4.png" alt="carousel-1" class="w-full rounded-xl" />
+                      <div class="absolute bottom-0 px-5 pb-5 z-[3]">
+                        <h6 class="text-neutral-0 font-medium mb-4">In Tune with the Earth: Embracing Natural Harmony</h6>
+                        <a href="#" class="text-neutral-0 flex items-center gap-1 font-semibold"><span>Learn More</span> <i class="las la-arrow-right"></i> </a>
+                      </div>
+                    </div>
+                    <div class="swiper-slide centered-slide-overlay">
+                      <img src="./assets/images/carousel/center-mode-1.png" alt="carousel-1" class="w-full rounded-xl" />
+                      <div class="absolute bottom-0 px-5 pb-5 z-[3]">
+                        <h6 class="text-neutral-0 font-medium mb-4">Nurturing the Soul in Nature's Embrace</h6>
+                        <a href="#" class="text-neutral-0 flex items-center gap-1 font-semibold"><span>Learn More</span> <i class="las la-arrow-right"></i> </a>
+                      </div>
+                    </div>
+                    <div class="swiper-slide centered-slide-overlay">
+                      <img src="./assets/images/carousel/center-mode-2.png" alt="carousel-1" class="w-full rounded-xl" />
+                      <div class="absolute bottom-0 px-5 pb-5 z-[3]">
+                        <h6 class="text-neutral-0 font-medium mb-4">Dancing with the Elements: Harmonious Living in Nature</h6>
+                        <a href="#" class="text-neutral-0 flex items-center gap-1 font-semibold"><span>Learn More</span> <i class="las la-arrow-right"></i> </a>
+                      </div>
+                    </div>
+                    <div class="swiper-slide centered-slide-overlay">
+                      <img src="./assets/images/carousel/center-mode-3.png" alt="carousel-1" class="w-full rounded-xl" />
+                      <div class="absolute bottom-0 px-5 pb-5 z-[3]">
+                        <h6 class="text-neutral-0 font-medium mb-4">Nurturing the Soul in Nature's Embrace</h6>
+                        <a href="#" class="text-neutral-0 flex items-center gap-1 font-semibold"><span>Learn More</span> <i class="las la-arrow-right"></i> </a>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    class="center-mode-prev opacity-0 group-hover:opacity-100 z-[3] bg-neutral-900 bg-opacity-50 border border-neutral-100 hover:border-primary-300 rounded-full size-10 f-center text-neutral-0 hover:bg-primary-300 hover:text-neutral-0 duration-300 left-6 absolute top-1/2 -translate-y-1/2"
+                  >
+                    <i class="las la-angle-left text-lg text-neutral-0"></i>
+                  </button>
+                  <button
+                    class="center-mode-next opacity-0 group-hover:opacity-100 z-[3] bg-neutral-900 bg-opacity-50 border border-neutral-100 hover:border-primary-300 rounded-full size-10 f-center text-neutral-0 hover:bg-primary-300 hover:text-neutral-0 duration-300 right-6 absolute top-1/2 -translate-y-1/2"
+                  >
+                    <i class="las la-angle-right text-lg text-neutral-0"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- carousel animation -->
+            <div class="col-span-2">
+              <div class="rounded-xl bg-neutral-20 p-3 dark:bg-neutral-903 sm:p-4 md:p-6 xl:p-8 border border-neutral-30 dark:border-neutral-500">
+                <h5 class="bb-dashed-n40">Carousel Animation</h5>
+                <div dir="ltr" class="swiper animation-carousel relative rounded-xl">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide centered-slide-overlay rounded-xl">
+                      <img class="rounded-xl w-full min-h-[350px] object-cover object-center" src="./assets/images/carousel/thumb-1.png" />
+                      <div class="absolute bottom-0 px-5 pb-5 z-[3] lg:px-12 lg:pb-10">
+                        <div class="max-w-3xl">
+                          <h2 class="text-neutral-0 mb-4 lg:mb-6">Finding Harmony in Nature's Rhythms</h2>
+                          <p class="l-text mb-6 lg:mb-8 text-neutral-0">Nature has long been recognized as a source of healing and renewal for both body and mind. Whether it's the therapeutic effects of a leisurely hike through...</p>
+                        </div>
+                        <a href="#" class="btn-primary">View More <i class="las la-arrow-right"></i></a>
+                      </div>
+                    </div>
+                    <div class="swiper-slide centered-slide-overlay rounded-xl">
+                      <img class="rounded-xl w-full min-h-[350px] object-cover object-center" src="./assets/images/carousel/thumb-2.png" />
+                      <div class="absolute bottom-0 px-5 pb-5 z-[3] lg:px-12 lg:pb-10">
+                        <div class="max-w-3xl">
+                          <h2 class="text-neutral-0 mb-4 lg:mb-6">The Healing Power of Nature's Bounty</h2>
+                          <p class="l-text mb-6 lg:mb-8 text-neutral-0">Nature has long been recognized as a source of healing and renewal for both body and mind. Whether it's the therapeutic effects of a leisurely hike through...</p>
+                        </div>
+                        <a href="#" class="btn-primary">View More <i class="las la-arrow-right"></i></a>
+                      </div>
+                    </div>
+                    <div class="swiper-slide centered-slide-overlay rounded-xl">
+                      <img class="rounded-xl w-full min-h-[350px] object-cover object-center" src="./assets/images/carousel/thumb-3.png" />
+                      <div class="absolute bottom-0 px-5 pb-5 z-[3] lg:px-12 lg:pb-10">
+                        <div class="max-w-3xl">
+                          <h2 class="text-neutral-0 mb-4 lg:mb-6">Finding Harmony in Nature's Rhythms</h2>
+                          <p class="l-text mb-6 lg:mb-8 text-neutral-0">Nature has long been recognized as a source of healing and renewal for both body and mind. Whether it's the therapeutic effects of a leisurely hike through...</p>
+                        </div>
+                        <a href="#" class="btn-primary">View More <i class="las la-arrow-right"></i></a>
+                      </div>
+                    </div>
+                    <div class="swiper-slide centered-slide-overlay rounded-xl">
+                      <img class="rounded-xl w-full min-h-[350px] object-cover object-center" src="./assets/images/carousel/thumb-4.png" />
+                      <div class="absolute bottom-0 px-5 pb-5 z-[3] lg:px-12 lg:pb-10">
+                        <div class="max-w-3xl">
+                          <h2 class="text-neutral-0 mb-4 lg:mb-6">The Healing Power of Nature's Bounty</h2>
+                          <p class="l-text mb-6 lg:mb-8 text-neutral-0">Nature has long been recognized as a source of healing and renewal for both body and mind. Whether it's the therapeutic effects of a leisurely hike through...</p>
+                        </div>
+                        <a href="#" class="btn-primary">View More <i class="las la-arrow-right"></i></a>
+                      </div>
+                    </div>
+                    <div class="swiper-slide centered-slide-overlay rounded-xl">
+                      <img class="rounded-xl w-full min-h-[350px] object-cover object-center" src="./assets/images/carousel/thumb-1.png" />
+                      <div class="absolute bottom-0 px-5 pb-5 z-[3] lg:px-12 lg:pb-10">
+                        <div class="max-w-3xl">
+                          <h2 class="text-neutral-0 mb-4 lg:mb-6">Finding Harmony in Nature's Rhythms</h2>
+                          <p class="l-text mb-6 lg:mb-8 text-neutral-0">Nature has long been recognized as a source of healing and renewal for both body and mind. Whether it's the therapeutic effects of a leisurely hike through...</p>
+                        </div>
+                        <a href="#" class="btn-primary">View More <i class="las la-arrow-right"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="absolute right-3 bottom-3 h-9 w-20 md:h-12 md:w-28 items-center justify-center rounded-full border bg-neutral-900 bg-opacity-50 border-neutral-100 flex gap-2 z-[3]">
+                    <button class="animation-carousel-prev">
+                      <i class="las la-angle-left text-lg text-neutral-0"></i>
+                    </button>
+                    <div class="animation-carousel-pagination text-neutral-0"></div>
+                    <button class="animation-carousel-next">
+                      <i class="las la-angle-right text-lg text-neutral-0"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+    <script src="./assets/js/libs/swiper-bundle.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

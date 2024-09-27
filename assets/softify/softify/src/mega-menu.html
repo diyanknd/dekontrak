@@ -1,0 +1,626 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/swiper.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h3 class="mb-3 xxxl:mb-5">Mega Menu</h3>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Components</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Mega Menu</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- mega menu -->
+        <section x-data="{mobileMenu:false}" class="text-neutral-700 dark:text-neutral-20 white-box">
+          <nav class="bg-neutral-0 dark:bg-neutral-904 shadow-lg max-md:py-5">
+            <div class="relative flex flex-wrap gap-4 justify-between items-center container">
+              <h4>Menu Horizontal</h4>
+              <ul class="flex items-center gap-4 font-medium text-neutral-700 dark:text-neutral-10 max-md:hidden xxl:gap-6">
+                <li class="group">
+                  <button class="inline-block py-6 xxl:py-8">Item 01 <i class="las la-plus group-hover:hidden"></i><i class="las la-minus hidden group-hover:inline-block"></i></button>
+                  <div class="invisible absolute left-0 top-full z-20 w-full translate-y-2 text-sm opacity-0 duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                    <div class="overflow-hidden rounded-2xl bg-neutral-0 px-4 py-5 shadow-xl dark:bg-neutral-800 xxl:px-5 flex flex-col gap-10 lg:gap-14">
+                      <div class="relative flex w-full flex-wrap justify-between gap-5">
+                        <div class="flex flex-col gap-4 relative z-10">
+                          <h6 class="font-semibold">Other Machinery &amp; Parts</h6>
+                          <ul class="flex flex-col gap-2 text-neutral-100 dark:text-neutral-80">
+                            <li><a href="#" class="text-xs">Engines &amp; Gears</a></li>
+                            <li><a href="#" class="text-xs">Bearings &amp; Pumps</a></li>
+                            <li><a href="#" class="text-xs">Valves &amp; Motors</a></li>
+                            <li><a href="#" class="text-xs">Belts &amp; Chains</a></li>
+                            <li><a href="#" class="text-xs">Shafts &amp; Pulleys</a></li>
+                            <li><a href="#" class="text-xs">Couplings &amp; Hydraulics</a></li>
+                            <li><a href="#" class="text-xs">Pneumatics &amp; Actuators</a></li>
+                            <li><a href="#" class="text-xs">Filters &amp; Seals</a></li>
+                            <li><a href="#" class="text-xs">Springs &amp; Hoses</a></li>
+                            <li><a href="#" class="text-xs">Fans &amp; Clutches</a></li>
+                            <li><a href="#" class="text-xs">Bearings &amp; Pumps</a></li>
+                          </ul>
+                        </div>
+                        <div class="flex flex-col gap-4 relative z-10">
+                          <div class="flex flex-col gap-4">
+                            <h6 class="font-semibold">Plastic &amp; Woodworking</h6>
+                            <ul class="flex flex-col gap-2 text-neutral-100 dark:text-neutral-80">
+                              <li><a href="#" class="text-xs">Polyethylene (PE)</a></li>
+                              <li><a href="#" class="text-xs">Polypropylene (PP)</a></li>
+                              <li><a href="#" class="text-xs">Polyvinyl chloride (PVC)</a></li>
+                              <li><a href="#" class="text-xs">Polycarbonate (PC)</a></li>
+                              <li><a href="#" class="text-xs">PET (Polyethylene terephthalate)</a></li>
+                            </ul>
+                          </div>
+                          <div class="flex flex-col gap-4">
+                            <h6 class="font-semibold">Machine Tools</h6>
+                            <ul class="flex flex-col gap-2 text-neutral-100 dark:text-neutral-80">
+                              <li><a href="#" class="text-xs">Lumber (e.g., pine, oak, maple)</a></li>
+                              <li><a href="#" class="text-xs">Particleboard</a></li>
+                              <li><a href="#" class="text-xs">Wood glue</a></li>
+                              <li><a href="#" class="text-xs">Power tools (e.g., table saws, drills)</a></li>
+                              <li><a href="#" class="text-xs">Sandpaper</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="flex flex-col gap-4 relative z-10">
+                          <h6 class="font-semibold">Construction Machinery</h6>
+                          <ul class="flex flex-col gap-2 text-neutral-100 dark:text-neutral-80">
+                            <li><a href="#" class="text-xs">Excavators &amp; Bulldozers</a></li>
+                            <li><a href="#" class="text-xs">Loaders (front-end loaders)</a></li>
+                            <li><a href="#" class="text-xs">Backhoes &amp; Skid steer loaders</a></li>
+                            <li><a href="#" class="text-xs">Dump trucks &amp; Forklifts</a></li>
+                            <li><a href="#" class="text-xs">Concrete mixers &amp; Pavers</a></li>
+                            <li><a href="#" class="text-xs">Rollers (compactors)</a></li>
+                            <li><a href="#" class="text-xs">Graders &amp; Trenchers</a></li>
+                            <li><a href="#" class="text-xs">Jackhammers</a></li>
+                            <li><a href="#" class="text-xs">Scaffolding &amp; Wheel loaders</a></li>
+                            <li><a href="#" class="text-xs">Asphalt pavers</a></li>
+                            <li><a href="#" class="text-xs">Concrete pumps</a></li>
+                          </ul>
+                        </div>
+                        <div class="flex flex-col gap-4 relative z-10">
+                          <h6 class="font-semibold">Agriculture Machinery</h6>
+                          <ul class="flex flex-col gap-3 text-neutral-100 dark:text-neutral-80">
+                            <li><a href="#" class="text-xs">Tractors &amp; Plows</a></li>
+                            <li><a href="#" class="text-xs">Seeders &amp; Cultivators</a></li>
+                            <li><a href="#" class="text-xs">Sprayers &amp; Balers</a></li>
+                            <li><a href="#" class="text-xs">Irrigation equipment</a></li>
+                            <li><a href="#" class="text-xs">Mowers &amp; Spreaders</a></li>
+                            <li><a href="#" class="text-xs">Tillers &amp; Threshers</a></li>
+                            <li><a href="#" class="text-xs">Planters &amp; Grain carts</a></li>
+                            <li><a href="#" class="text-xs">Bale wrappers &amp; Windrowers</a></li>
+                            <li><a href="#" class="text-xs">Grain dryers &amp; Grain augers</a></li>
+                          </ul>
+                        </div>
+
+                        <!-- gradient shape 1 -->
+                        <div class="absolute z-[-1] right-0 top-0 h-[304px] w-[304px] rounded-full bg-error-400 opacity-[0.4] blur-[250px]"></div>
+                        <div class="absolute z-[-1] bottom-0 left-0 h-[304px] w-[304px] rounded-full bg-info-400 opacity-[0.4] blur-[250px]"></div>
+                        <!-- gradient shape 1 -->
+                      </div>
+                      <div>
+                        <div class="flex justify-between items-center border-b border-dashed border-primary-50 pb-5 mb-5">
+                          <h6 class="font-semibold">More Categories</h6>
+                          <div class="flex gap-3">
+                            <button class="cat-prev size-7 f-center rounded-full border border-primary-300 text-primary-300 hover:bg-primary-300 hover:text-neutral-0 duration-300"><i class="las la-angle-left"></i></button>
+                            <button class="cat-next size-7 f-center rounded-full border border-primary-300 text-primary-300 hover:bg-primary-300 hover:text-neutral-0 duration-300"><i class="las la-angle-right"></i></button>
+                          </div>
+                        </div>
+                        <div class="swiper more-categories">
+                          <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                              <img src="./assets/images/more-categories/cat-1.png" class="rounded-xl w-full" alt="" />
+                              <p class="text-xs mt-4">Electronics and Parts</p>
+                            </div>
+                            <div class="swiper-slide">
+                              <img src="./assets/images/more-categories/cat-2.png" class="rounded-xl w-full" alt="" />
+                              <p class="text-xs mt-4">Apparel and Accessories</p>
+                            </div>
+                            <div class="swiper-slide">
+                              <img src="./assets/images/more-categories/cat-3.png" class="rounded-xl w-full" alt="" />
+                              <p class="text-xs mt-4">Beauty and Personal Care</p>
+                            </div>
+                            <div class="swiper-slide">
+                              <img src="./assets/images/more-categories/cat-4.png" class="rounded-xl w-full" alt="" />
+                              <p class="text-xs mt-4">Sports and Equipment</p>
+                            </div>
+                            <div class="swiper-slide">
+                              <img src="./assets/images/more-categories/cat-5.png" class="rounded-xl w-full" alt="" />
+                              <p class="text-xs mt-4">Toys and Games Toys</p>
+                            </div>
+                            <div class="swiper-slide">
+                              <img src="./assets/images/more-categories/cat-6.png" class="rounded-xl w-full" alt="" />
+                              <p class="text-xs mt-4">Health Wellness Products</p>
+                            </div>
+                            <div class="swiper-slide">
+                              <img src="./assets/images/more-categories/cat-7.png" class="rounded-xl w-full" alt="" />
+                              <p class="text-xs mt-4">Furniture and Decor</p>
+                            </div>
+                            <div class="swiper-slide">
+                              <img src="./assets/images/more-categories/cat-8.png" class="rounded-xl w-full" alt="" />
+                              <p class="text-xs mt-4">Groceries and Food Products</p>
+                            </div>
+                            <div class="swiper-slide">
+                              <img src="./assets/images/more-categories/cat-1.png" class="rounded-xl w-full" alt="" />
+                              <p class="text-xs mt-4">Electronics and Parts</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="cat-pagination"></div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="group">
+                  <button class="inline-block py-6 xxl:py-8">Item 02 <i class="las la-plus group-hover:hidden"></i><i class="las la-minus hidden group-hover:inline-block"></i></button>
+                  <div class="invisible absolute left-0 top-full z-20 w-full translate-y-2 text-sm opacity-0 duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                    <div class="relative flex w-full flex-wrap justify-between gap-5 overflow-hidden rounded-2xl bg-neutral-0 px-4 py-5 shadow-xl dark:bg-neutral-800 xxl:px-5">
+                      <div class="flex flex-col gap-4 relative z-10">
+                        <h6 class="font-semibold">Other Machinery &amp; Parts</h6>
+                        <ul class="flex flex-col gap-2 text-neutral-100 dark:text-neutral-80">
+                          <li><a href="#" class="text-xs">Engines &amp; Gears</a></li>
+                          <li><a href="#" class="text-xs">Bearings &amp; Pumps</a></li>
+                          <li><a href="#" class="text-xs">Valves &amp; Motors</a></li>
+                          <li><a href="#" class="text-xs">Belts &amp; Chains</a></li>
+                          <li><a href="#" class="text-xs">Shafts &amp; Pulleys</a></li>
+                          <li><a href="#" class="text-xs">Couplings &amp; Hydraulics</a></li>
+                          <li><a href="#" class="text-xs">Pneumatics &amp; Actuators</a></li>
+                          <li><a href="#" class="text-xs">Filters &amp; Seals</a></li>
+                          <li><a href="#" class="text-xs">Springs &amp; Hoses</a></li>
+                          <li><a href="#" class="text-xs">Fans &amp; Clutches</a></li>
+                          <li><a href="#" class="text-xs">Bearings &amp; Pumps</a></li>
+                        </ul>
+                      </div>
+                      <div class="flex flex-col gap-4 relative z-10">
+                        <div class="flex flex-col gap-4">
+                          <h6 class="font-semibold">Plastic &amp; Woodworking</h6>
+                          <ul class="flex flex-col gap-2 text-neutral-100 dark:text-neutral-80">
+                            <li><a href="#" class="text-xs">Polyethylene (PE)</a></li>
+                            <li><a href="#" class="text-xs">Polypropylene (PP)</a></li>
+                            <li><a href="#" class="text-xs">Polyvinyl chloride (PVC)</a></li>
+                            <li><a href="#" class="text-xs">Polycarbonate (PC)</a></li>
+                            <li><a href="#" class="text-xs">PET (Polyethylene terephthalate)</a></li>
+                          </ul>
+                        </div>
+                        <div class="flex flex-col gap-4">
+                          <h6 class="font-semibold">Machine Tools</h6>
+                          <ul class="flex flex-col gap-2 text-neutral-100 dark:text-neutral-80">
+                            <li><a href="#" class="text-xs">Lumber (e.g., pine, oak, maple)</a></li>
+                            <li><a href="#" class="text-xs">Particleboard</a></li>
+                            <li><a href="#" class="text-xs">Wood glue</a></li>
+                            <li><a href="#" class="text-xs">Power tools (e.g., table saws, drills)</a></li>
+                            <li><a href="#" class="text-xs">Sandpaper</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="flex flex-col gap-4 relative z-10">
+                        <h6 class="font-semibold">Construction Machinery</h6>
+                        <ul class="flex flex-col gap-2 text-neutral-100 dark:text-neutral-80">
+                          <li><a href="#" class="text-xs">Excavators &amp; Bulldozers</a></li>
+                          <li><a href="#" class="text-xs">Loaders (front-end loaders)</a></li>
+                          <li><a href="#" class="text-xs">Backhoes &amp; Skid steer loaders</a></li>
+                          <li><a href="#" class="text-xs">Dump trucks &amp; Forklifts</a></li>
+                          <li><a href="#" class="text-xs">Concrete mixers &amp; Pavers</a></li>
+                          <li><a href="#" class="text-xs">Rollers (compactors)</a></li>
+                          <li><a href="#" class="text-xs">Graders &amp; Trenchers</a></li>
+                          <li><a href="#" class="text-xs">Jackhammers</a></li>
+                          <li><a href="#" class="text-xs">Scaffolding &amp; Wheel loaders</a></li>
+                          <li><a href="#" class="text-xs">Asphalt pavers</a></li>
+                          <li><a href="#" class="text-xs">Concrete pumps</a></li>
+                        </ul>
+                      </div>
+                      <div class="flex flex-col gap-4 relative z-10">
+                        <h6 class="font-semibold">Agriculture Machinery</h6>
+                        <ul class="flex flex-col gap-3 text-neutral-100 dark:text-neutral-80">
+                          <li><a href="#" class="text-xs">Tractors &amp; Plows</a></li>
+                          <li><a href="#" class="text-xs">Seeders &amp; Cultivators</a></li>
+                          <li><a href="#" class="text-xs">Sprayers &amp; Balers</a></li>
+                          <li><a href="#" class="text-xs">Irrigation equipment</a></li>
+                          <li><a href="#" class="text-xs">Mowers &amp; Spreaders</a></li>
+                          <li><a href="#" class="text-xs">Tillers &amp; Threshers</a></li>
+                          <li><a href="#" class="text-xs">Planters &amp; Grain carts</a></li>
+                          <li><a href="#" class="text-xs">Bale wrappers &amp; Windrowers</a></li>
+                          <li><a href="#" class="text-xs">Grain dryers &amp; Grain augers</a></li>
+                        </ul>
+                      </div>
+
+                      <!-- gradient shape 1 -->
+                      <div class="absolute z-[-1] right-0 top-0 h-[304px] w-[304px] rounded-full bg-error-400 opacity-[0.4] blur-[250px]"></div>
+                      <div class="absolute z-[-1] bottom-0 left-0 h-[304px] w-[304px] rounded-full bg-info-400 opacity-[0.4] blur-[250px]"></div>
+                      <!-- gradient shape 1 -->
+                    </div>
+                  </div>
+                </li>
+                <li class="group">
+                  <button class="inline-block py-6 xxl:py-8">Item 03 <i class="las la-plus group-hover:hidden"></i><i class="las la-minus hidden group-hover:inline-block"></i></button>
+                  <div class="invisible absolute ltr:right-0 rtl:left-0 top-full z-20 w-[300px] translate-y-2 text-sm opacity-0 duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                    <div class="relative flex w-full flex-wrap justify-between gap-5 overflow-hidden rounded-2xl bg-neutral-0 px-4 py-5 shadow-xl dark:bg-neutral-800 xxl:px-5">
+                      <div class="flex flex-col gap-4 relative z-10">
+                        <h6 class="font-semibold">Other Machinery &amp; Parts</h6>
+                        <ul class="flex flex-col gap-2 text-neutral-100 dark:text-neutral-80">
+                          <li><a href="#" class="text-xs">Engines &amp; Gears</a></li>
+                          <li><a href="#" class="text-xs">Bearings &amp; Pumps</a></li>
+                          <li><a href="#" class="text-xs">Valves &amp; Motors</a></li>
+                          <li><a href="#" class="text-xs">Belts &amp; Chains</a></li>
+                          <li><a href="#" class="text-xs">Shafts &amp; Pulleys</a></li>
+                          <li><a href="#" class="text-xs">Couplings &amp; Hydraulics</a></li>
+                          <li><a href="#" class="text-xs">Pneumatics &amp; Actuators</a></li>
+                          <li><a href="#" class="text-xs">Filters &amp; Seals</a></li>
+                          <li><a href="#" class="text-xs">Springs &amp; Hoses</a></li>
+                          <li><a href="#" class="text-xs">Fans &amp; Clutches</a></li>
+                          <li><a href="#" class="text-xs">Bearings &amp; Pumps</a></li>
+                        </ul>
+                      </div>
+
+                      <!-- gradient shape 1 -->
+                      <div class="absolute z-[-1] right-0 top-0 h-[304px] w-[304px] rounded-full bg-error-400 opacity-[0.4] blur-[250px]"></div>
+                      <div class="absolute z-[-1] bottom-0 left-0 h-[304px] w-[304px] rounded-full bg-info-400 opacity-[0.4] blur-[250px]"></div>
+                      <!-- gradient shape 1 -->
+                    </div>
+                  </div>
+                </li>
+                <li><a href="#" class="inline-block py-6 xxl:py-8">Item 4</a></li>
+              </ul>
+              <button @click="mobileMenu=!mobileMenu" class="md:hidden bg-neutral-700 px-6 py-3 rounded-xl text-neutral-0 flex gap-3">
+                <i class="las la-bars text-xl"></i>
+                Menu Mobile
+              </button>
+            </div>
+          </nav>
+          <div class="py-10 xl:py-14 max-md:hidden">
+            <button @click="mobileMenu=!mobileMenu" class="bg-neutral-700 px-6 py-2.5 rounded-xl text-neutral-0 flex gap-3">
+              <i class="las la-bars text-xl"></i>
+              Menu Mobile
+            </button>
+          </div>
+
+          <div x-show="mobileMenu" @click="mobileMenu=false" x-transition class="fixed inset-0 z-[21] bg-neutral-900/40 dark:bg-neutral-20/30"></div>
+          <div x-bind:class="mobileMenu?'translate-x-0':'-translate-x-full'" class="fixed left-0 top-0 z-[22] h-full w-full max-w-[280px] bg-neutral-0 shadow-xl duration-300 dark:bg-neutral-900">
+            <div class="px-3">
+              <h5 class="mb-5 pb-5 border-b border-dashed border-primary-50 px-6 xl:px-8 pt-6 lg:pt-8">Mobile Menu</h5>
+              <ul class="flex h-full flex-col overflow-y-auto gap-1.5 pb-6 font-medium dark:text-neutral-10">
+                <li><a href="index.html" class="block px-3 py-2.5 rounded-lg duration-300 hover:bg-primary-300 hover:text-neutral-0">Home</a></li>
+                <li><a href="about-us.html" class="block px-3 py-2.5 rounded-lg duration-300 hover:bg-primary-300 hover:text-neutral-0">About Us</a></li>
+                <li><a href="shop.html" class="block px-3 py-2.5 rounded-lg duration-300 hover:bg-primary-300 hover:text-neutral-0">Shop</a></li>
+                <li><a href="blog-list.html" class="block px-3 py-2.5 rounded-lg duration-300 hover:bg-primary-300 hover:text-neutral-0">Blogs</a></li>
+                <li x-data="{opened:null}" class="relative">
+                  <button :class="opened=='user' ? 'bg-primary-300 text-neutral-0' : ''" @click="opened=='user' ? opened = null : opened='user'" class="flex w-full items-center justify-between gap-2 hover:bg-primary-300 hover:text-neutral-0 duration-300 rounded-lg py-2.5 text-sm px-3">
+                    Pages
+                    <i :class="opened=='user' ? 'las la-minus rotate-180 text-neutral-0' : 'las la-plus'" class="duration-300"></i>
+                  </button>
+                  <div x-show="opened=='user'" x-collapse>
+                    <ul class="mt-3 ltr:ml-6 rtl:mr-6 flex-col ltr:border-l rtl:border-r group-hover:flex border-primary-300" data-submenu="user">
+                      <li>
+                        <a href="pricing-plan.html" class="py-2.5 px-3 hover:text-primary-300 duration-300 inline-flex submenu-link-v">Pricing</a>
+                      </li>
+                      <li>
+                        <a href="payment.html" class="py-2.5 px-3 hover:text-primary-300 duration-300 inline-flex submenu-link-v">Payment</a>
+                      </li>
+                      <li>
+                        <a href="maintenance.html" class="py-2.5 px-3 hover:text-primary-300 duration-300 inline-flex submenu-link-v">Maintanence</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li><a href="pricing-plan.html" class="block px-3 py-2.5 rounded-lg duration-300 hover:bg-primary-300 hover:text-neutral-0">Pricing</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- menu vertical -->
+          <div class="grid grid-cols-12 gap-3 xxl:gap-6 pb-14 lg:pb-28 max-md:pt-10">
+            <div class="p-3 sm:p-4 md:p-6 xl:p-8 rounded-xl border border-neutral-30 dark:border-neutral-500 col-span-12 xl:col-span-3 relative">
+              <h4 class="mb-6">Menu Vertical</h4>
+              <ul class="flex flex-col font-medium text-neutral-700 dark:text-neutral-10">
+                <li class="group">
+                  <button class="flex justify-between items-center py-3 w-full">
+                    <span class="flex items-center gap-2"
+                      ><span><i class="las la-home text-2xl text-primary-300"></i></span><span>Item 01</span></span
+                    >
+                    <i class="las la-plus group-hover:hidden"></i><i class="las la-minus hidden group-hover:inline-block"></i>
+                  </button>
+                  <div class="invisible xl:absolute ltr:left-full rtl:right-full top-8 max-xl:hidden max-xl:group-hover:block z-[15] xl:w-[650px] translate-y-2 text-sm opacity-0 duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                    <div class="overflow-hidden rounded-2xl bg-neutral-0 px-4 py-5 shadow-xl dark:bg-neutral-800 xxl:px-5 flex flex-col gap-10 lg:gap-14">
+                      <div class="relative flex w-full flex-wrap justify-between gap-5">
+                        <div class="flex flex-col gap-4 relative z-10">
+                          <h6 class="font-semibold">Other Machinery &amp; Parts</h6>
+                          <ul class="flex flex-col gap-2 text-neutral-100 dark:text-neutral-80">
+                            <li><a href="#" class="text-xs">Engines &amp; Gears</a></li>
+                            <li><a href="#" class="text-xs">Bearings &amp; Pumps</a></li>
+                            <li><a href="#" class="text-xs">Valves &amp; Motors</a></li>
+                            <li><a href="#" class="text-xs">Belts &amp; Chains</a></li>
+                            <li><a href="#" class="text-xs">Shafts &amp; Pulleys</a></li>
+                            <li><a href="#" class="text-xs">Couplings &amp; Hydraulics</a></li>
+                            <li><a href="#" class="text-xs">Pneumatics &amp; Actuators</a></li>
+                            <li><a href="#" class="text-xs">Filters &amp; Seals</a></li>
+                            <li><a href="#" class="text-xs">Springs &amp; Hoses</a></li>
+                            <li><a href="#" class="text-xs">Fans &amp; Clutches</a></li>
+                            <li><a href="#" class="text-xs">Bearings &amp; Pumps</a></li>
+                          </ul>
+                        </div>
+                        <div class="flex flex-col gap-4 relative z-10">
+                          <div class="flex flex-col gap-4">
+                            <h6 class="font-semibold">Plastic &amp; Woodworking</h6>
+                            <ul class="flex flex-col gap-2 text-neutral-100 dark:text-neutral-80">
+                              <li><a href="#" class="text-xs">Polyethylene (PE)</a></li>
+                              <li><a href="#" class="text-xs">Polypropylene (PP)</a></li>
+                              <li><a href="#" class="text-xs">Polyvinyl chloride (PVC)</a></li>
+                              <li><a href="#" class="text-xs">Polycarbonate (PC)</a></li>
+                              <li><a href="#" class="text-xs">PET (Polyethylene terephthalate)</a></li>
+                            </ul>
+                          </div>
+                          <div class="flex flex-col gap-4">
+                            <h6 class="font-semibold">Machine Tools</h6>
+                            <ul class="flex flex-col gap-2 text-neutral-100 dark:text-neutral-80">
+                              <li><a href="#" class="text-xs">Lumber (e.g., pine, oak, maple)</a></li>
+                              <li><a href="#" class="text-xs">Particleboard</a></li>
+                              <li><a href="#" class="text-xs">Wood glue</a></li>
+                              <li><a href="#" class="text-xs">Power tools (e.g., table saws, drills)</a></li>
+                              <li><a href="#" class="text-xs">Sandpaper</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="flex flex-col gap-4 relative z-10">
+                          <h6 class="font-semibold">Construction Machinery</h6>
+                          <ul class="flex flex-col gap-2 text-neutral-100 dark:text-neutral-80">
+                            <li><a href="#" class="text-xs">Excavators &amp; Bulldozers</a></li>
+                            <li><a href="#" class="text-xs">Loaders (front-end loaders)</a></li>
+                            <li><a href="#" class="text-xs">Backhoes &amp; Skid steer loaders</a></li>
+                            <li><a href="#" class="text-xs">Dump trucks &amp; Forklifts</a></li>
+                            <li><a href="#" class="text-xs">Concrete mixers &amp; Pavers</a></li>
+                            <li><a href="#" class="text-xs">Rollers (compactors)</a></li>
+                            <li><a href="#" class="text-xs">Graders &amp; Trenchers</a></li>
+                            <li><a href="#" class="text-xs">Jackhammers</a></li>
+                            <li><a href="#" class="text-xs">Scaffolding &amp; Wheel loaders</a></li>
+                            <li><a href="#" class="text-xs">Asphalt pavers</a></li>
+                            <li><a href="#" class="text-xs">Concrete pumps</a></li>
+                          </ul>
+                        </div>
+                        <div class="flex flex-col gap-4 relative z-10">
+                          <h6 class="font-semibold">Agriculture Machinery</h6>
+                          <ul class="flex flex-col gap-3 text-neutral-100 dark:text-neutral-80">
+                            <li><a href="#" class="text-xs">Tractors &amp; Plows</a></li>
+                            <li><a href="#" class="text-xs">Seeders &amp; Cultivators</a></li>
+                            <li><a href="#" class="text-xs">Sprayers &amp; Balers</a></li>
+                            <li><a href="#" class="text-xs">Irrigation equipment</a></li>
+                            <li><a href="#" class="text-xs">Mowers &amp; Spreaders</a></li>
+                            <li><a href="#" class="text-xs">Tillers &amp; Threshers</a></li>
+                            <li><a href="#" class="text-xs">Planters &amp; Grain carts</a></li>
+                            <li><a href="#" class="text-xs">Bale wrappers &amp; Windrowers</a></li>
+                            <li><a href="#" class="text-xs">Grain dryers &amp; Grain augers</a></li>
+                          </ul>
+                        </div>
+
+                        <!-- gradient shape 1 -->
+                        <div class="absolute z-[-1] right-0 top-0 h-[304px] w-[304px] rounded-full bg-error-400 opacity-[0.4] blur-[250px]"></div>
+                        <div class="absolute z-[-1] bottom-0 left-0 h-[304px] w-[304px] rounded-full bg-info-400 opacity-[0.4] blur-[250px]"></div>
+                        <!-- gradient shape 1 -->
+                      </div>
+                      <div>
+                        <div class="flex justify-between items-center border-b border-dashed border-primary-50 pb-5 mb-5">
+                          <h6 class="font-semibold">More Categories</h6>
+                          <div class="flex gap-3">
+                            <button class="cat-prev size-7 f-center rounded-full border border-primary-300 text-primary-300 hover:bg-primary-300 hover:text-neutral-0 duration-300"><i class="las la-angle-left"></i></button>
+                            <button class="cat-next size-7 f-center rounded-full border border-primary-300 text-primary-300 hover:bg-primary-300 hover:text-neutral-0 duration-300"><i class="las la-angle-right"></i></button>
+                          </div>
+                        </div>
+                        <div class="swiper more-categories">
+                          <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                              <img src="./assets/images/more-categories/cat-1.png" class="rounded-xl w-full" alt="" />
+                              <p class="text-xs mt-4">Electronics and Parts</p>
+                            </div>
+                            <div class="swiper-slide">
+                              <img src="./assets/images/more-categories/cat-2.png" class="rounded-xl w-full" alt="" />
+                              <p class="text-xs mt-4">Apparel and Accessories</p>
+                            </div>
+                            <div class="swiper-slide">
+                              <img src="./assets/images/more-categories/cat-3.png" class="rounded-xl w-full" alt="" />
+                              <p class="text-xs mt-4">Beauty and Personal Care</p>
+                            </div>
+                            <div class="swiper-slide">
+                              <img src="./assets/images/more-categories/cat-4.png" class="rounded-xl w-full" alt="" />
+                              <p class="text-xs mt-4">Sports and Equipment</p>
+                            </div>
+                            <div class="swiper-slide">
+                              <img src="./assets/images/more-categories/cat-5.png" class="rounded-xl w-full" alt="" />
+                              <p class="text-xs mt-4">Toys and Games Toys</p>
+                            </div>
+                            <div class="swiper-slide">
+                              <img src="./assets/images/more-categories/cat-6.png" class="rounded-xl w-full" alt="" />
+                              <p class="text-xs mt-4">Health Wellness Products</p>
+                            </div>
+                            <div class="swiper-slide">
+                              <img src="./assets/images/more-categories/cat-7.png" class="rounded-xl w-full" alt="" />
+                              <p class="text-xs mt-4">Furniture and Decor</p>
+                            </div>
+                            <div class="swiper-slide">
+                              <img src="./assets/images/more-categories/cat-8.png" class="rounded-xl w-full" alt="" />
+                              <p class="text-xs mt-4">Groceries and Food Products</p>
+                            </div>
+                            <div class="swiper-slide">
+                              <img src="./assets/images/more-categories/cat-1.png" class="rounded-xl w-full" alt="" />
+                              <p class="text-xs mt-4">Electronics and Parts</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="cat-pagination"></div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="group">
+                  <button class="flex justify-between items-center py-3 w-full">
+                    <span class="flex items-center gap-2">
+                      <span><i class="las la-piggy-bank text-2xl text-primary-300"></i></span><span>Item 02</span>
+                    </span>
+                    <i class="las la-plus group-hover:hidden"></i><i class="las la-minus hidden group-hover:inline-block"></i>
+                  </button>
+                  <div class="invisible xl:absolute max-xl:hidden max-xl:group-hover:block ltr:left-full rtl:right-full top-8 z-[15] xl:w-[650px] translate-y-2 text-sm opacity-0 duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                    <div class="relative flex w-full flex-wrap justify-between gap-5 overflow-hidden rounded-2xl bg-neutral-0 px-4 py-5 shadow-xl dark:bg-neutral-800 xxl:px-5">
+                      <div class="flex flex-col gap-4 relative z-10">
+                        <h6 class="font-semibold">Other Machinery &amp; Parts</h6>
+                        <ul class="flex flex-col gap-2 text-neutral-100 dark:text-neutral-80">
+                          <li><a href="#" class="text-xs">Engines &amp; Gears</a></li>
+                          <li><a href="#" class="text-xs">Bearings &amp; Pumps</a></li>
+                          <li><a href="#" class="text-xs">Valves &amp; Motors</a></li>
+                          <li><a href="#" class="text-xs">Belts &amp; Chains</a></li>
+                          <li><a href="#" class="text-xs">Shafts &amp; Pulleys</a></li>
+                          <li><a href="#" class="text-xs">Couplings &amp; Hydraulics</a></li>
+                          <li><a href="#" class="text-xs">Pneumatics &amp; Actuators</a></li>
+                          <li><a href="#" class="text-xs">Filters &amp; Seals</a></li>
+                          <li><a href="#" class="text-xs">Springs &amp; Hoses</a></li>
+                          <li><a href="#" class="text-xs">Fans &amp; Clutches</a></li>
+                          <li><a href="#" class="text-xs">Bearings &amp; Pumps</a></li>
+                        </ul>
+                      </div>
+                      <div class="flex flex-col gap-4 relative z-10">
+                        <div class="flex flex-col gap-4">
+                          <h6 class="font-semibold">Plastic &amp; Woodworking</h6>
+                          <ul class="flex flex-col gap-2 text-neutral-100 dark:text-neutral-80">
+                            <li><a href="#" class="text-xs">Polyethylene (PE)</a></li>
+                            <li><a href="#" class="text-xs">Polypropylene (PP)</a></li>
+                            <li><a href="#" class="text-xs">Polyvinyl chloride (PVC)</a></li>
+                            <li><a href="#" class="text-xs">Polycarbonate (PC)</a></li>
+                            <li><a href="#" class="text-xs">PET (Polyethylene terephthalate)</a></li>
+                          </ul>
+                        </div>
+                        <div class="flex flex-col gap-4">
+                          <h6 class="font-semibold">Machine Tools</h6>
+                          <ul class="flex flex-col gap-2 text-neutral-100 dark:text-neutral-80">
+                            <li><a href="#" class="text-xs">Lumber (e.g., pine, oak, maple)</a></li>
+                            <li><a href="#" class="text-xs">Particleboard</a></li>
+                            <li><a href="#" class="text-xs">Wood glue</a></li>
+                            <li><a href="#" class="text-xs">Power tools (e.g., table saws, drills)</a></li>
+                            <li><a href="#" class="text-xs">Sandpaper</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="flex flex-col gap-4 relative z-10">
+                        <h6 class="font-semibold">Construction Machinery</h6>
+                        <ul class="flex flex-col gap-2 text-neutral-100 dark:text-neutral-80">
+                          <li><a href="#" class="text-xs">Excavators &amp; Bulldozers</a></li>
+                          <li><a href="#" class="text-xs">Loaders (front-end loaders)</a></li>
+                          <li><a href="#" class="text-xs">Backhoes &amp; Skid steer loaders</a></li>
+                          <li><a href="#" class="text-xs">Dump trucks &amp; Forklifts</a></li>
+                          <li><a href="#" class="text-xs">Concrete mixers &amp; Pavers</a></li>
+                          <li><a href="#" class="text-xs">Rollers (compactors)</a></li>
+                          <li><a href="#" class="text-xs">Graders &amp; Trenchers</a></li>
+                          <li><a href="#" class="text-xs">Jackhammers</a></li>
+                          <li><a href="#" class="text-xs">Scaffolding &amp; Wheel loaders</a></li>
+                          <li><a href="#" class="text-xs">Asphalt pavers</a></li>
+                          <li><a href="#" class="text-xs">Concrete pumps</a></li>
+                        </ul>
+                      </div>
+                      <div class="flex flex-col gap-4 relative z-10">
+                        <h6 class="font-semibold">Agriculture Machinery</h6>
+                        <ul class="flex flex-col gap-3 text-neutral-100 dark:text-neutral-80">
+                          <li><a href="#" class="text-xs">Tractors &amp; Plows</a></li>
+                          <li><a href="#" class="text-xs">Seeders &amp; Cultivators</a></li>
+                          <li><a href="#" class="text-xs">Sprayers &amp; Balers</a></li>
+                          <li><a href="#" class="text-xs">Irrigation equipment</a></li>
+                          <li><a href="#" class="text-xs">Mowers &amp; Spreaders</a></li>
+                          <li><a href="#" class="text-xs">Tillers &amp; Threshers</a></li>
+                          <li><a href="#" class="text-xs">Planters &amp; Grain carts</a></li>
+                          <li><a href="#" class="text-xs">Bale wrappers &amp; Windrowers</a></li>
+                          <li><a href="#" class="text-xs">Grain dryers &amp; Grain augers</a></li>
+                        </ul>
+                      </div>
+
+                      <!-- gradient shape 1 -->
+                      <div class="absolute z-[-1] right-0 top-0 h-[304px] w-[304px] rounded-full bg-error-400 opacity-[0.4] blur-[250px]"></div>
+                      <div class="absolute z-[-1] bottom-0 left-0 h-[304px] w-[304px] rounded-full bg-info-400 opacity-[0.4] blur-[250px]"></div>
+                      <!-- gradient shape 1 -->
+                    </div>
+                  </div>
+                </li>
+                <li class="group">
+                  <button class="flex justify-between items-center py-3 w-full">
+                    <span class="flex items-center gap-2">
+                      <span><i class="las la-credit-card text-2xl text-primary-300"></i></span><span>Item 03</span>
+                    </span>
+                    <i class="las la-plus group-hover:hidden"></i><i class="las la-minus hidden group-hover:inline-block"></i>
+                  </button>
+                  <div class="invisible xl:absolute max-xl:hidden max-xl:group-hover:block ltr:left-full rtl:right-full top-8 z-[15] w-[300px] translate-y-2 text-sm opacity-0 duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                    <div class="relative flex w-full flex-wrap justify-between gap-5 overflow-hidden rounded-2xl bg-neutral-0 px-4 py-5 shadow-xl dark:bg-neutral-800 xxl:px-5">
+                      <div class="flex flex-col gap-4 relative z-10">
+                        <h6 class="font-semibold">Other Machinery &amp; Parts</h6>
+                        <ul class="flex flex-col gap-2 text-neutral-100 dark:text-neutral-80">
+                          <li><a href="#" class="text-xs">Engines &amp; Gears</a></li>
+                          <li><a href="#" class="text-xs">Bearings &amp; Pumps</a></li>
+                          <li><a href="#" class="text-xs">Valves &amp; Motors</a></li>
+                          <li><a href="#" class="text-xs">Belts &amp; Chains</a></li>
+                          <li><a href="#" class="text-xs">Shafts &amp; Pulleys</a></li>
+                          <li><a href="#" class="text-xs">Couplings &amp; Hydraulics</a></li>
+                          <li><a href="#" class="text-xs">Pneumatics &amp; Actuators</a></li>
+                          <li><a href="#" class="text-xs">Filters &amp; Seals</a></li>
+                          <li><a href="#" class="text-xs">Springs &amp; Hoses</a></li>
+                          <li><a href="#" class="text-xs">Fans &amp; Clutches</a></li>
+                          <li><a href="#" class="text-xs">Bearings &amp; Pumps</a></li>
+                        </ul>
+                      </div>
+
+                      <!-- gradient shape 1 -->
+                      <div class="absolute z-[-1] right-0 top-0 h-[304px] w-[304px] rounded-full bg-error-400 opacity-[0.4] blur-[250px]"></div>
+                      <div class="absolute z-[-1] bottom-0 left-0 h-[304px] w-[304px] rounded-full bg-info-400 opacity-[0.4] blur-[250px]"></div>
+                      <!-- gradient shape 1 -->
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <a href="#" class="flex items-center gap-2 py-3">
+                    <i class="las la-exchange-alt text-2xl text-primary-300"></i>
+                    <span>Item 04</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="rounded-xl col-span-12 xl:col-span-9">
+              <img src="./assets/images/carousel/thumb-1.png" class="h-full object-cover object-center rounded-xl" alt="" />
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+    <script src="./assets/js/libs/swiper-bundle.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

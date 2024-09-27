@@ -1,0 +1,511 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="./assets/css/github.min.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-4 xxxl:mb-6">Accordion</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Components</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Accordion</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div class="flex flex-col gap-10 lg:gap-[60px]">
+            <!-- Always Accordion -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h5 class="bb-dashed-n40">Always Open</h5>
+
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+              <div x-show="!viewcode">
+                <div
+                  x-data="{
+                      activeAccordions: ['accordion-1'],
+                      setActiveAccordion(id) {                                
+                          if (this.activeAccordions.includes(id)) {                    
+                          this.activeAccordions = this.activeAccordions.filter(item => item !== id);
+                          } else {                        
+                              this.activeAccordions.push(id);
+                          }
+                          }
+                      }"
+                  class="relative w-full mx-auto overflow-hidden text-sm font-normal flex flex-col gap-4 lg:gap-6"
+                >
+                  <div x-data="{ id: $id('accordion') }" class="cursor-pointer group bg-neutral-0 dark:bg-neutral-904 rounded-xl">
+                    <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full p-3 sm:p-4 md:p-5 xl:px-8 text-left select-none">
+                      <span class="l-text font-medium">Accordion 01</span>
+                      <span :class="activeAccordions.includes(id)?'bg-error-300 rotate-180':'bg-primary-300'" class="shrink-0 size-6 lg:size-9 rounded-full f-center text-xl text-neutral-0 font-medium duration-300">
+                        <i x-show="!activeAccordions.includes(id)" class="las la-plus"></i>
+                        <i x-show="activeAccordions.includes(id)" class="las la-minus"></i>
+                      </span>
+                    </button>
+                    <div x-show="activeAccordions.includes(id)" x-collapse x-cloak>
+                      <div class="px-4 md:px-5 xl:px-8">
+                        <p class="border-t border-dashed border-neutral-40 dark:border-neutral-500 py-4">
+                          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making
+                          it look like readable English.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div x-data="{ id: $id('accordion') }" class="cursor-pointer group bg-neutral-0 dark:bg-neutral-904 rounded-xl">
+                    <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full p-3 sm:p-4 md:p-5 xl:px-8 text-left select-none">
+                      <span class="l-text font-medium">Accordion 02</span>
+                      <span :class="activeAccordions.includes(id)?'bg-error-300 rotate-180':'bg-primary-300'" class="shrink-0 size-6 lg:size-9 rounded-full f-center text-xl text-neutral-0 font-medium duration-300">
+                        <i x-show="!activeAccordions.includes(id)" class="las la-plus"></i>
+                        <i x-show="activeAccordions.includes(id)" class="las la-minus"></i>
+                      </span>
+                    </button>
+                    <div x-show="activeAccordions.includes(id)" x-collapse x-cloak>
+                      <div class="px-4 md:px-5 xl:px-8">
+                        <p class="border-t border-dashed border-neutral-40 dark:border-neutral-500 py-4">
+                          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making
+                          it look like readable English.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div x-data="{ id: $id('accordion') }" class="cursor-pointer group bg-neutral-0 dark:bg-neutral-904 rounded-xl">
+                    <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full p-3 sm:p-4 md:p-5 xl:px-8 text-left select-none">
+                      <span class="l-text font-medium">Accordion 03</span>
+                      <span :class="activeAccordions.includes(id)?'bg-error-300 rotate-180':'bg-primary-300'" class="shrink-0 size-6 lg:size-9 rounded-full f-center text-xl text-neutral-0 font-medium duration-300">
+                        <i x-show="!activeAccordions.includes(id)" class="las la-plus"></i>
+                        <i x-show="activeAccordions.includes(id)" class="las la-minus"></i>
+                      </span>
+                    </button>
+                    <div x-show="activeAccordions.includes(id)" x-collapse x-cloak>
+                      <div class="px-4 md:px-5 xl:px-8">
+                        <p class="border-t border-dashed border-neutral-40 dark:border-neutral-500 py-4">
+                          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making
+                          it look like readable English.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div x-data="{ id: $id('accordion') }" class="cursor-pointer group bg-neutral-0 dark:bg-neutral-904 rounded-xl">
+                    <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full p-3 sm:p-4 md:p-5 xl:px-8 text-left select-none">
+                      <span class="l-text font-medium">Accordion 04</span>
+                      <span :class="activeAccordions.includes(id)?'bg-error-300 rotate-180':'bg-primary-300'" class="shrink-0 size-6 lg:size-9 rounded-full f-center text-xl text-neutral-0 font-medium duration-300">
+                        <i x-show="!activeAccordions.includes(id)" class="las la-plus"></i>
+                        <i x-show="activeAccordions.includes(id)" class="las la-minus"></i>
+                      </span>
+                    </button>
+                    <div x-show="activeAccordions.includes(id)" x-collapse x-cloak>
+                      <div class="px-4 md:px-5 xl:px-8">
+                        <p class="border-t border-dashed border-neutral-40 dark:border-neutral-500 py-4">
+                          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making
+                          it look like readable English.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div x-data="{ id: $id('accordion') }" class="cursor-pointer group bg-neutral-0 dark:bg-neutral-904 rounded-xl">
+                    <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full p-3 sm:p-4 md:p-5 xl:px-8 text-left select-none">
+                      <span class="l-text font-medium">Accordion 05</span>
+                      <span :class="activeAccordions.includes(id)?'bg-error-300 rotate-180':'bg-primary-300'" class="shrink-0 size-6 lg:size-9 rounded-full f-center text-xl text-neutral-0 font-medium duration-300">
+                        <i x-show="!activeAccordions.includes(id)" class="las la-plus"></i>
+                        <i x-show="activeAccordions.includes(id)" class="las la-minus"></i>
+                      </span>
+                    </button>
+                    <div x-show="activeAccordions.includes(id)" x-collapse x-cloak>
+                      <div class="px-4 md:px-5 xl:px-8">
+                        <p class="border-t border-dashed border-neutral-40 dark:border-neutral-500 py-4">
+                          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making
+                          it look like readable English.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div
+  x-data=&#x22;{
+      activeAccordions: [&#x27;accordion-1&#x27;],
+      setActiveAccordion(id) {                                
+          if (this.activeAccordions.includes(id)) {                    
+          this.activeAccordions = this.activeAccordions.filter(item =&#x3E; item !== id);
+          } else {                        
+              this.activeAccordions.push(id);
+          }
+          }
+      }&#x22;
+  class=&#x22;relative w-full mx-auto overflow-hidden text-sm font-normal flex flex-col gap-4 lg:gap-6&#x22;
+&#x3E;
+  &#x3C;div x-data=&#x22;{ id: $id(&#x27;accordion&#x27;) }&#x22; class=&#x22;cursor-pointer group bg-neutral-0 dark:bg-neutral-904 rounded-xl&#x22;&#x3E;
+    &#x3C;button @click=&#x22;setActiveAccordion(id)&#x22; class=&#x22;flex items-center justify-between w-full p-3 sm:p-4 md:p-5 xl:px-8 text-left select-none&#x22;&#x3E;
+      &#x3C;span class=&#x22;l-text font-medium&#x22;&#x3E;Accordion 01&#x3C;/span&#x3E;
+      &#x3C;span :class=&#x22;activeAccordions.includes(id)?&#x27;bg-error-300 rotate-180&#x27;:&#x27;bg-primary-300&#x27;&#x22; class=&#x22;shrink-0 size-6 lg:size-9 rounded-full f-center text-xl text-neutral-0 font-medium duration-300&#x22;&#x3E;
+        &#x3C;i x-show=&#x22;!activeAccordions.includes(id)&#x22; class=&#x22;las la-plus&#x22;&#x3E;&#x3C;/i&#x3E;
+        &#x3C;i x-show=&#x22;activeAccordions.includes(id)&#x22; class=&#x22;las la-minus&#x22;&#x3E;&#x3C;/i&#x3E;
+      &#x3C;/span&#x3E;
+    &#x3C;/button&#x3E;
+    &#x3C;div x-show=&#x22;activeAccordions.includes(id)&#x22; x-collapse x-cloak&#x3E;
+      &#x3C;div class=&#x22;px-4 md:px-5 xl:px-8&#x22;&#x3E;
+        &#x3C;p class=&#x22;border-t border-dashed border-neutral-40 dark:border-neutral-500 py-4&#x22;&#x3E;
+          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#x27;Content here, content here&#x27;, making
+          it look like readable English.
+        &#x3C;/p&#x3E;
+      &#x3C;/div&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div x-data=&#x22;{ id: $id(&#x27;accordion&#x27;) }&#x22; class=&#x22;cursor-pointer group bg-neutral-0 dark:bg-neutral-904 rounded-xl&#x22;&#x3E;
+    &#x3C;button @click=&#x22;setActiveAccordion(id)&#x22; class=&#x22;flex items-center justify-between w-full p-3 sm:p-4 md:p-5 xl:px-8 text-left select-none&#x22;&#x3E;
+      &#x3C;span class=&#x22;l-text font-medium&#x22;&#x3E;Accordion 02&#x3C;/span&#x3E;
+      &#x3C;span :class=&#x22;activeAccordions.includes(id)?&#x27;bg-error-300 rotate-180&#x27;:&#x27;bg-primary-300&#x27;&#x22; class=&#x22;shrink-0 size-6 lg:size-9 rounded-full f-center text-xl text-neutral-0 font-medium duration-300&#x22;&#x3E;
+        &#x3C;i x-show=&#x22;!activeAccordions.includes(id)&#x22; class=&#x22;las la-plus&#x22;&#x3E;&#x3C;/i&#x3E;
+        &#x3C;i x-show=&#x22;activeAccordions.includes(id)&#x22; class=&#x22;las la-minus&#x22;&#x3E;&#x3C;/i&#x3E;
+      &#x3C;/span&#x3E;
+    &#x3C;/button&#x3E;
+    &#x3C;div x-show=&#x22;activeAccordions.includes(id)&#x22; x-collapse x-cloak&#x3E;
+      &#x3C;div class=&#x22;px-4 md:px-5 xl:px-8&#x22;&#x3E;
+        &#x3C;p class=&#x22;border-t border-dashed border-neutral-40 dark:border-neutral-500 py-4&#x22;&#x3E;
+          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#x27;Content here, content here&#x27;, making
+          it look like readable English.
+        &#x3C;/p&#x3E;
+      &#x3C;/div&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div x-data=&#x22;{ id: $id(&#x27;accordion&#x27;) }&#x22; class=&#x22;cursor-pointer group bg-neutral-0 dark:bg-neutral-904 rounded-xl&#x22;&#x3E;
+    &#x3C;button @click=&#x22;setActiveAccordion(id)&#x22; class=&#x22;flex items-center justify-between w-full p-3 sm:p-4 md:p-5 xl:px-8 text-left select-none&#x22;&#x3E;
+      &#x3C;span class=&#x22;l-text font-medium&#x22;&#x3E;Accordion 03&#x3C;/span&#x3E;
+      &#x3C;span :class=&#x22;activeAccordions.includes(id)?&#x27;bg-error-300 rotate-180&#x27;:&#x27;bg-primary-300&#x27;&#x22; class=&#x22;shrink-0 size-6 lg:size-9 rounded-full f-center text-xl text-neutral-0 font-medium duration-300&#x22;&#x3E;
+        &#x3C;i x-show=&#x22;!activeAccordions.includes(id)&#x22; class=&#x22;las la-plus&#x22;&#x3E;&#x3C;/i&#x3E;
+        &#x3C;i x-show=&#x22;activeAccordions.includes(id)&#x22; class=&#x22;las la-minus&#x22;&#x3E;&#x3C;/i&#x3E;
+      &#x3C;/span&#x3E;
+    &#x3C;/button&#x3E;
+    &#x3C;div x-show=&#x22;activeAccordions.includes(id)&#x22; x-collapse x-cloak&#x3E;
+      &#x3C;div class=&#x22;px-4 md:px-5 xl:px-8&#x22;&#x3E;
+        &#x3C;p class=&#x22;border-t border-dashed border-neutral-40 dark:border-neutral-500 py-4&#x22;&#x3E;
+          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#x27;Content here, content here&#x27;, making
+          it look like readable English.
+        &#x3C;/p&#x3E;
+      &#x3C;/div&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div x-data=&#x22;{ id: $id(&#x27;accordion&#x27;) }&#x22; class=&#x22;cursor-pointer group bg-neutral-0 dark:bg-neutral-904 rounded-xl&#x22;&#x3E;
+    &#x3C;button @click=&#x22;setActiveAccordion(id)&#x22; class=&#x22;flex items-center justify-between w-full p-3 sm:p-4 md:p-5 xl:px-8 text-left select-none&#x22;&#x3E;
+      &#x3C;span class=&#x22;l-text font-medium&#x22;&#x3E;Accordion 04&#x3C;/span&#x3E;
+      &#x3C;span :class=&#x22;activeAccordions.includes(id)?&#x27;bg-error-300 rotate-180&#x27;:&#x27;bg-primary-300&#x27;&#x22; class=&#x22;shrink-0 size-6 lg:size-9 rounded-full f-center text-xl text-neutral-0 font-medium duration-300&#x22;&#x3E;
+        &#x3C;i x-show=&#x22;!activeAccordions.includes(id)&#x22; class=&#x22;las la-plus&#x22;&#x3E;&#x3C;/i&#x3E;
+        &#x3C;i x-show=&#x22;activeAccordions.includes(id)&#x22; class=&#x22;las la-minus&#x22;&#x3E;&#x3C;/i&#x3E;
+      &#x3C;/span&#x3E;
+    &#x3C;/button&#x3E;
+    &#x3C;div x-show=&#x22;activeAccordions.includes(id)&#x22; x-collapse x-cloak&#x3E;
+      &#x3C;div class=&#x22;px-4 md:px-5 xl:px-8&#x22;&#x3E;
+        &#x3C;p class=&#x22;border-t border-dashed border-neutral-40 dark:border-neutral-500 py-4&#x22;&#x3E;
+          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#x27;Content here, content here&#x27;, making
+          it look like readable English.
+        &#x3C;/p&#x3E;
+      &#x3C;/div&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div x-data=&#x22;{ id: $id(&#x27;accordion&#x27;) }&#x22; class=&#x22;cursor-pointer group bg-neutral-0 dark:bg-neutral-904 rounded-xl&#x22;&#x3E;
+    &#x3C;button @click=&#x22;setActiveAccordion(id)&#x22; class=&#x22;flex items-center justify-between w-full p-3 sm:p-4 md:p-5 xl:px-8 text-left select-none&#x22;&#x3E;
+      &#x3C;span class=&#x22;l-text font-medium&#x22;&#x3E;Accordion 05&#x3C;/span&#x3E;
+      &#x3C;span :class=&#x22;activeAccordions.includes(id)?&#x27;bg-error-300 rotate-180&#x27;:&#x27;bg-primary-300&#x27;&#x22; class=&#x22;shrink-0 size-6 lg:size-9 rounded-full f-center text-xl text-neutral-0 font-medium duration-300&#x22;&#x3E;
+        &#x3C;i x-show=&#x22;!activeAccordions.includes(id)&#x22; class=&#x22;las la-plus&#x22;&#x3E;&#x3C;/i&#x3E;
+        &#x3C;i x-show=&#x22;activeAccordions.includes(id)&#x22; class=&#x22;las la-minus&#x22;&#x3E;&#x3C;/i&#x3E;
+      &#x3C;/span&#x3E;
+    &#x3C;/button&#x3E;
+    &#x3C;div x-show=&#x22;activeAccordions.includes(id)&#x22; x-collapse x-cloak&#x3E;
+      &#x3C;div class=&#x22;px-4 md:px-5 xl:px-8&#x22;&#x3E;
+        &#x3C;p class=&#x22;border-t border-dashed border-neutral-40 dark:border-neutral-500 py-4&#x22;&#x3E;
+          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#x27;Content here, content here&#x27;, making
+          it look like readable English.
+        &#x3C;/p&#x3E;
+      &#x3C;/div&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+            <!-- Single Item Open Accordion -->
+            <div x-data="copyorviewcode" class="n20-box">
+              <h5 class="bb-dashed-n40">Single Item Open</h5>
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <div x-show="!viewcode">
+                <div
+                  x-data="{
+                                activeAccordion: 'accordion-6',
+                                setActiveAccordion(id) {                              
+                                    this.activeAccordion = (this.activeAccordion == id) ? '' : id 
+                                    }
+                                }"
+                  class="relative w-full mx-auto overflow-hidden text-sm font-normal flex flex-col gap-4 lg:gap-6"
+                >
+                  <div x-data="{ id: $id('accordion') }" class="cursor-pointer group bg-neutral-0 dark:bg-neutral-904 rounded-xl">
+                    <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full p-3 sm:p-4 md:p-5 xl:px-8 text-left select-none">
+                      <div class="flex justify-between grow items-center gap-3">
+                        <p class="l-text font-semibold">How can I contact customer support?</p>
+                        <span :class="activeAccordion==id?'bg-error-300 rotate-180':'bg-primary-300'" class="shrink-0 size-6 lg:size-9 rounded-full f-center xl-text text-neutral-0 font-medium duration-300">
+                          <i x-show="activeAccordion!=id" class="las la-plus"></i>
+                          <i x-show="activeAccordion==id" class="las la-minus"></i>
+                        </span>
+                      </div>
+                    </button>
+                    <div x-show="activeAccordion==id" x-collapse x-cloak>
+                      <div class="px-4 md:px-5 xl:px-8">
+                        <p class="border-t border-dashed border-neutral-40 dark:border-neutral-500 py-4">
+                          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making
+                          it look like readable English.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div x-data="{ id: $id('accordion') }" class="cursor-pointer group bg-neutral-0 dark:bg-neutral-904 rounded-xl">
+                    <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full p-3 sm:p-4 md:p-5 xl:px-8 text-left select-none">
+                      <div class="flex justify-between grow items-center gap-3">
+                        <p class="l-text font-semibold">Is there a refund policy?</p>
+                        <span :class="activeAccordion==id?'bg-error-300 rotate-180':'bg-primary-300'" class="shrink-0 size-6 lg:size-9 rounded-full f-center xl-text text-neutral-0 font-medium duration-300">
+                          <i x-show="activeAccordion!=id" class="las la-plus"></i>
+                          <i x-show="activeAccordion==id" class="las la-minus"></i>
+                        </span>
+                      </div>
+                    </button>
+                    <div x-show="activeAccordion==id" x-collapse x-cloak>
+                      <div class="px-4 md:px-5 xl:px-8">
+                        <p class="border-t border-dashed border-neutral-40 dark:border-neutral-500 py-4">
+                          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making
+                          it look like readable English.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div x-data="{ id: $id('accordion') }" class="cursor-pointer group bg-neutral-0 dark:bg-neutral-904 rounded-xl">
+                    <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full p-3 sm:p-4 md:p-5 xl:px-8 text-left select-none">
+                      <div class="flex justify-between grow items-center gap-3">
+                        <p class="l-text font-semibold">How does your pricing structure work?</p>
+                        <span :class="activeAccordion==id?'bg-error-300 rotate-180':'bg-primary-300'" class="shrink-0 size-6 lg:size-9 rounded-full f-center xl-text text-neutral-0 font-medium duration-300">
+                          <i x-show="activeAccordion!=id" class="las la-plus"></i>
+                          <i x-show="activeAccordion==id" class="las la-minus"></i>
+                        </span>
+                      </div>
+                    </button>
+                    <div x-show="activeAccordion==id" x-collapse x-cloak>
+                      <div class="px-4 md:px-5 xl:px-8">
+                        <p class="border-t border-dashed border-neutral-40 dark:border-neutral-500 py-4">
+                          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making
+                          it look like readable English.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div x-data="{ id: $id('accordion') }" class="cursor-pointer group bg-neutral-0 dark:bg-neutral-904 rounded-xl">
+                    <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full p-3 sm:p-4 md:p-5 xl:px-8 text-left select-none">
+                      <div class="flex justify-between grow items-center gap-3">
+                        <p class="l-text font-semibold">How do I create an account?</p>
+                        <span :class="activeAccordion==id?'bg-error-300 rotate-180':'bg-primary-300'" class="shrink-0 size-6 lg:size-9 rounded-full f-center xl-text text-neutral-0 font-medium duration-300">
+                          <i x-show="activeAccordion!=id" class="las la-plus"></i>
+                          <i x-show="activeAccordion==id" class="las la-minus"></i>
+                        </span>
+                      </div>
+                    </button>
+                    <div x-show="activeAccordion ==id" x-collapse x-cloak>
+                      <div class="px-4 md:px-5 xl:px-8">
+                        <p class="border-t border-dashed border-neutral-40 dark:border-neutral-500 py-4">
+                          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making
+                          it look like readable English.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div x-data="{ id: $id('accordion') }" class="cursor-pointer group bg-neutral-0 dark:bg-neutral-904 rounded-xl">
+                    <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full p-3 sm:p-4 md:p-5 xl:px-8 text-left select-none">
+                      <div class="flex justify-between grow items-center gap-3">
+                        <p class="l-text font-semibold">How do I track my order?</p>
+                        <span :class="activeAccordion==id?'bg-error-300 rotate-180':'bg-primary-300'" class="shrink-0 size-6 lg:size-9 rounded-full f-center xl-text text-neutral-0 font-medium duration-300">
+                          <i x-show="activeAccordion!=id" class="las la-plus"></i>
+                          <i x-show="activeAccordion==id" class="las la-minus"></i>
+                        </span>
+                      </div>
+                    </button>
+                    <div x-show="activeAccordion==id" x-collapse x-cloak>
+                      <div class="px-4 md:px-5 xl:px-8">
+                        <p class="border-t border-dashed border-neutral-40 dark:border-neutral-500 py-4">
+                          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making
+                          it look like readable English.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div
+x-data=&#x22;{
+            activeAccordion: &#x27;accordion-6&#x27;,
+            setActiveAccordion(id) {                              
+                this.activeAccordion = (this.activeAccordion == id) ? &#x27;&#x27; : id 
+                }
+            }&#x22;
+class=&#x22;relative w-full mx-auto overflow-hidden text-sm font-normal flex flex-col gap-4 lg:gap-6&#x22;
+&#x3E;
+&#x3C;div x-data=&#x22;{ id: $id(&#x27;accordion&#x27;) }&#x22; class=&#x22;cursor-pointer group bg-neutral-0 dark:bg-neutral-904 rounded-xl&#x22;&#x3E;
+  &#x3C;button @click=&#x22;setActiveAccordion(id)&#x22; class=&#x22;flex items-center justify-between w-full p-3 sm:p-4 md:p-5 xl:px-8 text-left select-none&#x22;&#x3E;
+    &#x3C;div class=&#x22;flex justify-between grow items-center gap-3&#x22;&#x3E;
+      &#x3C;p class=&#x22;l-text font-semibold&#x22;&#x3E;How can I contact customer support?&#x3C;/p&#x3E;
+      &#x3C;span :class=&#x22;activeAccordion==id?&#x27;bg-error-300 rotate-180&#x27;:&#x27;bg-primary-300&#x27;&#x22; class=&#x22;shrink-0 size-6 lg:size-9 rounded-full f-center xl-text text-neutral-0 font-medium duration-300&#x22;&#x3E;
+        &#x3C;i x-show=&#x22;activeAccordion!=id&#x22; class=&#x22;las la-plus&#x22;&#x3E;&#x3C;/i&#x3E;
+        &#x3C;i x-show=&#x22;activeAccordion==id&#x22; class=&#x22;las la-minus&#x22;&#x3E;&#x3C;/i&#x3E;
+      &#x3C;/span&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/button&#x3E;
+  &#x3C;div x-show=&#x22;activeAccordion==id&#x22; x-collapse x-cloak&#x3E;
+    &#x3C;div class=&#x22;px-4 md:px-5 xl:px-8&#x22;&#x3E;
+      &#x3C;p class=&#x22;border-t border-dashed border-neutral-40 dark:border-neutral-500 py-4&#x22;&#x3E;
+        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#x27;Content here, content here&#x27;, making
+        it look like readable English.
+      &#x3C;/p&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+&#x3C;div x-data=&#x22;{ id: $id(&#x27;accordion&#x27;) }&#x22; class=&#x22;cursor-pointer group bg-neutral-0 dark:bg-neutral-904 rounded-xl&#x22;&#x3E;
+  &#x3C;button @click=&#x22;setActiveAccordion(id)&#x22; class=&#x22;flex items-center justify-between w-full p-3 sm:p-4 md:p-5 xl:px-8 text-left select-none&#x22;&#x3E;
+    &#x3C;div class=&#x22;flex justify-between grow items-center gap-3&#x22;&#x3E;
+      &#x3C;p class=&#x22;l-text font-semibold&#x22;&#x3E;Is there a refund policy?&#x3C;/p&#x3E;
+      &#x3C;span :class=&#x22;activeAccordion==id?&#x27;bg-error-300 rotate-180&#x27;:&#x27;bg-primary-300&#x27;&#x22; class=&#x22;shrink-0 size-6 lg:size-9 rounded-full f-center xl-text text-neutral-0 font-medium duration-300&#x22;&#x3E;
+        &#x3C;i x-show=&#x22;activeAccordion!=id&#x22; class=&#x22;las la-plus&#x22;&#x3E;&#x3C;/i&#x3E;
+        &#x3C;i x-show=&#x22;activeAccordion==id&#x22; class=&#x22;las la-minus&#x22;&#x3E;&#x3C;/i&#x3E;
+      &#x3C;/span&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/button&#x3E;
+  &#x3C;div x-show=&#x22;activeAccordion==id&#x22; x-collapse x-cloak&#x3E;
+    &#x3C;div class=&#x22;px-4 md:px-5 xl:px-8&#x22;&#x3E;
+      &#x3C;p class=&#x22;border-t border-dashed border-neutral-40 dark:border-neutral-500 py-4&#x22;&#x3E;
+        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#x27;Content here, content here&#x27;, making
+        it look like readable English.
+      &#x3C;/p&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+&#x3C;div x-data=&#x22;{ id: $id(&#x27;accordion&#x27;) }&#x22; class=&#x22;cursor-pointer group bg-neutral-0 dark:bg-neutral-904 rounded-xl&#x22;&#x3E;
+  &#x3C;button @click=&#x22;setActiveAccordion(id)&#x22; class=&#x22;flex items-center justify-between w-full p-3 sm:p-4 md:p-5 xl:px-8 text-left select-none&#x22;&#x3E;
+    &#x3C;div class=&#x22;flex justify-between grow items-center gap-3&#x22;&#x3E;
+      &#x3C;p class=&#x22;l-text font-semibold&#x22;&#x3E;How does your pricing structure work?&#x3C;/p&#x3E;
+      &#x3C;span :class=&#x22;activeAccordion==id?&#x27;bg-error-300 rotate-180&#x27;:&#x27;bg-primary-300&#x27;&#x22; class=&#x22;shrink-0 size-6 lg:size-9 rounded-full f-center xl-text text-neutral-0 font-medium duration-300&#x22;&#x3E;
+        &#x3C;i x-show=&#x22;activeAccordion!=id&#x22; class=&#x22;las la-plus&#x22;&#x3E;&#x3C;/i&#x3E;
+        &#x3C;i x-show=&#x22;activeAccordion==id&#x22; class=&#x22;las la-minus&#x22;&#x3E;&#x3C;/i&#x3E;
+      &#x3C;/span&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/button&#x3E;
+  &#x3C;div x-show=&#x22;activeAccordion==id&#x22; x-collapse x-cloak&#x3E;
+    &#x3C;div class=&#x22;px-4 md:px-5 xl:px-8&#x22;&#x3E;
+      &#x3C;p class=&#x22;border-t border-dashed border-neutral-40 dark:border-neutral-500 py-4&#x22;&#x3E;
+        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#x27;Content here, content here&#x27;, making
+        it look like readable English.
+      &#x3C;/p&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+&#x3C;div x-data=&#x22;{ id: $id(&#x27;accordion&#x27;) }&#x22; class=&#x22;cursor-pointer group bg-neutral-0 dark:bg-neutral-904 rounded-xl&#x22;&#x3E;
+  &#x3C;button @click=&#x22;setActiveAccordion(id)&#x22; class=&#x22;flex items-center justify-between w-full p-3 sm:p-4 md:p-5 xl:px-8 text-left select-none&#x22;&#x3E;
+    &#x3C;div class=&#x22;flex justify-between grow items-center gap-3&#x22;&#x3E;
+      &#x3C;p class=&#x22;l-text font-semibold&#x22;&#x3E;How do I create an account?&#x3C;/p&#x3E;
+      &#x3C;span :class=&#x22;activeAccordion==id?&#x27;bg-error-300 rotate-180&#x27;:&#x27;bg-primary-300&#x27;&#x22; class=&#x22;shrink-0 size-6 lg:size-9 rounded-full f-center xl-text text-neutral-0 font-medium duration-300&#x22;&#x3E;
+        &#x3C;i x-show=&#x22;activeAccordion!=id&#x22; class=&#x22;las la-plus&#x22;&#x3E;&#x3C;/i&#x3E;
+        &#x3C;i x-show=&#x22;activeAccordion==id&#x22; class=&#x22;las la-minus&#x22;&#x3E;&#x3C;/i&#x3E;
+      &#x3C;/span&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/button&#x3E;
+  &#x3C;div x-show=&#x22;activeAccordion ==id&#x22; x-collapse x-cloak&#x3E;
+    &#x3C;div class=&#x22;px-4 md:px-5 xl:px-8&#x22;&#x3E;
+      &#x3C;p class=&#x22;border-t border-dashed border-neutral-40 dark:border-neutral-500 py-4&#x22;&#x3E;
+        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#x27;Content here, content here&#x27;, making
+        it look like readable English.
+      &#x3C;/p&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+&#x3C;div x-data=&#x22;{ id: $id(&#x27;accordion&#x27;) }&#x22; class=&#x22;cursor-pointer group bg-neutral-0 dark:bg-neutral-904 rounded-xl&#x22;&#x3E;
+  &#x3C;button @click=&#x22;setActiveAccordion(id)&#x22; class=&#x22;flex items-center justify-between w-full p-3 sm:p-4 md:p-5 xl:px-8 text-left select-none&#x22;&#x3E;
+    &#x3C;div class=&#x22;flex justify-between grow items-center gap-3&#x22;&#x3E;
+      &#x3C;p class=&#x22;l-text font-semibold&#x22;&#x3E;How do I track my order?&#x3C;/p&#x3E;
+      &#x3C;span :class=&#x22;activeAccordion==id?&#x27;bg-error-300 rotate-180&#x27;:&#x27;bg-primary-300&#x27;&#x22; class=&#x22;shrink-0 size-6 lg:size-9 rounded-full f-center xl-text text-neutral-0 font-medium duration-300&#x22;&#x3E;
+        &#x3C;i x-show=&#x22;activeAccordion!=id&#x22; class=&#x22;las la-plus&#x22;&#x3E;&#x3C;/i&#x3E;
+        &#x3C;i x-show=&#x22;activeAccordion==id&#x22; class=&#x22;las la-minus&#x22;&#x3E;&#x3C;/i&#x3E;
+      &#x3C;/span&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/button&#x3E;
+  &#x3C;div x-show=&#x22;activeAccordion==id&#x22; x-collapse x-cloak&#x3E;
+    &#x3C;div class=&#x22;px-4 md:px-5 xl:px-8&#x22;&#x3E;
+      &#x3C;p class=&#x22;border-t border-dashed border-neutral-40 dark:border-neutral-500 py-4&#x22;&#x3E;
+        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#x27;Content here, content here&#x27;, making
+        it look like readable English.
+      &#x3C;/p&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/highlight.js"></script>
+    <script src="./assets/js/libs/sweetalert.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,312 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="./assets/css/tom-select.min.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/quill.min.css" />
+    <link rel="stylesheet" href="./assets/css/dropzone.min.css" />
+    <script src="./assets/js/libs/pristine.js"></script>
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">From Validation</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Forms</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>From Validation</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- form validation -->
+        <section class="white-box text-neutral-700 dark:text-neutral-20">
+          <div x-data="{name:'',email:'',age:'',password:'',checkbox:false, switch2:false, radio2:'',debug:false, multiple:null,confirm_pass:'',singleOne:null,}">
+            <div class="p-3 sm:p-4 md:p-6 xl:p-8 rounded-xl border border-neutral-30 dark:border-neutral-500">
+              <div class="border-b border-dashed border-primary-50 mb-5 pb-5">
+                <h4 class="mb-4">Validation Input Field</h4>
+                <label for="switch14" class="switch flex">
+                  <input id="switch14" type="checkbox" x-model="debug" />
+                  <span class="inner primary"></span>
+                  Show Debug
+                </label>
+              </div>
+              <div x-data="validateform" x-init="init">
+                <form x-on:submit.prevent="onSubmit()" id="signup-form" class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+                  <div>
+                    <div class="form-group mb-6">
+                      <div class="form-input">
+                        <input type="text" id="full-name" x-model="name" placeholder="John Doe" required />
+                        <label for="full-name">Full Name</label>
+                      </div>
+                    </div>
+                    <div class="form-group mb-6">
+                      <div class="form-input">
+                        <input type="email" id="email" x-model:="email" placeholder="john@example.com" required />
+                        <label for="email">Email Address</label>
+                      </div>
+                    </div>
+                    <div class="form-group mb-6">
+                      <div class="form-input">
+                        <input type="number" x-model:="age" id="age" placeholder="18" required />
+                        <label for="age">Age</label>
+                      </div>
+                    </div>
+                    <div class="form-group mb-6">
+                      <div x-data="{showPass: false}" class="form-input">
+                        <input :type="showPass?'text':'password'" x-model:="password" id="pass2" placeholder="Textfield" required />
+                        <label for="pass2">Password</label>
+                        <span @click="showPass = !showPass" class="absolute rtl:left-5 ltr:right-5 top-1/2 flex size-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full duration-300 hover:bg-neutral-40 dark:hover:bg-neutral-700">
+                          <i x-show="showPass" class="las la-eye text-2xl"></i>
+                          <i x-show="!showPass" class="las la-eye-slash text-2xl"></i>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group mb-6">
+                      <div x-data="{showPass: false}" class="form-input">
+                        <input :type="showPass?'text':'password'" x-model:="confirm_pass" id="confirm_pass" placeholder="Textfield" required />
+                        <label for="confirm_pass">Password</label>
+                        <span @click="showPass = !showPass" class="absolute ltr:right-5 rtl:left-5 top-1/2 flex size-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full duration-300 hover:bg-neutral-40 dark:hover:bg-neutral-700">
+                          <i x-show="showPass" class="las la-eye text-2xl"></i>
+                          <i x-show="!showPass" class="las la-eye-slash text-2xl"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="form-group mb-6">
+                      <div
+                        x-data="{
+                          selectOpen:false,
+                          selectedItem:null,
+                          searchText:'',
+                          optionList: [],
+                          async fetchCountries() {
+                              try {
+                                  const response = await fetch('https://restcountries.com/v3.1/all?fields=name,flags');
+                                  const data = await response.json();                                       
+                                  this.optionList = data.map(country => ({
+                                      title: country.name.common,
+                                      flag: country.flags.svg
+                                  }));
+                              } catch (error) {
+                                  console.error('Error fetching countries:', error);
+                              }
+                          },
+                          filteredOptions() {
+                              if (this.searchText.trim() === '') {
+                                  return this.optionList;
+                              } else {
+                                  return this.optionList.filter(option => option.title.toLowerCase().includes(this.searchText.trim().toLowerCase()));
+                              }
+                          }
+                      }"
+                        x-init="fetchCountries()"
+                        class="relative"
+                      >
+                        <div @click="selectOpen=!selectOpen" class="py-3 lg:py-4 px-3 sm:px-4 lg:px-6 rounded-xl flex items-center gap-3 w-full border bg-neutral-0 dark:bg-neutral-904 border-neutral-40 dark:border-neutral-500 relative form-autocomplete">
+                          <img x-show="selectedItem && selectedItem.title==searchText" class="size-6 rounded-full object-cover object-center" :src="selectedItem && selectedItem.flag" alt="flag" />
+                          <input type="text" placeholder="Select Country" x-model="searchText" :value="selectedItem?.title?selectedItem?.title:'Select Country'" class="w-full bg-transparent capitalize" required />
+                          <span class="absolute inset-y-0 ltr:right-0 rtl:left-0 flex items-center ltr:pr-3 ltr:md:pr-4 ltr:lg:pr-6 rtl:pl-3 rtl:xl:pl-6 pointer-events-none">
+                            <i class="las la-angle-down"></i>
+                          </span>
+                        </div>
+                        <ul x-show="selectOpen" @click.away="selectOpen=false" class="py-1 rounded-xl bg-neutral-0 dark:bg-neutral-904 absolute top-full left-0 ltr:right-0 rtl:left-0 w-full shadow-xl z-[3] max-h-[250px] overflow-y-auto">
+                          <template x-for="option in filteredOptions()" :key="option.title">
+                            <li
+                              @click="selectedItem=option,selectOpen=false,searchText=option.title"
+                              :class="selectedItem==option?'bg-primary-300 text-neutral-0':''"
+                              class="py-2 ltr:pl-6 rtl:pr-6 hover:bg-primary-300 flex items-center gap-2 hover:text-neutral-0 duration-300 cursor-pointer capitalize"
+                            >
+                              <img :src="option?.flag" alt="flag" class="size-6 shrink-0 rounded-full object-cover object-center" />
+                              <span x-text="option.title"></span>
+                            </li>
+                          </template>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="form-group mb-6">
+                      <div
+                        x-data="{
+                                selectOpen: false,
+                                selectedItems: [],
+                                searchText: '',
+                                optionList: [],
+                                async fetchCountries() {
+                                    try {
+                                        const response = await fetch('https://restcountries.com/v3.1/all?fields=name,flags');
+                                        const data = await response.json();                                       
+                                        this.optionList = data.map(country => ({
+                                            title: country.name.common,
+                                            flag: country.flags.svg
+                                        }));
+                                    } catch (error) {
+                                        console.error('Error fetching countries:', error);
+                                    }
+                                },
+                                filteredOptions() {
+                                    if (this.searchText.trim() === '') {
+                                        return this.optionList;
+                                    } else {
+                                        return this.optionList.filter(option => option.title.toLowerCase().includes(this.searchText.trim().toLowerCase()));
+                                    }
+                                },
+                                toggleItem(item) {
+                                    const index = this.selectedItems.findIndex(selectedItem => selectedItem.title === item.title);
+                                    if (index === -1) {
+                                        // If item not already selected, add it to selectedItems array
+                                        this.selectedItems.push(item);
+                                    } else {
+                                        // If item already selected, remove it from selectedItems array
+                                        this.selectedItems.splice(index, 1);
+                                    }
+                                    console.log(this.selectedItems)
+                                },
+                                isSelected(item) {
+                                    return this.selectedItems.findIndex(selectedItem => selectedItem.title === item.title) !== -1;
+                                }
+                            }"
+                        x-init="fetchCountries()"
+                        class="relative mt-4"
+                      >
+                        <div @click="selectOpen = !selectOpen" class="py-3 lg:py-4 px-3 sm:px-4 lg:px-6 lg:pr-10 rounded-xl w-full border bg-neutral-0 dark:bg-neutral-904 border-neutral-40 dark:border-neutral-500 relative flex gap-1 flex-wrap form-autocomplete">
+                          <div x-show="selectedItems.length" class="flex gap-2 flex-wrap">
+                            <template x-for="item in selectedItems">
+                              <div class="px-1.5 py-0.5 rounded-full bg-neutral-20 dark:bg-neutral-500 flex items-center gap-2 border border-neutral-40 dark:border-neutral-600 text-neutral-700 dark:text-neutral-20">
+                                <div class="flex gap-2 items-center">
+                                  <img x-show="selectedItems.length" class="size-6 rounded-full object-cover object-center" :src="item && item.flag" alt="flag" />
+                                  <span x-text="item.title" class="text-xs"></span>
+                                </div>
+                                <span @click.stop="toggleItem(item)" class="text-xs rounded-full size-4 bg-neutral-70 text-neutral-10 f-center">
+                                  <i class="las la-times"></i>
+                                </span>
+                              </div>
+                            </template>
+                          </div>
+                          <input type="text" placeholder="Choose countries" :value="selectedItems.length ? selectedItems.map(item => item.title).join(', ') : ''" x-model="searchText" class="w-full bg-transparent capitalize text-sm" required />
+                          <span class="absolute inset-y-0 ltr:right-0 rtl:left-0 flex items-center ltr:pr-3 ltr:md:pr-4 ltr:lg:pr-6 rtl:pl-3 rtl:xl:pl-6 pointer-events-none">
+                            <i class="las la-angle-down"></i>
+                          </span>
+                        </div>
+                        <ul x-show="selectOpen" @click.away="selectOpen = false" class="py-1 rounded-xl bg-neutral-0 dark:bg-neutral-904 absolute top-full left-0 ltr:right-0 rtl:left-0 w-full shadow-xl z-[3] max-h-[250px] overflow-y-auto">
+                          <template x-for="option in filteredOptions()" :key="option.title">
+                            <li @click="toggleItem(option)" :class="isSelected(option)?'bg-primary-50 dark:bg-neutral-600':''" class="py-2 ltr:pl-6 rtl:pr-6 hover:bg-primary-300 flex items-center gap-2 hover:text-neutral-0 duration-300 cursor-pointer capitalize">
+                              <img :src="option?.flag" alt="flag" class="size-6 shrink-0 rounded-full object-cover object-center" />
+                              <span x-text="option.title"></span>
+                            </li>
+                          </template>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="mb-6 form-group">
+                      <select x-model="singleOne" id="tom-single" data-placeholder="Select item" required>
+                        <option value="">Select</option>
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="GBP">GBP</option>
+                        <option value="JPY">JPY</option>
+                        <option value="CAD">CAD</option>
+                        <option value="CNR">CNR</option>
+                        <option value="INR">INR</option>
+                        <option value="RUB">RUB</option>
+                      </select>
+                    </div>
+                    <div class="multiple-select mb-6 xxl:mb-8 form-group">
+                      <select x-model="multiple" id="select-tags" multiple data-placeholder="Best movies and TV shows" required>
+                        <optgroup label="TV Shows">
+                          <option value="Blue Bloods" data-date="2010-2021">Blue Bloods</option>
+                          <option value="Magnum P.I." data-date="1980-1988">Magnum P.I.</option>
+                        </optgroup>
+                        <optgroup label="Movies">
+                          <option value="An Innocent Man" data-date="1989">An Innocent</option>
+                          <option value="In & Out" data-date="1997">In &amp Out</option>
+                          <option value="Lassiter" data-date="1984">Lassiter</option>
+                          <option value="Mr. Baseball" data-date="1992">Mr. Baseball</option>
+                          <option value="Quigley Down Under" data-date="1990">Quigley Down Under</option>
+                          <option value="Three Men and a Baby" data-date="1987">Three Men and a Baby</option>
+                        </optgroup>
+                      </select>
+                    </div>
+                    <button type="submit" class="btn-primary w-full">Submit</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div x-show="debug" class="w-[300px] fixed z-20 ltr:right-0 rtl:left-0 top-0 overflow-y-auto h-full p-5 bg-neutral-903">
+              <h5 class="mb-5 text-primary-300 bb-dashed-n30 !border-neutral-0">Values</h5>
+              <div class="flex flex-col gap-4">
+                <div>
+                  <p class="mb-2 !text-warning-300">Name :</p>
+                  <span class="h-8 text-neutral-20" x-text="name?name:'&quot; &quot;'"></span>
+                </div>
+                <div>
+                  <p class="mb-2 !text-warning-300">Email :</p>
+                  <span class="h-8 text-neutral-20" x-text="email?email:'&quot; &quot;'"></span>
+                </div>
+                <div>
+                  <p class="mb-2 !text-warning-300">Age :</p>
+                  <span class="h-8 text-neutral-20" x-text="age?age:'&quot; &quot;'"></span>
+                </div>
+                <div>
+                  <p class="mb-2 !text-warning-300">Password :</p>
+                  <span class="h-8 text-neutral-20" x-text="password?password:'&quot; &quot;'"></span>
+                </div>
+                <div>
+                  <p class="mb-2 !text-warning-300">Password :</p>
+                  <span class="h-8 text-neutral-20" x-text="confirm_pass?confirm_pass:'&quot; &quot;'"></span>
+                </div>
+                <div>
+                  <p class="mb-2 !text-warning-300">Muliple :</p>
+                  <span class="h-8 text-neutral-20" x-text="multiple?multiple:'&quot; &quot;'"></span>
+                </div>
+                <div>
+                  <p class="mb-2 !text-warning-300">Single One :</p>
+                  <span class="h-8 text-neutral-20" x-text="singleOne?singleOne:'&quot; &quot;'"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+    <script src="./assets/js/libs/tom-select.js"></script>
+    <script src="./assets/js/libs/range-slider.js"></script>
+    <script src="./assets/js/libs/dropzone.min.js"></script>
+    <script src="./assets/js/libs/quill.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,243 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="./assets/css/github.min.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Buttons</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Components</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Buttons</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- buttons -->
+        <section class="space-y-4 xl:space-y-6 white-box">
+          <div x-data="copyorviewcode" class="n20-box">
+            <h4 class="bb-dashed-n40">Solid Buttons</h4>
+
+            <!-- Buttons -->
+            <div class="flex gap-3 mb-6">
+              <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+              <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+            </div>
+
+            <!-- Preview -->
+            <div x-show="!viewcode" class="flex flex-wrap gap-4 xxl:gap-6">
+              <button class="btn-default">Default</button>
+              <button class="btn-primary">Primary</button>
+              <button class="btn-secondary">Secondary</button>
+              <button class="btn-info">Info</button>
+              <button class="btn-success">Success</button>
+              <button class="btn-warning">Warning</button>
+              <button class="btn-error">Error</button>
+              <button class="btn-disabled" disabled>Disabled</button>
+            </div>
+
+            <!-- Code Block -->
+            <div x-show="viewcode" class="code mt-3 relative">
+              <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+              <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex flex-wrap gap-4 xxl:gap-6&#x22;&#x3E;
+  &#x3C;button class=&#x22;btn-default&#x22;&#x3E;Default&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-primary&#x22;&#x3E;Primary&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-secondary&#x22;&#x3E;Secondary&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-info&#x22;&#x3E;Info&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-success&#x22;&#x3E;Success&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-warning&#x22;&#x3E;Warning&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-error&#x22;&#x3E;Error&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-disabled&#x22; disabled&#x3E;Disabled&#x3C;/button&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+            </div>
+          </div>
+
+          <div x-data="copyorviewcode" class="n20-box">
+            <h4 class="bb-dashed-n40">Outline Buttons</h4>
+
+            <!-- Buttons -->
+            <div class="flex gap-3 mb-6">
+              <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+              <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+            </div>
+
+            <!-- Preview -->
+            <div x-show="!viewcode" class="flex flex-wrap gap-4 xxl:gap-6">
+              <button class="btn-default-outlined">Default</button>
+              <button class="btn-primary-outlined">Primary</button>
+              <button class="btn-secondary-outlined">Secondary</button>
+              <button class="btn-info-outlined">Info</button>
+              <button class="btn-success-outlined">Success</button>
+              <button class="btn-warning-outlined">Warning</button>
+              <button class="btn-error-outlined">Error</button>
+              <button class="btn-disabled-outlined" disabled>Disabled</button>
+            </div>
+
+            <!-- Code Block -->
+            <div x-show="viewcode" class="code mt-3 relative">
+              <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+              <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex flex-wrap gap-4 xxl:gap-6&#x22;&#x3E;
+  &#x3C;button class=&#x22;btn-default-outlined&#x22;&#x3E;Default&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-primary-outlined&#x22;&#x3E;Primary&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-secondary-outlined&#x22;&#x3E;Secondary&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-info-outlined&#x22;&#x3E;Info&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-success-outlined&#x22;&#x3E;Success&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-warning-outlined&#x22;&#x3E;Warning&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-error-outlined&#x22;&#x3E;Error&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-disabled-outlined&#x22; disabled&#x3E;Disabled&#x3C;/button&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+            </div>
+          </div>
+
+          <div x-data="copyorviewcode" class="n20-box">
+            <h4 class="bb-dashed-n40">Subtle Buttons</h4>
+            <!-- Buttons -->
+            <div class="flex gap-3 mb-6">
+              <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+              <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+            </div>
+
+            <!-- Preview -->
+            <div x-show="!viewcode" class="flex flex-wrap gap-4 xxl:gap-6">
+              <button class="btn-default-soft">Default</button>
+              <button class="btn-primary-soft">Primary</button>
+              <button class="btn-secondary-soft">Secondary</button>
+              <button class="btn-info-soft">Info</button>
+              <button class="btn-success-soft">Success</button>
+              <button class="btn-warning-soft">Warning</button>
+              <button class="btn-error-soft">Error</button>
+            </div>
+
+            <!-- Code Block -->
+            <div x-show="viewcode" class="code mt-3 relative">
+              <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+              <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex flex-wrap gap-4 xxl:gap-6&#x22;&#x3E;
+  &#x3C;button class=&#x22;btn-default-soft&#x22;&#x3E;Default&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-primary-soft&#x22;&#x3E;Primary&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-secondary-soft&#x22;&#x3E;Secondary&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-info-soft&#x22;&#x3E;Info&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-success-soft&#x22;&#x3E;Success&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-warning-soft&#x22;&#x3E;Warning&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-error-soft&#x22;&#x3E;Error&#x3C;/button&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+            </div>
+          </div>
+
+          <div x-data="copyorviewcode" class="n20-box">
+            <h4 class="bb-dashed-n40">Text Buttons</h4>
+            <!-- Buttons -->
+            <div class="flex gap-3 mb-6">
+              <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+              <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+            </div>
+
+            <!-- Preview -->
+            <div x-show="!viewcode" class="flex flex-wrap">
+              <button class="btn-default-text">Default</button>
+              <button class="btn-primary-text">Primary</button>
+              <button class="btn-secondary-text">Secondary</button>
+              <button class="btn-info-text">Info</button>
+              <button class="btn-success-text">Success</button>
+              <button class="btn-warning-text">Warning</button>
+              <button class="btn-error-text">Error</button>
+              <button class="btn-disabled-text" disabled>Disabled</button>
+            </div>
+
+            <!-- Code Block -->
+            <div x-show="viewcode" class="code mt-3 relative">
+              <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+              <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex flex-wrap&#x22;&#x3E;
+  &#x3C;button class=&#x22;btn-default-text&#x22;&#x3E;Default&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-primary-text&#x22;&#x3E;Primary&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-secondary-text&#x22;&#x3E;Secondary&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-info-text&#x22;&#x3E;Info&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-success-text&#x22;&#x3E;Success&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-warning-text&#x22;&#x3E;Warning&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-error-text&#x22;&#x3E;Error&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-disabled-text&#x22; disabled&#x3E;Disabled&#x3C;/button&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+            </div>
+          </div>
+
+          <div x-data="copyorviewcode" class="n20-box">
+            <h4 class="bb-dashed-n40">Button Sizes</h4>
+
+            <!-- Buttons -->
+            <div class="flex gap-3 mb-6">
+              <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+              <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+            </div>
+
+            <div x-show="!viewcode" class="flex flex-wrap items-center gap-4">
+              <button class="btn-small">Primary</button>
+              <button class="btn-primary">Primary</button>
+              <button class="btn-large">Primary</button>
+            </div>
+
+            <!-- Code Block -->
+            <div x-show="viewcode" class="code mt-3 relative">
+              <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+              <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex flex-wrap items-center gap-4&#x22;&#x3E;
+  &#x3C;button class=&#x22;btn-small&#x22;&#x3E;Primary&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-primary&#x22;&#x3E;Primary&#x3C;/button&#x3E;
+  &#x3C;button class=&#x22;btn-large&#x22;&#x3E;Primary&#x3C;/button&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- Scripts -->
+    <script src="./assets/js/libs/highlight.js"></script>
+    <script src="./assets/js/libs/sweetalert.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

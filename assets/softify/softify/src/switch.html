@@ -1,0 +1,286 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="./assets/css/github.min.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Switch</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Forms</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Switch</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Switch -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div class="space-y-4 xl:space-y-6">
+            <div x-data="copyorviewcode" class="white-box">
+              <h4 class="bb-dashed-n30">Colors</h4>
+
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <!-- Preview -->
+              <div x-show="!viewcode" class="flex">
+                <div class="flex max-w-max items-start flex-wrap gap-4 lg:gap-6">
+                  <label for="switch13" class="switch flex justify-center">
+                    <input id="switch13" type="checkbox" checked />
+                    <span class="inner"></span>
+                    Default
+                  </label>
+                  <label for="switch14" class="switch flex justify-center">
+                    <input id="switch14" type="checkbox" checked />
+                    <span class="inner primary"></span>
+                    Primary
+                  </label>
+                  <label for="switch15" class="switch flex justify-center">
+                    <input id="switch15" type="checkbox" checked />
+                    <span class="inner secondary"></span>
+                    Secondary
+                  </label>
+                  <label for="switch16" class="switch flex justify-center">
+                    <input id="switch16" type="checkbox" checked />
+                    <span class="inner info"></span>
+                    Info
+                  </label>
+                  <label for="switch17" class="switch flex justify-center">
+                    <input id="switch17" type="checkbox" checked />
+                    <span class="inner success"></span>
+                    Success
+                  </label>
+                  <label for="switch18" class="switch flex justify-center">
+                    <input id="switch18" type="checkbox" checked />
+                    <span class="inner warning"></span>
+                    Warning
+                  </label>
+                  <label for="switch19" class="switch flex justify-center">
+                    <input id="switch19" type="checkbox" checked />
+                    <span class="inner error"></span>
+                    Error
+                  </label>
+                  <label for="switch20" class="switch flex justify-center">
+                    <input id="switch20" type="checkbox" checked disabled />
+                    <span class="inner disabled"></span>
+                    Disabled
+                  </label>
+                </div>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex &#x22;&#x3E;
+  &#x3C;div class=&#x22;flex max-w-max flex-col items-start gap-4 lg:gap-6&#x22;&#x3E;
+    &#x3C;label for=&#x22;switch13&#x22; class=&#x22;switch flex justify-center&#x22;&#x3E;
+      &#x3C;input id=&#x22;switch13&#x22; type=&#x22;checkbox&#x22; checked /&#x3E;
+      &#x3C;span class=&#x22;inner&#x22;&#x3E;&#x3C;/span&#x3E;
+      Default
+    &#x3C;/label&#x3E;
+    &#x3C;label for=&#x22;switch14&#x22; class=&#x22;switch flex justify-center&#x22;&#x3E;
+      &#x3C;input id=&#x22;switch14&#x22; type=&#x22;checkbox&#x22; checked /&#x3E;
+      &#x3C;span class=&#x22;inner primary&#x22;&#x3E;&#x3C;/span&#x3E;
+      Primary
+    &#x3C;/label&#x3E;
+    &#x3C;label for=&#x22;switch15&#x22; class=&#x22;switch flex justify-center&#x22;&#x3E;
+      &#x3C;input id=&#x22;switch15&#x22; type=&#x22;checkbox&#x22; checked /&#x3E;
+      &#x3C;span class=&#x22;inner secondary&#x22;&#x3E;&#x3C;/span&#x3E;
+      Secondary
+    &#x3C;/label&#x3E;
+    &#x3C;label for=&#x22;switch16&#x22; class=&#x22;switch flex justify-center&#x22;&#x3E;
+      &#x3C;input id=&#x22;switch16&#x22; type=&#x22;checkbox&#x22; checked /&#x3E;
+      &#x3C;span class=&#x22;inner info&#x22;&#x3E;&#x3C;/span&#x3E;
+      Info
+    &#x3C;/label&#x3E;
+    &#x3C;label for=&#x22;switch17&#x22; class=&#x22;switch flex justify-center&#x22;&#x3E;
+      &#x3C;input id=&#x22;switch17&#x22; type=&#x22;checkbox&#x22; checked /&#x3E;
+      &#x3C;span class=&#x22;inner success&#x22;&#x3E;&#x3C;/span&#x3E;
+      Success
+    &#x3C;/label&#x3E;
+    &#x3C;label for=&#x22;switch18&#x22; class=&#x22;switch flex justify-center&#x22;&#x3E;
+      &#x3C;input id=&#x22;switch18&#x22; type=&#x22;checkbox&#x22; checked /&#x3E;
+      &#x3C;span class=&#x22;inner warning&#x22;&#x3E;&#x3C;/span&#x3E;
+      Warning
+    &#x3C;/label&#x3E;
+    &#x3C;label for=&#x22;switch19&#x22; class=&#x22;switch flex justify-center&#x22;&#x3E;
+      &#x3C;input id=&#x22;switch19&#x22; type=&#x22;checkbox&#x22; checked /&#x3E;
+      &#x3C;span class=&#x22;inner error&#x22;&#x3E;&#x3C;/span&#x3E;
+      Error
+    &#x3C;/label&#x3E;
+    &#x3C;label for=&#x22;switch20&#x22; class=&#x22;switch flex justify-center&#x22;&#x3E;
+      &#x3C;input id=&#x22;switch20&#x22; type=&#x22;checkbox&#x22; checked disabled /&#x3E;
+      &#x3C;span class=&#x22;inner disabled&#x22;&#x3E;&#x3C;/span&#x3E;
+      Disabled
+    &#x3C;/label&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+
+            <div x-data="copyorviewcode" class="white-box">
+              <h4 class="bb-dashed-n30">Sizes</h4>
+
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <!-- Preview -->
+              <div x-show="!viewcode" class="flex gap-4">
+                <label for="switch5" class="switch">
+                  <input id="switch5" type="checkbox" checked />
+                  <span class="inner large primary"></span>
+                </label>
+                <label for="switch6" class="switch">
+                  <input id="switch6" type="checkbox" checked />
+                  <span class="inner primary"></span>
+                </label>
+                <label for="switch7" class="switch">
+                  <input id="switch7" type="checkbox" checked />
+                  <span class="inner small primary"></span>
+                </label>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex justify-center gap-4&#x22;&#x3E;
+  &#x3C;label for=&#x22;switch5&#x22; class=&#x22;switch&#x22;&#x3E;
+    &#x3C;input id=&#x22;switch5&#x22; type=&#x22;checkbox&#x22; checked /&#x3E;
+    &#x3C;span class=&#x22;inner large primary&#x22;&#x3E;&#x3C;/span&#x3E;
+  &#x3C;/label&#x3E;
+  &#x3C;label for=&#x22;switch6&#x22; class=&#x22;switch&#x22;&#x3E;
+    &#x3C;input id=&#x22;switch6&#x22; type=&#x22;checkbox&#x22; checked /&#x3E;
+    &#x3C;span class=&#x22;inner primary&#x22;&#x3E;&#x3C;/span&#x3E;
+  &#x3C;/label&#x3E;
+  &#x3C;label for=&#x22;switch7&#x22; class=&#x22;switch&#x22;&#x3E;
+    &#x3C;input id=&#x22;switch7&#x22; type=&#x22;checkbox&#x22; checked /&#x3E;
+    &#x3C;span class=&#x22;inner small primary&#x22;&#x3E;&#x3C;/span&#x3E;
+  &#x3C;/label&#x3E;
+&#x3C;/div&#x3E;
+
+                  </code></pre>
+              </div>
+            </div>
+
+            <div x-data="copyorviewcode" class="white-box">
+              <!-- Simple -->
+              <h4 class="bb-dashed-n30">Placement</h4>
+
+              <!-- Buttons -->
+              <div class="flex gap-3 mb-6">
+                <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+              </div>
+
+              <!-- Preview -->
+              <div x-show="!viewcode" class="flex flex-wrap gap-4 lg:gap-6">
+                <label for="switch9" class="switch flex flex-col">
+                  Top
+                  <input id="switch9" type="checkbox" />
+                  <span class="inner primary"></span>
+                </label>
+                <label for="switch10" class="switch flex">
+                  Start
+                  <input id="switch10" type="checkbox" checked />
+                  <span class="inner primary"></span>
+                </label>
+                <label for="switch11" class="switch flex flex-col">
+                  <input id="switch11" type="checkbox" />
+                  <span class="inner primary"></span>
+                  Bottom
+                </label>
+                <label for="switch12" class="switch flex">
+                  <input id="switch12" type="checkbox" checked />
+                  <span class="inner primary"></span>
+                  End
+                </label>
+              </div>
+
+              <!-- Code Block -->
+              <div x-show="viewcode" class="code mt-3 relative">
+                <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;flex justify-center flex-wrap gap-4 lg:gap-6&#x22;&#x3E;
+  &#x3C;label for=&#x22;switch9&#x22; class=&#x22;switch flex flex-col&#x22;&#x3E;
+    Top
+    &#x3C;input id=&#x22;switch9&#x22; type=&#x22;checkbox&#x22; /&#x3E;
+    &#x3C;span class=&#x22;inner primary&#x22;&#x3E;&#x3C;/span&#x3E;
+  &#x3C;/label&#x3E;
+  &#x3C;label for=&#x22;switch10&#x22; class=&#x22;switch flex&#x22;&#x3E;
+    Start
+    &#x3C;input id=&#x22;switch10&#x22; type=&#x22;checkbox&#x22; checked /&#x3E;
+    &#x3C;span class=&#x22;inner primary&#x22;&#x3E;&#x3C;/span&#x3E;
+  &#x3C;/label&#x3E;
+  &#x3C;label for=&#x22;switch11&#x22; class=&#x22;switch flex flex-col&#x22;&#x3E;
+    &#x3C;input id=&#x22;switch11&#x22; type=&#x22;checkbox&#x22; /&#x3E;
+    &#x3C;span class=&#x22;inner primary&#x22;&#x3E;&#x3C;/span&#x3E;
+    Bottom
+  &#x3C;/label&#x3E;
+  &#x3C;label for=&#x22;switch12&#x22; class=&#x22;switch flex&#x22;&#x3E;
+    &#x3C;input id=&#x22;switch12&#x22; type=&#x22;checkbox&#x22; checked /&#x3E;
+    &#x3C;span class=&#x22;inner primary&#x22;&#x3E;&#x3C;/span&#x3E;
+    End
+  &#x3C;/label&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libs and scripts -->
+    <script src="./assets/js/libs/highlight.js"></script>
+    <script src="./assets/js/libs/sweetalert.min.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+  </body>
+</html>

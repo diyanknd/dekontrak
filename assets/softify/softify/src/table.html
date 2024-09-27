@@ -1,0 +1,684 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select2.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Table</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Tables</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Table</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div class="flex flex-col gap-6 lg:gap-10">
+            <div class="n20-box">
+              <div class="bb-dashed-n40 flex flex-col sm:flex-row sm:justify-between items-center justify-center gap-4">
+                <h4>Simple Table</h4>
+              </div>
+              <div class="checkboxes-container overflow-x-auto">
+                <table class="w-full whitespace-nowrap">
+                  <thead class="text-left">
+                    <tr class="bg-neutral-0 dark:bg-neutral-904">
+                      <th class="px-6 py-3 lg:py-5">Employee Name</th>
+                      <th class="px-6 py-3 lg:py-5">Position</th>
+                      <th class="px-6 py-3 lg:py-5">Department</th>
+                      <th class="px-6 py-3 lg:py-5">Years of Experience</th>
+                      <th class="px-6 py-3 lg:py-5">Salary (USD)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                      <td class="px-6 py-3 lg:py-5">John Doe</td>
+                      <td class="px-6 py-3 lg:py-5">Software Engineer</td>
+                      <td class="px-6 py-3 lg:py-5">IT</td>
+                      <td class="px-6 py-3 lg:py-5">5</td>
+                      <td class="px-6 py-3 lg:py-5">$80,000</td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                      <td class="px-6 py-3 lg:py-5">Jane Smith</td>
+                      <td class="px-6 py-3 lg:py-5">Product Manager</td>
+                      <td class="px-6 py-3 lg:py-5">Product</td>
+                      <td class="px-6 py-3 lg:py-5">7</td>
+                      <td class="px-6 py-3 lg:py-5">$95,000</td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                      <td class="px-6 py-3 lg:py-5">Alex Johnson</td>
+                      <td class="px-6 py-3 lg:py-5">UX Designer</td>
+                      <td class="px-6 py-3 lg:py-5">Design</td>
+                      <td class="px-6 py-3 lg:py-5">4</td>
+                      <td class="px-6 py-3 lg:py-5">$70,000</td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                      <td class="px-6 py-3 lg:py-5">Emily Davis</td>
+                      <td class="px-6 py-3 lg:py-5">HR Manager</td>
+                      <td class="px-6 py-3 lg:py-5">Human Resources</td>
+                      <td class="px-6 py-3 lg:py-5">10</td>
+                      <td class="px-6 py-3 lg:py-5">$90,000</td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                      <td class="px-6 py-3 lg:py-5">Michael Brown</td>
+                      <td class="px-6 py-3 lg:py-5">Marketing Specialist</td>
+                      <td class="px-6 py-3 lg:py-5">Marketing</td>
+                      <td class="px-6 py-3 lg:py-5">6</td>
+                      <td class="px-6 py-3 lg:py-5">$75,000</td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                      <td class="px-6 py-3 lg:py-5">Sarah Wilson</td>
+                      <td class="px-6 py-3 lg:py-5">Data Scientist</td>
+                      <td class="px-6 py-3 lg:py-5">Analytics</td>
+                      <td class="px-6 py-3 lg:py-5">8</td>
+                      <td class="px-6 py-3 lg:py-5">$100,000</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- Selecting  -->
+            <div class="n20-box">
+              <div class="bb-dashed-n40 flex flex-col sm:flex-row sm:justify-between items-center justify-center gap-4">
+                <h4>With Checkbox</h4>
+                <div class="flex items-center gap-3">
+                  <span>Sort By : </span>
+                  <select name="sort" class="nc-select">
+                    <option value="day">Last 15 Days</option>
+                    <option value="week">Last 1 Month</option>
+                    <option value="year">Last 6 Month</option>
+                  </select>
+                </div>
+              </div>
+              <div x-data="{dense: false}" class="checkboxes-container overflow-x-auto">
+                <table class="w-full whitespace-nowrap">
+                  <thead class="text-left">
+                    <tr class="bg-neutral-0 dark:bg-neutral-904">
+                      <th class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                        <label for="checkbox12" class="option flex flex-col gap-2">
+                          <input type="checkbox" id="checkbox12" name="checkbox2" aria-checked="false" />
+                          <span class="checkbox"></span>
+                        </label>
+                      </th>
+                      <th class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Employee Name</th>
+                      <th class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Position</th>
+                      <th class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Department</th>
+                      <th class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Salary</th>
+                      <th class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Experience (Years)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                        <label for="checkbox13" class="option flex flex-col gap-2">
+                          <input type="checkbox" id="checkbox13" name="checkbox2" aria-checked="false" />
+                          <span class="checkbox"></span>
+                        </label>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">John Doe</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Software Engineer</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Engineering</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">$85,000</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">5</td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                        <label for="checkbox14" class="option flex flex-col gap-2">
+                          <input type="checkbox" id="checkbox14" name="checkbox2" aria-checked="false" />
+                          <span class="checkbox"></span>
+                        </label>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Jane Smith</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Marketing Manager</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Marketing</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">$75,000</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">8</td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                        <label for="checkbox15" class="option flex flex-col gap-2">
+                          <input type="checkbox" id="checkbox15" name="checkbox2" aria-checked="false" />
+                          <span class="checkbox"></span>
+                        </label>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Emily Johnson</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">HR Specialist</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Human Resources</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">$60,000</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">3</td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                        <label for="checkbox16" class="option flex flex-col gap-2">
+                          <input type="checkbox" id="checkbox16" name="checkbox2" aria-checked="false" />
+                          <span class="checkbox"></span>
+                        </label>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Michael Brown</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Product Manager</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Product</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">$95,000</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">7</td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                        <label for="checkbox17" class="option flex flex-col gap-2">
+                          <input type="checkbox" id="checkbox17" name="checkbox2" aria-checked="false" />
+                          <span class="checkbox"></span>
+                        </label>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Sarah Davis</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Financial Analyst</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Finance</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">$70,000</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">4</td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">
+                        <label for="checkbox19" class="option flex flex-col gap-2">
+                          <input type="checkbox" id="checkbox19" name="checkbox2" aria-checked="false" />
+                          <span class="checkbox"></span>
+                        </label>
+                      </td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Robert Wilson</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">UX Designer</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">Design</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">$65,000</td>
+                      <td class="px-6" :class="dense? 'py-1.5': 'py-3 lg:py-5'">6</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div class="mt-6 flex items-center justify-between whitespace-nowrap gap-5">
+                  <label for="switch" class="switch flex">
+                    <input x-model="dense" id="switch" type="checkbox" />
+                    <span class="inner primary"></span>
+                    Dense
+                  </label>
+                  <div class="flex gap-5">
+                    <div class="flex gap-4 items-center">
+                      <p>Rows per page :</p>
+                      <select name="rows" id="rows" class="bg-transparent dark:bg-neutral-904">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                      </select>
+                    </div>
+                    <div class="flex items-center gap-4">
+                      <p>1-10 of 100</p>
+                      <button><i class="las la-angle-left text-xl rtl:rotate-180"></i></button> <button><i class="las la-angle-right text-xl rtl:rotate-180"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--  fixheader -->
+            <div class="n20-box">
+              <div class="bb-dashed-n40 flex flex-col sm:flex-row sm:justify-between items-center justify-center gap-4">
+                <h4>Fixed Header</h4>
+                <div class="flex items-center gap-3">
+                  <span>Sort By : </span>
+                  <select name="sort" class="nc-select">
+                    <option value="day">Last 15 Days</option>
+                    <option value="week">Last 1 Month</option>
+                    <option value="year">Last 6 Month</option>
+                  </select>
+                </div>
+              </div>
+              <div class="overflow-x-auto">
+                <div class="checkboxes-container">
+                  <table class="w-full whitespace-nowrap min-w-[400px]">
+                    <thead class="relative table w-full table-fixed text-left">
+                      <tr class="table w-full table-fixed bg-neutral-0 dark:bg-neutral-904 text-sm md:text-base">
+                        <th class="px-6 py-3 lg:py-5 min-w-20">Name</th>
+                        <th class="px-6 py-3 lg:py-5 min-w-20">ISO Code</th>
+                        <th class="px-6 py-3 lg:py-5 min-w-20">Population</th>
+                        <th class="px-6 py-3 lg:py-5 min-w-20">Size (km2)</th>
+                        <th class="px-6 py-3 lg:py-5 min-w-20">Density</th>
+                      </tr>
+                    </thead>
+                    <tbody class="block max-h-[400px] w-full overflow-y-scroll">
+                      <tr class="table w-full table-fixed border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                        <td class="px-6 py-3 lg:py-5">India</td>
+                        <td class="px-6 py-3 lg:py-5">IN</td>
+                        <td class="px-6 py-3 lg:py-5">241,321</td>
+                        <td class="px-6 py-3 lg:py-5">3000</td>
+                        <td class="px-6 py-3 lg:py-5">444</td>
+                      </tr>
+                      <tr class="table w-full table-fixed border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                        <td class="px-6 py-3 lg:py-5">China</td>
+                        <td class="px-6 py-3 lg:py-5">CN</td>
+                        <td class="px-6 py-3 lg:py-5">172,521</td>
+                        <td class="px-6 py-3 lg:py-5">3260</td>
+                        <td class="px-6 py-3 lg:py-5">325</td>
+                      </tr>
+                      <tr class="table w-full table-fixed border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                        <td class="px-6 py-3 lg:py-5">UK</td>
+                        <td class="px-6 py-3 lg:py-5">UK</td>
+                        <td class="px-6 py-3 lg:py-5">171,321</td>
+                        <td class="px-6 py-3 lg:py-5">5200</td>
+                        <td class="px-6 py-3 lg:py-5">589</td>
+                      </tr>
+                      <tr class="table w-full table-fixed border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                        <td class="px-6 py-3 lg:py-5">USA</td>
+                        <td class="px-6 py-3 lg:py-5">US</td>
+                        <td class="px-6 py-3 lg:py-5">251,321</td>
+                        <td class="px-6 py-3 lg:py-5">5200</td>
+                        <td class="px-6 py-3 lg:py-5">663</td>
+                      </tr>
+                      <tr class="table w-full table-fixed border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                        <td class="px-6 py-3 lg:py-5">Russia</td>
+                        <td class="px-6 py-3 lg:py-5">Ru</td>
+                        <td class="px-6 py-3 lg:py-5">171,541</td>
+                        <td class="px-6 py-3 lg:py-5">7400</td>
+                        <td class="px-6 py-3 lg:py-5">254</td>
+                      </tr>
+                      <tr class="table w-full table-fixed border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                        <td class="px-6 py-3 lg:py-5">France</td>
+                        <td class="px-6 py-3 lg:py-5">FR</td>
+                        <td class="px-6 py-3 lg:py-5">141,321</td>
+                        <td class="px-6 py-3 lg:py-5">8500</td>
+                        <td class="px-6 py-3 lg:py-5">214</td>
+                      </tr>
+                      <tr class="table w-full table-fixed border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                        <td class="px-6 py-3 lg:py-5">India</td>
+                        <td class="px-6 py-3 lg:py-5">IN</td>
+                        <td class="px-6 py-3 lg:py-5">241,321</td>
+                        <td class="px-6 py-3 lg:py-5">3000</td>
+                        <td class="px-6 py-3 lg:py-5">444</td>
+                      </tr>
+                      <tr class="table w-full table-fixed border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                        <td class="px-6 py-3 lg:py-5">China</td>
+                        <td class="px-6 py-3 lg:py-5">CN</td>
+                        <td class="px-6 py-3 lg:py-5">172,521</td>
+                        <td class="px-6 py-3 lg:py-5">3260</td>
+                        <td class="px-6 py-3 lg:py-5">325</td>
+                      </tr>
+                      <tr class="table w-full table-fixed border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                        <td class="px-6 py-3 lg:py-5">UK</td>
+                        <td class="px-6 py-3 lg:py-5">UK</td>
+                        <td class="px-6 py-3 lg:py-5">171,321</td>
+                        <td class="px-6 py-3 lg:py-5">5200</td>
+                        <td class="px-6 py-3 lg:py-5">589</td>
+                      </tr>
+                      <tr class="table w-full table-fixed border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                        <td class="px-6 py-3 lg:py-5">USA</td>
+                        <td class="px-6 py-3 lg:py-5">US</td>
+                        <td class="px-6 py-3 lg:py-5">251,321</td>
+                        <td class="px-6 py-3 lg:py-5">5200</td>
+                        <td class="px-6 py-3 lg:py-5">663</td>
+                      </tr>
+                      <tr class="table w-full table-fixed border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                        <td class="px-6 py-3 lg:py-5">Russia</td>
+                        <td class="px-6 py-3 lg:py-5">Ru</td>
+                        <td class="px-6 py-3 lg:py-5">171,541</td>
+                        <td class="px-6 py-3 lg:py-5">7400</td>
+                        <td class="px-6 py-3 lg:py-5">254</td>
+                      </tr>
+                      <tr class="table w-full table-fixed border-b border-neutral-30 bg-neutral-20 duration-300 hover:bg-neutral-0 dark:border-neutral-500 dark:bg-neutral-903 dark:hover:bg-neutral-904">
+                        <td class="px-6 py-3 lg:py-5">France</td>
+                        <td class="px-6 py-3 lg:py-5">FR</td>
+                        <td class="px-6 py-3 lg:py-5">141,321</td>
+                        <td class="px-6 py-3 lg:py-5">8500</td>
+                        <td class="px-6 py-3 lg:py-5">214</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="mt-6 flex items-center justify-between gap-6 whitespace-nowrap">
+                    <div class="flex gap-4 items-center">
+                      <p>Rows per page :</p>
+                      <select name="select-group" id="select-group" class="bg-transparent">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                      </select>
+                    </div>
+                    <div class="flex items-center gap-4">
+                      <p>1-10 of 100</p>
+                      <button><i class="las la-angle-left text-xl rtl:rotate-180"></i></button> <button><i class="las la-angle-right text-xl rtl:rotate-180"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Collapsible table -->
+            <div class="n20-box">
+              <h4 class="bb-dashed-n40">Collapsible Table</h4>
+              <div class="checkboxes-container overflow-x-auto">
+                <table x-data="{row1:false, row2:false, row3:false, row4:false,row5:false,row6:false}" class="w-full whitespace-nowrap">
+                  <thead class="text-left">
+                    <tr class="bg-neutral-0 dark:bg-neutral-904">
+                      <th></th>
+                      <th class="px-6 py-3 lg:py-5">Title</th>
+                      <th class="px-6 py-3 lg:py-5">Calories</th>
+                      <th class="px-6 py-3 lg:py-5">Fat (g)</th>
+                      <th class="px-6 py-3 lg:py-5">Carbs (g)</th>
+                      <th class="px-6 py-3 lg:py-5">Protein (g)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-b border-neutral-30 bg-neutral-20 duration-300 dark:border-neutral-500 dark:bg-neutral-903">
+                      <td class="pl-6">
+                        <button @click="row1=!row1" :class="{ 'rotate-180': row1 }" class="flex size-8 items-center justify-center rounded-full duration-300 hover:bg-neutral-30 dark:bg-neutral-600">
+                          <i class="las la-angle-down text-xl"></i>
+                        </button>
+                      </td>
+                      <td class="px-6 py-3 lg:py-5">Lemon Drizzle Cake</td>
+                      <td class="px-6 py-3 lg:py-5">200 Cal</td>
+                      <td class="px-6 py-3 lg:py-5">34.1</td>
+                      <td class="px-6 py-3 lg:py-5">90.0</td>
+                      <td class="px-6 py-3 lg:py-5">7.7</td>
+                    </tr>
+                    <tr>
+                      <td colspan="6">
+                        <div x-show="row1" x-collapse x-cloak class="flex w-full rounded-xl border border-neutral-30 bg-neutral-0 shadow dark:border-neutral-500 dark:bg-neutral-904">
+                          <div class="w-full overflow-x-auto py-4">
+                            <h5 class="mb-4 px-4">History</h5>
+                            <table class="w-full whitespace-nowrap">
+                              <thead>
+                                <tr class="bg-neutral-20 dark:bg-neutral-600">
+                                  <th class="px-4 py-3 text-start">Date</th>
+                                  <th class="px-4 py-3 text-start">Customer</th>
+                                  <th class="px-4 py-3 text-start">Amount</th>
+                                  <th class="px-4 py-3 text-start">Total Price</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr class="border-b border-neutral-30 dark:border-neutral-500">
+                                  <td class="px-4 py-3">01/01/2018</td>
+                                  <td class="px-4 py-3">John Doe</td>
+                                  <td class="px-4 py-3">5</td>
+                                  <td class="px-4 py-3">900</td>
+                                </tr>
+                                <tr class="border-b border-neutral-30 dark:border-neutral-500">
+                                  <td class="px-4 py-3">01/01/2018</td>
+                                  <td class="px-4 py-3">John Doe</td>
+                                  <td class="px-4 py-3">5</td>
+                                  <td class="px-4 py-3">900</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-20 duration-300 dark:border-neutral-500 dark:bg-neutral-903">
+                      <td class="pl-6">
+                        <button @click="row2=!row2" :class="{ 'rotate-180': row2 }" class="flex size-8 items-center justify-center rounded-full duration-300 hover:bg-neutral-30 dark:bg-neutral-600">
+                          <i class="las la-angle-down text-xl"></i>
+                        </button>
+                      </td>
+                      <td class="px-6 py-3 lg:py-5">Marvel Cake</td>
+                      <td class="px-6 py-3 lg:py-5">200 Cal</td>
+                      <td class="px-6 py-3 lg:py-5">34.1</td>
+                      <td class="px-6 py-3 lg:py-5">90.0</td>
+                      <td class="px-6 py-3 lg:py-5">7.7</td>
+                    </tr>
+                    <tr>
+                      <td colspan="6">
+                        <div x-show="row2" x-collapse class="flex w-full rounded-xl border border-neutral-30 bg-neutral-0 shadow dark:border-neutral-500 dark:bg-neutral-904">
+                          <div class="w-full overflow-x-auto py-4">
+                            <h5 class="mb-4 px-4">History</h5>
+                            <table class="w-full whitespace-nowrap">
+                              <thead>
+                                <tr class="bg-neutral-20 dark:bg-neutral-600">
+                                  <th class="px-4 py-3 text-start">Date</th>
+                                  <th class="px-4 py-3 text-start">Customer</th>
+                                  <th class="px-4 py-3 text-start">Amount</th>
+                                  <th class="px-4 py-3 text-start">Total Price</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr class="border-b border-neutral-30 dark:border-neutral-500">
+                                  <td class="px-4 py-3">01/01/2018</td>
+                                  <td class="px-4 py-3">John Doe</td>
+                                  <td class="px-4 py-3">5</td>
+                                  <td class="px-4 py-3">900</td>
+                                </tr>
+                                <tr class="border-b border-neutral-30 dark:border-neutral-500">
+                                  <td class="px-4 py-3">01/01/2018</td>
+                                  <td class="px-4 py-3">John Doe</td>
+                                  <td class="px-4 py-3">5</td>
+                                  <td class="px-4 py-3">900</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-20 duration-300 dark:border-neutral-500 dark:bg-neutral-903">
+                      <td class="pl-6">
+                        <button @click="row3=!row3" :class="{ 'rotate-180': row3 }" class="flex size-8 items-center justify-center rounded-full duration-300 hover:bg-neutral-30 dark:bg-neutral-600">
+                          <i class="las la-angle-down text-xl"></i>
+                        </button>
+                      </td>
+                      <td class="px-6 py-3 lg:py-5">Funfetti Cake</td>
+                      <td class="px-6 py-3 lg:py-5">200 Cal</td>
+                      <td class="px-6 py-3 lg:py-5">34.1</td>
+                      <td class="px-6 py-3 lg:py-5">90.0</td>
+                      <td class="px-6 py-3 lg:py-5">7.7</td>
+                    </tr>
+                    <tr>
+                      <td colspan="6">
+                        <div x-show="row3" x-collapse class="flex w-full rounded-xl border border-neutral-30 bg-neutral-0 shadow dark:border-neutral-500 dark:bg-neutral-904">
+                          <div class="w-full overflow-x-auto py-4">
+                            <h5 class="mb-4 px-4">History</h5>
+                            <table class="w-full whitespace-nowrap">
+                              <thead>
+                                <tr class="bg-neutral-20 dark:bg-neutral-600">
+                                  <th class="px-4 py-3 text-start">Date</th>
+                                  <th class="px-4 py-3 text-start">Customer</th>
+                                  <th class="px-4 py-3 text-start">Amount</th>
+                                  <th class="px-4 py-3 text-start">Total Price</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr class="border-b border-neutral-30 dark:border-neutral-500">
+                                  <td class="px-4 py-3">01/01/2018</td>
+                                  <td class="px-4 py-3">John Doe</td>
+                                  <td class="px-4 py-3">5</td>
+                                  <td class="px-4 py-3">900</td>
+                                </tr>
+                                <tr class="border-b border-neutral-30 dark:border-neutral-500">
+                                  <td class="px-4 py-3">01/01/2018</td>
+                                  <td class="px-4 py-3">John Doe</td>
+                                  <td class="px-4 py-3">5</td>
+                                  <td class="px-4 py-3">900</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-20 duration-300 dark:border-neutral-500 dark:bg-neutral-903">
+                      <td class="pl-6">
+                        <button @click="row4=!row4" :class="{ 'rotate-180': row4 }" class="flex size-8 items-center justify-center rounded-full duration-300 hover:bg-neutral-30 dark:bg-neutral-600">
+                          <i class="las la-angle-down text-xl"></i>
+                        </button>
+                      </td>
+                      <td class="px-6 py-3 lg:py-5">Ice Cream Cake</td>
+                      <td class="px-6 py-3 lg:py-5">200 Cal</td>
+                      <td class="px-6 py-3 lg:py-5">34.1</td>
+                      <td class="px-6 py-3 lg:py-5">90.0</td>
+                      <td class="px-6 py-3 lg:py-5">7.7</td>
+                    </tr>
+                    <tr>
+                      <td colspan="6">
+                        <div x-show="row4" x-collapse class="flex w-full rounded-xl border border-neutral-30 bg-neutral-0 shadow dark:border-neutral-500 dark:bg-neutral-904">
+                          <div class="w-full overflow-x-auto py-4">
+                            <h5 class="mb-4 px-4">History</h5>
+                            <table class="w-full whitespace-nowrap">
+                              <thead>
+                                <tr class="bg-neutral-20 dark:bg-neutral-600">
+                                  <th class="px-4 py-3 text-start">Date</th>
+                                  <th class="px-4 py-3 text-start">Customer</th>
+                                  <th class="px-4 py-3 text-start">Amount</th>
+                                  <th class="px-4 py-3 text-start">Total Price</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr class="border-b border-neutral-30 dark:border-neutral-500">
+                                  <td class="px-4 py-3">01/01/2018</td>
+                                  <td class="px-4 py-3">John Doe</td>
+                                  <td class="px-4 py-3">5</td>
+                                  <td class="px-4 py-3">900</td>
+                                </tr>
+                                <tr class="border-b border-neutral-30 dark:border-neutral-500">
+                                  <td class="px-4 py-3">01/01/2018</td>
+                                  <td class="px-4 py-3">John Doe</td>
+                                  <td class="px-4 py-3">5</td>
+                                  <td class="px-4 py-3">900</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-20 duration-300 dark:border-neutral-500 dark:bg-neutral-903">
+                      <td class="pl-6">
+                        <button @click="row5=!row5" :class="{ 'rotate-180': row5 }" class="flex size-8 items-center justify-center rounded-full duration-300 hover:bg-neutral-30 dark:bg-neutral-600">
+                          <i class="las la-angle-down text-xl"></i>
+                        </button>
+                      </td>
+                      <td class="px-6 py-3 lg:py-5">Banana Cake</td>
+                      <td class="px-6 py-3 lg:py-5">200 Cal</td>
+                      <td class="px-6 py-3 lg:py-5">34.1</td>
+                      <td class="px-6 py-3 lg:py-5">90.0</td>
+                      <td class="px-6 py-3 lg:py-5">7.7</td>
+                    </tr>
+                    <tr>
+                      <td colspan="6">
+                        <div x-show="row5" x-collapse class="flex w-full rounded-xl border border-neutral-30 bg-neutral-0 shadow dark:border-neutral-500 dark:bg-neutral-904">
+                          <div class="w-full overflow-x-auto py-4">
+                            <h5 class="mb-4 px-4">History</h5>
+                            <table class="w-full whitespace-nowrap">
+                              <thead>
+                                <tr class="bg-neutral-20 dark:bg-neutral-600">
+                                  <th class="px-4 py-3 text-start">Date</th>
+                                  <th class="px-4 py-3 text-start">Customer</th>
+                                  <th class="px-4 py-3 text-start">Amount</th>
+                                  <th class="px-4 py-3 text-start">Total Price</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr class="border-b border-neutral-30 dark:border-neutral-500">
+                                  <td class="px-4 py-3">01/01/2018</td>
+                                  <td class="px-4 py-3">John Doe</td>
+                                  <td class="px-4 py-3">5</td>
+                                  <td class="px-4 py-3">900</td>
+                                </tr>
+                                <tr class="border-b border-neutral-30 dark:border-neutral-500">
+                                  <td class="px-4 py-3">01/01/2018</td>
+                                  <td class="px-4 py-3">John Doe</td>
+                                  <td class="px-4 py-3">5</td>
+                                  <td class="px-4 py-3">900</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-neutral-30 bg-neutral-20 duration-300 dark:border-neutral-500 dark:bg-neutral-903">
+                      <td class="pl-6">
+                        <button @click="row6=!row6" :class="{ 'rotate-180': row6 }" class="flex size-8 items-center justify-center rounded-full duration-300 hover:bg-neutral-30 dark:bg-neutral-600">
+                          <i class="las la-angle-down text-xl"></i>
+                        </button>
+                      </td>
+                      <td class="px-6 py-3 lg:py-5">Tiramisu Cake</td>
+                      <td class="px-6 py-3 lg:py-5">200 Cal</td>
+                      <td class="px-6 py-3 lg:py-5">34.1</td>
+                      <td class="px-6 py-3 lg:py-5">90.0</td>
+                      <td class="px-6 py-3 lg:py-5">7.7</td>
+                    </tr>
+                    <tr>
+                      <td colspan="6">
+                        <div x-show="row6" x-collapse class="flex w-full rounded-xl border border-neutral-30 bg-neutral-0 shadow dark:border-neutral-500 dark:bg-neutral-904">
+                          <div class="w-full overflow-x-auto py-4">
+                            <h5 class="mb-4 px-4">History</h5>
+                            <table class="w-full whitespace-nowrap">
+                              <thead>
+                                <tr class="bg-neutral-20 dark:bg-neutral-600">
+                                  <th class="px-4 py-3 text-start">Date</th>
+                                  <th class="px-4 py-3 text-start">Customer</th>
+                                  <th class="px-4 py-3 text-start">Amount</th>
+                                  <th class="px-4 py-3 text-start">Total Price</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr class="border-b border-neutral-30 dark:border-neutral-500">
+                                  <td class="px-4 py-3">01/01/2018</td>
+                                  <td class="px-4 py-3">John Doe</td>
+                                  <td class="px-4 py-3">5</td>
+                                  <td class="px-4 py-3">900</td>
+                                </tr>
+                                <tr class="border-b border-neutral-30 dark:border-neutral-500">
+                                  <td class="px-4 py-3">01/01/2018</td>
+                                  <td class="px-4 py-3">John Doe</td>
+                                  <td class="px-4 py-3">5</td>
+                                  <td class="px-4 py-3">900</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+    <script src="./assets/js/libs/nice-select2.js"></script>
+  </body>
+</html>

@@ -1,0 +1,567 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/glightbox.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/swiper.min.css" />
+    <link rel="stylesheet" href="./assets/css/swiper.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">About Us</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Pages</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Abouts Us</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <!-- About Us -->
+          <section class="text-neutral-700 dark:text-neutral-20 bg-neutral-0 dark:bg-neutral-904 py-12 lg:py-16 xxl:py-28 overflow-x-hidden">
+            <div class="container grid grid-cols-12 gap-3 xxl:gap-6 px-3">
+              <div class="col-span-12 lg:col-span-5 xl:col-span-12 xxl:col-span-6 px-4">
+                <h5 class="text-secondary-300 mb-4">About Us</h5>
+                <h2 class="mb-4 lg:mb-6">What is Softify?</h2>
+                <p class="mb-10 lg:mb-14">Welcome to Softify – Your Comprehensive Client and Admin Dashboard Solution! Softify is designed to streamline your workflow, enhance collaboration</p>
+                <div class="flex flex-col gap-5 xl:gap-8 mb-6 xl:mb-10 pb-6 xl:pb-10 border-b border-dashed border-primary-100">
+                  <div class="flex items-start gap-4 xxl:gap-6">
+                    <span class="inline-flex justify-center shrink-0 items-center size-16 rounded-full bg-primary-50 dark:bg-neutral-903 border border-neutral-20 dark:border-neutral-500">
+                      <i class="las la-file-invoice-dollar text-primary-300 text-4xl"></i>
+                    </span>
+                    <div>
+                      <h5 class="mb-3">Project Overview</h5>
+                      <p class="m-text">Gain a bird's eye view of ongoing projects, including milestones, deadlines, and key deliverables.</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-4 xxl:gap-6">
+                    <span class="inline-flex justify-center shrink-0 items-center size-16 rounded-full bg-secondary-50 dark:bg-neutral-903 border border-neutral-20 dark:border-neutral-500">
+                      <i class="las la-file-pdf text-secondary-300 text-4xl"></i>
+                    </span>
+                    <div>
+                      <h5 class="mb-3">File Sharing</h5>
+                      <p class="m-text">Share documents, images, and other files securely within the platform, ensuring everyone has access.</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-4 xxl:gap-6">
+                    <span class="inline-flex justify-center shrink-0 items-center size-16 rounded-full bg-warning-50 dark:bg-neutral-903 border border-neutral-20 dark:border-neutral-500">
+                      <i class="las la-chart-pie text-warning-300 text-4xl"></i>
+                    </span>
+                    <div>
+                      <h5 class="mb-3">Analytics and Reports</h5>
+                      <p class="m-text">Access detailed analytics and performance reports to monitor project progress, identify trends.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-wrap gap-3 sm:gap-6">
+                  <a href="#" class="btn-primary">Read More</a>
+                  <div class="flex items-center gap-5">
+                    <img src="./assets/images/avatar/avatar-1.png" class="size-12" alt="" />
+                    <div>
+                      <p class="mb-1">Arlene McCoy</p>
+                      <p class="s-text">CEO Of Company</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-span-12 lg:col-span-7 xl:col-span-12 xxl:col-span-6 px-4 grid grid-cols-2 gap-4 xxl:gap-6 items-start ltr:min-[1300px]:translate-x-8 ltr:xxl:translate-x-10 ltr:xxxl:translate-x-24 rtl:min-[1300px]:-translate-x-8 rtl:xxl:-translate-x-10 rtl:xxxl:-translate-x-24 relative"
+              >
+                <img src="./assets/images/about-bg-1.png" class="absolute bottom-24 left-[40%]" alt="" />
+                <div class="col-span-2 sm:col-span-1 grid grid-cols-2 gap-4 xxl:gap-6 relative z-[2]">
+                  <div class="col-span-1 bg-success-300 p-6 rounded-xl text-neutral-0 text-center">
+                    <h2>10+</h2>
+                    <p class="m-text text-neutral-0">Years of experience</p>
+                  </div>
+                  <div class="col-span-1 p-6 rounded-xl text-center bg-neutral-904 dark:bg-neutral-0 text-neutral-20">
+                    <h2 class="dark:text-neutral-700">1.2k</h2>
+                    <p class="m-text dark:!text-neutral-700 text-neutral-20">Happy Customers</p>
+                  </div>
+                  <div class="col-span-2">
+                    <img src="./assets/images/about-1.png" class="rounded-xl w-full" alt="" />
+                  </div>
+                </div>
+                <div class="col-span-2 sm:col-span-1 relative z-[2]">
+                  <img src="./assets/images/about-2.png" class="rounded-xl w-full" alt="" />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Why choose us -->
+          <section class="relative overflow-hidden bg-neutral-20 py-16 dark:bg-neutral-903 dark:text-neutral-10 xl:py-[115px] after:absolute after:w-full after:h-64 after:bottom-0 after:left-0 after:bg-neutral-0 after:dark:bg-neutral-904">
+            <div class="size-32 md:size-44 xl:size-[574px] rounded-full opacity-[0.2] blur-[80px] md:blur-[100px] xl:blur-[300px] bg-error-300 absolute bottom-0 left-0"></div>
+            <div class="size-32 md:size-44 xl:size-[574px] rounded-full opacity-[0.15] blur-[80px] md:blur-[100px] xl:blur-[300px] bg-error-300 absolute top-0 ltr:right-0 rtl:left-0"></div>
+            <img src="./assets/images/why-choose-el-1.png" class="absolute top-20 max-lg:hidden left-12 xxl:left-16" alt="" />
+            <img src="./assets/images/why-choose-el-2.png" class="absolute top-1/2 -translate-y-[60%] right-12 xxl:right-16" alt="" />
+            <div class="container">
+              <div class="max-w-xl mx-auto text-center mb-10 lg:mb-[60px] relative z-[3]">
+                <h5 class="text-secondary-300 mb-4">Why Choose Us</h5>
+                <h2 class="mb-3 lg:mb-6 leading-tight">The Best Creative Agency Side Is Softify</h2>
+                <p>With intuitive interfaces and powerful features, Softify empowers you to manage projects, track progress</p>
+              </div>
+              <div class="grid grid-cols-12 gap-4 lg:gap-6 justify-center relative z-[4]">
+                <img src="./assets/images/why-choose-el-3.png" class="absolute -bottom-[15%] -right-10 z-[2]" alt="" />
+                <div class="col-span-12 md:col-span-6 lg:col-span-4 p-3 sm:p-4 md:p-6 xl:px-8 xl:py-10 rounded-xl bg-neutral-0 dark:bg-neutral-904 border border-neutral-30 dark:border-neutral-500 text-center flex flex-col items-center">
+                  <span class="inline-flex justify-center shrink-0 items-center size-16 rounded-full bg-primary-50 dark:bg-neutral-903 border border-neutral-20 dark:border-neutral-500">
+                    <i class="las la-file-invoice-dollar text-primary-300 text-4xl"></i>
+                  </span>
+                  <h4 class="mt-6 lg:mt-8 mb-4">Enhanced Productivity</h4>
+                  <p class="mb-6">Streamline processes, automate repetitive tasks, and centralize communication to boost productivity across your organization.</p>
+                  <div class="w-12 h-px bg-neutral-100"></div>
+                </div>
+                <div class="col-span-12 md:col-span-6 lg:col-span-4 p-3 sm:p-4 md:p-6 xl:px-8 xl:py-10 rounded-xl bg-neutral-0 dark:bg-neutral-904 border border-neutral-30 dark:border-neutral-500 text-center flex flex-col items-center">
+                  <span class="inline-flex justify-center shrink-0 items-center size-16 rounded-full bg-secondary-50 dark:bg-neutral-903 border border-neutral-20 dark:border-neutral-500">
+                    <i class="las la-file-invoice-dollar text-secondary-300 text-4xl"></i>
+                  </span>
+                  <h4 class="mt-6 lg:mt-8 mb-4">Enhanced Productivity</h4>
+                  <p class="mb-6">Streamline processes, automate repetitive tasks, and centralize communication to boost productivity across your organization.</p>
+                  <div class="w-12 h-px bg-neutral-100"></div>
+                </div>
+                <div class="col-span-12 md:col-span-6 lg:col-span-4 p-3 relative z-[3] sm:p-4 md:p-6 xl:px-8 xl:py-10 rounded-xl bg-neutral-0 dark:bg-neutral-904 border border-neutral-30 dark:border-neutral-500 text-center flex flex-col items-center">
+                  <span class="inline-flex justify-center shrink-0 items-center size-16 rounded-full bg-warning-50 dark:bg-neutral-903 border border-neutral-20 dark:border-neutral-500">
+                    <i class="las la-file-invoice-dollar text-warning-300 text-4xl"></i>
+                  </span>
+                  <h4 class="mt-6 lg:mt-8 mb-4">Enhanced Productivity</h4>
+                  <p class="mb-6">Streamline processes, automate repetitive tasks, and centralize communication to boost productivity across your organization.</p>
+                  <div class="w-12 h-px bg-neutral-100"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Project Overview -->
+          <section class="relative overflow-hidden bg-neutral-20 py-16 dark:bg-neutral-903 dark:text-neutral-10 xxl:py-[115px]">
+            <div class="absolute right-0 top-0 h-[574px] w-[574px] rounded-full bg-error-300 opacity-[0.15] blur-[300px]"></div>
+            <img src="./assets/images/why-choose-el-1.png" class="absolute max-lg:hidden top-1/2 -translate-y-1/2 ltr:left-32 ltr:xxl:left-48 rtl:right-32 rtl:xxl:right-48" alt="" />
+            <div class="container">
+              <div class="grid grid-cols-12 gap-6 relative z-[4]">
+                <img src="./assets/images/project-overview-el-1.png" class="absolute ltr:-left-10 rtl:-right-10 -top-10" alt="" />
+                <div class="col-span-12 md:col-span-6 lg:col-span-5 relative">
+                  <img src="./assets/images/project-overview-1.png" class="rounded-xl max-w-[320px] mx-auto" alt="" />
+                  <div class="absolute bottom-0 right-0 size-60 lg:size-80">
+                    <img src="./assets/images/project-overview-1.png" class="rounded-full object-center size-60 lg:size-80 border-[3px] border-neutral-0 dark:border-neutral-904" alt="" />
+                    <a href="https://www.youtube.com/watch?v=27hMNWcsa-Y" class="size-12 glightbox2 rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary-300 text-neutral-0 f-center">
+                      <i class="las la-play text-3xl"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-span-12 md:col-span-6 lg:col-span-6 lg:col-start-7">
+                  <h5 class="text-secondary-300 mb-4">Project Overview</h5>
+                  <h2 class="mb-3 lg:mb-6 leading-tight">Discover Our Company's Vision and Commitment</h2>
+                  <p class="mb-10 lg:mb-[60px]">We believe in fostering trust and transparency in all our interactions. From transparent pricing and clear communication to ethical business practices</p>
+                  <div class="flex flex-col gap-4 lg:gap-6 border-b border-dashed border-primary-75 pb-6 mb-6 lg:pb-10 lg:mb-10">
+                    <div>
+                      <div class="flex justify-between items-center mb-4">
+                        <p class="m-text font-medium">Total Profit</p>
+                        <span>50%</span>
+                      </div>
+                      <div x-data="{shown:false}" x-intersect="shown = true" class="h-1.5 w-full rounded-xl bg-neutral-0 dark:bg-neutral-904">
+                        <div :class="shown?'w-[50%]':'w-0'" class="h-1.5 duration-[2s] rounded-xl bg-success-300"></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="flex justify-between items-center mb-4">
+                        <p class="m-text font-medium">Total Income</p>
+                        <span>44%</span>
+                      </div>
+                      <div x-data="{shown:false}" x-intersect="shown = true" class="h-1.5 w-full rounded-xl bg-neutral-0 dark:bg-neutral-904">
+                        <div :class="shown?'w-[44%]':'w-0'" class="h-1.5 duration-[2s] rounded-xl bg-secondary-300"></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="flex justify-between items-center mb-4">
+                        <p class="m-text font-medium">Total Expenses</p>
+                        <span>66%</span>
+                      </div>
+                      <div x-data="{shown:false}" x-intersect="shown = true" class="h-1.5 w-full rounded-xl bg-neutral-0 dark:bg-neutral-904">
+                        <div :class="shown?'w-[66%]':'w-0'" class="h-1.5 duration-[2s] rounded-xl bg-warning-300"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <a href="#" class="btn-primary">Read More</a>
+                </div>
+              </div>
+            </div>
+            <div class="pt-14 xl:pt-20 xxl:pt-28 container grid grid-cols-12 gap-4 xxl:gap-6">
+              <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 p-3 relative z-[3] sm:p-4 md:p-6 xxl:p-8 rounded-xl bg-neutral-0 dark:bg-neutral-904 border border-neutral-30 dark:border-neutral-500 text-center flex flex-col items-center">
+                <span class="inline-flex justify-center shrink-0 items-center size-16 rounded-full bg-primary-50 dark:bg-neutral-903 border border-neutral-20 dark:border-neutral-500">
+                  <i class="las la-project-diagram text-primary-300 text-4xl"></i>
+                </span>
+                <h2 class="mt-6 display-4 lg:mt-8 mb-4">27.6k</h2>
+                <p class="l-text">Completed Projects</p>
+              </div>
+              <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 p-3 relative z-[3] sm:p-4 md:p-6 xxl:p-8 rounded-xl bg-neutral-0 dark:bg-neutral-904 border border-neutral-30 dark:border-neutral-500 text-center flex flex-col items-center">
+                <span class="inline-flex justify-center shrink-0 items-center size-16 rounded-full bg-secondary-50 dark:bg-neutral-903 border border-neutral-20 dark:border-neutral-500">
+                  <i class="las la-user-friends text-secondary-300 text-4xl"></i>
+                </span>
+                <h2 class="mt-6 display-4 lg:mt-8 mb-4">99.3k</h2>
+                <p class="l-text">Happy Customers</p>
+              </div>
+              <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 p-3 relative z-[3] sm:p-4 md:p-6 xxl:p-8 rounded-xl bg-neutral-0 dark:bg-neutral-904 border border-neutral-30 dark:border-neutral-500 text-center flex flex-col items-center">
+                <span class="inline-flex justify-center shrink-0 items-center size-16 rounded-full bg-warning-50 dark:bg-neutral-903 border border-neutral-20 dark:border-neutral-500">
+                  <i class="las la-users text-warning-300 text-4xl"></i>
+                </span>
+                <h2 class="mt-6 display-4 lg:mt-8 mb-4">500+</h2>
+                <p class="l-text">Team Member</p>
+              </div>
+              <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 p-3 relative z-[3] sm:p-4 md:p-6 xxl:p-8 rounded-xl bg-neutral-0 dark:bg-neutral-904 border border-neutral-30 dark:border-neutral-500 text-center flex flex-col items-center">
+                <span class="inline-flex justify-center shrink-0 items-center size-16 rounded-full bg-error-50 dark:bg-neutral-903 border border-neutral-20 dark:border-neutral-500">
+                  <i class="las la-trophy text-error-300 text-4xl"></i>
+                </span>
+                <h2 class="mt-6 display-4 lg:mt-8 mb-4">85+</h2>
+                <p class="l-text">Our Awards</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- team -->
+          <section class="relative overflow-hidden bg-neutral-20 py-16 dark:bg-neutral-903 dark:text-neutral-10 xl:py-[115px] after:absolute after:w-full after:h-[55%] after:top-0 after:left-0 after:bg-neutral-0 after:dark:bg-neutral-904">
+            <div class="size-32 md:size-44 xl:size-[574px] rounded-full opacity-[0.2] blur-[80px] md:blur-[100px] xl:blur-[300px] bg-error-300 absolute bottom-0 left-0"></div>
+            <div class="size-32 md:size-44 xl:size-[574px] rounded-full opacity-[0.15] blur-[80px] md:blur-[100px] xl:blur-[300px] bg-error-300 absolute top-0 right-0"></div>
+            <img src="./assets/images/team-el-1.png" class="absolute max-xxl:hidden top-28 left-20 z-[1]" alt="" />
+            <img src="./assets/images/why-choose-el-1.png" class="absolute max-xxl:hidden top-36 right-16 z-[1] xxl:right-20" alt="" />
+            <div class="container">
+              <div class="max-w-xl mx-auto text-center mb-10 lg:mb-[60px] relative z-[3]">
+                <h5 class="text-secondary-300 mb-4">Our Expert Team</h5>
+                <h2 class="mb-3 lg:mb-6 leading-tight">Professional Team Member</h2>
+                <p>These numbers are more than just statistics – they represent our commitment to excellence, innovation</p>
+              </div>
+              <div dir="ltr" class="relative z-[4]">
+                <div class="size-52 rounded-full border border-primary-100 -top-12 -left-20 max-xl:hidden absolute"></div>
+                <img src="./assets/images/why-choose-el-3.png" class="absolute bottom-[10%] -right-10 z-[2]" alt="" />
+                <div class="swiper team-slider relative z-[3] rounded-xl">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide bg-warning-300 rounded-xl text-center relative overflow-hidden group">
+                      <div class="w-12 h-12 overflow-hidden duration-300 group-hover:h-auto rounded-full z-[2] p-1 bg-neutral-0 dark:bg-neutral-904 absolute top-6 right-6 flex flex-col gap-1">
+                        <button class="bg-primary-300 group-hover:bg-neutral-903 text-neutral-0 size-10 shrink-0 rounded-full relative z-[2]">
+                          <i class="las la-plus group-hover:hidden group-hover:rotate-180 text-2xl duration-300"></i>
+                          <i class="las la-minus text-2xl hidden group-hover:block duration-300"></i>
+                        </button>
+                        <div class="flex flex-col gap-1 -translate-y-full opacity-0 group-hover:opacity-100 group-hover:translate-y-0 duration-300 invisible group-hover:visible">
+                          <a href="#" class="bg-transparent hover:bg-primary-300 duration-300 border border-neutral-30 dark:border-neutral-500 hover:border-primary-300 hover:text-neutral-0 size-10 shrink-0 rounded-full inf-center">
+                            <i class="lab la-facebook text-2xl"></i>
+                          </a>
+                          <a href="#" class="bg-transparent hover:bg-primary-300 duration-300 border border-neutral-30 dark:border-neutral-500 hover:border-primary-300 hover:text-neutral-0 size-10 shrink-0 rounded-full inf-center">
+                            <i class="lab la-instagram text-2xl"></i>
+                          </a>
+                          <a href="#" class="bg-transparent hover:bg-primary-300 duration-300 border border-neutral-30 dark:border-neutral-500 hover:border-primary-300 hover:text-neutral-0 size-10 shrink-0 rounded-full inf-center">
+                            <i class="lab la-linkedin text-2xl"></i>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="absolute size-80 bg-success-300 opacity-0 group-hover:opacity-100 blur-[100px] z-[1] -right-2/3 -top-2/3 duration-300"></div>
+                      <img src="./assets/images/team/team-1.png" alt="" />
+                      <div class="px-6 bg-neutral-0 dark:bg-neutral-904 pt-6 absolute bottom-0 left-0 w-full z-[3] rounded-b-xl pb-6">
+                        <h3 class="mb-3">John Doe</h3>
+                        <p class="m-text">Nursing Assistant</p>
+                      </div>
+                      <div class="w-[120%] h-[116px] bg-neutral-0 dark:bg-neutral-904 origin-bottom-left absolute bottom-3 duration-300 group-hover:rotate-0 -rotate-6 left-0 z-[2]"></div>
+                    </div>
+                    <div class="swiper-slide bg-warning-300 rounded-xl text-center relative overflow-hidden group">
+                      <div class="w-12 h-12 overflow-hidden duration-300 group-hover:h-auto rounded-full z-[2] p-1 bg-neutral-0 dark:bg-neutral-904 absolute top-6 right-6 flex flex-col gap-1">
+                        <button class="bg-primary-300 group-hover:bg-neutral-903 text-neutral-0 size-10 shrink-0 rounded-full relative z-[2]">
+                          <i class="las la-plus group-hover:hidden group-hover:rotate-180 text-2xl duration-300"></i>
+                          <i class="las la-minus text-2xl hidden group-hover:block duration-300"></i>
+                        </button>
+                        <div class="flex flex-col gap-1 -translate-y-full opacity-0 group-hover:opacity-100 group-hover:translate-y-0 duration-300 invisible group-hover:visible">
+                          <a href="#" class="bg-transparent hover:bg-primary-300 duration-300 border border-neutral-30 dark:border-neutral-500 hover:border-primary-300 hover:text-neutral-0 size-10 shrink-0 rounded-full inf-center">
+                            <i class="lab la-facebook text-2xl"></i>
+                          </a>
+                          <a href="#" class="bg-transparent hover:bg-primary-300 duration-300 border border-neutral-30 dark:border-neutral-500 hover:border-primary-300 hover:text-neutral-0 size-10 shrink-0 rounded-full inf-center">
+                            <i class="lab la-instagram text-2xl"></i>
+                          </a>
+                          <a href="#" class="bg-transparent hover:bg-primary-300 duration-300 border border-neutral-30 dark:border-neutral-500 hover:border-primary-300 hover:text-neutral-0 size-10 shrink-0 rounded-full inf-center">
+                            <i class="lab la-linkedin text-2xl"></i>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="absolute size-80 bg-success-300 opacity-0 group-hover:opacity-100 blur-[100px] z-[1] -right-2/3 -top-2/3 duration-300"></div>
+                      <img src="./assets/images/team/team-2.png" alt="" />
+                      <div class="px-6 bg-neutral-0 dark:bg-neutral-904 pt-6 absolute bottom-0 left-0 w-full z-[3] rounded-b-xl pb-6">
+                        <h3 class="mb-3">Bessie Cooper</h3>
+                        <p class="m-text">Nursing Assistant</p>
+                      </div>
+                      <div class="w-[120%] h-[116px] bg-neutral-0 dark:bg-neutral-904 origin-bottom-left absolute bottom-3 duration-300 group-hover:rotate-0 -rotate-6 left-0 z-[2]"></div>
+                    </div>
+                    <div class="swiper-slide bg-warning-300 rounded-xl text-center relative overflow-hidden group">
+                      <div class="w-12 h-12 overflow-hidden duration-300 group-hover:h-auto rounded-full z-[2] p-1 bg-neutral-0 dark:bg-neutral-904 absolute top-6 right-6 flex flex-col gap-1">
+                        <button class="bg-primary-300 group-hover:bg-neutral-903 text-neutral-0 size-10 shrink-0 rounded-full relative z-[2]">
+                          <i class="las la-plus group-hover:hidden group-hover:rotate-180 text-2xl duration-300"></i>
+                          <i class="las la-minus text-2xl hidden group-hover:block duration-300"></i>
+                        </button>
+                        <div class="flex flex-col gap-1 -translate-y-full opacity-0 group-hover:opacity-100 group-hover:translate-y-0 duration-300 invisible group-hover:visible">
+                          <a href="#" class="bg-transparent hover:bg-primary-300 duration-300 border border-neutral-30 dark:border-neutral-500 hover:border-primary-300 hover:text-neutral-0 size-10 shrink-0 rounded-full inf-center">
+                            <i class="lab la-facebook text-2xl"></i>
+                          </a>
+                          <a href="#" class="bg-transparent hover:bg-primary-300 duration-300 border border-neutral-30 dark:border-neutral-500 hover:border-primary-300 hover:text-neutral-0 size-10 shrink-0 rounded-full inf-center">
+                            <i class="lab la-instagram text-2xl"></i>
+                          </a>
+                          <a href="#" class="bg-transparent hover:bg-primary-300 duration-300 border border-neutral-30 dark:border-neutral-500 hover:border-primary-300 hover:text-neutral-0 size-10 shrink-0 rounded-full inf-center">
+                            <i class="lab la-linkedin text-2xl"></i>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="absolute size-80 bg-success-300 opacity-0 group-hover:opacity-100 blur-[100px] z-[1] -right-2/3 -top-2/3 duration-300"></div>
+                      <img src="./assets/images/team/team-3.png" alt="" />
+                      <div class="px-6 bg-neutral-0 dark:bg-neutral-904 pt-6 absolute bottom-0 left-0 w-full z-[3] rounded-b-xl pb-6">
+                        <h3 class="mb-3">Kathryn Murphy</h3>
+                        <p class="m-text">Nursing Assistant</p>
+                      </div>
+                      <div class="w-[120%] h-[116px] bg-neutral-0 dark:bg-neutral-904 origin-bottom-left absolute bottom-3 duration-300 group-hover:rotate-0 -rotate-6 left-0 z-[2]"></div>
+                    </div>
+                    <div class="swiper-slide bg-warning-300 rounded-xl text-center relative overflow-hidden group">
+                      <div class="w-12 h-12 overflow-hidden duration-300 group-hover:h-auto rounded-full z-[2] p-1 bg-neutral-0 dark:bg-neutral-904 absolute top-6 right-6 flex flex-col gap-1">
+                        <button class="bg-primary-300 group-hover:bg-neutral-903 text-neutral-0 size-10 shrink-0 rounded-full relative z-[2]">
+                          <i class="las la-plus group-hover:hidden group-hover:rotate-180 text-2xl duration-300"></i>
+                          <i class="las la-minus text-2xl hidden group-hover:block duration-300"></i>
+                        </button>
+                        <div class="flex flex-col gap-1 -translate-y-full opacity-0 group-hover:opacity-100 group-hover:translate-y-0 duration-300 invisible group-hover:visible">
+                          <a href="#" class="bg-transparent hover:bg-primary-300 duration-300 border border-neutral-30 dark:border-neutral-500 hover:border-primary-300 hover:text-neutral-0 size-10 shrink-0 rounded-full inf-center">
+                            <i class="lab la-facebook text-2xl"></i>
+                          </a>
+                          <a href="#" class="bg-transparent hover:bg-primary-300 duration-300 border border-neutral-30 dark:border-neutral-500 hover:border-primary-300 hover:text-neutral-0 size-10 shrink-0 rounded-full inf-center">
+                            <i class="lab la-instagram text-2xl"></i>
+                          </a>
+                          <a href="#" class="bg-transparent hover:bg-primary-300 duration-300 border border-neutral-30 dark:border-neutral-500 hover:border-primary-300 hover:text-neutral-0 size-10 shrink-0 rounded-full inf-center">
+                            <i class="lab la-linkedin text-2xl"></i>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="absolute size-80 bg-success-300 opacity-0 group-hover:opacity-100 blur-[100px] z-[1] -right-2/3 -top-2/3 duration-300"></div>
+                      <img src="./assets/images/team/team-4.png" alt="" />
+                      <div class="px-6 bg-neutral-0 dark:bg-neutral-904 pt-6 absolute bottom-0 left-0 w-full z-[3] rounded-b-xl pb-6">
+                        <h3 class="mb-3">Dianne Russel</h3>
+                        <p class="m-text">Nursing Assistant</p>
+                      </div>
+                      <div class="w-[120%] h-[116px] bg-neutral-0 dark:bg-neutral-904 origin-bottom-left absolute bottom-3 duration-300 group-hover:rotate-0 -rotate-6 left-0 z-[2]"></div>
+                    </div>
+                    <div class="swiper-slide bg-warning-300 rounded-xl text-center relative overflow-hidden group">
+                      <div class="w-12 h-12 overflow-hidden duration-300 group-hover:h-auto rounded-full z-[2] p-1 bg-neutral-0 dark:bg-neutral-904 absolute top-6 right-6 flex flex-col gap-1">
+                        <button class="bg-primary-300 group-hover:bg-neutral-903 text-neutral-0 size-10 shrink-0 rounded-full relative z-[2]">
+                          <i class="las la-plus group-hover:hidden group-hover:rotate-180 text-2xl duration-300"></i>
+                          <i class="las la-minus text-2xl hidden group-hover:block duration-300"></i>
+                        </button>
+                        <div class="flex flex-col gap-1 -translate-y-full opacity-0 group-hover:opacity-100 group-hover:translate-y-0 duration-300 invisible group-hover:visible">
+                          <a href="#" class="bg-transparent hover:bg-primary-300 duration-300 border border-neutral-30 dark:border-neutral-500 hover:border-primary-300 hover:text-neutral-0 size-10 shrink-0 rounded-full inf-center">
+                            <i class="lab la-facebook text-2xl"></i>
+                          </a>
+                          <a href="#" class="bg-transparent hover:bg-primary-300 duration-300 border border-neutral-30 dark:border-neutral-500 hover:border-primary-300 hover:text-neutral-0 size-10 shrink-0 rounded-full inf-center">
+                            <i class="lab la-instagram text-2xl"></i>
+                          </a>
+                          <a href="#" class="bg-transparent hover:bg-primary-300 duration-300 border border-neutral-30 dark:border-neutral-500 hover:border-primary-300 hover:text-neutral-0 size-10 shrink-0 rounded-full inf-center">
+                            <i class="lab la-linkedin text-2xl"></i>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="absolute size-80 bg-success-300 opacity-0 group-hover:opacity-100 blur-[100px] z-[1] -right-2/3 -top-2/3 duration-300"></div>
+                      <img src="./assets/images/team/team-1.png" alt="" />
+                      <div class="px-6 bg-neutral-0 dark:bg-neutral-904 pt-6 absolute bottom-0 left-0 w-full z-[3] rounded-b-xl pb-6">
+                        <h3 class="mb-3">John Doe</h3>
+                        <p class="m-text">Nursing Assistant</p>
+                      </div>
+                      <div class="w-[120%] h-[116px] bg-neutral-0 dark:bg-neutral-904 origin-bottom-left absolute bottom-3 duration-300 group-hover:rotate-0 -rotate-6 left-0 z-[2]"></div>
+                    </div>
+                    <div class="swiper-slide bg-warning-300 rounded-xl text-center relative overflow-hidden group">
+                      <div class="w-12 h-12 overflow-hidden duration-300 group-hover:h-auto rounded-full z-[2] p-1 bg-neutral-0 dark:bg-neutral-904 absolute top-6 right-6 flex flex-col gap-1">
+                        <button class="bg-primary-300 group-hover:bg-neutral-903 text-neutral-0 size-10 shrink-0 rounded-full relative z-[2]">
+                          <i class="las la-plus group-hover:hidden group-hover:rotate-180 text-2xl duration-300"></i>
+                          <i class="las la-minus text-2xl hidden group-hover:block duration-300"></i>
+                        </button>
+                        <div class="flex flex-col gap-1 -translate-y-full opacity-0 group-hover:opacity-100 group-hover:translate-y-0 duration-300 invisible group-hover:visible">
+                          <a href="#" class="bg-transparent hover:bg-primary-300 duration-300 border border-neutral-30 dark:border-neutral-500 hover:border-primary-300 hover:text-neutral-0 size-10 shrink-0 rounded-full inf-center">
+                            <i class="lab la-facebook text-2xl"></i>
+                          </a>
+                          <a href="#" class="bg-transparent hover:bg-primary-300 duration-300 border border-neutral-30 dark:border-neutral-500 hover:border-primary-300 hover:text-neutral-0 size-10 shrink-0 rounded-full inf-center">
+                            <i class="lab la-instagram text-2xl"></i>
+                          </a>
+                          <a href="#" class="bg-transparent hover:bg-primary-300 duration-300 border border-neutral-30 dark:border-neutral-500 hover:border-primary-300 hover:text-neutral-0 size-10 shrink-0 rounded-full inf-center">
+                            <i class="lab la-linkedin text-2xl"></i>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="absolute size-80 bg-success-300 opacity-0 group-hover:opacity-100 blur-[100px] z-[1] -right-2/3 -top-2/3 duration-300"></div>
+                      <img src="./assets/images/team/team-2.png" alt="" />
+                      <div class="px-6 bg-neutral-0 dark:bg-neutral-904 pt-6 absolute bottom-0 left-0 w-full z-[3] rounded-b-xl pb-6">
+                        <h3 class="mb-3">Bessie Cooper</h3>
+                        <p class="m-text">Nursing Assistant</p>
+                      </div>
+                      <div class="w-[120%] h-[116px] bg-neutral-0 dark:bg-neutral-904 origin-bottom-left absolute bottom-3 duration-300 group-hover:rotate-0 -rotate-6 left-0 z-[2]"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-7 lg:mt-10 flex justify-center gap-4">
+                  <button class="team-prev size-12 border rounded-full border-primary-300 text-primary-300 hover:bg-primary-300 hover:text-neutral-0 f-center duration-300">
+                    <i class="las la-angle-left text-xl"></i>
+                  </button>
+                  <button class="team-next size-12 border rounded-full border-primary-300 text-primary-300 hover:bg-primary-300 hover:text-neutral-0 f-center duration-300">
+                    <i class="las la-angle-right text-xl"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Testimonials -->
+          <section class="relative overflow-hidden bg-neutral-0 py-16 dark:bg-neutral-904 dark:text-neutral-10 xl:py-28">
+            <img src="./assets/images/testimonial-el-1.png" class="absolute max-xl:hidden top-28 left-20 xxl:left-36" alt="" />
+            <img src="./assets/images/why-choose-el-1.png" class="absolute left-10 max-xxl:hidden bottom-10" alt="" />
+            <img src="./assets/images/testimonial-el-3.png" class="absolute right-10 bottom-9 growbig" alt="" />
+            <img src="./assets/images/why-choose-el-2.png" width="167" class="absolute max-xl:hidden right-5 xxl:right-20 top-5 xxl:top-16" alt="" />
+            <div class="container">
+              <div class="grid grid-cols-12 gap-4 lg:gap-6 relative z-[4] items-center">
+                <div class="col-span-12 lg:col-span-5">
+                  <h5 class="text-secondary-300 mb-4">Real-World Testimonial</h5>
+                  <h2 class="mb-3 lg:mb-6 leading-tight">Client Success Stories on Softify</h2>
+                  <p class="mb-6 lg:mb-10">Showcase testimonials from a variety of clients across different industries to demonstrate broad applicability. Use vivid quotes from clients, highlighting specific results.</p>
+                  <div class="flex gap-4">
+                    <button class="testi-prev size-12 border rounded-full border-primary-300 text-primary-300 hover:bg-primary-300 hover:text-neutral-0 f-center duration-300">
+                      <i class="las la-angle-left text-xl"></i>
+                    </button>
+                    <button class="testi-next size-12 border rounded-full border-primary-300 text-primary-300 hover:bg-primary-300 hover:text-neutral-0 f-center duration-300">
+                      <i class="las la-angle-right text-xl"></i>
+                    </button>
+                  </div>
+                </div>
+                <div dir="ltr" class="col-span-12 lg:col-span-7 xxl:col-span-6 xxl:col-start-7 relative">
+                  <div class="swiper testimonial-swiper">
+                    <div class="swiper-wrapper py-5">
+                      <div class="swiper-slide">
+                        <div class="bg-neutral-0 dark:bg-neutral-904 rounded-xl slide-inner shadow-custom-3 px-3 py-6 sm:px-4 md:p-6 xl:p-8 relative">
+                          <img src="./assets/images/why-choose-el-1.png" width="69" height="78" class="opacity-50 absolute top-10 right-8" alt="" />
+                          <div class="relative size-[88px] rounded-full">
+                            <img src="./assets/images/users/user-m-1.png" class="rounded-full" alt="" />
+                            <span class="inline-flex size-10 bg-primary-300 border-2 border-neutral-0 dark:border-neutral-904 rounded-full absolute -bottom-4 right-0 items-center justify-center">
+                              <i class="las la-quote-right text-neutral-0 text-2xl"></i>
+                            </span>
+                          </div>
+                          <p class="l-text mb-6 mt-8 lg:mt-10">Softify has been a game-changer for our business. We can now track our key metrics in real-time</p>
+                          <div class="flex items-center gap-1 text-xl text-warning-300 mb-4">
+                            <i class="las la-star"></i>
+                            <i class="las la-star"></i>
+                            <i class="las la-star"></i>
+                            <i class="las la-star"></i>
+                            <i class="las la-star-half-alt"></i>
+                          </div>
+                          <h4 class="mb-4">Kathryn Murphy</h4>
+                          <p>Teacher</p>
+                        </div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="bg-neutral-0 dark:bg-neutral-904 rounded-xl slide-inner shadow-custom-3 px-3 py-6 sm:px-4 md:p-6 xl:p-8 relative">
+                          <img src="./assets/images/why-choose-el-1.png" width="69" height="78" class="opacity-50 absolute top-10 right-8" alt="" />
+                          <div class="relative size-[88px] rounded-full">
+                            <img src="./assets/images/users/user-m-1.png" class="rounded-full" alt="" />
+                            <span class="inline-flex size-10 bg-primary-300 border-2 border-neutral-0 dark:border-neutral-904 rounded-full absolute -bottom-4 right-0 items-center justify-center">
+                              <i class="las la-quote-right text-neutral-0 text-2xl"></i>
+                            </span>
+                          </div>
+                          <p class="l-text mb-6 mt-8 lg:mt-10">Softify has been a game-changer for our business. We can now track our key metrics in real-time</p>
+                          <div class="flex items-center gap-1 text-xl text-warning-300 mb-4">
+                            <i class="las la-star"></i>
+                            <i class="las la-star"></i>
+                            <i class="las la-star"></i>
+                            <i class="las la-star"></i>
+                            <i class="las la-star-half-alt"></i>
+                          </div>
+                          <h4 class="mb-4">Kathryn Murphy</h4>
+                          <p>Teacher</p>
+                        </div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="bg-neutral-0 dark:bg-neutral-904 rounded-xl slide-inner shadow-custom-3 px-3 py-6 sm:px-4 md:p-6 xl:p-8 relative">
+                          <img src="./assets/images/why-choose-el-1.png" width="69" height="78" class="opacity-50 absolute top-10 right-8" alt="" />
+                          <div class="relative size-[88px] rounded-full">
+                            <img src="./assets/images/users/user-m-1.png" class="rounded-full" alt="" />
+                            <span class="inline-flex size-10 bg-primary-300 border-2 border-neutral-0 dark:border-neutral-904 rounded-full absolute -bottom-4 right-0 items-center justify-center">
+                              <i class="las la-quote-right text-neutral-0 text-2xl"></i>
+                            </span>
+                          </div>
+                          <p class="l-text mb-6 mt-8 lg:mt-10">Softify has been a game-changer for our business. We can now track our key metrics in real-time</p>
+                          <div class="flex items-center gap-1 text-xl text-warning-300 mb-4">
+                            <i class="las la-star"></i>
+                            <i class="las la-star"></i>
+                            <i class="las la-star"></i>
+                            <i class="las la-star"></i>
+                            <i class="las la-star-half-alt"></i>
+                          </div>
+                          <h4 class="mb-4">Kathryn Murphy</h4>
+                          <p>Teacher</p>
+                        </div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="bg-neutral-0 dark:bg-neutral-904 rounded-xl slide-inner shadow-custom-3 px-3 py-6 sm:px-4 md:p-6 xl:p-8 relative">
+                          <img src="./assets/images/why-choose-el-1.png" width="69" height="78" class="opacity-50 absolute top-10 right-8" alt="" />
+                          <div class="relative size-[88px] rounded-full">
+                            <img src="./assets/images/users/user-m-1.png" class="rounded-full" alt="" />
+                            <span class="inline-flex size-10 bg-primary-300 border-2 border-neutral-0 dark:border-neutral-904 rounded-full absolute -bottom-4 right-0 items-center justify-center">
+                              <i class="las la-quote-right text-neutral-0 text-2xl"></i>
+                            </span>
+                          </div>
+                          <p class="l-text mb-6 mt-8 lg:mt-10">Softify has been a game-changer for our business. We can now track our key metrics in real-time</p>
+                          <div class="flex items-center gap-1 text-xl text-warning-300 mb-4">
+                            <i class="las la-star"></i>
+                            <i class="las la-star"></i>
+                            <i class="las la-star"></i>
+                            <i class="las la-star"></i>
+                            <i class="las la-star-half-alt"></i>
+                          </div>
+                          <h4 class="mb-4">Kathryn Murphy</h4>
+                          <p>Teacher</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="testimonial-pagination"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <!-- js libraries and custom scripts -->
+    <script src="./assets/js/libs/swiper-bundle.min.js"></script>
+    <script src="./assets/js/libs/glightbox.js"></script>
+    <script defer src="./assets/js/libs/alpine.intersect.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>

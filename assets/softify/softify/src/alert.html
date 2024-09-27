@@ -1,0 +1,399 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./asstes/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="./assets/css/github.min.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./assets/fonts/line-awesome/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  </head>
+
+  <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''">
+    <!-- Customizer -->
+    <include-customizer />
+    <!-- loader -->
+    <include-loader />
+    <!-- Navigation -->
+    <include-navigation />
+
+    <!-- Main Content -->
+    <main
+      :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
+      class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
+    >
+      <div :class="[$store.app.menu=='horizontal' ? 'max-w-[1704px] mx-auto xxl:px-0 xxl:pt-8':'',$store.app.stretch?'xxxl:max-w-[92%] mx-auto':'']" class="p-3 md:p-4 xxl:p-6 relative space-y-4 xxl:space-y-6">
+        <div class="white-box xxxl:p-6">
+          <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
+            <h2 class="mb-3 xxxl:mb-5">Alert</h2>
+            <ul class="flex flex-wrap gap-2 items-center">
+              <li>
+                <a class="flex items-center gap-2" href="index.html"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Components</span></a>
+              </li>
+              <li class="text-sm text-neutral-100">•</li>
+              <li>
+                <a class="flex items-center gap-2 text-primary-300" href="#"> <i class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Alert</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- alert -->
+        <section class="text-neutral-700 dark:text-neutral-20 white-box">
+          <div class="space-y-4 xl:space-y-6">
+            <!-- Alert -->
+            <div class="col-span-12 lg:col-span-6 flex flex-col gap-4 lg:gap-6">
+              <div x-data="copyorviewcode" class="n20-box">
+                <div class="bb-dashed-n40">
+                  <h5>Light Color</h5>
+                </div>
+                <div class="flex gap-3 mb-6">
+                  <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                  <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+                </div>
+                <div x-show="!viewcode" class="flex flex-col gap-4 lg:gap-6">
+                  <div class="py-3 px-4 md:px-6 lg:px-8 rounded-xl bg-info-300/10 flex justify-between items-center">
+                    <div class="flex gap-5 items-center">
+                      <i class="las la-info-circle text-3xl text-info-300"></i>
+                      <span class="l-text font-medium text-info-300">This is an info alert — check it out!</span>
+                    </div>
+                    <span class="cursor-pointer size-9 rounded-full hover:bg-info-300/30 duration-300 f-center">
+                      <i class="las la-times text-2xl text-info-300"></i>
+                    </span>
+                  </div>
+                  <div class="py-3 px-4 md:px-6 lg:px-8 rounded-xl bg-success-300/10 flex justify-between items-center">
+                    <div class="flex gap-5 items-center">
+                      <i class="las la-check-circle text-3xl text-success-300"></i>
+                      <span class="l-text font-medium text-success-300">This is an success alert — check it out!</span>
+                    </div>
+                    <span class="cursor-pointer size-9 rounded-full hover:bg-info-300/30 duration-300 f-center">
+                      <i class="las la-times text-2xl text-success-300"></i>
+                    </span>
+                  </div>
+                  <div class="py-3 px-4 md:px-6 lg:px-8 rounded-xl bg-warning-300/10 flex justify-between items-center">
+                    <div class="flex gap-5 items-center">
+                      <i class="las la-exclamation-triangle text-3xl text-warning-300"></i>
+                      <span class="l-text font-medium text-warning-300">This is an warning alert — check it out!</span>
+                    </div>
+                    <span class="cursor-pointer size-9 rounded-full hover:bg-info-300/30 duration-300 f-center">
+                      <i class="las la-times text-2xl text-warning-300"></i>
+                    </span>
+                  </div>
+                  <div class="py-3 px-4 md:px-6 lg:px-8 rounded-xl bg-error-300/10 flex justify-between items-center">
+                    <div class="flex gap-5 items-center">
+                      <i class="las la-times-circle text-3xl text-error-300"></i>
+                      <span class="l-text font-medium text-error-300">This is an error alert — check it out!</span>
+                    </div>
+                    <span class="cursor-pointer size-9 rounded-full hover:bg-info-300/30 duration-300 f-center">
+                      <i class="las la-times text-2xl text-error-300"></i>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Code Block -->
+                <div x-show="viewcode" x-transtion.opacity class="code mt-3 relative">
+                  <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                  <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;py-3 px-4 md:px-6 lg:px-8 rounded-xl bg-info-300/10 flex justify-between items-center&#x22;&#x3E;
+  &#x3C;div class=&#x22;flex gap-5 items-center&#x22;&#x3E;
+    &#x3C;i class=&#x22;las la-info-circle text-3xl text-info-300&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;span class=&#x22;l-text font-medium text-info-300&#x22;&#x3E;This is an info alert &#x2014; check it out!&#x3C;/span&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;span class=&#x22;cursor-pointer size-9 rounded-full hover:bg-info-300/30 duration-300 f-center&#x22;&#x3E;
+    &#x3C;i class=&#x22;las la-times text-2xl text-info-300&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/span&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+                </div>
+              </div>
+              <!-- Outlined -->
+              <div x-data="copyorviewcode" class="n20-box">
+                <div class="bb-dashed-n40">
+                  <h5>Outlined</h5>
+                </div>
+                <div class="flex gap-3 mb-6">
+                  <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                  <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+                </div>
+
+                <div x-show="!viewcode" class="flex flex-col gap-4 lg:gap-6">
+                  <div class="py-3 px-4 md:px-6 lg:px-8 rounded-xl border border-info-300 bg-neutral-20 dark:bg-neutral-903 flex justify-between items-center">
+                    <div class="flex gap-5 items-center">
+                      <i class="las la-info-circle text-3xl text-info-300"></i>
+                      <span class="l-text font-medium text-info-300">This is an info alert — check it out!</span>
+                    </div>
+                    <span class="cursor-pointer size-9 rounded-full hover:bg-neutral-0 dark:bg-neutral-904 duration-300 f-center">
+                      <i class="las la-times text-2xl text-info-300"></i>
+                    </span>
+                  </div>
+                  <div class="py-3 px-4 md:px-6 lg:px-8 rounded-xl border border-success-300 bg-neutral-20 dark:bg-neutral-903 flex justify-between items-center">
+                    <div class="flex gap-5 items-center">
+                      <i class="las la-check-circle text-3xl text-success-300"></i>
+                      <span class="l-text font-medium text-success-300">This is an success alert — check it out!</span>
+                    </div>
+                    <span class="cursor-pointer size-9 rounded-full hover:bg-neutral-0 dark:bg-neutral-904 duration-300 f-center">
+                      <i class="las la-times text-2xl text-success-300"></i>
+                    </span>
+                  </div>
+                  <div class="py-3 px-4 md:px-6 lg:px-8 rounded-xl border border-warning-300 bg-neutral-20 dark:bg-neutral-903 flex justify-between items-center">
+                    <div class="flex gap-5 items-center">
+                      <i class="las la-exclamation-triangle text-3xl text-warning-300"></i>
+                      <span class="l-text font-medium text-warning-300">This is an warning alert — check it out!</span>
+                    </div>
+                    <span class="cursor-pointer size-9 rounded-full hover:bg-neutral-0 dark:bg-neutral-904 duration-300 f-center">
+                      <i class="las la-times text-2xl text-warning-300"></i>
+                    </span>
+                  </div>
+                  <div class="py-3 px-4 md:px-6 lg:px-8 rounded-xl border border-error-300 bg-neutral-20 dark:bg-neutral-903 flex justify-between items-center">
+                    <div class="flex gap-5 items-center">
+                      <i class="las la-times-circle text-3xl text-error-300"></i>
+                      <span class="l-text font-medium text-error-300">This is an error alert — check it out!</span>
+                    </div>
+                    <span class="cursor-pointer size-9 rounded-full hover:bg-neutral-0 dark:bg-neutral-904 duration-300 f-center">
+                      <i class="las la-times text-2xl text-error-300"></i>
+                    </span>
+                  </div>
+                </div>
+                <!-- Code Block -->
+                <div x-show="viewcode" class="code mt-3 relative">
+                  <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                  <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;py-3 px-4 md:px-6 lg:px-8 rounded-xl border border-info-300 bg-neutral-20 dark:bg-neutral-903 flex justify-between items-center&#x22;&#x3E;
+  &#x3C;div class=&#x22;flex gap-5 items-center&#x22;&#x3E;
+    &#x3C;i class=&#x22;las la-info-circle text-3xl text-info-300&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;span class=&#x22;l-text font-medium text-info-300&#x22;&#x3E;This is an info alert &#x2014; check it out!&#x3C;/span&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;span class=&#x22;cursor-pointer size-9 rounded-full hover:bg-neutral-0 dark:bg-neutral-904 duration-300 f-center&#x22;&#x3E;
+    &#x3C;i class=&#x22;las la-times text-2xl text-info-300&#x22;&#x3E;&#x3C;/i&#x3E;
+  &#x3C;/span&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+                </div>
+              </div>
+
+              <!-- Actions -->
+              <div x-data="copyorviewcode" class="n20-box">
+                <div class="bb-dashed-n40">
+                  <h5>With Action Button</h5>
+                </div>
+
+                <!-- Buttons -->
+                <div class="flex gap-3 mb-6">
+                  <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                  <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+                </div>
+
+                <div x-show="!viewcode" class="flex flex-col gap-4 lg:gap-6">
+                  <div class="py-3 px-4 flex-wrap gap-4 rounded-xl border border-info-300/30 bg-primary-300/10 flex justify-between items-center">
+                    <div class="flex gap-4 items-center">
+                      <i class="las la-info-circle text-3xl text-info-300"></i>
+                      <span class="m-text font-medium text-info-300">This is an info alert — check it out!</span>
+                    </div>
+                    <button class="rounded-lg py-2 px-5 bg-info-300/30 font-semibold">Action</button>
+                  </div>
+                  <div class="py-3 px-4 flex-wrap gap-4 rounded-xl border border-info-300/30 bg-info-300 flex justify-between items-center">
+                    <div class="flex gap-4 items-center text-neutral-0">
+                      <i class="las la-info-circle text-3xl"></i>
+                      <span class="m-text font-medium">This is an info alert — check it out!</span>
+                    </div>
+                    <div class="flex gap-4">
+                      <button class="rounded-lg py-2 px-5 bg-transparent text-white font-semibold border border-neutral-20">Undo</button>
+                      <button class="rounded-lg py-2 px-5 bg-neutral-0 text-info-300 border border-neutral-0 font-semibold">Action</button>
+                    </div>
+                  </div>
+
+                  <div class="py-3 px-4 flex-wrap gap-4 rounded-xl border border-info-300/30 bg-info-300/10 flex justify-between items-center">
+                    <div class="flex gap-4 items-center">
+                      <i class="las la-info-circle text-3xl text-info-300"></i>
+                      <span class="m-text font-medium text-info-300">This is an info alert — check it out!</span>
+                    </div>
+                    <div class="flex gap-4">
+                      <button class="rounded-lg py-2 px-5 bg-transparent text-info-300 font-semibold border border-info-300">Undo</button>
+                      <button class="rounded-lg py-2 px-5 bg-info-300 text-neutral-0 border border-info-300 font-semibold">Action</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Code Block -->
+                <div x-show="viewcode" class="code mt-3 relative">
+                  <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                  <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;py-3 px-4 flex-wrap gap-4 rounded-xl border border-info-300/30 bg-info-300 flex justify-between items-center&#x22;&#x3E;
+  &#x3C;div class=&#x22;flex gap-4 items-center text-neutral-0&#x22;&#x3E;
+    &#x3C;i class=&#x22;las la-info-circle text-3xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;span class=&#x22;m-text font-medium&#x22;&#x3E;This is an info alert &#x2014; check it out!&#x3C;/span&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;flex gap-4&#x22;&#x3E;
+    &#x3C;button class=&#x22;rounded-lg py-2 px-5 bg-transparent text-white font-semibold border border-neutral-20&#x22;&#x3E;Undo&#x3C;/button&#x3E;
+    &#x3C;button class=&#x22;rounded-lg py-2 px-5 bg-neutral-0 text-info-300 border border-neutral-0 font-semibold&#x22;&#x3E;Action&#x3C;/button&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12 lg:col-span-6 flex flex-col gap-4 lg:gap-6">
+              <!-- Filled -->
+              <div x-data="copyorviewcode" class="n20-box">
+                <h5 class="bb-dashed-n40">Filled</h5>
+                <!-- Buttons -->
+                <div class="flex gap-3 mb-6">
+                  <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                  <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+                </div>
+
+                <div x-show="!viewcode" class="flex flex-col gap-4 lg:gap-6">
+                  <div class="py-3 px-4 md:px-6 lg:px-8 rounded-xl text-neutral-0 bg-info-300 flex justify-between items-center">
+                    <div class="flex gap-5 items-center">
+                      <i class="las la-info-circle text-3xl"></i>
+                      <span class="l-text font-medium">This is an info alert — check it out!</span>
+                    </div>
+                    <span class="cursor-pointer size-9 rounded-full hover:bg-info-300/30 duration-300 f-center">
+                      <i class="las la-times text-2xl"></i>
+                    </span>
+                  </div>
+                  <div class="py-3 px-4 md:px-6 lg:px-8 rounded-xl text-neutral-0 bg-success-300 flex justify-between items-center">
+                    <div class="flex gap-5 items-center">
+                      <i class="las la-check-circle text-3xl"></i>
+                      <span class="l-text font-medium">This is an success alert — check it out!</span>
+                    </div>
+                    <span class="cursor-pointer size-9 rounded-full hover:bg-info-300/30 duration-300 f-center">
+                      <i class="las la-times text-2xl"></i>
+                    </span>
+                  </div>
+                  <div class="py-3 px-4 md:px-6 lg:px-8 rounded-xl bg-warning-300 text-neutral-0 flex justify-between items-center">
+                    <div class="flex gap-5 items-center">
+                      <i class="las la-exclamation-triangle text-3xl"></i>
+                      <span class="l-text font-medium">This is an warning alert — check it out!</span>
+                    </div>
+                    <span class="cursor-pointer size-9 rounded-full hover:bg-info-300/30 duration-300 f-center">
+                      <i class="las la-times text-2xl"></i>
+                    </span>
+                  </div>
+                  <div class="py-3 px-4 md:px-6 lg:px-8 rounded-xl bg-error-300 text-neutral-0 flex justify-between items-center">
+                    <div class="flex gap-5 items-center">
+                      <i class="las la-times-circle text-3xl"></i>
+                      <span class="l-text font-medium">This is an error alert — check it out!</span>
+                    </div>
+                    <span class="cursor-pointer size-9 rounded-full hover:bg-info-300/30 duration-300 f-center">
+                      <i class="las la-times text-2xl"></i>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Code Block -->
+                <div x-show="viewcode" class="code mt-3 relative">
+                  <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                  <pre><code class="code-block rounded-lg">
+ &#x3C;div class=&#x22;py-3 px-4 md:px-6 lg:px-8 rounded-xl text-neutral-0 bg-info-300 flex justify-between items-center&#x22;&#x3E;
+    &#x3C;div class=&#x22;flex gap-5 items-center&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-info-circle text-3xl&#x22;&#x3E;&#x3C;/i&#x3E;
+      &#x3C;span class=&#x22;l-text font-medium&#x22;&#x3E;This is an info alert &#x2014; check it out!&#x3C;/span&#x3E;
+    &#x3C;/div&#x3E;
+    &#x3C;span class=&#x22;cursor-pointer size-9 rounded-full hover:bg-info-300/30 duration-300 f-center&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-times text-2xl&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/span&#x3E;
+  &#x3C;/div&#x3E;
+                  </code></pre>
+                </div>
+              </div>
+              <!-- Description -->
+              <div x-data="copyorviewcode" class="n20-box">
+                <h5 class="bb-dashed-n40">Addtional Content</h5>
+                <!-- Buttons -->
+                <div class="flex gap-3 mb-6">
+                  <button @click="viewcode=false" :class="!viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Preview</button>
+                  <button @click="showCode" :class="viewcode?'bg-primary-300 text-neutral-0':'text-primary-300'" class="px-3 py-1.5 rounded-md text-sm border hover:underline duration-300 border-primary-300">Code</button>
+                </div>
+                <div x-show="!viewcode" class="flex flex-col gap-4 lg:gap-6">
+                  <div class="py-3 px-4 md:px-6 lg:px-8 rounded-xl border border-info-300/30 bg-info-300/10">
+                    <div class="flex justify-between items-center mb-3">
+                      <div class="flex gap-4 items-center">
+                        <i class="las la-info-circle text-3xl text-info-300"></i>
+                        <span class="l-text font-medium text-info-300">Info</span>
+                      </div>
+                      <span class="cursor-pointer size-9 rounded-full hover:bg-info-300/30 duration-300 f-center">
+                        <i class="las la-times text-2xl text-info-300"></i>
+                      </span>
+                    </div>
+                    <p class="text-sm">This is an info alert — <span class="font-semibold">check it out!</span></p>
+                  </div>
+                  <div class="py-3 px-4 md:px-6 lg:px-8 rounded-xl border border-primary-300/30 bg-primary-300/10">
+                    <div class="flex justify-between items-center mb-3">
+                      <div class="flex gap-4 items-center">
+                        <i class="las la-info-circle text-3xl text-primary-300"></i>
+                        <span class="l-text font-medium text-primary-300">Info</span>
+                      </div>
+                      <span class="cursor-pointer size-9 rounded-full hover:bg-info-300/30 duration-300 f-center">
+                        <i class="las la-times text-2xl text-primary-300"></i>
+                      </span>
+                    </div>
+                    <p class="text-sm">This is an info alert — <span class="font-semibold">check it out!</span></p>
+                  </div>
+                  <div class="py-3 px-4 md:px-6 lg:px-8 rounded-xl border border-warning-300/30 bg-warning-300/10">
+                    <div class="flex justify-between items-center mb-3">
+                      <div class="flex gap-4 items-center">
+                        <i class="las la-info-circle text-3xl text-warning-300"></i>
+                        <span class="l-text font-medium text-warning-300">Info</span>
+                      </div>
+                      <span class="cursor-pointer size-9 rounded-full hover:bg-info-300/30 duration-300 f-center">
+                        <i class="las la-times text-2xl text-warning-300"></i>
+                      </span>
+                    </div>
+                    <p class="text-sm">This is an info alert — <span class="font-semibold">check it out!</span></p>
+                  </div>
+                  <div class="py-3 px-4 md:px-6 lg:px-8 rounded-xl border border-error-300/30 bg-error-300/10">
+                    <div class="flex justify-between items-center mb-3">
+                      <div class="flex gap-4 items-center">
+                        <i class="las la-info-circle text-3xl text-error-300"></i>
+                        <span class="l-text font-medium text-error-300">Info</span>
+                      </div>
+                      <span class="cursor-pointer size-9 rounded-full hover:bg-info-300/30 duration-300 f-center">
+                        <i class="las la-times text-2xl text-error-300"></i>
+                      </span>
+                    </div>
+                    <p class="text-sm">This is an info alert — <span class="font-semibold">check it out!</span></p>
+                  </div>
+                </div>
+                <!-- Code Block -->
+                <div x-show="viewcode" class="code mt-3 relative">
+                  <button @click="copyCode($el)" class="absolute top-3 text-sm rounded-lg ltr:right-3 rtl:left-3 px-3 py-1.5 bg-primary-300 text-neutral-0"><i class="las la-copy"></i> Copy</button>
+                  <pre><code class="code-block rounded-lg">
+&#x3C;div class=&#x22;py-3 px-4 md:px-6 lg:px-8 rounded-xl border border-info-300/30 bg-info-300/10&#x22;&#x3E;
+  &#x3C;div class=&#x22;flex justify-between items-center mb-3&#x22;&#x3E;
+    &#x3C;div class=&#x22;flex gap-4 items-center&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-info-circle text-3xl text-info-300&#x22;&#x3E;&#x3C;/i&#x3E;
+      &#x3C;span class=&#x22;l-text font-medium text-info-300&#x22;&#x3E;Info&#x3C;/span&#x3E;
+    &#x3C;/div&#x3E;
+    &#x3C;span class=&#x22;cursor-pointer size-9 rounded-full hover:bg-info-300/30 duration-300 f-center&#x22;&#x3E;
+      &#x3C;i class=&#x22;las la-times text-2xl text-info-300&#x22;&#x3E;&#x3C;/i&#x3E;
+    &#x3C;/span&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;p class=&#x22;text-sm&#x22;&#x3E;This is an info alert &#x2014; &#x3C;span class=&#x22;font-semibold&#x22;&#x3E;check it out!&#x3C;/span&#x3E;&#x3C;/p&#x3E;
+&#x3C;/div&#x3E;
+                  </code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <include-dashboard-footer />
+
+    <script src="./assets/js/libs/sweetalert.min.js"></script>
+    <script src="./assets/js/libs/highlight.js"></script>
+    <script src="./assets/js/libs/alpine.collapse.js"></script>
+    <script src="./assets/js/libs/alpine.persist.js"></script>
+    <script defer src="./assets/js/libs/alpine.min.js"></script>
+  </body>
+</html>
