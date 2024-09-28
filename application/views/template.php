@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/css/animate.min.css" />
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/css/swiper.min.css" />
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/css/snackbar.min.css" />
-  <title>Softify - Multi Component UI Web with Client and Admin Dashboard</title>
+  <title>Home - DEKONTRAK</title>
   <script defer src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/app.js"></script><link href="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/css/style.css" rel="stylesheet"></head>
 
   <body x-cloak x-data="customizer" :class="$store.app.isDarkMode?'dark':''" class="bg-neutral-20 dark:bg-neutral-903">
@@ -237,19 +237,7 @@
             <button title="Toggle Theme" x-cloak x-show="$store.app.theme === 'dark'" @click="$store.app.toggleTheme('light')" class="flex size-9 items-center justify-center rounded-full border border-neutral-30 bg-neutral-20 text-xl dark:border-neutral-500 dark:bg-neutral-700">
               <i class="las la-sun"></i>
             </button>
-            <!-- Language switch -->
-            <div x-data="{open:false,selected:'English',options:['English','French','Spanish','Arabic']}" class="relative">
-              <button title="Change Language" :class="$store.app.menu=='horizontal'?'bg-neutral-0 dark:bg-neutral-903':'bg-neutral-20 dark:bg-neutral-903'" @click="open = !open" class="flex size-9 items-center justify-center rounded-full border border-neutral-30 text-xl dark:border-neutral-500">
-                <i class="las la-language"></i>
-              </button>
-              <div @click.away="open = false" x-show="open" class="absolute w-[150px] z-20 bg-neutral-0 dark:bg-neutral-904 top-full ltr:right-0 shadow-lg rtl:left-0 p-2 rounded-xl">
-                <ul class="flex flex-col gap-1">
-                  <template x-for="option in options">
-                    <li><span @click="selected = option; open = false" x-text="option" class="flex cursor-pointer duration-300 hover:text-primary-300 rounded-md px-4 py-1.5 hover:bg-primary-50" :class="selected===option ? 'bg-primary-300 text-neutral-0' : ''"></span></li>
-                  </template>
-                </ul>
-              </div>
-            </div>
+            
 
             <!-- Notification switch -->
             <div class="relative" x-data="{open:false}">
@@ -467,10 +455,35 @@
     <p class="text-xs font-semibold mb-3">Dashboards</p>
     <ul class="flex flex-col gap-2 bb-dashed-n30 xl:mb-5 xl:pb-5 text-sm font-medium">
       <li>
-        <a href="index.html" class="menu-link vertical-menu">
-          <i class="lab la-bitcoin text-xl text-primary-300"></i>
-          <span>Crypto</span>
+        <a href="<?php echo site_url('page/home') ?>" class="menu-link vertical-menu">
+          <i class="las la-cube text-xl text-primary-300"></i>
+          <span>Home</span>
         </a>
+      </li>
+      <li class="relative">
+        <button :class="opened=='user' ? 'bg-primary-50 text-primary-300' : ''" @click="openMenu('user')" class="submenu-btn-v">
+          <span class="flex items-center gap-2">
+            <i class="las la-user-alt text-xl text-primary-300"></i>
+            <span>E Kontrak</span>
+          </span>
+          <i :class="opened=='user' ? 'las la-minus rotate-180 text-primary-300' : 'las la-plus'" class="text-lg duration-300"></i>
+        </button>
+        <div x-show="opened=='user'" x-collapse>
+          <ul class="submenu-v" data-submenu="user">
+            <li>
+              <a href="<?php echo site_url('user/page/list') ?>" class="dropdown-link submenu-link-v">List</a>
+            </li>
+            <li>
+              <a href="user-cards.html" class="dropdown-link submenu-link-v">Fisik</a>
+            </li>
+            <li>
+              <a href="user-list.html" class="dropdown-link submenu-link-v">Konsultan Pengawas</a>
+            </li>
+            <li>
+              <a href="create-user.html" class="dropdown-link submenu-link-v">Konsultan Perencanaan</a>
+            </li>
+          </ul>
+        </div>
       </li>
       <li>
         <a href="nft.html" class="menu-link vertical-menu">
@@ -524,37 +537,7 @@
     </ul>
     <p class="text-xs font-semibold mb-3 mt-5">Operations</p>
     <ul class="flex flex-col gap-2 bb-dashed-n30 xl:mb-5 xl:pb-5 m-text font-medium">
-      <li class="relative">
-        <button :class="opened=='user' ? 'bg-primary-50 text-primary-300' : ''" @click="openMenu('user')" class="submenu-btn-v">
-          <span class="flex items-center gap-2">
-            <i class="las la-user-alt text-xl text-primary-300"></i>
-            <span>User</span>
-          </span>
-          <i :class="opened=='user' ? 'las la-minus rotate-180 text-primary-300' : 'las la-plus'" class="text-lg duration-300"></i>
-        </button>
-        <div x-show="opened=='user'" x-collapse>
-          <ul class="submenu-v" data-submenu="user">
-            <li>
-              <a href="user-profile.html" class="dropdown-link submenu-link-v">Profile</a>
-            </li>
-            <li>
-              <a href="user-cards.html" class="dropdown-link submenu-link-v">Cards</a>
-            </li>
-            <li>
-              <a href="user-list.html" class="dropdown-link submenu-link-v">List</a>
-            </li>
-            <li>
-              <a href="create-user.html" class="dropdown-link submenu-link-v">Create</a>
-            </li>
-            <li>
-              <a href="edit-user.html" class="dropdown-link submenu-link-v">Edit</a>
-            </li>
-            <li>
-              <a href="user-account.html" class="dropdown-link submenu-link-v">Account</a>
-            </li>
-          </ul>
-        </div>
-      </li>
+      
       <li class="relative">
         <button :class="opened=='store' ? 'bg-primary-50 text-primary-300' : ''" @click="openMenu('store')" class="submenu-btn-v">
           <span class="flex items-center gap-2">
@@ -1187,11 +1170,36 @@ class="overflow-y-auto h-full px-2.5 pt-3 sm:pt-4 lg:pt-6 xl:pt-0 group-hover:xl
 >
 <p class="text-xs font-semibold mb-3 xl:hidden group-hover:block">Dashboards</p>
 <ul class="flex flex-col gap-2 bb-dashed-n30 xl:mb-5 xl:pb-5 m-text font-medium xl:pt-5 group-hover:pt-0">
-  <li class="flex xl:justify-center group-hover:justify-start w-full">
-    <a href="index.html" class="hovered-menu menu-link">
-      <i class="lab la-bitcoin text-xl text-primary-300"></i>
-      <span class="xl:hidden group-hover:block">Crypto</span>
+   <li class="flex xl:justify-center group-hover:justify-start w-full">
+    <a href="<?php echo site_url('page/home'); ?>" class="hovered-menu menu-link">
+      <i class="las la-cube text-xl text-primary-300"></i>
+      <span class="xl:hidden group-hover:block">Home</span>
     </a>
+  </li>
+   <li class="relative xl:flex xl:justify-center group-hover:block group-hover:justify-start">
+    <button :class="opened=='user' ? 'bg-primary-50 text-primary-300' : ''" @click="openMenu('user')" class="submenu-btn-h">
+      <span class="flex items-center gap-2">
+        <i class="las la-user-alt text-xl text-primary-300"></i>
+        <span class="xl:hidden group-hover:block">E Kontrak</span>
+      </span>
+      <i :class="opened=='user' ? 'las la-minus rotate-180 text-primary-300' : 'las la-plus'" class="text-xl duration-300 xl:hidden group-hover:block"></i>
+    </button>
+    <div x-show="opened=='user'" x-collapse>
+      <ul class="mt-3 ltr:ml-6 rtl:mr-6 flex-col ltr:border-l rtl:border-r xl:hidden group-hover:flex border-primary-300" data-submenu="user">
+        <li>
+          <a href="<?php echo site_url('user/page/list') ?>" class="dropdown-link submenu-link-h">List</a>
+        </li>
+        <li>
+          <a href="user-cards.html" class="dropdown-link submenu-link-h">Fisik</a>
+        </li>
+        <li>
+          <a href="user-list.html" class="dropdown-link submenu-link-h">Konsultan Pengawasan</a>
+        </li>
+        <li>
+          <a href="create-user.html" class="dropdown-link submenu-link-h">Konsultan Pengawasan</a>
+        </li>
+      </ul>
+    </div>
   </li>
   <li class="flex xl:justify-center group-hover:justify-start w-full">
     <a href="nft.html" class="hovered-menu menu-link">
@@ -1245,37 +1253,7 @@ class="overflow-y-auto h-full px-2.5 pt-3 sm:pt-4 lg:pt-6 xl:pt-0 group-hover:xl
 </ul>
 <p class="text-xs font-semibold mb-3 xl:hidden group-hover:block mt-5">Operations</p>
 <ul class="flex flex-col gap-2 bb-dashed-n30 xl:mb-5 xl:pb-5 m-text font-medium">
-  <li class="relative xl:flex xl:justify-center group-hover:block group-hover:justify-start">
-    <button :class="opened=='user' ? 'bg-primary-50 text-primary-300' : ''" @click="openMenu('user')" class="submenu-btn-h">
-      <span class="flex items-center gap-2">
-        <i class="las la-user-alt text-xl text-primary-300"></i>
-        <span class="xl:hidden group-hover:block">User</span>
-      </span>
-      <i :class="opened=='user' ? 'las la-minus rotate-180 text-primary-300' : 'las la-plus'" class="text-xl duration-300 xl:hidden group-hover:block"></i>
-    </button>
-    <div x-show="opened=='user'" x-collapse>
-      <ul class="mt-3 ltr:ml-6 rtl:mr-6 flex-col ltr:border-l rtl:border-r xl:hidden group-hover:flex border-primary-300" data-submenu="user">
-        <li>
-          <a href="user-profile.html" class="dropdown-link submenu-link-h">Profile</a>
-        </li>
-        <li>
-          <a href="user-cards.html" class="dropdown-link submenu-link-h">Cards</a>
-        </li>
-        <li>
-          <a href="user-list.html" class="dropdown-link submenu-link-h">List</a>
-        </li>
-        <li>
-          <a href="create-user.html" class="dropdown-link submenu-link-h">Create</a>
-        </li>
-        <li>
-          <a href="edit-user.html" class="dropdown-link submenu-link-h">Edit</a>
-        </li>
-        <li>
-          <a href="user-account.html" class="dropdown-link submenu-link-h">Account</a>
-        </li>
-      </ul>
-    </div>
-  </li>
+ 
   <li class="relative xl:flex xl:justify-center group-hover:block group-hover:justify-start">
     <button :class="opened=='store' ? 'bg-primary-50 text-primary-300' : ''" @click="openMenu('store')" class="submenu-btn-h">
       <span class="flex items-center gap-2">
@@ -1823,7 +1801,16 @@ class="overflow-y-auto h-full px-2.5 pt-3 sm:pt-4 lg:pt-6 xl:pt-0 group-hover:xl
       <li class="relative group">
         <button class="inline-flex py-3 text-sm font-medium items-center gap-2">Dashboards <i class="las la-plus group-hover:hidden text-lg"></i><i class="las la-minus hidden text-lg group-hover:inline-block"></i></button>
         <ul class="submenu-horiz">
-          <li><a href="index.html" class="link-horiz menu-link-horiz">Crypto</a></li>
+          <li><a href="nft.html" class="link-horiz menu-link-horiz">Home</a></li>
+          <li class="relative group">
+        <button class="inline-flex py-3 text-sm font-medium items-center gap-2">E Kontrak <i class="las la-plus group-hover:hidden text-lg"></i><i class="las la-minus hidden text-lg group-hover:inline-block"></i></button>
+        <ul class="submenu-horiz">
+          <li><a href="<?php echo site_url('user/page/list') ?>" class="link-horiz menu-link-horiz">List</a></li>
+          <li><a href="user-list.html" class="link-horiz menu-link-horiz">Fisik</a></li>
+          <li><a href="create-user.html" class="link-horiz menu-link-horiz">Konsultan Pengawasan</a></li>
+          <li><a href="edit-user.html" class="link-horiz menu-link-horiz">Konsultan Perencanaan</a></li>
+        </ul>
+      </li>
           <li><a href="nft.html" class="link-horiz menu-link-horiz">NFT</a></li>
           <li><a href="music.html" class="link-horiz menu-link-horiz">Music</a></li>
           <li><a href="app.html" class="link-horiz menu-link-horiz">App</a></li>
@@ -2118,7 +2105,7 @@ if ($this->session->flashdata('alert')) {
 :class="[$store.app.sidebar && $store.app.menu=='vertical'?'w-full xl:ltr:ml-[280px] xl:rtl:mr-[280px] xl:w-[calc(100%-280px)]':'w-full',$store.app.sidebar && $store.app.menu=='hovered'?'w-full xl:ltr:ml-[80px] xl:w-[calc(100%-80px)] xl:rtl:mr-[80px]':'w-full', $store.app.menu == 'horizontal' && 'xl:!pt-[118px]', $store.app.contrast=='high'?'bg-neutral-0 dark:bg-neutral-904':'bg-neutral-20 dark:bg-neutral-903']"
 class="w-full text-neutral-700 min-h-screen dark:text-neutral-20 pt-[60px] md:pt-[66px] duration-300"
 >
- 
+
 
 <?php echo $contents; ?>
 
