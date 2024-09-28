@@ -26,6 +26,18 @@ class Page extends CI_Controller
 		$this->template->load('template','page/list');
 	}
 
+	function fisik(){
+		$this->template->load('template','page/fisik');
+	}
+
+	function konsultan_perencanaan(){
+		$this->template->load('template','page/konsultan_perencanaan');
+	}
+
+	function konsultan_pengawasan(){
+		$this->template->load('template','page/konsultan_pengawasan');
+	}
+
 	public function logout() {
         // Destroy the session to log out the user
 		$this->session->sess_destroy();
