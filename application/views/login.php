@@ -78,7 +78,48 @@ class="absolute -left-8 -bottom-8 lg:-left-40 lg:-bottom-28 size-40 lg:size-[340
               </select>
             </div>
 
-<button class="btn-primary w-full">Login</button>
+<button class="btn-primary w-full mb-5">Login</button>
+
+<!-- BEGIN: alert -->
+
+<?php if ($this->session->flashdata('success')): ?>
+<div id="success-alert" class="py-3 px-4 md:px-6 lg:px-8 rounded-xl bg-info-300/10 flex justify-between items-center">
+  <div class="flex gap-5 items-center">
+    <i class="las la-info-circle text-3xl text-info-300"></i>
+    <span class="l-text font-medium text-info-300">
+      <?= $this->session->flashdata('success'); ?>
+    </span>
+  </div>
+  <span class="cursor-pointer size-9 rounded-full hover:bg-info-300/30 duration-300 f-center" onclick="dismissAlert('success-alert')">
+    <i class="las la-times text-2xl text-info-300"></i>
+  </span>
+</div>
+<?php endif; ?>
+
+<?php if ($this->session->flashdata('error')): ?>
+<div id="error-alert" class="py-3 px-4 md:px-6 lg:px-8 rounded-xl bg-red-300/10 flex justify-between items-center">
+  <div class="flex gap-5 items-center">
+    <i class="las la-exclamation-circle text-3xl text-red-300"></i>
+    <span class="l-text font-medium text-red-300">
+      <?= $this->session->flashdata('error'); ?>
+    </span>
+  </div>
+  <span class="cursor-pointer size-9 rounded-full hover:bg-red-300/30 duration-300 f-center" onclick="dismissAlert('error-alert')">
+    <i class="las la-times text-2xl text-red-300"></i>
+  </span>
+</div>
+<?php endif; ?>
+
+<!-- END: alert -->
+
+<script>
+  function dismissAlert(alertId) {
+    document.getElementById(alertId).style.display = 'none';
+  }
+</script>
+
+
+
 <?php echo form_close(); ?>
 </div>
 <div class="col-span-12 lg:col-span-6 xxl:col-start-7 flex justify-center">

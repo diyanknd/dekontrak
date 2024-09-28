@@ -4,6 +4,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Auth extends CI_Controller
 {
 
+   
+
 	public function __construct()
     {
         parent::__construct();
@@ -44,6 +46,8 @@ class Auth extends CI_Controller
             'login' => TRUE
         ));
 
+        $this->session->set_flashdata('success', 'Login Berhasil !');
+        $this->session->set_flashdata('alert', 'success');
         redirect('page');
     } else {
         $this->session->set_flashdata('error', 'Username dan Password Salah');
