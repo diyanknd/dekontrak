@@ -2,7 +2,7 @@
   <!-- Breadcrumb -->
   <div class="white-box xxxl:p-6">
     <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain" style="background-image: url(assets/images/breadcrumb-el-1.png)">
-      <h2 class="mb-3 xxxl:mb-5">Fisik List</h2>
+      <h2 class="mb-3 xxxl:mb-5">Kontrak Fisik</h2>
       <ul class="flex flex-wrap gap-2 items-center">
         <li>
           <a class="flex items-center gap-2" href="<?php echo site_url('Page/home'); ?>"> <i class="las text-lg xl:text-xl xxl:text-2xl la-home shrink-0"></i> <span>Home</span></a>
