@@ -2,7 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Kontrak extends CI_Model {
+<<<<<<< Updated upstream
 a
+=======
+b
+>>>>>>> Stashed changes
 function get_kontrak(){
 	$query = $this->db2->query("SELECT * FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan");
 
@@ -40,7 +44,7 @@ function get_pagu_fisik(){
 
 	return $query;
 }
-
+ 
 function get_pagu_fisik_count(){
 	$query = $this->db2->query("SELECT count(nilai_pagu) as count_nilai_pagu FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan WHERE tb_paket.jenis_pengadaan = 'Pekerjaan Konstruksi'");
 
