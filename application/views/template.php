@@ -2145,6 +2145,7 @@ if ($this->session->flashdata('alert')) {
     <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/charts.js"></script>
     <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/snackbar.min.js"></script>
     <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/sweetalert.min.js"></script>
+    
 
     <script>
       document.addEventListener('alpine:init', () => {
