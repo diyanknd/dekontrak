@@ -49,7 +49,22 @@ class Page extends CI_Controller
 	}
 
 	function fisik(){
-		$this->template->load('template','page/fisik');
+		
+		$data['kontrak'] = $this->Kontrak->get_fisik();
+		$data['nilai_pagu'] = $this->Kontrak->get_pagu()->row()->nilai_pagu;
+		$data['nilai_kontrak'] = $this->Kontrak->get_nilai_kontrak()->row()->nilai_kontrak;
+		$data['get_pagu_fisik'] = $this->Kontrak->get_pagu_fisik()->row()->nilai_pagu;
+		$data['get_pagu_konsultan_pengawasan'] = $this->Kontrak->get_pagu_konsultan_pengawasan()->row()->nilai_pagu;
+		$data['get_pagu_konsultan_perencanaan'] = $this->Kontrak->get_pagu_konsultan_perencanaan()->row()->nilai_pagu;
+		$data['get_kontrak_fisik'] = $this->Kontrak->get_kontrak_fisik()->row()->nilai_kontrak;
+		$data['get_kontrak_konsultan_pengawasan'] = $this->Kontrak->get_kontrak_konsultan_pengawasan()->row()->nilai_kontrak;
+		$data['get_kontrak_konsultan_perencanaan'] = $this->Kontrak->get_kontrak_konsultan_perencanaan()->row()->nilai_kontrak;
+		$data['get_pagu_count'] = $this->Kontrak->get_pagu_count()->row()->count_nilai_pagu;
+		$data['get_nilai_kontrak_count'] = $this->Kontrak->get_nilai_kontrak_count()->row()->count_nilai_kontrak;
+		$data['get_pagu_fisik_count'] = $this->Kontrak->get_pagu_fisik_count()->row()->count_nilai_pagu;
+		$data['get_pagu_konsultan_pengawasan_count'] = $this->Kontrak->get_pagu_konsultan_pengawasan_count()->row()->count_nilai_pagu;
+		$data['get_pagu_konsultan_perencanaan_count'] = $this->Kontrak->get_pagu_konsultan_perencanaan_count()->row()->count_nilai_pagu;
+		$this->template->load('template','page/fisik',$data);
 	}
 
 	function konsultan_perencanaan(){

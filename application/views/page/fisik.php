@@ -46,18 +46,6 @@
 
     <div class="col-span-12 sm:col-span-6 lg:col-span-4 xxxl:col-span-3 4xl:col-span-2">
       <div class="white-box xl:p-6">
-        <p class="m-text font-medium bb-dashed-n30">Total</p>
-        <div class="flex justify-between items-center">
-          <div class="grow">
-            <h4 class="mb-4" x-text="activeTab=='pagu' ? '<?php echo number_format($nilai_pagu) ?>' : '<?php echo number_format($nilai_kontrak) ?>'"></h4>
-            <p class="m-text" x-text="activeTab=='pagu' ? '<?php echo $get_pagu_count." Paket" ?>' : '<?php echo $get_nilai_kontrak_count." Paket" ?>'"></p>
-          </div>
-          <div x-ref="progressPrimary"></div>
-        </div>
-      </div>
-    </div>
-    <div class="col-span-12 sm:col-span-6 lg:col-span-4 xxxl:col-span-3 4xl:col-span-2">
-      <div class="white-box xl:p-6">
         <p class="m-text font-medium bb-dashed-n30">Fisik</p>
         <div class="flex justify-between items-center">
           <div class="grow">
@@ -68,30 +56,7 @@
         </div>
       </div>
     </div>
-    <div class="col-span-12 sm:col-span-6 lg:col-span-4 xxxl:col-span-3 4xl:col-span-2">
-      <div class="white-box xl:p-6">
-        <p class="m-text font-medium bb-dashed-n30">Konsultan Pengawasan</p>
-        <div class="flex justify-between items-center">
-          <div class="grow">
-            <h4 class="mb-4" x-text="activeTab=='pagu' ? '<?php echo number_format($get_pagu_konsultan_pengawasan) ?>' : '<?php echo number_format($get_kontrak_konsultan_pengawasan) ?>'"></h4>
-            <p class="m-text" x-text="activeTab=='pagu' ? '<?php echo $get_pagu_konsultan_pengawasan_count." Paket" ?>' : '<?php echo $get_pagu_konsultan_pengawasan_count." Paket" ?>'"></p>
-          </div>
-          <div x-ref="progressWarning"></div>
-        </div>
-      </div>
-    </div>
-    <div  class="col-span-12 sm:col-span-6 lg:col-span-4 xxxl:col-span-3 4xl:col-span-2">
-      <div class="white-box xl:p-6">
-        <p class="m-text font-medium bb-dashed-n30">Konsultan Perencanaan</p>
-        <div class="flex justify-between items-center">
-          <div class="grow">
-            <h4 class="mb-4" x-text="activeTab=='pagu' ? '<?php echo number_format($get_pagu_konsultan_perencanaan) ?>' : '<?php echo number_format($get_kontrak_konsultan_perencanaan) ?>'"></h4>
-           <p class="m-text" x-text="activeTab=='pagu' ? '<?php echo $get_pagu_konsultan_perencanaan_count." Paket" ?>' : '<?php echo $get_pagu_konsultan_perencanaan_count." Paket" ?>'"></p>
-          </div>
-          <div x-ref="progressError"></div>
-        </div>
-      </div>
-    </div>
+   
 
   </div>
 

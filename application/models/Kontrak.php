@@ -46,6 +46,11 @@ function get_nilai_kontrak_count(){
 	return $query;
 }
 
+function get_fisik(){
+	$query = $this->db2->query("SELECT * FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan WHERE tb_paket.jenis_pengadaan = 'Pekerjaan Konstruksi'");
+
+	return $query;
+}
 
 function get_pagu_fisik(){
 	$query = $this->db2->query("SELECT sum(nilai_pagu) as nilai_pagu FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan WHERE tb_paket.jenis_pengadaan = 'Pekerjaan Konstruksi'");
