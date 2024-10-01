@@ -103,6 +103,16 @@ class Page extends CI_Controller
 		$this->template->load('template','page/konsultan_pengawasan',$data);
 	}
 
+
+	function detail_fisik(){
+
+		$id = $this->input->post('id');
+         // Ambil data invoice berdasarkan nomor
+         $data['kontrak'] = $this->Kontrak->get_kontrak_by_id($id);
+
+		$this->template->load('template','detail/fisik_detail',$data);
+	}
+
 	public function logout() {
         // Destroy the session to log out the user
 		$this->session->sess_destroy();
