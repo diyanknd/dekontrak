@@ -9,6 +9,12 @@ function get_kontrak(){
 	return $query;
 }
 
+function get_kontrak_by_id($id){
+	$query = $this->db2->query("SELECT * FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan INNER JOIN tb_data_penyedia ON tb_kontrak.penyedia_jasa = tb_data_penyedia.id_data_penyedia WHERE tb_paket.id = ?", array($id));
+
+    return $query->row();
+}
+
 function get_kontrak_konsultan_pengawasan_list(){
 	$query = $this->db2->query("SELECT * FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan WHERE tb_paket.jenis_pengadaan = 'Jasa Konsultansi Pengawasan'");
 

@@ -70,7 +70,9 @@
     invoices: [
         <?php $i = 1; $total = $kontrak->num_rows(); foreach ($kontrak->result() as $row) { ?>
         {
+
             no: <?php echo $i; ?>,
+            id: '<?php echo $row->id; ?>',
             nomor_kontrak: '<?php echo $row->nomor_kontrak; ?>',
             checked: false,
             paket_pekerjaan: '<?php echo $row->paket_pekerjaan; ?>',
@@ -282,7 +284,7 @@
   </thead>
   <tbody>
     <template x-for="invoice in paginatedInvoices()" :key="invoice.no">
-      <tr class="border-b border-neutral-30 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:hover:bg-neutral-903" :class="invoice.checked?'!bg-primary-300/10':'bg-neutral-0 dark:bg-neutral-904'">
+      <tr @click="window.location.href=`<?php echo site_url(); ?>/detail_page/detail_fisik/${invoice.id}`"class="border-b border-neutral-30 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:hover:bg-neutral-903" :class="invoice.checked?'!bg-primary-300/10':'bg-neutral-0 dark:bg-neutral-904'">
         <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
           <a href="invoice-details.html" class="flex">
             <div>
