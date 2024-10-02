@@ -172,5 +172,27 @@ WHERE tb_paket.id = '$id_paket'
 		$this->db->update('surat_perjanjian', $data);
 	}
 
+	//Ini Surat Perintah Mulai Kerja (SPMK)
+	public function cek_spmk($id_paket)
+	{
+		$this->db->where('id_paket', $id_paket);
+		$query = $this->db->get('spmk');
+		if ($query->num_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
+	public function insert_spmk($data)
+	{
+		$this->db->insert('spmk', $data);
+	}
+
+	public function update_spmk($data)
+	{
+		$this->db->where('id_paket', $data['id_paket']);
+		$this->db->update('spmk', $data);
+	}
 
 }

@@ -134,6 +134,7 @@ class Page extends CI_Controller
 		$data['id_paket'] = $id;
 		$data['get_data_sppbj'] = $this->db->select('*')->from('sppbj')->where('id_paket', $id)->get()->row();
 		$data['get_data_surat_perjanjian'] = $this->db->query("SELECT * FROM surat_perjanjian WHERE id_paket = '$id'")->row();
+		$data['get_data_spmk'] = $this->db->query("SELECT * FROM spmk WHERE id_paket = '$id'")->row();
 
 
 		$this->template->load('template', 'detail/fisik_detail', $data);

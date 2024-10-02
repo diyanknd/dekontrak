@@ -115,5 +115,35 @@ class Create extends CI_Controller
         redirect('page/detail_fisik');
     }
 
+    
+    public function spmk()
+    {
+        // Simpan data ke database
+        $data = array(
+            'id_paket' => $this->input->post('id_paket'),
+            'nomor_spmk' => $this->input->post('nomor_spmk'),
+            'tanggal_spmk' => $this->input->post('tanggal_spmk')
+        );
+
+        // Cek apakah data sudah ada di database
+        $cek_data = $this->Kontrak->cek_spmk($data['id_paket']);
+
+        if ($cek_data) {
+            // Jika data sudah ada, update data
+            $this->Kontrak->update_spmk($data);
+            $this->session->set_flashdata('success', 'Surat Perintah Mulai Kerja Berhasil di Update !');
+            $this->session->set_flashdata('alert', 'success');
+        } else {
+            // Jika data tidak ada, insert data
+            $this->Kontrak->insert_spmk($data);
+            $this->session->set_flashdata('success', 'Surat Perintah Mulai Kerja Berhasil di Input !');
+            $this->session->set_flashdata('alert', 'success');
+        }
+        $this->session->set_userdata('id_paket', $data['id_paket']);
+
+        // Redirect ke halaman lain
+        redirect('page/detail_fisik');
+    }
+
 }
 

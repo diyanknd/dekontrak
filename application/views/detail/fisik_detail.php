@@ -657,7 +657,12 @@
                                 });
                             </script>
                             <td class="px-2 py-3 lg:py-5 w-24 text-center">
-                                <div x-data="{ showModal: false, spmkData: {} }">
+                                <div x-data="{ showModal: false, spmkData: {
+                                        id_paket: '<?php echo isset($get_data_spmk->id_paket) ? $get_data_spmk->id_paket : ''; ?>',
+                                        nomor_spmk: '<?php echo isset($get_data_spmk->nomor_spmk) ? $get_data_spmk->nomor_spmk : ''; ?>',
+                                        tanggal_spmk: '<?php echo isset($get_data_spmk->tanggal_spmk) ? $get_data_spmk->tanggal_spmk : ''; ?>'
+
+                                } }">
                                     <button @click="showModal = true; spmkData()"
                                         class="<?php echo $get_spmk == 1 ? 'btn-primary' : 'btn-warning' ?>">
                                         SPMK</button>
@@ -715,6 +720,12 @@
                                                             <div class="flex gap-4 lg:gap-6">
                                                                 <button type="submit"
                                                                     class="btn-primary">Submit</button>
+                                                                    <?php if ($get_spmk != 0) { ?>
+                                                                <button type="button" class="btn-primary-outlined"
+                                                                    @click="window.open(`<?php echo ($nilai_pagu->nilai_pagu >= 200000000) ? site_url('surat/spmk_tender/') . $id_paket : site_url('surat/spmk_non_tender/') . $id_paket; ?>`, '_blank')">
+                                                                    <i class="las la-print mr-2"></i> Print
+                                                                </button>
+                                                            <?php } ?>
                                                                 <button type="button" class="btn-primary-outlined"
                                                                     @click="showModal = false">Cancel</button>
                                                             </div>

@@ -44,11 +44,29 @@ class Surat extends CI_Controller
 
 	function spmk_tender()
 	{
-		$this->load->view('surat/spmk_tender');
+		$id_paket = $this->uri->segment('3');
+
+		$data['row1'] = $this->db->select('*')
+			->from('spmk')
+			->join('surat_perjanjian', 'surat_perjanjian.id_paket = spmk.id_paket', 'left')
+			->where('spmk.id_paket', $id_paket)
+			->get()
+			->row();
+		$data['row2'] = $this->Kontrak->get_data_paket()->row();
+		$this->load->view('surat/spmk_tender', $data);
 	}
 
 	function spmk_non_tender()
 	{
+		$id_paket = $this->uri->segment('3');
+
+		$data['row1'] = $this->db->select('*')
+			->from('spmk')
+			->join('surat_perjanjian', 'surat_perjanjian.id_paket = spmk.id_paket', 'left')
+			->where('spmk.id_paket', $id_paket)
+			->get()
+			->row();
+		$data['row2'] = $this->Kontrak->get_data_paket()->row();
 		$data['jumlah_rangkap'] = $this->input->post('jumlah_rangkap');
 		$this->load->view('surat/spmk_non_tender', $data);
 	}
