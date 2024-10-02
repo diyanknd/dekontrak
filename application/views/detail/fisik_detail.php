@@ -68,33 +68,39 @@
                             <span x-text="formatIDR(invoice.nilai_kontrak)"></span>
                         </td>
                         <td class="px-2 py-3 lg:py-5 w-24 text-center">
-                            <div x-data="{ open: false }" class="relative">
+                            <div x-data="modal">
                                 <!-- Button to toggle dropdown -->
-                                <button @click="open = !open" class="btn-primary">
+                                <button class="btn-primary" @click="openModal">
                                     Cover
                                 </button>
 
-                                <!-- Dropdown menu -->
-                                <div x-show="open" @click.away="open = false" class="absolute bg-white border mt-2 rounded shadow-md w-28">
-                                    <ul>
-                                        <li>
-                                            <?php 
-    // Get the actual nilai_pagu from the controller result
-    $nilai_pagu_value = $nilai_pagu->nilai_pagu; 
-    // Determine the correct URL based on the value
-    $url = ($nilai_pagu_value >= 200000000) ? site_url('surat/kop_surat_tender') : site_url('surat/kop_surat_non_tender'); 
-?>
-<button @click="window.open('<?php echo $url; ?>', '_blank')" 
-        class="flex items-center px-4 py-2 text-sm text-black hover:bg-gray-200 w-full text-left">
-    <i class="las la-print mr-2"></i> Print
-</button>
-
-
-                                        </li>
-                                    </ul>
-                                </div>
+                                <!-- Modal Structure -->
+                                <template x-teleport="body">
+                                    <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60 dark:bg-neutral-40/80" :class="isOpen && '!block'">
+                                        <div class="flex min-h-screen items-center justify-center px-4 text-neutral-700 dark:text-neutral-20" @click.self="closeModal">
+                                            <div x-show="isOpen" x-transition x-transition.duration.300 class="panel my-8 w-full max-w-3xl overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                                                <form method="POST" action="<?php echo ($nilai_pagu->nilai_pagu >= 200000000) ? site_url('surat/kop_surat_tender') : site_url('surat/kop_surat_non_tender'); ?>" target="_blank">
+                                                    <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                                                        <h4>Masukkan Jumlah Rangkap</h4>
+                                                        <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
+                                                    </div>
+                                                    <div class="mb-4">
+                                                        <label for="jumlahRangkap" class="block text-sm font-medium text-gray-700">Jumlah Rangkap</label>
+                                                        <input type="number" x-model="jumlahRangkap" name="jumlah_rangkap" id="jumlahRangkap" class="my-5 w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4 dark:border-neutral-500 dark:bg-neutral-903" placeholder="Jumlah Rangkap..." required />
+                                                    </div>
+                                                    <div class="flex gap-4 lg:gap-6">
+                                                        <button type="submit" class="btn-primary">Submit</button>
+                                                        <button type="button" class="btn-primary-outlined" @click="closeModal">Cancel</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
                             </div>
                         </td>
+
+
                         <td class="px-2 py-3 lg:py-5 w-24 text-center">
                             <button class="<?php echo $get_sppbj == 1 ? 'btn-primary' : 'btn-warning' ?>">SPPBJ</button>
                         </td>
@@ -113,3 +119,25 @@
 </div>
 
 </div>
+
+
+
+<!-- Alpine.js Data and Methods -->
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('modal', () => ({
+            isOpen: false,
+            jumlahRangkap: '',
+            urlToOpen: '',
+
+            openModal() {
+                // Assign URL dynamically based on nilai_pagu
+                this.urlToOpen = '<?php echo ($nilai_pagu->nilai_pagu >= 200000000) ? site_url('surat/kop_surat_tender') : site_url('surat/kop_surat_non_tender'); ?>';
+                this.isOpen = true;
+            },
+            closeModal() {
+                this.isOpen = false;
+            }
+        }));
+    });
+</script>

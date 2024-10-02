@@ -71,6 +71,8 @@
     </style>
 </head>
 <body>
+    <?php for ($i=1; $i < $jumlah_rangkap; $i++) { ?>
+  
     <div class="container" style="padding-top: 1px;padding-left: 1px;padding-right: 1px;padding-bottom: 1px; border: 2px solid black; border-collapse: collapse; border-radius: 30px;" >
          <div class="container" style="padding-top: 10px;padding-left: 25px;padding-right: 25px;padding-bottom: 25px; border: 4px solid black; border-collapse: collapse; border-radius: 30px;" >
         <!-- BEGIN: Kop Surat -->
@@ -266,23 +268,13 @@
     <tr >
         <td>
             <div style="font-weight:bold;font-size:22pt">
-                1
+                <?php echo $i; ?>
             </div>
         </td>
     </tr>
 </table>
-
-
-
-
-
-
-
-
-
-
-
 </div>
 </div>
+<?php  } ?>
 </body>
 </html>

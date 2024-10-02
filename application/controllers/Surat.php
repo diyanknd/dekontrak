@@ -16,11 +16,13 @@ class Surat extends CI_Controller
 	}
 
 	function spmk_non_tender(){
-		$this->load->view('surat/spmk_non_tender');
+		$data['jumlah_rangkap'] = $this->input->post('jumlah_rangkap');
+		$this->load->view('surat/spmk_non_tender',$data);
 	}
 
 	function kop_surat_tender(){
-		$this->load->view('surat/kop_tender');
+		$data['jumlah_rangkap'] = $this->input->post('jumlah_rangkap');
+		$this->load->view('surat/kop_tender',$data);
 
 	}
 
