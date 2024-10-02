@@ -101,9 +101,126 @@
                         </td>
 
 
-                        <td class="px-2 py-3 lg:py-5 w-24 text-center">
-                            <button class="<?php echo $get_sppbj == 1 ? 'btn-primary' : 'btn-warning' ?>">SPPBJ</button>
-                        </td>
+                       <td class="px-2 py-3 lg:py-5 w-24 text-center">
+    <div x-data="{ showModal: false, sppbjData: {} }">
+        <!-- Button logic -->
+        <button 
+            @click="showModal = true; fetchSppbjData()" 
+            class="<?php echo $get_sppbj == 1 ? 'btn-primary' : 'btn-warning' ?>">
+            SPPBJ
+        </button>
+
+     <!-- Modal -->
+<template x-teleport="body">
+    <div x-show="showModal" class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60 dark:bg-neutral-40/80" 
+        :class="showModal && '!block'">
+        <div class="flex min-h-screen items-center justify-center px-4 text-neutral-700 dark:text-neutral-20"
+            @click.self="showModal = false">
+            <div x-show="showModal" x-transition x-transition.duration.300 
+                class="panel my-8 w-full max-w-3xl overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                
+                <form method="POST" action="<?php echo site_url('create'); ?>">
+                    <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                        <h4>SPPBJ Form</h4>
+                        <i class="las la-times cursor-pointer text-xl" @click="showModal = false"></i>
+                    </div>
+
+                    <!-- Form fields based on database -->
+                    <div class="grid grid-cols-2 gap-4"> <!-- Using Grid for 2 columns layout -->
+
+                        <!-- Column 1 -->
+                            <input type="text" name="id_paket" value="<?php echo $id_paket; ?>" hidden>
+
+                        <!-- Column 2 -->
+                        <div class="mb-4">
+                            <label for="nomor_sppbj" class="block text-sm font-medium text-gray-700">Nomor SPPBJ</label>
+                            <input type="text" x-model="sppbjData.nomor_sppbj" name="nomor_sppbj" id="nomor_sppbj" 
+                                class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4" required>
+                        </div>
+
+                        <!-- Column 1 -->
+                        <div class="mb-4">
+                            <label for="tanggal_sppbj" class="block text-sm font-medium text-gray-700">Tanggal SPPBJ</label>
+                            <input type="date" x-model="sppbjData.tanggal_sppbj" name="tanggal_sppbj" id="tanggal_sppbj" 
+                                class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4" required>
+                        </div>
+
+                        <!-- Column 2 -->
+                        <div class="mb-4">
+                            <label for="no_surat_penawaran" class="block text-sm font-medium text-gray-700">Nomor Surat Penawaran</label>
+                            <input type="text" x-model="sppbjData.no_surat_penawaran" name="no_surat_penawaran" id="no_surat_penawaran" 
+                                class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4" required>
+                        </div>
+
+                        <!-- Column 1 -->
+                        <div class="mb-4">
+                            <label for="tanggal_surat_penawaran" class="block text-sm font-medium text-gray-700">Tanggal Surat Penawaran</label>
+                            <input type="date" x-model="sppbjData.tanggal_surat_penawaran" name="tanggal_surat_penawaran" id="tanggal_surat_penawaran" 
+                                class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4" required>
+                        </div>
+
+                        <!-- Column 2 -->
+                        <div class="mb-4">
+                            <label for="hasil_negoisasi" class="block text-sm font-medium text-gray-700">Hasil Negoisasi</label>
+                            <input type="text" x-model="sppbjData.hasil_negoisasi" name="hasil_negoisasi" id="hasil_negoisasi" 
+                                class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4" required>
+                        </div>
+
+                        <!-- Column 1 -->
+                        <div class="mb-4">
+                            <label for="kode_paket" class="block text-sm font-medium text-gray-700">Kode Paket</label>
+                            <input type="text" x-model="sppbjData.kode_paket" name="kode_paket" id="kode_paket" 
+                                class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4" required>
+                        </div>
+
+                        <!-- Column 2 -->
+                        <div class="mb-4">
+                            <label for="tanggal_kode_paket" class="block text-sm font-medium text-gray-700">Tanggal Kode Paket</label>
+                            <input type="date" x-model="sppbjData.tanggal_kode_paket" name="tanggal_kode_paket" id="tanggal_kode_paket" 
+                                class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4" required>
+                        </div>
+
+                        <!-- Column 1 -->
+                        <div class="mb-4">
+                            <label for="tentang_kode_paket" class="block text-sm font-medium text-gray-700">Tentang Kode Paket</label>
+                            <input type="text" x-model="sppbjData.tentang_kode_paket" name="tentang_kode_paket" id="tentang_kode_paket" 
+                                class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4" required>
+                        </div>
+
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="flex gap-4 lg:gap-6">
+                        <button type="submit" class="btn-primary">Submit</button>
+                        <button type="button" class="btn-primary-outlined" @click="showModal = false">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
+
+    </div>
+</td>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('modal', () => ({
+            showModal: false,
+            sppbjData: {},
+            fetchSppbjData() {
+                // Fetch SPPBJ data from server (AJAX or Fetch API)
+                fetch('<?php echo site_url('create/get_sppbj_data'); ?>')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Populate sppbjData with the fetched data
+                        this.sppbjData = data;
+                    })
+                    .catch(error => console.error('Error fetching SPPBJ data:', error));
+            }
+        }));
+    });
+</script>
                         <td class="px-2 py-3 lg:py-5 w-36 whitespace-nowrap text-center">
                             <button class="<?php echo $get_surat_perjanjian == 1 ? 'btn-primary' : 'btn-warning' ?>">Surat Perjanjian</button>
                         </td>

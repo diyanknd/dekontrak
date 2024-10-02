@@ -5,12 +5,12 @@ class Page extends CI_Controller
 {
 
 	public function __construct()
-    {
-        parent::__construct();
-        $this->db2 = $this->load->database('dekontrak', TRUE);
-        $this->load->model('Kontrak');
-        $this->check_login();
-    }
+	{
+		parent::__construct();
+		$this->db2 = $this->load->database('dekontrak', TRUE);
+		$this->load->model('Kontrak');
+		$this->check_login();
+	}
 
 	
 	public function index()
@@ -106,14 +106,22 @@ class Page extends CI_Controller
 
 	function detail_fisik(){
 
-		$id = $this->input->post('id');
+		//  check if the session data exists
+		if ($this->session->userdata('id_paket')) {
+    // Retrieve id_paket from session
+			$id = $this->session->userdata('id_paket');
+		} else {
+    // If session data doesn't exist, fallback to POST data
+			$id = $this->input->post('id');
+		}
          // Ambil data invoice berdasarkan nomor
-         $data['kontrak'] = $this->Kontrak->get_kontrak_by_id($id);
+		$data['kontrak'] = $this->Kontrak->get_kontrak_by_id($id);
 
-         $data['get_sppbj'] = $this->db->query("SELECT * FROM sppbj WHERE id_paket = '$id'")->num_rows();
-         $data['get_surat_perjanjian'] = $this->db->query("SELECT * FROM surat_perjanjian WHERE id_paket = '$id'")->num_rows();
-         $data['get_spmk'] = $this->db->query("SELECT * FROM spmk WHERE id_paket = '$id'")->num_rows();
-         $data['nilai_pagu'] = $this->db2->query("SELECT nilai_pagu FROM tb_paket WHERE id = '$id'")->row();
+		$data['get_sppbj'] = $this->db->query("SELECT * FROM sppbj WHERE id_paket = '$id'")->num_rows();
+		$data['get_surat_perjanjian'] = $this->db->query("SELECT * FROM surat_perjanjian WHERE id_paket = '$id'")->num_rows();
+		$data['get_spmk'] = $this->db->query("SELECT * FROM spmk WHERE id_paket = '$id'")->num_rows();
+		$data['nilai_pagu'] = $this->db2->query("SELECT nilai_pagu FROM tb_paket WHERE id = '$id'")->row();
+		$data['id_paket'] = $this->input->post('id');
 
 		$this->template->load('template','detail/fisik_detail',$data);
 	}
