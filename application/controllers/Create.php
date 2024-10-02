@@ -12,6 +12,21 @@ class Create extends CI_Controller
         // Return the result as JSON
         echo json_encode($query->row());
     }
+    public function get_surat_perjanjian_data() {
+        // Example query to fetch SPPBJ data from the database
+        $query = $this->db->query("SELECT id_surat_perjanjian, id_paket, jenis_kontrak, nomor_surat_perjanjian, tanggal_surat_perjanjian, no_bahp, tanggal_bahp, no_skpad, tanggal_skapd, ruang_lingkup, harga_penawaran, no_supl, tanggal_supl, dokumen_penunjang, uang_muka FROM surat_perjanjian WHERE id_paket = ?", array($this->input->post('id_paket')));
+
+        // Return the result as JSON
+        echo json_encode($query->row());
+    }
+    
+    public function get_spmk_data() {
+        // Example query to fetch SPPBJ data from the database
+        $query = $this->db->query("SELECT id_spmk, id_paket, no_spmk, tanggal_spmk FROM spmk WHERE id_paket = ?", array($this->input->post('id_paket')));
+
+        // Return the result as JSON
+        echo json_encode($query->row());
+    }
 
     // Function to handle form submission
     public function index() {
