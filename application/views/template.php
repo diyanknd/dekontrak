@@ -7,6 +7,7 @@
   <link rel="shortcut icon" href="<?php echo base_url(); ?>/assets/Softify/Softify/dist/asstes/images/favicon.ico"
     type="image/x-icon" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/css/tom-select.min.css" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet"
     href="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/fonts/line-awesome/css/line-awesome.min.css" />
@@ -18,7 +19,7 @@
 
   <title>Home - DEKONTRAK</title>
   <script defer src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/app.js"></script>
-  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/css/tom-select.min.css" />
+
   <link href="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/css/style.css" rel="stylesheet">
 </head>
 
@@ -2238,6 +2239,7 @@ setActiveMenu(){
 
 
   <!-- js libraries and custom scripts -->
+  <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/tom-select.js"></script>
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/swiper-bundle.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/alpine.collapse.js"></script>
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/alpine.persist.js"></script>
@@ -2247,7 +2249,7 @@ setActiveMenu(){
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/charts.js"></script>
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/snackbar.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/sweetalert.min.js"></script>
-  <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/tom-select.js"></script>
+
 
 
   <script>

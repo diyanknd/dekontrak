@@ -1,4 +1,5 @@
 <!-- Custom -->
+
 <div x-data="{
     invoices: [
     { 
@@ -455,37 +456,107 @@
                                                                 <label for="ruang_lingkup"
                                                                     class="block text-sm font-medium text-gray-700">Ruang
                                                                     Lingkup</label>
-                                                                <!-- <input type="text"
-                                                                    x-model="suratperjanjianData.ruang_lingkup"
-                                                                    name="ruang_lingkup" id="ruang_lingkup"
-                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
-                                                                    required> -->
-                                                                <select id="select-tags" multiple
-                                                                    data-placeholder="Best movies and TV shows">
-                                                                    <optgroup label="TV Shows">
-                                                                        <option value="Blue Bloods"
-                                                                            data-date="2010-2021">Blue Bloods</option>
-                                                                        <option value="Magnum P.I."
-                                                                            data-date="1980-1988" selected>Magnum P.I.
-                                                                        </option>
-                                                                    </optgroup>
-                                                                    <optgroup label="Movies">
-                                                                        <option value="An Innocent Man"
-                                                                            data-date="1989">An Innocent</option>
-                                                                        <option value="In & Out" data-date="1997">In
-                                                                            &amp Out</option>
-                                                                        <option value="Lassiter" data-date="1984">
-                                                                            Lassiter</option>
-                                                                        <option value="Mr. Baseball" data-date="1992">
-                                                                            Mr. Baseball</option>
-                                                                        <option value="Quigley Down Under"
-                                                                            data-date="1990">Quigley Down Under</option>
-                                                                        <option value="Three Men and a Baby"
-                                                                            data-date="1987">Three Men and a Baby
-                                                                        </option>
-                                                                    </optgroup>
-                                                                </select>
+                                                                <!-- Hidden input to hold selected ruang_lingkup values -->
+                                                                <input type="hidden" name="ruang_lingkup"
+                                                                    id="ruang_lingkup"
+                                                                    x-model="suratperjanjianData.ruang_lingkup">
+
+                                                                <div x-data="{
+                selectOpen: false,
+                selectedItems: [],
+                searchText: '',
+                optionList: [
+                    { title: 'Umum' },
+                    { title: 'Drainase' },
+                    { title: 'Pekerjaan Tanah dan Geosintetik' },
+                    { title: 'Pekerjaan Preventif' },
+                    { title: 'Pekerasan Berbutir dan Perkerasan Beton Semen' },
+                    { title: 'Pekerjaan Aspal' },
+                    { title: 'Struktur' },
+                    { title: 'Rehabilitasi Jembatan' },
+                    { title: 'Pekerjaan Harian dan Pekerjaan Lain-lain' },
+                    { title: 'Pekerjaan Pemeliharaan Kinerja' },
+                ],
+                filteredOptions() {
+                    if (this.searchText.trim() === '') {
+                        return this.optionList;
+                    } else {
+                        return this.optionList.filter(option => option.title.toLowerCase().includes(this.searchText.trim().toLowerCase()));
+                    }
+                },
+                toggleItem(item) {
+                    const index = this.selectedItems.findIndex(selectedItem => selectedItem.title === item.title);
+                    if (index === -1) {
+                        // If item not already selected, add it to selectedItems array
+                        this.selectedItems.push(item);
+                    } else {
+                        // If item already selected, remove it from selectedItems array
+                        this.selectedItems.splice(index, 1);
+                    }
+                    // Update the x-model with the comma-separated selected items
+                    this.suratperjanjianData.ruang_lingkup = this.selectedItems.map(i => i.title).join(', ');
+                },
+                isSelected(item) {
+                    return this.selectedItems.findIndex(selectedItem => selectedItem.title == item.title) !== -1;
+                },
+                toggleCheckbox(item) {
+                    this.toggleItem(item); // Call the toggle function
+                },
+                init() {
+                    // Initialize selectedItems if x-model already has some values (for example, during edit form)
+                    if (this.suratperjanjianData.ruang_lingkup) {
+                        const initialSelected = this.suratperjanjianData.ruang_lingkup.split(', ');
+                        this.selectedItems = this.optionList.filter(option => initialSelected.includes(option.title));
+                    }
+                }
+            }" class="relative mt-4" x-init="init">
+                                                                    <button type="button"
+                                                                        @click="selectOpen = !selectOpen"
+                                                                        class="py-2 lg:py-2.5 px-3 sm:px-4 lg:pr-10 rounded-xl w-full border bg-neutral-0 dark:bg-neutral-904 border-neutral-40 dark:border-neutral-500 relative flex gap-1 flex-wrap">
+                                                                        <div x-show="selectedItems.length"
+                                                                            class="flex gap-2 flex-wrap">
+                                                                            <template x-for="item in selectedItems">
+                                                                                <div
+                                                                                    class="px-1.5 py-0.5 rounded-full bg-neutral-20 dark:bg-neutral-904 flex items-center gap-2 border border-neutral-40 dark:border-neutral-600 text-neutral-700 dark:text-neutral-40">
+                                                                                    <span x-text="item.title"
+                                                                                        class="text-xs"></span>
+                                                                                    <i @click.stop="toggleItem(item)"
+                                                                                        class="las la-times text-xs rounded-full size-4 bg-neutral-70 text-neutral-10"></i>
+                                                                                </div>
+                                                                            </template>
+                                                                        </div>
+                                                                        <input type="text" placeholder="Select Items"
+                                                                            class="w-full bg-transparent capitalize text-sm"
+                                                                            readonly />
+                                                                        <span
+                                                                            class="absolute inset-y-0 ltr:right-0 rtl:left-0 flex items-center ltr:pr-3 ltr:md:pr-4 ltr:xl:pr-6 rtl:pl-3 rtl:md:pl-4 rtl:xl:pl-6 pointer-events-none">
+                                                                            <i class="las la-angle-down"></i>
+                                                                        </span>
+                                                                    </button>
+
+                                                                    <ul x-show="selectOpen"
+                                                                        @click.away="selectOpen = false"
+                                                                        class="py-1 rounded-xl bg-neutral-0 dark:bg-neutral-904 absolute top-full left-0 right-0 w-full shadow-xl z-[3] max-h-[250px] overflow-y-auto">
+                                                                        <template x-for="option in filteredOptions()"
+                                                                            :key="option.title">
+                                                                            <li :class="{ 'bg-primary-300 text-neutral-0': isSelected(option) }"
+                                                                                class="py-2 ltr:pl-6 rtl:pr-6 hover:bg-primary-300 text-sm hover:text-neutral-0 duration-300 cursor-pointer capitalize">
+                                                                                <label
+                                                                                    class="flex items-center gap-2 cursor-pointer"
+                                                                                    :for="option.title">
+                                                                                    <input :id="option.title"
+                                                                                        type="checkbox"
+                                                                                        @click="toggleCheckbox(option)"
+                                                                                        :checked="isSelected(option)"
+                                                                                        class="scale-125 accent-secondary-200" />
+                                                                                    <span x-text="option.title"></span>
+                                                                                </label>
+                                                                            </li>
+                                                                        </template>
+                                                                    </ul>
+                                                                </div>
                                                             </div>
+
 
                                                             <!-- Column 2 -->
                                                             <div class="mb-4">
@@ -683,9 +754,10 @@
 </div>
 
 
-
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.0/dist/js/tom-select.min.js"></script>
 <!-- Alpine.js Data and Methods -->
 <script>
+
     document.addEventListener('alpine:init', () => {
         Alpine.data('modal', () => ({
             isOpen: false,
