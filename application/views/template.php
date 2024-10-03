@@ -15,6 +15,9 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/css/animate.min.css" />
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/css/swiper.min.css" />
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/css/snackbar.min.css" />
+  <link rel="stylesheet"
+    href="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/css/simple-datatables.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
 
   <title>Home - DEKONTRAK</title>
@@ -2249,6 +2252,7 @@ setActiveMenu(){
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/charts.js"></script>
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/snackbar.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/sweetalert.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/simple-datatable.js"></script>
 
 
 

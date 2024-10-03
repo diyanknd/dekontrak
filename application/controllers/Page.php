@@ -15,7 +15,8 @@ class Page extends CI_Controller
 
 	public function index()
 	{
-		$this->template->load('template', 'page/home');
+		$data['pekerjaan_konstruksi_tender'] = $this->Kontrak->get_data_pekerjaan_konstruksi();
+		$this->template->load('template', 'page/home', $data);
 	}
 
 	function check_login()
@@ -28,7 +29,8 @@ class Page extends CI_Controller
 
 	function home()
 	{
-		$this->template->load('template', 'page/home');
+		$data['pekerjaan_konstruksi_tender'] = $this->Kontrak->get_data_pekerjaan_konstruksi();
+		$this->template->load('template', 'page/home', $data);
 	}
 
 

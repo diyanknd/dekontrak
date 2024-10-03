@@ -677,7 +677,7 @@
                                                 <div x-show="showModal" x-transition x-transition.duration.300
                                                     class="panel my-8 w-full max-w-3xl overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
 
-                                                    <form method="POST" action="<?php echo site_url('create'); ?>">
+                                                    <form method="POST" action="<?php echo site_url('create/spmk'); ?>">
                                                         <div
                                                             class="mb-4 flex items-center justify-between bb-dashed-n30">
                                                             <h4>Surat Printah Mulai Kerja Form</h4>
@@ -720,12 +720,12 @@
                                                             <div class="flex gap-4 lg:gap-6">
                                                                 <button type="submit"
                                                                     class="btn-primary">Submit</button>
-                                                                    <?php if ($get_spmk != 0) { ?>
-                                                                <button type="button" class="btn-primary-outlined"
-                                                                    @click="window.open(`<?php echo ($nilai_pagu->nilai_pagu >= 200000000) ? site_url('surat/spmk_tender/') . $id_paket : site_url('surat/spmk_non_tender/') . $id_paket; ?>`, '_blank')">
-                                                                    <i class="las la-print mr-2"></i> Print
-                                                                </button>
-                                                            <?php } ?>
+                                                                <?php if ($get_spmk != 0) { ?>
+                                                                    <button type="button" class="btn-primary-outlined"
+                                                                        @click="window.open(`<?php echo ($nilai_pagu->nilai_pagu >= 200000000) ? site_url('surat/spmk_tender/') . $id_paket : site_url('surat/spmk_non_tender/') . $id_paket; ?>`, '_blank')">
+                                                                        <i class="las la-print mr-2"></i> Print
+                                                                    </button>
+                                                                <?php } ?>
                                                                 <button type="button" class="btn-primary-outlined"
                                                                     @click="showModal = false">Cancel</button>
                                                             </div>
@@ -763,6 +763,69 @@
     </div>
 
 </div>
+
+<div class="flex flex-col gap-14">
+    <div class="f-center gap-3">
+        <div class="w-[48%] text-end">
+            <p class="m-text mb-1 font-medium">Kop Surat</p>
+            <p class="text-xs">
+            </p>
+        </div>
+        <div
+            class="relative flex size-9 items-center justify-center rounded-full bg-neutral-100 text-neutral-0 after:absolute after:left-1/2 after:top-[110%] after:h-14 after:w-px after:-translate-x-1/2 after:bg-neutral-100">
+            <i class="las la-file text-xl"></i>
+        </div>
+        <div class="w-[48%] self-start">
+            <p></p>
+        </div>
+    </div>
+    <?php if ($get_sppbj != 0) { ?>
+        <div class="f-center gap-3">
+            <div class="w-[48%] self-start text-end">
+                <p><?php echo $get_data_sppbj->created_at; ?></p>
+            </div>
+            <div
+                class="relative flex size-9 items-center justify-center rounded-full bg-primary-300 text-neutral-0 after:absolute after:left-1/2 after:top-[110%] after:h-14 after:w-px after:-translate-x-1/2 after:bg-primary-300">
+                <i class="las la-image text-xl"></i>
+            </div>
+            <div class="w-[48%] text-start">
+                <p class="m-text mb-1 font-medium">SPPBJ</p>
+                <p class="text-xs">SPPBJ - <?php echo $get_data_sppbj->nomor_sppbj; ?></p>
+            </div>
+        </div>
+    <?php } ?>
+
+    <?php if ($get_surat_perjanjian != 0) { ?>
+        <div class="f-center gap-3">
+            <div class="w-[48%] text-end">
+                <p class="m-text mb-1 font-medium">Surat Perjanjian</p>
+                <p class="text-xs">Surat Perjanjian - <?php echo $get_data_surat_perjanjian->nomor_surat_perjanjian; ?></p>
+            </div>
+            <div
+                class="relative flex size-9 items-center justify-center rounded-full bg-secondary-300 text-neutral-0 after:absolute after:left-1/2 after:top-[110%] after:h-14 after:w-px after:-translate-x-1/2 after:bg-secondary-300">
+                <i class="las la-music text-xl"></i>
+            </div>
+            <div class="w-[48%] self-start">
+                <p><?php echo $get_data_surat_perjanjian->created_at; ?></p>
+            </div>
+        </div>
+    <?php } ?>
+
+    <?php if ($get_spmk != 0) { ?>
+        <div class="f-center gap-3">
+            <div class="w-[48%] self-start text-end">
+                <p><?php echo $get_data_spmk->created_at; ?></p>
+            </div>
+            <div class="relative flex size-9 items-center justify-center rounded-full bg-info-300 text-neutral-0">
+                <i class="las la-tv text-xl"></i>
+            </div>
+            <div class="w-[48%] text-start">
+                <p class="m-text mb-1 font-medium">SPMK</p>
+                <p class="text-xs">SPMK - <?php echo $get_data_spmk->nomor_spmk; ?></p>
+            </div>
+        </div>
+    </div>
+<?php } ?>
 
 
 <script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.0/dist/js/tom-select.min.js"></script>

@@ -195,4 +195,16 @@ WHERE tb_paket.id = '$id_paket'
 		$this->db->update('spmk', $data);
 	}
 
+	function get_data_pekerjaan_konstruksi()
+	{
+		$query = $this->db2
+			->select('*')
+			->from('tb_paket')
+			->where('jenis_pengadaan', 'Pekerjaan Konstruksi')
+			->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner')
+			->get();
+
+		return $query;
+	}
+
 }
