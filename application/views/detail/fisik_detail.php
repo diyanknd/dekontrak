@@ -6,7 +6,6 @@
         id: <?php echo $kontrak->id; ?>, 
         nilai_kontrak: <?php echo $kontrak->nilai_kontrak; ?>, 
         tanggal_kontrak: '<?php echo $kontrak->tanggal_kontrak; ?>',
-
         nama_penyedia: '<?php echo $kontrak->nama_penyedia; ?>',
         paket_pekerjaan: '<?php echo $kontrak->paket_pekerjaan; ?>',
         nomor_kontrak: '<?php echo $kontrak->nomor_kontrak; ?>',
@@ -59,20 +58,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <template x-for="(invoice, index) in invoices" :key="invoice.id">
+                    
                         <tr class="bg-white">
                             <td class="px-2 py-3 w-48" style="white-space: normal; word-wrap: break-word;">
                                 <div class="flex flex-col">
-                                    <p class="mb-1 font-extrabold" x-text="invoice.paket_pekerjaan"></p>
-                                    <span class="text-xs whitespace-nowrap" x-text="invoice.nomor_kontrak"></span>
+                                    <p class="mb-1 font-extrabold"><?php echo $kontrak->paket_pekerjaan; ?></p>
+                                    <span class="text-xs whitespace-nowrap" ><?php echo $kontrak->nomor_kontrak; ?></span>
                                 </div>
                             </td>
-                            <td class="px-2 py-3 w-36 text-center whitespace-nowrap"
-                                x-text="formatTanggalIndonesia(invoice.tanggal_kontrak)"></td>
-                            <td class="px-2 py-3 w-36 text-center whitespace-nowrap" x-text="invoice.nama_penyedia">
-                            </td>
+                            <td class="px-2 py-3 w-36 text-center whitespace-nowrap"> <?php echo $kontrak->tanggal_kontrak; ?></td>
+                            <td class="px-2 py-3 w-36 text-center whitespace-nowrap"> <?php echo $kontrak->nama_penyedia; ?></td>
                             <td class="px-2 py-3 lg:py-5 w-36 whitespace-nowrap">
-                                <span x-text="formatIDR(invoice.nilai_kontrak)"></span>
+                                <span><?php echo $kontrak->nilai_kontrak; ?></span>
                             </td>
                             <td class="px-2 py-3 lg:py-5 w-24 text-center">
                                 <div x-data="modal">
@@ -756,7 +753,6 @@
                                 });
                             </script>
                         </tr>
-                    </template>
                 </tbody>
             </table>
         </div>
@@ -848,4 +844,29 @@
             }
         }));
     });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const dataTable = new simpleDatatables.DataTable('#advance-datatable', {
+      // Konfigurasi tabel
+      columns: [
+        { select: 0, type: 'string' }, // Paket Pekerjaan (string)
+        { select: 1, type: 'date' },   // Tanggal Kontrak (date)
+        { select: 2, type: 'string' }, // Penyedia (string)
+        { select: 3, type: 'num' },    // Harga Kontrak (number)
+        { select: 4, type: 'html' },   // Cover (HTML content)
+        { select: 5, type: 'html' },   // SPPJ (HTML content)
+        { select: 6, type: 'html' },   // Surat Perjanjian (HTML content)
+        { select: 7, type: 'html' }    // SPMK (HTML content)
+      ],
+      // Konfigurasi lainnya
+      perPage: 10,
+      perPageSelect: [10, 20, 50, 100],
+      labels: {
+        placeholder: 'Cari...',
+        noRows: 'Tidak ada data',
+        info: 'Menampilkan {start} - {end} dari {rows} baris'
+      },
+    });
+  });
 </script>

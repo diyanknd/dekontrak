@@ -291,7 +291,7 @@
       // Konfigurasi tabel
       columns: [
         { select: 0, type: 'num' },
-        { select: 1, type: 'string' },
+        { select: 1, type: 'html' },
         { select: 2, type: 'num' },
         { select: 3, type: 'num' },
         { select: 4, type: 'string' },
@@ -314,7 +314,7 @@
       // Konfigurasi tabel
       columns: [
         { select: 0, type: 'num' },
-        { select: 1, type: 'string' },
+        { select: 1, type: 'html' },
         { select: 2, type: 'num' },
         { select: 3, type: 'num' },
         { select: 4, type: 'string' },
@@ -338,7 +338,7 @@
       // Konfigurasi tabel
       columns: [
         { select: 0, type: 'num' },
-        { select: 1, type: 'string' },
+        { select: 1, type: 'html' },
         { select: 2, type: 'num' },
         { select: 3, type: 'num' },
         { select: 4, type: 'string' },
@@ -362,7 +362,7 @@
       // Konfigurasi tabel
       columns: [
         { select: 0, type: 'num' },
-        { select: 1, type: 'string' },
+        { select: 1, type: 'html' },
         { select: 2, type: 'num' },
         { select: 3, type: 'num' },
         { select: 4, type: 'string' },
@@ -386,7 +386,7 @@
       // Konfigurasi tabel
       columns: [
         { select: 0, type: 'num' },
-        { select: 1, type: 'string' },
+        { select: 1, type: 'html' },
         { select: 2, type: 'num' },
         { select: 3, type: 'num' },
         { select: 4, type: 'string' },
@@ -410,7 +410,7 @@
       // Konfigurasi tabel
       columns: [
         { select: 0, type: 'num' },
-        { select: 1, type: 'string' },
+        { select: 1, type: 'html' },
         { select: 2, type: 'num' },
         { select: 3, type: 'num' },
         { select: 4, type: 'string' },

@@ -3,6 +3,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Kontrak extends CI_Model
 {
+public function __construct()
+	{
+		parent::__construct();
+		$this->db2 = $this->load->database('dekontrak', TRUE);
+	}
 
 	function get_kontrak()
 	{
@@ -136,19 +141,89 @@ class Kontrak extends CI_Model
 	{
 		$id_paket = $this->uri->segment('3');
 		$query = $this->db2->query("SELECT * FROM `tb_paket` 
-INNER JOIN tb_program ON tb_paket.id_program = tb_program.id_program
-INNER JOIN tb_kegiatan ON tb_paket.id_kegiatan = tb_kegiatan.id_kegiatan
-INNER JOIN tb_sub_kegiatan ON tb_paket.id_sub_kegiatan = tb_sub_kegiatan.id_sub
-INNER JOIN tb_user ON tb_paket.nama_ppk = tb_user.id
-INNER JOIN tb_sumber_dana ON tb_paket.sumber_dana = tb_sumber_dana.id_sumber_dana
-INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan
-LEFT JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket
-INNER JOIN tb_data_penyedia ON tb_kontrak.penyedia_jasa = tb_data_penyedia.id_data_penyedia
-WHERE tb_paket.id = '$id_paket'
-");
+		INNER JOIN tb_program ON tb_paket.id_program = tb_program.id_program
+		INNER JOIN tb_kegiatan ON tb_paket.id_kegiatan = tb_kegiatan.id_kegiatan
+		INNER JOIN tb_sub_kegiatan ON tb_paket.id_sub_kegiatan = tb_sub_kegiatan.id_sub
+		INNER JOIN tb_user ON tb_paket.nama_ppk = tb_user.id
+		INNER JOIN tb_sumber_dana ON tb_paket.sumber_dana = tb_sumber_dana.id_sumber_dana
+		INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan
+		LEFT JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket
+		INNER JOIN tb_data_penyedia ON tb_kontrak.penyedia_jasa = tb_data_penyedia.id_data_penyedia
+		WHERE tb_paket.id = '$id_paket'
+		");
 
 		return $query;
 	}
+
+
+	//Ini Surat Perintah Mulai Kerja (sppbj)
+	public function cek_sppbj($id_paket)
+	{
+		$this->db->where('id_paket', $id_paket);
+		$query = $this->db->get('sppbj');
+		if ($query->num_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
+	
+	public function insert_sppbj($data)
+	{
+		// Start the transaction for both databases
+		$this->db->trans_start(); // Start transaction for the primary DB (dekontrak)
+		$this->db2->trans_start(); // Start transaction for the second DB (new_jantan)
+	
+		// Insert into the first database (dekontrak)
+		$this->db->insert('sppbj', $data);
+	
+		// Insert into the second database (new_jantan)
+		$this->db2->insert('sppbj', '1');
+	
+		// Complete the transactions
+		$this->db->trans_complete(); // Commit or rollback for the primary DB
+		$this->db2->trans_complete(); // Commit or rollback for the second DB
+	
+		// Check the transaction status for both databases
+		if ($this->db->trans_status() === FALSE || $this->db2->trans_status() === FALSE) {
+			// If something went wrong in any of the DB inserts
+			return false;
+		} else {
+			// Both inserts were successful
+			return true;
+		}
+	}
+	
+
+	public function update_sppbj($data)
+{
+    // Start the transaction
+    $this->db->trans_start(); // This will start a transaction for the primary DB
+    $this->db2->trans_start(); // This will start a transaction for the second DB (new_jantan)
+
+    // Update on the first database (dekontrak)
+    $this->db->where('id_paket', $data['id_paket']);
+	$this->db->update('sppbj', $data);
+
+    // Update on the second database (new_jantan)
+    $this->db2->where('id_paket', $data['id_paket']);
+    $this->db2->update('tb_kontrak', ['sppbj' => '1']);
+
+    // Complete the transactions
+    $this->db->trans_complete(); // Commit or rollback for primary DB
+    $this->db2->trans_complete(); // Commit or rollback for second DB (new_jantan)
+
+    // Check the transaction status for both databases
+    if ($this->db->trans_status() === FALSE || $this->db2->trans_status() === FALSE) {
+        // If something went wrong in any of the DB updates
+        return false;
+    } else {
+        // All updates were successful
+        return true;
+    }
+}
+
 
 	public function cek_surat_perjanjian($id_paket)
 	{
@@ -163,14 +238,58 @@ WHERE tb_paket.id = '$id_paket'
 
 	public function insert_surat_perjanjian($data)
 	{
+		// Start the transaction for both databases
+		$this->db->trans_start(); // Start transaction for the primary DB (dekontrak)
+		$this->db2->trans_start(); // Start transaction for the second DB (new_jantan)
+	
+		// Insert into the first database (dekontrak)
 		$this->db->insert('surat_perjanjian', $data);
+	
+		// Insert into the second database (new_jantan)
+		$this->db2->insert('surat_perjanjian', '1');
+	
+		// Complete the transactions
+		$this->db->trans_complete(); // Commit or rollback for the primary DB
+		$this->db2->trans_complete(); // Commit or rollback for the second DB
+	
+		// Check the transaction status for both databases
+		if ($this->db->trans_status() === FALSE || $this->db2->trans_status() === FALSE) {
+			// If something went wrong in any of the DB inserts
+			return false;
+		} else {
+			// Both inserts were successful
+			return true;
+		}
 	}
+	
 
 	public function update_surat_perjanjian($data)
-	{
-		$this->db->where('id_paket', $data['id_paket']);
-		$this->db->update('surat_perjanjian', $data);
-	}
+{
+    // Start the transaction
+    $this->db->trans_start(); // This will start a transaction for the primary DB
+    $this->db2->trans_start(); // This will start a transaction for the second DB (new_jantan)
+
+    // Update on the first database (dekontrak)
+    $this->db->where('id_paket', $data['id_paket']);
+	$this->db->update('surat_perjanjian', $data);
+
+    // Update on the second database (new_jantan)
+    $this->db2->where('id_paket', $data['id_paket']);
+    $this->db2->update('tb_kontrak', ['surat_perjanjian' => '1']);
+
+    // Complete the transactions
+    $this->db->trans_complete(); // Commit or rollback for primary DB
+    $this->db2->trans_complete(); // Commit or rollback for second DB (new_jantan)
+
+    // Check the transaction status for both databases
+    if ($this->db->trans_status() === FALSE || $this->db2->trans_status() === FALSE) {
+        // If something went wrong in any of the DB updates
+        return false;
+    } else {
+        // All updates were successful
+        return true;
+    }
+}
 
 	//Ini Surat Perintah Mulai Kerja (SPMK)
 	public function cek_spmk($id_paket)
@@ -184,16 +303,62 @@ WHERE tb_paket.id = '$id_paket'
 		}
 	}
 
+	
 	public function insert_spmk($data)
 	{
+		// Start the transaction for both databases
+		$this->db->trans_start(); // Start transaction for the primary DB (dekontrak)
+		$this->db2->trans_start(); // Start transaction for the second DB (new_jantan)
+	
+		// Insert into the first database (dekontrak)
 		$this->db->insert('spmk', $data);
+	
+		// Insert into the second database (new_jantan)
+		$this->db2->insert('spmk', '1');
+	
+		// Complete the transactions
+		$this->db->trans_complete(); // Commit or rollback for the primary DB
+		$this->db2->trans_complete(); // Commit or rollback for the second DB
+	
+		// Check the transaction status for both databases
+		if ($this->db->trans_status() === FALSE || $this->db2->trans_status() === FALSE) {
+			// If something went wrong in any of the DB inserts
+			return false;
+		} else {
+			// Both inserts were successful
+			return true;
+		}
 	}
+	
 
 	public function update_spmk($data)
-	{
-		$this->db->where('id_paket', $data['id_paket']);
-		$this->db->update('spmk', $data);
-	}
+{
+    // Start the transaction
+    $this->db->trans_start(); // This will start a transaction for the primary DB
+    $this->db2->trans_start(); // This will start a transaction for the second DB (new_jantan)
+
+    // Update on the first database (dekontrak)
+    $this->db->where('id_paket', $data['id_paket']);
+	$this->db->update('spmk', $data);
+
+    // Update on the second database (new_jantan)
+    $this->db2->where('id_paket', $data['id_paket']);
+    $this->db2->update('tb_kontrak', ['spmk' => '1']);
+
+    // Complete the transactions
+    $this->db->trans_complete(); // Commit or rollback for primary DB
+    $this->db2->trans_complete(); // Commit or rollback for second DB (new_jantan)
+
+    // Check the transaction status for both databases
+    if ($this->db->trans_status() === FALSE || $this->db2->trans_status() === FALSE) {
+        // If something went wrong in any of the DB updates
+        return false;
+    } else {
+        // All updates were successful
+        return true;
+    }
+}
+
 
 	function get_data_pekerjaan_konstruksi()
 	{

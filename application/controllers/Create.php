@@ -53,17 +53,15 @@ class Create extends CI_Controller
         );
 
         // Check if a record with the same id_paket already exists
-        $this->db->where('id_paket', $id_paket);
-        $query = $this->db->get('sppbj');
-        if ($query->num_rows() > 0) {
+        $cek_data = $this->Kontrak->cek_sppbj($data['id_paket']);
+        if ($cek_data) {
             // Record already exists, update it
-            $this->db->where('id_paket', $id_paket);
-            $this->db->update('sppbj', $data);
+            $this->Kontrak->update_sppbj($data);
             $this->session->set_flashdata('success', 'SPPBJ Berhasil di Update !');
             $this->session->set_flashdata('alert', 'success');
         } else {
             // Record doesn't exist, insert a new one
-            $this->db->insert('sppbj', $data);
+            $this->Kontrak->insert_sppbj($data);
             $this->session->set_flashdata('success', 'SPPBJ Berhasil di Input !');
             $this->session->set_flashdata('alert', 'success');
         }
