@@ -202,9 +202,76 @@ WHERE tb_paket.id = '$id_paket'
 			->from('tb_paket')
 			->where('jenis_pengadaan', 'Pekerjaan Konstruksi')
 			->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner')
+			->where('nilai_pagu >=', 200000000)
 			->get();
 
 		return $query;
 	}
 
+	
+	function get_data_konsultan_pengawasan()
+	{
+		$query = $this->db2
+			->select('*')
+			->from('tb_paket')
+			->where('jenis_pengadaan', 'Jasa Konsultansi Pengawasan')
+			->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner')
+			->where('nilai_pagu >=', 100000000) // add this line			
+			->get();
+
+		return $query;
+	}
+	
+	function get_data_konsultan_perencanaan()
+	{
+		$query = $this->db2
+			->select('*')
+			->from('tb_paket')
+			->where('jenis_pengadaan', 'Jasa Konsultansi Perencanaan')
+			->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner')
+			->where('nilai_pagu >=', 100000000)
+			->get();
+
+		return $query;
+	}
+
+	function get_data_pekerjaan_nonkonstruksi()
+	{
+		$query = $this->db2
+			->select('*')
+			->from('tb_paket')
+			->where('jenis_pengadaan', 'Pekerjaan Konstruksi')
+			->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner')
+			->where('nilai_pagu <', 200000000)
+			->get();
+
+		return $query;
+	}
+
+	
+	function get_data_konsultan_nonpengawasan()
+	{
+		$query = $this->db2
+			->select('*')
+			->from('tb_paket')
+			->where('jenis_pengadaan', 'Jasa Konsultansi Pengawasan')
+			->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner')
+			->where('nilai_pagu <', 100000000) // add this line			
+			->get();
+
+		return $query;
+	}
+	
+	function get_data_konsultan_nonperencanaan()
+	{
+		$query = $this->db2
+			->select('*')
+			->from('tb_paket')
+			->where('jenis_pengadaan', 'Jasa Konsultansi Perencanaan')
+			->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner')
+			->where('nilai_pagu <', 100000000)
+			->get();
+
+		return $query;
+	}
 }

@@ -16,6 +16,12 @@ class Page extends CI_Controller
 	public function index()
 	{
 		$data['pekerjaan_konstruksi_tender'] = $this->Kontrak->get_data_pekerjaan_konstruksi();
+		$data['konsultan_pengawasan_tender'] = $this->Kontrak->get_data_konsultan_pengawasan();
+		$data['konsultan_perencanaan_tender'] = $this->Kontrak->get_data_konsultan_perencanaan();
+		
+		$data['pekerjaan_konstruksi_nontender'] = $this->Kontrak->get_data_pekerjaan_nonkonstruksi();		
+		$data['konsultan_pengawasan_nontender'] = $this->Kontrak->get_data_konsultan_nonpengawasan();
+		$data['konsultan_perencanaan_nontender'] = $this->Kontrak->get_data_konsultan_nonperencanaan();
 		$this->template->load('template', 'page/home', $data);
 	}
 
@@ -29,7 +35,14 @@ class Page extends CI_Controller
 
 	function home()
 	{
-		$data['pekerjaan_konstruksi_tender'] = $this->Kontrak->get_data_pekerjaan_konstruksi();
+		$data['pekerjaan_konstruksi_tender'] = $this->Kontrak->get_data_pekerjaan_konstruksi();		
+		$data['konsultan_pengawasan_tender'] = $this->Kontrak->get_data_konsultan_pengawasan();
+		$data['konsultan_perencanaan_tender'] = $this->Kontrak->get_data_konsultan_perencanaan();
+
+		
+		$data['pekerjaan_konstruksi_nontender'] = $this->Kontrak->get_data_pekerjaan_nonkonstruksi();		
+		$data['konsultan_pengawasan_nontender'] = $this->Kontrak->get_data_konsultan_nonpengawasan();
+		$data['konsultan_perencanaan_nontender'] = $this->Kontrak->get_data_konsultan_nonperencanaan();
 		$this->template->load('template', 'page/home', $data);
 	}
 
