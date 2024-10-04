@@ -18,12 +18,31 @@ class Page extends CI_Controller
 		$data['pekerjaan_konstruksi_tender'] = $this->Kontrak->get_data_pekerjaan_konstruksi();
 		$data['konsultan_pengawasan_tender'] = $this->Kontrak->get_data_konsultan_pengawasan();
 		$data['konsultan_perencanaan_tender'] = $this->Kontrak->get_data_konsultan_perencanaan();
-		
-		$data['pekerjaan_konstruksi_nontender'] = $this->Kontrak->get_data_pekerjaan_nonkonstruksi();		
+
+		$data['pekerjaan_konstruksi_nontender'] = $this->Kontrak->get_data_pekerjaan_nonkonstruksi();
 		$data['konsultan_pengawasan_nontender'] = $this->Kontrak->get_data_konsultan_nonpengawasan();
 		$data['konsultan_perencanaan_nontender'] = $this->Kontrak->get_data_konsultan_nonperencanaan();
+		$data['paket_pekerjaan_all_tender'] = $this->Kontrak->get_data_paket_pekerjaan_all_tender();
+		$data['paket_pekerjaan_all_non_tender'] = $this->Kontrak->get_data_paket_pekerjaan_all_non_tender();
 		$this->template->load('template', 'page/home', $data);
 	}
+
+	public function search_paket_pekerjaan()
+	{
+		$this->load->model('Kontrak');
+		$input = json_decode(file_get_contents('php://input'), true);
+
+		$query = $input['query'] ?? '';
+
+		if (!empty($query)) {
+			$results = $this->Kontrak->search_paket_pekerjaan($query);
+			header('Content-Type: application/json');
+			echo json_encode($results); // Ensure it's returning the correct structure
+		} else {
+			echo json_encode([]); // Return empty array if query is empty
+		}
+	}
+
 
 	function check_login()
 	{
@@ -35,14 +54,16 @@ class Page extends CI_Controller
 
 	function home()
 	{
-		$data['pekerjaan_konstruksi_tender'] = $this->Kontrak->get_data_pekerjaan_konstruksi();		
+		$data['pekerjaan_konstruksi_tender'] = $this->Kontrak->get_data_pekerjaan_konstruksi();
 		$data['konsultan_pengawasan_tender'] = $this->Kontrak->get_data_konsultan_pengawasan();
 		$data['konsultan_perencanaan_tender'] = $this->Kontrak->get_data_konsultan_perencanaan();
 
-		
-		$data['pekerjaan_konstruksi_nontender'] = $this->Kontrak->get_data_pekerjaan_nonkonstruksi();		
+
+		$data['pekerjaan_konstruksi_nontender'] = $this->Kontrak->get_data_pekerjaan_nonkonstruksi();
 		$data['konsultan_pengawasan_nontender'] = $this->Kontrak->get_data_konsultan_nonpengawasan();
 		$data['konsultan_perencanaan_nontender'] = $this->Kontrak->get_data_konsultan_nonperencanaan();
+		$data['paket_pekerjaan_all_tender'] = $this->Kontrak->get_data_paket_pekerjaan_all_tender();
+		$data['paket_pekerjaan_all_non_tender'] = $this->Kontrak->get_data_paket_pekerjaan_all_non_tender();
 		$this->template->load('template', 'page/home', $data);
 	}
 
@@ -127,6 +148,7 @@ class Page extends CI_Controller
 
 	function detail_fisik()
 	{
+
 		// $this->session->unset_userdata('id_paket');
 		// $id = $this->input->post('id');
 		//  check if the session data exists

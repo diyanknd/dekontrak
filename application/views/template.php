@@ -308,14 +308,110 @@
           <button :class="$store.app.menu=='horizontal'?'xl:hidden':''" @click="$store.app.toggleSidebar()"><i
               class="las la-bars text-2xl"></i></button>
 
-          <form
-            :class="$store.app.menu=='horizontal'?'bg-neutral-0 dark:bg-neutral-903':'bg-neutral-0 dark:bg-neutral-904'"
-            class="max-w-[357px] max-md:hidden rounded-lg border focus-within:border-primary-300 border-neutral-30 dark:border-neutral-500 p-1 flex items-center">
-            <input type="text" class="px-4 w-full bg-transparent text-sm" placeholder="Search..." />
-            <span class="size-8 shrink-0 rounded-full f-center">
-              <i class="las la-search text-xl"></i>
-            </span>
-          </form>
+          <div x-data="searchComponent" class="relative">
+            <form @submit.prevent="searchPaketPekerjaan"
+              class="max-w-[357px] rounded-lg border focus-within:border-primary-300 border-neutral-30 dark:border-neutral-500 p-1 flex items-center">
+              <input type="text" x-model="query" @input="searchPaketPekerjaan"
+                class="px-4 w-full bg-transparent text-sm focus:outline-none" placeholder="Search Paket Pekerjaan..." />
+              <span class="size-8 shrink-0 rounded-full f-center">
+                <i class="las la-search text-xl"></i>
+              </span>
+            </form>
+
+            <!-- Dropdown for search results -->
+            <div x-show="query.length > 0 && results.length > 0"
+              class="absolute bg-white border mt-1 w-full max-h-60 overflow-y-auto z-50 rounded-md shadow-lg">
+              <template x-for="(result, index) in results" :key="index">
+                <div class="p-2 hover:bg-gray-200 cursor-pointer" @click="selectPaket(result.id)">
+                  <span x-text="result.paket_pekerjaan"></span>
+                </div>
+              </template>
+            </div>
+
+            <!-- Loading state -->
+            <div x-show="isLoading" class="absolute inset-0 flex justify-center items-center bg-opacity-50 bg-white">
+              <span>Loading...</span>
+            </div>
+
+            <!-- No results found -->
+            <div x-show="query.length > 0 && results.length === 0 && !isLoading"
+              class="absolute bg-white border mt-1 w-full p-2">
+              <span>No results found</span>
+            </div>
+          </div>
+
+          <script>
+            document.addEventListener('alpine:init', () => {
+              Alpine.data('searchComponent', () => ({
+                query: '',
+                results: [],
+                isLoading: false,
+
+                async searchPaketPekerjaan() {
+                  this.isLoading = true;
+                  try {
+                    const response = await fetch('<?php echo site_url('Page/search_paket_pekerjaan'); ?>', {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        query: this.query
+                      })
+                    });
+
+                    if (!response.ok) {
+                      throw new Error('Network response was not ok');
+                    }
+
+                    const data = await response.json();
+                    console.log("Response Data: ", data); // Log the full response to check if 'id' is present
+
+                    if (Array.isArray(data)) {
+                      this.results = data; // Populate results with fetched data
+                      console.log(this.results); // Log the results to ensure the data contains 'id'
+                    } else {
+                      console.error('Unexpected data format:', data);
+                      this.results = [];
+                    }
+                  } catch (error) {
+                    console.error('Error fetching data:', error);
+                    this.results = [];
+                  } finally {
+                    this.isLoading = false; // Hide loading state
+                  }
+                },
+
+                selectPaket(id) {
+                  console.log("Selected Paket ID: ", id); // Log the selected id for debugging
+
+                  // Post the selected 'id' to detail_fisik
+                  fetch('<?php echo site_url('Page/detail_fisik'); ?>', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id: id }) // Send the selected paket id
+                  })
+                    .then(response => {
+                      if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                      }
+                      // Redirect to the detail_fisik page
+                      window.location.href = '<?php echo site_url('Page/detail_fisik'); ?>';
+                    })
+                    .catch(error => {
+                      console.error('Error posting data:', error);
+                    });
+                }
+              }));
+            });
+          </script>
+
+
+
+
+
         </div>
         <div class="flex gap-3 xxl:gap-4 items-center">
           <!-- full screen toggle btn -->
@@ -2248,18 +2344,11 @@ setActiveMenu(){
       class="flex flex-col items-center justify-center gap-3 px-4 py-5 lg:flex-row lg:justify-between xxl:px-8 xxl:py-6">
       <p class="text-sm max-md:w-full max-md:text-center">
         Copyright @ <span id="current-year"></span>
-        <a class="text-primary-300 font-medium" href="index.html"> Softify </a>
+        <a class="text-primary-300 font-medium" href="#"> PJ2 DPUPR BERAU - 2024 </a>
         . All Rights Reserved
       </p>
 
-      <ul class="flex gap-3 text-sm max-lg:w-full max-lg:justify-center lg:gap-4">
-        <li>
-          <a href="#" class="footer-link">Help Center</a>
-        </li>
-        <li>
-          <a href="#" class="footer-link">Privacy Policy</a>
-        </li>
-      </ul>
+
     </div>
   </footer>
 
