@@ -94,6 +94,7 @@
     foreach ($kontrak->result() as $row) { ?>
       {
         no: <?php echo $i; ?>,
+        id: '<?php echo $row->id; ?>',
         nomor_kontrak: '<?php echo $row->nomor_kontrak; ?>',
         checked: false,
         paket_pekerjaan: '<?php echo $row->paket_pekerjaan; ?>',
@@ -313,7 +314,7 @@
               </thead>
               <tbody>
                 <template x-for="invoice in paginatedInvoices()" :key="invoice.no">
-                  <tr
+                  <tr @click="submitDetailFisik(invoice.id)"
                     class="border-b border-neutral-30 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:hover:bg-neutral-903"
                     :class="invoice.checked?'!bg-primary-300/10':'bg-neutral-0 dark:bg-neutral-904'">
                     <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
@@ -384,7 +385,20 @@
               </tfoot>
             </table>
 
-            </table>
+
+            <form id="detailFisikForm" action="<?php echo site_url(); ?>/page/detail_fisik" method="POST"
+            style="display:none;">
+            <input type="hidden" name="id" id="invoiceId">
+          </form>
+          <script>
+            function submitDetailFisik(id) {
+              // Set the invoice ID in the hidden form
+              document.getElementById('invoiceId').value = id;
+
+              // Submit the form
+              document.getElementById('detailFisikForm').submit();
+            }
+          </script>
 
             <div
               class="mt-6 flex items-center gap-5 justify-center flex-col md:flex-row md:justify-between whitespace-nowrap">

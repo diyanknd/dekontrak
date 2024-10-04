@@ -66,10 +66,10 @@
                                     <span class="text-xs whitespace-nowrap" ><?php echo $kontrak->nomor_kontrak; ?></span>
                                 </div>
                             </td>
-                            <td class="px-2 py-3 w-36 text-center whitespace-nowrap"> <?php echo $kontrak->tanggal_kontrak; ?></td>
+                            <td class="px-2 py-3 w-36 text-center whitespace-nowrap"> <?php echo formatTanggalIndonesia($kontrak->tanggal_kontrak); ?></td>
                             <td class="px-2 py-3 w-36 text-center whitespace-nowrap"> <?php echo $kontrak->nama_penyedia; ?></td>
-                            <td class="px-2 py-3 lg:py-5 w-36 whitespace-nowrap">
-                                <span><?php echo $kontrak->nilai_kontrak; ?></span>
+                            <td class="px-2 py-3 lg:py-5 w-36 whitespace-nowrap text-right">
+                                <span><?php echo number_format($kontrak->nilai_kontrak); ?></span>
                             </td>
                             <td class="px-2 py-3 lg:py-5 w-24 text-center">
                                 <div x-data="modal">
@@ -870,3 +870,27 @@
     });
   });
 </script>
+
+<?php
+// Fungsi untuk memformat tanggal menjadi format Indonesia
+function formatTanggalIndonesia($tanggal) {
+    $bulan = [
+        1 => "Januari",
+        2 => "Februari",
+        3 => "Maret",
+        4 => "April",
+        5 => "Mei",
+        6 => "Juni",
+        7 => "Juli",
+        8 => "Agustus",
+        9 => "September",
+        10 => "Oktober",
+        11 => "November",
+        12 => "Desember"
+    ];
+
+    $pecahkan = explode('-', $tanggal); // Format: yyyy-mm-dd
+
+    return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
+}
+?>
