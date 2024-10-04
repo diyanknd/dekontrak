@@ -18,7 +18,33 @@ public function __construct()
 
 	function get_kontrak_by_id($id)
 	{
-		$query = $this->db2->query("SELECT * FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan INNER JOIN tb_data_penyedia ON tb_kontrak.penyedia_jasa = tb_data_penyedia.id_data_penyedia WHERE tb_paket.id = ?", array($id));
+		$query = $this->db2->query("
+    SELECT 
+        tb_paket.*, 
+        tb_kontrak.*, 
+        tb_kecamatan.*, 
+        tb_data_penyedia.*, 
+        tb_user.nip, 
+        tb_user.nama_lengkap, 
+        tb_user.gelar, 
+        tb_user.alamat, 
+        tb_user.email, 
+        tb_user.nomor_telp, 
+        tb_user.tanggal_lahir, 
+        tb_user.pas_photo, 
+        tb_user.id_jabatan 
+    FROM 
+        tb_paket 
+    INNER JOIN 
+        tb_kontrak ON tb_paket.id = tb_kontrak.id_paket 
+    INNER JOIN 
+        tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan 
+    INNER JOIN 
+        tb_data_penyedia ON tb_kontrak.penyedia_jasa = tb_data_penyedia.id_data_penyedia 
+    INNER JOIN 
+        tb_user ON tb_paket.nama_ppk = tb_user.id 
+    WHERE 
+        tb_paket.id = ?", array($id));
 
 		return $query->row();
 	}

@@ -1,126 +1,117 @@
 <!-- Custom -->
-
-<div x-data="{
-    invoices: [
-    { 
-        id: <?php echo $kontrak->id; ?>, 
-        nilai_kontrak: <?php echo $kontrak->nilai_kontrak; ?>, 
-        tanggal_kontrak: '<?php echo $kontrak->tanggal_kontrak; ?>',
-        nama_penyedia: '<?php echo $kontrak->nama_penyedia; ?>',
-        paket_pekerjaan: '<?php echo $kontrak->paket_pekerjaan; ?>',
-        nomor_kontrak: '<?php echo $kontrak->nomor_kontrak; ?>',
-        status: '<?php
-        if ($kontrak->jenis_pengadaan == "Pekerjaan Konstruksi") {
-            echo ($kontrak->nilai_pagu >= 200000000) ? "Tender" : "Non_Tender";
-        } else {
-            echo ($kontrak->nilai_pagu >= 100000000) ? "Tender" : "Non_Tender";
-        }
-        ?>'
-    }
-    ],
-
-    // Fungsi untuk memformat IDR
-    formatIDR(value) {
-        return new Intl.NumberFormat('id-ID', {
-            style: 'currency',
-            currency: 'IDR'
-        }).format(value);
-    },
-
-    // Fungsi untuk memformat tanggal
-    formatTanggalIndonesia(dateString) {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('id-ID', {
-            day: '2-digit',
-            month: 'long',
-            year: 'numeric'
-        });
-    }
-}" class="n20-box">
-
-    <div class="bb-dashed-n40 flex justify-between items-center">
-        <h4><?php echo $kontrak->jenis_pengadaan; ?><br><span x-text="invoices[0].status"></span></h4>
-        <!-- Opsi export (komentar jika tidak digunakan) -->
-    </div>
-    <div x-data="{activeTab:'list'}" class="white-box mb-10">
-        <div class="checkboxes-container overflow-x-auto mb-5">
-            <table id="advance-datatable" class="w-full whitespace-nowrap mb-10">
-                <thead class="text-center">
-                    <tr class="bg-neutral-20 dark:bg-neutral-903">
-                        <th class="px-2 py-3 lg:py-5 text-left w-48 whitespace-nowrap text-center">Paket Pekerjaan</th>
-                        <th class="px-2 py-3 lg:py-5 w-36 whitespace-nowrap text-center">Tanggal Kontrak</th>
-                        <th class="px-2 py-3 lg:py-5 w-36 whitespace-nowrap text-center">Penyedia</th>
-                        <th class="px-2 py-3 lg:py-5 w-36 whitespace-nowrap text-center">Harga Kontrak</th>
-                        <th class="px-2 py-3 lg:py-5 w-24 whitespace-nowrap text-center">Cover</th>
-                        <th class="px-2 py-3 lg:py-5 w-24 whitespace-nowrap text-center">SPPJ</th>
-                        <th class="px-2 py-3 lg:py-5 w-36 whitespace-nowrap text-center">Surat Perjanjian</th>
-                        <th class="px-2 py-3 lg:py-5 w-24 whitespace-nowrap text-center">SPMK</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                        <tr class="bg-white">
-                            <td class="px-2 py-3 w-48" style="white-space: normal; word-wrap: break-word;">
-                                <div class="flex flex-col">
-                                    <p class="mb-1 font-extrabold"><?php echo $kontrak->paket_pekerjaan; ?></p>
-                                    <span class="text-xs whitespace-nowrap" ><?php echo $kontrak->nomor_kontrak; ?></span>
-                                </div>
+<div class="white-box">
+          <div class="flex justify-between max-sm:flex-col gap-4 items-center bb-dashed-n30">
+            
+            <!--<h4><?php echo $kontrak->jenis_pengadaan; ?><br>
+                <span>
+                <?php
+                if ($kontrak->jenis_pengadaan == "Pekerjaan Konstruksi") {
+                    echo ($kontrak->nilai_pagu >= 200000000) ? "Tender" : "Non Tender";
+                } else {
+                    echo ($kontrak->nilai_pagu >= 100000000) ? "Tender" : "Non Tender";
+                }
+                ?>
+                </span>
+            </h4>
+            <div class="flex items-center flex-wrap gap-3 sm:gap-4 xxl:gap-6">
+              <select name="sort" class="nc-select n20">
+                <option value="completed">Completed</option>
+                <option value="pending">Pending</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+              <button class="btn-primary-outlined xl:py-2"><i class="las la-pen text-xl"></i> Edit</button>
+              <button class="btn-primary-soft xl:py-2 text-primary-300"><i class="las la-print text-xl"></i> Print</button>
+            </div>
+            
+          </div>-->
+          <div class="grid grid-cols-12 gap-4 xxl:gap-6">
+            <div class="col-span-12 lg:col-span-7 xxl:col-span-8 flex flex-col gap-4 xxl:gap-6">
+              <div class="n20-box">
+                <div class="flex justify-between items-center bb-dashed-n40">
+                  <h5><?php echo $kontrak->jenis_pengadaan; ?><br>
+                <span>
+                <?php
+                if ($kontrak->jenis_pengadaan == "Pekerjaan Konstruksi") {
+                    echo ($kontrak->nilai_pagu >= 200000000) ? "Tender" : "Non Tender";
+                } else {
+                    echo ($kontrak->nilai_pagu >= 100000000) ? "Tender" : "Non Tender";
+                }
+                ?>
+                </span>
+            </h5>
+                  <button>
+                    <i class="las la-pen text-xl"></i>
+                  </button>
+                </div>
+                <div class="flex justify-between flex-wrap gap-4 items-start">
+                  <div class="flex items-center gap-5">
+                    <img src="<?php echo base_url(); ?>assets/images/logo.png" width="60" class="rounded" alt="product image" />
+                    <div>
+                      <h4 class="m-text mb-1 font-medium"><?php echo $kontrak->paket_pekerjaan; ?></h4>
+                      <span class="text-xs"><?php echo $kontrak->nomor_kontrak; ?></span> <br>
+                      <span class="text-xs"><?php echo $kontrak->nama_penyedia; ?></span> <br><br>
+                      <h4 class="m-text mb-1 font-medium">Nilai Kontrak</h4>
+                      <span class="text-xs extrabold">Rp. <?php echo number_format($kontrak->nilai_kontrak); ?></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="px-2 py-3 flex justify-center">
+                    <div class="w-full">
+                        <table class="w-full whitespace-nowrap mb-10">
+                        <tr x-data="{
+                            isOpen: false,
+                            jumlahRangkap: '',
+                            openModals() {
+                                this.isOpen = true;
+                            },
+                            closeModal() {
+                                this.isOpen = false;
+                            }
+                        }">
+                            <td class="py-2 m-text text-left" style="width:5px; ">
+                                     <a href="#">
+                                        <i class="px-3 las la-file text-xl text-primary-300"></i>
+                                    </a>
                             </td>
-                            <td class="px-2 py-3 w-36 text-center whitespace-nowrap"> <?php echo formatTanggalIndonesia($kontrak->tanggal_kontrak); ?></td>
-                            <td class="px-2 py-3 w-36 text-center whitespace-nowrap"> <?php echo $kontrak->nama_penyedia; ?></td>
-                            <td class="px-2 py-3 lg:py-5 w-36 whitespace-nowrap text-right">
-                                <span><?php echo number_format($kontrak->nilai_kontrak); ?></span>
+                            
+                            <td class="py-2 m-text text-left">
+                                <button  @click="openModals"> Cover </button>
                             </td>
-                            <td class="px-2 py-3 lg:py-5 w-24 text-center">
-                                <div x-data="modal">
-                                    <!-- Button to toggle dropdown -->
-                                    <button class="btn-primary" @click="openModal">
-                                        Cover
-                                    </button>
 
-                                    <!-- Modal Structure -->
-                                    <template x-teleport="body">
-                                        <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60 dark:bg-neutral-40/80"
-                                            :class="isOpen && '!block'">
-                                            <div class="flex min-h-screen items-center justify-center px-4 text-neutral-700 dark:text-neutral-20"
-                                                @click.self="closeModal">
-                                                <div x-show="isOpen" x-transition x-transition.duration.300
-                                                    class="panel my-8 w-full max-w-3xl overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
-                                                    <form method="POST"
-                                                        action="<?php echo ($nilai_pagu->nilai_pagu >= 200000000) ? site_url('surat/kop_surat_tender') : site_url('surat/kop_surat_non_tender'); ?>"
-                                                        target="_blank">
-                                                        <div
-                                                            class="mb-4 flex items-center justify-between bb-dashed-n30">
-                                                            <h4>Masukkan Jumlah Rangkap</h4>
-                                                            <i class="las la-times cursor-pointer text-xl"
-                                                                @click="closeModal"></i>
-                                                        </div>
-                                                        <div class="mb-4">
-                                                            <label for="jumlahRangkap"
-                                                                class="block text-sm font-medium text-gray-700">Jumlah
-                                                                Rangkap</label>
-                                                            <input type="number" x-model="jumlahRangkap"
-                                                                name="jumlah_rangkap" id="jumlahRangkap"
-                                                                class="my-5 w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4 dark:border-neutral-500 dark:bg-neutral-903"
-                                                                placeholder="Jumlah Rangkap..." required />
-                                                        </div>
-                                                        <div class="flex gap-4 lg:gap-6">
-                                                            <button type="submit" class="btn-primary">Submit</button>
-
-                                                            <button type="button" class="btn-primary-outlined"
-                                                                @click="closeModal">Cancel</button>
-                                                        </div>
-                                                    </form>
+                            <!-- Modal Structure -->
+                            <template x-teleport="body">
+                                <div class="fixed inset-0 z-[999] bg-[black]/60 dark:bg-neutral-40/80" x-show="isOpen" x-transition>
+                                    <div class="flex min-h-screen items-center justify-center px-4 text-neutral-700 dark:text-neutral-20" @click.self="closeModal">
+                                        <div x-show="isOpen" x-transition x-transition.duration.300
+                                            class="panel my-8 w-full max-w-3xl overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                                            
+                                            <form method="POST" action="<?php echo ($nilai_pagu->nilai_pagu >= 200000000) ? site_url('surat/kop_surat_tender') : site_url('surat/kop_surat_non_tender'); ?>" target="_blank">
+                                                <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                                                    <h4>Masukkan Jumlah Rangkap</h4>
+                                                    <i class="las la-times cursor-pointer text-xl" @click="closeModal"></i>
                                                 </div>
-                                            </div>
+                                                <div class="mb-4">
+                                                    <label for="jumlahRangkap" class="block text-sm font-medium text-gray-700">Jumlah Rangkap</label>
+                                                    <input type="number" x-model="jumlahRangkap"
+                                                        name="jumlah_rangkap" id="jumlahRangkap"
+                                                        class="my-5 w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4 dark:border-neutral-500 dark:bg-neutral-903"
+                                                        placeholder="Jumlah Rangkap..." required />
+                                                </div>
+                                                <div class="flex gap-4 lg:gap-6">
+                                                    <button type="submit" class="btn-primary">Submit</button>
+                                                    <button type="button" class="btn-primary-outlined" @click="closeModal">Cancel</button>
+                                                </div>
+                                            </form>
                                         </div>
-                                    </template>
+                                    </div>
                                 </div>
+                            </template>
+
+                            <td class="py-2 text-right">
+                                <input type="checkbox" checked disabled style="width: 20px; height: 20px;">
                             </td>
-
-
-                            <td class="px-2 py-3 lg:py-5 w-24 text-center">
-                                <div x-data="{ showModal: false, 
+                        </tr>
+                        <tr x-data="{ showModal: false, 
                                         sppbjData: 
                                         {
                                             nomor_sppbj:'<?php echo isset($get_data_sppbj->nomor_sppbj) ? $get_data_sppbj->nomor_sppbj : ''; ?>',
@@ -134,187 +125,176 @@
                                             tanggal_kode_paket:'<?php echo isset($get_data_sppbj->tanggal_kode_paket) ? $get_data_sppbj->tanggal_kode_paket : ''; ?>',
                                         }                                     
                                     }">
-                                    <!-- Button logic -->
-                                    <button @click="showModal = true; fetchSppbjData()"
-                                        class="<?php echo $get_sppbj == 1 ? 'btn-primary' : 'btn-warning' ?>">
-                                        SPPBJ
-                                    </button>
+                            
+                            <td class="py-2 m-text text-left" style="width:5px; ">
+                                <?php if ($get_sppbj == 1): ?>
+                                    <a href="#" onclick="openWindow('<?php echo ($kontrak->nilai_pagu >= 200000000) ? site_url('surat/sppbj_tender/') . $kontrak->id_paket : site_url('surat/sppbj_non_tender/') . $kontrak->id_paket; ?>')">
+                                        <i class="px-3 las la-file text-xl text-primary-300"></i>
+                                    </a>
+                                <?php else: ?>
+                                    <i class="px-3 las la-file text-xl default-soft disabled"></i> 
+                                <?php endif; ?> 
+                            </td>
+                            <td class="py-2 m-text text-left">
+                                <button @click="showModal = true; fetchSppbjData()">
+                                    SPPBJ
+                                </button>
+                                
+                                <!-- Modal -->
+                                <template x-teleport="body">
+                                    <div x-show="showModal"
+                                        class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60 dark:bg-neutral-40/80"
+                                        :class="showModal && '!block'" x-data="">
+                                        <div class="flex min-h-screen items-center justify-center px-4 text-neutral-700 dark:text-neutral-20"
+                                            @click.self="showModal = false">
+                                            <div x-show="showModal" x-transition x-transition.duration.300
+                                                class="panel my-8 w-full max-w-3xl overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
 
-                                    <!-- Modal -->
-                                    <template x-teleport="body">
-                                        <div x-show="showModal"
-                                            class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60 dark:bg-neutral-40/80"
-                                            :class="showModal && '!block'" x-data="">
-                                            <div class="flex min-h-screen items-center justify-center px-4 text-neutral-700 dark:text-neutral-20"
-                                                @click.self="showModal = false">
-                                                <div x-show="showModal" x-transition x-transition.duration.300
-                                                    class="panel my-8 w-full max-w-3xl overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                                                <form method="POST" action="<?php echo site_url('create'); ?>">
+                                                    <div
+                                                        class="mb-4 flex items-center justify-between bb-dashed-n30">
+                                                        <h4>SPPBJ Form</h4>
+                                                        <i class="las la-times cursor-pointer text-xl"
+                                                            @click="showModal = false"></i>
+                                                    </div>
 
-                                                    <form method="POST" action="<?php echo site_url('create'); ?>">
-                                                        <div
-                                                            class="mb-4 flex items-center justify-between bb-dashed-n30">
-                                                            <h4>SPPBJ Form</h4>
-                                                            <i class="las la-times cursor-pointer text-xl"
-                                                                @click="showModal = false"></i>
+                                                    <!-- Form fields based on database -->
+                                                    <div class="grid grid-cols-2 gap-4">
+                                                        <!-- Using Grid for 2 columns layout -->
+
+                                                        <!-- Column 1 -->
+                                                        <input type="text" name="id_paket"
+                                                            value="<?php echo $id_paket; ?>" hidden>
+
+                                                        <!-- Column 2 -->
+                                                        <div class="mb-4">
+                                                            <label for="nomor_sppbj"
+                                                                class="block text-sm font-medium text-gray-700">Nomor
+                                                                SPPBJ</label>
+                                                            <input type="text" x-model="sppbjData.nomor_sppbj"
+                                                                name="nomor_sppbj" id="nomor_sppbj"
+                                                                class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
+                                                                required>
                                                         </div>
 
-                                                        <!-- Form fields based on database -->
-                                                        <div class="grid grid-cols-2 gap-4">
-                                                            <!-- Using Grid for 2 columns layout -->
-
-                                                            <!-- Column 1 -->
-                                                            <input type="text" name="id_paket"
-                                                                value="<?php echo $id_paket; ?>" hidden>
-
-                                                            <!-- Column 2 -->
-                                                            <div class="mb-4">
-                                                                <label for="nomor_sppbj"
-                                                                    class="block text-sm font-medium text-gray-700">Nomor
-                                                                    SPPBJ</label>
-                                                                <input type="text" x-model="sppbjData.nomor_sppbj"
-                                                                    name="nomor_sppbj" id="nomor_sppbj"
-                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
-                                                                    required>
-                                                            </div>
-
-                                                            <!-- Column 1 -->
-                                                            <div class="mb-4">
-                                                                <label for="tanggal_sppbj"
-                                                                    class="block text-sm font-medium text-gray-700">Tanggal
-                                                                    SPPBJ</label>
-                                                                <input type="date" x-model="sppbjData.tanggal_sppbj"
-                                                                    name="tanggal_sppbj" id="tanggal_sppbj"
-                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
-                                                                    required>
-                                                            </div>
-
-                                                            <!-- Column 2 -->
-                                                            <div class="mb-4">
-                                                                <label for="no_surat_penawaran"
-                                                                    class="block text-sm font-medium text-gray-700">Nomor
-                                                                    Surat Penawaran</label>
-                                                                <input type="text"
-                                                                    x-model="sppbjData.no_surat_penawaran"
-                                                                    name="no_surat_penawaran" id="no_surat_penawaran"
-                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
-                                                                    required>
-                                                            </div>
-
-                                                            <!-- Column 1 -->
-                                                            <div class="mb-4">
-                                                                <label for="tanggal_surat_penawaran"
-                                                                    class="block text-sm font-medium text-gray-700">Tanggal
-                                                                    Surat Penawaran</label>
-                                                                <input type="date"
-                                                                    x-model="sppbjData.tanggal_surat_penawaran"
-                                                                    name="tanggal_surat_penawaran"
-                                                                    id="tanggal_surat_penawaran"
-                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
-                                                                    required>
-                                                            </div>
-
-                                                            <!-- Column 2 -->
-                                                            <div class="mb-4">
-                                                                <label for="hasil_negoisasi"
-                                                                    class="block text-sm font-medium text-gray-700">Hasil
-                                                                    Negoisasi</label>
-                                                                <input type="text" x-model="sppbjData.hasil_negoisasi"
-                                                                    name="hasil_negoisasi" id="hasil_negoisasi"
-                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
-                                                                    required>
-                                                            </div>
-
-                                                            <div class="mb-4">
-                                                                <label for="lima_persen"
-                                                                    class="block text-sm font-medium text-gray-700">Nilai
-                                                                    Jaminan 5%</label>
-                                                                <input type="text" x-model="sppbjData.lima_persen"
-                                                                    name="lima_persen" id="lima_persen"
-                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
-                                                                    required>
-                                                            </div>
-
-                                                            <!-- Column 1 -->
-                                                            <div class="mb-4">
-                                                                <label for="kode_paket"
-                                                                    class="block text-sm font-medium text-gray-700">Kode
-                                                                    Paket</label>
-                                                                <input type="text" x-model="sppbjData.kode_paket"
-                                                                    name="kode_paket" id="kode_paket"
-                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
-                                                                    required>
-                                                            </div>
-
-                                                            <!-- Column 2 -->
-                                                            <div class="mb-4">
-                                                                <label for="tanggal_kode_paket"
-                                                                    class="block text-sm font-medium text-gray-700">Tanggal
-                                                                    Kode Paket</label>
-                                                                <input type="date"
-                                                                    x-model="sppbjData.tanggal_kode_paket"
-                                                                    name="tanggal_kode_paket" id="tanggal_kode_paket"
-                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
-                                                                    required>
-                                                            </div>
-
-                                                            <!-- Column 1 -->
-                                                            <div class="mb-4">
-                                                                <label for="tentang_kode_paket"
-                                                                    class="block text-sm font-medium text-gray-700">Tentang
-                                                                    Kode Paket</label>
-                                                                <input type="text"
-                                                                    x-model="sppbjData.tentang_kode_paket"
-                                                                    name="tentang_kode_paket" id="tentang_kode_paket"
-                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
-                                                                    required>
-                                                            </div>
-
+                                                        <!-- Column 1 -->
+                                                        <div class="mb-4">
+                                                            <label for="tanggal_sppbj"
+                                                                class="block text-sm font-medium text-gray-700">Tanggal
+                                                                SPPBJ</label>
+                                                            <input type="date" x-model="sppbjData.tanggal_sppbj"
+                                                                name="tanggal_sppbj" id="tanggal_sppbj"
+                                                                class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
+                                                                required>
                                                         </div>
 
-                                                        <!-- Submit Button -->
-                                                        <div class="flex gap-4 lg:gap-12 justify-center">
-                                                            <button type="submit" class="btn-primary">Submit</button>
-                                                            <?php if ($get_sppbj != 0) { ?>
-                                                                <button type="button" class="btn-primary-outlined"
-                                                                    @click="window.open(`<?php echo ($nilai_pagu->nilai_pagu >= 200000000) ? site_url('surat/sppbj_tender/') . $id_paket : site_url('surat/sppbj_non_tender/') . $id_paket; ?>`, '_blank')">
-                                                                    <i class="las la-print mr-2"></i> Print
-                                                                </button>
-                                                            <?php } ?>
+                                                        <!-- Column 2 -->
+                                                        <div class="mb-4">
+                                                            <label for="no_surat_penawaran"
+                                                                class="block text-sm font-medium text-gray-700">Nomor
+                                                                Surat Penawaran</label>
+                                                            <input type="text"
+                                                                x-model="sppbjData.no_surat_penawaran"
+                                                                name="no_surat_penawaran" id="no_surat_penawaran"
+                                                                class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
+                                                                required>
+                                                        </div>
+
+                                                        <!-- Column 1 -->
+                                                        <div class="mb-4">
+                                                            <label for="tanggal_surat_penawaran"
+                                                                class="block text-sm font-medium text-gray-700">Tanggal
+                                                                Surat Penawaran</label>
+                                                            <input type="date"
+                                                                x-model="sppbjData.tanggal_surat_penawaran"
+                                                                name="tanggal_surat_penawaran"
+                                                                id="tanggal_surat_penawaran"
+                                                                class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
+                                                                required>
+                                                        </div>
+
+                                                        <!-- Column 2 -->
+                                                        <div class="mb-4">
+                                                            <label for="hasil_negoisasi"
+                                                                class="block text-sm font-medium text-gray-700">Hasil
+                                                                Negoisasi</label>
+                                                            <input type="text" x-model="sppbjData.hasil_negoisasi"
+                                                                name="hasil_negoisasi" id="hasil_negoisasi"
+                                                                class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
+                                                                required>
+                                                        </div>
+
+                                                        <div class="mb-4">
+                                                            <label for="lima_persen"
+                                                                class="block text-sm font-medium text-gray-700">Nilai
+                                                                Jaminan 5%</label>
+                                                            <input type="text" x-model="sppbjData.lima_persen"
+                                                                name="lima_persen" id="lima_persen"
+                                                                class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
+                                                                required>
+                                                        </div>
+
+                                                        <!-- Column 1 -->
+                                                        <div class="mb-4">
+                                                            <label for="kode_paket"
+                                                                class="block text-sm font-medium text-gray-700">Kode
+                                                                Paket</label>
+                                                            <input type="text" x-model="sppbjData.kode_paket"
+                                                                name="kode_paket" id="kode_paket"
+                                                                class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
+                                                                required>
+                                                        </div>
+
+                                                        <!-- Column 2 -->
+                                                        <div class="mb-4">
+                                                            <label for="tanggal_kode_paket"
+                                                                class="block text-sm font-medium text-gray-700">Tanggal
+                                                                Kode Paket</label>
+                                                            <input type="date"
+                                                                x-model="sppbjData.tanggal_kode_paket"
+                                                                name="tanggal_kode_paket" id="tanggal_kode_paket"
+                                                                class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
+                                                                required>
+                                                        </div>
+
+                                                        <!-- Column 1 -->
+                                                        <div class="mb-4">
+                                                            <label for="tentang_kode_paket"
+                                                                class="block text-sm font-medium text-gray-700">Tentang
+                                                                Kode Paket</label>
+                                                            <input type="text"
+                                                                x-model="sppbjData.tentang_kode_paket"
+                                                                name="tentang_kode_paket" id="tentang_kode_paket"
+                                                                class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
+                                                                required>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <!-- Submit Button -->
+                                                    <div class="flex gap-4 lg:gap-12 justify-center">
+                                                        <button type="submit" class="btn-primary">Submit</button>
+                                                        <?php if ($get_sppbj != 0) { ?>
                                                             <button type="button" class="btn-primary-outlined"
-                                                                @click="showModal = false">Cancel</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
+                                                                @click="window.open(`<?php echo ($nilai_pagu->nilai_pagu >= 200000000) ? site_url('surat/sppbj_tender/') . $id_paket : site_url('surat/sppbj_non_tender/') . $id_paket; ?>`, '_blank')">
+                                                                <i class="las la-print mr-2"></i> Print
+                                                            </button>
+                                                        <?php } ?>
+                                                        <button type="button" class="btn-primary-outlined"
+                                                            @click="showModal = false">Cancel</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
-                                    </template>
-
-                                </div>
+                                    </div>
+                                </template>
+                            </td>
+                            <td class="py-2 text-right">
+                                <input type="checkbox" <?php echo $get_sppbj == 1 ? 'checked' : ''; ?> disabled style="width: 20px; height: 20px;">
                             </td>
 
-                            <script>
-                                document.addEventListener('alpine:init', () => {
-                                    Alpine.data('modal', () => ({
-                                        showModal: false,
-                                        sppbjData: {},
-                                        fetchSppbjData() {
-                                            // Fetch SPPBJ data from server (AJAX or Fetch API)
-                                            fetch('<?php echo site_url('create/get_sppbj_data'); ?>')
-                                                .then(response => response.json())
-                                                .then(data => {
-                                                    // Populate sppbjData with the fetched data
-                                                    this.sppbjData = data;
-                                                })
-                                                .catch(error => console.error('Error fetching SPPBJ data:', error));
-                                        }
-                                    }));
-                                });
-                            </script>
-
-
-                            <!-- Button logic -->
-                            <td class="px-2 py-3 lg:py-5 w-36 whitespace-nowrap text-center">
-                                <div x-data="{ showModal: false, suratperjanjianData: {
+                        </tr>
+                        <tr x-data="{ showModal: false, suratperjanjianData: {
                                         id_paket: '<?php echo isset($get_data_surat_perjanjian->id_paket) ? $get_data_surat_perjanjian->id_paket : ''; ?>',
                                         jenis_kontrak: '<?php echo isset($get_data_surat_perjanjian->jenis_kontrak) ? $get_data_surat_perjanjian->jenis_kontrak : ''; ?>',
                                         nomor_surat_perjanjian: '<?php echo isset($get_data_surat_perjanjian->nomor_surat_perjanjian) ? $get_data_surat_perjanjian->nomor_surat_perjanjian : ''; ?>',
@@ -331,12 +311,22 @@
                                         uang_muka: '<?php echo isset($get_data_surat_perjanjian->uang_muka) ? $get_data_surat_perjanjian->uang_muka : ''; ?>'
 
                                 } }">
-                                    <button @click="showModal = true; fetchsuratperjanjianData()"
-                                        class="<?php echo $get_surat_perjanjian == 1 ? 'btn-primary' : 'btn-warning' ?>">
-                                        Surat Perjanjian</button>
-
-
-                                    <!-- Modal -->
+                            <td class="py-2 m-text text-left" style="width:5px; ">
+                                <?php if ($get_surat_perjanjian == 1): ?>
+                                    <a href="#" onclick="openWindow('<?php echo ($kontrak->nilai_pagu >= 200000000) ? site_url('surat/surat_perjanjian_tender/') . $kontrak->id_paket : site_url('surat/surat_perjanjian_non_tender/') . $kontrak->id_paket; ?>')">
+                                        <i class="px-3 las la-file text-xl text-primary-300"></i>
+                                    </a>
+                                    
+                                <?php else: ?>
+                                    <i class="px-3 las la-file text-xl default-soft disabled"></i> 
+                                    
+                                <?php endif; ?>
+                            </td>
+                            <td class="py-2 m-text text-left" >
+                                    <button  @click="showModal = true; fetchsuratperjanjianData()">
+                                        Surat Perjanjian
+                                    </button>
+                                        <!-- Modal -->
                                     <template x-teleport="body">
                                         <div x-show="showModal"
                                             class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60 dark:bg-neutral-40/80"
@@ -459,54 +449,54 @@
                                                                     x-model="suratperjanjianData.ruang_lingkup">
 
                                                                 <div x-data="{
-                selectOpen: false,
-                selectedItems: [],
-                searchText: '',
-                optionList: [
-                    { title: 'Umum' },
-                    { title: 'Drainase' },
-                    { title: 'Pekerjaan Tanah dan Geosintetik' },
-                    { title: 'Pekerjaan Preventif' },
-                    { title: 'Pekerasan Berbutir dan Perkerasan Beton Semen' },
-                    { title: 'Pekerjaan Aspal' },
-                    { title: 'Struktur' },
-                    { title: 'Rehabilitasi Jembatan' },
-                    { title: 'Pekerjaan Harian dan Pekerjaan Lain-lain' },
-                    { title: 'Pekerjaan Pemeliharaan Kinerja' },
-                ],
-                filteredOptions() {
-                    if (this.searchText.trim() === '') {
-                        return this.optionList;
-                    } else {
-                        return this.optionList.filter(option => option.title.toLowerCase().includes(this.searchText.trim().toLowerCase()));
-                    }
-                },
-                toggleItem(item) {
-                    const index = this.selectedItems.findIndex(selectedItem => selectedItem.title === item.title);
-                    if (index === -1) {
-                        // If item not already selected, add it to selectedItems array
-                        this.selectedItems.push(item);
-                    } else {
-                        // If item already selected, remove it from selectedItems array
-                        this.selectedItems.splice(index, 1);
-                    }
-                    // Update the x-model with the comma-separated selected items
-                    this.suratperjanjianData.ruang_lingkup = this.selectedItems.map(i => i.title).join(', ');
-                },
-                isSelected(item) {
-                    return this.selectedItems.findIndex(selectedItem => selectedItem.title == item.title) !== -1;
-                },
-                toggleCheckbox(item) {
-                    this.toggleItem(item); // Call the toggle function
-                },
-                init() {
-                    // Initialize selectedItems if x-model already has some values (for example, during edit form)
-                    if (this.suratperjanjianData.ruang_lingkup) {
-                        const initialSelected = this.suratperjanjianData.ruang_lingkup.split(', ');
-                        this.selectedItems = this.optionList.filter(option => initialSelected.includes(option.title));
-                    }
-                }
-            }" class="relative mt-4" x-init="init">
+                                                                        selectOpen: false,
+                                                                        selectedItems: [],
+                                                                        searchText: '',
+                                                                        optionList: [
+                                                                            { title: 'Umum' },
+                                                                            { title: 'Drainase' },
+                                                                            { title: 'Pekerjaan Tanah dan Geosintetik' },
+                                                                            { title: 'Pekerjaan Preventif' },
+                                                                            { title: 'Pekerasan Berbutir dan Perkerasan Beton Semen' },
+                                                                            { title: 'Pekerjaan Aspal' },
+                                                                            { title: 'Struktur' },
+                                                                            { title: 'Rehabilitasi Jembatan' },
+                                                                            { title: 'Pekerjaan Harian dan Pekerjaan Lain-lain' },
+                                                                            { title: 'Pekerjaan Pemeliharaan Kinerja' },
+                                                                        ],
+                                                                        filteredOptions() {
+                                                                            if (this.searchText.trim() === '') {
+                                                                                return this.optionList;
+                                                                            } else {
+                                                                                return this.optionList.filter(option => option.title.toLowerCase().includes(this.searchText.trim().toLowerCase()));
+                                                                            }
+                                                                        },
+                                                                        toggleItem(item) {
+                                                                            const index = this.selectedItems.findIndex(selectedItem => selectedItem.title === item.title);
+                                                                            if (index === -1) {
+                                                                                // If item not already selected, add it to selectedItems array
+                                                                                this.selectedItems.push(item);
+                                                                            } else {
+                                                                                // If item already selected, remove it from selectedItems array
+                                                                                this.selectedItems.splice(index, 1);
+                                                                            }
+                                                                            // Update the x-model with the comma-separated selected items
+                                                                            this.suratperjanjianData.ruang_lingkup = this.selectedItems.map(i => i.title).join(', ');
+                                                                        },
+                                                                        isSelected(item) {
+                                                                            return this.selectedItems.findIndex(selectedItem => selectedItem.title == item.title) !== -1;
+                                                                        },
+                                                                        toggleCheckbox(item) {
+                                                                            this.toggleItem(item); // Call the toggle function
+                                                                        },
+                                                                        init() {
+                                                                            // Initialize selectedItems if x-model already has some values (for example, during edit form)
+                                                                            if (this.suratperjanjianData.ruang_lingkup) {
+                                                                                const initialSelected = this.suratperjanjianData.ruang_lingkup.split(', ');
+                                                                                this.selectedItems = this.optionList.filter(option => initialSelected.includes(option.title));
+                                                                            }
+                                                                        }
+                                                                    }" class="relative mt-4" x-init="init">
                                                                     <button type="button"
                                                                         @click="selectOpen = !selectOpen"
                                                                         class="py-2 lg:py-2.5 px-3 sm:px-4 lg:pr-10 rounded-xl w-full border bg-neutral-0 dark:bg-neutral-904 border-neutral-40 dark:border-neutral-500 relative flex gap-1 flex-wrap">
@@ -633,37 +623,32 @@
                                             </div>
                                         </div>
                                     </template>
-                                </div>
                             </td>
-                            <script>
-                                document.addEventListener('alpine:init', () => {
-                                    Alpine.data('modal', () => ({
-                                        showModal: false,
-                                        suratperjanjianData: {},
-                                        fetchsuratperjanjianData() {
-                                            // Fetch suratperjanjian data from server (AJAX or Fetch API)
-                                            fetch('<?php echo site_url('create/get_surat_perjanjian_data'); ?>')
-                                                .then(response => response.json())
-                                                .then(data => {
-                                                    // Populate suratperjanjianData with the fetched data
-                                                    this.suratperjanjianData = data;
-                                                })
-                                                .catch(error => console.error('Error fetching Surat Perjanjian data:', error));
-                                        }
-                                    }));
-                                });
-                            </script>
-                            <td class="px-2 py-3 lg:py-5 w-24 text-center">
-                                <div x-data="{ showModal: false, spmkData: {
+                            <td class="py-2 text-right">
+                                <input type="checkbox" <?php echo $get_surat_perjanjian == 1 ? 'checked' : ''; ?> disabled style="width: 20px; height: 20px;">
+                            </td>
+                        </tr>
+                        <tr x-data="{ showModal: false, spmkData: {
                                         id_paket: '<?php echo isset($get_data_spmk->id_paket) ? $get_data_spmk->id_paket : ''; ?>',
                                         nomor_spmk: '<?php echo isset($get_data_spmk->nomor_spmk) ? $get_data_spmk->nomor_spmk : ''; ?>',
                                         tanggal_spmk: '<?php echo isset($get_data_spmk->tanggal_spmk) ? $get_data_spmk->tanggal_spmk : ''; ?>'
 
                                 } }">
-                                    <button @click="showModal = true; spmkData()"
-                                        class="<?php echo $get_spmk == 1 ? 'btn-primary' : 'btn-warning' ?>">
-                                        SPMK</button>
-
+                            <td class="py-2 m-text text-left" style="width:5px; ">
+                                <?php if ($get_spmk == 1): ?>
+                                    <a href="#" onclick="openWindow('<?php echo ($kontrak->nilai_pagu >= 200000000) ? site_url('surat/spmk_tender/') . $kontrak->id_paket : site_url('surat/spmk_non_tender/') . $kontrak->id_paket; ?>')">
+                                        <i class="px-3 las la-file text-xl text-primary-300"></i>
+                                    </a>
+                                    
+                                <?php else: ?>
+                                    <i class="px-3 las la-file text-xl default-soft disabled"></i> 
+                                    
+                                <?php endif; ?>
+                            </td>
+                            <td class="py-2 m-text text-left">
+                                    <button @click="showModal = true; spmkData()">
+                                        SPMK
+                                    </button>
                                     <!-- Modal -->
                                     <template x-teleport="body">
                                         <div x-show="showModal"
@@ -731,8 +716,210 @@
                                             </div>
                                         </div>
                                     </template>
-                                </div>
                             </td>
+                            <td class="py-2 text-right">
+                                <input type="checkbox" <?php echo $get_spmk == 1 ? 'checked' : ''; ?> disabled style="width: 20px; height: 20px;">
+                            </td>
+                        </tr>
+                        </table>
+                    </div>
+                </div>
+
+              </div>
+              <div class="n20-box">
+                <h5 class="bb-dashed-n40">History</h5>
+                <div class="flex justify-between gap-4 items-start flex-wrap">
+                  <div class="max-w-[500px] w-full">
+                    
+                    <div class="flex flex-col gap-14">
+                        <div class="f-center gap-3">
+                            <div class="w-[48%] text-end">
+                                <p class="m-text mb-1 font-medium">Kop Surat</p>
+                                <p class="text-xs">
+                                </p>
+                            </div>
+                            <div
+                                class="relative flex size-9 items-center justify-center rounded-full bg-neutral-100 text-neutral-0 after:absolute after:left-1/2 after:top-[110%] after:h-14 after:w-px after:-translate-x-1/2 after:bg-neutral-100">
+                                <i class="las la-file text-xl"></i>
+                            </div>
+                            <div class="w-[48%] self-start">
+                                <p></p>
+                            </div>
+                        </div>
+                        <?php if ($get_sppbj != 0) { ?>
+                            <div class="f-center gap-3">
+                                <div class="w-[48%] self-start text-end">
+                                    <p><?php echo $get_data_sppbj->created_at; ?></p>
+                                </div>
+                                <div
+                                    class="relative flex size-9 items-center justify-center rounded-full bg-primary-300 text-neutral-0 after:absolute after:left-1/2 after:top-[110%] after:h-14 after:w-px after:-translate-x-1/2 after:bg-primary-300">
+                                    <i class="las la-file text-xl"></i>
+                                </div>
+                                <div class="w-[48%] text-start">
+                                    <p class="m-text mb-1 font-medium">SPPBJ</p>
+                                    <p class="text-xs">SPPBJ - <?php echo $get_data_sppbj->nomor_sppbj; ?></p>
+                                </div>
+                            </div>
+                        <?php } ?>
+
+                        <?php if ($get_surat_perjanjian != 0) { ?>
+                            <div class="f-center gap-3">
+                                <div class="w-[48%] text-end">
+                                    <p class="m-text mb-1 font-medium">Surat Perjanjian</p>
+                                    <p class="text-xs">Surat Perjanjian - <?php echo $get_data_surat_perjanjian->nomor_surat_perjanjian; ?></p>
+                                </div>
+                                <div
+                                    class="relative flex size-9 items-center justify-center rounded-full bg-secondary-300 text-neutral-0 after:absolute after:left-1/2 after:top-[110%] after:h-14 after:w-px after:-translate-x-1/2 after:bg-secondary-300">
+                                    <i class="las la-file text-xl"></i>
+                                </div>
+                                <div class="w-[48%] self-start">
+                                    <p><?php echo $get_data_surat_perjanjian->created_at; ?></p>
+                                </div>
+                            </div>
+                        <?php } ?>
+
+                        <?php if ($get_spmk != 0) { ?>
+                            <div class="f-center gap-3">
+                                <div class="w-[48%] self-start text-end">
+                                    <p><?php echo $get_data_spmk->created_at; ?></p>
+                                </div>
+                                <div class="relative flex size-9 items-center justify-center rounded-full bg-info-300 text-neutral-0">
+                                    <i class="las la-file text-xl"></i>
+                                </div>
+                                <div class="w-[48%] text-start">
+                                    <p class="m-text mb-1 font-medium">SPMK</p>
+                                    <p class="text-xs">SPMK - <?php echo $get_data_spmk->nomor_spmk; ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12 lg:col-span-5 xxl:col-span-4 flex flex-col gap-4 xxl:gap-6">
+              <div class="n20-box">
+                <div class="flex justify-between items-center bb-dashed-n40">
+                  <h5>Pejabat Penandatangan Kontrak</h5>
+                  <button>
+                    <i class="las la-pen text-xl"></i>
+                  </button>
+                </div>
+                <div class="flex gap-3 md:gap-4 xxl:gap-6 items-start">
+                  <img src="<?php echo base_url();?><?php $kontrak->nama_lengkap; ?>" class="rounded-full size-10 md:size-14" alt="" />
+                  <div>
+                    <p class="l-text font-medium mb-2"><?php echo $kontrak->nama_lengkap; ?></p>
+                    <p class="s-text mb-6"><?php echo $kontrak->nip; ?></p>
+                    <button class="flex items-center gap-2 sm:gap-4 text-primary-300 font-semibold"><i class="las la-plus-circle text-lg md:text-xl"></i>Add To Blacklist</button>
+                  </div>
+                </div>
+              </div>
+              <div class="n20-box">
+                <div class="flex justify-between items-center bb-dashed-n40">
+                  <h5>Delivery</h5>
+                  <button>
+                    <i class="las la-pen text-xl"></i>
+                  </button>
+                </div>
+                <table class="w-full whitespace-nowrap">
+                  <tr>
+                    <td class="w-1/2 py-3 m-text">Ship by</td>
+                    <td class="w-1/2 py-3 m-text font-medium">DHL</td>
+                  </tr>
+                  <tr>
+                    <td class="w-1/2 py-3 m-text">Speedy</td>
+                    <td class="w-1/2 py-3 m-text font-medium">Standard</td>
+                  </tr>
+                  <tr>
+                    <td class="w-1/2 py-3 m-text">Tracking No.</td>
+                    <td class="w-1/2 py-3 m-text font-medium">HFG666S6F6</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="n20-box">
+                <div class="flex justify-between items-center bb-dashed-n40">
+                  <h5>Shipping</h5>
+                  <button>
+                    <i class="las la-pen text-xl"></i>
+                  </button>
+                </div>
+                <table class="w-full">
+                  <tr>
+                    <td class="w-1/2 py-3 m-text">Address</td>
+                    <td class="w-1/2 py-3 m-text font-medium">4140 Parker Rd. Allentown, New Mexico 31134</td>
+                  </tr>
+                  <tr>
+                    <td class="w-1/2 py-3 m-text">Phone number</td>
+                    <td class="w-1/2 py-3 m-text font-medium">(225) 555-0118</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="n20-box">
+                <div class="flex justify-between items-center bb-dashed-n40">
+                  <h5>Payment</h5>
+                  <button>
+                    <i class="las la-pen text-xl"></i>
+                  </button>
+                </div>
+                <table class="w-full whitespace-nowrap">
+                  <tr>
+                    <td class="w-1/2 py-3 m-text">Card Number</td>
+                    <td class="w-1/2 py-3 px-3 m-text font-medium">
+                      <div class="flex gap-2 flex-wrap items-start">
+                        <img src="./assets/images/mastercard-m.png" width="45" alt="" />
+                        •••• •••• •••• 8854
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+                            <script>
+                                document.addEventListener('alpine:init', () => {
+                                    Alpine.data('modal', () => ({
+                                        showModal: false,
+                                        sppbjData: {},
+                                        fetchSppbjData() {
+                                            // Fetch SPPBJ data from server (AJAX or Fetch API)
+                                            fetch('<?php echo site_url('create/get_sppbj_data'); ?>')
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                    // Populate sppbjData with the fetched data
+                                                    this.sppbjData = data;
+                                                })
+                                                .catch(error => console.error('Error fetching SPPBJ data:', error));
+                                        }
+                                    }));
+                                });
+                            </script>
+
+
+                            <script>
+                                document.addEventListener('alpine:init', () => {
+                                    Alpine.data('modal', () => ({
+                                        showModal: false,
+                                        suratperjanjianData: {},
+                                        fetchsuratperjanjianData() {
+                                            // Fetch suratperjanjian data from server (AJAX or Fetch API)
+                                            fetch('<?php echo site_url('create/get_surat_perjanjian_data'); ?>')
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                    // Populate suratperjanjianData with the fetched data
+                                                    this.suratperjanjianData = data;
+                                                })
+                                                .catch(error => console.error('Error fetching Surat Perjanjian data:', error));
+                                        }
+                                    }));
+                                });
+                            </script>
+                            
 
                             <script>
                                 document.addEventListener('alpine:init', () => {
@@ -752,77 +939,6 @@
                                     }));
                                 });
                             </script>
-                        </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-</div>
-
-<div class="flex flex-col gap-14">
-    <div class="f-center gap-3">
-        <div class="w-[48%] text-end">
-            <p class="m-text mb-1 font-medium">Kop Surat</p>
-            <p class="text-xs">
-            </p>
-        </div>
-        <div
-            class="relative flex size-9 items-center justify-center rounded-full bg-neutral-100 text-neutral-0 after:absolute after:left-1/2 after:top-[110%] after:h-14 after:w-px after:-translate-x-1/2 after:bg-neutral-100">
-            <i class="las la-file text-xl"></i>
-        </div>
-        <div class="w-[48%] self-start">
-            <p></p>
-        </div>
-    </div>
-    <?php if ($get_sppbj != 0) { ?>
-        <div class="f-center gap-3">
-            <div class="w-[48%] self-start text-end">
-                <p><?php echo $get_data_sppbj->created_at; ?></p>
-            </div>
-            <div
-                class="relative flex size-9 items-center justify-center rounded-full bg-primary-300 text-neutral-0 after:absolute after:left-1/2 after:top-[110%] after:h-14 after:w-px after:-translate-x-1/2 after:bg-primary-300">
-                <i class="las la-image text-xl"></i>
-            </div>
-            <div class="w-[48%] text-start">
-                <p class="m-text mb-1 font-medium">SPPBJ</p>
-                <p class="text-xs">SPPBJ - <?php echo $get_data_sppbj->nomor_sppbj; ?></p>
-            </div>
-        </div>
-    <?php } ?>
-
-    <?php if ($get_surat_perjanjian != 0) { ?>
-        <div class="f-center gap-3">
-            <div class="w-[48%] text-end">
-                <p class="m-text mb-1 font-medium">Surat Perjanjian</p>
-                <p class="text-xs">Surat Perjanjian - <?php echo $get_data_surat_perjanjian->nomor_surat_perjanjian; ?></p>
-            </div>
-            <div
-                class="relative flex size-9 items-center justify-center rounded-full bg-secondary-300 text-neutral-0 after:absolute after:left-1/2 after:top-[110%] after:h-14 after:w-px after:-translate-x-1/2 after:bg-secondary-300">
-                <i class="las la-music text-xl"></i>
-            </div>
-            <div class="w-[48%] self-start">
-                <p><?php echo $get_data_surat_perjanjian->created_at; ?></p>
-            </div>
-        </div>
-    <?php } ?>
-
-    <?php if ($get_spmk != 0) { ?>
-        <div class="f-center gap-3">
-            <div class="w-[48%] self-start text-end">
-                <p><?php echo $get_data_spmk->created_at; ?></p>
-            </div>
-            <div class="relative flex size-9 items-center justify-center rounded-full bg-info-300 text-neutral-0">
-                <i class="las la-tv text-xl"></i>
-            </div>
-            <div class="w-[48%] text-start">
-                <p class="m-text mb-1 font-medium">SPMK</p>
-                <p class="text-xs">SPMK - <?php echo $get_data_spmk->nomor_spmk; ?></p>
-            </div>
-        </div>
-    </div>
-<?php } ?>
-
 
 <script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.0/dist/js/tom-select.min.js"></script>
 <!-- Alpine.js Data and Methods -->
@@ -894,3 +1010,30 @@ function formatTanggalIndonesia($tanggal) {
     return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
 }
 ?>
+
+<script>
+  function openWindow(url) {
+    window.open(url, '_blank', 'innerWidth=900,innerHeight=842,toolbar=no,location=no,menubar=no,scrollbars=yes,resizable=yes');
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    const dataTable = new simpleDatatables.DataTable('#advance-datatable-1', {
+      // Konfigurasi tabel
+      columns: [
+        { select: 0, type: 'num' },
+        { select: 1, type: 'html' },
+        { select: 2, type: 'num' },
+        { select: 3, type: 'num' },
+        { select: 4, type: 'string' },
+      ],
+      // Konfigurasi lainnya
+      perPage: 10,
+      perPageSelect: [10, 20, 50, 100],
+      labels: {
+        placeholder: 'Cari...',
+        noRows: 'Tidak ada data',
+        info: 'Menampilkan {start} - {end} dari {rows} baris'
+      },
+    });
+
+  });
+</script>
