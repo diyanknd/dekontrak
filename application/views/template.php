@@ -19,6 +19,26 @@
     href="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/css/simple-datatables.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
 
+  <style>
+    @keyframes scaleFade {
+        0% {
+            transform: scale(0.5);
+            opacity: 0.5;
+        }
+        50% {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    .scale-fade-animation {
+        animation: scaleFade 2s ease-in-out infinite;
+    }
+</style>
 
   <title>Home - DEKONTRAK</title>
   <script defer src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/app.js"></script>
@@ -218,11 +238,16 @@
   <!-- loader -->
   <!-- screen loader -->
   <div x-cloak
+    class="screen_loader fixed  duration-700 fixed inset-0 z-[60] grid place-content-center bg-neutral-400">
+    <img src="<?php echo base_url(); ?>/assets/images/logo.png" alt="Loading" class="h-30 w-25 scale-fade-animation">
+</div>
+
+  <!--<div x-cloak
     class="screen_loader animate__animated duration-700 fixed inset-0 z-[60] grid place-content-center bg-neutral-400">
     <svg viewBox="25 25 50 50">
       <circle r="20" cy="50" cx="50"></circle>
     </svg>
-  </div>
+  </div>-->
 
 
   <!-- Navigation -->

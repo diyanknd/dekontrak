@@ -47,7 +47,15 @@
                 </td>
                 <td><?php echo number_format($row->nilai_pagu); ?></td>
                 <td><?php echo number_format($row->nilai_kontrak); ?></td>
-                <td>Status Kontrak</td>
+                <td>
+                <?php
+                    if ($row->jenis_pengadaan == "Pekerjaan Konstruksi") {
+                      echo ($row->nilai_pagu >= 200000000) ? "Tender" : "Non Tender";
+                    } else {
+                      echo ($row->nilai_pagu >= 100000000) ? "Tender" : "Non Tender";
+                    }
+                    ?>
+                </td>
               </tr>
               <?php $i++;
             } ?>
@@ -91,7 +99,15 @@
                 </td>
                 <td><?php echo number_format($row->nilai_pagu); ?></td>
                 <td><?php echo number_format($row->nilai_kontrak); ?></td>
-                <td>Status Kontrak</td>
+                <td>
+                <?php
+                    if ($row->jenis_pengadaan == "Pekerjaan Konstruksi") {
+                      echo ($row->nilai_pagu >= 200000000) ? "Tender" : "Non Tender";
+                    } else {
+                      echo ($row->nilai_pagu >= 100000000) ? "Tender" : "Non Tender";
+                    }
+                    ?>
+                </td>
               </tr>
               <?php $i++;
             } ?>
@@ -136,7 +152,15 @@
                 </td>
                 <td><?php echo number_format($row->nilai_pagu); ?></td>
                 <td><?php echo number_format($row->nilai_kontrak); ?></td>
-                <td>Status Kontrak</td>
+                <td>
+                <?php
+                    if ($row->jenis_pengadaan == "Pekerjaan Konstruksi") {
+                      echo ($row->nilai_pagu >= 200000000) ? "Tender" : "Non Tender";
+                    } else {
+                      echo ($row->nilai_pagu >= 100000000) ? "Tender" : "Non Tender";
+                    }
+                    ?>
+                </td>
               </tr>
               <?php $i++;
             } ?>
@@ -184,7 +208,15 @@
                 </td>
                 <td><?php echo number_format($row->nilai_pagu); ?></td>
                 <td><?php echo number_format($row->nilai_kontrak); ?></td>
-                <td>Status Kontrak</td>
+                <td>
+                <?php
+                    if ($row->jenis_pengadaan == "Pekerjaan Konstruksi") {
+                      echo ($row->nilai_pagu >= 200000000) ? "Tender" : "Non Tender";
+                    } else {
+                      echo ($row->nilai_pagu >= 100000000) ? "Tender" : "Non Tender";
+                    }
+                    ?>
+                </td>
               </tr>
               <?php $i++;
             } ?>
@@ -228,7 +260,15 @@
                 </td>
                 <td><?php echo number_format($row->nilai_pagu); ?></td>
                 <td><?php echo number_format($row->nilai_kontrak); ?></td>
-                <td>Status Kontrak</td>
+                <td>
+                <?php
+                    if ($row->jenis_pengadaan == "Pekerjaan Konstruksi") {
+                      echo ($row->nilai_pagu >= 200000000) ? "Tender" : "Non Tender";
+                    } else {
+                      echo ($row->nilai_pagu >= 100000000) ? "Tender" : "Non Tender";
+                    }
+                    ?>
+                </td>
               </tr>
               <?php $i++;
             } ?>
@@ -273,7 +313,14 @@
                 </td>
                 <td><?php echo number_format($row->nilai_pagu); ?></td>
                 <td><?php echo number_format($row->nilai_kontrak); ?></td>
-                <td>Status Kontrak</td>
+                <td><?php
+                    if ($row->jenis_pengadaan == "Pekerjaan Konstruksi") {
+                      echo ($row->nilai_pagu >= 200000000) ? "Tender" : "Non Tender";
+                    } else {
+                      echo ($row->nilai_pagu >= 100000000) ? "Tender" : "Non Tender";
+                    }
+                    ?>
+                </td>
               </tr>
               <?php $i++;
             } ?>
