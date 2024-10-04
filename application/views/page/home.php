@@ -18,7 +18,8 @@
       <div class="bg-neutral-40 p-2 rounded-xl font-bold mb-3" @click="isOpen = !isOpen">
         <div style="width: 100%; display: flex; justify-content: space-between;" class="pl-2 pr-2">
           <div style="margin: 0;">
-            <i :class="isOpen ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-up'"></i> <span>Pekerjaan
+            <i class="fa-solid fa-caret-up"
+              :class="{ 'rotate-0 duration-300': !isOpen, 'rotate-180 duration-300': isOpen }"></i> <span>Pekerjaan
               Konstruksi</span>
           </div>
           <div style="margin: 0; text-align: right;">
@@ -71,7 +72,8 @@
       <div class="bg-neutral-40 p-2 rounded-xl font-bold mb-3" @click="isOpen = !isOpen">
         <div style="width: 100%; display: flex; justify-content: space-between;" class="pl-2 pr-2">
           <div style="margin: 0;">
-            <i :class="isOpen ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-up'"></i> <span>Konsultasi
+            <i class="fa-solid fa-caret-up"
+              :class="{ 'rotate-0 duration-300': !isOpen, 'rotate-180 duration-300': isOpen }"></i> <span>Konsultasi
               Pengawasan</span>
           </div>
           <div style="margin: 0; text-align: right;">
@@ -125,7 +127,8 @@
       <div class="bg-neutral-40 p-2 rounded-xl font-bold mb-3" @click="isOpen = !isOpen">
         <div style="width: 100%; display: flex; justify-content: space-between;" class="pl-2 pr-2">
           <div style="margin: 0;">
-            <i :class="isOpen ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-up'"></i> <span>Konsultasi
+            <i class="fa-solid fa-caret-up"
+              :class="{ 'rotate-0 duration-300': !isOpen, 'rotate-180 duration-300': isOpen }"></i> <span>Konsultasi
               Perencanaan</span>
           </div>
           <div style="margin: 0; text-align: right;">
@@ -182,7 +185,8 @@
       <div class="bg-neutral-40 p-2 rounded-xl font-bold mb-3" @click="isOpen = !isOpen">
         <div style="width: 100%; display: flex; justify-content: space-between;" class="pl-2 pr-2">
           <div style="margin: 0;">
-            <i :class="isOpen ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-up'"></i> <span>Pekerjaan
+            <i class="fa-solid fa-caret-up"
+              :class="{ 'rotate-0 duration-300': !isOpen, 'rotate-180 duration-300': isOpen }"></i> <span>Pekerjaan
               Konstruksi</span>
           </div>
           <div style="margin: 0; text-align: right;">
@@ -235,7 +239,8 @@
       <div class="bg-neutral-40 p-2 rounded-xl font-bold mb-3" @click="isOpen = !isOpen">
         <div style="width: 100%; display: flex; justify-content: space-between;" class="pl-2 pr-2">
           <div style="margin: 0;">
-            <i :class="isOpen ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-up'"></i> <span>Konsultasi
+            <i class="fa-solid fa-caret-up"
+              :class="{ 'rotate-0 duration-300': !isOpen, 'rotate-180 duration-300': isOpen }"></i> <span>Konsultasi
               Pengawasan</span>
           </div>
           <div style="margin: 0; text-align: right;">
@@ -289,7 +294,8 @@
       <div class="bg-neutral-40 p-2 rounded-xl font-bold mb-3" @click="isOpen = !isOpen">
         <div style="width: 100%; display: flex; justify-content: space-between;" class="pl-2 pr-2">
           <div style="margin: 0;">
-            <i :class="isOpen ? 'fa-solid fa-caret-down' : 'fa-solid fa-caret-up'"></i> <span>Konsultasi
+            <i class="fa-solid fa-caret-up"
+              :class="{ 'rotate-0 duration-300': !isOpen, 'rotate-180 duration-300': isOpen }"></i> <span>Konsultasi
               Perencanaan</span>
           </div>
           <div style="margin: 0; text-align: right;">
