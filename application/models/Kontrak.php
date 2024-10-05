@@ -30,7 +30,7 @@ class Kontrak extends CI_Model
 
 	function get_kontrak_by_id($id)
 	{
-		$query = $this->db2->query("
+		$query = $this->db2->query(" 
     SELECT 
         tb_paket.*, 
         tb_kontrak.*, 
@@ -44,7 +44,8 @@ class Kontrak extends CI_Model
         tb_user.nomor_telp, 
         tb_user.tanggal_lahir, 
         tb_user.pas_photo, 
-        tb_user.id_jabatan 
+        tb_user.id_jabatan, 
+		tb_foto_dokumentasi.upload_file
     FROM 
         tb_paket 
     INNER JOIN 
@@ -54,11 +55,60 @@ class Kontrak extends CI_Model
     INNER JOIN 
         tb_data_penyedia ON tb_kontrak.penyedia_jasa = tb_data_penyedia.id_data_penyedia 
     INNER JOIN 
-        tb_user ON tb_paket.nama_ppk = tb_user.id 
+        tb_user ON tb_paket.nama_ppk = tb_user.id
+	LEFT JOIN 
+        tb_foto_dokumentasi ON tb_kontrak.id_paket = tb_foto_dokumentasi.id_paket  
     WHERE 
         tb_paket.id = ?", array($id));
 
 		return $query->row();
+	}
+
+	function get_dokumentasi_by_id($id)
+	{
+		$query = $this->db2->query(" 
+    SELECT 
+        tb_paket.*, 
+        tb_kontrak.*, 
+		tb_foto_dokumentasi.upload_file
+    FROM 
+        tb_paket 
+    INNER JOIN 
+        tb_kontrak ON tb_paket.id = tb_kontrak.id_paket 
+	INNER JOIN 
+        tb_foto_dokumentasi ON tb_kontrak.id_paket = tb_foto_dokumentasi.id_paket  
+    WHERE 
+        tb_paket.id = ?", array($id));
+
+		return $query;
+	}
+	function get_dokumen_by_id($id)
+	{
+		$query = $this->db2->query(" 
+    SELECT 
+        tb_paket.*, 
+        tb_kontrak.*, 
+		tb_addendum.upload_file as addendum,
+		tb_bast.upload_file as bast,
+		tb_bast.upload_file_jaminan as jaminan,
+		tb_fho.upload_file as fho,
+		tb_mc.upload_file as mc
+    FROM 
+        tb_paket 
+    LEFT JOIN 
+        tb_kontrak ON tb_paket.id = tb_kontrak.id_paket 
+	LEFT JOIN 
+        tb_addendum ON tb_kontrak.id_paket = tb_addendum.id_paket
+	LEFT JOIN 
+        tb_bast ON tb_kontrak.id_paket = tb_bast.id_paket  
+	LEFT JOIN 
+        tb_fho ON tb_kontrak.id_paket = tb_btb_fhoast.id_paket  
+	LEFT JOIN 
+        tb_mc ON tb_kontrak.id_paket = tb_mc.id_paket  
+    WHERE 
+        tb_paket.id = ?", array($id));
+
+		return $query;
 	}
 
 	function get_kontrak_konsultan_pengawasan_list()
