@@ -165,6 +165,7 @@ class Page extends CI_Controller
 		$data['kontrak'] = $this->Kontrak->get_kontrak_by_id($id);
 		$data['dokumentasi'] = $this->Kontrak->get_dokumentasi_by_id($id);
 		$data['dokumen'] = $this->Kontrak->get_dokumen_by_id($id);
+		$data['skppk'] = $this->db2->query("SELECT * FROM nomor_skppk")->row();
 		$data['get_sppbj'] = $this->db->query("SELECT * FROM sppbj WHERE id_paket = '$id'")->num_rows();
 		$data['get_surat_perjanjian'] = $this->db->query("SELECT * FROM surat_perjanjian WHERE id_paket = '$id'")->num_rows();
 		$data['get_spmk'] = $this->db->query("SELECT * FROM spmk WHERE id_paket = '$id'")->num_rows();

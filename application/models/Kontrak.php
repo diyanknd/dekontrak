@@ -27,7 +27,7 @@ class Kontrak extends CI_Model
 
 		return $query;
 	}
-
+	
 	function get_kontrak_by_id($id)
 	{
 		$query = $this->db2->query(" 
@@ -102,7 +102,7 @@ class Kontrak extends CI_Model
 	LEFT JOIN 
         tb_bast ON tb_kontrak.id_paket = tb_bast.id_paket  
 	LEFT JOIN 
-        tb_fho ON tb_kontrak.id_paket = tb_btb_fhoast.id_paket  
+        tb_fho ON tb_kontrak.id_paket = tb_fho.id_paket  
 	LEFT JOIN 
         tb_mc ON tb_kontrak.id_paket = tb_mc.id_paket  
     WHERE 

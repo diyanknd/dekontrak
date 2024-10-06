@@ -828,13 +828,58 @@
                   
                 </div>
                 <div class="flex gap-3 md:gap-4 xxl:gap-6 items-start">
-                  <img src="<?php echo base_url();?><?php $kontrak->nama_lengkap; ?>" class="rounded-full size-10 md:size-14" alt="" />
-                  <div>
-                    <p class="l-text font-medium mb-2"><?php echo $kontrak->nama_lengkap; ?></p>
-                    <p class="s-text mb-6"><?php echo $kontrak->nip; ?></p>
-                    <button class="flex items-center gap-2 sm:gap-4 text-primary-300 font-semibold"><i class="las la-plus-circle text-lg md:text-xl"></i>Add To Blacklist</button>
-                  </div>
+                  <img src="<?php echo base_url();?><?php $kontrak->pas_photo; ?>" class="rounded-full size-10 md:size-14" alt="" />
+                    <div>
+                            <table class="w-full whitespace-nowrap">
+                        <tr>
+                            <td class="w-1/2 px-2 py-3 m-text">Nama</td>
+                            <td class="w-1/2 py-3 l-text">: <?php echo $kontrak->nama_lengkap; ?></td>
+                        </tr>
+                        <tr>
+                            <td class="w-1/2 px-2 py-3 m-text">NIP</td> 
+                            <td class="w-1/2 py-3 m-text">: <?php echo $kontrak->nip; ?></td> 
+                        </tr>
+                        <tr>
+                            <td class="w-1/2 px-2 py-3 m-text">SKPPK</td>
+                            <td class="w-1/2 py-3 m-text">: <?php echo $skppk->nomor_skppk; ?> </td>
+                        </tr>
+                        <tr>
+                            <td class="w-1/2 px-2 py-3 m-text">Tanggal</td>
+                            <td class="w-1/2 py-3 m-text">: <?php echo $skppk->tanggal_skppk; ?></td>
+                        </tr>
+                        </table>
+                    </div>
                 </div>
+              </div>
+
+              <div class="n20-box">
+                <div class="flex justify-between items-center bb-dashed-n40">
+                  <h5>SK PPK</h5>
+                </div>
+                        <div class="flex justify-between items-center">
+                            <div class="flex grow gap-4 xxl:gap-6">
+                                <span class="size-14 shrink-0 flex justify-center items-center rounded-lg border bg-warning-300/10 border-warning-300 text-warning-300" onclick="printFile('<?php echo $skppk->doc_skppk; ?>')">
+                                    <i class="las la-file-pdf text-warning-300 text-3xl"></i>
+                                </span>
+                                <div class="flex items-center">SK PPK Document</p>
+                                </div>
+                            </div>
+                            <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                                <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                                <ul class="horiz-option" :class="isOpen ? 'show' : 'hide'">
+                                    <li>
+                                        <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50" onclick="printFile('<?php echo $skppk->doc_skppk; ?>')">
+                                            <i class="las la-print text-xl"></i> Print
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50" onclick="shareFile('<?php echo $skppk->doc_skppk; ?>')">
+                                            <i class="las la-share-alt-square text-xl"></i> Share
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
               </div>
 
                 <div class="n20-box">
@@ -894,77 +939,186 @@
 
 
 
-              <div class="n20-box">
-                <h4 class="bb-dashed-n30">PDF</h4>
-                <div x-ref="fileOverview"></div>
-                <div class="flex flex-col gap-4 xxl:gap-8">
-                    <div class="flex justify-between items-center">
-                    <div class="flex grow gap-4 xxl:gap-6">
-                        <span class="size-14 shrink-0 flex justify-center bg-primary-300/10 items-center rounded-lg border border-primary-300 text-primary-300">
-                        <i class="las la-file-image text-3xl"></i>
-                        </span>
-                        <div>
-                        <p class="l-text font-medium mb-2">Images</p>
-                        <p class="s-text">223 Files</p>
-                        </div>
-                    </div>
-                    <p class="l-text font-medium">11.18 Gb</p>
-                    </div>
-                    <div class="flex justify-between items-center">
-                    <div class="flex grow gap-4 xxl:gap-6">
-                        <span class="size-14 shrink-0 flex justify-center bg-secondary-300/10 items-center rounded-lg border border-secondary-300 text-secondary-300">
-                        <i class="las la-file-video text-3xl"></i>
-                        </span>
-                        <div>
-                        <p class="l-text font-medium mb-2">Media</p>
-                        <p class="s-text">212 Files</p>
-                        </div>
-                    </div>
-                    <p class="l-text font-medium">4.18 Gb</p>
-                    </div>
-                    <div class="flex justify-between items-center">
-                    <div class="flex grow gap-4 xxl:gap-6">
-                        <span class="size-14 shrink-0 flex justify-center bg-warning-300/10 items-center rounded-lg border border-warning-300 text-warning-300">
-                        <i class="las la-file-pdf text-3xl"></i>
-                        </span>
-                        <div>
-                        <p class="l-text font-medium mb-2">Doucments</p>
-                        <p class="s-text">254 Files</p>
-                        </div>
-                    </div>
-                    <p class="l-text font-medium">5.18 Gb</p>
-                    </div>
-                    <div class="flex justify-between items-center">
-                    <div class="flex grow gap-4 xxl:gap-6">
-                        <span class="size-14 shrink-0 flex justify-center bg-error-300/10 items-center rounded-lg border border-error-300 text-error-300">
-                        <i class="las la-file-alt text-3xl"></i>
-                        </span>
-                        <div>
-                        <p class="l-text font-medium mb-2">Others</p>
-                        <p class="s-text">23 Files</p>
-                        </div>
-                    </div>
-                    <p class="l-text font-medium">21.18 Gb</p>
-                    </div>
-                </div>
-              </div>
+                <div class="n20-box">
+    <h4 class="bb-dashed-n30">Dokumen</h4>
 
-              <div class="n20-box">
-                <div class="flex justify-between items-center bb-dashed-n40">
-                  <h5>Payment</h5>
-                </div>
-                <table class="w-full whitespace-nowrap">
-                  <tr>
-                    <td class="w-1/2 py-3 m-text">Card Number</td>
-                    <td class="w-1/2 py-3 px-3 m-text font-medium">
-                      <div class="flex gap-2 flex-wrap items-start">
-                        <img src="./assets/images/mastercard-m.png" width="45" alt="" />
-                        •••• •••• •••• 8854
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-              </div>
+    <?php if ($dokumen->num_rows() > 0) { ?> 
+        <div x-ref="fileOverview"></div>
+        <div class="flex flex-col gap-4 xxl:gap-8">
+            <?php foreach ($dokumen->result() as $row) { 
+                // Array of file categories from each document type
+                $file_sources = [
+                    'kontrak Konstruksi' => $row->kontrak_konstruksi ?? '',
+                    'kontrak Konsultan' => $row->kontrak_konsultan ?? '',
+                    'jaminan Pelaksanaan' => $row->jaminan_pelaksanaan ?? '',
+                    'addendum' => $row->addendum ?? '',  
+                    'bast' => $row->bast ?? '',
+                    'jaminan' => $row->jaminan ?? '',
+                    'fho' => $row->fho ?? '',
+                    'mc' => $row->mc ?? ''
+                ];
+
+                // Iterate through each document category
+                foreach ($file_sources as $category => $files_json) {
+                    $uploaded_files = json_decode($files_json, true); // Try to decode JSON into an array
+
+                    if (is_array($uploaded_files) && count($uploaded_files) > 0) {
+                        // Multiple files (JSON array case)
+                        foreach ($uploaded_files as $file) {
+                            // Extract the file extension to determine the type of icon
+                            $extension = pathinfo($file, PATHINFO_EXTENSION);
+                            $icon_class = '';
+                            switch ($extension) {
+                                case 'pdf':
+                                    $icon_class = 'la-file-pdf text-warning-300';
+                                    $span_class = 'bg-warning-300/10 border-warning-300 text-warning-300';
+                                    break;
+                                case 'jpg':
+                                case 'jpeg':
+                                case 'png':
+                                case 'gif':
+                                    $icon_class = 'la-file-image text-primary-300';
+                                    $span_class = 'bg-primary-300/10 border-primary-300 text-primary-300';
+                                    break;
+                                case 'mp4':
+                                case 'mkv':
+                                case 'avi':
+                                    $icon_class = 'la-file-video text-secondary-300';
+                                    $span_class = 'bg-secondary-300/10 border-secondary-300 text-secondary-300';
+                                    break;
+                                default:
+                                    $icon_class = 'la-file-alt text-error-300';
+                                    $span_class = 'bg-error-300/10 border-error-300 text-error-300';
+                                    break;
+                            }
+
+                            // Get the file size
+                            $file_path = FCPATH . 'https://jantan.beraudpupr.com/assets/upload_dokumen/' . $file;
+                            $file_size = file_exists($file_path) ? filesize($file_path) : 0;
+                            $file_size_gb = number_format($file_size / (1024 * 1024), 2) . ' MB';
+                            ?>
+
+                            <div class="flex justify-between items-center">
+                                <div class="flex grow gap-4 xxl:gap-6">
+                                    <span class="size-14 shrink-0 flex justify-center items-center rounded-lg border <?php echo $span_class; ?>" onclick="printFile('<?php echo addslashes($files_json); ?>')">
+                                        <i class="las <?php echo $icon_class; ?> text-3xl"></i>
+                                    </span>
+                                    <div class="flex items-center">
+                                        <p class="l-text font-medium mb-2"><?php echo ucfirst($category); ?> Document</p>
+                                    </div>
+                                </div>
+                                <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                                    <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                                    <ul class="horiz-option" :class="isOpen ? 'show' : 'hide'">
+                                        <li>
+                                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50" onclick="printFile('<?php echo addslashes($files_json); ?>')">
+                                                <i class="las la-print text-xl"></i> Print
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50" onclick="shareFile('<?php echo addslashes($files_json); ?>')">
+                                                <i class="las la-share-alt-square text-xl"></i> Share
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <?php
+                        }
+                    } elseif (!empty($files_json)) {
+                        // Single file (Non-JSON string case)
+                        $extension = pathinfo($files_json, PATHINFO_EXTENSION);
+                        $icon_class = '';
+                        switch ($extension) {
+                            case 'pdf':
+                                $icon_class = 'la-file-pdf text-warning-300';
+                                $span_class = 'bg-warning-300/10 border-warning-300 text-warning-300';
+                                break;
+                            case 'jpg':
+                            case 'jpeg':
+                            case 'png':
+                            case 'gif':
+                                $icon_class = 'la-file-image text-primary-300';
+                                $span_class = 'bg-primary-300/10 border-primary-300 text-primary-300';
+                                break;
+                            case 'mp4':
+                            case 'mkv':
+                            case 'avi':
+                                $icon_class = 'la-file-video text-secondary-300';
+                                $span_class = 'bg-secondary-300/10 border-secondary-300 text-secondary-300';
+                                break;
+                            default:
+                                $icon_class = 'la-file-alt text-error-300';
+                                $span_class = 'bg-error-300/10 border-error-300 text-error-300';
+                                break;
+                        }
+
+                        // Get the file size for a single file
+                        $file_path = FCPATH . 'https://jantan.beraudpupr.com/assets/upload_dokumen/' . $files_json;
+                        $file_size = file_exists($file_path) ? filesize($file_path) : 0;
+                        $file_size_gb = number_format($file_size / (1024 * 1024), 2) . ' MB';
+                        $site_dokumen = 'https://jantan.beraudpupr.com/assets/upload_dokumen/';
+                        ?>
+
+                        <div class="flex justify-between items-center">
+                            <div class="flex grow gap-4 xxl:gap-6">
+                                <span class="size-14 shrink-0 flex justify-center items-center rounded-lg border <?php echo $span_class; ?>" onclick="printFile('<?php echo addslashes($files_json); ?>')">
+                                    <i class="las <?php echo $icon_class; ?> text-3xl"></i>
+                                </span>
+                                <div class="flex items-center">
+                                    <p class="l-text font-medium mb-2"><?php echo ucfirst($category); ?> Document</p>
+                                </div>
+                            </div>
+                            <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                                <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                                <ul class="horiz-option" :class="isOpen ? 'show' : 'hide'">
+                                    <li>
+                                        <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50" onclick="printFile('<?php echo addslashes($files_json); ?>')">
+                                            <i class="las la-print text-xl"></i> Print
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50" onclick="shareFile('<?php echo addslashes($files_json); ?>')">
+                                            <i class="las la-share-alt-square text-xl"></i> Share
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    <?php
+                    } else {
+                        // No documents available for this category
+                        ?>
+
+                        <div class="flex justify-between items-center">
+                            <div class="flex grow gap-4 xxl:gap-6">
+                                <span class="size-14 shrink-0 flex justify-center bg-error-300/10 items-center rounded-lg border border-error-300 text-error-300">
+                                    <i class="las la-exclamation-circle text-error-300 text-3xl"></i>
+                                </span>
+                                <div>
+                                    <p class="l-text font-medium mb-2"><?php echo ucfirst($category); ?> Document</p>
+                                    <p class="s-text">No files available for <?php echo ucfirst($category); ?>.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <?php
+                    }
+                }
+            } ?>
+        </div>
+    <?php } else { ?>
+        <div class="flex justify-center">
+            <p class="xl-text">No Documents Available</p>
+        </div>
+    <?php } ?>
+</div>
+
+
+
+              
             </div>
           </div>
         </div>
@@ -1132,4 +1286,50 @@ function formatTanggalIndonesia($tanggal) {
     document.addEventListener('DOMContentLoaded', function () {
         refreshFsLightbox(); // This will refresh the gallery to ensure it picks up the images
     });
+</script>
+
+<script>
+    function printFile(fileUrl) {
+        if (fileUrl) {
+            const newWindow = window.open(`https://jantan.beraudpupr.com/assets/upload_dokumen/${fileUrl}`, '_blank', 'innerWidth=900,innerHeight=842,toolbar=no,location=no,menubar=no,scrollbars=yes,resizable=yes');
+            newWindow.print();
+        } else {
+            alert("File URL is missing.");
+        }
+    }
+
+    function shareFile(fileUrl) {
+        if (fileUrl) {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Document',
+                    text: 'Check out this document',
+                    url: `https://jantan.beraudpupr.com/assets/upload_dokumen/${fileUrl}`
+                }).then(() => {
+                    console.log('Sharing successful');
+                }).catch((error) => {
+                    console.error('Error sharing:', error);
+                });
+            } else {
+                alert("Sharing not supported in this browser.");
+            }
+        } else {
+            alert("File URL is missing.");
+        }
+    }
+
+    function downloadFile(fileUrl) {
+    if (fileUrl) {
+        console.log("Downloading file from: ", fileUrl);  // Log the file URL to ensure it's correct
+        const link = document.createElement('a');
+        link.href = `https://jantan.beraudpupr.com/assets/upload_dokumen/${fileUrl}`;
+        link.setAttribute('download', fileUrl);  // The default filename for the download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } else {
+        alert("File URL is missing.");
+    }
+}
+
 </script>
