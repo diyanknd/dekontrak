@@ -1,3 +1,4 @@
+
 <!-- Custom -->
 <div class="white-box">
           <!--<div class="flex justify-between max-sm:flex-col gap-4 items-center bb-dashed-n30">
@@ -66,7 +67,7 @@
                             }
                         }">
                             <td class="py-2 m-text text-left" style="width:5px; ">
-                                     <a href="#">
+                                     <a @click="openModals">
                                         <i class="px-3 las la-file text-xl text-primary-300"></i>
                                     </a>
                             </td>
@@ -828,25 +829,25 @@
                   
                 </div>
                 <div class="flex gap-3 md:gap-4 xxl:gap-6 items-start">
-                  <img src="<?php echo base_url();?><?php $kontrak->pas_photo; ?>" class="rounded-full size-10 md:size-14" alt="" />
+                    <img src="https://jantan.beraudpupr.com/assets/foto_profil/<?php echo $kontrak->pas_photo; ?>" class="rounded-full size-10 md:size-14" alt="" />
                     <div>
-                            <table class="w-full whitespace-nowrap">
-                        <tr>
-                            <td class="w-1/2 px-2 py-3 m-text">Nama</td>
-                            <td class="w-1/2 py-3 l-text">: <?php echo $kontrak->nama_lengkap; ?></td>
-                        </tr>
-                        <tr>
-                            <td class="w-1/2 px-2 py-3 m-text">NIP</td> 
-                            <td class="w-1/2 py-3 m-text">: <?php echo $kontrak->nip; ?></td> 
-                        </tr>
-                        <tr>
-                            <td class="w-1/2 px-2 py-3 m-text">SKPPK</td>
-                            <td class="w-1/2 py-3 m-text">: <?php echo $skppk->nomor_skppk; ?> </td>
-                        </tr>
-                        <tr>
-                            <td class="w-1/2 px-2 py-3 m-text">Tanggal</td>
-                            <td class="w-1/2 py-3 m-text">: <?php echo $skppk->tanggal_skppk; ?></td>
-                        </tr>
+                        <table class="w-full whitespace-nowrap">
+                            <tr>
+                                <td class="w-1/2 px-2 py-3 m-text">Nama</td>
+                                <td class="w-1/2 py-3 l-text">: <?php echo $kontrak->nama_lengkap; ?></td>
+                            </tr>
+                            <tr>
+                                <td class="w-1/2 px-2 py-3 m-text">NIP</td> 
+                                <td class="w-1/2 py-3 m-text">: <?php echo $kontrak->nip; ?></td> 
+                            </tr>
+                            <tr>
+                                <td class="w-1/2 px-2 py-3 m-text">SKPPK</td>
+                                <td class="w-1/2 py-3 m-text">: <?php echo $skppk->nomor_skppk; ?> </td>
+                            </tr>
+                            <tr>
+                                <td class="w-1/2 px-2 py-3 m-text">Tanggal</td>
+                                <td class="w-1/2 py-3 m-text">: <?php echo $skppk->tanggal_skppk; ?></td>
+                            </tr>
                         </table>
                     </div>
                 </div>
@@ -858,22 +859,22 @@
                 </div>
                         <div class="flex justify-between items-center">
                             <div class="flex grow gap-4 xxl:gap-6">
-                                <span class="size-14 shrink-0 flex justify-center items-center rounded-lg border bg-warning-300/10 border-warning-300 text-warning-300" onclick="printFile('<?php echo $skppk->doc_skppk; ?>')">
+                                <span class="size-14 shrink-0 flex justify-center items-center rounded-lg border bg-warning-300/10 border-warning-300 text-warning-300" onclick="printFilesk('<?php echo $skppk->doc_skppk; ?>')">
                                     <i class="las la-file-pdf text-warning-300 text-3xl"></i>
                                 </span>
-                                <div class="flex items-center">SK PPK Document</p>
+                                <div class="flex items-center"><?php echo $skppk->tentang_skppk?></p>
                                 </div>
                             </div>
                             <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
                                 <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
                                 <ul class="horiz-option" :class="isOpen ? 'show' : 'hide'">
                                     <li>
-                                        <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50" onclick="printFile('<?php echo $skppk->doc_skppk; ?>')">
+                                        <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50" onclick="printFilesk('<?php echo $skppk->doc_skppk; ?>')">
                                             <i class="las la-print text-xl"></i> Print
                                         </span>
                                     </li>
                                     <li>
-                                        <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50" onclick="shareFile('<?php echo $skppk->doc_skppk; ?>')">
+                                        <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50" onclick="shareFilesk('<?php echo $skppk->doc_skppk; ?>')">
                                             <i class="las la-share-alt-square text-xl"></i> Share
                                         </span>
                                     </li>
@@ -892,8 +893,8 @@
                                 if(is_array($uploaded_files)) {
                                     foreach($uploaded_files as $file) { // Loop through each file
                             ?>
-                                <div class="col-span-12 sm:col-span-6 md:col-span-4 xxl:col-span-3">
-                                    <a data-fslightbox href="https://jantan.beraudpupr.com/assets/foto_dokumentasi/<?php echo $file; ?>" 
+                                <div class="col-span-12 sm:col-span-6 md:col-span-4 xxl:col-span-3 hover:shadow-lg hover:scale-125">
+                                    <a data-fslightbox="gallery" href="https://jantan.beraudpupr.com/assets/foto_dokumentasi/<?php echo $file; ?>" 
                                     data-thumb="https://jantan.beraudpupr.com/assets/foto_dokumentasi/<?php echo $file; ?>" 
                                     class="block">
                                         <img src="https://jantan.beraudpupr.com/assets/foto_dokumentasi/<?php echo $file; ?>" 
@@ -905,11 +906,11 @@
                                     } // End of file loop
                                 } else { // If it's not an array, handle single file
                             ?>
-                                <div class="col-span-12 sm:col-span-6 md:col-span-4 xxl:col-span-3">
-                                    <a data-fslightbox href="https://jantan.beraudpupr.com/assets/foto_dokumentasi/<?php echo $row->upload_file; ?>" 
+                                <div class="col-span-12 sm:col-span-6 md:col-span-4 xxl:col-span-3 hover:shadow-lg hover:scale-125">
+                                    <a data-fslightbox="gallery" href="https://jantan.beraudpupr.com/assets/foto_dokumentasi/<?php echo $row->upload_file; ?>" 
                                     data-thumb="https://jantan.beraudpupr.com/assets/foto_dokumentasi/<?php echo $row->upload_file; ?>" 
                                     class="block">
-                                        <img src="https://jantan.beraudpupr.com/assets/foto_dokumentasi/<?php echo $row->upload_file; ?>" 
+                                        <img src="https://jantan.beraudpupr.com/assets/foto_dokumentasi/<?php echo  urlencode($row->upload_file); ?>" 
                                             class="rounded-xl w-full h-auto object-cover"  
                                             alt="Dokumentasi" />
                                     </a>
@@ -944,7 +945,7 @@
 
     <?php if ($dokumen->num_rows() > 0) { ?> 
         <div x-ref="fileOverview"></div>
-        <div class="flex flex-col gap-4 xxl:gap-8">
+        <div class="flex flex-col gap-4 xxl:gap-8 ">
             <?php foreach ($dokumen->result() as $row) { 
                 // Array of file categories from each document type
                 $file_sources = [
@@ -998,8 +999,8 @@
                             $file_size_gb = number_format($file_size / (1024 * 1024), 2) . ' MB';
                             ?>
 
-                            <div class="flex justify-between items-center">
-                                <div class="flex grow gap-4 xxl:gap-6">
+                            <div class="p-2 xl:p-2 cursor-pointer rounded-xl flex justify-between items-center hover:shadow-lg">
+                                <div class="flex grow gap-4 xxl:gap-6 ">
                                     <span class="size-14 shrink-0 flex justify-center items-center rounded-lg border <?php echo $span_class; ?>" onclick="printFile('<?php echo addslashes($files_json); ?>')">
                                         <i class="las <?php echo $icon_class; ?> text-3xl"></i>
                                     </span>
@@ -1061,8 +1062,8 @@
                         $site_dokumen = 'https://jantan.beraudpupr.com/assets/upload_dokumen/';
                         ?>
 
-                        <div class="flex justify-between items-center">
-                            <div class="flex grow gap-4 xxl:gap-6">
+                        <div class="p-2 xl:p-2 cursor-pointer rounded-xl flex justify-between items-center hover:shadow-lg">
+                            <div class="flex grow gap-4 xxl:gap-6 ">
                                 <span class="size-14 shrink-0 flex justify-center items-center rounded-lg border <?php echo $span_class; ?>" onclick="printFile('<?php echo addslashes($files_json); ?>')">
                                     <i class="las <?php echo $icon_class; ?> text-3xl"></i>
                                 </span>
@@ -1092,7 +1093,7 @@
                         // No documents available for this category
                         ?>
 
-                        <div class="flex justify-between items-center">
+                        <div class="p-2 xl:p-2 cursor-pointer rounded-xl flex justify-between items-center hover:shadow-lg">
                             <div class="flex grow gap-4 xxl:gap-6">
                                 <span class="size-14 shrink-0 flex justify-center bg-error-300/10 items-center rounded-lg border border-error-300 text-error-300">
                                     <i class="las la-exclamation-circle text-error-300 text-3xl"></i>
@@ -1333,3 +1334,58 @@ function formatTanggalIndonesia($tanggal) {
 }
 
 </script>
+
+<script>
+    function printFilesk(fileUrl) {
+        if (fileUrl) {
+            const newWindow = window.open(`https://jantan.beraudpupr.com/assets/upload_skppk/${fileUrl}`, '_blank', 'innerWidth=900,innerHeight=842,toolbar=no,location=no,menubar=no,scrollbars=yes,resizable=yes');
+            newWindow.print();
+        } else {
+            alert("File URL is missing.");
+        }
+    }
+
+    function shareFilesk(fileUrl) {
+        if (fileUrl) {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Document',
+                    text: 'Check out this document',
+                    url: `https://jantan.beraudpupr.com/assets/upload_skppk/${fileUrl}`
+                }).then(() => {
+                    console.log('Sharing successful');
+                }).catch((error) => {
+                    console.error('Error sharing:', error);
+                });
+            } else {
+                alert("Sharing not supported in this browser.");
+            }
+        } else {
+            alert("File URL is missing.");
+        }
+    }
+
+    function downloadFile(fileUrl) {
+    if (fileUrl) {
+        console.log("Downloading file from: ", fileUrl);  // Log the file URL to ensure it's correct
+        const link = document.createElement('a');
+        link.href = `https://jantan.beraudpupr.com/assets/upload_dokumen/${fileUrl}`;
+        link.setAttribute('download', fileUrl);  // The default filename for the download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } else {
+        alert("File URL is missing.");
+    }
+}
+
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    refreshFsLightbox(); // Ensure the lightbox is refreshed after the gallery is loaded
+});
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/fslightbox/index.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fslightbox/3.3.1/index.min.js"></script>
+
