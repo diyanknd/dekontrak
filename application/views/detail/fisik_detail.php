@@ -1,8 +1,8 @@
 <!-- Custom -->
 <div class="white-box">
-          <div class="flex justify-between max-sm:flex-col gap-4 items-center bb-dashed-n30">
+          <!--<div class="flex justify-between max-sm:flex-col gap-4 items-center bb-dashed-n30">
             
-            <!--<h4><?php echo $kontrak->jenis_pengadaan; ?><br>
+            <h4><?php echo $kontrak->jenis_pengadaan; ?><br>
                 <span>
                 <?php
                 if ($kontrak->jenis_pengadaan == "Pekerjaan Konstruksi") {
@@ -38,10 +38,7 @@
                 }
                 ?>
                 </span>
-            </h5>
-                  <button>
-                    <i class="las la-pen text-xl"></i>
-                  </button>
+                </h5>
                 </div>
                 <div class="flex justify-between flex-wrap gap-4 items-start">
                   <div class="flex items-center gap-5">
@@ -108,7 +105,10 @@
                             </template>
 
                             <td class="py-2 text-right">
-                                <input type="checkbox" checked disabled style="width: 20px; height: 20px;">
+                            <label style="position: relative;display: inline-block;width: 20px;height: 20px;cursor: not-allowed;">
+                                <input type="checkbox" checked disabled style="width: 20px;height: 20px;cursor: not-allowed;appearance: none;background-color: #007bff;border: 2px solid #007bff;border-radius: 3px;position: relative;">
+                                <span style="position: absolute;top: 1px;left: 4px;font-size: 16px;color: white;pointer-events: none;">✔</span>
+                            </label>
                             </td>
                         </tr>
                         <tr x-data="{ showModal: false, 
@@ -289,8 +289,17 @@
                                     </div>
                                 </template>
                             </td>
+
+
                             <td class="py-2 text-right">
-                                <input type="checkbox" <?php echo $get_sppbj == 1 ? 'checked' : ''; ?> disabled style="width: 20px; height: 20px;">
+                            <?php if  ($get_sppbj == 1){ ?>
+                            <label style="position: relative;display: inline-block;width: 20px;height: 20px;cursor: not-allowed;">
+                                <input type="checkbox" checked disabled style="width: 20px;height: 20px;cursor: not-allowed;appearance: none;background-color: #007bff;border: 2px solid #007bff;border-radius: 3px;position: relative;">
+                                <span style="position: absolute;top: 1px;left: 4px;font-size: 16px;color: white;pointer-events: none;">✔</span>
+                            </label>
+                            <?php } else { ?>
+                                <input type="checkbox" disabled style="width: 20px; height: 20px;">
+                            <?php }?>
                             </td>
 
                         </tr>
@@ -625,7 +634,14 @@
                                     </template>
                             </td>
                             <td class="py-2 text-right">
-                                <input type="checkbox" <?php echo $get_surat_perjanjian == 1 ? 'checked' : ''; ?> disabled style="width: 20px; height: 20px;">
+                            <?php if  ($get_sppbj == 1){ ?>
+                            <label style="position: relative;display: inline-block;width: 20px;height: 20px;cursor: not-allowed;">
+                                <input type="checkbox" checked disabled style="width: 20px;height: 20px;cursor: not-allowed;appearance: none;background-color: #007bff;border: 2px solid #007bff;border-radius: 3px;position: relative;">
+                                <span style="position: absolute;top: 1px;left: 4px;font-size: 16px;color: white;pointer-events: none;">✔</span>
+                            </label>
+                            <?php } else { ?>
+                                <input type="checkbox"  disabled style="width: 20px; height: 20px;">
+                            <?php } ?>
                             </td>
                         </tr>
                         <tr x-data="{ showModal: false, spmkData: {
@@ -718,19 +734,25 @@
                                     </template>
                             </td>
                             <td class="py-2 text-right">
-                                <input type="checkbox" <?php echo $get_spmk == 1 ? 'checked' : ''; ?> disabled style="width: 20px; height: 20px;">
+                            <?php if  ($get_sppbj == 1){ ?>
+                            <label style="position: relative;display: inline-block;width: 20px;height: 20px;cursor: not-allowed;">
+                                <input type="checkbox" checked disabled style="width: 20px;height: 20px;cursor: not-allowed;appearance: none;background-color: #007bff;border: 2px solid #007bff;border-radius: 3px;position: relative;">
+                                <span style="position: absolute;top: 1px;left: 4px;font-size: 16px;color: white;pointer-events: none;">✔</span>
+                            </label>
+                            <?php } else { ?>
+                                <input type="checkbox" disabled style="width: 20px; height: 20px;">
+                            <?php } ?>
                             </td>
                         </tr>
                         </table>
                     </div>
                 </div>
-
               </div>
+
               <div class="n20-box">
                 <h5 class="bb-dashed-n40">History</h5>
                 <div class="flex justify-between gap-4 items-start flex-wrap">
                   <div class="max-w-[500px] w-full">
-                    
                     <div class="flex flex-col gap-14">
                         <div class="f-center gap-3">
                             <div class="w-[48%] text-end">
@@ -739,7 +761,7 @@
                                 </p>
                             </div>
                             <div
-                                class="relative flex size-9 items-center justify-center rounded-full bg-neutral-100 text-neutral-0 after:absolute after:left-1/2 after:top-[110%] after:h-14 after:w-px after:-translate-x-1/2 after:bg-neutral-100">
+                                class="relative flex size-9 items-center justify-center rounded-full bg-neutral-100 text-neutral-0 <?php echo $get_sppbj != 0 ?  'after:absolute after:left-1/2 after:top-[110%] after:h-14 after:w-px after:-translate-x-1/2 after:bg-neutral-100' : '' ;?>">
                                 <i class="las la-file text-xl"></i>
                             </div>
                             <div class="w-[48%] self-start">
@@ -752,7 +774,7 @@
                                     <p><?php echo $get_data_sppbj->created_at; ?></p>
                                 </div>
                                 <div
-                                    class="relative flex size-9 items-center justify-center rounded-full bg-primary-300 text-neutral-0 after:absolute after:left-1/2 after:top-[110%] after:h-14 after:w-px after:-translate-x-1/2 after:bg-primary-300">
+                                    class="relative flex size-9 items-center justify-center rounded-full bg-primary-300 text-neutral-0 <?php echo $get_surat_perjanjian != 0 ? 'after:absolute after:left-1/2 after:top-[110%] after:h-14 after:w-px after:-translate-x-1/2 after:bg-primary-300' : '' ;?>">
                                     <i class="las la-file text-xl"></i>
                                 </div>
                                 <div class="w-[48%] text-start">
@@ -769,7 +791,7 @@
                                     <p class="text-xs">Surat Perjanjian - <?php echo $get_data_surat_perjanjian->nomor_surat_perjanjian; ?></p>
                                 </div>
                                 <div
-                                    class="relative flex size-9 items-center justify-center rounded-full bg-secondary-300 text-neutral-0 after:absolute after:left-1/2 after:top-[110%] after:h-14 after:w-px after:-translate-x-1/2 after:bg-secondary-300">
+                                    class="relative flex size-9 items-center justify-center rounded-full bg-secondary-300 text-neutral-0 <?php echo $get_spmk != 0 ? 'after:absolute after:left-1/2 after:top-[110%] after:h-14 after:w-px after:-translate-x-1/2 after:bg-secondary-300' : '' ;?>">
                                     <i class="las la-file text-xl"></i>
                                 </div>
                                 <div class="w-[48%] self-start">
@@ -791,91 +813,312 @@
                                     <p class="text-xs">SPMK - <?php echo $get_data_spmk->nomor_spmk; ?></p>
                                 </div>
                             </div>
-                        </div>
-                    <?php } ?>
+                        <?php } ?>
+                    </div>
                   </div>
                   
                 </div>
               </div>
             </div>
+            
             <div class="col-span-12 lg:col-span-5 xxl:col-span-4 flex flex-col gap-4 xxl:gap-6">
               <div class="n20-box">
                 <div class="flex justify-between items-center bb-dashed-n40">
                   <h5>Pejabat Penandatangan Kontrak</h5>
-                  <button>
-                    <i class="las la-pen text-xl"></i>
-                  </button>
+                  
                 </div>
                 <div class="flex gap-3 md:gap-4 xxl:gap-6 items-start">
-                  <img src="<?php echo base_url();?><?php $kontrak->nama_lengkap; ?>" class="rounded-full size-10 md:size-14" alt="" />
-                  <div>
-                    <p class="l-text font-medium mb-2"><?php echo $kontrak->nama_lengkap; ?></p>
-                    <p class="s-text mb-6"><?php echo $kontrak->nip; ?></p>
-                    <button class="flex items-center gap-2 sm:gap-4 text-primary-300 font-semibold"><i class="las la-plus-circle text-lg md:text-xl"></i>Add To Blacklist</button>
-                  </div>
+                  <img src="<?php echo base_url();?><?php $kontrak->pas_photo; ?>" class="rounded-full size-10 md:size-14" alt="" />
+                    <div>
+                            <table class="w-full whitespace-nowrap">
+                        <tr>
+                            <td class="w-1/2 px-2 py-3 m-text">Nama</td>
+                            <td class="w-1/2 py-3 l-text">: <?php echo $kontrak->nama_lengkap; ?></td>
+                        </tr>
+                        <tr>
+                            <td class="w-1/2 px-2 py-3 m-text">NIP</td> 
+                            <td class="w-1/2 py-3 m-text">: <?php echo $kontrak->nip; ?></td> 
+                        </tr>
+                        <tr>
+                            <td class="w-1/2 px-2 py-3 m-text">SKPPK</td>
+                            <td class="w-1/2 py-3 m-text">: <?php echo $skppk->nomor_skppk; ?> </td>
+                        </tr>
+                        <tr>
+                            <td class="w-1/2 px-2 py-3 m-text">Tanggal</td>
+                            <td class="w-1/2 py-3 m-text">: <?php echo $skppk->tanggal_skppk; ?></td>
+                        </tr>
+                        </table>
+                    </div>
                 </div>
-              </div>
-              <div class="n20-box">
-                <div class="flex justify-between items-center bb-dashed-n40">
-                  <h5>Delivery</h5>
-                  <button>
-                    <i class="las la-pen text-xl"></i>
-                  </button>
-                </div>
-                <table class="w-full whitespace-nowrap">
-                  <tr>
-                    <td class="w-1/2 py-3 m-text">Ship by</td>
-                    <td class="w-1/2 py-3 m-text font-medium">DHL</td>
-                  </tr>
-                  <tr>
-                    <td class="w-1/2 py-3 m-text">Speedy</td>
-                    <td class="w-1/2 py-3 m-text font-medium">Standard</td>
-                  </tr>
-                  <tr>
-                    <td class="w-1/2 py-3 m-text">Tracking No.</td>
-                    <td class="w-1/2 py-3 m-text font-medium">HFG666S6F6</td>
-                  </tr>
-                </table>
               </div>
 
               <div class="n20-box">
                 <div class="flex justify-between items-center bb-dashed-n40">
-                  <h5>Shipping</h5>
-                  <button>
-                    <i class="las la-pen text-xl"></i>
-                  </button>
+                  <h5>SK PPK</h5>
                 </div>
-                <table class="w-full">
-                  <tr>
-                    <td class="w-1/2 py-3 m-text">Address</td>
-                    <td class="w-1/2 py-3 m-text font-medium">4140 Parker Rd. Allentown, New Mexico 31134</td>
-                  </tr>
-                  <tr>
-                    <td class="w-1/2 py-3 m-text">Phone number</td>
-                    <td class="w-1/2 py-3 m-text font-medium">(225) 555-0118</td>
-                  </tr>
-                </table>
+                        <div class="flex justify-between items-center">
+                            <div class="flex grow gap-4 xxl:gap-6">
+                                <span class="size-14 shrink-0 flex justify-center items-center rounded-lg border bg-warning-300/10 border-warning-300 text-warning-300" onclick="printFile('<?php echo $skppk->doc_skppk; ?>')">
+                                    <i class="las la-file-pdf text-warning-300 text-3xl"></i>
+                                </span>
+                                <div class="flex items-center">SK PPK Document</p>
+                                </div>
+                            </div>
+                            <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                                <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                                <ul class="horiz-option" :class="isOpen ? 'show' : 'hide'">
+                                    <li>
+                                        <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50" onclick="printFile('<?php echo $skppk->doc_skppk; ?>')">
+                                            <i class="las la-print text-xl"></i> Print
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50" onclick="shareFile('<?php echo $skppk->doc_skppk; ?>')">
+                                            <i class="las la-share-alt-square text-xl"></i> Share
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
               </div>
 
-              <div class="n20-box">
-                <div class="flex justify-between items-center bb-dashed-n40">
-                  <h5>Payment</h5>
-                  <button>
-                    <i class="las la-pen text-xl"></i>
-                  </button>
+                <div class="n20-box">
+                    <h4 class="bb-dashed-n30">Foto Dokumentasi</h4>
+
+                    <?php if($dokumentasi->num_rows() > 0) { ?>    
+                        <div class="grid grid-cols-12 gap-3 lg:gap-5 gallery">
+                            <?php foreach ($dokumentasi->result() as $row) { 
+                                $uploaded_files = json_decode($row->upload_file, true); // Decode JSON into an array
+                                if(is_array($uploaded_files)) {
+                                    foreach($uploaded_files as $file) { // Loop through each file
+                            ?>
+                                <div class="col-span-12 sm:col-span-6 md:col-span-4 xxl:col-span-3">
+                                    <a data-fslightbox href="https://jantan.beraudpupr.com/assets/foto_dokumentasi/<?php echo $file; ?>" 
+                                    data-thumb="https://jantan.beraudpupr.com/assets/foto_dokumentasi/<?php echo $file; ?>" 
+                                    class="block">
+                                        <img src="https://jantan.beraudpupr.com/assets/foto_dokumentasi/<?php echo $file; ?>" 
+                                            class="rounded-xl w-full h-auto object-cover"  
+                                            alt="Dokumentasi" />
+                                    </a>
+                                </div>
+                            <?php 
+                                    } // End of file loop
+                                } else { // If it's not an array, handle single file
+                            ?>
+                                <div class="col-span-12 sm:col-span-6 md:col-span-4 xxl:col-span-3">
+                                    <a data-fslightbox href="https://jantan.beraudpupr.com/assets/foto_dokumentasi/<?php echo $row->upload_file; ?>" 
+                                    data-thumb="https://jantan.beraudpupr.com/assets/foto_dokumentasi/<?php echo $row->upload_file; ?>" 
+                                    class="block">
+                                        <img src="https://jantan.beraudpupr.com/assets/foto_dokumentasi/<?php echo $row->upload_file; ?>" 
+                                            class="rounded-xl w-full h-auto object-cover"  
+                                            alt="Dokumentasi" />
+                                    </a>
+                                </div>
+                            <?php 
+                                } // End of single file condition
+                            } // End of dokumentasi loop 
+                            ?>
+                        </div> <!-- End of gallery grid -->
+
+                    <?php } else { // No documents found ?>
+                    
+                        <div class="flex flex-col gap-4 xxl:gap-8">
+                            <div class="flex grow gap-4 xxl:gap-6">
+                                <span class="size-14 shrink-0 flex justify-center bg-error-300/10 items-center rounded-lg border border-error-300 text-error-300">
+                                    <i class="las la-image text-3xl"></i>
+                                </span>
+                                <div>
+                                    <p class="xl-text font-large mb-2">Tidak Ada Dokumentasi</p>
+                                    <p class="l-text">0 File</p> 
+                                </div>
+                            </div>
+                        </div>
+
+                    <?php } ?>
                 </div>
-                <table class="w-full whitespace-nowrap">
-                  <tr>
-                    <td class="w-1/2 py-3 m-text">Card Number</td>
-                    <td class="w-1/2 py-3 px-3 m-text font-medium">
-                      <div class="flex gap-2 flex-wrap items-start">
-                        <img src="./assets/images/mastercard-m.png" width="45" alt="" />
-                        •••• •••• •••• 8854
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-              </div>
+
+
+
+                <div class="n20-box">
+    <h4 class="bb-dashed-n30">Dokumen</h4>
+
+    <?php if ($dokumen->num_rows() > 0) { ?> 
+        <div x-ref="fileOverview"></div>
+        <div class="flex flex-col gap-4 xxl:gap-8">
+            <?php foreach ($dokumen->result() as $row) { 
+                // Array of file categories from each document type
+                $file_sources = [
+                    'kontrak Konstruksi' => $row->kontrak_konstruksi ?? '',
+                    'kontrak Konsultan' => $row->kontrak_konsultan ?? '',
+                    'jaminan Pelaksanaan' => $row->jaminan_pelaksanaan ?? '',
+                    'addendum' => $row->addendum ?? '',  
+                    'bast' => $row->bast ?? '',
+                    'jaminan' => $row->jaminan ?? '',
+                    'fho' => $row->fho ?? '',
+                    'mc' => $row->mc ?? ''
+                ];
+
+                // Iterate through each document category
+                foreach ($file_sources as $category => $files_json) {
+                    $uploaded_files = json_decode($files_json, true); // Try to decode JSON into an array
+
+                    if (is_array($uploaded_files) && count($uploaded_files) > 0) {
+                        // Multiple files (JSON array case)
+                        foreach ($uploaded_files as $file) {
+                            // Extract the file extension to determine the type of icon
+                            $extension = pathinfo($file, PATHINFO_EXTENSION);
+                            $icon_class = '';
+                            switch ($extension) {
+                                case 'pdf':
+                                    $icon_class = 'la-file-pdf text-warning-300';
+                                    $span_class = 'bg-warning-300/10 border-warning-300 text-warning-300';
+                                    break;
+                                case 'jpg':
+                                case 'jpeg':
+                                case 'png':
+                                case 'gif':
+                                    $icon_class = 'la-file-image text-primary-300';
+                                    $span_class = 'bg-primary-300/10 border-primary-300 text-primary-300';
+                                    break;
+                                case 'mp4':
+                                case 'mkv':
+                                case 'avi':
+                                    $icon_class = 'la-file-video text-secondary-300';
+                                    $span_class = 'bg-secondary-300/10 border-secondary-300 text-secondary-300';
+                                    break;
+                                default:
+                                    $icon_class = 'la-file-alt text-error-300';
+                                    $span_class = 'bg-error-300/10 border-error-300 text-error-300';
+                                    break;
+                            }
+
+                            // Get the file size
+                            $file_path = FCPATH . 'https://jantan.beraudpupr.com/assets/upload_dokumen/' . $file;
+                            $file_size = file_exists($file_path) ? filesize($file_path) : 0;
+                            $file_size_gb = number_format($file_size / (1024 * 1024), 2) . ' MB';
+                            ?>
+
+                            <div class="flex justify-between items-center">
+                                <div class="flex grow gap-4 xxl:gap-6">
+                                    <span class="size-14 shrink-0 flex justify-center items-center rounded-lg border <?php echo $span_class; ?>" onclick="printFile('<?php echo addslashes($files_json); ?>')">
+                                        <i class="las <?php echo $icon_class; ?> text-3xl"></i>
+                                    </span>
+                                    <div class="flex items-center">
+                                        <p class="l-text font-medium mb-2"><?php echo ucfirst($category); ?> Document</p>
+                                    </div>
+                                </div>
+                                <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                                    <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                                    <ul class="horiz-option" :class="isOpen ? 'show' : 'hide'">
+                                        <li>
+                                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50" onclick="printFile('<?php echo addslashes($files_json); ?>')">
+                                                <i class="las la-print text-xl"></i> Print
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50" onclick="shareFile('<?php echo addslashes($files_json); ?>')">
+                                                <i class="las la-share-alt-square text-xl"></i> Share
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <?php
+                        }
+                    } elseif (!empty($files_json)) {
+                        // Single file (Non-JSON string case)
+                        $extension = pathinfo($files_json, PATHINFO_EXTENSION);
+                        $icon_class = '';
+                        switch ($extension) {
+                            case 'pdf':
+                                $icon_class = 'la-file-pdf text-warning-300';
+                                $span_class = 'bg-warning-300/10 border-warning-300 text-warning-300';
+                                break;
+                            case 'jpg':
+                            case 'jpeg':
+                            case 'png':
+                            case 'gif':
+                                $icon_class = 'la-file-image text-primary-300';
+                                $span_class = 'bg-primary-300/10 border-primary-300 text-primary-300';
+                                break;
+                            case 'mp4':
+                            case 'mkv':
+                            case 'avi':
+                                $icon_class = 'la-file-video text-secondary-300';
+                                $span_class = 'bg-secondary-300/10 border-secondary-300 text-secondary-300';
+                                break;
+                            default:
+                                $icon_class = 'la-file-alt text-error-300';
+                                $span_class = 'bg-error-300/10 border-error-300 text-error-300';
+                                break;
+                        }
+
+                        // Get the file size for a single file
+                        $file_path = FCPATH . 'https://jantan.beraudpupr.com/assets/upload_dokumen/' . $files_json;
+                        $file_size = file_exists($file_path) ? filesize($file_path) : 0;
+                        $file_size_gb = number_format($file_size / (1024 * 1024), 2) . ' MB';
+                        $site_dokumen = 'https://jantan.beraudpupr.com/assets/upload_dokumen/';
+                        ?>
+
+                        <div class="flex justify-between items-center">
+                            <div class="flex grow gap-4 xxl:gap-6">
+                                <span class="size-14 shrink-0 flex justify-center items-center rounded-lg border <?php echo $span_class; ?>" onclick="printFile('<?php echo addslashes($files_json); ?>')">
+                                    <i class="las <?php echo $icon_class; ?> text-3xl"></i>
+                                </span>
+                                <div class="flex items-center">
+                                    <p class="l-text font-medium mb-2"><?php echo ucfirst($category); ?> Document</p>
+                                </div>
+                            </div>
+                            <div x-data="dropdown" class="relative flex justify-center" @click.away="close()">
+                                <i class="las la-ellipsis-v cursor-pointer text-2xl" @click="toggle()"></i>
+                                <ul class="horiz-option" :class="isOpen ? 'show' : 'hide'">
+                                    <li>
+                                        <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50" onclick="printFile('<?php echo addslashes($files_json); ?>')">
+                                            <i class="las la-print text-xl"></i> Print
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="flex items-center hover:text-primary-300 gap-2 cursor-pointer rounded px-3 py-1.5 text-sm leading-normal duration-300 hover:bg-primary-50" onclick="shareFile('<?php echo addslashes($files_json); ?>')">
+                                            <i class="las la-share-alt-square text-xl"></i> Share
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    <?php
+                    } else {
+                        // No documents available for this category
+                        ?>
+
+                        <div class="flex justify-between items-center">
+                            <div class="flex grow gap-4 xxl:gap-6">
+                                <span class="size-14 shrink-0 flex justify-center bg-error-300/10 items-center rounded-lg border border-error-300 text-error-300">
+                                    <i class="las la-exclamation-circle text-error-300 text-3xl"></i>
+                                </span>
+                                <div>
+                                    <p class="l-text font-medium mb-2"><?php echo ucfirst($category); ?> Document</p>
+                                    <p class="s-text">No files available for <?php echo ucfirst($category); ?>.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <?php
+                    }
+                }
+            } ?>
+        </div>
+    <?php } else { ?>
+        <div class="flex justify-center">
+            <p class="xl-text">No Documents Available</p>
+        </div>
+    <?php } ?>
+</div>
+
+
+
+              
             </div>
           </div>
         </div>
@@ -1036,4 +1279,57 @@ function formatTanggalIndonesia($tanggal) {
     });
 
   });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/fslightbox/index.js"></script>
+<script>
+    // Reinitialize fslightbox when new content is loaded dynamically
+    document.addEventListener('DOMContentLoaded', function () {
+        refreshFsLightbox(); // This will refresh the gallery to ensure it picks up the images
+    });
+</script>
+
+<script>
+    function printFile(fileUrl) {
+        if (fileUrl) {
+            const newWindow = window.open(`https://jantan.beraudpupr.com/assets/upload_dokumen/${fileUrl}`, '_blank', 'innerWidth=900,innerHeight=842,toolbar=no,location=no,menubar=no,scrollbars=yes,resizable=yes');
+            newWindow.print();
+        } else {
+            alert("File URL is missing.");
+        }
+    }
+
+    function shareFile(fileUrl) {
+        if (fileUrl) {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Document',
+                    text: 'Check out this document',
+                    url: `https://jantan.beraudpupr.com/assets/upload_dokumen/${fileUrl}`
+                }).then(() => {
+                    console.log('Sharing successful');
+                }).catch((error) => {
+                    console.error('Error sharing:', error);
+                });
+            } else {
+                alert("Sharing not supported in this browser.");
+            }
+        } else {
+            alert("File URL is missing.");
+        }
+    }
+
+    function downloadFile(fileUrl) {
+    if (fileUrl) {
+        console.log("Downloading file from: ", fileUrl);  // Log the file URL to ensure it's correct
+        const link = document.createElement('a');
+        link.href = `https://jantan.beraudpupr.com/assets/upload_dokumen/${fileUrl}`;
+        link.setAttribute('download', fileUrl);  // The default filename for the download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } else {
+        alert("File URL is missing.");
+    }
+}
+
 </script>
