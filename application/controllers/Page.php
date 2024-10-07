@@ -179,6 +179,16 @@ class Page extends CI_Controller
 		$this->template->load('template', 'detail/fisik_detail', $data);
 	}
 
+
+	function check_data($data, $id)
+	{
+		$this->session->set_userdata('id_paket', $id);
+		$this->session->set_flashdata('error', $data . ' Berhasil di Input !');
+		$this->session->set_flashdata('alert', 'error');
+
+		$this->detail_fisik();
+	}
+
 	public function logout()
 	{
 		// Destroy the session to log out the user

@@ -181,7 +181,7 @@
         <!-- BEGIN: Isi 2 -->
         <table>
             <td style="text-align:justify">
-                Berdasarkan Surat Perintah Kerja (SPK) Nomor : 04/PPK- PJ/XXXXXXXX/PJ2/X/2023 tanggal 28 Xxxx 2024,
+                Berdasarkan Surat Perintah Kerja (SPK) Nomor : <?php echo $row1->nomor_surat_perjanjian ?>,
                 bersama ini memerintahkan:</td>
         </table>
         <!-- END: Isi 2 -->
@@ -202,7 +202,7 @@
             <tr>
                 <td>Yang dalam hal ini diwakili oleh</td>
                 <td>:</td>
-                <td><?php echo $row2->nama_direktur; ?> (Direktur)</td>
+                <td><?php echo $row2->nama_direktur; ?> (<?php echo $row2->jabatan; ?>)</td>
             </tr>
             <tr>
                 <td colspan="3">Selanjutnya disebut sebagai <span style="font-weight:bold;">Penyedia;</span></td>
@@ -325,7 +325,7 @@
                         <?php echo $row2->nama_direktur; ?>
                     </div>
                     <div>
-                        Direktur
+                        <?php echo $row2->jabatan; ?>
                     </div>
                 </td>
 

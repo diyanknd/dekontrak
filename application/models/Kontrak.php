@@ -27,7 +27,7 @@ class Kontrak extends CI_Model
 
 		return $query;
 	}
-	
+
 	function get_kontrak_by_id($id)
 	{
 		$query = $this->db2->query(" 
@@ -228,7 +228,7 @@ class Kontrak extends CI_Model
 	function get_data_paket()
 	{
 		$id_paket = $this->uri->segment('3');
-		$query = $this->db2->query("SELECT * FROM `tb_paket` 
+		$query = $this->db2->query("SELECT *,tb_user.alamat as alamat_ppk FROM `tb_paket` 
 		INNER JOIN tb_program ON tb_paket.id_program = tb_program.id_program
 		INNER JOIN tb_kegiatan ON tb_paket.id_kegiatan = tb_kegiatan.id_kegiatan
 		INNER JOIN tb_sub_kegiatan ON tb_paket.id_sub_kegiatan = tb_sub_kegiatan.id_sub
@@ -267,7 +267,8 @@ class Kontrak extends CI_Model
 		$this->db->insert('sppbj', $data);
 
 		// Insert into the second database (new_jantan)
-		$this->db2->insert('sppbj', '1');
+		$this->db2->where('id_paket', $data['id_paket']);
+		$this->db2->update('tb_kontrak', ['sppbj' => '1']);
 
 		// Complete the transactions
 		$this->db->trans_complete(); // Commit or rollback for the primary DB
@@ -334,7 +335,8 @@ class Kontrak extends CI_Model
 		$this->db->insert('surat_perjanjian', $data);
 
 		// Insert into the second database (new_jantan)
-		$this->db2->insert('surat_perjanjian', '1');
+		$this->db2->where('id_paket', $data['id_paket']);
+		$this->db2->update('tb_kontrak', ['surat_perjanjian' => '1']);
 
 		// Complete the transactions
 		$this->db->trans_complete(); // Commit or rollback for the primary DB
@@ -402,7 +404,8 @@ class Kontrak extends CI_Model
 		$this->db->insert('spmk', $data);
 
 		// Insert into the second database (new_jantan)
-		$this->db2->insert('spmk', '1');
+		$this->db2->where('id_paket', $data['id_paket']);
+		$this->db2->update('tb_kontrak', ['spmk' => '1']);
 
 		// Complete the transactions
 		$this->db->trans_complete(); // Commit or rollback for the primary DB

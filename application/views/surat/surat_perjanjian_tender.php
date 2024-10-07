@@ -152,52 +152,110 @@
             <td style="text-align:justify">
                 SURAT PERJANJIAN ini berikut semua lampirannya adalah Kontrak Kerja Konstruksi
                 <?php echo $row1->jenis_kontrak; ?>, yang selanjutnya disebut “Kontrak” dibuat dan ditandatangani di
-                Tanjung Redeb pada hari Rabu
-                tanggal <?php echo convertDateToWords($row1->tanggal_surat_perjanjian); ?>
-                <?php
-                function convertDateToWords($tanggal_kontrak)
+                Tanjung Redeb pada hari <?php
+                function formatIndonesianDate($date)
                 {
-                    // Array of days and months in words (Bahasa Indonesia)
-                    $days = ["Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan", "Sepuluh", "Sebelas", "Dua Belas", "Tiga Belas", "Empat Belas", "Lima Belas", "Enam Belas", "Tujuh Belas", "Delapan Belas", "Sembilan Belas", "Dua Puluh", "Dua Puluh Satu", "Dua Puluh Dua", "Dua Puluh Tiga", "Dua Puluh Empat", "Dua Puluh Lima", "Dua Puluh Enam", "Dua Puluh Tujuh", "Dua Puluh Delapan", "Dua Puluh Sembilan", "Tiga Puluh", "Tiga Puluh Satu"];
-                    $months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-
-                    // Extract day, month, and year from the date
-                    $date_parts = explode('-', $tanggal_kontrak);
-                    $day = intval($date_parts[2]); // Day
-                    $month = intval($date_parts[1]); // Month
-                    $year = intval($date_parts[0]); // Year
-                
-                    // Convert year to words (for example: 2024 -> Dua Ribu Dua Puluh Empat)
-                    $year_in_words = convertYearToWords($year);
-
-                    // Construct the final string
-                    return $days[$day - 1] . " bulan " . $months[$month - 1] . " tahun " . $year_in_words;
-                }
-
-                // Helper function to convert year into words
-                function convertYearToWords($year)
-                {
-                    $year_map = [
-                        1000 => "Seribu",
-                        2000 => "Dua Ribu",
-                        2020 => "Dua Puluh",
-                        2021 => "Dua Puluh Satu",
-                        2022 => "Dua Puluh Dua",
-                        2023 => "Dua Puluh Tiga",
-                        2024 => "Dua Puluh Empat",
-                        2025 => "Dua Puluh Lima"
+                    $days = [
+                        'Sunday' => 'Minggu',
+                        'Monday' => 'Senin',
+                        'Tuesday' => 'Selasa',
+                        'Wednesday' => 'Rabu',
+                        'Thursday' => 'Kamis',
+                        'Friday' => 'Jumat',
+                        'Saturday' => 'Sabtu'
                     ];
 
-                    $year_string = "Dua Ribu";
-                    if ($year >= 2020) {
-                        $year_string .= " " . $year_map[$year];
-                    }
+                    $months = [
+                        '01' => 'Januari',
+                        '02' => 'Februari',
+                        '03' => 'Maret',
+                        '04' => 'April',
+                        '05' => 'Mei',
+                        '06' => 'Juni',
+                        '07' => 'Juli',
+                        '08' => 'Agustus',
+                        '09' => 'September',
+                        '10' => 'Oktober',
+                        '11' => 'November',
+                        '12' => 'Desember'
+                    ];
 
-                    return $year_string;
-
+                    // Convert the date to the needed format
+                    $dayOfWeek = date('l', strtotime($date)); // Get the day of the week (e.g., 'Wednesday')
+                    $day = date('j', strtotime($date)); // Get the day (e.g., '5')
+                    $month = date('m', strtotime($date)); // Get the month (e.g., '05')
+                    $year = date('Y', strtotime($date)); // Get the year (e.g., '2024')
+                
+                    // Convert numbers to Indonesian words for the year
+                    $yearInWords = terbilang((int) $year); // Call the function to convert number to words
+                
+                    // Format the date string
+                    return $days[$dayOfWeek] . " tanggal " . terbilang($day) . " bulan " . $months[$month] . " tahun " . $yearInWords;
                 }
 
+                // Function to convert numbers to Indonesian words (terbilang)
+                function terbilang($number)
+                {
+                    $words = [
+                        0 => '',
+                        1 => 'Satu',
+                        2 => 'Dua',
+                        3 => 'Tiga',
+                        4 => 'Empat',
+                        5 => 'Lima',
+                        6 => 'Enam',
+                        7 => 'Tujuh',
+                        8 => 'Delapan',
+                        9 => 'Sembilan',
+                        10 => 'Sepuluh',
+                        11 => 'Sebelas',
+                        12 => 'Dua Belas',
+                        13 => 'Tiga Belas',
+                        14 => 'Empat Belas',
+                        15 => 'Lima Belas',
+                        16 => 'Enam Belas',
+                        17 => 'Tujuh Belas',
+                        18 => 'Delapan Belas',
+                        19 => 'Sembilan Belas',
+                        20 => 'Dua Puluh',
+                        30 => 'Tiga Puluh',
+                        40 => 'Empat Puluh',
+                        50 => 'Lima Puluh',
+                        60 => 'Enam Puluh',
+                        70 => 'Tujuh Puluh',
+                        80 => 'Delapan Puluh',
+                        90 => 'Sembilan Puluh',
+                        100 => 'Seratus',
+                        1000 => 'Seribu'
+                    ];
+
+                    if ($number < 20) {
+                        return $words[$number];
+                    }
+
+                    if ($number < 100) {
+                        return $words[(int) ($number / 10) * 10] . ' ' . $words[$number % 10];
+                    }
+
+                    if ($number < 1000) {
+                        return $words[(int) ($number / 100)] . ' Ratus ' . terbilang($number % 100);
+                    }
+
+                    if ($number < 1000000) {
+                        return terbilang((int) ($number / 1000)) . ' Ribu ' . terbilang($number % 1000);
+                    }
+
+                    if ($number < 1000000000) {
+                        return terbilang((int) ($number / 1000000)) . ' Juta ' . terbilang($number % 1000000);
+                    }
+
+                    return $number; // Return the number if it’s out of supported range
+                }
+
+                // Example usage
+                echo formatIndonesianDate($row1->tanggal_surat_perjanjian);
                 ?>
+
                 , berdasarkan Berita Acara Hasil Pemilihan Nomor :
                 <?php echo $row1->nomor_bahp; ?> Tanggal
                 <?php

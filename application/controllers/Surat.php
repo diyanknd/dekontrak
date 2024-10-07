@@ -115,13 +115,35 @@ class Surat extends CI_Controller
 
 	function surat_perjanjian_konsultansi_non_tender()
 	{
-		$this->load->view('surat/surat_perjanjian_konsultansi_non_tender');
+		$id_paket = $this->uri->segment('3');
+
+		$data['row1'] = $this->db->select('*')
+			->from('sppbj')
+			->join('surat_perjanjian', 'sppbj.id_paket = surat_perjanjian.id_paket')
+			->where('surat_perjanjian.id_paket', $id_paket)
+			->get()
+			->row();
+		$data['row2'] = $this->Kontrak->get_data_paket()->row();
+		$data['skppk'] = $this->db2->get('nomor_skppk')->row();
+		$query = $this->db2->where('id_paket', $id_paket)->get('tb_bast')->num_rows();
+		if ($query == 1) {
+			$data['bast'] = $this->db2->where('id_paket', $id_paket)->get('tb_bast')->row();
+		} else {
+			$this->session->set_flashdata('error', 'BAST belum di Input !');
+			$this->session->set_flashdata('alert', 'error');
+
+			redirect('page/detail_fisik');
+		}
+
+
+
+		$this->load->view('surat/surat_perjanjian_konsultansi_non_tender', $data);
 	}
 
 
 
 
-	function sppbj_konsultan_tender()
+	function sppbj_konsultansi_tender()
 	{
 
 		$id_paket = $this->uri->segment('3');
@@ -131,7 +153,7 @@ class Surat extends CI_Controller
 		$this->load->view('surat/sppbj_konsultan_tender', $data);
 	}
 
-	function surat_konsultan_perjanjian_tender()
+	function surat_perjanjian_konsultansi_tender()
 	{
 		$id_paket = $this->uri->segment('3');
 
@@ -142,10 +164,11 @@ class Surat extends CI_Controller
 			->get()
 			->row();
 		$data['row2'] = $this->Kontrak->get_data_paket()->row();
+		$data['skppk'] = $this->db2->get('nomor_skppk')->row();
 		$this->load->view('surat/surat_konsultan_perjanjian_tender', $data);
 	}
 
-	function spmk_konsultan_tender()
+	function spmk_konsultansi_tender()
 	{
 		$id_paket = $this->uri->segment('3');
 

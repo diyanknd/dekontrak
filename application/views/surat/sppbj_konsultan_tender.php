@@ -183,13 +183,61 @@
             <td>
                 <div class="justify">
                     Dengan ini kami beritahukan bahwa penawaran Saudara berdasarkan Surat Penawaran Nomor:
-                    151087043/1/2022 tanggal 17 April 2023 perihal Penawaran Pekerjaan Konsultan… dengan nilai penawaran
+                    <?php echo $row1->no_surat_penawaran; ?> tanggal <?php
+                        $tanggal = $row1->tanggal_surat_penawaran;
+                        $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+                        $tanggal_format = date("d", strtotime($tanggal));
+                        $bulan_index = date("n", strtotime($tanggal)) - 1;
+                        $tahun = date("Y", strtotime($tanggal));
+                        echo $tanggal_format . " " . $bulan[$bulan_index] . " " . $tahun;
+                        ?> perihal Penawaran Pekerjaan <?php echo $row2->paket_pekerjaan; ?>
+                    dengan nilai penawaran
                     setelah dilakukan klarifikasi dan negosiasi teknis dan biaya oleh Pokja Pemilihan Pekerjaan UKPBJ
-                    sebesar Rp. 500.000.000,00 (Lima Ratus Juta Rupiah) termasuk PPN, telah ditetapkan sebagai pemenang
+                    sebesar <?php
+                    $hasil_negoisasi = $row1->hasil_negoisasi;
+                    $hasil_format = number_format($hasil_negoisasi, 2, ',', '.');
+                    $hasil_terbilang = terbilang($hasil_negoisasi);
+                    echo "Rp. " . $hasil_format . " (" . $hasil_terbilang . " Rupiah )";
+                    ?>
+
+                    <?php
+                    function terbilang($nilai)
+                    {
+                        $nilai = abs($nilai);
+                        $huruf = array("", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan", "Sepuluh", "Sebelas");
+                        $temp = "";
+                        if ($nilai < 12) {
+                            $temp = " " . $huruf[$nilai];
+                        } elseif ($nilai < 20) {
+                            $temp = terbilang($nilai - 10) . " Belas";
+                        } elseif ($nilai < 100) {
+                            $temp = terbilang($nilai / 10) . " Puluh" . terbilang($nilai % 10);
+                        } elseif ($nilai < 200) {
+                            $temp = " Seratus" . terbilang($nilai - 100);
+                        } elseif ($nilai < 1000) {
+                            $temp = terbilang($nilai / 100) . " Ratus" . terbilang($nilai % 100);
+                        } elseif ($nilai < 2000) {
+                            $temp = " Seribu" . terbilang($nilai - 1000);
+                        } elseif ($nilai < 1000000) {
+                            $temp = terbilang($nilai / 1000) . " Ribu" . terbilang($nilai % 1000);
+                        } elseif ($nilai < 2000000) {
+                            $temp = " Sejuta" . terbilang($nilai - 1000000);
+                        } elseif ($nilai < 1000000000) {
+                            $temp = terbilang($nilai / 1000000) . " Juta" . terbilang($nilai % 1000000);
+                        } elseif ($nilai < 2000000000) {
+                            $temp = " SeMilyar" . terbilang($nilai - 1000000000);
+                        } else {
+                            $temp = terbilang($nilai / 1000000000) . " Milyar" . terbilang($nilai % 1000000000);
+                        }
+                        return $temp;
+                    }
+                    ?>
+                    termasuk PPN, telah ditetapkan sebagai pemenang
                     oleh Pokja Pemilihan UKPBJ.
                 </div><br>
                 <div class="justify">
-                    Selanjutnya kami menunjuk Saudara untuk melaksanakan pekerjaan Konsultan .... dan meminta Saudara
+                    Selanjutnya kami menunjuk Saudara untuk melaksanakan pekerjaan <?php echo $row2->paket_pekerjaan; ?>
+                    dan meminta Saudara
                     untuk menandatangani Surat Perjanjian setelah dikeluarkannya SPPBJ ini sesuai dengan ketentuan dalam
                     Dokumen Seleksi
                 </div><br>

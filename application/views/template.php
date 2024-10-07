@@ -18,6 +18,7 @@
   <link rel="stylesheet"
     href="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/css/simple-datatables.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/css/github.min.css" />
 
   <style>
     .scale-fade-animation {
@@ -443,7 +444,7 @@
 
 
           <!-- Notification switch -->
-          <div class="relative" x-data="{open:false}">
+          <!-- <div class="relative" x-data="{open:false}">
             <span class="size-4 text-xs absolute -top-1 -right-1 f-center text-neutral-0 bg-primary-300 rounded-full"> 2
             </span>
             <button title="Notifications" @click="open = !open"
@@ -515,12 +516,13 @@
                 </div>
               </ul>
             </div>
-          </div>
+          </div> -->
 
           <!-- user profile -->
           <div x-data="dropdown" class="relative shrink-0">
             <div title="User Profile" @click="toggle" class="size-9 cursor-pointer">
-              <img src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/images/users/user-s-4.png"
+              <img
+                src="https://jantan.beraudpupr.com/assets/foto_profil/<?php echo $this->session->userdata('pas_photo'); ?>"
                 class="rounded-full" alt="profile img" />
             </div>
             <div @click.away="close" x-show="isOpen"
@@ -2331,6 +2333,7 @@ setActiveMenu(){
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/snackbar.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/sweetalert.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/simple-datatable.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/highlight.js"></script>
 
 
 

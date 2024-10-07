@@ -336,7 +336,7 @@
                         <?php echo $row2->nama_direktur; ?>
                     </div>
                     <div>
-                        Direktur
+                        <?php echo $row2->jabatan; ?>
                     </div>
                 </td>
 
