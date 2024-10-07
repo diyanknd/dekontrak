@@ -322,7 +322,7 @@
             <div x-show="query.length > 0 && results.length > 0"
               class="absolute bg-white border mt-1 w-full max-h-60 overflow-y-auto z-50 rounded-md shadow-lg">
               <template x-for="(result, index) in results" :key="index">
-                <div class="p-2 hover:bg-gray-200 cursor-pointer" @click="selectPaket(result.id)">
+                <div class="p-2 hover:bg-gray-200 cursor-pointer" @click="submitDetailFisik(result.id)">
                   <span x-text="result.paket_pekerjaan"></span>
                 </div>
               </template>
@@ -338,14 +338,22 @@
               class="absolute bg-white border mt-1 w-full p-2">
               <span>No results found</span>
             </div>
+
+            <!-- Hidden Form for Submitting the Selected Paket ID -->
+            <form id="detailFisikFormlol" action="<?php echo site_url('Page/detail_fisik'); ?>" method="POST">
+              <input type="hidden" id="id_paketlol" name="id" value="">
+            </form>
           </div>
 
+
+          <!-- JavaScript Section -->
           <script>
             document.addEventListener('alpine:init', () => {
               Alpine.data('searchComponent', () => ({
                 query: '',
                 results: [],
                 isLoading: false,
+                selectedId: '', // Variable to store the selected result ID
 
                 async searchPaketPekerjaan() {
                   this.isLoading = true;
@@ -365,48 +373,47 @@
                     }
 
                     const data = await response.json();
-                    console.log("Response Data: ", data); // Log the full response to check if 'id' is present
+                    console.log("Response Data: ", data);
 
-                    if (Array.isArray(data)) {
+                    if (Array.isArray(data) && data.length > 0) {
                       this.results = data; // Populate results with fetched data
-                      console.log(this.results); // Log the results to ensure the data contains 'id'
                     } else {
-                      console.error('Unexpected data format:', data);
+                      console.error('Unexpected data format or empty results:', data);
                       this.results = [];
                     }
                   } catch (error) {
                     console.error('Error fetching data:', error);
                     this.results = [];
                   } finally {
-                    this.isLoading = false; // Hide loading state
+                    this.isLoading = false;
                   }
                 },
 
-                selectPaket(id) {
-                  console.log("Selected Paket ID: ", id); // Log the selected id for debugging
+                submitDetailFisik(id) {
+                  if (!id) {
+                    console.error("ID Paket is empty!");
+                    return; // Exit function if id is empty
+                  }
 
-                  // Post the selected 'id' to detail_fisik
-                  fetch('<?php echo site_url('Page/detail_fisik'); ?>', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ id: id }) // Send the selected paket id
-                  })
-                    .then(response => {
-                      if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                      }
-                      // Redirect to the detail_fisik page
-                      window.location.href = '<?php echo site_url('Page/detail_fisik'); ?>';
-                    })
-                    .catch(error => {
-                      console.error('Error posting data:', error);
-                    });
+                  console.log("Selected Paket ID: ", id); // Logging the selected paket ID
+
+                  // Set the id_paket in the hidden form field
+                  document.getElementById('id_paketlol').value = id;
+
+                  // Submit the form
+                  document.getElementById('detailFisikFormlol').submit();
                 }
               }));
             });
           </script>
+
+
+
+
+
+
+
+
 
 
 
@@ -584,49 +591,8 @@
       class="fixed top-0 z-[12] h-full w-[280px] bg-neutral-0 duration-300 dark:bg-neutral-904 ltr:left-0 rtl:right-0">
       <div class="px-3 xxl:px-4 pt-3 sm:pt-4">
         <a href="index.html" class="text-primary-300 flex gap-3 items-center bb-dashed-n30 xl:pb-3.5 !mb-0">
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clip-path="url(#clip0_9642_133646)">
-              <path
-                d="M20.5716 17.5166L19.674 13.4388L16.5908 16.2554L17.0598 16.403L12.2837 31.7543C1.43017 27.3907 0.00733577 12.5359 9.82304 6.173C15.4788 2.50631 22.7587 3.30374 27.5051 7.6686L28.5416 4.33954C22.7583 -0.132655 14.5448 -0.722943 8.07255 3.47288C-5.2819 12.1298 -1.23273 32.7566 14.4218 35.7129C15.4924 32.2695 18.1055 23.8728 20.1268 17.376L20.5716 17.5166Z"
-                fill="currentColor" />
-              <path
-                d="M32.7199 8.96344L31.3295 13.4321C34.4068 21.9951 28.8794 31.3718 19.7571 32.6634L21.288 27.7448C22.6152 28.028 21.5668 27.805 25.4758 28.6385C28.4719 19.0106 30.6186 12.1073 33.164 3.92455L33.6012 4.06323L32.7035 -0.015625L29.6204 2.80102L30.0966 2.95233C28.4298 8.3099 28.3457 8.58051 23.2755 24.8794C21.9979 24.6065 23.0063 24.8217 19.0869 23.9857C15.7039 34.8601 16.9887 30.7289 15.3906 35.8672C30.3023 37.8435 40.5552 21.5237 32.7199 8.96344Z"
-                fill="currentColor" />
-              <path
-                d="M22.5662 23.628L26.3888 11.3387L26.8504 11.4855L25.9527 7.40625L22.8696 10.2229L23.3215 10.3663L19.4062 22.9539L22.5662 23.628Z"
-                fill="currentColor" />
-              <path
-                d="M14.2726 35.4612C7.21781 34.0536 1.98186 28.7935 0.584283 21.6896C-0.82592 14.5228 2.08941 7.61258 8.19247 3.65624C11.0227 1.82146 14.2985 0.851562 17.6648 0.851562C21.4899 0.851562 25.2559 2.11799 28.2888 4.42044L27.3993 7.27872C24.7149 4.92333 21.2754 3.62999 17.6751 3.62999C14.8432 3.62999 12.087 4.4458 9.70558 5.98993C5.02126 9.02622 2.54734 14.1682 3.08711 19.7451C3.6259 25.3135 7.03382 29.8789 12.2032 31.9569L12.4232 32.0451L17.3339 16.2607L17.0189 16.1613L19.5428 13.8558L20.2779 17.1948L19.9846 17.1019C19.9844 17.1016 14.9144 33.3963 14.2726 35.4612Z"
-                fill="currentColor" />
-              <path
-                d="M19.6875 22.7955L23.596 10.2291L23.2978 10.1345L25.8219 7.82812L26.5572 11.1682L26.2469 11.0695L22.4185 23.3782L19.6875 22.7955Z"
-                fill="currentColor" />
-              <path
-                d="M17.8402 35.81C17.1252 35.81 16.3969 35.7666 15.6719 35.6802L19.2314 24.2384L23.4197 25.1321L30.3649 2.80778L30.042 2.70465L32.5665 0.398438L33.3018 3.73835L33.0158 3.64752L25.3219 28.3813L21.134 27.4869L19.4414 32.9255L19.783 32.877C24.1618 32.2572 27.9844 29.7263 30.2713 25.9333C32.5598 22.1379 33.0264 17.5832 31.5547 13.425L32.7798 9.48927C35.9381 14.8622 36.016 21.2963 32.964 26.7963C29.8321 32.4404 24.1793 35.8101 17.8426 35.8101C17.8418 35.81 17.8411 35.81 17.8402 35.81Z"
-                fill="currentColor" />
-              <path
-                d="M18.6684 21.3143C19.4295 18.8676 19.9803 17.0977 19.9803 17.0977L20.2736 17.1906L19.5384 13.8516L17.0145 16.1571L17.3295 16.2565L15.8203 21.1074C16.7669 21.2005 17.716 21.2691 18.6684 21.3143Z"
-                fill="currentColor" />
-              <path
-                d="M3.01171 18.1501C3.0415 13.199 5.46923 8.73446 9.70261 5.98993C12.084 4.4458 14.8402 3.62999 17.6721 3.62999C21.2725 3.62999 24.712 4.92333 27.3963 7.27873L28.2858 4.42044C25.253 2.11799 21.4869 0.851562 17.6618 0.851562C14.2955 0.851562 11.0198 1.82135 8.1895 3.65624C3.42421 6.74548 0.602474 11.6351 0.265625 17.0418C1.17105 17.4347 2.08656 17.8047 3.01171 18.1501Z"
-                fill="currentColor" />
-              <path
-                d="M20.125 21.3709C21.0928 21.3941 22.0634 21.3938 23.0366 21.3732L26.2413 11.0695L26.5516 11.1682L25.8163 7.82812L23.2922 10.1343L23.5903 10.2289L20.125 21.3709Z"
-                fill="currentColor" />
-              <path
-                d="M31.5547 13.4279C32.3777 15.7536 32.5933 18.203 32.2243 20.5745C33.1934 20.413 34.1571 20.2237 35.113 20.001C35.4765 16.4044 34.6965 12.7529 32.7798 9.49219L31.5547 13.4279Z"
-                fill="currentColor" />
-              <path
-                d="M24.6094 21.3211C25.5991 21.2808 26.5894 21.2223 27.5777 21.1413L33.0196 3.64752L33.3056 3.73835L32.5704 0.398438L30.0458 2.70465L30.3687 2.80778L24.6094 21.3211Z"
-                fill="currentColor" />
-            </g>
-            <defs>
-              <clippath id="clip0_9642_133646">
-                <rect width="35.4462" height="36" fill="white" />
-              </clippath>
-            </defs>
-          </svg>
-          <span class="h4 shrink-0 text-neutral-700 dark:text-neutral-0">Softify</span>
+          <img src="<?php echo base_url(); ?>/assets/images/logo.png" class="w-10" alt="">
+          <span class="h4 shrink-0 text-neutral-700 dark:text-neutral-0">DPUPR BERAU</span>
         </a>
       </div>
       <div x-data="{
