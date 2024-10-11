@@ -4,7 +4,7 @@
   <!-- Breadcrumb -->
   <div class="white-box xxxl:p-6">
     <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain"
-      style="background-image: url(assets/images/breadcrumb-el-1.png)">
+      style="background-image: url(<?php echo base_url(); ?>/assets/softify/softify/dist/assets/images/breadcrumb-el-1.png)">
       <h2 class="mb-3 xxxl:mb-5">Kontrak List</h2>
       <ul class="flex flex-wrap gap-2 items-center">
         <li>
@@ -133,30 +133,32 @@
     searchQuery: '', // Holds the search query
     filteredInvoices: [],
     invoices: [
-    <?php $i = 1;
-    $total = $kontrak->num_rows();
-    foreach ($kontrak->result() as $row) { ?>
-      {
-        no: <?php echo $i; ?>,
-        nomor_kontrak: '<?php echo $row->nomor_kontrak; ?>',
-        checked: false,
-        paket_pekerjaan: '<?php echo $row->paket_pekerjaan; ?>',
-        pagu_anggaran: '<?php echo number_format($row->nilai_pagu); ?>',
-        nilai_kontrak: '<?php echo number_format($row->nilai_kontrak); ?>',
-        kecamatan: '<?php echo "Kec." . $row->kecamatan; ?>',
-        status: '<?php
-        if ($row->jenis_pengadaan == "Pekerjaan Konstruksi") {
-          echo ($row->nilai_pagu >= 200000000) ? "tender" : "non_tender";
-        } else {
-          echo ($row->nilai_pagu >= 100000000) ? "tender" : "non_tender";
+        <?php $i = 1;
+        $total = $kontrak->num_rows();
+        foreach ($kontrak->result() as $row) { ?>
+        {
+
+            no: <?php echo $i; ?>,
+            id: '<?php echo $row->id; ?>',
+            nomor_kontrak: '<?php echo $row->nomor_kontrak; ?>',
+            checked: false,
+            paket_pekerjaan: '<?php echo $row->paket_pekerjaan; ?>',
+            pagu_anggaran: '<?php echo number_format($row->nilai_pagu); ?>',
+            nilai_kontrak: '<?php echo number_format($row->nilai_kontrak); ?>',
+            kecamatan: '<?php echo "Kec." . $row->kecamatan; ?>',
+            status: '<?php
+            if ($row->jenis_pengadaan == "Pekerjaan Konstruksi") {
+              echo ($row->nilai_pagu >= 200000000) ? "tender" : "non_tender";
+            } else {
+              echo ($row->nilai_pagu >= 100000000) ? "tender" : "non_tender";
+            }
+            ?>'
         }
-        ?>'
-    }
-    <?php if ($i < $total) {
-      echo ',';
-    } ?>
-    <?php $i++;
-    } ?>
+        <?php if ($i < $total) {
+          echo ',';
+        } ?>
+        <?php $i++;
+        } ?>
     ],
     currentPage: 1,
     pageSize: 10, // Default rows per page
@@ -164,76 +166,76 @@
     
     // Get paginated invoices
     paginatedInvoices() {
-      let start = (this.currentPage - 1) * this.pageSize;
-      let end = start + this.pageSize;
-      return this.filteredInvoices.slice(start, end);
+        let start = (this.currentPage - 1) * this.pageSize;
+        let end = start + this.pageSize;
+        return this.filteredInvoices.slice(start, end);
     },
 
     // Calculate total pages
     totalPages() {
-      return Math.ceil(this.filteredInvoices.length / this.pageSize);
+        return Math.ceil(this.filteredInvoices.length / this.pageSize);
     },
 
     // Change the page number
     changePage(page) {
-      if (page >= 1 && page <= this.totalPages()) {
-        this.currentPage = page;
-      }
+        if (page >= 1 && page <= this.totalPages()) {
+            this.currentPage = page;
+        }
     },
 
     // Update page size
     updatePageSize(event) {
-      this.pageSize = parseInt(event.target.value);
-      this.currentPage = 1; // Reset to page 1 when changing page size
+        this.pageSize = parseInt(event.target.value);
+        this.currentPage = 1; // Reset to page 1 when changing page size
     },
 
     // Filter invoices by status (tender, non_tender)
     filterInvoiceByStatus(status) {
-      this.activeTab = status;
-      if (status === 'all') {
-        this.filteredInvoices = this.invoices;
-      } else {
-        this.filteredInvoices = this.invoices.filter(invoice => invoice.status.toLowerCase() === status.toLowerCase());
-      }
-      this.currentPage = 1; // Reset to page 1 when filter is applied
+        this.activeTab = status;
+        if (status === 'all') {
+            this.filteredInvoices = this.invoices;
+        } else {
+            this.filteredInvoices = this.invoices.filter(invoice => invoice.status.toLowerCase() === status.toLowerCase());
+        }
+        this.currentPage = 1; // Reset to page 1 when filter is applied
     },
 
     // Search invoices by paket pekerjaan or nomor kontrak
     searchInvoices() {
-      this.filteredInvoices = this.invoices.filter(invoice => {
-        return invoice.paket_pekerjaan.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        invoice.nomor_kontrak.toLowerCase().includes(this.searchQuery.toLowerCase());
-      });
-      this.currentPage = 1; // Reset to page 1 after search
+        this.filteredInvoices = this.invoices.filter(invoice => {
+            return invoice.paket_pekerjaan.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+                   invoice.nomor_kontrak.toLowerCase().includes(this.searchQuery.toLowerCase());
+        });
+        this.currentPage = 1; // Reset to page 1 after search
     },
 
     // Clear filters and reset search
     clearFilter() {
-      this.activeTab = 'all';
-      this.filteredInvoices = this.invoices;
-      this.searchQuery = ''; // Clear search query
-      this.currentPage = 1; // Reset to page 1
+        this.activeTab = 'all';
+        this.filteredInvoices = this.invoices;
+        this.searchQuery = ''; // Clear search query
+        this.currentPage = 1; // Reset to page 1
     },
 
     // Calculate the total pagu anggaran
     totalPaguAnggaran() {
-      return this.filteredInvoices.reduce((total, invoice) => {
-        return total + parseFloat(invoice.pagu_anggaran.replace(/[^0-9.-]+/g, ''));
-      }, 0).toLocaleString('en-US', { style: 'currency', currency: 'IDR' });
+        return this.filteredInvoices.reduce((total, invoice) => {
+            return total + parseFloat(invoice.pagu_anggaran.replace(/[^0-9.-]+/g, ''));
+        }, 0).toLocaleString('en-US', { style: 'currency', currency: 'IDR' });
     },
 
     // Calculate the total nilai kontrak
     totalNilaiKontrak() {
-      return this.filteredInvoices.reduce((total, invoice) => {
-        return total + parseFloat(invoice.nilai_kontrak.replace(/[^0-9.-]+/g, ''));
-      }, 0).toLocaleString('en-US', { style: 'currency', currency: 'IDR' });
+        return this.filteredInvoices.reduce((total, invoice) => {
+            return total + parseFloat(invoice.nilai_kontrak.replace(/[^0-9.-]+/g, ''));
+        }, 0).toLocaleString('en-US', { style: 'currency', currency: 'IDR' });
     },
 
     // Initialize filteredInvoices to all invoices when page loads
     init() {
-      this.filteredInvoices = this.invoices;
+        this.filteredInvoices = this.invoices;
     }
-  }" x-init="filteredInvoices=invoices" class="white-box">
+}" x-init="filteredInvoices=invoices" class="white-box">
         <div class="flex justify-between items-center bb-dashed-n30">
           <h4>Kontrak List</h4>
           <div class="flex flex-wrap items-center gap-4">
@@ -357,9 +359,10 @@
             </thead>
             <tbody>
               <template x-for="invoice in paginatedInvoices()" :key="invoice.no">
-                <tr
+                <tr @click="submitDetailFisik(invoice.id)"
                   class="border-b border-neutral-30 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:hover:bg-neutral-903"
-                  :class="invoice.checked?'!bg-primary-300/10':'bg-neutral-0 dark:bg-neutral-904'">
+                  :class="invoice.checked ? '!bg-primary-300/10' : 'bg-neutral-0 dark:bg-neutral-904'"
+                  style="cursor:pointer">
                   <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
                     <a href="invoice-details.html" class="flex">
                       <div>
@@ -367,7 +370,7 @@
                       </div>
                     </a>
                   </td>
-                  <td class="px-6 w-30" :class="dense? 'py-2': 'py-2 lg:py-3'"
+                  <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'"
                     style="white-space: normal; word-wrap: break-word;">
                     <div>
                       <p class="m-text font-medium mb-1" x-text="invoice.paket_pekerjaan"></p>
@@ -427,8 +430,21 @@
               </tr>
             </tfoot>
           </table>
+          <form id="detailFisikForm" action="<?php echo site_url(); ?>/page/detail_fisik" method="POST"
+            style="display:none;">
+            <input type="hidden" name="id" id="invoiceId">
+          </form>
+          <script>
+            function submitDetailFisik(id) {
+              // Set the invoice ID in the hidden form
+              document.getElementById('invoiceId').value = id;
 
-          </table>
+              // Submit the form
+              document.getElementById('detailFisikForm').submit();
+            }
+          </script>
+          </p>
+
 
           <div
             class="mt-6 flex items-center gap-5 justify-center flex-col md:flex-row md:justify-between whitespace-nowrap">

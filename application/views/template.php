@@ -535,7 +535,7 @@
                 <span class="text-sm">@<?php echo $this->session->userdata('username') ?></span>
               </div>
               <ul class="flex w-[250px] flex-col p-4">
-                <li>
+                <!-- <li>
                   <a href="user-profile.html"
                     class="flex items-center gap-2 rounded-md px-2 py-1.5 duration-300 hover:bg-primary-300/10 hover:text-primary-300">
                     <span>
@@ -543,8 +543,8 @@
                     </span>
                     Profile
                   </a>
-                </li>
-                <li>
+                </li> -->
+                <!-- <li>
                   <a href="chat.html"
                     class="flex items-center gap-2 rounded-md px-2 py-1.5 duration-300 hover:bg-primary-300/10 hover:text-primary-300">
                     <span>
@@ -552,8 +552,8 @@
                     </span>
                     Messages
                   </a>
-                </li>
-                <li>
+                </li> -->
+                <!-- <li>
                   <a href="#"
                     class="flex items-center gap-2 rounded-md px-2 py-1.5 duration-300 hover:bg-primary-300/10 hover:text-primary-300">
                     <span>
@@ -561,8 +561,8 @@
                     </span>
                     Help
                   </a>
-                </li>
-                <li>
+                </li> -->
+                <!-- <li>
                   <a href="user-account.html"
                     class="flex items-center gap-2 rounded-md px-2 py-1.5 duration-300 hover:bg-primary-300/10 hover:text-primary-300">
                     <span>
@@ -570,9 +570,9 @@
                     </span>
                     Settings
                   </a>
-                </li>
+                </li> -->
                 <li>
-                  <a href="<?php echo site_url('page/logout'); ?>"
+                  <a href="#" onclick="event.preventDefault(); logoutConfirm();"
                     class="flex items-center gap-2 rounded-md px-2 py-1.5 duration-300 hover:bg-primary-300/10 hover:text-primary-300">
                     <span>
                       <i class="las la-sign-out-alt mt-0.5 text-xl"></i>
@@ -580,6 +580,23 @@
                     Logout
                   </a>
                 </li>
+                <script>
+                  function logoutConfirm() {
+                    Swal.fire({
+                      title: 'Are you sure?',
+                      text: "You will be logged out!",
+                      icon: 'warning',
+                      showCancelButton: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Yes, logout!'
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        window.location.href = "<?php echo site_url('page/logout'); ?>";
+                      }
+                    });
+                  }
+                </script>
               </ul>
             </div>
           </div>
@@ -2329,7 +2346,7 @@ setActiveMenu(){
   <script defer src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/alpine.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/nice-select2.js"></script>
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/apexcharts.min.js"></script>
-  <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/charts.js"></script>
+  <!-- <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/charts.js"></script> -->
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/snackbar.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/sweetalert.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/simple-datatable.js"></script>

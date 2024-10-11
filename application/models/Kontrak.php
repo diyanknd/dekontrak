@@ -7,6 +7,8 @@ class Kontrak extends CI_Model
 	{
 		parent::__construct();
 		$this->db2 = $this->load->database('dekontrak', TRUE);
+		$this->jenis_user = $this->session->userdata('jenis_user');
+
 	}
 
 	public function search_paket_pekerjaan($query)
@@ -15,6 +17,9 @@ class Kontrak extends CI_Model
 		$this->db2->from('tb_paket');
 		$this->db2->join('tb_kontrak', 'tb_paket.id = tb_kontrak.id_paket');
 		$this->db2->like('tb_paket.paket_pekerjaan', $query, 'both');  // Perform a LIKE search
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
 		$query = $this->db2->get();
 
 		return $query->result(); // Ensure the 'id' is included in the result set
@@ -23,7 +28,14 @@ class Kontrak extends CI_Model
 
 	function get_kontrak()
 	{
-		$query = $this->db2->query("SELECT * FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan");
+		$this->db2->select('*');
+		$this->db2->from('tb_paket');
+		$this->db2->join('tb_kontrak', 'tb_paket.id = tb_kontrak.id_paket');
+		$this->db2->join('tb_kecamatan', 'tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan');
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+		$query = $this->db2->get();
 
 		return $query;
 	}
@@ -113,114 +125,230 @@ class Kontrak extends CI_Model
 
 	function get_kontrak_konsultan_pengawasan_list()
 	{
-		$query = $this->db2->query("SELECT * FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan WHERE tb_paket.jenis_pengadaan = 'Jasa Konsultansi Pengawasan'");
-
+		$this->db2->select('*');
+		$this->db2->from('tb_paket');
+		$this->db2->join('tb_kontrak', 'tb_paket.id = tb_kontrak.id_paket');
+		$this->db2->join('tb_kecamatan', 'tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan');
+		$this->db2->where('tb_paket.jenis_pengadaan', 'Jasa Konsultansi Pengawasan');
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+		$query = $this->db2->get();
 		return $query;
 	}
 
 	function get_kontrak_konsultan_perencanaan_list()
 	{
-		$query = $this->db2->query("SELECT * FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan WHERE tb_paket.jenis_pengadaan = 'Jasa Konsultansi Perencanaan'");
-
+		$this->db2->select('*');
+		$this->db2->from('tb_paket');
+		$this->db2->join('tb_kontrak', 'tb_paket.id = tb_kontrak.id_paket');
+		$this->db2->join('tb_kecamatan', 'tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan');
+		$this->db2->where('tb_paket.jenis_pengadaan', 'Jasa Konsultansi Perencanaan');
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+		$query = $this->db2->get();
 		return $query;
 	}
 
 	function get_pagu()
 	{
-		$query = $this->db2->query("SELECT sum(nilai_pagu) as nilai_pagu FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan");
-
+		$this->db2->select('SUM(nilai_pagu) as nilai_pagu');
+		$this->db2->from('tb_paket');
+		$this->db2->join('tb_kontrak', 'tb_paket.id = tb_kontrak.id_paket');
+		$this->db2->join('tb_kecamatan', 'tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan');
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+		$query = $this->db2->get();
 		return $query;
 	}
 
 	function get_pagu_count()
 	{
-		$query = $this->db2->query("SELECT count(nilai_pagu) as count_nilai_pagu FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan");
-
+		$this->db2->select('SUM(nilai_kontrak) as count_nilai_pagu');
+		$this->db2->from('tb_paket');
+		$this->db2->join('tb_kontrak', 'tb_paket.id = tb_kontrak.id_paket');
+		$this->db2->join('tb_kecamatan', 'tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan');
+		$this->db2->where('tb_paket.jenis_pengadaan', 'Jasa Konsultansi Perencanaan');
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+		$query = $this->db2->get();
 		return $query;
 	}
 
 
+
+
 	function get_nilai_kontrak()
 	{
-		$query = $this->db2->query("SELECT sum(nilai_kontrak) as nilai_kontrak FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan");
-
+		$this->db2->select('SUM(nilai_kontrak) as nilai_kontrak');
+		$this->db2->from('tb_paket');
+		$this->db2->join('tb_kontrak', 'tb_paket.id = tb_kontrak.id_paket');
+		$this->db2->join('tb_kecamatan', 'tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan');
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+		$query = $this->db2->get();
 		return $query;
 	}
 
 	function get_nilai_kontrak_count()
 	{
-		$query = $this->db2->query("SELECT count(nilai_kontrak) as count_nilai_kontrak FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan");
-
+		$this->db2->select('COUNT(nilai_kontrak) as count_nilai_kontrak');
+		$this->db2->from('tb_paket');
+		$this->db2->join('tb_kontrak', 'tb_paket.id = tb_kontrak.id_paket');
+		$this->db2->join('tb_kecamatan', 'tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan');
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+		$query = $this->db2->get();
 		return $query;
 	}
 
 	function get_fisik()
 	{
-		$query = $this->db2->query("SELECT * FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan INNER JOIN tb_data_penyedia ON tb_kontrak.penyedia_jasa = tb_data_penyedia.id_data_penyedia WHERE tb_paket.jenis_pengadaan = 'Pekerjaan Konstruksi'");
-
+		$this->db2->select('*');
+		$this->db2->from('tb_paket');
+		$this->db2->join('tb_kontrak', 'tb_paket.id = tb_kontrak.id_paket');
+		$this->db2->join('tb_kecamatan', 'tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan');
+		$this->db2->join('tb_data_penyedia', 'tb_kontrak.penyedia_jasa = tb_data_penyedia.id_data_penyedia');
+		$this->db2->where('tb_paket.jenis_pengadaan', 'Pekerjaan Konstruksi');
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+		$query = $this->db2->get();
 		return $query;
 	}
 
 	function get_pagu_fisik()
 	{
-		$query = $this->db2->query("SELECT sum(nilai_pagu) as nilai_pagu FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan WHERE tb_paket.jenis_pengadaan = 'Pekerjaan Konstruksi'");
-
+		$this->db2->select('SUM(nilai_pagu) as nilai_pagu');
+		$this->db2->from('tb_paket');
+		$this->db2->join('tb_kontrak', 'tb_paket.id = tb_kontrak.id_paket');
+		$this->db2->join('tb_kecamatan', 'tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan');
+		$this->db2->where('tb_paket.jenis_pengadaan', 'Pekerjaan Konstruksi');
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+		$query = $this->db2->get();
 		return $query;
 	}
 
 	function get_pagu_fisik_count()
 	{
-		$query = $this->db2->query("SELECT count(nilai_pagu) as count_nilai_pagu FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan WHERE tb_paket.jenis_pengadaan = 'Pekerjaan Konstruksi'");
-
+		$this->db2->select('COUNT(nilai_pagu) as count_nilai_pagu');
+		$this->db2->from('tb_paket');
+		$this->db2->join('tb_kontrak', 'tb_paket.id = tb_kontrak.id_paket');
+		$this->db2->join('tb_kecamatan', 'tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan');
+		$this->db2->where('tb_paket.jenis_pengadaan', 'Pekerjaan Konstruksi');
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+		$query = $this->db2->get();
 		return $query;
 	}
 
 	function get_pagu_konsultan_pengawasan()
 	{
-		$query = $this->db2->query("SELECT sum(nilai_pagu) as nilai_pagu FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan WHERE tb_paket.jenis_pengadaan = 'Jasa Konsultansi Pengawasan'");
-
+		$this->db2->select('SUM(nilai_pagu) as nilai_pagu');
+		$this->db2->from('tb_paket');
+		$this->db2->join('tb_kontrak', 'tb_paket.id = tb_kontrak.id_paket');
+		$this->db2->join('tb_kecamatan', 'tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan');
+		$this->db2->where('tb_paket.jenis_pengadaan', 'Jasa Konsultansi Pengawasan');
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+		$query = $this->db2->get();
 		return $query;
 	}
 
 	function get_pagu_konsultan_pengawasan_count()
 	{
-		$query = $this->db2->query("SELECT count(nilai_pagu) as count_nilai_pagu FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan WHERE tb_paket.jenis_pengadaan = 'Jasa Konsultansi Pengawasan'");
+		$this->db2->select('count(nilai_pagu) as count_nilai_pagu');
+		$this->db2->from('tb_paket');
+		$this->db2->join('tb_kontrak', 'tb_paket.id = tb_kontrak.id_paket', 'inner');
+		$this->db2->join('tb_kecamatan', 'tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan', 'inner');
+		$this->db2->where('tb_paket.jenis_pengadaan', 'Jasa Konsultansi Pengawasan');
 
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+
+		$query = $this->db2->get();
 		return $query;
 	}
 
+
 	function get_pagu_konsultan_perencanaan()
 	{
-		$query = $this->db2->query("SELECT sum(nilai_pagu) as nilai_pagu FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan WHERE tb_paket.jenis_pengadaan = 'Jasa Konsultansi Perencanaan'");
-
+		$this->db2->select('SUM(nilai_pagu) as nilai_pagu');
+		$this->db2->from('tb_paket');
+		$this->db2->join('tb_kontrak', 'tb_paket.id = tb_kontrak.id_paket');
+		$this->db2->join('tb_kecamatan', 'tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan');
+		$this->db2->where('tb_paket.jenis_pengadaan', 'Jasa Konsultansi Perencanaan');
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+		$query = $this->db2->get();
 		return $query;
 	}
 	function get_pagu_konsultan_perencanaan_count()
 	{
-		$query = $this->db2->query("SELECT count(nilai_pagu) as count_nilai_pagu FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan WHERE tb_paket.jenis_pengadaan = 'Jasa Konsultansi Perencanaan'");
+		$this->db2->select('count(nilai_pagu) as count_nilai_pagu');
+		$this->db2->from('tb_paket');
+		$this->db2->join('tb_kontrak', 'tb_paket.id = tb_kontrak.id_paket');
+		$this->db2->join('tb_kecamatan', 'tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan');
+		$this->db2->where('tb_paket.jenis_pengadaan', 'Jasa Konsultansi Perencanaan');
 
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+		$query = $this->db2->get();
 		return $query;
 	}
 
 
 	function get_kontrak_fisik()
 	{
-		$query = $this->db2->query("SELECT sum(nilai_kontrak) as nilai_kontrak FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan WHERE tb_paket.jenis_pengadaan = 'Pekerjaan Konstruksi'");
-
+		$this->db2->select('SUM(nilai_kontrak) as nilai_kontrak');
+		$this->db2->from('tb_paket');
+		$this->db2->join('tb_kontrak', 'tb_paket.id = tb_kontrak.id_paket');
+		$this->db2->join('tb_kecamatan', 'tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan');
+		$this->db2->where('tb_paket.jenis_pengadaan', 'Pekerjaan Konstruksi');
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+		$query = $this->db2->get();
 		return $query;
 	}
 
 	function get_kontrak_konsultan_pengawasan()
 	{
-		$query = $this->db2->query("SELECT sum(nilai_kontrak) as nilai_kontrak FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan WHERE tb_paket.jenis_pengadaan = 'Jasa Konsultansi Pengawasan'");
-
+		$this->db2->select('SUM(nilai_kontrak) as nilai_kontrak');
+		$this->db2->from('tb_paket');
+		$this->db2->join('tb_kontrak', 'tb_paket.id = tb_kontrak.id_paket');
+		$this->db2->join('tb_kecamatan', 'tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan');
+		$this->db2->where('tb_paket.jenis_pengadaan', 'Jasa Konsultansi Pengawasan');
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+		$query = $this->db2->get();
 		return $query;
 	}
 
 	function get_kontrak_konsultan_perencanaan()
 	{
-		$query = $this->db2->query("SELECT sum(nilai_kontrak) as nilai_kontrak FROM tb_paket INNER JOIN tb_kontrak ON tb_paket.id = tb_kontrak.id_paket INNER JOIN tb_kecamatan ON tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan WHERE tb_paket.jenis_pengadaan = 'Jasa Konsultansi Perencanaan'");
-
+		$this->db2->select('SUM(nilai_kontrak) as nilai_kontrak');
+		$this->db2->from('tb_paket');
+		$this->db2->join('tb_kontrak', 'tb_paket.id = tb_kontrak.id_paket');
+		$this->db2->join('tb_kecamatan', 'tb_paket.id_kecamatan = tb_kecamatan.id_kecamatan');
+		$this->db2->where('tb_paket.jenis_pengadaan', 'Jasa Konsultansi Perencanaan');
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+		$query = $this->db2->get();
 		return $query;
 	}
 
@@ -453,120 +581,208 @@ class Kontrak extends CI_Model
 
 	function get_data_pekerjaan_konstruksi()
 	{
-		$query = $this->db2
-			->select('*')
-			->from('tb_paket')
-			->where('jenis_pengadaan', 'Pekerjaan Konstruksi')
-			->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner')
-			->where('nilai_pagu >=', 200000000)
-			->get();
+		$this->db2->select('*');
+		$this->db2->from('tb_paket');
+		$this->db2->where('jenis_pengadaan', 'Pekerjaan Konstruksi');
+		$this->db2->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner');
+		$this->db2->where('nilai_pagu >=', 200000000);
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+		$query = $this->db2->get();
 
 		return $query;
 	}
+
 
 	function get_data_paket_pekerjaan_all_tender()
 	{
-		$this->db2
-			->select('*')
-			->from('tb_paket')
-			->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner')
-			->group_start()
-			->where('tb_paket.jenis_pengadaan', 'Pekerjaan Konstruksi')
-			->where('tb_paket.nilai_pagu >=', 200000000)
-			->group_end()
-			->or_group_start()
-			->where('tb_paket.jenis_pengadaan !=', 'Pekerjaan Konstruksi')
-			->where('tb_paket.nilai_pagu >=', 100000000)
-			->group_end();
+		$this->db2->select('*');
+		$this->db2->from('tb_paket');
+		$this->db2->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner');
+		$this->db2->group_start();
+		$this->db2->where('tb_paket.jenis_pengadaan', 'Pekerjaan Konstruksi');
+		$this->db2->where('tb_paket.nilai_pagu >=', 200000000);
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+		$this->db2->group_end();
+		$this->db2->or_group_start();
+		$this->db2->where('tb_paket.jenis_pengadaan !=', 'Pekerjaan Konstruksi');
+		$this->db2->where('tb_paket.nilai_pagu >=', 100000000);
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+		$this->db2->group_end();
+
+
 
 		$query = $this->db2->get();
 		return $query;
 	}
+
 
 	function get_data_paket_pekerjaan_all_non_tender()
 	{
-		$this->db2
-			->select('*')
-			->from('tb_paket')
-			->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner')
-			->group_start()
-			->where('tb_paket.jenis_pengadaan', 'Pekerjaan Konstruksi')
-			->where('tb_paket.nilai_pagu <', 200000000)
-			->group_end()
-			->or_group_start()
-			->where('tb_paket.jenis_pengadaan !=', 'Pekerjaan Konstruksi')
-			->where('tb_paket.nilai_pagu <', 100000000)
-			->group_end();
+		$this->db2->select('*');
+		$this->db2->from('tb_paket');
+		$this->db2->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner');
+		$this->db2->group_start();
+		$this->db2->where('tb_paket.jenis_pengadaan', 'Pekerjaan Konstruksi');
+		$this->db2->where('tb_paket.nilai_pagu <', 200000000);
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+		$this->db2->group_end();
+		$this->db2->or_group_start();
+		$this->db2->where('tb_paket.jenis_pengadaan !=', 'Pekerjaan Konstruksi');
+		$this->db2->where('tb_paket.nilai_pagu <', 100000000);
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+		$this->db2->group_end();
+
+
 
 		$query = $this->db2->get();
 		return $query;
 	}
+
 
 
 
 	function get_data_konsultan_pengawasan()
 	{
-		$query = $this->db2
-			->select('*')
-			->from('tb_paket')
-			->where('jenis_pengadaan', 'Jasa Konsultansi Pengawasan')
-			->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner')
-			->where('nilai_pagu >=', 100000000) // add this line			
-			->get();
+		$this->db2->select('*');
+		$this->db2->from('tb_paket');
+		$this->db2->where('jenis_pengadaan', 'Jasa Konsultansi Pengawasan');
+		$this->db2->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner');
+		$this->db2->where('nilai_pagu >=', 100000000);
+
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+
+		$query = $this->db2->get();
 
 		return $query;
 	}
+
 
 	function get_data_konsultan_perencanaan()
 	{
-		$query = $this->db2
-			->select('*')
-			->from('tb_paket')
-			->where('jenis_pengadaan', 'Jasa Konsultansi Perencanaan')
-			->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner')
-			->where('nilai_pagu >=', 100000000)
-			->get();
+		$this->db2->select('*');
+		$this->db2->from('tb_paket');
+		$this->db2->where('jenis_pengadaan', 'Jasa Konsultansi Perencanaan');
+		$this->db2->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner');
+		$this->db2->where('nilai_pagu >=', 100000000);
+
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+
+		$query = $this->db2->get();
 
 		return $query;
 	}
+
 
 	function get_data_pekerjaan_nonkonstruksi()
 	{
-		$query = $this->db2
-			->select('*')
-			->from('tb_paket')
-			->where('jenis_pengadaan', 'Pekerjaan Konstruksi')
-			->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner')
-			->where('nilai_pagu <', 200000000)
-			->get();
+		$this->db2->select('*');
+		$this->db2->from('tb_paket');
+		$this->db2->where('jenis_pengadaan', 'Pekerjaan Konstruksi');
+		$this->db2->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner');
+		$this->db2->where('nilai_pagu <', 200000000);
+
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+
+		$query = $this->db2->get();
 
 		return $query;
 	}
+
 
 
 	function get_data_konsultan_nonpengawasan()
 	{
-		$query = $this->db2
-			->select('*')
-			->from('tb_paket')
-			->where('jenis_pengadaan', 'Jasa Konsultansi Pengawasan')
-			->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner')
-			->where('nilai_pagu <', 100000000) // add this line			
-			->get();
+		$this->db2->select('*');
+		$this->db2->from('tb_paket');
+		$this->db2->where('jenis_pengadaan', 'Jasa Konsultansi Pengawasan');
+		$this->db2->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner');
+		$this->db2->where('nilai_pagu <', 100000000);
+
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+
+		$query = $this->db2->get();
 
 		return $query;
 	}
+
 
 	function get_data_konsultan_nonperencanaan()
 	{
-		$query = $this->db2
-			->select('*')
-			->from('tb_paket')
-			->where('jenis_pengadaan', 'Jasa Konsultansi Perencanaan')
-			->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner')
-			->where('nilai_pagu <', 100000000)
-			->get();
+		$this->db2->select('*');
+		$this->db2->from('tb_paket');
+		$this->db2->where('jenis_pengadaan', 'Jasa Konsultansi Perencanaan');
+		$this->db2->join('tb_kontrak', 'tb_kontrak.id_paket = tb_paket.id', 'inner');
+		$this->db2->where('nilai_pagu <', 100000000);
+
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tb_paket.nama_ppk', $this->id_user);
+		}
+
+		$query = $this->db2->get();
 
 		return $query;
 	}
+
+
+	function check_sppbj()
+	{
+		$this->db2->select('*');
+		$this->db2->from('tb_paket tp');
+		$this->db2->join('tb_kontrak tk', 'tp.id = tk.id_paket');
+		$this->db2->where('tk.sppbj', 0);
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tp.nama_ppk', $this->id_user);
+		}
+		$query = $this->db2->get();
+
+		return $query;
+
+	}
+
+	function check_sp()
+	{
+		$this->db2->select('*');
+		$this->db2->from('tb_paket tp');
+		$this->db2->join('tb_kontrak tk', 'tp.id = tk.id_paket');
+		$this->db2->where('tk.surat_perjanjian', 0);
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tp.nama_ppk', $this->id_user);
+		}
+		$query = $this->db2->get();
+
+		return $query;
+	}
+
+	function check_spmk()
+	{
+		$this->db2->select('*');
+		$this->db2->from('tb_paket tp');
+		$this->db2->join('tb_kontrak tk', 'tp.id = tk.id_paket');
+		$this->db2->where('tk.spmk', 0);
+		if ($this->jenis_user == 2) {
+			$this->db2->where('tp.nama_ppk', $this->id_user);
+		}
+		$query = $this->db2->get();
+
+		return $query;
+	}
+
 }

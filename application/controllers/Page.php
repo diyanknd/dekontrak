@@ -10,6 +10,9 @@ class Page extends CI_Controller
 		$this->db2 = $this->load->database('dekontrak', TRUE);
 		$this->load->model('Kontrak');
 		$this->check_login();
+		$this->jenis_user = $this->session->userdata('jenis_user');
+		$this->id_user = $this->session->userdata('id');
+		$this->tahun = $this->session->userdata('tahun');
 	}
 
 
@@ -24,6 +27,12 @@ class Page extends CI_Controller
 		$data['konsultan_perencanaan_nontender'] = $this->Kontrak->get_data_konsultan_nonperencanaan();
 		$data['paket_pekerjaan_all_tender'] = $this->Kontrak->get_data_paket_pekerjaan_all_tender();
 		$data['paket_pekerjaan_all_non_tender'] = $this->Kontrak->get_data_paket_pekerjaan_all_non_tender();
+
+
+		// check_data
+		$data['check_sppbj'] = $this->Kontrak->check_sppbj();
+		$data['check_sp'] = $this->Kontrak->check_sp();
+		$data['check_spmk'] = $this->Kontrak->check_spmk();
 		$this->template->load('template', 'page/home', $data);
 	}
 
@@ -64,6 +73,12 @@ class Page extends CI_Controller
 		$data['konsultan_perencanaan_nontender'] = $this->Kontrak->get_data_konsultan_nonperencanaan();
 		$data['paket_pekerjaan_all_tender'] = $this->Kontrak->get_data_paket_pekerjaan_all_tender();
 		$data['paket_pekerjaan_all_non_tender'] = $this->Kontrak->get_data_paket_pekerjaan_all_non_tender();
+
+		// check_data
+		$data['check_sppbj'] = $this->Kontrak->check_sppbj();
+		$data['check_sp'] = $this->Kontrak->check_sp();
+		$data['check_spmk'] = $this->Kontrak->check_spmk();
+
 		$this->template->load('template', 'page/home', $data);
 	}
 
@@ -79,7 +94,7 @@ class Page extends CI_Controller
 		$data['get_kontrak_fisik'] = $this->Kontrak->get_kontrak_fisik()->row()->nilai_kontrak;
 		$data['get_kontrak_konsultan_pengawasan'] = $this->Kontrak->get_kontrak_konsultan_pengawasan()->row()->nilai_kontrak;
 		$data['get_kontrak_konsultan_perencanaan'] = $this->Kontrak->get_kontrak_konsultan_perencanaan()->row()->nilai_kontrak;
-		$data['get_pagu_count'] = $this->Kontrak->get_pagu_count()->row()->count_nilai_pagu;
+		$data['get_pagu_count'] = $this->Kontrak->get_nilai_kontrak_count()->row()->count_nilai_kontrak;
 		$data['get_nilai_kontrak_count'] = $this->Kontrak->get_nilai_kontrak_count()->row()->count_nilai_kontrak;
 		$data['get_pagu_fisik_count'] = $this->Kontrak->get_pagu_fisik_count()->row()->count_nilai_pagu;
 		$data['get_pagu_konsultan_pengawasan_count'] = $this->Kontrak->get_pagu_konsultan_pengawasan_count()->row()->count_nilai_pagu;

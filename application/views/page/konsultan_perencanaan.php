@@ -4,7 +4,7 @@
   <!-- Breadcrumb -->
   <div class="white-box xxxl:p-6">
     <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain"
-      style="background-image: url(assets/images/breadcrumb-el-1.png)">
+      style="background-image: url(<?php echo base_url(); ?>/assets/softify/softify/dist/assets/images/breadcrumb-el-1.png)">
       <h2 class="mb-3 xxxl:mb-5">Kontrak Konsultan Perencanaan</h2>
       <ul class="flex flex-wrap gap-2 items-center">
         <li>
@@ -316,7 +316,8 @@
                 <template x-for="invoice in paginatedInvoices()" :key="invoice.no">
                   <tr @click="submitDetailFisik(invoice.id)"
                     class="border-b border-neutral-30 duration-300 hover:bg-neutral-20 dark:border-neutral-500 dark:hover:bg-neutral-903"
-                    :class="invoice.checked?'!bg-primary-300/10':'bg-neutral-0 dark:bg-neutral-904'">
+                    :class="invoice.checked ? '!bg-primary-300/10' : 'bg-neutral-0 dark:bg-neutral-904'"
+                    style="cursor:pointer">
                     <td class="px-6" :class="dense? 'py-2': 'py-2 lg:py-3'">
                       <a href="invoice-details.html" class="flex">
                         <div>
@@ -387,18 +388,18 @@
 
 
             <form id="detailFisikForm" action="<?php echo site_url(); ?>/page/detail_fisik" method="POST"
-            style="display:none;">
-            <input type="hidden" name="id" id="invoiceId">
-          </form>
-          <script>
-            function submitDetailFisik(id) {
-              // Set the invoice ID in the hidden form
-              document.getElementById('invoiceId').value = id;
+              style="display:none;">
+              <input type="hidden" name="id" id="invoiceId">
+            </form>
+            <script>
+              function submitDetailFisik(id) {
+                // Set the invoice ID in the hidden form
+                document.getElementById('invoiceId').value = id;
 
-              // Submit the form
-              document.getElementById('detailFisikForm').submit();
-            }
-          </script>
+                // Submit the form
+                document.getElementById('detailFisikForm').submit();
+              }
+            </script>
 
             <div
               class="mt-6 flex items-center gap-5 justify-center flex-col md:flex-row md:justify-between whitespace-nowrap">

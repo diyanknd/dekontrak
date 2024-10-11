@@ -4,7 +4,7 @@
   <!-- Breadcrumb -->
   <div class="white-box xxxl:p-6">
     <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain"
-      style="background-image: url(assets/images/breadcrumb-el-1.png)">
+      style="background-image: url(<?php echo base_url(); ?>/assets/softify/softify/dist/assets/images/breadcrumb-el-1.png)">
       <h2 class="mb-3 xxxl:mb-5">Kontrak Fisik</h2>
       <ul class="flex flex-wrap gap-2 items-center">
         <li>

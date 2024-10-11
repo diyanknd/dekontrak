@@ -974,7 +974,9 @@
                             </tr>
                             <tr>
                                 <td class="w-1/2 px-2 py-3 m-text">Tanggal</td>
-                                <td class="w-1/2 py-3 m-text">: <?php echo $skppk->tanggal_skppk; ?></td>
+                                <td class="w-1/2 py-3 m-text">:
+                                    <?php echo date("d F Y", strtotime($skppk->tanggal_skppk)); ?>
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -987,10 +989,11 @@
                 </div>
                 <div class="flex justify-between items-center">
                     <div class="flex grow gap-4 xxl:gap-6">
-                        <span
+                        <span x-data="{ hover: false }" @mouseover="hover = true" @mouseout="hover = false"
+                            :class="{ 'shadow-md': hover }"
                             class="size-14 shrink-0 flex justify-center items-center rounded-lg border bg-warning-300/10 border-warning-300 text-warning-300"
                             onclick="printFile('<?php echo $skppk->doc_skppk; ?>')">
-                            <i class="las la-file-pdf text-warning-300 text-3xl"></i>
+                            <i class="las la-file-pdf text-warning-300 text-3xl cursor-pointer"></i>
                         </span>
                         <div class="flex items-center"><?php echo $skppk->tentang_skppk ?></p>
                         </div>
