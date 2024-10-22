@@ -4,89 +4,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surat Perjanjian Non Tender - <?php echo $row2->paket_pekerjaan; ?>/title>
-        <style>
-            @font-face {
-                font-family: 'Bookman Old Style';
-                src: local('Bookman Old Style'), local('Bookman');
+    <title>Surat Perjanjian Non Tender - <?php echo $row2->paket_pekerjaan; ?></title>
+    <style>
+        @font-face {
+            font-family: 'Bookman Old Style';
+            src: local('Bookman Old Style'), local('Bookman');
+        }
+
+        body {
+            font-family: 'Bookman Old Style', serif;
+            margin: 0;
+            padding: 0;
+            font-size: 10pt;
+        }
+
+        @media print {
+            @page {
+                size: A4;
+                margin: 15mm;
             }
 
             body {
-                font-family: 'Bookman Old Style', serif;
                 margin: 0;
                 padding: 0;
-                font-size: 10pt;
             }
+        }
 
-            @media print {
-                @page {
-                    size: A4;
-                    margin: 15mm;
-                }
+        .container {
+            width: 100%;
+            max-width: 210mm;
+            /* A4 width */
+            margin: 0 auto;
+            padding: 20mm;
+            box-sizing: border-box;
+        }
 
-                body {
-                    margin: 0;
-                    padding: 0;
-                }
-            }
+        .col-container {
+            display: flex;
+            justify-content: space-between;
+            column-gap: 20px;
+            /* Gap between the two columns */
+        }
 
-            .container {
-                width: 100%;
-                max-width: 210mm;
-                /* A4 width */
-                margin: 0 auto;
-                padding: 20mm;
-                box-sizing: border-box;
-            }
+        .col {
+            flex: 1;
+            /* Each column takes equal space */
+            box-sizing: border-box;
+        }
 
-            .col-container {
-                display: flex;
-                justify-content: space-between;
-                column-gap: 20px;
-                /* Gap between the two columns */
-            }
+        .letter-body {
+            margin-top: 20px;
+            line-height: 1.5;
+        }
 
-            .col {
-                flex: 1;
-                /* Each column takes equal space */
-                box-sizing: border-box;
-            }
+        .signature {
+            margin-top: 40px;
+            text-align: left;
+        }
 
-            .letter-body {
-                margin-top: 20px;
-                line-height: 1.5;
-            }
+        .footer {
+            margin-top: 40px;
+        }
 
-            .signature {
-                margin-top: 40px;
-                text-align: left;
-            }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
 
-            .footer {
-                margin-top: 40px;
-            }
+        td {
+            padding: 0;
+            /* Remove padding from table cells */
+            margin: 0;
+            /* Remove margin from table cells */
+            line-height: 1.2;
+            /* Adjust line height for tighter text */
+            vertical-align: top;
+        }
 
-            table {
-                width: 100%;
-                margin-top: 20px;
-                margin-bottom: 20px;
-            }
-
-            td {
-                padding: 0;
-                /* Remove padding from table cells */
-                margin: 0;
-                /* Remove margin from table cells */
-                line-height: 1.2;
-                /* Adjust line height for tighter text */
-                vertical-align: top;
-            }
-
-            .justify {
-                text-align: justify;
-                line-height: 1.6;
-            }
-        </style>
+        .justify {
+            text-align: justify;
+            line-height: 1.6;
+        }
+    </style>
 </head>
 
 <body>
@@ -105,7 +105,7 @@
                     <div style="text-align:center;font-size:12pt;font-weight: bold;">DINAS PEKERJAAN UMUM DAN PENATAAN
                         RUANG</div>
                     <div style="text-align:center;font-size:11pt;">SUB KEGIATAN PEMBANGUNAN JALAN</div>
-                    <div style="text-align:center;font-size:11pt;">TAHUN ANGGARAN 2024</div>
+                    <div style="text-align:center;font-size:11pt;">TAHUN ANGGARAN <?= $this->tahun ?></div>
                     <div style="text-align:center;font-size:10pt;">Jl. Jend. Gatot Subroto No.123 Telp. 0554 – 21065
                         Tanjung Redeb</div>
                     <div style="text-align:center;font-size:11pt;">Berau – Kalimantan Timur</div>
@@ -138,12 +138,19 @@
                             <tr>
                                 <td>Nomor</td>
                                 <td>:</td>
-                                <td>03/PPK-PJ9/TMBSN RT.01 KE RT.05/PJ2/VI/2024</td>
+                                <td><?= $row1->nomor_surat_perjanjian ?></td>
                             </tr>
                             <tr>
                                 <td>Tanggal</td>
                                 <td>:</td>
-                                <td>19 Juni 2024</td>
+                                <td><?php
+                                $tanggal = $row1->tanggal_surat_perjanjian;
+                                $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+                                $tanggal_format = date("d", strtotime($tanggal));
+                                $bulan_index = date("n", strtotime($tanggal)) - 1;
+                                $tahun = date("Y", strtotime($tanggal));
+                                echo $tanggal_format . " " . $bulan[$bulan_index] . " " . $tahun;
+                                ?></td>
                             </tr>
                         </table>
                     </div>
@@ -163,12 +170,12 @@
                         <tr>
                             <td>Nama</td>
                             <td>:</td>
-                            <td>A. Awang Idris,SE</td>
+                            <td><?= $row2->nama_lengkap ?></td>
                         </tr>
                         <tr>
                             <td>NIP</td>
                             <td>:</td>
-                            <td>19790606 200012 1 005</td>
+                            <td><?= $row2->nip ?></td>
                         </tr>
                         <tr>
                             <td>Jabatan</td>
@@ -181,11 +188,17 @@
                             <td>Dinas Pekerjaan Umum dan Penataan Ruang</td>
                         </tr>
                     </table>
-                    <div style="padding-bottom: 5px;">
+                    <div style="padding-bottom: 5px; padding-right:5px; text-align: justify;">
                         yang bertindak untuk dan atas nama*) Pemerintah Indonesia c.q. Pemerintah Kabupaten Berau c.q.
                         Satuan Kerja Dinas Pekerjaan Umum dan Penataan Ruang Kabupaten Berau berdasarkan Surat Keputusan
-                        Pengguna Anggaran Dinas PUPR Kab. Berau Nomor: 600/806/DPUPR-KAB.UM/XI/2023 tanggal 07 November
-                        2023, selanjutnya disebut “Pejabat Penandatangan Kontrak ”, dengan:
+                        Pengguna Anggaran Dinas PUPR Kab. Berau Nomor: <?= $skppk->nomor_skppk ?> tanggal <?php
+                           $tanggal = $skppk->tanggal_skppk;
+                           $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+                           $tanggal_format = date("d", strtotime($tanggal));
+                           $bulan_index = date("n", strtotime($tanggal)) - 1;
+                           $tahun = date("Y", strtotime($tanggal));
+                           echo $tanggal_format . " " . $bulan[$bulan_index] . " " . $tahun;
+                           ?>, selanjutnya disebut “Pejabat Penandatangan Kontrak ”, dengan:
                     </div>
                 </td>
             </tr>
@@ -199,36 +212,44 @@
                         <tr>
                             <td>Nama</td>
                             <td>:</td>
-                            <td>Tamrin</td>
+                            <td><?= $penyedia_jasa->nama_direktur; ?></td>
                         </tr>
                         <tr>
                             <td>Jabatan</td>
                             <td>:</td>
-                            <td>Direktur</td>
+                            <td><?= $penyedia_jasa->jabatan; ?></td>
                         </tr>
                         <tr>
                             <td>Berkedudukan di</td>
                             <td>:</td>
-                            <td>Jl. Murjani II Gang Berkah, Kel. Karang Ambun</td>
+                            <td style="padding-right:5px; text-align: justify;"><?= $penyedia_jasa->alamat ?></td>
                         </tr>
                         <tr>
                             <td>Akta Notaris Nomor</td>
                             <td>:</td>
-                            <td>37</td>
+                            <td><?= $penyedia_jasa->no_akta ?></td>
                         </tr>
                         <tr>
                             <td>Tanggal</td>
                             <td>:</td>
-                            <td>30 Januari 2020</td>
+                            <td><?php
+                            $tanggal = $penyedia_jasa->tanggal_akta;
+                            $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+                            $tanggal_format = date("d", strtotime($tanggal));
+                            $bulan_index = date("n", strtotime($tanggal)) - 1;
+                            $tahun = date("Y", strtotime($tanggal));
+                            echo $tanggal_format . " " . $bulan[$bulan_index] . " " . $tahun;
+                            ?></td>
                         </tr>
                         <tr>
                             <td>Notaris</td>
                             <td>:</td>
-                            <td>M. Fahmi Azis, S.H., M.Kn.</td>
+                            <td><?= $penyedia_jasa->notaris ?></td>
                         </tr>
                     </table>
                     <div style="padding-bottom: 5px;">
-                        yang bertindak untuk dan atas nama CV. Tandan Jaya selanjutnya disebut “Penyedia”.
+                        yang bertindak untuk dan atas nama <?= $penyedia_jasa->nama_direktur; ?> selanjutnya disebut
+                        “Penyedia”.
                     </div>
                 </td>
             </tr>
@@ -252,13 +273,22 @@
                         <tr>
                             <td>Nama</td>
                             <td>:</td>
-                            <td>A Awang Idris,SE</td>
+                            <td><?= $row2->nama_lengkap ?></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
-                            <td>Berdasarkan Surat Keputusan Pengguna Anggaran Dinas PUPR Kab. Berau Nomor
-                                600/806/DPUPR-KAB.UM/XI/2023 tanggal 07 November 2023</td>
+                            <td style="padding-right:5px; text-align: justify;">Berdasarkan Surat Keputusan Pengguna
+                                Anggaran Dinas PUPR Kab. Berau Nomor
+                                <?= $skppk->nomor_skppk ?> tanggal <?php
+                                   $tanggal = $skppk->tanggal_skppk;
+                                   $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+                                   $tanggal_format = date("d", strtotime($tanggal));
+                                   $bulan_index = date("n", strtotime($tanggal)) - 1;
+                                   $tahun = date("Y", strtotime($tanggal));
+                                   echo $tanggal_format . " " . $bulan[$bulan_index] . " " . $tahun;
+                                   ?>
+                            </td>
                         </tr>
                     </table>
 
@@ -281,12 +311,19 @@
                             <tr>
                                 <td>Nomor</td>
                                 <td>:</td>
-                                <td>nomor_supl</td>
+                                <td><?= $row1->no_supl ?></td>
                             </tr>
                             <tr>
                                 <td>Tanggal</td>
                                 <td>:</td>
-                                <td>tanggal_supl</td>
+                                <td><?php
+                                $tanggal = $row1->tanggal_supl;
+                                $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+                                $tanggal_format = date("d", strtotime($tanggal));
+                                $bulan_index = date("n", strtotime($tanggal)) - 1;
+                                $tahun = date("Y", strtotime($tanggal));
+                                echo $tanggal_format . " " . $bulan[$bulan_index] . " " . $tahun;
+                                ?></td>
                             </tr>
                         </table>
                     </div>
@@ -301,12 +338,19 @@
                             <tr>
                                 <td>Nomor</td>
                                 <td>:</td>
-                                <td>nomor_bast</td>
+                                <td><?= $bast->nomor ?></td>
                             </tr>
                             <tr>
                                 <td>Tanggal</td>
                                 <td>:</td>
-                                <td>tanggal_bast</td>
+                                <td><?php
+                                $tanggal = $bast->tanggal;
+                                $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+                                $tanggal_format = date("d", strtotime($tanggal));
+                                $bulan_index = date("n", strtotime($tanggal)) - 1;
+                                $tahun = date("Y", strtotime($tanggal));
+                                echo $tanggal_format . " " . $bulan[$bulan_index] . " " . $tahun;
+                                ?></td>
                             </tr>
                         </table>
                     </div>
@@ -318,18 +362,21 @@
 
 
             <tr style="border: 1px solid black; border-collapse: collapse;">
-                <td colspan="2" style="padding-left: 10px; padding-bottom:10px">
+                <td colspan="2"
+                    style="padding-left: 10px; padding-bottom:10px; padding-right:5px; text-align: justify;">
                     <span style="font-weight:bold">SUMBER DANA:</span> dibebankan atas DPA Dinas PUPR Kab. Berau Tahun
-                    Anggaran 2024 untuk mata anggaran kegiatan 5.2.04.01.01.0003
+                    Anggaran <?= $this->tahun ?> untuk mata anggaran kegiatan 5.2.04.01.01.0003
                 </td>
             </tr>
 
 
             <tr style="border: 1px solid black; border-collapse: collapse;">
-                <td colspan="2" style="padding-left: 10px; padding-bottom:10px">
+                <td colspan="2"
+                    style="padding-left: 10px; padding-bottom:10px; padding-right:5px; text-align: justify;">
                     <div>
-                        <span style="font-weight:bold; padding-bottom:10px">MASA PELAKSANAAN PEKERJAAN:</span> 60 (Enam
-                        Puluh) hari kalender dihitung sejak Tanggal Mulai Kerja yang tercantum dalam SPMK sampai dengan
+                        <span style="font-weight:bold; padding-bottom:10px">MASA PELAKSANAAN PEKERJAAN:</span>
+                        <?= hitungHari($row1->tanggal_mulai, $row1->tanggal_selesai) ?> hari kalender dihitung sejak
+                        Tanggal Mulai Kerja yang tercantum dalam SPMK sampai dengan
                         Tanggal Penyerahan Pertama Pekerjaan
                     </div><br>
 
@@ -341,6 +388,57 @@
                 </td>
             </tr>
 
+            <?php
+            function hitungHari($tanggal_mulai, $tanggal_selesai)
+            {
+                // Mengubah string tanggal menjadi objek DateTime
+                $startDate = new DateTime($tanggal_mulai);
+                $endDate = new DateTime($tanggal_selesai);
+
+                // Menghitung selisih hari
+                $interval = $startDate->diff($endDate);
+                $jumlah_hari = $interval->days; // Mengambil jumlah hari
+            
+                // Mengubah angka ke dalam format teks (terbilang)
+                $terbilang = terbilang($jumlah_hari);
+
+                // Mengembalikan hasil dalam format angka dan teks
+                return $jumlah_hari . " (" . ucfirst($terbilang) . ")";
+            }
+
+            // Fungsi terbilang untuk mengubah angka menjadi teks (seperti sebelumnya)
+            function terbilang($nilai)
+            {
+                $nilai = abs($nilai);
+                $huruf = array("", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan", "Sepuluh", "Sebelas");
+                $temp = "";
+                if ($nilai < 12) {
+                    $temp = " " . $huruf[$nilai];
+                } elseif ($nilai < 20) {
+                    $temp = terbilang($nilai - 10) . " Belas";
+                } elseif ($nilai < 100) {
+                    $temp = terbilang($nilai / 10) . " Puluh" . terbilang($nilai % 10);
+                } elseif ($nilai < 200) {
+                    $temp = " Seratus" . terbilang($nilai - 100);
+                } elseif ($nilai < 1000) {
+                    $temp = terbilang($nilai / 100) . " Ratus" . terbilang($nilai % 100);
+                } elseif ($nilai < 2000) {
+                    $temp = " Seribu" . terbilang($nilai - 1000);
+                } elseif ($nilai < 1000000) {
+                    $temp = terbilang($nilai / 1000) . " Ribu" . terbilang($nilai % 1000);
+                } elseif ($nilai < 2000000) {
+                    $temp = " Sejuta" . terbilang($nilai - 1000000);
+                } elseif ($nilai < 1000000000) {
+                    $temp = terbilang($nilai / 1000000) . " Juta" . terbilang($nilai % 1000000);
+                } elseif ($nilai < 2000000000) {
+                    $temp = " SeMilyar" . terbilang($nilai - 1000000000);
+                } else {
+                    $temp = terbilang($nilai / 1000000000) . " Milyar" . terbilang($nilai % 1000000000);
+                }
+                return $temp;
+            }
+            ?>
+
 
 
             <tr style="border: 1px solid black; border-collapse: collapse;">
@@ -351,7 +449,8 @@
 
 
             <tr style="border: 1px solid black; border-collapse: collapse;">
-                <td colspan="2" style="padding-left: 10px; padding-bottom:10px">
+                <td colspan="2"
+                    style="padding-left: 10px; padding-bottom:10px; padding-right:5px; text-align: justify;">
                     <span style="font-weight:bold">DOKUMEN KONTRAK</span>
 
                     <div>
@@ -403,11 +502,13 @@
 
 
             <tr style="border: 1px solid black; border-collapse: collapse;">
-                <td colspan="2" style="padding-left: 10px; padding-bottom:10px">
+                <td colspan="2"
+                    style="padding-left: 10px; padding-bottom:10px; padding-right:5px; text-align: justify;">
                     <span style="font-weight:bold">HARGA KONTRAK</span>
                     <div>
-                        Harga Kontrak termasuk Pajak Pertambahan Nilai (PPN) adalah sebesar Rp 191.357.250,00 (Seratus
-                        Sembilan Puluh Satu Juta Tiga Ratus Lima Puluh Tujuh Ribu Dua Ratus Lima Puluh Rupiah) yang
+                        Harga Kontrak termasuk Pajak Pertambahan Nilai (PPN) adalah sebesar Rp
+                        <?= number_format($row1->harga_penawaran, 2, ',', '.') . ',00'; ?>
+                        (<?= terbilang($row1->harga_penawaran) . " Rupiah"; ?>) yang
                         diperoleh berdasarkan total harga penawaran terkoreksi aritmatik sebagaimana tercantum dalam
                         Daftar Kuantitas dan Harga Penawaran.(Melalui koreksi aritmatik)
                     </div>
@@ -427,7 +528,7 @@
                         Ruang lingkup pekerjaan terdiri dari :
                     </div>
                     <div>
-                        Umum, Pekerjaan Tanah dan Geosintetik
+                        <?= $row1->ruang_lingkup; ?>
                     </div>
                 </td>
             </tr>
@@ -435,15 +536,19 @@
 
 
             <tr style="border: 1px solid black; border-collapse: collapse;">
-                <td colspan="2" style="padding-left: 10px;padding-top:5px; padding-bottom:10px">
+                <td colspan="3"
+                    style="padding-left: 10px;padding-top:5px; padding-bottom:10px; padding-right:5px; text-align: justify;">
                     <span style="font-weight:bold">SISTEM PEMBAYARAN</span>
                     <div>
-                        Pembayaran untuk kontrak ini dilakukan ke Bank BPD Kaltim Kaltara rekening nomor : 0061543767
-                        atas nama Penyedia : CV. Tandan Jaya
+                        Pembayaran untuk kontrak ini dilakukan ke Bank <?= $penyedia_jasa->nama_bank ?>
+                        rekening nomor : <?= $penyedia_jasa->nomor_rekening ?>
+                        atas nama Penyedia : <?= $penyedia_jasa->nama_penyedia ?>
                     </div>
                     <div>
                         Pembayaran prestasi pekerjaan dilakukan dengan cara : Sekaligus
-                        Dokumen penunjang yang disyaratkan untuk mengajukan tagihan pembayaran prestasi pekerjaan:
+                        Dokumen penunjang yang disyaratkan untuk mengajukan tagihan
+                        pembayaran
+                        prestasi pekerjaan:
                     </div>
                     <table style="margin-top:1px;margin-bottom:1px">
                         <tr>
@@ -496,24 +601,25 @@
                         Pejabat Pembuat Komitment
                     </div><br><br><br>
                     <div>
-                        A.Awang Idris,SE
+                        <?= $row2->nama_lengkap ?>
                     </div>
                     <div>
-                        NIP.123123123
+                        NIP.<?= $row2->nip; ?>
                     </div>
                 </td>
-                <td style="border: 1px solid black; border-collapse: collapse;text-align:center;"><br><br>
+                <td style="border: 1px solid black; border-collapse: collapse;text-align:center;">
+                    <br><br>
                     <div>
                         Untuk dan atas nama Penyedia
                     </div>
                     <div>
-                        CV. Tandan Jaya
+                        <?= $penyedia_jasa->nama_penyedia ?>
                     </div><br><br><br>
                     <div style="margin-top:5px">
-                        Tamrin
+                        <?= $penyedia_jasa->nama_direktur ?>
                     </div>
                     <div>
-                        Direktur
+                        <?= $penyedia_jasa->jabatan; ?>
                     </div>
                 </td>
             </tr>

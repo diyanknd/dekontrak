@@ -163,7 +163,7 @@
                 <td>di</td>
             </tr>
             <tr>
-                <td><?php echo $row2->alamat; ?></td>
+                <td class="justify"><?php echo $row2->alamat; ?></td>
             </tr>
         </table>
         <!-- END: Kepada Yth -->
@@ -173,7 +173,8 @@
         <table>
             <td style="width:10%">Perihal</td>
             <td>:</td>
-            <td>Penunjukan Penyedia Untuk Pelaksanaan Pekerjaan <?php echo $row2->paket_pekerjaan; ?></td>
+            <td class="justify">Penunjukan Penyedia Untuk Pelaksanaan Pekerjaan <?php echo $row2->paket_pekerjaan; ?>
+            </td>
         </table>
         <!-- END: Perihal -->
 

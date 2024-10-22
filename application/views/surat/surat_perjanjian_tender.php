@@ -238,10 +238,16 @@
                     }
 
                     if ($number < 1000) {
+                        if ($number == 100) {
+                            return 'Seratus';
+                        }
                         return $words[(int) ($number / 100)] . ' Ratus ' . terbilang($number % 100);
                     }
 
                     if ($number < 1000000) {
+                        if ($number == 1000) {
+                            return 'Seribu';
+                        }
                         return terbilang((int) ($number / 1000)) . ' Ribu ' . terbilang($number % 1000);
                     }
 
@@ -249,8 +255,19 @@
                         return terbilang((int) ($number / 1000000)) . ' Juta ' . terbilang($number % 1000000);
                     }
 
-                    return $number; // Return the number if it’s out of supported range
+                    if ($number < 1000000000000) {
+                        return terbilang((int) ($number / 1000000000)) . ' Milyar ' . terbilang($number % 1000000000);
+                    }
+
+                    if ($number < 1000000000000000) {
+                        return terbilang((int) ($number / 1000000000000)) . ' Triliun ' . terbilang($number % 1000000000000);
+                    }
+
+                    return $number; // Jika angkanya terlalu besar, kembalikan angkanya saja.
                 }
+
+
+
 
                 // Example usage
                 echo formatIndonesianDate($row1->tanggal_surat_perjanjian);
@@ -393,7 +410,7 @@
             <tr>
                 <td>Nama</td>
                 <td>:</td>
-                <td><?php echo $row2->nama_penyedia; ?></td>
+                <td><?php echo $penyedia_jasa->nama_penyedia; ?></td>
             </tr>
             <tr>
                 <td>Jabatan</td>
@@ -403,23 +420,48 @@
             <tr>
                 <td style="width:20%">Berkedudukan di</td>
                 <td>:</td>
-                <td><?php echo $row2->alamat; ?>
+                <td><?php echo $penyedia_jasa->alamat; ?>
                 </td>
             </tr>
             <tr>
                 <td>Akta Notaris Nomor</td>
                 <td>:</td>
-                <td>buat akta notaris</td>
+                <td><?= $penyedia_jasa->no_akta ?></td>
             </tr>
             <tr>
                 <td>Tanggal</td>
                 <td>:</td>
-                <td>??</td>
+                <td><?php
+                $tanggal_akta = $penyedia_jasa->tanggal_akta;
+                $tanggal_indonesia = date('d F Y', strtotime($tanggal_akta));
+
+                ?>
+                    <?php
+                    $tanggal_akta = $penyedia_jasa->tanggal_akta;
+                    $bulan = array(
+                        'January' => 'Januari',
+                        'February' => 'Februari',
+                        'March' => 'Maret',
+                        'April' => 'April',
+                        'May' => 'Mei',
+                        'June' => 'Juni',
+                        'July' => 'Juli',
+                        'August' => 'Agustus',
+                        'September' => 'September',
+                        'October' => 'Oktober',
+                        'November' => 'November',
+                        'December' => 'Desember'
+                    );
+
+                    $tanggal_indonesia = date('d', strtotime($tanggal_akta)) . ' ' . $bulan[date('F', strtotime($tanggal_akta))] . ' ' . date('Y', strtotime($tanggal_akta));
+                    echo $tanggal_indonesia;
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td>Notaris</td>
                 <td>:</td>
-                <td>buat Nama Notaris</td>
+                <td><?= $penyedia_jasa->notaris ?></td>
             </tr>
         </table>
         <!-- END: Data Penyedia -->
@@ -429,7 +471,8 @@
         <!-- BEGIN: Isi 3 -->
         <table>
             <td style="text-align:justify">
-                yang bertindak untuk dan atas nama <?php echo $row2->nama_penyedia; ?> selanjutnya disebut “Penyedia”.
+                yang bertindak untuk dan atas nama <?php echo $penyedia_jasa->nama_penyedia; ?> selanjutnya disebut
+                “Penyedia”.
             </td>
         </table>
         <!-- END: Isi 3 -->
@@ -445,29 +488,33 @@
 
             <tr>
                 <td>1.</td>
-                <td>Undang-Undang Nomor 2 Tahun 2017 tentang Jasa Konstruksi yang selanjutnya dirubah dengan
+                <td style="text-align:justify">Undang-Undang Nomor 2 Tahun 2017 tentang Jasa Konstruksi yang selanjutnya
+                    dirubah dengan
                     Undang-UndangNomor 11 Tahun 2020 tentang Cipta Kerja;</td>
             </tr>
             <tr>
                 <td>2.</td>
-                <td>Kitab Undang-Undang Hukum Perdata (Buku III tentang Perikatan);</td>
+                <td style="text-align:justify">Kitab Undang-Undang Hukum Perdata (Buku III tentang Perikatan);</td>
             </tr>
             <tr>
                 <td>3.</td>
-                <td>Peraturan Pemerintah Nomor 22 Tahun 2020 tentang Peraturan Pelaksanaan Undang-Undang Nomor 2 tahun
+                <td style="text-align:justify">Peraturan Pemerintah Nomor 22 Tahun 2020 tentang Peraturan Pelaksanaan
+                    Undang-Undang Nomor 2 tahun
                     2017 tentang Jasa Konstruksi sebagaimana telah diubah dengan Peraturan Pemerintah Nomor 14 Tahun
                     2021 tentang Perubahan Peraturan Pemerintah Nomor 22 Tahun 2020 tentang Peraturan Pelaksanaan
                     Undang-Undang Nomor 2 tahun 2017 tentang Jasa Konstruksi;</td>
             </tr>
             <tr>
                 <td>4.</td>
-                <td>Peraturan Presiden Nomor 16 Tahun 2018 tentang Pengadaan Barang/Jasa Pemerintah sebagaimana telah
+                <td style="text-align:justify">Peraturan Presiden Nomor 16 Tahun 2018 tentang Pengadaan Barang/Jasa
+                    Pemerintah sebagaimana telah
                     diubah dengan Peraturan Presiden Nomor 12 Tahun 2021 tentang Perubahan Peraturan Presiden Nomor 16
                     Tahun 2018 tentang Pengadaan Barang/Jasa Pemerintah;</td>
             </tr>
             <tr>
                 <td>5.</td>
-                <td>Peraturan LKPP Nomor 12 Tahun 2021 Tentang Pedoman Pelaksanaan Pengadaan Barang/Jasa Pemerintah
+                <td style="text-align:justify">Peraturan LKPP Nomor 12 Tahun 2021 Tentang Pedoman Pelaksanaan Pengadaan
+                    Barang/Jasa Pemerintah
                     Melalui Penyedia.</td>
             </tr>
         </table>
@@ -488,30 +535,36 @@
         <table>
             <tr>
                 <td>(a)</td>
-                <td colspan="2">Telah dilakukan proses pemilihan Penyedia yang telah sesuai dengan Dokumen pemilihan;
+                <td colspan="2" style="text-align:justify">Telah dilakukan proses pemilihan Penyedia yang telah sesuai
+                    dengan Dokumen pemilihan;
                 </td>
             </tr>
             <tr>
                 <td>(b)</td>
-                <td colspan="2">Pejabat Penandatangan Kontrak telah menunjuk Penyedia menjadi pihak dalam Kontrak ini
+                <td colspan="2" style="text-align:justify">Pejabat Penandatangan Kontrak telah menunjuk Penyedia menjadi
+                    pihak dalam Kontrak ini
                     melalui Surat Penunjukan Penyediaan Barang/Jasa (SPPBJ) untuk melaksanakan Pekerjaan Konstruksi
-                    Lanjutan Pembangunan Jalan Merdeka sebagaimana diterangkan dalam dokumen Kontrak ini selanjutnya
-                    disebut “Pekerjaan Konstruksi”;</td>
+                    <?= $row2->paket_pekerjaan ?> sebagaimana diterangkan dalam dokumen Kontrak ini selanjutnya
+                    disebut “Pekerjaan Konstruksi”;
+                </td>
             </tr>
             <tr>
                 <td>(c)</td>
-                <td colspan="2">Penyedia telah menyatakan kepada Pejabat Penandatangan Kontrak, memiliki keahlian
+                <td colspan="2" style="text-align:justify">Penyedia telah menyatakan kepada Pejabat Penandatangan
+                    Kontrak, memiliki keahlian
                     profesional, tenaga kerja konstruksi, dan sumber daya teknis, serta telah menyetujui untuk
                     melaksanakan Pekerjaan Konstruksi sesuai dengan persyaratan dan ketentuan dalam Kontrak ini;</td>
             </tr>
             <tr>
                 <td>(d)</td>
-                <td colspan="2">Pejabat Penandatangan Kontrak dan Penyedia menyatakan memiliki kewenangan untuk
+                <td colspan="2" style="text-align:justify">Pejabat Penandatangan Kontrak dan Penyedia menyatakan
+                    memiliki kewenangan untuk
                     menandatangani Kontrak ini, dan mengikat pihak yang diwakili;</td>
             </tr>
             <tr>
                 <td>(e)</td>
-                <td colspan="2">Pejabat Penandatangan Kontrak dan Penyedia mengakui dan menyatakan bahwa sehubungan
+                <td colspan="2" style="text-align:justify">Pejabat Penandatangan Kontrak dan Penyedia mengakui dan
+                    menyatakan bahwa sehubungan
                     dengan penandatanganan Kontrak ini masing-masing pihak:</td>
             </tr>
             <tr>
@@ -532,7 +585,8 @@
             <tr>
                 <td></td>
                 <td>4)</td>
-                <td>Telah mendapatkan kesempatan yang memadai untuk memeriksa dan mengkonfirmasikan semua ketentuan
+                <td style="text-align:justify">Telah mendapatkan kesempatan yang memadai untuk memeriksa dan
+                    mengkonfirmasikan semua ketentuan
                     dalam Kontrak ini beserta semua fakta dan kondisi yang terkait.</td>
             </tr>
         </table>
@@ -599,33 +653,36 @@
 
 
         <!-- BEGIN: Isi 11 -->
+        <?php
+        // Ambil data dari database
+        $ruang_lingkup = $row1->ruang_lingkup;
+
+        // Pisahkan data menjadi array berdasarkan koma
+        $ruang_lingkup_items = explode(',', $ruang_lingkup);
+
+        // Hapus spasi yang berlebihan dari setiap item
+        $ruang_lingkup_items = array_map('trim', $ruang_lingkup_items);
+        ?>
+
         <table>
             <tr>
                 <td colspan="2">
                     Ruang lingkup utama pekerjaan terdiri dari:
                 </td>
             </tr>
-            <tr>
-                <td>1.</td>
-                <td>Umum</td>
-            </tr>
-            <tr>
-                <td>2.</td>
-                <td>Drainase</td>
-            </tr>
-            <tr>
-                <td>3.</td>
-                <td>Pekerjaan Tanah dan Geosintetik</td>
-            </tr>
-            <tr>
-                <td>4.</td>
-                <td>Pekerasan Berbutir</td>
-            </tr>
-            <tr>
-                <td>5.</td>
-                <td>Pekerasan Aspal</td>
-            </tr>
+            <?php
+            // Looping untuk menampilkan setiap item ruang lingkup
+            $no = 1;
+            foreach ($ruang_lingkup_items as $item) {
+                echo "<tr>";
+                echo "<td>{$no}.</td>";
+                echo "<td>{$item}</td>";
+                echo "</tr>";
+                $no++;
+            }
+            ?>
         </table>
+
         <!-- END: Isi 11-->
 
 
@@ -652,22 +709,66 @@
         <table style="text-align:justify">
             <tr>
                 <td>(1)</td>
-                <td>Harga Kontrak termasuk Pajak Pertambahan Nilai (PPN) yang diperoleh berdasarkan total harga
+                <td style="text-align:justify">Harga Kontrak termasuk Pajak Pertambahan Nilai (PPN) yang diperoleh
+                    berdasarkan total harga
                     penawaran terkoreksi sebagaimana tercantum dalam Daftar Kuantitas/Keluaran dan Harga adalah sebesar
-                    Rp. 10.000.000.000,00 (Sepuluh Milyar Rupiah) dengan kode akun kegiatan Sub Kegiatan
-                    1.03.10.2.01.0032 Pembangunan Jalan.</td>
+                    Rp.
+                    <?= number_format($row1->harga_penawaran, 2, ',', '.') . ',00'; ?>
+                    (<?= terbilang($row1->harga_penawaran) . " Rupiah"; ?>)
+                    dengan kode akun kegiatan Sub
+                    Kegiatan
+                    1.03.10.2.01.0032 Pembangunan Jalan.
+                </td>
             </tr>
             <tr>
                 <td>(2)</td>
-                <td>Kontrak ini dibiayai dari APBD Kabupaten;</td>
+                <td>Kontrak ini dibiayai dari <?= $row2->sumber_dana ?>;</td>
             </tr>
             <tr>
                 <td>(3)</td>
-                <td>Pembayaran untuk kontrak ini dilakukan ke Bank (nama Bank) rekening nomor : (no. Rekening penyedia)
-                    atas nama Penyedia : (nama CV/PT perusahaan);</td>
+                <td style="text-align:justify">Pembayaran untuk kontrak ini dilakukan ke Bank
+                    <?= $penyedia_jasa->nama_bank ?> rekening nomor
+                    : <?= $penyedia_jasa->nomor_rekening; ?>
+                    atas nama Penyedia : <?= $penyedia_jasa->nama_penyedia ?>;
+                </td>
             </tr>
         </table>
         <!-- END: Isi 13 -->
+
+        <?php
+        function terbilang_rupiah($angka)
+        {
+            $angka = abs($angka);
+            $baca = array("", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan", "Sepuluh", "Sebelas");
+            $terbilang = "";
+
+            if ($angka < 12) {
+                $terbilang = " " . $baca[$angka];
+            } elseif ($angka < 20) {
+                $terbilang = terbilang($angka - 10) . " Belas";
+            } elseif ($angka < 100) {
+                $terbilang = terbilang($angka / 10) . " Puluh" . terbilang($angka % 10);
+            } elseif ($angka < 200) {
+                $terbilang = " Seratus" . terbilang($angka - 100);
+            } elseif ($angka < 1000) {
+                $terbilang = terbilang($angka / 100) . " Ratus" . terbilang($angka % 100);
+            } elseif ($angka < 2000) {
+                $terbilang = " Seribu" . terbilang($angka - 1000);
+            } elseif ($angka < 1000000) {
+                $terbilang = terbilang($angka / 1000) . " Ribu" . terbilang($angka % 1000);
+            } elseif ($angka < 1000000000) {
+                $terbilang = terbilang($angka / 1000000) . " Juta" . terbilang($angka % 1000000);
+            } elseif ($angka < 1000000000000) {
+                $terbilang = terbilang($angka / 1000000000) . " Milyar" . terbilang($angka % 1000000000);
+            } elseif ($angka < 1000000000000000) {
+                $terbilang = terbilang($angka / 1000000000000) . " Triliun" . terbilang($angka % 1000000000000);
+            }
+
+            return trim($terbilang);
+        }
+
+
+        ?>
 
 
 
@@ -788,14 +889,17 @@
             <tr>
                 <td>(2)</td>
                 <td>Masa Pelaksanaan ditentukan dalam Syarat-Syarat Khusus Kontrak, dihitung sejak Tanggal Mulai Kerja
-                    yang tercantum dalam SPMK sampai dengan Tanggal Penyerahan Pertama Pekerjaan selama 150 (Seratus
-                    Lima Puluh) hari kalender;</td>
+                    yang tercantum dalam SPMK sampai dengan Tanggal Penyerahan Pertama Pekerjaan selama
+                    <?= hitungHari($row1->tanggal_mulai, $row1->tanggal_selesai); ?> hari kalender;
+                </td>
             </tr>
             <tr>
                 <td>(3)</td>
                 <td>Masa Pemeliharaan ditentukan dalam Syarat-Syarat Khusus Kontrak dihitung sejak Tanggal Penyerahan
-                    Pertama Pekerjaan sampai dengan Tanggal Penyerahan Akhir Pekerjaan selama 180 (Seratus Delapan
-                    Puluh) hari kalender.</td>
+                    Pertama Pekerjaan sampai dengan Tanggal Penyerahan Akhir Pekerjaan selama
+                    <?= hitungHari($row1->tanggal_mulai, $row1->tanggal_selesai); ?>
+                    hari kalender.
+                </td>
             </tr>
             <tr>
                 <td colspan="2">Dengan demikian, Pejabat Penandatangan Kontrak dan Penyedia telah bersepakat untuk
@@ -806,6 +910,25 @@
             </tr>
         </table>
         <!-- END: Isi 17 -->
+
+        <?php
+        function hitungHari($tanggal_mulai, $tanggal_selesai)
+        {
+            // Mengubah string tanggal menjadi objek DateTime
+            $startDate = new DateTime($tanggal_mulai);
+            $endDate = new DateTime($tanggal_selesai);
+
+            // Menghitung selisih hari
+            $interval = $startDate->diff($endDate);
+            $jumlah_hari = $interval->days; // Mengambil jumlah hari
+        
+            // Mengubah angka ke dalam format teks (terbilang)
+            $terbilang = terbilang($jumlah_hari);
+
+            // Mengembalikan hasil dalam format angka dan teks
+            return $jumlah_hari . " (" . ucfirst($terbilang) . ")";
+        }
+        ?>
 
 
 
@@ -818,7 +941,7 @@
                         Untuk dan atas nama Penyedia
                     </div>
                     <div>
-                        CV.XXXXXXXXXXXXXXxx
+                        <?= $penyedia_jasa->nama_penyedia; ?>
                     </div>
                 </td>
                 <td>
@@ -848,18 +971,18 @@
             <tr>
                 <td>
                     <div>
-                        XXXXXXXXXXX,ST
+                        <?= $penyedia_jasa->nama_direktur; ?>
                     </div>
                     <div>
-                        Direktur
+                        <?= $penyedia_jasa->jabatan; ?>
                     </div>
                 </td>
                 <td>
                     <div>
-                        Bambang,ST
+                        <?= $row2->nama_lengkap ?>
                     </div>
                     <div>
-                        NIP.XXXXXXXXXXXX
+                        NIP.<?= $row2->nip ?>
                     </div>
                 </td>
             </tr>

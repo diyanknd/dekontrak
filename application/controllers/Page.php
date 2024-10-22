@@ -99,7 +99,8 @@ class Page extends CI_Controller
 		$data['get_pagu_fisik_count'] = $this->Kontrak->get_pagu_fisik_count()->row()->count_nilai_pagu;
 		$data['get_pagu_konsultan_pengawasan_count'] = $this->Kontrak->get_pagu_konsultan_pengawasan_count()->row()->count_nilai_pagu;
 		$data['get_pagu_konsultan_perencanaan_count'] = $this->Kontrak->get_pagu_konsultan_perencanaan_count()->row()->count_nilai_pagu;
-		$this->template->load('template', 'page/list', $data);
+		// $this->template->load('template', 'page/list', $data);
+		$this->template->load('template', 'page/daftar_paket', $data);
 	}
 
 	function fisik()
@@ -180,6 +181,7 @@ class Page extends CI_Controller
 		$data['kontrak'] = $this->Kontrak->get_kontrak_by_id($id);
 		$data['dokumentasi'] = $this->Kontrak->get_dokumentasi_by_id($id);
 		$data['dokumen'] = $this->Kontrak->get_dokumen_by_id($id);
+		$data['dekontrak'] = $this->db->where('id_paket', $id)->get('surat_perjanjian')->row();
 		$data['skppk'] = $this->db2->query("SELECT * FROM nomor_skppk")->row();
 		$data['get_sppbj'] = $this->db->query("SELECT * FROM sppbj WHERE id_paket = '$id'")->num_rows();
 		$data['get_surat_perjanjian'] = $this->db->query("SELECT * FROM surat_perjanjian WHERE id_paket = '$id'")->num_rows();
@@ -189,7 +191,22 @@ class Page extends CI_Controller
 		$data['get_data_sppbj'] = $this->db->select('*')->from('sppbj')->where('id_paket', $id)->get()->row();
 		$data['get_data_surat_perjanjian'] = $this->db->query("SELECT * FROM surat_perjanjian WHERE id_paket = '$id'")->row();
 		$data['get_data_spmk'] = $this->db->query("SELECT * FROM spmk WHERE id_paket = '$id'")->row();
+		$data['data_penyedia'] = $this->db2->get('tb_data_penyedia');
+		$data['data_bast'] = $this->db2->where('id_paket', $id)->get('tb_bast')->row();
 
+		//ambil nama penyedia
+		//ini ambil id penyedia di dekontrak.surat_perjanjian
+		$penyedia = $this->db->where('id_paket', $id)->get('surat_perjanjian')->row();
+
+		//ambil id penyedia
+		$id_penyedia_jasa = isset($penyedia->penyedia_jasa) ? $penyedia->penyedia_jasa : '';
+		$id_konsultan_pengawasan = isset($penyedia->konsultan_pengawasan) ? $penyedia->konsultan_pengawasan : '';
+
+		//ambil data sesuai dengan id paket
+		$data['penyedia_jasa'] = $this->db2->where('id_data_penyedia', $id_penyedia_jasa)->get('tb_data_penyedia')->row();
+		$data['konsultan_pengawasan'] = $this->db2->where('id_data_penyedia', $id_konsultan_pengawasan)->get('tb_data_penyedia')->row();
+
+		$data['cover'] = $this->db->where('id_paket', $id)->get('cover')->row();
 
 		$this->template->load('template', 'detail/fisik_detail', $data);
 	}

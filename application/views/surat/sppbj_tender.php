@@ -241,7 +241,7 @@
                     $nilai_terbilang = terbilang($nilai_5_persen);
                     echo "Rp. " . $nilai_format . " (" . $nilai_terbilang . " Rupiah )";
                     ?> dengan masa berlaku selama <?php
-                     $masa_pelaksanaan = $row2->masa_pelaksanaan;
+                     $masa_pelaksanaan = $row1->masa_pelaksanaan;
                      $masa_terbilang = terbilang($masa_pelaksanaan);
                      echo $masa_pelaksanaan . " (" . $masa_terbilang . ")";
                      ?> hari kalender dan menandatangani Surat Perjanjian

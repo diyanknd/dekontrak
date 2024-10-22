@@ -20,6 +20,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/css/github.min.css" />
 
+
+
+
   <style>
     .scale-fade-animation {
       animation: blink 2s ease-in-out infinite;
@@ -673,9 +676,9 @@
             <div x-show="opened=='list'" x-collapse>
               <ul class="submenu-v" data-submenu="list">
                 <li>
-                  <a href="list" class="dropdown-link submenu-link-v">List</a>
+                  <a href="list" class="dropdown-link submenu-link-v">Daftar Paket</a>
                 </li>
-                <li>
+                <!-- <li>
                   <a href="fisik" class="dropdown-link submenu-link-v">Fisik</a>
                 </li>
                 <li>
@@ -683,7 +686,7 @@
                 </li>
                 <li>
                   <a href="konsultan_perencanaan" class="dropdown-link submenu-link-v">Konsultan Perencanaan</a>
-                </li>
+                </li> -->
               </ul>
             </div>
           </li>
@@ -1400,9 +1403,9 @@ setActiveMenu(){
                 class="mt-3 ltr:ml-6 rtl:mr-6 flex-col ltr:border-l rtl:border-r xl:hidden group-hover:flex border-primary-300"
                 data-submenu="list">
                 <li>
-                  <a href="list" class="dropdown-link submenu-link-h">List</a>
+                  <a href="list" class="dropdown-link submenu-link-h">Daftar Paket</a>
                 </li>
-                <li>
+                <!-- <li>
                   <a href="fisik" class="dropdown-link submenu-link-h">Fisik</a>
                 </li>
                 <li>
@@ -1410,7 +1413,7 @@ setActiveMenu(){
                 </li>
                 <li>
                   <a href="konsultan_perencanaan" class="dropdown-link submenu-link-h">Konsultan Pengawasan</a>
-                </li>
+                </li> -->
               </ul>
             </div>
           </li>
@@ -2034,10 +2037,10 @@ setActiveMenu(){
                 class="las la-plus group-hover:hidden text-lg"></i><i
                 class="las la-minus hidden text-lg group-hover:inline-block"></i></button>
             <ul class="submenu-horiz">
-              <li><a href="user-profile.html" class="link-horiz menu-link-horiz">List</a></li>
-              <li><a href="user-cards.html" class="link-horiz menu-link-horiz">Fisik</a></li>
+              <li><a href="user-profile.html" class="link-horiz menu-link-horiz">Daftar Paket</a></li>
+              <!-- <li><a href="user-cards.html" class="link-horiz menu-link-horiz">Fisik</a></li>
               <li><a href="user-list.html" class="link-horiz menu-link-horiz">Konsultan Pengawasan</a></li>
-              <li><a href="create-user.html" class="link-horiz menu-link-horiz">Konsultan Perencanaan</a></li>
+              <li><a href="create-user.html" class="link-horiz menu-link-horiz">Konsultan Perencanaan</a></li> -->
               <!-- <li><a href="edit-user.html" class="link-horiz menu-link-horiz">Edit</a></li>
             <li><a href="user-account.html" class="link-horiz menu-link-horiz">Account</a></li> -->
             </ul>
@@ -2339,6 +2342,7 @@ setActiveMenu(){
 
 
   <!-- js libraries and custom scripts -->
+
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/tom-select.js"></script>
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/swiper-bundle.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/alpine.collapse.js"></script>
@@ -2351,6 +2355,8 @@ setActiveMenu(){
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/sweetalert.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/simple-datatable.js"></script>
   <script src="<?php echo base_url(); ?>/assets/Softify/Softify/dist/assets/js/libs/highlight.js"></script>
+
+
 
 
 

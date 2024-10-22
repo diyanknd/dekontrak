@@ -255,14 +255,6 @@
             </tr>
             <tr>
                 <td style="width:4%; vertical-align: top;">5.</td>
-                <td style="width:30%; vertical-align: top;">Hasil Pekerjaan</td>
-                <td style="width:2%; vertical-align: top;">:</td>
-                <td style="vertical-align: top;">
-                    <?php echo $row2->paket_pekerjaan; ?>
-                </td>
-            </tr>
-            <tr>
-                <td style="width:4%; vertical-align: top;">6.</td>
                 <td style="width:30%; vertical-align: top;">Sanksi</td>
                 <td style="width:2%; vertical-align: top;">:</td>
                 <td style="vertical-align: top;">

@@ -7,6 +7,7 @@ class Create extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Kontrak');
+        $this->db2 = $this->load->database('dekontrak', TRUE);
     }
     // Function to fetch SPPBJ data
     public function get_sppbj_data()
@@ -36,6 +37,8 @@ class Create extends CI_Controller
     }
 
     // Function to handle form submission
+
+
     public function index()
     {
         $id_paket = $this->input->post('id_paket');
@@ -44,12 +47,13 @@ class Create extends CI_Controller
             'id_paket' => $this->input->post('id_paket'),
             'tanggal_sppbj' => $this->input->post('tanggal_sppbj'),
             'no_surat_penawaran' => $this->input->post('no_surat_penawaran'),
-            'lima_persen' => $this->input->post('lima_persen'),
+            'lima_persen' => self::removeComma($this->input->post('lima_persen')),
             'tanggal_surat_penawaran' => $this->input->post('tanggal_surat_penawaran'),
-            'hasil_negoisasi' => $this->input->post('hasil_negoisasi'),
+            'hasil_negoisasi' => self::removeComma($this->input->post('hasil_negoisasi')),
             'kode_paket' => $this->input->post('kode_paket'),
             'tanggal_kode_paket' => $this->input->post('tanggal_kode_paket'),
             'tentang_kode_paket' => $this->input->post('tentang_kode_paket'),
+            'masa_pelaksanaan' => $this->input->post('masa_pelaksanaan')
         );
 
         // Check if a record with the same id_paket already exists
@@ -72,6 +76,11 @@ class Create extends CI_Controller
         redirect('page/detail_fisik');
     }
 
+    public static function removeComma($value)
+    {
+        return str_replace(",", "", $value);
+    }
+
 
     public function surat_perjanjian()
     {
@@ -81,20 +90,49 @@ class Create extends CI_Controller
             'jenis_kontrak' => $this->input->post('jenis_kontrak'),
             'nomor_surat_perjanjian' => $this->input->post('nomor_suratperjanjian'),
             'tanggal_surat_perjanjian' => $this->input->post('tanggal_suratperjanjian'),
+            'nilai_kontrak' => self::removeComma($this->input->post('nilai_kontrak')),
             'nomor_bahp' => $this->input->post('no_bahp'),
             'tanggal_bahp' => $this->input->post('tanggal_bahp'),
             'no_skpd' => $this->input->post('no_skpd'),
             'tanggal_skpd' => $this->input->post('tanggal_skpd'),
             'ruang_lingkup' => $this->input->post('ruang_lingkup'),
-            'harga_penawaran' => $this->input->post('harga_penawaran'),
+            'harga_penawaran' => self::removeComma($this->input->post('harga_penawaran')),
             'no_supl' => $this->input->post('no_supl'),
             'tanggal_supl' => $this->input->post('tanggal_supl'),
             'dokumen_penunjang' => $this->input->post('dokumen_penunjang'),
-            'uang_muka' => $this->input->post('uang_muka')
+            'uang_muka' => self::removeComma($this->input->post('uang_muka')),
+            'penyedia_jasa' => $this->input->post('penyedia_jasa'),
+            'konsultan_pengawasan' => $this->input->post('konsultan_pengawasan'),
+            'tanggal_mulai' => $this->input->post('tanggal_mulai'),
+            'tanggal_selesai' => $this->input->post('tanggal_selesai')
         );
+
+        $data_bast = array(
+            'nomor' => $this->input->post('no_bast'),
+            'tanggal' => $this->input->post('tanggal_bast'),
+            'id_paket' => $this->input->post('id_paket')
+        );
+
+        $id_paket = $this->input->post('id_paket');
+
+        // Cek apakah id_paket sudah ada di database
+        $this->db2->where('id_paket', $id_paket);
+        $query = $this->db2->get('tb_bast');
+
+        // Jika id_paket sudah ada, lakukan update
+        if ($query->num_rows() > 0) {
+            $this->db2->where('id_paket', $id_paket);
+            $this->db2->update('tb_bast', $data_bast);
+        } else {
+            // Jika id_paket belum ada, lakukan insert
+            $this->db2->insert('tb_bast', $data_bast);
+        }
+
+
 
         // Cek apakah data sudah ada di database
         $cek_data = $this->Kontrak->cek_surat_perjanjian($data['id_paket']);
+
 
         if ($cek_data) {
             // Jika data sudah ada, update data
@@ -113,7 +151,7 @@ class Create extends CI_Controller
         redirect('page/detail_fisik');
     }
 
-    
+
     public function spmk()
     {
         // Simpan data ke database

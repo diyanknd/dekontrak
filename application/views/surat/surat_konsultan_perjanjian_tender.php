@@ -384,33 +384,33 @@
             <tr>
                 <td>Nama</td>
                 <td>:</td>
-                <td><?php echo $row2->nama_penyedia; ?></td>
+                <td><?php echo $penyedia_jasa->nama_penyedia; ?></td>
             </tr>
             <tr>
                 <td>Jabatan</td>
                 <td>:</td>
-                <td><?php echo $row2->jabatan; ?></td>
+                <td><?php echo $penyedia_jasa->jabatan; ?></td>
             </tr>
             <tr>
                 <td style="width:20%">Berkedudukan di</td>
                 <td>:</td>
-                <td><?php echo $row2->alamat; ?>
+                <td><?php echo $penyedia_jasa->alamat; ?>
                 </td>
             </tr>
             <tr>
                 <td>Akta Notaris Nomor</td>
                 <td>:</td>
-                <td><?php echo $row2->no_akta; ?></td>
+                <td><?php echo $penyedia_jasa->no_akta; ?></td>
             </tr>
             <tr>
                 <td>Tanggal</td>
                 <td>:</td>
-                <td><?php echo $row2->tanggal_akta; ?></td>
+                <td><?php echo $penyedia_jasa->tanggal_akta; ?></td>
             </tr>
             <tr>
                 <td>Notaris</td>
                 <td>:</td>
-                <td><?php echo $row2->notaris; ?></td>
+                <td><?php echo $penyedia_jasa->notaris; ?></td>
             </tr>
         </table>
         <!-- END: Data Penyedia -->
@@ -420,7 +420,8 @@
         <!-- BEGIN: Isi 3 -->
         <table>
             <td style="text-align:justify">
-                yang bertindak untuk dan atas nama <?php echo $row2->nama_penyedia; ?> selanjutnya disebut “Penyedia”.
+                yang bertindak untuk dan atas nama <?php echo $penyedia_jasa->nama_penyedia; ?> selanjutnya disebut
+                “Penyedia”.
             </td>
         </table>
         <!-- END: Isi 3 -->
@@ -436,29 +437,33 @@
 
             <tr>
                 <td>1.</td>
-                <td>Undang-Undang Nomor 2 Tahun 2017 tentang Jasa Konstruksi yang selanjutnya dirubah dengan
+                <td style="text-align:justify">Undang-Undang Nomor 2 Tahun 2017 tentang Jasa Konstruksi yang selanjutnya
+                    dirubah dengan
                     Undang-UndangNomor 11 Tahun 2020 tentang Cipta Kerja;</td>
             </tr>
             <tr>
                 <td>2.</td>
-                <td>Kitab Undang-Undang Hukum Perdata (Buku III tentang Perikatan);</td>
+                <td style="text-align:justify">Kitab Undang-Undang Hukum Perdata (Buku III tentang Perikatan);</td>
             </tr>
             <tr>
                 <td>3.</td>
-                <td>Peraturan Pemerintah Nomor 22 Tahun 2020 tentang Peraturan Pelaksanaan Undang-Undang Nomor 2 tahun
+                <td style="text-align:justify">Peraturan Pemerintah Nomor 22 Tahun 2020 tentang Peraturan Pelaksanaan
+                    Undang-Undang Nomor 2 tahun
                     2017 tentang Jasa Konstruksi sebagaimana telah diubah dengan Peraturan Pemerintah Nomor 14 Tahun
                     2021 tentang Perubahan Peraturan Pemerintah Nomor 22 Tahun 2020 tentang Peraturan Pelaksanaan
                     Undang-Undang Nomor 2 tahun 2017 tentang Jasa Konstruksi;</td>
             </tr>
             <tr>
                 <td>4.</td>
-                <td>Peraturan Presiden Nomor 16 Tahun 2018 tentang Pengadaan Barang/Jasa Pemerintah sebagaimana telah
+                <td style="text-align:justify">Peraturan Presiden Nomor 16 Tahun 2018 tentang Pengadaan Barang/Jasa
+                    Pemerintah sebagaimana telah
                     diubah dengan Peraturan Presiden Nomor 12 Tahun 2021 tentang Perubahan Peraturan Presiden Nomor 16
                     Tahun 2018 tentang Pengadaan Barang/Jasa Pemerintah;</td>
             </tr>
             <tr>
                 <td>5.</td>
-                <td>Peraturan LKPP Nomor 12 Tahun 2021 Tentang Pedoman Pelaksanaan Pengadaan Barang/Jasa Pemerintah
+                <td style="text-align:justify">Peraturan LKPP Nomor 12 Tahun 2021 Tentang Pedoman Pelaksanaan Pengadaan
+                    Barang/Jasa Pemerintah
                     Melalui Penyedia.</td>
             </tr>
         </table>
@@ -479,50 +484,57 @@
         <table>
             <tr>
                 <td>(a)</td>
-                <td colspan="2">Telah dilakukan proses pemilihan Penyedia yang telah sesuai dengan Dokumen pemilihan;
+                <td colspan="2" style="text-align:justify">Telah dilakukan proses pemilihan Penyedia yang telah sesuai
+                    dengan Dokumen pemilihan;
                 </td>
             </tr>
             <tr>
                 <td>(b)</td>
-                <td colspan="2">Pejabat Penandatangan Kontrak telah menunjuk Penyedia menjadi pihak dalam Kontrak ini
+                <td colspan="2" style="text-align:justify">Pejabat Penandatangan Kontrak telah menunjuk Penyedia menjadi
+                    pihak dalam Kontrak ini
                     melalui Surat Penunjukan Penyediaan Barang/Jasa (SPPBJ) untuk melaksanakan Pekerjaan sebagaimana
                     diterangkan dalam Syarat-Syarat Umum Kontrak, selanjutnya disebut “Pengadaan Jasa Konsultansi”;</td>
             </tr>
             <tr>
                 <td>(c)</td>
-                <td colspan="2">Penyedia telah menyatakan kepada Pejabat Penandatangan Kontrak, memenuhi persyaratan
+                <td colspan="2" style="text-align:justify">Penyedia telah menyatakan kepada Pejabat Penandatangan
+                    Kontrak, memenuhi persyaratan
                     kualifikasi, memiliki keahlian profesional, personel, dan sumber daya teknis, serta telah menyetujui
                     untuk menyediakan Jasa Konsultansi sesuai dengan persyaratan dan ketentuan dalam Kontrak ini;</td>
             </tr>
             <tr>
                 <td>(d)</td>
-                <td colspan="2">(d) Pejabat Penandatangan Kontrak dan Penyedia menyatakan memiliki kewenangan untuk
+                <td colspan="2" style="text-align:justify">(d) Pejabat Penandatangan Kontrak dan Penyedia menyatakan
+                    memiliki kewenangan untuk
                     menandatangani Kontrak ini, dan mengikat pihak yang diwakili;</td>
             </tr>
             <tr>
                 <td>(e)</td>
-                <td colspan="2">Pejabat Penandatangan Kontrak dan Penyedia mengakui dan menyatakan bahwa sehubungan
+                <td colspan="2" style="text-align:justify">Pejabat Penandatangan Kontrak dan Penyedia mengakui dan
+                    menyatakan bahwa sehubungan
                     dengan penandatanganan Kontrak ini masing-masing pihak:</td>
             </tr>
             <tr>
                 <td></td>
                 <td>1)</td>
-                <td>Telah dan senantiasa diberikan kesempatan untuk didampingi oleh advokat;</td>
+                <td style="text-align:justify">Telah dan senantiasa diberikan kesempatan untuk didampingi oleh advokat;
+                </td>
             </tr>
             <tr>
                 <td></td>
                 <td>2)</td>
-                <td>Menandatangani Kontrak ini setelah meneliti secara patut;</td>
+                <td style="text-align:justify">Menandatangani Kontrak ini setelah meneliti secara patut;</td>
             </tr>
             <tr>
                 <td></td>
                 <td>3)</td>
-                <td>Telah membaca dan memahami secara penuh ketentuan Kontrak ini;</td>
+                <td style="text-align:justify">Telah membaca dan memahami secara penuh ketentuan Kontrak ini;</td>
             </tr>
             <tr>
                 <td></td>
                 <td>4)</td>
-                <td>Telah mendapatkan kesempatan yang memadai untuk memeriksa dan mengkonfirmasikan semua ketentuan
+                <td style="text-align:justify">Telah mendapatkan kesempatan yang memadai untuk memeriksa dan
+                    mengkonfirmasikan semua ketentuan
                     dalam Kontrak ini beserta semua fakta dan kondisi yang terkait.</td>
             </tr>
         </table>
@@ -673,9 +685,10 @@
                         return $temp;
                     }
                     ?>,
-                    Pembayaran untuk kontrak ini dilakukan ke Bank <?php echo $row2->nama_bank; ?> rekening nomor :
-                    <?php echo $row2->nomor_rekening; ?>
-                    atas nama Penyedia : <?php echo $row2->nama_penyedia; ?>;
+                    Pembayaran untuk kontrak ini dilakukan ke Bank <?php echo $penyedia_jasa->nama_bank; ?> rekening
+                    nomor :
+                    <?php echo $penyedia_jasa->nomor_rekening; ?>
+                    atas nama Penyedia : <?php echo $penyedia_jasa->nama_penyedia; ?>
                 </td>
             </tr>
         </table>
@@ -826,7 +839,7 @@
                         Untuk dan atas nama Penyedia
                     </div>
                     <div>
-                        <?php echo $row2->nama_penyedia; ?>
+                        <?php echo $penyedia_jasa->nama_penyedia; ?>
                     </div>
                 </td>
                 <td>
@@ -856,10 +869,10 @@
             <tr>
                 <td>
                     <div>
-                        <?php echo $row2->nama_direktur; ?>
+                        <?php echo $penyedia_jasa->nama_direktur; ?>
                     </div>
                     <div>
-                        <?php echo $row2->jabatan; ?>
+                        <?php echo $penyedia_jasa->jabatan; ?>
                     </div>
                 </td>
                 <td>

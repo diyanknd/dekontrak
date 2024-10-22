@@ -46,8 +46,12 @@
                             alt="product image" />
                         <div>
                             <h4 class="m-text mb-1 font-medium"><?php echo $kontrak->paket_pekerjaan; ?></h4>
-                            <span class="text-xs"><?php echo $kontrak->nomor_kontrak; ?></span> <br>
-                            <span class="text-xs"><?php echo $kontrak->nama_penyedia; ?></span> <br><br>
+                            <span
+                                class="text-xs"><?php echo isset($dekontrak->nomor_surat_perjanjian) ? $dekontrak->nomor_surat_perjanjian : 'Nomor Surat Perjanjian Belum dibuat'; ?></span>
+                            <br>
+                            <span
+                                class="text-xs"><?php echo isset($penyedia_jasa->nama_penyedia) ? $penyedia_jasa->nama_penyedia : 'Nama Penyedia Jasa Belum dibuat'; ?></span>
+                            <br><br>
                             <h4 class="m-text mb-1 font-medium">Nilai Kontrak</h4>
                             <span class="text-xs extrabold">Rp.
                                 <?php echo number_format($kontrak->nilai_kontrak); ?></span>
@@ -57,9 +61,11 @@
                 <div class="px-2 py-3 flex justify-center">
                     <div class="w-full">
                         <table class="w-full whitespace-nowrap mb-10">
-                            <tr x-data="{
+                            <?php if ($get_spmk == 1) { ?>
+                                <tr x-data="{
                             isOpen: false,
                             jumlahRangkap: '',
+                            tanggal_dpa:'<?= isset($cover->tanggal_dpa) ? $cover->tanggal_dpa : '' ?>',
                             openModals() {
                                 this.isOpen = true;
                             },
@@ -67,63 +73,74 @@
                                 this.isOpen = false;
                             }
                         }">
-                                <td class="py-2 m-text text-left" style="width:5px; ">
-                                    <a @click="openModals">
-                                        <i class="px-3 las la-file text-xl text-primary-300"></i>
-                                    </a>
-                                </td>
+                                    <td class="py-2 m-text text-left" style="width:5px; ">
+                                        <a @click="openModals">
+                                            <i class="px-3 las la-file text-xl text-primary-300"></i>
+                                        </a>
+                                    </td>
 
-                                <td class="py-2 m-text text-left">
-                                    <button @click="openModals"> Cover </button>
-                                </td>
+                                    <td class="py-2 m-text text-left">
+                                        <button @click="openModals"> Cover </button>
+                                    </td>
 
-                                <!-- Modal Structure -->
-                                <template x-teleport="body">
-                                    <div class="fixed inset-0 z-[999] bg-[black]/60 dark:bg-neutral-40/80"
-                                        x-show="isOpen" x-transition>
-                                        <div class="flex min-h-screen items-center justify-center px-4 text-neutral-700 dark:text-neutral-20"
-                                            @click.self="closeModal">
-                                            <div x-show="isOpen" x-transition x-transition.duration.300
-                                                class="panel my-8 w-full max-w-3xl overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
+                                    <!-- Modal Structure -->
+                                    <template x-teleport="body">
+                                        <div class="fixed inset-0 z-[999] bg-[black]/60 dark:bg-neutral-40/80"
+                                            x-show="isOpen" x-transition>
+                                            <div class="flex min-h-screen items-center justify-center px-4 text-neutral-700 dark:text-neutral-20"
+                                                @click.self="closeModal">
+                                                <div x-show="isOpen" x-transition x-transition.duration.300
+                                                    class="panel my-8 w-full max-w-3xl overflow-hidden rounded-lg border-0 bg-neutral-0 p-3 dark:bg-neutral-904 sm:p-4 md:p-6 lg:p-8">
 
-                                                <form method="POST"
-                                                    action="<?php echo ($nilai_pagu->nilai_pagu >= 200000000) ? site_url('surat/kop_surat_tender') : site_url('surat/kop_surat_non_tender'); ?>"
-                                                    target="_blank">
-                                                    <div class="mb-4 flex items-center justify-between bb-dashed-n30">
-                                                        <h4>Masukkan Jumlah Rangkap</h4>
-                                                        <i class="las la-times cursor-pointer text-xl"
-                                                            @click="closeModal"></i>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <label for="jumlahRangkap"
-                                                            class="block text-sm font-medium text-gray-700">Jumlah
-                                                            Rangkap</label>
-                                                        <input type="number" x-model="jumlahRangkap"
-                                                            name="jumlah_rangkap" id="jumlahRangkap"
-                                                            class="my-5 w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4 dark:border-neutral-500 dark:bg-neutral-903"
-                                                            placeholder="Jumlah Rangkap..." required />
-                                                    </div>
-                                                    <div class="flex gap-4 lg:gap-6">
-                                                        <button type="submit" class="btn-primary">Submit</button>
-                                                        <button type="button" class="btn-primary-outlined"
-                                                            @click="closeModal">Cancel</button>
-                                                    </div>
-                                                </form>
+                                                    <form method="POST"
+                                                        action="<?php echo ($nilai_pagu->nilai_pagu >= 200000000) ? site_url('surat/kop_surat_tender') : site_url('surat/kop_surat_non_tender'); ?>"
+                                                        target="_blank">
+                                                        <div class="mb-4 flex items-center justify-between bb-dashed-n30">
+                                                            <h4>Masukkan Jumlah Rangkap</h4>
+                                                            <i class="las la-times cursor-pointer text-xl"
+                                                                @click="closeModal"></i>
+                                                        </div>
+                                                        <input type="text" name="id_paket" value="<?= $id_paket ?>" hidden>
+                                                        <div class="mb-4">
+                                                            <label for="jumlahRangkap"
+                                                                class="block text-sm font-medium text-gray-700">Jumlah
+                                                                Rangkap</label>
+                                                            <input type="number" x-model="jumlahRangkap"
+                                                                name="jumlah_rangkap" id="jumlahRangkap"
+                                                                class="my-5 w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4 dark:border-neutral-500 dark:bg-neutral-903"
+                                                                placeholder="Jumlah Rangkap..." required />
+
+                                                            <label for="tanggal_dpa"
+                                                                class="block text-sm font-medium text-gray-700">Tanggal
+                                                                DPA</label>
+                                                            <input type="date" x-model="tanggal_dpa" name="tanggal_dpa"
+                                                                id="tanggal_dpa"
+                                                                class="my-5 w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4 dark:border-neutral-500 dark:bg-neutral-903" " required />
+                                                                                                                                                                                            </div>
+                                                                                                                                                                                            <div class="
+                                                            flex gap-4 lg:gap-6">
+                                                            <button type="submit" class="btn-primary">Submit</button>
+                                                            <button type="button" class="btn-primary-outlined"
+                                                                @click="closeModal">Cancel</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </template>
+                                    </template>
 
-                                <td class="py-2 text-right">
-                                    <label
-                                        style="position: relative;display: inline-block;width: 20px;height: 20px;cursor: not-allowed;">
-                                        <input type="checkbox" checked disabled
-                                            style="width: 20px;height: 20px;cursor: not-allowed;appearance: none;background-color: #007bff;border: 2px solid #007bff;border-radius: 3px;position: relative;">
-                                        <span
-                                            style="position: absolute;top: 1px;left: 4px;font-size: 16px;color: white;pointer-events: none;">✔</span>
-                                    </label>
-                                </td>
-                            </tr>
+                                    <td class="py-2 text-right">
+                                        <label
+                                            style="position: relative;display: inline-block;width: 20px;height: 20px;cursor: not-allowed;">
+                                            <input type="checkbox" checked disabled
+                                                style="width: 20px;height: 20px;cursor: not-allowed;appearance: none;background-color: #007bff;border: 2px solid #007bff;border-radius: 3px;position: relative;">
+                                            <span
+                                                style="position: absolute;top: 1px;left: 4px;font-size: 16px;color: white;pointer-events: none;">✔</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+
                             <tr x-data="{ showModal: false, 
                                         sppbjData: 
                                         {
@@ -131,25 +148,26 @@
                                             no_surat_penawaran:'<?php echo isset($get_data_sppbj->no_surat_penawaran) ? $get_data_sppbj->no_surat_penawaran : ''; ?>',
                                             tanggal_surat_penawaran:'<?php echo isset($get_data_sppbj->tanggal_surat_penawaran) ? $get_data_sppbj->tanggal_surat_penawaran : ''; ?>',
                                             tanggal_sppbj:'<?php echo isset($get_data_sppbj->tanggal_sppbj) ? $get_data_sppbj->tanggal_sppbj : ''; ?>',
-                                            hasil_negoisasi:'<?php echo isset($get_data_sppbj->hasil_negoisasi) ? $get_data_sppbj->hasil_negoisasi : ''; ?>',
-                                            lima_persen:'<?php echo isset($get_data_sppbj->lima_persen) ? $get_data_sppbj->lima_persen : ''; ?>',
+                                            hasil_negoisasi:'<?php echo isset($get_data_sppbj->hasil_negoisasi) ? number_format($get_data_sppbj->hasil_negoisasi) : ''; ?>',
+                                            lima_persen:'<?php echo isset($get_data_sppbj->lima_persen) ? number_format($get_data_sppbj->lima_persen) : ''; ?>',
                                             kode_paket:'<?php echo isset($get_data_sppbj->kode_paket) ? $get_data_sppbj->kode_paket : ''; ?>',
                                             tentang_kode_paket:'<?php echo isset($get_data_sppbj->tentang_kode_paket) ? $get_data_sppbj->tentang_kode_paket : ''; ?>',
                                             tanggal_kode_paket:'<?php echo isset($get_data_sppbj->tanggal_kode_paket) ? $get_data_sppbj->tanggal_kode_paket : ''; ?>',
+                                            masa_pelaksanaan:'<?php echo isset($get_data_sppbj->masa_pelaksanaan) ? $get_data_sppbj->masa_pelaksanaan : ''; ?>',
                                         }                                     
                                     }">
 
                                 <td class="py-2 m-text text-left" style="width:5px; ">
                                     <?php if ($get_sppbj == 1): ?>
                                         <a href="#" onclick="openWindow('<?php
-                                        if ($kontrak->jenis_pengadaan == 'Konstruksi') {
+                                        if ($kontrak->jenis_pengadaan == 'Pekerjaan Konstruksi') {
                                             echo ($kontrak->nilai_pagu >= 200000000)
-                                                ? site_url('surat/sppbj_tender/') . $kontrak->id_paket
-                                                : site_url('surat/sppbj_non_tender/') . $kontrak->id_paket;
+                                                ? site_url('surat/sppbj_tender/') . $kontrak->id
+                                                : site_url('surat/sppbj_non_tender/') . $kontrak->id;
                                         } else {
-                                            echo ($kontrak->nilai_pagu >= 200000000)
-                                                ? site_url('surat/sppbj_konsultansi_tender/') . $kontrak->id_paket
-                                                : site_url('surat/sppbj_konsultansi_non_tender/') . $kontrak->id_paket;
+                                            echo ($kontrak->nilai_pagu >= 100000000)
+                                                ? site_url('surat/sppbj_konsultansi_tender/') . $kontrak->id
+                                                : site_url('surat/sppbj_konsultansi_non_tender/') . $kontrak->id;
                                         }
                                         ?>')">
 
@@ -218,7 +236,7 @@
                                                                 value="<?php echo $id_paket; ?>" hidden>
 
                                                             <!-- Column 2 -->
-                                                            <div class="mb-4">
+                                                            <div class="mb-2">
                                                                 <label for="nomor_sppbj"
                                                                     class="block text-sm font-medium text-gray-700">Nomor
                                                                     SPPBJ</label>
@@ -229,7 +247,7 @@
                                                             </div>
 
                                                             <!-- Column 1 -->
-                                                            <div class="mb-4">
+                                                            <div class="mb-2">
                                                                 <label for="tanggal_sppbj"
                                                                     class="block text-sm font-medium text-gray-700">Tanggal
                                                                     SPPBJ</label>
@@ -240,7 +258,7 @@
                                                             </div>
 
                                                             <!-- Column 2 -->
-                                                            <div class="mb-4">
+                                                            <div class="mb-2">
                                                                 <label for="no_surat_penawaran"
                                                                     class="block text-sm font-medium text-gray-700">Nomor
                                                                     Surat Penawaran</label>
@@ -252,7 +270,7 @@
                                                             </div>
 
                                                             <!-- Column 1 -->
-                                                            <div class="mb-4">
+                                                            <div class="mb-2">
                                                                 <label for="tanggal_surat_penawaran"
                                                                     class="block text-sm font-medium text-gray-700">Tanggal
                                                                     Surat Penawaran</label>
@@ -264,29 +282,58 @@
                                                                     required>
                                                             </div>
 
+                                                            <div class="mb-2">
+                                                                <label for="masa_pelaksanaan"
+                                                                    class="block text-sm font-medium text-gray-700">Masa
+                                                                    Pelaksanaan</label>
+                                                                <input type="text" x-model="sppbjData.masa_pelaksanaan"
+                                                                    x-on:input="formatNumber($event.target)"
+                                                                    x-on:focus="removeFormatting($event.target)"
+                                                                    name="masa_pelaksanaan" id="masa_pelaksanaan"
+                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
+                                                                    required>
+                                                            </div>
+
                                                             <!-- Column 2 -->
-                                                            <div class="mb-4">
+                                                            <div class="mb-2">
                                                                 <label for="hasil_negoisasi"
                                                                     class="block text-sm font-medium text-gray-700">Hasil
                                                                     Negoisasi</label>
                                                                 <input type="text" x-model="sppbjData.hasil_negoisasi"
+                                                                    x-on:input="formatNumber($event.target)"
+                                                                    x-on:focus="removeFormatting($event.target)"
                                                                     name="hasil_negoisasi" id="hasil_negoisasi"
                                                                     class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
                                                                     required>
                                                             </div>
 
-                                                            <div class="mb-4">
+                                                            <div class="mb-2">
                                                                 <label for="lima_persen"
                                                                     class="block text-sm font-medium text-gray-700">Nilai
                                                                     Jaminan 5%</label>
                                                                 <input type="text" x-model="sppbjData.lima_persen"
+                                                                    x-on:input="formatNumber($event.target)"
                                                                     name="lima_persen" id="lima_persen"
                                                                     class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
                                                                     required>
                                                             </div>
 
+                                                            <script>
+                                                                function formatNumber(target) {
+                                                                    // Ambil nilai input dan hapus karakter non-digit
+                                                                    let rawValue = target.value.replace(/\D/g, '');
+
+                                                                    // Format mata uang
+                                                                    let formattedValue = rawValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                                                    formattedValue = formattedValue;
+
+                                                                    // Tampilkan nilai yang sudah diformat
+                                                                    target.value = formattedValue;
+                                                                }
+                                                            </script>
+
                                                             <!-- Column 1 -->
-                                                            <div class="mb-4">
+                                                            <div class="mb-2">
                                                                 <label for="kode_paket"
                                                                     class="block text-sm font-medium text-gray-700">Kode
                                                                     Paket</label>
@@ -297,7 +344,7 @@
                                                             </div>
 
                                                             <!-- Column 2 -->
-                                                            <div class="mb-4">
+                                                            <div class="mb-2">
                                                                 <label for="tanggal_kode_paket"
                                                                     class="block text-sm font-medium text-gray-700">Tanggal
                                                                     Kode Paket</label>
@@ -309,7 +356,7 @@
                                                             </div>
 
                                                             <!-- Column 1 -->
-                                                            <div class="mb-4">
+                                                            <div class="mb-2">
                                                                 <label for="tentang_kode_paket"
                                                                     class="block text-sm font-medium text-gray-700">Tentang
                                                                     Kode Paket</label>
@@ -323,7 +370,7 @@
                                                         </div>
 
                                                         <!-- Submit Button -->
-                                                        <div class="flex gap-4 lg:gap-12 justify-center">
+                                                        <div class="flex gap-4 lg:gap-12 justify-center mt-4">
                                                             <button type="submit" class="btn-primary">Submit</button>
                                                             <?php if ($get_sppbj != 0) { ?>
                                                                 <button type="button" class="btn-primary-outlined"
@@ -358,33 +405,41 @@
 
                             </tr>
                             <tr x-data="{ showModal: false, suratperjanjianData: {
-                                        id_paket: '<?php echo isset($get_data_surat_perjanjian->id_paket) ? $get_data_surat_perjanjian->id_paket : ''; ?>',
+                                        id: '<?php echo isset($get_data_surat_perjanjian->id) ? $get_data_surat_perjanjian->id : ''; ?>',
                                         jenis_kontrak: '<?php echo isset($get_data_surat_perjanjian->jenis_kontrak) ? $get_data_surat_perjanjian->jenis_kontrak : ''; ?>',
                                         nomor_surat_perjanjian: '<?php echo isset($get_data_surat_perjanjian->nomor_surat_perjanjian) ? $get_data_surat_perjanjian->nomor_surat_perjanjian : ''; ?>',
                                         tanggal_surat_perjanjian: '<?php echo isset($get_data_surat_perjanjian->tanggal_surat_perjanjian) ? $get_data_surat_perjanjian->tanggal_surat_perjanjian : ''; ?>',
+                                        nilai_kontrak: '<?php echo isset($get_data_surat_perjanjian->nilai_kontrak) ? number_format($get_data_surat_perjanjian->nilai_kontrak) : ''; ?>',
                                         nomor_bahp: '<?php echo isset($get_data_surat_perjanjian->nomor_bahp) ? $get_data_surat_perjanjian->nomor_bahp : ''; ?>',
                                         tanggal_bahp: '<?php echo isset($get_data_surat_perjanjian->tanggal_bahp) ? $get_data_surat_perjanjian->tanggal_bahp : ''; ?>',
+                                        tanggal_mulai: '<?php echo isset($get_data_surat_perjanjian->tanggal_mulai) ? $get_data_surat_perjanjian->tanggal_mulai : ''; ?>',
+                                        tanggal_selesai: '<?php echo isset($get_data_surat_perjanjian->tanggal_selesai) ? $get_data_surat_perjanjian->tanggal_selesai : ''; ?>',
                                         no_skpd: '<?php echo isset($get_data_surat_perjanjian->no_skpd) ? $get_data_surat_perjanjian->no_skpd : ''; ?>',
                                         tanggal_skpd: '<?php echo isset($get_data_surat_perjanjian->tanggal_skpd) ? $get_data_surat_perjanjian->tanggal_skpd : ''; ?>',
                                         ruang_lingkup: '<?php echo isset($get_data_surat_perjanjian->ruang_lingkup) ? $get_data_surat_perjanjian->ruang_lingkup : ''; ?>',
-                                        harga_penawaran: '<?php echo isset($get_data_surat_perjanjian->harga_penawaran) ? $get_data_surat_perjanjian->harga_penawaran : ''; ?>',
+                                        harga_penawaran: '<?php echo isset($get_data_surat_perjanjian->harga_penawaran) ? number_format($get_data_surat_perjanjian->harga_penawaran) : ''; ?>',
                                         no_supl: '<?php echo isset($get_data_surat_perjanjian->no_supl) ? $get_data_surat_perjanjian->no_supl : ''; ?>',
                                         tanggal_supl: '<?php echo isset($get_data_surat_perjanjian->tanggal_supl) ? $get_data_surat_perjanjian->tanggal_supl : ''; ?>',
+                                        tanggal_supl: '<?php echo isset($get_data_surat_perjanjian->tanggal_supl) ? $get_data_surat_perjanjian->tanggal_supl : ''; ?>',
                                         dokumen_penunjang: '<?php echo isset($get_data_surat_perjanjian->dokumen_penunjang) ? $get_data_surat_perjanjian->dokumen_penunjang : ''; ?>',
-                                        uang_muka: '<?php echo isset($get_data_surat_perjanjian->uang_muka) ? $get_data_surat_perjanjian->uang_muka : ''; ?>'
+                                        uang_muka: '<?php echo isset($get_data_surat_perjanjian->uang_muka) ? number_format($get_data_surat_perjanjian->uang_muka) : ''; ?>',
+                                        penyedia_jasa : '<?php echo isset($get_data_surat_perjanjian->penyedia_jasa) ? $get_data_surat_perjanjian->penyedia_jasa : ''; ?>',
+                                        konsultan_pengawasan : '<?php echo isset($get_data_surat_perjanjian->konsultan_pengawasan) ? $get_data_surat_perjanjian->konsultan_pengawasan : ''; ?>',
+                                        no_bast : '<?php echo isset($data_bast->nomor) ? $data_bast->nomor : ''; ?>',
+                                        tanggal_bast : '<?php echo isset($data_bast->tanggal) ? $data_bast->tanggal : ''; ?>'
 
                                 } }">
                                 <td class="py-2 m-text text-left" style="width:5px; ">
                                     <?php if ($get_surat_perjanjian == 1): ?>
                                         <a href="#" onclick="openWindow('<?php
-                                        if ($kontrak->jenis_pengadaan == 'Konstruksi') {
+                                        if ($kontrak->jenis_pengadaan == 'Pekerjaan Konstruksi') {
                                             echo ($kontrak->nilai_pagu >= 200000000)
-                                                ? site_url('surat/surat_perjanjian_tender/') . $kontrak->id_paket
-                                                : site_url('surat/surat_perjanjian_non_tender/') . $kontrak->id_paket;
+                                                ? site_url('surat/surat_perjanjian_tender/') . $kontrak->id
+                                                : site_url('surat/surat_perjanjian_non_tender/') . $kontrak->id;
                                         } else {
-                                            echo ($kontrak->nilai_pagu >= 200000000)
-                                                ? site_url('surat/surat_perjanjian_konsultansi_tender/') . $kontrak->id_paket
-                                                : site_url('surat/surat_perjanjian_konsultansi_non_tender/') . $kontrak->id_paket;
+                                            echo ($kontrak->nilai_pagu >= 100000000)
+                                                ? site_url('surat/surat_perjanjian_konsultansi_tender/') . $kontrak->id
+                                                : site_url('surat/surat_perjanjian_konsultansi_non_tender/') . $kontrak->id;
                                         }
                                         ?>')">
                                             <div class="group relative">
@@ -451,13 +506,38 @@
 
                                                             <!-- Column 2 -->
                                                             <div class="mb-4">
-                                                                <label for="jenis_kontrak"
-                                                                    class="block text-sm font-medium text-gray-700">Jenis_kontrak</label>
-                                                                <input type="text"
-                                                                    x-model="suratperjanjianData.jenis_kontrak"
+                                                                <label for="jumlahRangkap"
+                                                                    class="block text-sm font-medium text-gray-700">Jenis
+                                                                    Kontrak</label>
+                                                                <select x-model="suratperjanjianData.jenis_kontrak"
                                                                     name="jenis_kontrak" id="jenis_kontrak"
-                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
-                                                                    required>
+                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20"
+                                                                    x-init="
+                                                                            new TomSelect($el, {
+                                                                                onChange: (value) => {
+                                                                                    suratperjanjianData.jenis_kontrak = value;
+                                                                                }
+                                                                            });
+                                                                            // Inisialisasi nilai awal dari x-model ke TomSelect jika ada nilai
+                                                                            $nextTick(() => {
+                                                                                if (suratperjanjianData.jenis_kontrak) {
+                                                                                    $el.tomselect.setValue(suratperjanjianData.jenis_kontrak);
+                                                                                }
+                                                                            });
+                                                                        ">
+                                                                    <option value="">Pilih Paket Pekerjaan</option>
+                                                                    <option value="Lumsum">Lumsum</option>
+                                                                    <option value="Harga Satuan">Harga Satuan</option>
+                                                                    <option value="Gabungan Lumsum dan Harga Satuan">
+                                                                        Gabungan Lumsum dan Harga Satuan</option>
+                                                                    <option value="Terima Jadi (Turnkey)">Terima Jadi
+                                                                        (Turnkey)</option>
+                                                                    <option value="Kontrak Payung">Kontrak Payung
+                                                                    </option>
+                                                                </select>
+
+
+
                                                             </div>
 
                                                             <!-- Column 2 -->
@@ -487,6 +567,33 @@
                                                             </div>
 
                                                             <!-- Column 2 -->
+                                                            <div class="mb-4">
+                                                                <label for="nilai_kontrak"
+                                                                    class="block text-sm font-medium text-gray-700">Nilai
+                                                                    Kontrak</label>
+                                                                <input type="text"
+                                                                    x-on:input="formatNumber($event.target)"
+                                                                    x-model="suratperjanjianData.nilai_kontrak"
+                                                                    name="nilai_kontrak" id="nilai_kontrak"
+                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
+                                                                    required>
+                                                            </div>
+
+                                                            <script>
+                                                                function formatNumber(target) {
+                                                                    // Ambil nilai input dan hapus karakter non-digit
+                                                                    let rawValue = target.value.replace(/\D/g, '');
+
+                                                                    // Format mata uang
+                                                                    let formattedValue = rawValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                                                    formattedValue = formattedValue;
+
+                                                                    // Tampilkan nilai yang sudah diformat
+                                                                    target.value = formattedValue;
+                                                                }
+                                                            </script>
+
+
                                                             <div class="mb-4">
                                                                 <label for="no_bahp"
                                                                     class="block text-sm font-medium text-gray-700">Nomor
@@ -529,6 +636,28 @@
                                                                 <input type="date"
                                                                     x-model="suratperjanjianData.tanggal_skpd"
                                                                     name="tanggal_skpd" id="tanggal_skpd"
+                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
+                                                                    required>
+                                                            </div>
+
+                                                            <div class="mb-4">
+                                                                <label for="no_supl"
+                                                                    class="block text-sm font-medium text-gray-700">Nomor
+                                                                    Surat Undangan Pengadaan Langsung</label>
+                                                                <input type="text" x-model="suratperjanjianData.no_supl"
+                                                                    name="no_supl" id="no_supl"
+                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
+                                                                    required>
+                                                            </div>
+
+                                                            <!-- Column 1 -->
+                                                            <div class="mb-4">
+                                                                <label for="tanggal_supl"
+                                                                    class="block text-sm font-medium text-gray-700">Tanggal
+                                                                    Surat Undangan Pengadaan Langsung</label>
+                                                                <input type="date"
+                                                                    x-model="suratperjanjianData.tanggal_supl"
+                                                                    name="tanggal_supl" id="tanggal_supl"
                                                                     class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
                                                                     required>
                                                             </div>
@@ -646,31 +775,88 @@
                                                                     class="block text-sm font-medium text-gray-700">Harga
                                                                     Penawaran</label>
                                                                 <input type="text"
+                                                                    x-on:input="formatNumber($event.target)"
                                                                     x-model="suratperjanjianData.harga_penawaran"
                                                                     name="harga_penawaran" id="harga_penawaran"
                                                                     class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
                                                                     required>
                                                             </div>
 
+                                                            <script>
+                                                                function formatNumber(target) {
+                                                                    // Ambil nilai input dan hapus karakter non-digit
+                                                                    let rawValue = target.value.replace(/\D/g, '');
+
+                                                                    // Format mata uang
+                                                                    let formattedValue = rawValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                                                    formattedValue = formattedValue;
+
+                                                                    // Tampilkan nilai yang sudah diformat
+                                                                    target.value = formattedValue;
+                                                                }
+                                                            </script>
+
                                                             <!-- Column 2 -->
-                                                            <div class="mb-4">
-                                                                <label for="no_supl"
+                                                            <!-- <div class="mb-4">
+                                                                <label for="no_bahp"
                                                                     class="block text-sm font-medium text-gray-700">Nomor
                                                                     Berita Acara</label>
-                                                                <input type="text" x-model="suratperjanjianData.no_supl"
-                                                                    name="no_supl" id="no_supl"
+                                                                <input type="text" x-model="suratperjanjianData.no_bahp"
+                                                                    name="no_bahp" id="no_bahp"
+                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
+                                                                    required>
+                                                            </div> -->
+
+                                                            <!-- Column 1 -->
+                                                            <!-- <div class="mb-4">
+                                                                <label for="tanggal_bahp"
+                                                                    class="block text-sm font-medium text-gray-700">Tanggal
+                                                                    Berita Acara</label>
+                                                                <input type="date"
+                                                                    x-model="suratperjanjianData.tanggal_bahp"
+                                                                    name="tanggal_bahp" id="tanggal_bahp"
+                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
+                                                                    required>
+                                                            </div> -->
+                                                            <div class="mb-4">
+                                                                <label for="no_bast"
+                                                                    class="block text-sm font-medium text-gray-700">Nomor
+                                                                    BAST</label>
+                                                                <input type="text" x-model="suratperjanjianData.no_bast"
+                                                                    name="no_bast" id="no_bast"
                                                                     class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
                                                                     required>
                                                             </div>
 
-                                                            <!-- Column 1 -->
                                                             <div class="mb-4">
-                                                                <label for="tanggal_supl"
+                                                                <label for="tanggal_bast"
                                                                     class="block text-sm font-medium text-gray-700">Tanggal
-                                                                    Surat Penawaran</label>
+                                                                    BAST</label>
                                                                 <input type="date"
-                                                                    x-model="suratperjanjianData.tanggal_supl"
-                                                                    name="tanggal_supl" id="tanggal_supl"
+                                                                    x-model="suratperjanjianData.tanggal_bast"
+                                                                    name="tanggal_bast" id="tanggal_bast"
+                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
+                                                                    required>
+                                                            </div>
+
+                                                            <div class="mb-4">
+                                                                <label for="tanggal_mulai"
+                                                                    class="block text-sm font-medium text-gray-700">Tanggal
+                                                                    Mulai</label>
+                                                                <input type="date"
+                                                                    x-model="suratperjanjianData.tanggal_mulai"
+                                                                    name="tanggal_mulai" id="tanggal_mulai"
+                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
+                                                                    required>
+                                                            </div>
+
+                                                            <div class="mb-4">
+                                                                <label for="tanggal_selesai"
+                                                                    class="block text-sm font-medium text-gray-700">Tanggal
+                                                                    Selesai</label>
+                                                                <input type="date"
+                                                                    x-model="suratperjanjianData.tanggal_selesai"
+                                                                    name="tanggal_selesai" id="tanggal_selesai"
                                                                     class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
                                                                     required>
                                                             </div>
@@ -693,10 +879,85 @@
                                                                     class="block text-sm font-medium text-gray-700">Uang
                                                                     Muka</label>
                                                                 <input type="text"
+                                                                    x-on:input="formatNumber($event.target)"
                                                                     x-model="suratperjanjianData.uang_muka"
                                                                     name="uang_muka" id="uang_muka"
                                                                     class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
                                                                     required>
+                                                            </div>
+
+                                                            <script>
+                                                                function formatNumber(target) {
+                                                                    // Ambil nilai input dan hapus karakter non-digit
+                                                                    let rawValue = target.value.replace(/\D/g, '');
+
+                                                                    // Format mata uang
+                                                                    let formattedValue = rawValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                                                    formattedValue = formattedValue;
+
+                                                                    // Tampilkan nilai yang sudah diformat
+                                                                    target.value = formattedValue;
+                                                                }
+                                                            </script>
+
+                                                            <div class="mb-4">
+                                                                <label for="jumlahRangkap"
+                                                                    class="block text-sm font-medium text-gray-700">Penyedia
+                                                                    Jasa</label>
+                                                                <select x-model="suratperjanjianData.penyedia_jasa"
+                                                                    name="penyedia_jasa" id="penyedia_jasa"
+                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20"
+                                                                    required x-init="
+                                                                            new TomSelect($el, {
+                                                                                onChange: (value) => {
+                                                                                    suratperjanjianData.penyedia_jasa = value;
+                                                                                }
+                                                                            });
+                                                                            // Inisialisasi nilai awal dari x-model ke TomSelect jika ada nilai
+                                                                            $nextTick(() => {
+                                                                                if (suratperjanjianData.penyedia_jasa) {
+                                                                                    $el.tomselect.setValue(suratperjanjianData.penyedia_jasa);
+                                                                                }
+                                                                            });
+                                                                        ">
+                                                                    <option value="">Pilih Data Penyedia</option>
+                                                                    <?php foreach ($data_penyedia->result() as $row) { ?>
+                                                                        <option value="<?= $row->id_data_penyedia ?>">
+                                                                            <?= $row->nama_penyedia ?>
+                                                                        </option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
+                                                            <div class="mb-4">
+                                                                <label for="jumlahRangkap"
+                                                                    class="block text-sm font-medium text-gray-700">Konsultan
+                                                                    Pengawasan
+                                                                </label>
+                                                                <select
+                                                                    x-model="suratperjanjianData.konsultan_pengawasan"
+                                                                    name="konsultan_pengawasan"
+                                                                    id="konsultan_pengawasan"
+                                                                    class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20"
+                                                                    required x-init="
+                                                                            new TomSelect($el, {
+                                                                                onChange: (value) => {
+                                                                                    suratperjanjianData.konsultan_pengawasan = value;
+                                                                                }
+                                                                            });
+                                                                            // Inisialisasi nilai awal dari x-model ke TomSelect jika ada nilai
+                                                                            $nextTick(() => {
+                                                                                if (suratperjanjianData.konsultan_pengawasan) {
+                                                                                    $el.tomselect.setValue(suratperjanjianData.konsultan_pengawasan);
+                                                                                }
+                                                                            });
+                                                                        ">
+                                                                    <option value="">Pilih Konsultan Pengawasan</option>
+                                                                    <?php foreach ($data_penyedia->result() as $row) { ?>
+                                                                        <option value="<?= $row->id_data_penyedia ?>">
+                                                                            <?= $row->nama_penyedia ?>
+                                                                        </option>
+                                                                    <?php } ?>
+                                                                </select>
                                                             </div>
 
                                                         </div>
@@ -734,7 +995,7 @@
                                 </td>
                             </tr>
                             <tr x-data="{ showModal: false, spmkData: {
-                                        id_paket: '<?php echo isset($get_data_spmk->id_paket) ? $get_data_spmk->id_paket : ''; ?>',
+                                        id: '<?php echo isset($get_data_spmk->id) ? $get_data_spmk->id : ''; ?>',
                                         nomor_spmk: '<?php echo isset($get_data_spmk->nomor_spmk) ? $get_data_spmk->nomor_spmk : ''; ?>',
                                         tanggal_spmk: '<?php echo isset($get_data_spmk->tanggal_spmk) ? $get_data_spmk->tanggal_spmk : ''; ?>'
 
@@ -742,14 +1003,14 @@
                                 <td class="py-2 m-text text-left" style="width:5px; ">
                                     <?php if ($get_spmk == 1): ?>
                                         <a href="#" onclick="openWindow('<?php
-                                        if ($kontrak->jenis_pengadaan == 'Konstruksi') {
+                                        if ($kontrak->jenis_pengadaan == 'Pekerjaan Konstruksi') {
                                             echo ($kontrak->nilai_pagu >= 200000000)
-                                                ? site_url('surat/spmk_tender/') . $kontrak->id_paket
-                                                : site_url('surat/spmk_non_tender/') . $kontrak->id_paket;
+                                                ? site_url('surat/spmk_tender/') . $kontrak->id
+                                                : site_url('surat/spmk_non_tender/') . $kontrak->id;
                                         } else {
-                                            echo ($kontrak->nilai_pagu >= 200000000)
-                                                ? site_url('surat/spmk_konsultansi_tender/') . $kontrak->id_paket
-                                                : site_url('surat/spmk_konsultansi_non_tender/') . $kontrak->id_paket;
+                                            echo ($kontrak->nilai_pagu >= 100000000)
+                                                ? site_url('surat/spmk_konsultansi_tender/') . $kontrak->id
+                                                : site_url('surat/spmk_konsultansi_non_tender/') . $kontrak->id;
                                         }
                                         ?>')">
 
@@ -800,7 +1061,7 @@
                                                     <form method="POST" action="<?php echo site_url('create/spmk'); ?>">
                                                         <div
                                                             class="mb-4 flex items-center justify-between bb-dashed-n30">
-                                                            <h4>Surat Printah Mulai Kerja Form</h4>
+                                                            <h4>Surat Perintah Mulai Kerja Form</h4>
                                                             <i class="las la-times cursor-pointer text-xl"
                                                                 @click="showModal = false"></i>
                                                         </div>
@@ -818,7 +1079,7 @@
                                                             <div class="mb-4">
                                                                 <label for="nomor_spmk"
                                                                     class="block text-sm font-medium text-gray-700">Nomor
-                                                                    Surat Printah Mulai Kerja</label>
+                                                                    Surat Perintah Mulai Kerja</label>
                                                                 <input type="text" x-model="spmkData.nomor_spmk"
                                                                     name="nomor_spmk" id="nomor_spmk"
                                                                     class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
@@ -829,7 +1090,7 @@
                                                             <div class="mb-4">
                                                                 <label for="tanggal_spmk"
                                                                     class="block text-sm font-medium text-gray-700">Tanggal
-                                                                    Surat Perjanjian</label>
+                                                                    Surat Perintah Mulai Kerja</label>
                                                                 <input type="date" x-model="spmkData.tanggal_spmk"
                                                                     name="tanggal_spmk" id="tanggal_spmk"
                                                                     class="w-full rounded-xl border focus:border-primary-300 border-neutral-30 bg-neutral-20 px-4 py-2.5 lg:px-6 lg:py-4"
@@ -1277,7 +1538,7 @@
 
 
 <script>
-    document.addEventListener('alpine:init', () => {
+    doc        ument.addEventListener('alpine:init', () => {
         Alpine.data('modal', () => ({
             showModal: false,
             sppbjData: {},
@@ -1337,6 +1598,22 @@
 
 <script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.0/dist/js/tom-select.min.js"></script>
 <!-- Alpine.js Data and Methods -->
+
+<script>
+    $('input.number').keyup(function (event) {
+
+        // skip for arrow keys
+        if (event.which >= 37 && event.which <= 40) return;
+
+        // format number
+        $(this).val(function (index, value) {
+            return value
+                .replace(/\D/g, "")
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                ;
+        });
+    });
+</script>
 <script>
 
     document.addEventListener('alpine:init', () => {

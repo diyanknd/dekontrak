@@ -5,7 +5,7 @@
   <div class="white-box xxxl:p-6">
     <div class="n20-box xxxl:p-6 relative ltr:bg-right rtl:bg-left bg-no-repeat max-[650px]:!bg-none bg-contain"
       style="background-image: url(<?php echo base_url(); ?>/assets/softify/softify/dist/assets/images/breadcrumb-el-1.png)">
-      <h2 class="mb-3 xxxl:mb-5">Kontrak List</h2>
+      <h2 class="mb-3 xxxl:mb-5">Daftar Paket</h2>
       <ul class="flex flex-wrap gap-2 items-center">
         <li>
           <a class="flex items-center gap-2" href="<?php echo site_url('Page/home'); ?>"> <i
@@ -15,7 +15,7 @@
 
         <li>
           <a class="flex items-center gap-2 text-primary-300" href="#"> <i
-              class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>List</span></a>
+              class="las text-lg xl:text-xl xxl:text-2xl la-layer-group shrink-0"></i> <span>Daftar Paket</span></a>
         </li>
       </ul>
     </div>
@@ -126,7 +126,6 @@
     </div>
 
 
-
     <div class="col-span-12">
       <div x-data="{
     activeTab: 'all',
@@ -140,11 +139,19 @@
 
             no: <?php echo $i; ?>,
             id: '<?php echo $row->id; ?>',
-            nomor_kontrak: '<?php echo $row->nomor_kontrak; ?>',
+            nomor_kontrak: '<?php if ($row->nomor_kontrak == NULL) {
+              echo 'Belum Berkontrak';
+            } else {
+              echo $row->nomor_kontrak;
+            } ?>',
             checked: false,
             paket_pekerjaan: '<?php echo $row->paket_pekerjaan; ?>',
             pagu_anggaran: '<?php echo number_format($row->nilai_pagu); ?>',
-            nilai_kontrak: '<?php echo number_format($row->nilai_kontrak); ?>',
+            nilai_kontrak: '<?php if ($row->nilai_kontrak == 0) {
+              echo '0';
+            } else {
+              echo number_format($row->nilai_kontrak);
+            } ?>',
             kecamatan: '<?php echo "Kec." . $row->kecamatan; ?>',
             status: '<?php
             if ($row->jenis_pengadaan == "Pekerjaan Konstruksi") {
@@ -237,7 +244,7 @@
     }
 }" x-init="filteredInvoices=invoices" class="white-box">
         <div class="flex justify-between items-center bb-dashed-n30">
-          <h4>Kontrak List</h4>
+          <h4>Daftar Paket</h4>
           <div class="flex flex-wrap items-center gap-4">
             <div class="flex items-center gap-3">
               <span>Sort By : </span>

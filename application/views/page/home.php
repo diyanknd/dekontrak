@@ -12,7 +12,7 @@
   </div>
 
   <div class="grid grid-cols-12 gap-4 lg:gap-6">
-    <div class="col-span-6">
+    <div class="col-span-12">
       <div class="white-box xxxl:p-6" x-data="{ isOpenAll: 'false'}">
         <h4 class="mb-3 xxxl:mb-5">Tender <span style="cursor:pointer" @click="isOpenAll = !isOpenAll"
             x-text="isOpenAll ? 'Lihat Semua' : 'Sembunyikan'"></span></h4>
@@ -49,15 +49,26 @@
                   <?php $i = 1;
                   foreach ($pekerjaan_konstruksi_tender->result() as $row) { ?>
                     <tr>
-                      <td><?php echo $i; ?></td>
+                      <td><?php echo $i; ?>
+
+
+                      </td>
                       <td class="w-70 p-2" style="white-space: normal;">
                         <?php echo $row->paket_pekerjaan; ?></br>
-                        <?php echo $row->sppbj == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/sppbj_tender/') . $row->id_paket : site_url('surat/sppbj_non_tender/') . $row->id_paket) . '\')">SPPBJ</a>' : ''; ?>
-                        <?php echo $row->surat_perjanjian == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/surat_perjanjian_tender/') . $row->id_paket : site_url('surat/surat_perjanjian_non_tender/') . $row->id_paket) . '\')">Surat Perjanjian</a>' : ''; ?>
-                        <?php echo $row->spmk == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/spmk_tender/') . $row->id_paket : site_url('surat/spmk_non_tender/') . $row->id_paket) . '\')">SPMK</a>' : ''; ?>
+                        <?php echo isset($row->nomor_sppbj) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/sppbj_tender/') . $row->id_paket : site_url('surat/sppbj_non_tender/') . $row->id_paket) . '\')">SPPBJ</a>' : ''; ?>
+                        <?php echo isset($row->nomor_surat_perjanjian) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/surat_perjanjian_tender/') . $row->id_paket : site_url('surat/surat_perjanjian_non_tender/') . $row->id_paket) . '\')">Surat Perjanjian</a>' : ''; ?>
+                        <?php echo isset($row->nomor_spmk) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/spmk_tender/') . $row->id_paket : site_url('surat/spmk_non_tender/') . $row->id_paket) . '\')">SPMK</a>' : ''; ?>
                       </td>
                       <td><?php echo number_format($row->nilai_pagu); ?></td>
-                      <td><?php echo number_format($row->nilai_kontrak); ?></td>
+                      <td>
+                        <?php
+                        if ($row->nilai_kontrak == 0) {
+                          echo 'Belum Berkontrak';
+                        } else {
+                          echo number_format($row->nilai_kontrak);
+                        }
+                        ?>
+                      </td>
                       <td>
                         <?php
                         if ($row->jenis_pengadaan == "Pekerjaan Konstruksi") {
@@ -110,12 +121,18 @@
                       <td><?php echo $i; ?></td>
                       <td class="w-70 p-2" style="white-space: normal;">
                         <?php echo $row->paket_pekerjaan; ?></br>
-                        <?php echo $row->sppbj == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/sppbj_tender/') . $row->id_paket : site_url('surat/sppbj_non_tender/') . $row->id_paket) . '\')">SPPBJ</a>' : ''; ?>
-                        <?php echo $row->surat_perjanjian == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/surat_perjanjian_tender/') . $row->id_paket : site_url('surat/surat_perjanjian_non_tender/') . $row->id_paket) . '\')">Surat Perjanjian</a>' : ''; ?>
-                        <?php echo $row->spmk == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/spmk_tender/') . $row->id_paket : site_url('surat/spmk_non_tender/') . $row->id_paket) . '\')">SPMK</a>' : ''; ?>
+                        <?php echo isset($row->nomor_sppbj) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/sppbj_tender/') . $row->id_paket : site_url('surat/sppbj_non_tender/') . $row->id_paket) . '\')">SPPBJ</a>' : ''; ?>
+                        <?php echo isset($row->nomor_surat_perjanjian) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/surat_perjanjian_tender/') . $row->id_paket : site_url('surat/surat_perjanjian_non_tender/') . $row->id_paket) . '\')">Surat Perjanjian</a>' : ''; ?>
+                        <?php echo isset($row->nomor_spmk) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/spmk_tender/') . $row->id_paket : site_url('surat/spmk_non_tender/') . $row->id_paket) . '\')">SPMK</a>' : ''; ?>
                       </td>
                       <td><?php echo number_format($row->nilai_pagu); ?></td>
-                      <td><?php echo number_format($row->nilai_kontrak); ?></td>
+                      <td><?php
+                      if ($row->nilai_kontrak == 0) {
+                        echo 'Belum Berkontrak';
+                      } else {
+                        echo number_format($row->nilai_kontrak);
+                      }
+                      ?></td>
                       <td>
                         <?php
                         if ($row->jenis_pengadaan == "Pekerjaan Konstruksi") {
@@ -169,12 +186,18 @@
                       <td><?php echo $i; ?></td>
                       <td class="w-70 p-2" style="white-space: normal;">
                         <?php echo $row->paket_pekerjaan; ?></br>
-                        <?php echo $row->sppbj == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/sppbj_tender/') . $row->id_paket : site_url('surat/sppbj_non_tender/') . $row->id_paket) . '\')">SPPBJ</a>' : ''; ?>
-                        <?php echo $row->surat_perjanjian == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/surat_perjanjian_tender/') . $row->id_paket : site_url('surat/surat_perjanjian_non_tender/') . $row->id_paket) . '\')">Surat Perjanjian</a>' : ''; ?>
-                        <?php echo $row->spmk == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/spmk_tender/') . $row->id_paket : site_url('surat/spmk_non_tender/') . $row->id_paket) . '\')">SPMK</a>' : ''; ?>
+                        <?php echo isset($row->nomor_sppbj) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/sppbj_tender/') . $row->id_paket : site_url('surat/sppbj_non_tender/') . $row->id_paket) . '\')">SPPBJ</a>' : ''; ?>
+                        <?php echo isset($row->nomor_surat_perjanjian) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/surat_perjanjian_tender/') . $row->id_paket : site_url('surat/surat_perjanjian_non_tender/') . $row->id_paket) . '\')">Surat Perjanjian</a>' : ''; ?>
+                        <?php echo isset($row->nomor_spmk) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/spmk_tender/') . $row->id_paket : site_url('surat/spmk_non_tender/') . $row->id_paket) . '\')">SPMK</a>' : ''; ?>
                       </td>
                       <td><?php echo number_format($row->nilai_pagu); ?></td>
-                      <td><?php echo number_format($row->nilai_kontrak); ?></td>
+                      <td><?php
+                      if ($row->nilai_kontrak == 0) {
+                        echo 'Belum Berkontrak';
+                      } else {
+                        echo number_format($row->nilai_kontrak);
+                      }
+                      ?></td>
                       <td>
                         <?php
                         if ($row->jenis_pengadaan == "Pekerjaan Konstruksi") {
@@ -210,13 +233,25 @@
                   <td><?php echo $i; ?></td>
                   <td class="w-70 p-2" style="white-space: normal;">
                     <?php echo $row->paket_pekerjaan; ?></br>
-                    <?php echo $row->sppbj == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/sppbj_tender/') . $row->id_paket : site_url('surat/sppbj_non_tender/') . $row->id_paket) . '\')">SPPBJ</a>' : ''; ?>
-                    <?php echo $row->surat_perjanjian == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/surat_perjanjian_tender/') . $row->id_paket : site_url('surat/surat_perjanjian_non_tender/') . $row->id_paket) . '\')">Surat Perjanjian</a>' : ''; ?>
-                    <?php echo $row->spmk == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/spmk_tender/') . $row->id_paket : site_url('surat/spmk_non_tender/') . $row->id_paket) . '\')">SPMK</a>' : ''; ?>
+                    <?php echo isset($row->nomor_sppbj) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/sppbj_tender/') . $row->id_paket : site_url('surat/sppbj_non_tender/') . $row->id_paket) . '\')">SPPBJ</a>' : ''; ?>
+                    <?php echo isset($row->nomor_surat_perjanjian) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/surat_perjanjian_tender/') . $row->id_paket : site_url('surat/surat_perjanjian_non_tender/') . $row->id_paket) . '\')">Surat Perjanjian</a>' : ''; ?>
+                    <?php echo isset($row->nomor_spmk) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/spmk_tender/') . $row->id_paket : site_url('surat/spmk_non_tender/') . $row->id_paket) . '\')">SPMK</a>' : ''; ?>
                   </td>
                   <td><?php echo number_format($row->nilai_pagu); ?></td>
-                  <td><?php echo number_format($row->nilai_kontrak); ?></td>
-                  <td>Status Kontrak</td>
+                  <td><?php
+                  if ($row->nilai_kontrak == 0) {
+                    echo 'Belum Berkontrak';
+                  } else {
+                    echo number_format($row->nilai_kontrak);
+                  }
+                  ?></td>
+                  <td><?php
+                  if ($row->jenis_pengadaan == "Pekerjaan Konstruksi") {
+                    echo ($row->nilai_pagu >= 200000000) ? "Tender" : "Non Tender";
+                  } else {
+                    echo ($row->nilai_pagu >= 100000000) ? "Tender" : "Non Tender";
+                  }
+                  ?></td>
                 </tr>
                 <?php $i++;
               } ?>
@@ -225,7 +260,7 @@
         </div>
       </div>
 
-      <div class="white-box xxxl:p-6" style="margin-top:9%" x-data="{ isOpenAll: 'false'}">
+      <div class="white-box xxxl:p-6" style="margin-top:2%" x-data="{ isOpenAll: 'false'}">
         <h4 class="mb-3 xxxl:mb-5">Non Tender <span style="cursor:pointer" @click="isOpenAll = !isOpenAll"
             x-text="isOpenAll ? 'Lihat Semua' : 'Sembunyikan'"></span></h4>
         <div x-show="isOpenAll">
@@ -266,12 +301,18 @@
                       <td><?php echo $i; ?></td>
                       <td class="w-70 p-2" style="white-space: normal;">
                         <?php echo $row->paket_pekerjaan; ?></br>
-                        <?php echo $row->sppbj == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/sppbj_tender/') . $row->id_paket : site_url('surat/sppbj_non_tender/') . $row->id_paket) . '\')">SPPBJ</a>' : ''; ?>
-                        <?php echo $row->surat_perjanjian == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/surat_perjanjian_tender/') . $row->id_paket : site_url('surat/surat_perjanjian_non_tender/') . $row->id_paket) . '\')">Surat Perjanjian</a>' : ''; ?>
-                        <?php echo $row->spmk == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/spmk_tender/') . $row->id_paket : site_url('surat/spmk_non_tender/') . $row->id_paket) . '\')">SPMK</a>' : ''; ?>
+                        <?php echo isset($row->nomor_sppbj) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/sppbj_tender/') . $row->id_paket : site_url('surat/sppbj_non_tender/') . $row->id_paket) . '\')">SPPBJ</a>' : ''; ?>
+                        <?php echo isset($row->nomor_surat_perjanjian) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/surat_perjanjian_tender/') . $row->id_paket : site_url('surat/surat_perjanjian_non_tender/') . $row->id_paket) . '\')">Surat Perjanjian</a>' : ''; ?>
+                        <?php echo isset($row->nomor_spmk) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/spmk_tender/') . $row->id_paket : site_url('surat/spmk_non_tender/') . $row->id_paket) . '\')">SPMK</a>' : ''; ?>
                       </td>
                       <td><?php echo number_format($row->nilai_pagu); ?></td>
-                      <td><?php echo number_format($row->nilai_kontrak); ?></td>
+                      <td><?php
+                      if ($row->nilai_kontrak == 0) {
+                        echo 'Belum Berkontrak';
+                      } else {
+                        echo number_format($row->nilai_kontrak);
+                      }
+                      ?></td>
                       <td>
                         <?php
                         if ($row->jenis_pengadaan == "Pekerjaan Konstruksi") {
@@ -324,12 +365,18 @@
                       <td><?php echo $i; ?></td>
                       <td class="w-70 p-2" style="white-space: normal;">
                         <?php echo $row->paket_pekerjaan; ?></br>
-                        <?php echo $row->sppbj == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/sppbj_tender/') . $row->id_paket : site_url('surat/sppbj_non_tender/') . $row->id_paket) . '\')">SPPBJ</a>' : ''; ?>
-                        <?php echo $row->surat_perjanjian == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/surat_perjanjian_tender/') . $row->id_paket : site_url('surat/surat_perjanjian_non_tender/') . $row->id_paket) . '\')">Surat Perjanjian</a>' : ''; ?>
-                        <?php echo $row->spmk == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/spmk_tender/') . $row->id_paket : site_url('surat/spmk_non_tender/') . $row->id_paket) . '\')">SPMK</a>' : ''; ?>
+                        <?php echo isset($row->nomor_sppbj) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/sppbj_tender/') . $row->id_paket : site_url('surat/sppbj_non_tender/') . $row->id_paket) . '\')">SPPBJ</a>' : ''; ?>
+                        <?php echo isset($row->nomor_surat_perjanjian) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/surat_perjanjian_tender/') . $row->id_paket : site_url('surat/surat_perjanjian_non_tender/') . $row->id_paket) . '\')">Surat Perjanjian</a>' : ''; ?>
+                        <?php echo isset($row->nomor_spmk) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/spmk_tender/') . $row->id_paket : site_url('surat/spmk_non_tender/') . $row->id_paket) . '\')">SPMK</a>' : ''; ?>
                       </td>
                       <td><?php echo number_format($row->nilai_pagu); ?></td>
-                      <td><?php echo number_format($row->nilai_kontrak); ?></td>
+                      <td><?php
+                      if ($row->nilai_kontrak == 0) {
+                        echo 'Belum Berkontrak';
+                      } else {
+                        echo number_format($row->nilai_kontrak);
+                      }
+                      ?></td>
                       <td>
                         <?php
                         if ($row->jenis_pengadaan == "Pekerjaan Konstruksi") {
@@ -383,12 +430,18 @@
                       <td><?php echo $i; ?></td>
                       <td class="w-70 p-2" style="white-space: normal;">
                         <?php echo $row->paket_pekerjaan; ?></br>
-                        <?php echo $row->sppbj == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/sppbj_tender/') . $row->id_paket : site_url('surat/sppbj_non_tender/') . $row->id_paket) . '\')">SPPBJ</a>' : ''; ?>
-                        <?php echo $row->surat_perjanjian == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/surat_perjanjian_tender/') . $row->id_paket : site_url('surat/surat_perjanjian_non_tender/') . $row->id_paket) . '\')">Surat Perjanjian</a>' : ''; ?>
-                        <?php echo $row->spmk == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/spmk_tender/') . $row->id_paket : site_url('surat/spmk_non_tender/') . $row->id_paket) . '\')">SPMK</a>' : ''; ?>
+                        <?php echo isset($row->nomor_sppbj) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/sppbj_tender/') . $row->id_paket : site_url('surat/sppbj_non_tender/') . $row->id_paket) . '\')">SPPBJ</a>' : ''; ?>
+                        <?php echo isset($row->nomor_surat_perjanjian) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/surat_perjanjian_tender/') . $row->id_paket : site_url('surat/surat_perjanjian_non_tender/') . $row->id_paket) . '\')">Surat Perjanjian</a>' : ''; ?>
+                        <?php echo isset($row->nomor_spmk) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/spmk_tender/') . $row->id_paket : site_url('surat/spmk_non_tender/') . $row->id_paket) . '\')">SPMK</a>' : ''; ?>
                       </td>
                       <td><?php echo number_format($row->nilai_pagu); ?></td>
-                      <td><?php echo number_format($row->nilai_kontrak); ?></td>
+                      <td><?php
+                      if ($row->nilai_kontrak == 0) {
+                        echo 'Belum Berkontrak';
+                      } else {
+                        echo number_format($row->nilai_kontrak);
+                      }
+                      ?></td>
                       <td><?php
                       if ($row->jenis_pengadaan == "Pekerjaan Konstruksi") {
                         echo ($row->nilai_pagu >= 200000000) ? "Tender" : "Non Tender";
@@ -423,13 +476,25 @@
                   <td><?php echo $i; ?></td>
                   <td class="w-70 p-2" style="white-space: normal;">
                     <?php echo $row->paket_pekerjaan; ?></br>
-                    <?php echo $row->sppbj == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/sppbj_tender/') . $row->id_paket : site_url('surat/sppbj_non_tender/') . $row->id_paket) . '\')">SPPBJ</a>' : ''; ?>
-                    <?php echo $row->surat_perjanjian == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/surat_perjanjian_tender/') . $row->id_paket : site_url('surat/surat_perjanjian_non_tender/') . $row->id_paket) . '\')">Surat Perjanjian</a>' : ''; ?>
-                    <?php echo $row->spmk == 1 ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/spmk_tender/') . $row->id_paket : site_url('surat/spmk_non_tender/') . $row->id_paket) . '\')">SPMK</a>' : ''; ?>
+                    <?php echo isset($row->nomor_sppbj) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/sppbj_tender/') . $row->id_paket : site_url('surat/sppbj_non_tender/') . $row->id_paket) . '\')">SPPBJ</a>' : ''; ?>
+                    <?php echo isset($row->nomor_surat_perjanjian) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/surat_perjanjian_tender/') . $row->id_paket : site_url('surat/surat_perjanjian_non_tender/') . $row->id_paket) . '\')">Surat Perjanjian</a>' : ''; ?>
+                    <?php echo isset($row->nomor_spmk) ? '<a href="#" class="inline-block rounded-md bg-primary-300 py-1 px-2 text-white" onclick="openWindow(\'' . (($row->nilai_pagu >= 200000000) ? site_url('surat/spmk_tender/') . $row->id_paket : site_url('surat/spmk_non_tender/') . $row->id_paket) . '\')">SPMK</a>' : ''; ?>
                   </td>
                   <td><?php echo number_format($row->nilai_pagu); ?></td>
-                  <td><?php echo number_format($row->nilai_kontrak); ?></td>
-                  <td>Status Kontrak</td>
+                  <td><?php
+                  if ($row->nilai_kontrak == 0) {
+                    echo 'Belum Berkontrak';
+                  } else {
+                    echo number_format($row->nilai_kontrak);
+                  }
+                  ?></td>
+                  <td><?php
+                  if ($row->jenis_pengadaan == "Pekerjaan Konstruksi") {
+                    echo ($row->nilai_pagu >= 200000000) ? "Tender" : "Non Tender";
+                  } else {
+                    echo ($row->nilai_pagu >= 100000000) ? "Tender" : "Non Tender";
+                  }
+                  ?></td>
                 </tr>
                 <?php $i++;
               } ?>
@@ -440,100 +505,102 @@
     </div>
 
 
-    <div class="col-span-6">
-      <div class="col-span-2 lg:col-span-1 xl:col-span-2 xxl:col-span-1 white-box">
-        <div class="n20-box">
-          <h5 class="bb-dashed-n40">Pekerjaan Bar Chart</h5>
-          <div id="columnStackedd"></div>
-        </div>
-      </div>
 
-      <script>
-        document.addEventListener('DOMContentLoaded', function () {
-          var columnStackedOptions = {
-            series: [
-              {
-                name: 'Non Tender',
-                data: ['<?= $pekerjaan_konstruksi_nontender->num_rows(); ?>', '<?= $konsultan_pengawasan_nontender->num_rows(); ?>', '<?= $konsultan_perencanaan_nontender->num_rows(); ?>']
-              },
-              {
-                name: 'Tender',
-                data: ['<?= $pekerjaan_konstruksi_tender->num_rows(); ?>', '<?= $konsultan_pengawasan_tender->num_rows(); ?>', '<?= $konsultan_perencanaan_tender->num_rows(); ?>']
-              }
-            ],
-            chart: {
-              type: 'bar',
-              height: 350,
-              width: '85%',
-              stacked: true,
-              toolbar: {
-                show: false
-              },
-              zoom: {
-                enabled: true
-              }
-            },
-            colors: ['#FFAB00', '#FF5630'],
-            fill: {
-              colors: ['#FFAB00', '#FF5630']
-            },
-            responsive: [
-              {
-                breakpoint: 480,
-                options: {
-                  legend: {
-                    position: 'bottom',
-                    offsetX: -10,
-                    offsetY: 0
-                  }
-                }
-              }
-            ],
-            plotOptions: {
-              bar: {
-                horizontal: false,
-                borderRadius: 10,
-                columnWidth: 40,
-                dataLabels: {
-                  total: {
-                    enabled: true,
-                    style: {
-                      fontSize: '13px',
-                      fontWeight: 900
-                    }
-                  }
-                }
-              }
-            },
-            xaxis: {
-              type: 'text',
-              categories: ['Pekerjaan Konstruksi', 'Konsultansi Peng.', 'Konsultansi Pern']
-            },
-            legend: {
-              offsetY: 10,
-              position: 'bottom',
-              markers: {
-                offsetX: 0,
-                width: 6,
-                height: 6,
-                radius: 20
-              }
-            },
-            fill: {
-              opacity: 1
-            }
-          };
-
-
-          var chart = new ApexCharts(document.querySelector("#columnStackedd"), columnStackedOptions);
-          chart.render();
-        });
-      </script>
-    </div>
   </div>
+  <div class="col-span-6">
+    <div class="col-span-2 lg:col-span-1 xl:col-span-2 xxl:col-span-1 white-box">
+      <div class="n20-box">
+        <h5 class="bb-dashed-n40">Pekerjaan Bar Chart</h5>
+        <div id="columnStackedd"></div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var columnStackedOptions = {
+          series: [
+            {
+              name: 'Non Tender',
+              data: ['<?= $pekerjaan_konstruksi_nontender->num_rows(); ?>', '<?= $konsultan_pengawasan_nontender->num_rows(); ?>', '<?= $konsultan_perencanaan_nontender->num_rows(); ?>']
+            },
+            {
+              name: 'Tender',
+              data: ['<?= $pekerjaan_konstruksi_tender->num_rows(); ?>', '<?= $konsultan_pengawasan_tender->num_rows(); ?>', '<?= $konsultan_perencanaan_tender->num_rows(); ?>']
+            }
+          ],
+          chart: {
+            type: 'bar',
+            height: 350,
+            width: '85%',
+            stacked: true,
+            toolbar: {
+              show: false
+            },
+            zoom: {
+              enabled: true
+            }
+          },
+          colors: ['#FFAB00', '#FF5630'],
+          fill: {
+            colors: ['#FFAB00', '#FF5630']
+          },
+          responsive: [
+            {
+              breakpoint: 480,
+              options: {
+                legend: {
+                  position: 'bottom',
+                  offsetX: -10,
+                  offsetY: 0
+                }
+              }
+            }
+          ],
+          plotOptions: {
+            bar: {
+              horizontal: false,
+              borderRadius: 10,
+              columnWidth: 40,
+              dataLabels: {
+                total: {
+                  enabled: true,
+                  style: {
+                    fontSize: '13px',
+                    fontWeight: 900
+                  }
+                }
+              }
+            }
+          },
+          xaxis: {
+            type: 'text',
+            categories: ['Pekerjaan Konstruksi', 'Konsultansi Peng.', 'Konsultansi Pern']
+          },
+          legend: {
+            offsetY: 10,
+            position: 'bottom',
+            markers: {
+              offsetX: 0,
+              width: 6,
+              height: 6,
+              radius: 20
+            }
+          },
+          fill: {
+            opacity: 1
+          }
+        };
 
 
-  <div class="grid grid-cols-12 gap-4 lg:gap-4">
+        var chart = new ApexCharts(document.querySelector("#columnStackedd"), columnStackedOptions);
+        chart.render();
+      });
+    </script>
+  </div>
+  </script>
+
+
+  <!-- <div class="grid grid-cols-12 gap-4 lg:gap-4">
     <div class="col-span-4">
       <div class="white-box xxxl:p-6 overflow-x-auto">
         <div class="mb-5">
@@ -610,7 +677,7 @@
         </table>
       </div>
     </div>
-  </div>
+  </div> -->
 
 
 

@@ -209,36 +209,45 @@
                         <tr>
                             <td>Nama</td>
                             <td>:</td>
-                            <td><?php echo $row2->nama_penyedia ?></td>
+                            <td><?php echo $penyedia_jasa->nama_penyedia ?></td>
                         </tr>
                         <tr>
                             <td>Jabatan</td>
                             <td>:</td>
-                            <td><?php echo $row2->jabatan ?></td>
+                            <td><?php echo $penyedia_jasa->jabatan ?></td>
                         </tr>
                         <tr>
                             <td>Berkedudukan di</td>
                             <td>:</td>
-                            <td><?php echo $row2->alamat; ?></td>
+                            <td><?php echo $penyedia_jasa->alamat; ?></td>
                         </tr>
                         <tr>
                             <td>Akta Notaris Nomor</td>
                             <td>:</td>
-                            <td><?php echo $row2->no_akta ?></td>
+                            <td><?php echo $penyedia_jasa->no_akta ?></td>
                         </tr>
                         <tr>
                             <td>Tanggal</td>
                             <td>:</td>
-                            <td><?php echo $row2->tanggal_akta ?></td>
+                            <td>
+                                <?php $tanggal_akta = $penyedia_jasa->tanggal_akta;
+                                $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+                                $tanggal_format = date("d", strtotime($tanggal_akta));
+                                $bulan_index = date("n", strtotime($tanggal_akta)) - 1;
+                                $tahun = date("Y", strtotime($tanggal_akta));
+                                echo $tanggal_format . " " . $bulan[$bulan_index] . " " . $tahun; ?>
+
+                            </td>
                         </tr>
                         <tr>
                             <td>Notaris</td>
                             <td>:</td>
-                            <td><?php echo $row2->notaris ?></td>
+                            <td><?php echo $penyedia_jasa->notaris ?></td>
                         </tr>
                     </table>
                     <div style="padding-bottom: 5px;">
-                        yang bertindak untuk dan atas nama <?php echo $row2->nama_penyedia ?> selanjutnya disebut
+                        yang bertindak untuk dan atas nama <?php echo $penyedia_jasa->nama_penyedia ?> selanjutnya
+                        disebut
                         “Penyedia”.
                     </div>
                 </td>
@@ -406,8 +415,9 @@
                 <td colspan="3" style="padding-left: 10px; padding-bottom:10px">
                     <span style="font-weight:bold">SISTEM PEMBAYARAN:</span><br> Pembayaran untuk kontrak ini dilakukan
                     ke
-                    Bank <?php echo $row2->nama_bank ?> rekening nomor : <?php echo $row2->nomor_rekening ?> atas nama
-                    Penyedia : <?php echo $row2->nama_penyedia ?>
+                    Bank <?php echo $penyedia_jasa->nama_bank ?> rekening nomor :
+                    <?php echo $penyedia_jasa->nomor_rekening ?> atas nama
+                    Penyedia : <?php echo $penyedia_jasa->nama_penyedia ?>
                     Pembayaran prestasi pekerjaan dilakukan dengan cara : Sekaligus
                 </td>
             </tr>
@@ -419,7 +429,7 @@
             <tr style="border: 1px solid black; border-collapse: collapse;">
                 <td colspan="3" style="padding-left: 10px; padding-bottom:10px">
                     <span style="font-weight:bold">MASA PELAKSANAAN PEKERJAAN:</span><br>
-                    <?php echo $row2->masa_pelaksanaan; ?> (<?php echo terbilang($row2->masa_pelaksanaan) ?>) Hari
+                    <?php echo $row1->masa_pelaksanaan; ?> (<?php echo terbilang($row1->masa_pelaksanaan) ?>) Hari
                     Kalender
                 </td>
             </tr>
@@ -462,13 +472,13 @@
                         Untuk dan atas nama Penyedia
                     </div>
                     <div>
-                        <?php echo $row2->nama_penyedia ?>
+                        <?php echo $penyedia_jasa->nama_penyedia ?>
                     </div><br><br><br>
                     <div style="margin-top:5px">
-                        <?php echo $row2->nama_direktur; ?>
+                        <?php echo $penyedia_jasa->nama_direktur; ?>
                     </div>
                     <div>
-                        <?php echo $row2->jabatan; ?>
+                        <?php echo $penyedia_jasa->jabatan; ?>
                     </div>
                 </td>
             </tr>
